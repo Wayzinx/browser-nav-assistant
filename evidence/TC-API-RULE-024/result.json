@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RULE-024",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:05.119Z",
+  "tests": [
+    {
+      "testId": "415ba2cc135ee265f975-c095d32d8b3b38907904",
+      "title": "TC-API-RULE-024 只确认双规则中的第一条时仅保存archive_candidate",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-024.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 16,
+      "startedAt": "2026-11-04T03:27:05.103Z",
+      "endedAt": "2026-11-04T03:27:05.119Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 6,
+      "screenshots": [],
+      "serverLogLines": 8,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 784,
+          "after": 785
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 1,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

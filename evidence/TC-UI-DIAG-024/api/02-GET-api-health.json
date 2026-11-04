@@ -1,0 +1,35 @@
+{
+  "reqId": "TC-UI-DIAG-024-02",
+  "setup": false,
+  "method": "GET",
+  "url": "http://127.0.0.1:63057/api/health",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-UI-DIAG-024-02"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "content-type": "application/json; charset=utf-8",
+    "access-control-allow-origin": "*",
+    "access-control-allow-headers": "*",
+    "access-control-allow-methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+    "date": "Wed, 04 Nov 2026 03:28:27 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5",
+    "transfer-encoding": "chunked"
+  },
+  "responseBody": {
+    "status": "ok",
+    "version": "2.3.1",
+    "uptime": 0,
+    "pageCount": 0,
+    "ruleCount": 0,
+    "enabledRuleCount": 0,
+    "lastSyncAt": null,
+    "persistence": "memory",
+    "startedAt": 1793762907650
+  },
+  "ms": 2,
+  "mutated": null
+}

@@ -1,0 +1,1113 @@
+{
+  "stage": "gate",
+  "pass": false,
+  "module": null,
+  "errors": [
+    "[run] 71 个测试失败",
+    "[run] 证据不完整 TC-UI-CACHE-001：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-CACHE-002：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-CACHE-003：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-CACHE-004：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-CACHE-005：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-CACHE-006：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-CACHE-007：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-DIAG-011：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-INCR-001：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-INCR-002：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-INCR-003：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-INCR-004：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-INCR-005：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-INCR-006：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-INCR-007：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-MENU-001：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-MENU-002：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-MENU-003：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-MENU-004：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-MENU-005：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-MENU-006：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-MENU-007：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-MENU-008：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-MENU-009：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-MENU-010：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-PRIV-001：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-PRIV-002：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-PRIV-003：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-PRIV-004：screenshots/ 为空",
+    "[run] 证据不完整 TC-UI-PRIV-005：screenshots/ 为空",
+    "[run] 另有 20 个用例证据不完整"
+  ],
+  "warnings": [
+    "[用例设计检查] F-MENU-01 的 exception 已有用例覆盖，waiver 已过时，可以删除"
+  ],
+  "stats": {
+    "merged": {
+      "fragments": 27,
+      "api": 227,
+      "ui": 143
+    },
+    "prd": {
+      "features": 75,
+      "inScope": 70,
+      "modules": [
+        "CACHE",
+        "CLEAN",
+        "CTX",
+        "DEMO",
+        "DIAG",
+        "INCR",
+        "MENU",
+        "PERF",
+        "PERSIST",
+        "PRIV",
+        "RANK",
+        "REC",
+        "RULE",
+        "SYNC"
+      ]
+    },
+    "apiEndpoints": 18,
+    "uiTestIds": 172,
+    "design": {
+      "codePoints": 118,
+      "be": 60,
+      "fe": 58,
+      "coreFiles": 36
+    },
+    "cases": {
+      "total": 370,
+      "byType": {
+        "API": 219,
+        "E2E": 8,
+        "UI": 143
+      },
+      "uiModules": [
+        "CACHE",
+        "CLEAN",
+        "CTX",
+        "DIAG",
+        "INCR",
+        "MENU",
+        "PRIV",
+        "RANK",
+        "REC",
+        "RULE",
+        "SYNC"
+      ]
+    },
+    "skillChecks": {
+      "cases": {
+        "script": ".agents/skills/nav-test-case-design/scripts/check-cases.mjs",
+        "pass": true,
+        "errors": 0,
+        "warnings": 1
+      },
+      "spec": {
+        "script": "specs/tools/check-spec.mjs",
+        "pass": true,
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "code": {
+      "annotated": 118,
+      "codePoints": 118,
+      "jsFiles": 131
+    },
+    "tamper": {
+      "changed": [],
+      "added": [],
+      "removed": []
+    },
+    "run": {
+      "total": 389,
+      "passed": 318,
+      "failed": 71,
+      "skipped": 0,
+      "flaky": 0,
+      "evidenceIncomplete": 50
+    },
+    "matrix": {
+      "reqMandatory": 96,
+      "reqCovered": 96,
+      "file": "docs/trace/matrix.md",
+      "inScope": 70,
+      "covered": 70
+    }
+  },
+  "digest": "e0cc4577e677b6027690ab3b48eec93d0a5db58e7e72d93ea396332047a6e76b",
+  "tampered": false,
+  "run": {
+    "runId": "gate-2026-11-02T22-18-31-882Z",
+    "total": 389,
+    "passed": 318,
+    "failed": 71,
+    "skipped": 0,
+    "flaky": 0,
+    "casesTotal": 370,
+    "casesPassed": 301,
+    "globalErrors": [],
+    "failures": [
+      {
+        "caseId": "TC-UI-CACHE-001",
+        "module": "CACHE",
+        "project": "ui",
+        "file": "ui/TC-UI-CACHE-001.spec.mjs:151",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at prepare (./tests/ui/TC-UI-CACHE-001.spec.mjs:129:13)\n    at ./tests/ui/TC-UI-CACHE-001.spec.mjs:152:9",
+        "evidence": "evidence/TC-UI-CACHE-001/"
+      },
+      {
+        "caseId": "TC-UI-CACHE-002",
+        "module": "CACHE",
+        "project": "ui",
+        "file": "ui/TC-UI-CACHE-002.spec.mjs:290",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at prepare (./tests/ui/TC-UI-CACHE-002.spec.mjs:129:13)\n    at ./tests/ui/TC-UI-CACHE-002.spec.mjs:291:9",
+        "evidence": "evidence/TC-UI-CACHE-002/"
+      },
+      {
+        "caseId": "TC-UI-CACHE-003",
+        "module": "CACHE",
+        "project": "ui",
+        "file": "ui/TC-UI-CACHE-003.spec.mjs:214",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetProfile (./tests/ui/TC-UI-CACHE-003.spec.mjs:135:13)\n    at preparePopulated (./tests/ui/TC-UI-CACHE-003.spec.mjs:153:3)\n    at /Users/by",
+        "evidence": "evidence/TC-UI-CACHE-003/"
+      },
+      {
+        "caseId": "TC-UI-CACHE-004",
+        "module": "CACHE",
+        "project": "ui",
+        "file": "ui/TC-UI-CACHE-004.spec.mjs:142",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetProfile (./tests/ui/TC-UI-CACHE-004.spec.mjs:135:13)\n    at ./tests/ui/TC-UI-CACHE-004.spec.mjs:148:5\n    at <project>/...",
+        "evidence": "evidence/TC-UI-CACHE-004/"
+      },
+      {
+        "caseId": "TC-UI-CACHE-005",
+        "module": "CACHE",
+        "project": "ui",
+        "file": "ui/TC-UI-CACHE-005.spec.mjs:311",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:30)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:30)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at ./tests/ui/TC-UI-CACHE-005.spec.mjs:445:17",
+        "evidence": "evidence/TC-UI-CACHE-005/"
+      },
+      {
+        "caseId": "TC-UI-CACHE-006",
+        "module": "CACHE",
+        "project": "ui",
+        "file": "ui/TC-UI-CACHE-006.spec.mjs:158",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetProfile (./tests/ui/TC-UI-CACHE-006.spec.mjs:133:13)\n    at ./tests/ui/TC-UI-CACHE-006.spec.mjs:164:5\n    at <project>/...",
+        "evidence": "evidence/TC-UI-CACHE-006/"
+      },
+      {
+        "caseId": "TC-UI-CACHE-007",
+        "module": "CACHE",
+        "project": "ui",
+        "file": "ui/TC-UI-CACHE-007.spec.mjs:192",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetProfile (./tests/ui/TC-UI-CACHE-007.spec.mjs:135:13)\n    at preparePopulated (./tests/ui/TC-UI-CACHE-007.spec.mjs:153:3)\n    at /Users/by",
+        "evidence": "evidence/TC-UI-CACHE-007/"
+      },
+      {
+        "caseId": "TC-UI-CTX-004",
+        "module": "CTX",
+        "project": "ui",
+        "file": "ui/TC-UI-CTX-004.spec.mjs:125",
+        "status": "unexpected",
+        "error": "Error: [E1] 当前页面标题严格一致\n\nexpect(locator).toHaveText(expected) failed\n\nLocator:  getByTestId('current-page-title')\nExpected: \"Refactor auth middleware (#456)\"\nReceived: \"当前页面读取失败\"\nTimeout:  5000ms\n\nCall log:\n  - [E1] 当前页面标题严格一致 getByTestId('current-page-title') with timeout 5000ms\n  - waiting for getByTestId('current-page-title')\n    14 × locator resolved to <p data-testid=\"current-page-title\">当前页面读取失败</p>\n       - unexpected value \"当前页面读取失败\"\n\n\n  136 |   await test.step('S2：打开 popup 并核对完整当前页面卡片', async () => {\n  137 |     const popup = await ext.openPopup();\n> 138 |     await expect(popup.getByTestId('current-page-title'), '[E1] 当前页面标题严格一致').toHaveText(TITLE);\n      |                          ",
+        "evidence": "evidence/TC-UI-CTX-004/"
+      },
+      {
+        "caseId": "TC-UI-CTX-005",
+        "module": "CTX",
+        "project": "ui",
+        "file": "ui/TC-UI-CTX-005.spec.mjs:125",
+        "status": "unexpected",
+        "error": "Error: [E1] 离线时标题严格一致\n\nexpect(locator).toHaveText(expected) failed\n\nLocator:  getByTestId('current-page-title')\nExpected: \"Refactor auth middleware (#456)\"\nReceived: \"当前页面读取失败\"\nTimeout:  5000ms\n\nCall log:\n  - [E1] 离线时标题严格一致 getByTestId('current-page-title') with timeout 5000ms\n  - waiting for getByTestId('current-page-title')\n    14 × locator resolved to <p data-testid=\"current-page-title\">当前页面读取失败</p>\n       - unexpected value \"当前页面读取失败\"\n\n\n  138 |     const popup = await ext.openPopup();\n  139 |     await expect(popup.getByTestId('connection-status'), '真实后端连接失败已处理').toHaveAttribute('data-state', 'offline');\n> 140 |     await expect(popup.getByTestId('current-page-title'), '[E1] 离线时标题严格一致').",
+        "evidence": "evidence/TC-UI-CTX-005/"
+      },
+      {
+        "caseId": "TC-UI-CTX-006",
+        "module": "CTX",
+        "project": "ui",
+        "file": "ui/TC-UI-CTX-006.spec.mjs:125",
+        "status": "unexpected",
+        "error": "Error: [E1] 当前页面严格为最近活动 MDN\n\nexpect(locator).toHaveText(expected) failed\n\nLocator:  getByTestId('current-page-url')\nExpected: \"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\"\nReceived: \"\"\nTimeout:  5000ms\n\nCall log:\n  - [E1] 当前页面严格为最近活动 MDN getByTestId('current-page-url') with timeout 5000ms\n  - waiting for getByTestId('current-page-url')\n    14 × locator resolved to <p hidden=\"\" data-testid=\"current-page-url\"></p>\n       - unexpected value \"\"\n\n\n  143 |     const active = await ext.swEval(() => chrome.tabs.query({ active: true, lastFocusedWindow: true }));\n  144 |     expect(active.map((tab) => tab.url), 'popup 已成为真实活动标签').toEqual([popup.url()]);\n> 145 |     await expect(popup.ge",
+        "evidence": "evidence/TC-UI-CTX-006/"
+      },
+      {
+        "caseId": "TC-UI-CTX-007",
+        "module": "CTX",
+        "project": "ui",
+        "file": "ui/TC-UI-CTX-007.spec.mjs:122",
+        "status": "unexpected",
+        "error": "Error: [E1] 系统页标识可见\n\nexpect(locator).toBeVisible() failed\n\nLocator: getByTestId('current-page-system-badge')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - [E1] 系统页标识可见 getByTestId('current-page-system-badge') with timeout 5000ms\n  - waiting for getByTestId('current-page-system-badge')\n\n\n  136 |   });\n  137 |   await test.step('S2：核对系统页标识、禁止候选 URL 及未捕获异常', async () => {\n> 138 |     await expect(popup.getByTestId('current-page-system-badge'), '[E1] 系统页标识可见').toBeVisible();\n      |                                                                                  ^\n  139 |     await expect(popup.getByTestId('current-page-system-badge'), '[E1] 降级文案严格一致').toHaveText('",
+        "evidence": "evidence/TC-UI-CTX-007/"
+      },
+      {
+        "caseId": "TC-UI-CTX-008",
+        "module": "CTX",
+        "project": "ui",
+        "file": "ui/TC-UI-CTX-008.spec.mjs:125",
+        "status": "unexpected",
+        "error": "Error: [E1] 首次选择较早创建但最近激活的 PR\n\nexpect(locator).toHaveText(expected) failed\n\nLocator:  getByTestId('current-page-url')\nExpected: \"https://github.com/org/repo/pull/456\"\nReceived: \"\"\nTimeout:  5000ms\n\nCall log:\n  - [E1] 首次选择较早创建但最近激活的 PR getByTestId('current-page-url') with timeout 5000ms\n  - waiting for getByTestId('current-page-url')\n    14 × locator resolved to <p hidden=\"\" data-testid=\"current-page-url\"></p>\n       - unexpected value \"\"\n\n\n  143 |   await test.step('S2：两次打开 popup，分别验证 PR 与重新激活后的 MDN', async () => {\n  144 |     const first = await ext.openPopup();\n> 145 |     await expect(first.getByTestId('current-page-url'), '[E1] 首次选择较早创建但最近激活的 PR').toHaveText(PR);\n      |                 ",
+        "evidence": "evidence/TC-UI-CTX-008/"
+      },
+      {
+        "caseId": "TC-UI-CTX-009",
+        "module": "CTX",
+        "project": "ui",
+        "file": "ui/TC-UI-CTX-009.spec.mjs:125",
+        "status": "unexpected",
+        "error": "Error: [E1] 离线时仍显示最近活动 MDN URL\n\nexpect(locator).toHaveText(expected) failed\n\nLocator:  getByTestId('current-page-url')\nExpected: \"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\"\nReceived: \"\"\nTimeout:  5000ms\n\nCall log:\n  - [E1] 离线时仍显示最近活动 MDN URL getByTestId('current-page-url') with timeout 5000ms\n  - waiting for getByTestId('current-page-url')\n    14 × locator resolved to <p hidden=\"\" data-testid=\"current-page-url\"></p>\n       - unexpected value \"\"\n\n\n  145 |     expect(active.map((tab) => tab.url), '当前真实活动标签是 popup').toEqual([popup.url()]);\n  146 |     await expect(popup.getByTestId('connection-status'), '真实后端连接失败已完成').toHaveAttribute('data-state', 'offline');\n> 147 |     await ",
+        "evidence": "evidence/TC-UI-CTX-009/"
+      },
+      {
+        "caseId": "TC-UI-CTX-010",
+        "module": "CTX",
+        "project": "ui",
+        "file": "ui/TC-UI-CTX-010.spec.mjs:130",
+        "status": "unexpected",
+        "error": "Error: [E1] 指定完整 URL 对应行恰好一条\n\nexpect(locator).toHaveCount(expected) failed\n\nLocator:  getByTestId('context-tabs-list').getByTestId('context-tab-item').filter({ has: getByTestId('context-tab-url').filter({ hasText: /^https:\\/\\/github\\.com\\/org\\/repo\\/pull\\/456$/ }) })\nExpected: 1\nReceived: 0\nTimeout:  5000ms\n\nCall log:\n  - [E1] 指定完整 URL 对应行恰好一条 getByTestId('context-tabs-list').getByTestId('context-tab-item').filter({ has: getByTestId('context-tab-url').filter({ hasText: /^https:\\/\\/github\\.com\\/org\\/repo\\/pull\\/456$/ }) }) with timeout 5000ms\n  - waiting for getByTestId('context-tabs-list').getByTestId('context-tab-item').filter({ has: getByTestId('context-tab-url').filter({ hasText: /^https:",
+        "evidence": "evidence/TC-UI-CTX-010/"
+      },
+      {
+        "caseId": "TC-UI-CTX-011",
+        "module": "CTX",
+        "project": "ui",
+        "file": "ui/TC-UI-CTX-011.spec.mjs:126",
+        "status": "unexpected",
+        "error": "Error: [E1] 当前窗口 PR 恰好一条\n\nexpect(locator).toHaveCount(expected) failed\n\nLocator:  getByTestId('context-tabs-list').getByTestId('context-tab-item').filter({ has: getByTestId('context-tab-url').filter({ hasText: /^https:\\/\\/github\\.com\\/org\\/repo\\/pull\\/456$/ }) })\nExpected: 1\nReceived: 0\nTimeout:  5000ms\n\nCall log:\n  - [E1] 当前窗口 PR 恰好一条 getByTestId('context-tabs-list').getByTestId('context-tab-item').filter({ has: getByTestId('context-tab-url').filter({ hasText: /^https:\\/\\/github\\.com\\/org\\/repo\\/pull\\/456$/ }) }) with timeout 5000ms\n  - waiting for getByTestId('context-tabs-list').getByTestId('context-tab-item').filter({ has: getByTestId('context-tab-url').filter({ hasText: /^https:\\/\\/gith",
+        "evidence": "evidence/TC-UI-CTX-011/"
+      },
+      {
+        "caseId": "TC-UI-CTX-012",
+        "module": "CTX",
+        "project": "ui",
+        "file": "ui/TC-UI-CTX-012.spec.mjs:130",
+        "status": "unexpected",
+        "error": "Error: [E1] 四个指定 URL 各对应唯一一行\n\nexpect(locator).toHaveCount(expected) failed\n\nLocator:  getByTestId('context-tabs-list').getByTestId('context-tab-item').filter({ has: getByTestId('context-tab-url').filter({ hasText: /^https:\\/\\/github\\.com\\/org\\/repo\\/pull\\/456$/ }) })\nExpected: 1\nReceived: 0\nTimeout:  5000ms\n\nCall log:\n  - [E1] 四个指定 URL 各对应唯一一行 getByTestId('context-tabs-list').getByTestId('context-tab-item').filter({ has: getByTestId('context-tab-url').filter({ hasText: /^https:\\/\\/github\\.com\\/org\\/repo\\/pull\\/456$/ }) }) with timeout 5000ms\n  - waiting for getByTestId('context-tabs-list').getByTestId('context-tab-item').filter({ has: getByTestId('context-tab-url').filter({ hasText: /^https:",
+        "evidence": "evidence/TC-UI-CTX-012/"
+      },
+      {
+        "caseId": "TC-UI-CTX-013",
+        "module": "CTX",
+        "project": "ui",
+        "file": "ui/TC-UI-CTX-013.spec.mjs:142",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:1:22)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:1:22)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at ./tests/ui/TC-UI-CTX-013.spec.mjs:145:15\n    at <project>/...",
+        "evidence": "evidence/TC-UI-CTX-013/"
+      },
+      {
+        "caseId": "TC-UI-CTX-014",
+        "module": "CTX",
+        "project": "ui",
+        "file": "ui/TC-UI-CTX-014.spec.mjs:129",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:1:22)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:1:22)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at ./tests/ui/TC-UI-CTX-014.spec.mjs:132:15\n    at <project>/...",
+        "evidence": "evidence/TC-UI-CTX-014/"
+      },
+      {
+        "caseId": "TC-UI-CTX-015",
+        "module": "CTX",
+        "project": "ui",
+        "file": "ui/TC-UI-CTX-015.spec.mjs:128",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:1:22)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:1:22)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at ./tests/ui/TC-UI-CTX-015.spec.mjs:132:17\n    at <project>/...",
+        "evidence": "evidence/TC-UI-CTX-015/"
+      },
+      {
+        "caseId": "TC-UI-CTX-015",
+        "module": "CTX",
+        "project": "ui",
+        "file": "ui/TC-UI-CTX-015.spec.mjs:128",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:1:22)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:1:22)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at ./tests/ui/TC-UI-CTX-015.spec.mjs:132:17\n    at <project>/...",
+        "evidence": "evidence/TC-UI-CTX-015/"
+      },
+      {
+        "caseId": "TC-UI-CTX-015",
+        "module": "CTX",
+        "project": "ui",
+        "file": "ui/TC-UI-CTX-015.spec.mjs:128",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:1:22)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:1:22)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at ./tests/ui/TC-UI-CTX-015.spec.mjs:132:17\n    at <project>/...",
+        "evidence": "evidence/TC-UI-CTX-015/"
+      },
+      {
+        "caseId": "TC-UI-CTX-016",
+        "module": "CTX",
+        "project": "ui",
+        "file": "ui/TC-UI-CTX-016.spec.mjs:129",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'addUrl')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:52)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:52)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.seedHistory (./tests/fixtures/extension.mjs:68:19)\n    at ./tests/ui/TC-UI-CTX-016.spec.mjs:132:15\n    at <project>/...",
+        "evidence": "evidence/TC-UI-CTX-016/"
+      },
+      {
+        "caseId": "TC-UI-CTX-017",
+        "module": "CTX",
+        "project": "ui",
+        "file": "ui/TC-UI-CTX-017.spec.mjs:125",
+        "status": "unexpected",
+        "error": "Error: 实际历史查询范围已显示\n\nexpect(locator).toBeVisible() failed\n\nLocator: getByTestId('context-history-query')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - 实际历史查询范围已显示 getByTestId('context-history-query') with timeout 5000ms\n  - waiting for getByTestId('context-history-query')\n\n\n  129 |     await popup.getByTestId('tab-context').click();\n  130 |     await expect(popup.getByTestId('panel-context'), '上下文面板已显示').toBeVisible();\n> 131 |     await expect(popup.getByTestId('context-history-query'), '实际历史查询范围已显示').toBeVisible();\n      |                                                                             ^\n  132 |     await expect(popup.getByTestId('context-history-qu",
+        "evidence": "evidence/TC-UI-CTX-017/"
+      },
+      {
+        "caseId": "TC-UI-CTX-018",
+        "module": "CTX",
+        "project": "ui",
+        "file": "ui/TC-UI-CTX-018.spec.mjs:143",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:1:22)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:1:22)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at ./tests/ui/TC-UI-CTX-018.spec.mjs:147:15\n    at <project>/...",
+        "evidence": "evidence/TC-UI-CTX-018/"
+      },
+      {
+        "caseId": "TC-UI-CTX-019",
+        "module": "CTX",
+        "project": "ui",
+        "file": "ui/TC-UI-CTX-019.spec.mjs:122",
+        "status": "unexpected",
+        "error": "Error: [E1] 系统页降级标识可见\n\nexpect(locator).toBeVisible() failed\n\nLocator: getByTestId('current-page-system-badge')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - [E1] 系统页降级标识可见 getByTestId('current-page-system-badge') with timeout 5000ms\n  - waiting for getByTestId('current-page-system-badge')\n\n\n  136 |   await test.step('S2：打开 popup，核对系统降级和本次 popup 异常', async () => {\n  137 |     const popup = await ext.openPopup();\n> 138 |     await expect(popup.getByTestId('current-page-system-badge'), '[E1] 系统页降级标识可见').toBeVisible();\n      |                                                                                    ^\n  139 |     await expect(popup.getByTestId('current-pag",
+        "evidence": "evidence/TC-UI-CTX-019/"
+      },
+      {
+        "caseId": "TC-UI-CTX-020",
+        "module": "CTX",
+        "project": "ui",
+        "file": "ui/TC-UI-CTX-020.spec.mjs:124",
+        "status": "unexpected",
+        "error": "Error: [E1] 忽略末尾斜线规范化后系统页行恰好一条\n\nexpect(locator).toHaveCount(expected) failed\n\nLocator:  getByTestId('context-tabs-list').getByTestId('context-tab-item').filter({ has: getByTestId('context-tab-url').filter({ hasText: /^chrome:\\/\\/version\\/?$/ }) })\nExpected: 1\nReceived: 0\nTimeout:  5000ms\n\nCall log:\n  - [E1] 忽略末尾斜线规范化后系统页行恰好一条 getByTestId('context-tabs-list').getByTestId('context-tab-item').filter({ has: getByTestId('context-tab-url').filter({ hasText: /^chrome:\\/\\/version\\/?$/ }) }) with timeout 5000ms\n  - waiting for getByTestId('context-tabs-list').getByTestId('context-tab-item').filter({ has: getByTestId('context-tab-url').filter({ hasText: /^chrome:\\/\\/version\\/?$/ }) })\n    14 × locator",
+        "evidence": "evidence/TC-UI-CTX-020/"
+      },
+      {
+        "caseId": "TC-UI-CTX-021",
+        "module": "CTX",
+        "project": "ui",
+        "file": "ui/TC-UI-CTX-021.spec.mjs:124",
+        "status": "unexpected",
+        "error": "Error: [E1] 阶段一降级标识可见\n\nexpect(locator).toBeVisible() failed\n\nLocator: getByTestId('current-page-system-badge')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - [E1] 阶段一降级标识可见 getByTestId('current-page-system-badge') with timeout 5000ms\n  - waiting for getByTestId('current-page-system-badge')\n\n\n  137 |     const page = await ext.openPopup();\n  138 |     await expect(page.getByTestId('connection-status'), '真实后端连接失败已处理').toHaveAttribute('data-state', 'offline');\n> 139 |     await expect(page.getByTestId('current-page-system-badge'), '[E1] 阶段一降级标识可见').toBeVisible();\n      |                                                                                   ^\n  140 |    ",
+        "evidence": "evidence/TC-UI-CTX-021/"
+      },
+      {
+        "caseId": "TC-UI-DIAG-011",
+        "module": "DIAG",
+        "project": "ui",
+        "file": "ui/TC-UI-DIAG-011.spec.mjs:5",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'addUrl')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:52)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:52)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.seedHistory (./tests/fixtures/extension.mjs:68:19)\n    at ./tests/ui/TC-UI-DIAG-011.spec.mjs:9:15\n    at <project>/...",
+        "evidence": "evidence/TC-UI-DIAG-011/"
+      },
+      {
+        "caseId": "TC-UI-DIAG-025",
+        "module": "DIAG",
+        "project": "ui",
+        "file": "ui/TC-UI-DIAG-025.spec.mjs:8",
+        "status": "unexpected",
+        "error": "Error: [E3] 每个失败项都有一条 hint 命中命令 / 路径 / 配置键\n\nexpect(received).toEqual(expected) // deep equality\n\n- Expected  - 1\n+ Received  + 1\n\n  Array [\n    true,\n-   true,\n+   false,\n  ]\n\n  29 |     expect(Math.min(...failed.map((state) => state.hintSteps.length)), '[E2] 每个失败项的排查步骤数量 ≥ 1').toBeGreaterThanOrEqual(1);\n  30 |     const executable = failed.map((state) => state.hintSteps.some((step) => EXECUTABLE_HINTS.some((fragment) => step.includes(fragment))));\n> 31 |     expect(executable, '[E3] 每个失败项都有一条 hint 命中命令 / 路径 / 配置键').toEqual(failed.map(() => true));\n     |                                                               ^\n  32 |     expect(failed.filter((state) => /^[A-Z_]+$/.test(state.detail.t",
+        "evidence": "evidence/TC-UI-DIAG-025/"
+      },
+      {
+        "caseId": "TC-UI-INCR-001",
+        "module": "INCR",
+        "project": "ui",
+        "file": "ui/TC-UI-INCR-001.spec.mjs:140",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetBrowserState (./tests/ui/TC-UI-INCR-001.spec.mjs:13:13)\n    at /",
+        "evidence": "evidence/TC-UI-INCR-001/"
+      },
+      {
+        "caseId": "TC-UI-INCR-002",
+        "module": "INCR",
+        "project": "ui",
+        "file": "ui/TC-UI-INCR-002.spec.mjs:139",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetBrowserState (./tests/ui/TC-UI-INCR-002.spec.mjs:13:13)\n    at /",
+        "evidence": "evidence/TC-UI-INCR-002/"
+      },
+      {
+        "caseId": "TC-UI-INCR-003",
+        "module": "INCR",
+        "project": "ui",
+        "file": "ui/TC-UI-INCR-003.spec.mjs:139",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetBrowserState (./tests/ui/TC-UI-INCR-003.spec.mjs:13:13)\n    at /",
+        "evidence": "evidence/TC-UI-INCR-003/"
+      },
+      {
+        "caseId": "TC-UI-INCR-004",
+        "module": "INCR",
+        "project": "ui",
+        "file": "ui/TC-UI-INCR-004.spec.mjs:148",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetBrowserState (./tests/ui/TC-UI-INCR-004.spec.mjs:13:13)\n    at /",
+        "evidence": "evidence/TC-UI-INCR-004/"
+      },
+      {
+        "caseId": "TC-UI-INCR-005",
+        "module": "INCR",
+        "project": "ui",
+        "file": "ui/TC-UI-INCR-005.spec.mjs:139",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetBrowserState (./tests/ui/TC-UI-INCR-005.spec.mjs:13:13)\n    at /",
+        "evidence": "evidence/TC-UI-INCR-005/"
+      },
+      {
+        "caseId": "TC-UI-INCR-006",
+        "module": "INCR",
+        "project": "ui",
+        "file": "ui/TC-UI-INCR-006.spec.mjs:140",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetBrowserState (./tests/ui/TC-UI-INCR-006.spec.mjs:13:13)\n    at /",
+        "evidence": "evidence/TC-UI-INCR-006/"
+      },
+      {
+        "caseId": "TC-UI-INCR-007",
+        "module": "INCR",
+        "project": "ui",
+        "file": "ui/TC-UI-INCR-007.spec.mjs:139",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetBrowserState (./tests/ui/TC-UI-INCR-007.spec.mjs:13:13)\n    at /",
+        "evidence": "evidence/TC-UI-INCR-007/"
+      },
+      {
+        "caseId": "TC-UI-MENU-001",
+        "module": "MENU",
+        "project": "ui",
+        "file": "ui/TC-UI-MENU-001.spec.mjs:120",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetExtensionState (./tests/ui/TC-UI-MENU-001.spec.mjs:87:13)\n    at ./tests/ui/TC-UI-MENU-001.spec.mjs:122:11\n    at <project>/...",
+        "evidence": "evidence/TC-UI-MENU-001/"
+      },
+      {
+        "caseId": "TC-UI-MENU-002",
+        "module": "MENU",
+        "project": "ui",
+        "file": "ui/TC-UI-MENU-002.spec.mjs:119",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetExtensionState (./tests/ui/TC-UI-MENU-002.spec.mjs:87:13)\n    at ./tests/ui/TC-UI-MENU-002.spec.mjs:121:11\n    at <project>/...",
+        "evidence": "evidence/TC-UI-MENU-002/"
+      },
+      {
+        "caseId": "TC-UI-MENU-003",
+        "module": "MENU",
+        "project": "ui",
+        "file": "ui/TC-UI-MENU-003.spec.mjs:119",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetExtensionState (./tests/ui/TC-UI-MENU-003.spec.mjs:87:13)\n    at ./tests/ui/TC-UI-MENU-003.spec.mjs:121:11\n    at <project>/...",
+        "evidence": "evidence/TC-UI-MENU-003/"
+      },
+      {
+        "caseId": "TC-UI-MENU-004",
+        "module": "MENU",
+        "project": "ui",
+        "file": "ui/TC-UI-MENU-004.spec.mjs:119",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetExtensionState (./tests/ui/TC-UI-MENU-004.spec.mjs:87:13)\n    at ./tests/ui/TC-UI-MENU-004.spec.mjs:121:11\n    at <project>/...",
+        "evidence": "evidence/TC-UI-MENU-004/"
+      },
+      {
+        "caseId": "TC-UI-MENU-005",
+        "module": "MENU",
+        "project": "ui",
+        "file": "ui/TC-UI-MENU-005.spec.mjs:118",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetExtensionState (./tests/ui/TC-UI-MENU-005.spec.mjs:87:13)\n    at ./tests/ui/TC-UI-MENU-005.spec.mjs:120:11\n    at <project>/...",
+        "evidence": "evidence/TC-UI-MENU-005/"
+      },
+      {
+        "caseId": "TC-UI-MENU-006",
+        "module": "MENU",
+        "project": "ui",
+        "file": "ui/TC-UI-MENU-006.spec.mjs:132",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetExtensionState (./tests/ui/TC-UI-MENU-006.spec.mjs:87:13)\n    at ./tests/ui/TC-UI-MENU-006.spec.mjs:134:11\n    at <project>/...",
+        "evidence": "evidence/TC-UI-MENU-006/"
+      },
+      {
+        "caseId": "TC-UI-MENU-007",
+        "module": "MENU",
+        "project": "ui",
+        "file": "ui/TC-UI-MENU-007.spec.mjs:119",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetExtensionState (./tests/ui/TC-UI-MENU-007.spec.mjs:87:13)\n    at ./tests/ui/TC-UI-MENU-007.spec.mjs:121:11\n    at <project>/...",
+        "evidence": "evidence/TC-UI-MENU-007/"
+      },
+      {
+        "caseId": "TC-UI-MENU-008",
+        "module": "MENU",
+        "project": "ui",
+        "file": "ui/TC-UI-MENU-008.spec.mjs:119",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetExtensionState (./tests/ui/TC-UI-MENU-008.spec.mjs:87:13)\n    at ./tests/ui/TC-UI-MENU-008.spec.mjs:121:11\n    at <project>/...",
+        "evidence": "evidence/TC-UI-MENU-008/"
+      },
+      {
+        "caseId": "TC-UI-MENU-009",
+        "module": "MENU",
+        "project": "ui",
+        "file": "ui/TC-UI-MENU-009.spec.mjs:119",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetExtensionState (./tests/ui/TC-UI-MENU-009.spec.mjs:87:13)\n    at ./tests/ui/TC-UI-MENU-009.spec.mjs:121:11\n    at <project>/...",
+        "evidence": "evidence/TC-UI-MENU-009/"
+      },
+      {
+        "caseId": "TC-UI-MENU-010",
+        "module": "MENU",
+        "project": "ui",
+        "file": "ui/TC-UI-MENU-010.spec.mjs:119",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetExtensionState (./tests/ui/TC-UI-MENU-010.spec.mjs:87:13)\n    at ./tests/ui/TC-UI-MENU-010.spec.mjs:121:11\n    at <project>/...",
+        "evidence": "evidence/TC-UI-MENU-010/"
+      },
+      {
+        "caseId": "TC-UI-PRIV-001",
+        "module": "PRIV",
+        "project": "ui",
+        "file": "ui/TC-UI-PRIV-001.spec.mjs:149",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at preparePages (./tests/ui/TC-UI-PRIV-001.spec.mjs:6:13)\n    at ./tests/ui/TC-UI-PRIV-001.spec.mjs:158:27\n    at <project>/...",
+        "evidence": "evidence/TC-UI-PRIV-001/"
+      },
+      {
+        "caseId": "TC-UI-PRIV-002",
+        "module": "PRIV",
+        "project": "ui",
+        "file": "ui/TC-UI-PRIV-002.spec.mjs:151",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at preparePages (./tests/ui/TC-UI-PRIV-002.spec.mjs:6:13)\n    at ./tests/ui/TC-UI-PRIV-002.spec.mjs:158:29\n    at <project>/...",
+        "evidence": "evidence/TC-UI-PRIV-002/"
+      },
+      {
+        "caseId": "TC-UI-PRIV-003",
+        "module": "PRIV",
+        "project": "ui",
+        "file": "ui/TC-UI-PRIV-003.spec.mjs:147",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at preparePages (./tests/ui/TC-UI-PRIV-003.spec.mjs:6:13)\n    at ./tests/ui/TC-UI-PRIV-003.spec.mjs:152:27\n    at <project>/...",
+        "evidence": "evidence/TC-UI-PRIV-003/"
+      },
+      {
+        "caseId": "TC-UI-PRIV-004",
+        "module": "PRIV",
+        "project": "ui",
+        "file": "ui/TC-UI-PRIV-004.spec.mjs:151",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at preparePages (./tests/ui/TC-UI-PRIV-004.spec.mjs:6:13)\n    at ./tests/ui/TC-UI-PRIV-004.spec.mjs:156:27\n    at <project>/...",
+        "evidence": "evidence/TC-UI-PRIV-004/"
+      },
+      {
+        "caseId": "TC-UI-PRIV-005",
+        "module": "PRIV",
+        "project": "ui",
+        "file": "ui/TC-UI-PRIV-005.spec.mjs:149",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at preparePages (./tests/ui/TC-UI-PRIV-005.spec.mjs:6:13)\n    at ./tests/ui/TC-UI-PRIV-005.spec.mjs:162:13\n    at <project>/...",
+        "evidence": "evidence/TC-UI-PRIV-005/"
+      },
+      {
+        "caseId": "TC-UI-PRIV-006",
+        "module": "PRIV",
+        "project": "ui",
+        "file": "ui/TC-UI-PRIV-006.spec.mjs:150",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at preparePages (./tests/ui/TC-UI-PRIV-006.spec.mjs:6:13)\n    at ./tests/ui/TC-UI-PRIV-006.spec.mjs:158:13\n    at <project>/...",
+        "evidence": "evidence/TC-UI-PRIV-006/"
+      },
+      {
+        "caseId": "TC-UI-PRIV-007",
+        "module": "PRIV",
+        "project": "ui",
+        "file": "ui/TC-UI-PRIV-007.spec.mjs:337",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at preparePages (./tests/ui/TC-UI-PRIV-007.spec.mjs:71:13)\n    at ./tests/ui/TC-UI-PRIV-007.spec.mjs:345:30\n    at <project>/...",
+        "evidence": "evidence/TC-UI-PRIV-007/"
+      },
+      {
+        "caseId": "TC-UI-PRIV-008",
+        "module": "PRIV",
+        "project": "ui",
+        "file": "ui/TC-UI-PRIV-008.spec.mjs:338",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at preparePages (./tests/ui/TC-UI-PRIV-008.spec.mjs:71:13)\n    at ./tests/ui/TC-UI-PRIV-008.spec.mjs:346:30\n    at <project>/...",
+        "evidence": "evidence/TC-UI-PRIV-008/"
+      },
+      {
+        "caseId": "TC-UI-PRIV-009",
+        "module": "PRIV",
+        "project": "ui",
+        "file": "ui/TC-UI-PRIV-009.spec.mjs:159",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at preparePages (./tests/ui/TC-UI-PRIV-009.spec.mjs:6:13)\n    at ./tests/ui/TC-UI-PRIV-009.spec.mjs:170:13\n    at <project>/...",
+        "evidence": "evidence/TC-UI-PRIV-009/"
+      },
+      {
+        "caseId": "TC-UI-PRIV-010",
+        "module": "PRIV",
+        "project": "ui",
+        "file": "ui/TC-UI-PRIV-010.spec.mjs:337",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at eval (eval at evaluate (:370:30), <anonymous>:3:26)\n    at async <anonymous>:396:30\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at preparePages (./tests/ui/TC-UI-PRIV-010.spec.mjs:71:13)\n    at ./tests/ui/TC-UI-PRIV-010.spec.mjs:350:30\n    at <project>/...",
+        "evidence": "evidence/TC-UI-PRIV-010/"
+      },
+      {
+        "caseId": "TC-UI-REC-001",
+        "module": "REC",
+        "project": "ui",
+        "file": "ui/TC-UI-REC-001.spec.mjs:144",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at prepareBrowser (./tests/ui/TC-UI-REC-001.spec.mjs:15:13)\n    at /User",
+        "evidence": "evidence/TC-UI-REC-001/"
+      },
+      {
+        "caseId": "TC-UI-REC-002",
+        "module": "REC",
+        "project": "ui",
+        "file": "ui/TC-UI-REC-002.spec.mjs:144",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at prepareBrowser (./tests/ui/TC-UI-REC-002.spec.mjs:15:13)\n    at /User",
+        "evidence": "evidence/TC-UI-REC-002/"
+      },
+      {
+        "caseId": "TC-UI-REC-003",
+        "module": "REC",
+        "project": "ui",
+        "file": "ui/TC-UI-REC-003.spec.mjs:144",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at prepareBrowser (./tests/ui/TC-UI-REC-003.spec.mjs:15:13)\n    at /User",
+        "evidence": "evidence/TC-UI-REC-003/"
+      },
+      {
+        "caseId": "TC-UI-REC-004",
+        "module": "REC",
+        "project": "ui",
+        "file": "ui/TC-UI-REC-004.spec.mjs:144",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at prepareBrowser (./tests/ui/TC-UI-REC-004.spec.mjs:15:13)\n    at /User",
+        "evidence": "evidence/TC-UI-REC-004/"
+      },
+      {
+        "caseId": "TC-UI-REC-005",
+        "module": "REC",
+        "project": "ui",
+        "file": "ui/TC-UI-REC-005.spec.mjs:144",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at prepareBrowser (./tests/ui/TC-UI-REC-005.spec.mjs:15:13)\n    at /User",
+        "evidence": "evidence/TC-UI-REC-005/"
+      },
+      {
+        "caseId": "TC-UI-REC-006",
+        "module": "REC",
+        "project": "ui",
+        "file": "ui/TC-UI-REC-006.spec.mjs:144",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at prepareBrowser (./tests/ui/TC-UI-REC-006.spec.mjs:15:13)\n    at /User",
+        "evidence": "evidence/TC-UI-REC-006/"
+      },
+      {
+        "caseId": "TC-UI-SYNC-001",
+        "module": "SYNC",
+        "project": "ui",
+        "file": "ui/TC-UI-SYNC-001.spec.mjs:159",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetBrowser (./tests/ui/TC-UI-SYNC-001.spec.mjs:14:13)\n    at prepar",
+        "evidence": "evidence/TC-UI-SYNC-001/"
+      },
+      {
+        "caseId": "TC-UI-SYNC-002",
+        "module": "SYNC",
+        "project": "ui",
+        "file": "ui/TC-UI-SYNC-002.spec.mjs:159",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetBrowser (./tests/ui/TC-UI-SYNC-002.spec.mjs:14:13)\n    at prepar",
+        "evidence": "evidence/TC-UI-SYNC-002/"
+      },
+      {
+        "caseId": "TC-UI-SYNC-003",
+        "module": "SYNC",
+        "project": "ui",
+        "file": "ui/TC-UI-SYNC-003.spec.mjs:159",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetBrowser (./tests/ui/TC-UI-SYNC-003.spec.mjs:14:13)\n    at prepar",
+        "evidence": "evidence/TC-UI-SYNC-003/"
+      },
+      {
+        "caseId": "TC-UI-SYNC-004",
+        "module": "SYNC",
+        "project": "ui",
+        "file": "ui/TC-UI-SYNC-004.spec.mjs:129",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetBrowser (./tests/ui/TC-UI-SYNC-004.spec.mjs:14:13)\n    at /Users",
+        "evidence": "evidence/TC-UI-SYNC-004/"
+      },
+      {
+        "caseId": "TC-UI-SYNC-005",
+        "module": "SYNC",
+        "project": "ui",
+        "file": "ui/TC-UI-SYNC-005.spec.mjs:159",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetBrowser (./tests/ui/TC-UI-SYNC-005.spec.mjs:14:13)\n    at prepar",
+        "evidence": "evidence/TC-UI-SYNC-005/"
+      },
+      {
+        "caseId": "TC-UI-SYNC-006",
+        "module": "SYNC",
+        "project": "ui",
+        "file": "ui/TC-UI-SYNC-006.spec.mjs:143",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetBrowser (./tests/ui/TC-UI-SYNC-006.spec.mjs:14:13)\n    at prepar",
+        "evidence": "evidence/TC-UI-SYNC-006/"
+      },
+      {
+        "caseId": "TC-UI-SYNC-007",
+        "module": "SYNC",
+        "project": "ui",
+        "file": "ui/TC-UI-SYNC-007.spec.mjs:112",
+        "status": "unexpected",
+        "error": "Error: [setup] SW 扩展 API 绑定已就绪\n\n[setup] SW 扩展 API 绑定已就绪\n\nexpect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 10000ms exceeded while waiting on the predicate\n\n  16 |     && typeof chrome.storage?.local?.remove === 'function'), { // expect.poll 遇到抛错会自动重试\n  17 |     message: '[setup] SW 扩展 API 绑定已就绪', timeout: 10_000,\n> 18 |   }).toBe(true);\n     |      ^\n  19 |   await ext.swEval(async () => {\n  20 |     await chrome.history.deleteAll();\n  21 |     await chrome.storage.local.remove(['syncState', 'cache', 'connection']);\n    at resetBrowser (./tests/ui/TC-UI-SYNC-007.spec.",
+        "evidence": "evidence/TC-UI-SYNC-007/"
+      },
+      {
+        "caseId": "TC-UI-SYNC-008",
+        "module": "SYNC",
+        "project": "ui",
+        "file": "ui/TC-UI-SYNC-008.spec.mjs:123",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetBrowser (./tests/ui/TC-UI-SYNC-008.spec.mjs:14:13)\n    at /Users",
+        "evidence": "evidence/TC-UI-SYNC-008/"
+      },
+      {
+        "caseId": "TC-UI-SYNC-009",
+        "module": "SYNC",
+        "project": "ui",
+        "file": "ui/TC-UI-SYNC-009.spec.mjs:161",
+        "status": "unexpected",
+        "error": "Error: worker.evaluate: TypeError: Cannot read properties of undefined (reading 'deleteAll')\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:370:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at ExtensionHelper.swEval (./tests/fixtures/extension.mjs:64:42)\n    at resetBrowser (./tests/ui/TC-UI-SYNC-009.spec.mjs:14:13)\n    at prepar",
+        "evidence": "evidence/TC-UI-SYNC-009/"
+      }
+    ],
+    "missingCases": [],
+    "evidenceIncomplete": [
+      {
+        "caseId": "TC-UI-CACHE-001",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-CACHE-002",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-CACHE-003",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-CACHE-004",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-CACHE-005",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-CACHE-006",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-CACHE-007",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-DIAG-011",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-INCR-001",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-INCR-002",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-INCR-003",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-INCR-004",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-INCR-005",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-INCR-006",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-INCR-007",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-MENU-001",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-MENU-002",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-MENU-003",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-MENU-004",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-MENU-005",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-MENU-006",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-MENU-007",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-MENU-008",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-MENU-009",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-MENU-010",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-PRIV-001",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-PRIV-002",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-PRIV-003",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-PRIV-004",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-PRIV-005",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-PRIV-006",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-PRIV-007",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-PRIV-008",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-PRIV-009",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-PRIV-010",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-REC-001",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-REC-002",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-REC-003",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-REC-004",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-REC-005",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-REC-006",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-SYNC-001",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-SYNC-002",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-SYNC-003",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-SYNC-004",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-SYNC-005",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-SYNC-006",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-SYNC-007",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-SYNC-008",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      },
+      {
+        "caseId": "TC-UI-SYNC-009",
+        "missing": [
+          "screenshots/ 为空"
+        ]
+      }
+    ]
+  },
+  "modules": [
+    "CACHE",
+    "CLEAN",
+    "CTX",
+    "DEMO",
+    "DIAG",
+    "INCR",
+    "MENU",
+    "PERF",
+    "PERSIST",
+    "PRIV",
+    "RANK",
+    "REC",
+    "RULE",
+    "SYNC"
+  ],
+  "sharedModules": [
+    "CORE"
+  ]
+}

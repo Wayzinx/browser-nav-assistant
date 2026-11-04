@@ -1,0 +1,21 @@
+{
+  "caseId": "TC-UI-RULE-018",
+  "verdict": "pass",
+  "observed": "导入样例并保存 2 条后 cleanup-suggestions 含 keep ai-agent-design；点击永不归档项删除后确认按钮出现、仍 2 条；确认后剩 1 条 archive_candidate，rules-count「1」；GET /api/rules total=1、health.ruleCount=1；cleanup-suggestions 与整理页签「保留 0」均无 ai-agent-design keep。E1–E5 满足。",
+  "steps": [
+    "PORT=4183 启动后端（ENABLE_TEST_API=1），每条前 POST /api/__test__/reset",
+    "headless chromium（channel=chromium）加载 extension/（DIAG-010/012 为删权限临时副本），apiBaseUrl 指向 http://127.0.0.1:4183，只 route 外部站点",
+    "S3 删除确认（截图 evidence/TC-UI-RULE-018/explore/1.png）",
+    "S4 删除后（截图 evidence/TC-UI-RULE-018/explore/2.png）",
+    "S5 整理页签（截图 evidence/TC-UI-RULE-018/explore/3.png）",
+    "探索脚本：tests/explore/tmp/x4183-rule.mjs；观测数据与 aria 快照：tests/explore/tmp/x4183-rule.out.json",
+    "TEST_PORT=4183 npx playwright test tests/ui/TC-UI-RULE-018.spec.mjs 通过（2026-11-03 07:27 续跑：产品代码与 UI-DIAG/RULE 用例分片未变；探索脚本 52/52 ok，观测与 aria 快照除数字/时间外与上轮完全一致；TEST_PORT=4183 隔离 --output 批量 52 passed）"
+  ],
+  "screenshots": [
+    "evidence/TC-UI-RULE-018/explore/1.png",
+    "evidence/TC-UI-RULE-018/explore/2.png",
+    "evidence/TC-UI-RULE-018/explore/3.png"
+  ],
+  "spec": "tests/ui/TC-UI-RULE-018.spec.mjs",
+  "solidified": true
+}

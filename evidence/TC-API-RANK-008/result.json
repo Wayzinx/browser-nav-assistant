@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RANK-008",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:03.361Z",
+  "tests": [
+    {
+      "testId": "ef6897e73dddf0af11b8-50689be8f4cd653ebbfc",
+      "title": "TC-API-RANK-008 POST ranked 返回 405 且带 Allow 头，随后 GET 仍正常",
+      "project": "api",
+      "file": "tests/api/TC-API-RANK-008.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 18,
+      "startedAt": "2026-11-04T03:27:03.343Z",
+      "endedAt": "2026-11-04T03:27:03.361Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 640,
+          "after": 641
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

@@ -1,0 +1,480 @@
+{
+  "cases": [
+    {
+      "id": "TC-API-MENU-001",
+      "type": "API",
+      "module": "MENU",
+      "title": "新增手动分析页面：来源包含 manual，已有打开快照保留",
+      "priority": "P1",
+      "category": "positive",
+      "technique": "equivalence",
+      "features": [
+        "F-MENU-01"
+      ],
+      "acceptanceRefs": [
+        "F-MENU-01#AC2"
+      ],
+      "codePoints": [
+        "C-BE-MENU-01"
+      ],
+      "preconditions": [
+        "测试后端以 ENABLE_TEST_API=1 启动，允许真实 HTTP POST /api/__test__/reset；测试地址由 TEST_PORT 配置。",
+        "只通过 HTTP 构造和读取数据，不 mock/route 后端，不 import 服务端代码；本用例不依赖其他用例或执行顺序。"
+      ],
+      "testData": "resource.json 只读；导入前取 t0=Date.now()，每个 history.lastVisitTime 加 Δ=t0-300000-1710100000000，最新历史变成 t0-5 分钟；其他字段照原样。POST /api/sync 返回 syncedAt 记为 T，全部 ranked/cleanup 读回均传 now=T。PRD §13 基线 pageCount=10、打开4页、docs.internal.com 的 domain=0.10、score=0.56。 ",
+      "steps": [
+        "S1：POST /api/__test__/reset 隔离本用例；核对 HTTP 200、body.ok=true。",
+        "S2：按 testData 平移 resource.json，通过 POST /api/sync 导入；保存响应 syncedAt 为 T。 核对 HTTP 200、body.ok=true、pageCount=10，不符则停止并记录失败。",
+        "S3：GET /api/pages/ranked?now=T，保存原有页面的 normalizedUrl、isOpen、isActive。",
+        "S4：POST /api/pages/manual，JSON={\"url\":\"https://example.com/note\",\"title\":\"Note\"}。",
+        "S5：GET /api/pages/ranked?limit=500&now=T 及 GET /api/health。"
+      ],
+      "expected": [
+        "E1：新增 POST 返回 HTTP 200。",
+        "E2：新增响应的 accepted=true、rejected=0、created=true、pageCount=11。",
+        "E3：最终 ranked.total=11，pages 中 normalizedUrl=\"https://example.com/note\" 恰好1条，title=\"Note\"。",
+        "E4：新增页面的 sources 包含 \"manual\"，isOpen=false、isActive=false。",
+        "E5：原有10页的 isOpen/isActive 与操作前逐页相同；isOpen=true 的集合恰为 pull/456、issues/123、Fetch_API、ai-agent-design 四个样例完整 URL，isActive=true 的 URL 仅为 https://github.com/org/repo/pull/456。",
+        "E6：最终 health.pageCount=11。",
+        "E7：本条每轮初始化 reset 均返回 HTTP 200、body.ok=true；初始化 sync 均返回 HTTP 200、body.ok=true、pageCount=10。"
+      ],
+      "evidence": [
+        "api/：reset、sync、被测 POST 与 ranked/health/cleanup（如适用）的完整请求和响应；原始畸形请求须保留原始字节。",
+        "server.log：按本 Case ID 的 x-request-id 对应请求日志；result.json：后续脚本执行时记录每个 [En]。"
+      ]
+    },
+    {
+      "id": "TC-API-MENU-002",
+      "type": "API",
+      "module": "MENU",
+      "title": "规范化重复手动添加：复用原页面 id，来源合并且页面数保持10",
+      "priority": "P2",
+      "category": "state",
+      "technique": "state-transition",
+      "features": [
+        "F-MENU-01"
+      ],
+      "acceptanceRefs": [
+        "F-MENU-01#AC2"
+      ],
+      "codePoints": [
+        "C-BE-MENU-01"
+      ],
+      "preconditions": [
+        "测试后端以 ENABLE_TEST_API=1 启动，允许真实 HTTP POST /api/__test__/reset；测试地址由 TEST_PORT 配置。",
+        "只通过 HTTP 构造和读取数据，不 mock/route 后端，不 import 服务端代码；本用例不依赖其他用例或执行顺序。"
+      ],
+      "testData": "resource.json 只读；导入前取 t0=Date.now()，每个 history.lastVisitTime 加 Δ=t0-300000-1710100000000，最新历史变成 t0-5 分钟；其他字段照原样。POST /api/sync 返回 syncedAt 记为 T，全部 ranked/cleanup 读回均传 now=T。PRD §13 基线 pageCount=10、打开4页、docs.internal.com 的 domain=0.10、score=0.56。 归一化依据后端方案 §6.1 / D-03：host转小写、去hash、去utm_*、去非根路径末尾/；不把业务query全部删除。",
+      "steps": [
+        "S1：POST /api/__test__/reset 隔离本用例；核对 HTTP 200、body.ok=true。",
+        "S2：按 testData 平移 resource.json，通过 POST /api/sync 导入；保存响应 syncedAt 为 T。 核对 HTTP 200、body.ok=true、pageCount=10，不符则停止并记录失败。",
+        "S3：GET /api/pages/ranked?now=T，按 normalizedUrl=\"https://docs.internal.com/ai-agent-design\" 保存后端生成的 id 及打开状态。",
+        "S4：POST /api/pages/manual，JSON={\"url\":\"https://DOCS.INTERNAL.com/ai-agent-design/?utm_source=menu#mark\",\"title\":\"Menu note\"}。",
+        "S5：再次 POST /api/pages/manual，JSON={\"url\":\"https://docs.internal.com/ai-agent-design\",\"title\":\"Menu note\"}。",
+        "S6：GET /api/pages/ranked?limit=500&now=T 及 GET /api/health。"
+      ],
+      "expected": [
+        "E1：两次 manual POST 均返回 HTTP 200，accepted=true、rejected=0、created=false、pageCount=10。",
+        "E2：最终 normalizedUrl=\"https://docs.internal.com/ai-agent-design\" 恰好1条，id 等于首次 ranked 返回的 id。",
+        "E3：该页面 sources 包含 \"open_tab\"、\"history\"、\"manual\"，且 \"manual\" 恰好出现1次。",
+        "E4：该页面 title=\"Menu note\"，isOpen=true、isActive=false；最终全部页面 isOpen=true 共4条。",
+        "E5：最终 ranked.total=10，health.pageCount=10。",
+        "E6：本条每轮初始化 reset 均返回 HTTP 200、body.ok=true；初始化 sync 均返回 HTTP 200、body.ok=true、pageCount=10。"
+      ],
+      "evidence": [
+        "api/：reset、sync、被测 POST 与 ranked/health/cleanup（如适用）的完整请求和响应；原始畸形请求须保留原始字节。",
+        "server.log：按本 Case ID 的 x-request-id 对应请求日志；result.json：后续脚本执行时记录每个 [En]。"
+      ]
+    },
+    {
+      "id": "TC-API-MENU-003",
+      "type": "API",
+      "module": "MENU",
+      "title": "对样例文档显式标记重要：域名分为1并给出重要理由",
+      "priority": "P1",
+      "category": "positive",
+      "technique": "scenario",
+      "features": [
+        "F-MENU-01"
+      ],
+      "acceptanceRefs": [
+        "F-MENU-01#AC3"
+      ],
+      "codePoints": [
+        "C-BE-MENU-02",
+        "C-BE-RANK-02",
+        "C-BE-RANK-03"
+      ],
+      "preconditions": [
+        "测试后端以 ENABLE_TEST_API=1 启动，允许真实 HTTP POST /api/__test__/reset；测试地址由 TEST_PORT 配置。",
+        "只通过 HTTP 构造和读取数据，不 mock/route 后端，不 import 服务端代码；本用例不依赖其他用例或执行顺序。"
+      ],
+      "testData": "resource.json 只读；导入前取 t0=Date.now()，每个 history.lastVisitTime 加 Δ=t0-300000-1710100000000，最新历史变成 t0-5 分钟；其他字段照原样。POST /api/sync 返回 syncedAt 记为 T，全部 ranked/cleanup 读回均传 now=T。PRD §13 基线 pageCount=10、打开4页、docs.internal.com 的 domain=0.10、score=0.56。 重要标记后的总分依赖该操作是否刷新访问时间，契约未明确，故不将0.65或第7名作为硬预期。",
+      "steps": [
+        "S1：POST /api/__test__/reset 隔离本用例；核对 HTTP 200、body.ok=true。",
+        "S2：按 testData 平移 resource.json，通过 POST /api/sync 导入；保存响应 syncedAt 为 T。 核对 HTTP 200、body.ok=true、pageCount=10，不符则停止并记录失败。",
+        "S3：GET /api/pages/ranked?now=T，记录 normalizedUrl=\"https://docs.internal.com/ai-agent-design\" 对应页面。",
+        "S4：POST /api/pages/important，JSON={\"url\":\"https://docs.internal.com/ai-agent-design\",\"title\":\"AI Agent Design Guidelines\",\"important\":true}。",
+        "S5：GET /api/pages/ranked?now=T。",
+        "S6：GET /api/pages/cleanup-suggestions?now=T 及 GET /api/health。"
+      ],
+      "expected": [
+        "E1：操作前目标页面 isImportant=false，scoreDetail.domain=0.10、score=0.56。",
+        "E2：important POST 返回 HTTP 200，accepted=true、rejected=0、isImportant=true、created=false。",
+        "E3：操作后目标页面 isImportant=true，scoreDetail.domain=1.00、scoreDetail.domainSource=\"important\"。",
+        "E4：操作后目标页面 reason 包含「已被你标记为重要」。",
+        "E5：cleanup.suggestions 中目标 URL 恰有1条 action=\"keep\"，reason=\"你已标记为重要，不建议归档\"，且不存在该 URL 的 archive 建议。",
+        "E6：最终 ranked.total=10，health.pageCount=10。",
+        "E7：本条每轮初始化 reset 均返回 HTTP 200、body.ok=true；初始化 sync 均返回 HTTP 200、body.ok=true、pageCount=10。"
+      ],
+      "evidence": [
+        "api/：reset、sync、被测 POST 与 ranked/health/cleanup（如适用）的完整请求和响应；原始畸形请求须保留原始字节。",
+        "server.log：按本 Case ID 的 x-request-id 对应请求日志；result.json：后续脚本执行时记录每个 [En]。"
+      ]
+    },
+    {
+      "id": "TC-API-MENU-004",
+      "type": "API",
+      "module": "MENU",
+      "title": "空库首次标记且省略 important：默认 true 并创建 manual 页面",
+      "priority": "P1",
+      "category": "positive",
+      "technique": "equivalence",
+      "features": [
+        "F-MENU-01"
+      ],
+      "acceptanceRefs": [
+        "F-MENU-01#AC3"
+      ],
+      "codePoints": [
+        "C-BE-MENU-02",
+        "C-BE-RANK-02",
+        "C-BE-RANK-03"
+      ],
+      "preconditions": [
+        "测试后端以 ENABLE_TEST_API=1 启动，允许真实 HTTP POST /api/__test__/reset；测试地址由 TEST_PORT 配置。",
+        "只通过 HTTP 构造和读取数据，不 mock/route 后端，不 import 服务端代码；本用例不依赖其他用例或执行顺序。"
+      ],
+      "testData": "本条使用空库：reset后通过 POST /api/sync 导入 {\"activeTab\":null,\"openTabs\":[],\"history\":[]}，不导入resource.json样例。sync返回syncedAt记为T，ranked查询传now=T。URL=https://example.com/important-note；title和important均省略。新页manual来源依据 C-BE-MENU-02 描述，important缺省true依据api-contract。",
+      "steps": [
+        "S1：POST /api/__test__/reset 隔离本用例；核对 HTTP 200、body.ok=true。",
+        "S2：POST /api/sync，JSON 为 {\"activeTab\":null,\"openTabs\":[],\"history\":[]}；保存响应 syncedAt 为 T。 核对 HTTP 200、body.ok=true、pageCount=0，不符则停止并记录失败。",
+        "S3：POST /api/pages/important，JSON={\"url\":\"https://example.com/important-note\"}，省略 title 与 important。",
+        "S4：GET /api/pages/ranked?now=T 及 GET /api/health。"
+      ],
+      "expected": [
+        "E1：important POST 返回 HTTP 200，accepted=true、rejected=0、isImportant=true、created=true。",
+        "E2：响应 url 和 normalizedUrl 均为 \"https://example.com/important-note\"。",
+        "E3：ranked.total=1、pages.length=1；唯一页面 normalizedUrl=\"https://example.com/important-note\"，sources 包含 \"manual\"，isImportant=true。",
+        "E4：唯一页面 scoreDetail.domain=1.00、domainSource=\"important\"，reason 包含「已被你标记为重要」。",
+        "E5：health.pageCount=1。",
+        "E6：本条每轮初始化 reset 均返回 HTTP 200、body.ok=true；初始化 sync 均返回 HTTP 200、body.ok=true、pageCount=0。"
+      ],
+      "evidence": [
+        "api/：reset、sync、被测 POST 与 ranked/health/cleanup（如适用）的完整请求和响应；原始畸形请求须保留原始字节。",
+        "server.log：按本 Case ID 的 x-request-id 对应请求日志；result.json：后续脚本执行时记录每个 [En]。"
+      ]
+    },
+    {
+      "id": "TC-API-MENU-005",
+      "type": "API",
+      "module": "MENU",
+      "title": "取消重要标记：恢复亲和域名分并移除重要理由",
+      "priority": "P2",
+      "category": "state",
+      "technique": "state-transition",
+      "features": [
+        "F-MENU-01"
+      ],
+      "acceptanceRefs": [
+        "F-MENU-01#AC3"
+      ],
+      "codePoints": [
+        "C-BE-MENU-02",
+        "C-BE-RANK-02",
+        "C-BE-RANK-03"
+      ],
+      "preconditions": [
+        "测试后端以 ENABLE_TEST_API=1 启动，允许真实 HTTP POST /api/__test__/reset；测试地址由 TEST_PORT 配置。",
+        "只通过 HTTP 构造和读取数据，不 mock/route 后端，不 import 服务端代码；本用例不依赖其他用例或执行顺序。"
+      ],
+      "testData": "resource.json 只读；导入前取 t0=Date.now()，每个 history.lastVisitTime 加 Δ=t0-300000-1710100000000，最新历史变成 t0-5 分钟；其他字段照原样。POST /api/sync 返回 syncedAt 记为 T，全部 ranked/cleanup 读回均传 now=T。PRD §13 基线 pageCount=10、打开4页、docs.internal.com 的 domain=0.10、score=0.56。 无规则，取消重要后domain回到样例该域访问量2/最大域访问量20=0.10；不要求总分或lastVisitedAt恢复。",
+      "steps": [
+        "S1：POST /api/__test__/reset 隔离本用例；核对 HTTP 200、body.ok=true。",
+        "S2：按 testData 平移 resource.json，通过 POST /api/sync 导入；保存响应 syncedAt 为 T。 核对 HTTP 200、body.ok=true、pageCount=10，不符则停止并记录失败。",
+        "S3：POST /api/pages/important，JSON={\"url\":\"https://docs.internal.com/ai-agent-design\",\"important\":true}；GET /api/pages/ranked?now=T 记录标记状态。",
+        "S4：POST /api/pages/important，JSON={\"url\":\"https://docs.internal.com/ai-agent-design\",\"important\":false}。",
+        "S5：GET /api/pages/ranked?now=T 及 GET /api/health。"
+      ],
+      "expected": [
+        "E1：首次 POST 返回 HTTP 200 且 isImportant=true；中间 ranked 目标页面 domainSource=\"important\"，reason 包含「已被你标记为重要」。",
+        "E2：取消 POST 返回 HTTP 200，accepted=true、rejected=0、created=false、isImportant=false。",
+        "E3：最终目标页面 isImportant=false、scoreDetail.domain=0.10、domainSource=\"affinity\"。",
+        "E4：最终目标页面 reason 不包含「已被你标记为重要」。",
+        "E5：最终 ranked.total=10，health.pageCount=10。",
+        "E6：本条每轮初始化 reset 均返回 HTTP 200、body.ok=true；初始化 sync 均返回 HTTP 200、body.ok=true、pageCount=10。"
+      ],
+      "evidence": [
+        "api/：reset、sync、被测 POST 与 ranked/health/cleanup（如适用）的完整请求和响应；原始畸形请求须保留原始字节。",
+        "server.log：按本 Case ID 的 x-request-id 对应请求日志；result.json：后续脚本执行时记录每个 [En]。"
+      ]
+    },
+    {
+      "id": "TC-API-MENU-006",
+      "type": "API",
+      "module": "MENU",
+      "title": "含 token 或大写 BANK 的 URL：两个入口拒收且不改变已存页面",
+      "priority": "P0",
+      "category": "security",
+      "technique": "decision-table",
+      "features": [
+        "F-MENU-01"
+      ],
+      "acceptanceRefs": [
+        "F-MENU-01#AC2",
+        "F-MENU-01#AC3"
+      ],
+      "codePoints": [
+        "C-BE-MENU-01",
+        "C-BE-MENU-02"
+      ],
+      "preconditions": [
+        "测试后端以 ENABLE_TEST_API=1 启动，允许真实 HTTP POST /api/__test__/reset；测试地址由 TEST_PORT 配置。",
+        "只通过 HTTP 构造和读取数据，不 mock/route 后端，不 import 服务端代码；本用例不依赖其他用例或执行顺序。"
+      ],
+      "testData": "resource.json 只读；导入前取 t0=Date.now()，每个 history.lastVisitTime 加 Δ=t0-300000-1710100000000，最新历史变成 t0-5 分钟；其他字段照原样。POST /api/sync 返回 syncedAt 记为 T，全部 ranked/cleanup 读回均传 now=T。PRD §13 基线 pageCount=10、打开4页、docs.internal.com 的 domain=0.10、score=0.56。 路径=[/api/pages/manual,/api/pages/important]；URL=[https://example.com/reset?token=1,https://BANK.example.com/account]，共4组合，每轮重新隔离。隐私默认关键词token/bank、URL不区分大小写。持久字段投影=id、url、normalizedUrl、title、visitCount、lastVisitedAt、firstSeenAt、sources、isOpen、isActive、isImportant。敏感important响应仅固定accepted/rejected，不写死其他未约定字段；本条验证后端拒收，不证明前端未发送HTTP。",
+      "steps": [
+        "S1：对 testData 的每个「路径×URL」组合单独 POST /api/__test__/reset，并通过 POST /api/sync 导入平移后的样例，保存 syncedAt=T。 每轮 reset 必须返回 HTTP 200、body.ok=true；sync 必须返回 HTTP 200、body.ok=true、pageCount=10，任一步不符即停止本轮并记录失败。",
+        "S2：GET /api/pages/ranked?limit=500&now=T 及 GET /api/health，保存每个页面的持久字段投影及 health.pageCount/lastSyncAt/ruleCount。",
+        "S3：向组合指定的路径 POST JSON={\"url\":组合URL,\"title\":\"Private note\"}；important 路径另传 important=true。",
+        "S4：再次 GET /api/pages/ranked?limit=500&now=T、GET /api/pages/cleanup-suggestions?now=T 及 GET /api/health。"
+      ],
+      "expected": [
+        "E1：4个组合的 POST 均返回 HTTP 200，accepted=false、rejected=1。",
+        "E2：每轮最终 ranked.total=10、health.pageCount=10，lastSyncAt 和 ruleCount 与拒收前相同。",
+        "E3：每轮 ranked 均没有对应敏感 URL 的页面；cleanup.suggestions 的 url、urls、keepUrl 均不含对应敏感 URL。",
+        "E4：每轮原有10页的持久字段投影与拒收前逐页完全一致。",
+        "E5：本条每轮初始化 reset 均返回 HTTP 200、body.ok=true；初始化 sync 均返回 HTTP 200、body.ok=true、pageCount=10。"
+      ],
+      "evidence": [
+        "api/：reset、sync、被测 POST 与 ranked/health/cleanup（如适用）的完整请求和响应；原始畸形请求须保留原始字节。",
+        "server.log：按本 Case ID 的 x-request-id 对应请求日志；result.json：后续脚本执行时记录每个 [En]。"
+      ]
+    },
+    {
+      "id": "TC-API-MENU-007",
+      "type": "API",
+      "module": "MENU",
+      "title": "URL 缺失、空值或非 http(s)：两个入口返回统一400且无副作用",
+      "priority": "P2",
+      "category": "negative",
+      "technique": "equivalence",
+      "features": [
+        "F-MENU-01"
+      ],
+      "acceptanceRefs": [
+        "F-MENU-01#AC2",
+        "F-MENU-01#AC3"
+      ],
+      "codePoints": [
+        "C-BE-MENU-01",
+        "C-BE-MENU-02"
+      ],
+      "preconditions": [
+        "测试后端以 ENABLE_TEST_API=1 启动，允许真实 HTTP POST /api/__test__/reset；测试地址由 TEST_PORT 配置。",
+        "只通过 HTTP 构造和读取数据，不 mock/route 后端，不 import 服务端代码；本用例不依赖其他用例或执行顺序。"
+      ],
+      "testData": "resource.json 只读；导入前取 t0=Date.now()，每个 history.lastVisitTime 加 Δ=t0-300000-1710100000000，最新历史变成 t0-5 分钟；其他字段照原样。POST /api/sync 返回 syncedAt 记为 T，全部 ranked/cleanup 读回均传 now=T。PRD §13 基线 pageCount=10、打开4页、docs.internal.com 的 domain=0.10、score=0.56。 路径=[/api/pages/manual,/api/pages/important]；JSON=[{}, {\"url\":\"\"}, {\"url\":\"chrome://version/\"}, {\"url\":\"javascript:alert(1)\"}, {\"url\":\"not-a-url\"}]，共10组合，每组合单独reset+sync。投影=id、url、normalizedUrl、title、visitCount、lastVisitedAt、firstSeenAt、sources、isOpen、isActive、isImportant。",
+      "steps": [
+        "S1：对 testData 每个「路径×JSON请求体」组合单独 reset 并 POST /api/sync 导入样例，保存 T。 每轮 reset 必须返回 HTTP 200、body.ok=true；sync 必须返回 HTTP 200、body.ok=true、pageCount=10，任一步不符即停止本轮并记录失败。",
+        "S2：GET /api/pages/ranked?limit=500&now=T 及 GET /api/health，保存持久字段投影与 pageCount/lastSyncAt/ruleCount。",
+        "S3：向组合指定路径发送原样 JSON 请求体，Content-Type=application/json。",
+        "S4：GET /api/pages/ranked?limit=500&now=T 及 GET /api/health 读回。"
+      ],
+      "expected": [
+        "E1：每个非法输入均返回 HTTP 400，body.error.code=\"VALIDATION_FAILED\"，body.error.message 为非空字符串。",
+        "E2：每个响应 body.error.details.fields 包含 \"url\"。",
+        "E3：每轮最终 ranked.total=10、health.pageCount=10，lastSyncAt/ruleCount 与操作前一致。",
+        "E4：每轮原有10页的持久字段投影与操作前逐页完全一致。",
+        "E5：本条每轮初始化 reset 均返回 HTTP 200、body.ok=true；初始化 sync 均返回 HTTP 200、body.ok=true、pageCount=10。"
+      ],
+      "evidence": [
+        "api/：reset、sync、被测 POST 与 ranked/health/cleanup（如适用）的完整请求和响应；原始畸形请求须保留原始字节。",
+        "server.log：按本 Case ID 的 x-request-id 对应请求日志；result.json：后续脚本执行时记录每个 [En]。"
+      ]
+    },
+    {
+      "id": "TC-API-MENU-008",
+      "type": "API",
+      "module": "MENU",
+      "title": "URL 恰好2048字符可接收，2049字符被拒绝且不落库",
+      "priority": "P2",
+      "category": "boundary",
+      "technique": "boundary",
+      "features": [
+        "F-MENU-01"
+      ],
+      "acceptanceRefs": [
+        "F-MENU-01#AC2",
+        "F-MENU-01#AC3"
+      ],
+      "codePoints": [
+        "C-BE-MENU-01",
+        "C-BE-MENU-02"
+      ],
+      "preconditions": [
+        "测试后端以 ENABLE_TEST_API=1 启动，允许真实 HTTP POST /api/__test__/reset；测试地址由 TEST_PORT 配置。",
+        "只通过 HTTP 构造和读取数据，不 mock/route 后端，不 import 服务端代码；本用例不依赖其他用例或执行顺序。"
+      ],
+      "testData": "resource.json 只读；导入前取 t0=Date.now()，每个 history.lastVisitTime 加 Δ=t0-300000-1710100000000，最新历史变成 t0-5 分钟；其他字段照原样。POST /api/sync 返回 syncedAt 记为 T，全部 ranked/cleanup 读回均传 now=T。PRD §13 基线 pageCount=10、打开4页、docs.internal.com 的 domain=0.10、score=0.56。 4组合分别隔离，N分别2048/2049；全ASCII确保字符数与字节数相等。URL长度上限来自两个POST的errors与LIMITS.maxUrlLength；不使用超1MB请求掩盖URL校验。投影=id、url、normalizedUrl、title、visitCount、lastVisitedAt、firstSeenAt、sources、isOpen、isActive、isImportant。",
+      "steps": [
+        "S1：对路径 /api/pages/manual、/api/pages/important 与长度2048、2049的每个组合，单独 reset 并 POST /api/sync 导入样例，保存T，再读取初始 ranked/health。 每轮 reset 必须返回 HTTP 200、body.ok=true；sync 必须返回 HTTP 200、body.ok=true、pageCount=10，任一步不符即停止本轮并记录失败。",
+        "S2：构造 prefix=\"https://example.com/\"，url=prefix+\"a\".repeat(N-prefix.length)，严格核对 url.length=N；JSON={url,title:\"URL length boundary\"}；important 路径另传 important=true。",
+        "S3：POST 到当前路径，Content-Type=application/json。",
+        "S4：GET /api/pages/ranked?limit=500&now=T 及 GET /api/health 读回。"
+      ],
+      "expected": [
+        "E1：两个入口的2048字符输入均返回 HTTP 200，accepted=true、rejected=0、created=true。",
+        "E2：2048字符输入操作后 ranked.total=11、health.pageCount=11，目标 normalizedUrl 等于所发完整 URL，且该值长度为2048，sources 包含 \"manual\"。",
+        "E3：manual 的2048字符响应 pageCount=11；important 的2048字符响应 isImportant=true，且读回目标页面 isImportant=true。",
+        "E4：两个入口的2049字符输入均返回 HTTP 400、error.code=\"VALIDATION_FAILED\"、error.message非空、error.details.fields包含\"url\"。",
+        "E5：2049字符输入操作后 ranked.total=10、health.pageCount=10，没有对应长URL，且原10页持久字段投影和 health.lastSyncAt/ruleCount 与本轮操作前相同。",
+        "E6：本条每轮初始化 reset 均返回 HTTP 200、body.ok=true；初始化 sync 均返回 HTTP 200、body.ok=true、pageCount=10。"
+      ],
+      "evidence": [
+        "api/：reset、sync、被测 POST 与 ranked/health/cleanup（如适用）的完整请求和响应；原始畸形请求须保留原始字节。",
+        "server.log：按本 Case ID 的 x-request-id 对应请求日志；result.json：后续脚本执行时记录每个 [En]。"
+      ]
+    },
+    {
+      "id": "TC-API-MENU-009",
+      "type": "API",
+      "module": "MENU",
+      "title": "原始请求体不是合法JSON：两个入口返回INVALID_JSON且无副作用",
+      "priority": "P2",
+      "category": "negative",
+      "technique": "error-guessing",
+      "features": [
+        "F-MENU-01"
+      ],
+      "acceptanceRefs": [
+        "F-MENU-01#AC2",
+        "F-MENU-01#AC3"
+      ],
+      "codePoints": [
+        "C-BE-MENU-01",
+        "C-BE-MENU-02"
+      ],
+      "preconditions": [
+        "测试后端以 ENABLE_TEST_API=1 启动，允许真实 HTTP POST /api/__test__/reset；测试地址由 TEST_PORT 配置。",
+        "只通过 HTTP 构造和读取数据，不 mock/route 后端，不 import 服务端代码；本用例不依赖其他用例或执行顺序。"
+      ],
+      "testData": "resource.json 只读；导入前取 t0=Date.now()，每个 history.lastVisitTime 加 Δ=t0-300000-1710100000000，最新历史变成 t0-5 分钟；其他字段照原样。POST /api/sync 返回 syncedAt 记为 T，全部 ranked/cleanup 读回均传 now=T。PRD §13 基线 pageCount=10、打开4页、docs.internal.com 的 domain=0.10、score=0.56。 畸形字节确为 {bad，不是合法JSON字符串 \"{bad\"。投影=id、url、normalizedUrl、title、visitCount、lastVisitedAt、firstSeenAt、sources、isOpen、isActive、isImportant。该输入校验属于negative，不冒充外部依赖异常。",
+      "steps": [
+        "S1：对每条路径 /api/pages/manual、/api/pages/important 单独 reset 并 POST /api/sync 导入样例，保存T；读取 ranked/health 保存基线。 每轮 reset 必须返回 HTTP 200、body.ok=true；sync 必须返回 HTTP 200、body.ok=true、pageCount=10，任一步不符即停止本轮并记录失败。",
+        "S2：POST 当前路径，Content-Type=application/json，请求体为原始UTF-8字节 {bad；使用 Buffer/rawBody，禁止JSON.stringify后再发送。",
+        "S3：GET /api/pages/ranked?limit=500&now=T 及 GET /api/health。"
+      ],
+      "expected": [
+        "E1：两个路径均返回 HTTP 400、body.error.code=\"INVALID_JSON\"，body.error.message非空。",
+        "E2：每轮最终 ranked.total=10、health.pageCount=10，health.lastSyncAt/ruleCount与操作前一致。",
+        "E3：每轮原有10页持久字段投影与操作前逐页完全一致。",
+        "E4：本条每轮初始化 reset 均返回 HTTP 200、body.ok=true；初始化 sync 均返回 HTTP 200、body.ok=true、pageCount=10。"
+      ],
+      "evidence": [
+        "api/：reset、sync、被测 POST 与 ranked/health/cleanup（如适用）的完整请求和响应；原始畸形请求须保留原始字节。",
+        "server.log：按本 Case ID 的 x-request-id 对应请求日志；result.json：后续脚本执行时记录每个 [En]。"
+      ]
+    },
+    {
+      "id": "TC-API-MENU-010",
+      "type": "API",
+      "module": "MENU",
+      "title": "有请求体但媒体类型为text/plain：两个入口返回415且不写入",
+      "priority": "P2",
+      "category": "negative",
+      "technique": "equivalence",
+      "features": [
+        "F-MENU-01"
+      ],
+      "acceptanceRefs": [
+        "F-MENU-01#AC2",
+        "F-MENU-01#AC3"
+      ],
+      "codePoints": [
+        "C-BE-MENU-01",
+        "C-BE-MENU-02"
+      ],
+      "preconditions": [
+        "测试后端以 ENABLE_TEST_API=1 启动，允许真实 HTTP POST /api/__test__/reset；测试地址由 TEST_PORT 配置。",
+        "只通过 HTTP 构造和读取数据，不 mock/route 后端，不 import 服务端代码；本用例不依赖其他用例或执行顺序。"
+      ],
+      "testData": "resource.json 只读；导入前取 t0=Date.now()，每个 history.lastVisitTime 加 Δ=t0-300000-1710100000000，最新历史变成 t0-5 分钟；其他字段照原样。POST /api/sync 返回 syncedAt 记为 T，全部 ranked/cleanup 读回均传 now=T。PRD §13 基线 pageCount=10、打开4页、docs.internal.com 的 domain=0.10、score=0.56。 投影=id、url、normalizedUrl、title、visitCount、lastVisitedAt、firstSeenAt、sources、isOpen、isActive、isImportant。请求内容本身是合法JSON，只有媒体类型错误，避免混入INVALID_JSON分支。",
+      "steps": [
+        "S1：对每条路径 /api/pages/manual、/api/pages/important 单独 reset 并 POST /api/sync 导入样例，保存T；读取 ranked/health 保存基线。 每轮 reset 必须返回 HTTP 200、body.ok=true；sync 必须返回 HTTP 200、body.ok=true、pageCount=10，任一步不符即停止本轮并记录失败。",
+        "S2：POST 当前路径，强制 Content-Type=text/plain，原始请求体为 {\"url\":\"https://example.com/media-type-note\",\"important\":true}；使用 rawBody/Buffer 防止客户端自动覆盖Content-Type。",
+        "S3：GET /api/pages/ranked?limit=500&now=T 及 GET /api/health。"
+      ],
+      "expected": [
+        "E1：两个路径均返回 HTTP 415、body.error.code=\"UNSUPPORTED_MEDIA_TYPE\"，body.error.message非空。",
+        "E2：每轮最终 ranked.total=10、health.pageCount=10，且没有 normalizedUrl=\"https://example.com/media-type-note\" 的页面。",
+        "E3：每轮原有10页持久字段投影和 health.lastSyncAt/ruleCount 与操作前一致。",
+        "E4：本条每轮初始化 reset 均返回 HTTP 200、body.ok=true；初始化 sync 均返回 HTTP 200、body.ok=true、pageCount=10。"
+      ],
+      "evidence": [
+        "api/：reset、sync、被测 POST 与 ranked/health/cleanup（如适用）的完整请求和响应；原始畸形请求须保留原始字节。",
+        "server.log：按本 Case ID 的 x-request-id 对应请求日志；result.json：后续脚本执行时记录每个 [En]。"
+      ]
+    },
+    {
+      "id": "TC-API-MENU-011",
+      "type": "API",
+      "module": "MENU",
+      "title": "对已有页面重复标记true：id不变且不新增重复记录",
+      "priority": "P2",
+      "category": "state",
+      "technique": "state-transition",
+      "features": [
+        "F-MENU-01"
+      ],
+      "acceptanceRefs": [
+        "F-MENU-01#AC3"
+      ],
+      "codePoints": [
+        "C-BE-MENU-02",
+        "C-BE-RANK-02",
+        "C-BE-RANK-03"
+      ],
+      "preconditions": [
+        "测试后端以 ENABLE_TEST_API=1 启动，允许真实 HTTP POST /api/__test__/reset；测试地址由 TEST_PORT 配置。",
+        "只通过 HTTP 构造和读取数据，不 mock/route 后端，不 import 服务端代码；本用例不依赖其他用例或执行顺序。"
+      ],
+      "testData": "resource.json 只读；导入前取 t0=Date.now()，每个 history.lastVisitTime 加 Δ=t0-300000-1710100000000，最新历史变成 t0-5 分钟；其他字段照原样。POST /api/sync 返回 syncedAt 记为 T，全部 ranked/cleanup 读回均传 now=T。PRD §13 基线 pageCount=10、打开4页、docs.internal.com 的 domain=0.10、score=0.56。 重复写入仅检验标记状态和页面身份幂等，不要求两次返回时间或访问时间相同。",
+      "steps": [
+        "S1：POST /api/__test__/reset 隔离本用例；核对 HTTP 200、body.ok=true。",
+        "S2：按 testData 平移 resource.json，通过 POST /api/sync 导入；保存响应 syncedAt 为 T。 核对 HTTP 200、body.ok=true、pageCount=10，不符则停止并记录失败。",
+        "S3：GET /api/pages/ranked?now=T，保存 docs.internal.com/ai-agent-design 对应的后端生成 id。",
+        "S4：连续两次 POST /api/pages/important，均发送 {\"url\":\"https://docs.internal.com/ai-agent-design\",\"important\":true}。",
+        "S5：GET /api/pages/ranked?limit=500&now=T 及 GET /api/health。"
+      ],
+      "expected": [
+        "E1：两次 POST 均返回 HTTP 200，accepted=true、rejected=0、created=false、isImportant=true。",
+        "E2：最终目标 normalizedUrl 只有1条，id 等于首次 ranked 返回的 id。",
+        "E3：最终目标页面 isImportant=true、scoreDetail.domain=1.00、domainSource=\"important\"，reason 包含「已被你标记为重要」。",
+        "E4：最终 ranked.total=10、health.pageCount=10。",
+        "E5：本条每轮初始化 reset 均返回 HTTP 200、body.ok=true；初始化 sync 均返回 HTTP 200、body.ok=true、pageCount=10。"
+      ],
+      "evidence": [
+        "api/：reset、sync、被测 POST 与 ranked/health/cleanup（如适用）的完整请求和响应；原始畸形请求须保留原始字节。",
+        "server.log：按本 Case ID 的 x-request-id 对应请求日志；result.json：后续脚本执行时记录每个 [En]。"
+      ]
+    }
+  ],
+  "waivers": [
+    {
+      "feature": "F-MENU-01",
+      "category": "exception",
+      "reason": "仅针对本API分片：当前HTTP契约没有可控的服务端外部依赖故障注入或500响应约定；不能把400/415输入反例冒充运行时异常，也不能为造异常停止共享后端。右键注册、浏览器API、本地storage和后端不可达的故障场景仍由UI分片负责，本豁免不表示这些UI场景已设计或已通过。"
+    }
+  ]
+}

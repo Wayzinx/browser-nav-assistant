@@ -1,0 +1,64 @@
+{
+  "caseId": "TC-UI-PRIV-010",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:12.744Z",
+  "tests": [
+    {
+      "testId": "da3503adccb2f909f074-574aafdd929978953830",
+      "title": "TC-UI-PRIV-010 关闭关键词过滤的配置边界：真实无痕 URL 仍不会上传",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-PRIV-010.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 2019,
+      "startedAt": "2026-11-04T03:29:10.725Z",
+      "endedAt": "2026-11-04T03:29:12.744Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 21,
+      "screenshots": [
+        "evidence/TC-UI-PRIV-010/screenshots/01-关键词过滤关闭但真实无痕存在.png",
+        "evidence/TC-UI-PRIV-010/screenshots/02-关键词过滤关闭但无痕仍未上传.png"
+      ],
+      "serverLogLines": 24,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1143,
+          "after": 1144
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 1,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [
+          "enablePrivacyFilter"
+        ],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "真实无痕授权核验：true",
+        "真实无痕外站已离线化：host=example.com",
+        "真实无痕窗口存在：{\"windowId\":832714852,\"tabId\":832714853,\"incognito\":true}",
+        "GET_CONTEXT {\"privacy\":{\"enabled\":false,\"keywords\":[\"password\",\"token\",\"bank\",\"secret\"],\"source\":\"server\"},\"tabs\":1,\"history\":0}",
+        "真实无痕窗口存在：{\"windowId\":832714852,\"tabId\":832714853,\"incognito\":true}"
+      ]
+    }
+  ]
+}

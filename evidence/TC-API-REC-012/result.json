@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-API-REC-012",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:04.048Z",
+  "tests": [
+    {
+      "testId": "fc54e08cd36805ae91ed-24b3267af2b7edabd191",
+      "title": "TC-API-REC-012 已归档的 Actions 即使关联度最高也不再被推荐",
+      "project": "api",
+      "file": "tests/api/TC-API-REC-012.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 24,
+      "startedAt": "2026-11-04T03:27:04.024Z",
+      "endedAt": "2026-11-04T03:27:04.048Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 8,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 696,
+          "after": 699
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 1,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "{\"T\":1793762824033,\"N\":1793762824034}"
+      ]
+    }
+  ]
+}

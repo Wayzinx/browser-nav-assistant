@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-UI-CLEAN-001",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:24.695Z",
+  "tests": [
+    {
+      "testId": "504bb6510eefef8ea2db-488d0310370fb85203a1",
+      "title": "TC-UI-CLEAN-001 样例与两条规则：摘要2/1/1，三组和命中规则原文完整展示",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CLEAN-001.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 984,
+      "startedAt": "2026-11-04T03:27:23.711Z",
+      "endedAt": "2026-11-04T03:27:24.695Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 15,
+      "screenshots": [
+        "evidence/TC-UI-CLEAN-001/screenshots/01-首页摘要.png",
+        "evidence/TC-UI-CLEAN-001/screenshots/02-点击摘要后.png"
+      ],
+      "serverLogLines": 18,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 975,
+          "after": 978
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 3,
+      "notes": [
+        "{\"suggestions\":[{\"key\":\"archive:https://www.google.com/search?q=chrome+extension+manifest+v3\",\"action\":\"archive\",\"url\":\"https://www.google.com/search?q=chrome+extension+manifest+v3\",\"title\":\"chrome extension manifest v3 - Google Search\",\"reason\":\"超过 14 天未访问（已 35 天），且不在当前打开的 tab 中\",\"ageDays\":35,\"ruleId\":null,\"lastVisitedAt\":1790662544131},{\"key\":\"archive:https://github.com/org/repo/issues/100\",\"action\":\"archive\",\"url\":\"https://github.com/org/repo/issues/100\",\"title\":\"Old bug report from last sprint\",\"reason\":\"超过 7 天未访问（已 24 天），且不在当前打开的 tab 中；命中规则「把 7 天没访问过的 GitHub issue 建议归档」\",\"ageDays\":24,\"ruleId\":\"rule_1\",\"lastVisitedAt\":1791662544131},{\"key\":\"merge:github.com/org/repo/issues/123\",\"action\":\"merge\",\"urls\":[\"https://github.com/org/repo/issues/123\",\"https://github.com/org/repo/issues/123?tab=comments\"],\"titles\":[\"Fix login redirect bug\",\"Fix login redirect bug - Comments\"],\"keepUrl\":\"https://github.com/org/repo/issues/123\",\"title\":\"Fix login redirect bug\",\"reason\":\"去掉 query 参数后 URL 相同，疑似重复页面\"},{\"key\":\"keep:https://docs.internal.com/ai-agent-design\",\"action\":\"keep\",\"url\":\"https://docs.internal.com/ai-agent-design\",\"title\":\"AI Agent Design Guidelines\",\"reason\":\"被保护域名配置（docs.internal.com），不建议归档，虽已 6 天未访问\",\"ageDays\":6,\"ruleId\":\"rule_2\"}],\"savedRules\":[{\"domain\":\"github.com\",\"urlPattern\":\"/issues/\",\"inactiveDays\":7,\"enabled\":true,\"confidence\":\"high\",\"createdAt\":1793762844134,\"updatedAt\":1793762844134,\"rawText\":\"把 7 天没访问过的 GitHub issue 建议归档\",\"type\":\"archive_candidate\",\"action\":\"suggest_archive\",\"id\":\"rule_1\"},{\"domain\":\"docs.internal.com\",\"urlPattern\":null,\"inactiveDays\":null,\"enabled\":true,\"confidence\":\"high\",\"createdAt\":1793762844134,\"updatedAt\":1793762844134,\"rawText\":\"docs.internal.com 的页面永远不要归档\",\"type\":\"never_archive\",\"action\":\"keep\",\"id\":\"rule_2\"}]}"
+      ]
+    }
+  ]
+}

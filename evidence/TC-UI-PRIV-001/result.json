@@ -1,0 +1,59 @@
+{
+  "caseId": "TC-UI-PRIV-001",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:58.623Z",
+  "tests": [
+    {
+      "testId": "091666091d555f029ed2-4f00111467741dda11fb",
+      "title": "TC-UI-PRIV-001 默认敏感词命中两标签：上传前剔除且上下文逐条标注",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-PRIV-001.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1243,
+      "startedAt": "2026-11-04T03:28:57.380Z",
+      "endedAt": "2026-11-04T03:28:58.623Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 21,
+      "screenshots": [
+        "evidence/TC-UI-PRIV-001/screenshots/01-普通页活动且历史已清空.png",
+        "evidence/TC-UI-PRIV-001/screenshots/02-两条敏感记录分别标注.png",
+        "evidence/TC-UI-PRIV-001/screenshots/03-过滤两条并同步成功.png"
+      ],
+      "serverLogLines": 24,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1124,
+          "after": 1125
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 1,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 2,
+      "notes": [
+        "GET_CONTEXT {\"privacy\":{\"enabled\":true,\"keywords\":[\"password\",\"token\",\"bank\",\"secret\"],\"source\":\"server\"},\"tabs\":3,\"history\":0}"
+      ]
+    }
+  ]
+}

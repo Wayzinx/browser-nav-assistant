@@ -1,0 +1,146 @@
+[
+  {
+    "name": "U",
+    "sync": {
+      "status": "success",
+      "statusText": "同步成功上传 2 条 · 过滤 1 条05:40 · 刚刚",
+      "filtered": "1",
+      "uploaded": "2",
+      "bodies": [
+        {
+          "activeTab": {
+            "url": "https://example.com/docs",
+            "title": "合成页"
+          },
+          "openTabs": [
+            {
+              "url": "https://example.com/docs",
+              "title": "合成页",
+              "lastAccessed": 1793655630131.338
+            }
+          ],
+          "history": [],
+          "mode": "full",
+          "clientVersion": "1.0.0"
+        }
+      ]
+    },
+    "containsSensitive": false
+  },
+  {
+    "shot": "evidence/TC-UI-PRIV-002/explore/1.png",
+    "aria": "- banner:\n  - heading \"导航助手\" [level=1]\n  - button \"后端已连接\"\n- region \"当前页面\":\n  - heading \"当前页面\" [level=2]\n  - paragraph: 合成页\n  - paragraph: https://example.com/docs\n  - button \"标记为重要\": ☆\n  - button \"添加到分析\"\n- region \"浏览器上下文同步\":\n  - button \"同步浏览器上下文\"\n  - status:\n    - paragraph: 同步成功\n    - paragraph: 上传 2 条 · 过滤 1 条\n    - time: 05:40 · 刚刚\n  - button \"全量同步\"\n  - paragraph: 当前模式：全量\n- tablist \"导航助手功能\":\n  - tab \"首页\" [selected]\n  - tab \"上下文\"\n  - tab \"排序\"\n  - tab \"整理\"\n  - tab \"规则\"\n  - tab \"诊断\"\n- main:\n  - tabpanel \"首页\":\n    - heading \"下一步推荐\" [level=2]\n    - paragraph: 还没有推荐，点击「同步浏览器上下文」开始\n    - heading \"历史排序 Top 5\" [level=2]\n    - list:\n      - listitem:\n        - text: 合成页 1.00 https://example.com/docs\n        - paragraph: 正在浏览，今天访问过，常用域名 example.com\n    - heading \"整理建议\" [level=2]\n    - paragraph: 还没有整理建议，点击上方「同步浏览器上下文」开始\n    - button \"查看整理建议\": 归档 0 重复 0 保留 0\n    - heading \"用一句话配置规则\" [level=2]\n    - text: 规则内容\n    - textbox \"规则内容\":\n      - /placeholder: 输入一句话配置规则\n    - button \"解析\"\n    - button \"启动诊断 · 尚未检测 ›\""
+  },
+  {
+    "ranked": {
+      "status": 200,
+      "body": {
+        "pages": [
+          {
+            "id": "page_1",
+            "url": "https://example.com/docs",
+            "normalizedUrl": "https://example.com/docs",
+            "title": "合成页",
+            "domain": "example.com",
+            "visitCount": 1,
+            "lastVisitedAt": 1793655630304,
+            "firstSeenAt": 1793655630131.338,
+            "sources": [
+              "open_tab",
+              "active_tab"
+            ],
+            "isOpen": true,
+            "isActive": true,
+            "isImportant": false,
+            "score": 1,
+            "scoreDetail": {
+              "recency": 1,
+              "frequency": 1,
+              "open": 1,
+              "domain": 1,
+              "domainSource": "affinity"
+            },
+            "reason": "正在浏览，今天访问过，常用域名 example.com"
+          }
+        ],
+        "total": 1,
+        "domains": [
+          "example.com"
+        ],
+        "generatedAt": 1793655630305
+      }
+    }
+  },
+  {
+    "name": "L",
+    "sync": {
+      "status": "success",
+      "statusText": "同步成功上传 2 条 · 过滤 1 条05:40 · 刚刚",
+      "filtered": "1",
+      "uploaded": "2",
+      "bodies": [
+        {
+          "activeTab": {
+            "url": "https://example.com/docs",
+            "title": "合成页"
+          },
+          "openTabs": [
+            {
+              "url": "https://example.com/docs",
+              "title": "合成页",
+              "lastAccessed": 1793655631559.433
+            }
+          ],
+          "history": [],
+          "mode": "full",
+          "clientVersion": "1.0.0"
+        }
+      ]
+    },
+    "containsSensitive": false
+  },
+  {
+    "shot": "evidence/TC-UI-PRIV-002/explore/2.png",
+    "aria": "- banner:\n  - heading \"导航助手\" [level=1]\n  - button \"后端已连接\"\n- region \"当前页面\":\n  - heading \"当前页面\" [level=2]\n  - paragraph: 合成页\n  - paragraph: https://example.com/docs\n  - button \"标记为重要\": ☆\n  - button \"添加到分析\"\n- region \"浏览器上下文同步\":\n  - button \"同步浏览器上下文\"\n  - status:\n    - paragraph: 同步成功\n    - paragraph: 上传 2 条 · 过滤 1 条\n    - time: 05:40 · 刚刚\n  - button \"全量同步\"\n  - paragraph: 当前模式：全量\n- tablist \"导航助手功能\":\n  - tab \"首页\" [selected]\n  - tab \"上下文\"\n  - tab \"排序\"\n  - tab \"整理\"\n  - tab \"规则\"\n  - tab \"诊断\"\n- main:\n  - tabpanel \"首页\":\n    - heading \"下一步推荐\" [level=2]\n    - paragraph: 还没有推荐，点击「同步浏览器上下文」开始\n    - heading \"历史排序 Top 5\" [level=2]\n    - list:\n      - listitem:\n        - text: 合成页 1.00 https://example.com/docs\n        - paragraph: 正在浏览，今天访问过，常用域名 example.com\n    - heading \"整理建议\" [level=2]\n    - paragraph: 还没有整理建议，点击上方「同步浏览器上下文」开始\n    - button \"查看整理建议\": 归档 0 重复 0 保留 0\n    - heading \"用一句话配置规则\" [level=2]\n    - text: 规则内容\n    - textbox \"规则内容\":\n      - /placeholder: 输入一句话配置规则\n    - button \"解析\"\n    - button \"启动诊断 · 尚未检测 ›\""
+  },
+  {
+    "ranked": {
+      "status": 200,
+      "body": {
+        "pages": [
+          {
+            "id": "page_1",
+            "url": "https://example.com/docs",
+            "normalizedUrl": "https://example.com/docs",
+            "title": "合成页",
+            "domain": "example.com",
+            "visitCount": 1,
+            "lastVisitedAt": 1793655631782,
+            "firstSeenAt": 1793655631559.433,
+            "sources": [
+              "open_tab",
+              "active_tab"
+            ],
+            "isOpen": true,
+            "isActive": true,
+            "isImportant": false,
+            "score": 1,
+            "scoreDetail": {
+              "recency": 1,
+              "frequency": 1,
+              "open": 1,
+              "domain": 1,
+              "domainSource": "affinity"
+            },
+            "reason": "正在浏览，今天访问过，常用域名 example.com"
+          }
+        ],
+        "total": 1,
+        "domains": [
+          "example.com"
+        ],
+        "generatedAt": 1793655631783
+      }
+    }
+  }
+]

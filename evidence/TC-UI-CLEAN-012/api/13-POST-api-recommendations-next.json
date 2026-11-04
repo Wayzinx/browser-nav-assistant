@@ -1,0 +1,90 @@
+{
+  "source": "extension",
+  "method": "POST",
+  "url": "http://127.0.0.1:4300/api/recommendations/next",
+  "reqId": "ext_1793762859322_6",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762859322_6"
+  },
+  "requestBody": "{\"currentPage\":null,\"openTabs\":[],\"recentHistory\":[]}",
+  "status": 200,
+  "responseHeaders": {
+    "connection": "keep-alive",
+    "date": "Wed, 04 Nov 2026 03:27:39 GMT",
+    "keep-alive": "timeout=5",
+    "access-control-allow-origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "access-control-expose-headers": "x-request-id",
+    "content-length": "1384",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin",
+    "x-request-id": "ext_1793762859322_6"
+  },
+  "responseBody": {
+    "recommendations": [
+      {
+        "id": "rec_2",
+        "type": "next_visit",
+        "url": "https://github.com/org/repo/issues/123",
+        "title": "Fix login redirect bug",
+        "score": 0.58,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": null,
+        "createdAt": 1793762859323
+      },
+      {
+        "id": "rec_1",
+        "type": "next_visit",
+        "url": "https://github.com/org/repo/pull/456",
+        "title": "Refactor auth middleware (#456)",
+        "score": 0.56,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": null,
+        "createdAt": 1793762859323
+      },
+      {
+        "id": "rec_4",
+        "type": "next_visit",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+        "title": "Fetch API - Web APIs | MDN",
+        "score": 0.51,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": null,
+        "createdAt": 1793762859323
+      },
+      {
+        "id": "rec_9",
+        "type": "next_visit",
+        "url": "https://react.dev/reference/react/useState",
+        "title": "useState – React",
+        "score": 0.46,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": null,
+        "createdAt": 1793762859323
+      },
+      {
+        "id": "rec_3",
+        "type": "next_visit",
+        "url": "https://github.com/org/repo/actions",
+        "title": "Actions · org/repo",
+        "score": 0.45,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": null,
+        "createdAt": 1793762859323
+      }
+    ],
+    "cached": false,
+    "generatedAt": 1793762859323
+  },
+  "ms": 1.794,
+  "setup": false
+}

@@ -1,0 +1,91 @@
+{
+  "dataVersion": 694,
+  "versions": {
+    "data": 694,
+    "rule": 188,
+    "config": 171
+  },
+  "counts": {
+    "pages": 2,
+    "rules": 0,
+    "openPages": 0,
+    "archivedPages": 0,
+    "syncLogs": 1
+  },
+  "pagesTruncated": false,
+  "pagesHash": "230b65bc513dd6b3d60e6904d5c73a52cc40e48f9424354598b4c60f57f1c669",
+  "pages": [
+    {
+      "id": "page_1",
+      "url": "https://example.com/p?id=1&tab=x",
+      "normalizedUrl": "https://example.com/p?id=1&tab=x",
+      "domain": "example.com",
+      "title": "Higher",
+      "visitCount": 5,
+      "lastVisitedAt": 1793676423982,
+      "firstSeenAt": 1793676423982,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    },
+    {
+      "id": "page_2",
+      "url": "https://example.com/p?id=1&tab=y",
+      "normalizedUrl": "https://example.com/p?id=1&tab=y",
+      "domain": "example.com",
+      "title": "Lower",
+      "visitCount": 2,
+      "lastVisitedAt": 1793676423982,
+      "firstSeenAt": 1793676423982,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    }
+  ],
+  "rules": [],
+  "config": {
+    "cleanupThresholdDays": 14,
+    "maxHistoryItems": 100,
+    "historyLookbackDays": 30,
+    "enablePrivacyFilter": true,
+    "privacySensitiveKeywords": [
+      "password",
+      "token",
+      "bank",
+      "secret"
+    ]
+  },
+  "sequences": {
+    "page": 2,
+    "rule": 0,
+    "sync": 1
+  },
+  "lastSync": {
+    "id": "sync_1",
+    "syncedAt": 1793762823982,
+    "mode": "full",
+    "received": 2,
+    "created": 2,
+    "updated": 0,
+    "rejected": 0,
+    "durationMs": 0.12345899999490939,
+    "ok": true,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 0
+    }
+  },
+  "persist": null
+}

@@ -1,0 +1,59 @@
+- banner:
+  - heading "导航助手" [level=1]
+  - button "后端已连接"
+- region "当前页面":
+  - heading "当前页面" [level=2]
+  - paragraph: github.com/org/repo/pull/456
+  - paragraph: https://github.com/org/repo/pull/456
+  - button "标记为重要": ☆
+  - button "添加到分析"
+- region "浏览器上下文同步":
+  - button "同步浏览器上下文"
+  - status:
+    - paragraph: 同步成功
+    - paragraph: 上传 9 条 · 过滤 0 条
+    - time: 07:28 · 刚刚
+  - button "全量同步"
+  - paragraph: 当前模式：全量
+- tablist "导航助手功能":
+  - tab "首页"
+  - tab "上下文"
+  - tab "排序"
+  - tab "整理 3" [selected]
+  - tab "规则"
+  - tab "诊断"
+- main:
+  - tabpanel "整理 3":
+    - heading "整理建议" [level=2]
+    - heading "归档 2" [level=3]
+    - article:
+      - text: chrome extension manifest v3 - Google Search
+      - paragraph: https://www.google.com/search?q=chrome+extension+manifest+v3
+      - paragraph: 超过 14 天未访问（已 35 天），且不在当前打开的 tab 中
+      - paragraph: 已 35 天未访问
+      - button "归档"
+      - button "忽略"
+    - article:
+      - text: Old bug report from last sprint
+      - paragraph: https://github.com/org/repo/issues/100
+      - paragraph: 超过 7 天未访问（已 24 天），且不在当前打开的 tab 中；命中规则「把 7 天没访问过的 GitHub issue 建议归档」
+      - paragraph: 已 24 天未访问
+      - paragraph: 规则把 7 天没访问过的 GitHub issue 建议归档
+      - button "归档"
+      - button "忽略"
+    - heading "重复 1" [level=3]
+    - article:
+      - text: Fix login redirect bug
+      - paragraph: https://github.com/org/repo/issues/123 https://github.com/org/repo/issues/123?tab=comments
+      - paragraph: 去掉 query 参数后 URL 相同，疑似重复页面
+      - button "合并"
+      - button "忽略"
+    - heading "保留 1" [level=3]
+    - article:
+      - text: docs.internal.com/ai-agent-design
+      - paragraph: https://docs.internal.com/ai-agent-design
+      - paragraph: 被保护域名配置（docs.internal.com），不建议归档
+      - paragraph: 已 0 天未访问
+      - paragraph: 规则docs.internal.com 的页面永远不要归档
+      - button "忽略"
+    - button "全部归档"

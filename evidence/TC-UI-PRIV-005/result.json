@@ -1,0 +1,60 @@
+{
+  "caseId": "TC-UI-PRIV-005",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:03.792Z",
+  "tests": [
+    {
+      "testId": "749d3d23d14397969a11-96d300761d6ce128f8a1",
+      "title": "TC-UI-PRIV-005 服务端新增 cookie 关键词：请求过滤、上下文标注与配置缓存一致",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-PRIV-005.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1150,
+      "startedAt": "2026-11-04T03:29:02.642Z",
+      "endedAt": "2026-11-04T03:29:03.792Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 22,
+      "screenshots": [
+        "evidence/TC-UI-PRIV-005/screenshots/01-后端新增cookie并标注.png",
+        "evidence/TC-UI-PRIV-005/screenshots/02-cookie过滤且缓存与后端一致.png"
+      ],
+      "serverLogLines": 25,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1134,
+          "after": 1135
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 1,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [
+          "privacySensitiveKeywords"
+        ],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "GET_CONTEXT {\"privacy\":{\"enabled\":true,\"keywords\":[\"password\",\"token\",\"bank\",\"secret\",\"cookie\"],\"source\":\"server\"},\"tabs\":2,\"history\":0}"
+      ]
+    }
+  ]
+}

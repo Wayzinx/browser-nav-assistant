@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RULE-029",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:05.337Z",
+  "tests": [
+    {
+      "testId": "f36db8030f7b6bc95a25-07716761a0a768b5ad9e",
+      "title": "TC-API-RULE-029 各规则必填字段缺失时逐批返回400且已有规则不变",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-029.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 65,
+      "startedAt": "2026-11-04T03:27:05.272Z",
+      "endedAt": "2026-11-04T03:27:05.337Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 25,
+      "screenshots": [],
+      "serverLogLines": 27,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 796,
+          "after": 797
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 1,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

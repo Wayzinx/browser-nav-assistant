@@ -1,0 +1,60 @@
+{
+  "caseId": "TC-UI-REC-004",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:26.192Z",
+  "tests": [
+    {
+      "testId": "8d129cc21afcb304fee2-7c6aeeb35541fffb2856",
+      "title": "TC-UI-REC-004 真实返回五条推荐时首页严格显示前三条",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-REC-004.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 904,
+      "startedAt": "2026-11-04T03:29:25.288Z",
+      "endedAt": "2026-11-04T03:29:26.192Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [
+        "evidence/TC-UI-REC-004/screenshots/01-五条响应只展示前三条.png"
+      ],
+      "serverLogLines": 12,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1166,
+          "after": 1167
+        },
+        "pages": {
+          "added": 5,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 5,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "打开 popup 前的恢复状态：{}",
+        "T=1793762965729，visitCount=[10,8,6,4,2]；pageScore=[0.80,0.77,0.74,0.70,0.64]；same_domain final=0.6*0.6+0.4*pageScore。",
+        "真实五条到首页三条：{\"response\":[{\"id\":\"rec_1\",\"type\":\"next_visit\",\"url\":\"https://news.example.org/a1\",\"title\":\"候选1\",\"score\":0.68,\"reason\":\"与当前页面同域名，历史评分较高（0.80）\",\"strategy\":\"same_domain\",\"contextUrl\":\"https://news.example.org/c\",\"createdAt\":1793762965898},{\"id\":\"rec_2\",\"type\":\"next_visit\",\"url\":\"https://news.example.org/a2\",\"title\":\"候选2\",\"score\":0.67,\"reason\":\"与当前页面同域名，历史评分较高（0.77）\",\"strategy\":\"same_domain\",\"contextUrl\":\"https://news.example.org/c\",\"createdAt\":1793762965898},{\"id\":\"rec_3\",\"type\":\"next_visit\",\"url\":\"https://news.example.org/a3\",\"title\":\"候选3\",\"score\":0.66,\"reason\":\"与当前页面同域名，历史评分较高（0.74）\",\"strategy\":\"same_domain\",\"contextUrl\":\"https://news.example.org/c\",\"createdAt\":1793762965898},{\"id\":\"rec_4\",\"type\":\"next_visit\",\"url\":\"https://news.example.org/a4\",\"title\":\"候选4\",\"score\":0.64,\"reason\":\"与当前页面同域名，历史评分较高（0.70）\",\"strategy\":\"same_domain\",\"contextUrl\":\"https://news.example.org/c\",\"createdAt\":1793762965898},{\"id\":\"rec_5\",\"type\":\"next_visit\",\"url\":\"https://news.example.org/a5\",\"title\":\"候选5\",\"score\":0.62,\"reason\":\"与当前页面同域名，历史评分较高（0.64）\",\"strategy\":\"same_domain\",\"contextUrl\":\"https://news.example.org/c\",\"createdAt\":1793762965898}],\"displayed\":[{\"id\":\"rec_1\",\"type\":\"next_visit\",\"url\":\"https://news.example.org/a1\",\"title\":\"候选1\",\"score\":0.68,\"reason\":\"与当前页面同域名，历史评分较高（0.80）\",\"strategy\":\"same_domain\",\"contextUrl\":\"https://news.example.org/c\",\"createdAt\":1793762965898},{\"id\":\"rec_2\",\"type\":\"next_visit\",\"url\":\"https://news.example.org/a2\",\"title\":\"候选2\",\"score\":0.67,\"reason\":\"与当前页面同域名，历史评分较高（0.77）\",\"strategy\":\"same_domain\",\"contextUrl\":\"https://news.example.org/c\",\"createdAt\":1793762965898},{\"id\":\"rec_3\",\"type\":\"next_visit\",\"url\":\"https://news.example.org/a3\",\"title\":\"候选3\",\"score\":0.66,\"reason\":\"与当前页面同域名，历史评分较高（0.74）\",\"strategy\":\"same_domain\",\"contextUrl\":\"https://news.example.org/c\",\"createdAt\":1793762965898}]}",
+        "SW 网络观察汇总：{\"requests\":[{\"url\":\"http://127.0.0.1:4300/api/recommendations/next\",\"method\":\"POST\",\"body\":{\"currentPage\":{\"url\":\"https://news.example.org/c\",\"title\":\"同域当前页\"},\"openTabs\":[{\"url\":\"https://news.example.org/c\",\"title\":\"同域当前页\"}],\"recentHistory\":[{\"url\":\"https://news.example.org/c\",\"title\":\"同域当前页\",\"lastVisitTime\":1793762965780.042}]},\"startedAt\":1793762965898,\"sequence\":1}],\"responses\":[{\"url\":\"http://127.0.0.1:4300/api/recommendations/next\",\"status\":200}],\"failures\":[],\"syncRequests\":[]}"
+      ]
+    }
+  ]
+}

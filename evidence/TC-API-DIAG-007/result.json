@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-DIAG-007",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:48.261Z",
+  "tests": [
+    {
+      "testId": "1e88ee2f604857347bce-13f03b80fc2c93f3fb6f",
+      "title": "TC-API-DIAG-007 health 的 CORS 与请求 ID：chrome-extension 来源被放行并回传 x-request-id，其他来源不返回 Allow-Origin",
+      "project": "api",
+      "file": "tests/api/TC-API-DIAG-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 15,
+      "startedAt": "2026-11-04T03:25:48.246Z",
+      "endedAt": "2026-11-04T03:25:48.261Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 6,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 94,
+          "after": 94
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

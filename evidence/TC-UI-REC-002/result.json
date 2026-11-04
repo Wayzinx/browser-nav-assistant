@@ -1,0 +1,61 @@
+{
+  "caseId": "TC-UI-REC-002",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:24.309Z",
+  "tests": [
+    {
+      "testId": "0e7c4521572f44c3847d-ece333bc3deb0dd81822",
+      "title": "TC-UI-REC-002 点击第一条推荐只新增一个活动 Actions 标签页",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-REC-002.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 2062,
+      "startedAt": "2026-11-04T03:29:22.247Z",
+      "endedAt": "2026-11-04T03:29:24.309Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 3,
+      "screenshots": [
+        "evidence/TC-UI-REC-002/screenshots/01-点击前首页.png",
+        "evidence/TC-UI-REC-002/screenshots/02-新Actions活动页.png",
+        "evidence/TC-UI-REC-002/screenshots/03-原popup仍保留.png"
+      ],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1163,
+          "after": 1164
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "打开 popup 前的恢复状态：{}",
+        "标签页前后快照与事件：{\"before\":[{\"active\":false,\"audible\":false,\"autoDiscardable\":true,\"discarded\":false,\"frozen\":false,\"groupId\":-1,\"height\":673,\"highlighted\":false,\"id\":1606573456,\"incognito\":false,\"index\":0,\"lastAccessed\":1793762962760.21,\"mutedInfo\":{\"muted\":false},\"pinned\":false,\"selected\":false,\"splitViewId\":-1,\"status\":\"complete\",\"title\":\"Fix login redirect bug\",\"url\":\"https://github.com/org/repo/issues/123\",\"width\":500,\"windowId\":1606573454},{\"active\":false,\"audible\":false,\"autoDiscardable\":true,\"discarded\":false,\"frozen\":false,\"groupId\":-1,\"height\":673,\"highlighted\":false,\"id\":1606573457,\"incognito\":false,\"index\":1,\"lastAccessed\":1793762962799.679,\"mutedInfo\":{\"muted\":false},\"openerTabId\":1606573456,\"pinned\":false,\"selected\":false,\"splitViewId\":-1,\"status\":\"complete\",\"title\":\"Fetch API - Web APIs | MDN\",\"url\":\"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\",\"width\":500,\"windowId\":1606573454},{\"active\":false,\"audible\":false,\"autoDiscardable\":true,\"discarded\":false,\"frozen\":false,\"groupId\":-1,\"height\":673,\"highlighted\":false,\"id\":1606573458,\"incognito\":false,\"index\":2,\"lastAccessed\":1793762962842.546,\"mutedInfo\":{\"muted\":false},\"openerTabId\":1606573457,\"pinned\":false,\"selected\":false,\"splitViewId\":-1,\"status\":\"complete\",\"title\":\"AI Agent Design Guidelines\",\"url\":\"https://docs.internal.com/ai-agent-design\",\"width\":500,\"windowId\":1606573454},{\"active\":false,\"audible\":false,\"autoDiscardable\":true,\"discarded\":false,\"frozen\":false,\"groupId\":-1,\"height\":673,\"highlighted\":false,\"id\":1606573459,\"incognito\":false,\"index\":3,\"lastAccessed\":1793762962884.441,\"mutedInfo\":{\"muted\":false},\"openerTabId\":1606573458,\"pinned\":false,\"selected\":false,\"splitViewId\":-1,\"status\":\"complete\",\"title\":\"Refactor auth middleware (#456)\",\"url\":\"https://github.com/org/repo/pull/456\",\"width\":500,\"windowId\":1606573454},{\"active\":true,\"audible\":false,\"autoDiscardable\":true,\"discarded\":false,\"favIconUrl\":\"\",\"frozen\":false,\"groupId\":-1,\"height\":673,\"highlighted\":true,\"id\":1606573461,\"incognito\":false,\"index\":4,\"lastAccessed\":1793762962952.3,\"mutedInfo\":{\"muted\":false},\"openerTabId\":1606573459,\"pinned\":false,\"selected\":true,\"splitViewId\":-1,\"status\":\"complete\",\"title\":\"导航助手\",\"url\":\"chrome-extension://apogdiijbmmelomlehodilcejcmocaki/popup/popup.html\",\"width\":500,\"windowId\":1606573454}],\"after\":[{\"active\":false,\"audible\":false,\"autoDiscardable\":true,\"discarded\":false,\"frozen\":false,\"groupId\":-1,\"height\":673,\"highlighted\":false,\"id\":1606573456,\"incognito\":false,\"index\":0,\"lastAccessed\":1793762962760.21,\"mutedInfo\":{\"muted\":false},\"pinned\":false,\"selected\":false,\"splitViewId\":-1,\"status\":\"complete\",\"title\":\"Fix login redirect bug\",\"url\":\"https://github.com/org/repo/issues/123\",\"width\":500,\"windowId\":1606573454},{\"active\":false,\"audible\":false,\"autoDiscardable\":true,\"discarded\":false,\"frozen\":false,\"groupId\":-1,\"height\":673,\"highlighted\":false,\"id\":1606573457,\"incognito\":false,\"index\":1,\"lastAccessed\":1793762962799.679,\"mutedInfo\":{\"muted\":false},\"openerTabId\":1606573456,\"pinned\":false,\"selected\":false,\"splitViewId\":-1,\"status\":\"complete\",\"title\":\"Fetch API - Web APIs | MDN\",\"url\":\"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\",\"width\":500,\"windowId\":1606573454},{\"active\":false,\"audible\":false,\"autoDiscardable\":true,\"discarded\":false,\"frozen\":false,\"groupId\":-1,\"height\":673,\"highlighted\":false,\"id\":1606573458,\"incognito\":false,\"index\":2,\"lastAccessed\":1793762962842.546,\"mutedInfo\":{\"muted\":false},\"openerTabId\":1606573457,\"pinned\":false,\"selected\":false,\"splitViewId\":-1,\"status\":\"complete\",\"title\":\"AI Agent Design Guidelines\",\"url\":\"https://docs.internal.com/ai-agent-design\",\"width\":500,\"windowId\":1606573454},{\"active\":false,\"audible\":false,\"autoDiscardable\":true,\"discarded\":false,\"frozen\":false,\"groupId\":-1,\"height\":673,\"highlighted\":false,\"id\":1606573459,\"incognito\":false,\"index\":3,\"lastAccessed\":1793762962884.441,\"mutedInfo\":{\"muted\":false},\"openerTabId\":1606573458,\"pinned\":false,\"selected\":false,\"splitViewId\":-1,\"status\":\"complete\",\"title\":\"Refactor auth middleware (#456)\",\"url\":\"https://github.com/org/repo/pull/456\",\"width\":500,\"windowId\":1606573454},{\"active\":false,\"audible\":false,\"autoDiscardable\":true,\"discarded\":false,\"favIconUrl\":\"\",\"frozen\":false,\"groupId\":-1,\"height\":673,\"highlighted\":false,\"id\":1606573461,\"incognito\":false,\"index\":4,\"lastAccessed\":1793762962952.3,\"mutedInfo\":{\"muted\":false},\"openerTabId\":1606573459,\"pinned\":false,\"selected\":false,\"splitViewId\":-1,\"status\":\"complete\",\"title\":\"导航助手\",\"url\":\"chrome-extension://apogdiijbmmelomlehodilcejcmocaki/popup/popup.html\",\"width\":500,\"windowId\":1606573454},{\"active\":true,\"audible\":false,\"autoDiscardable\":true,\"discarded\":false,\"frozen\":false,\"groupId\":-1,\"height\":673,\"highlighted\":true,\"id\":1606573462,\"incognito\":false,\"index\":5,\"lastAccessed\":1793762963238.309,\"mutedInfo\":{\"muted\":false},\"pinned\":false,\"selected\":true,\"splitViewId\":-1,\"status\":\"complete\",\"title\":\"Page not found · GitHub · GitHub\",\"url\":\"https://github.com/org/repo/actions\",\"width\":500,\"windowId\":1606573454}],\"events\":[{\"type\":\"created\",\"tabId\":1606573462,\"url\":\"https://github.com/org/repo/actions\",\"active\":true},{\"type\":\"activated\",\"tabId\":1606573462,\"windowId\":1606573454}]}",
+        "SW 网络观察汇总：{\"requests\":[{\"url\":\"http://127.0.0.1:4300/api/recommendations/next\",\"method\":\"POST\",\"body\":{\"currentPage\":{\"url\":\"https://github.com/org/repo/pull/456\",\"title\":\"Refactor auth middleware (#456)\"},\"openTabs\":[{\"url\":\"https://github.com/org/repo/issues/123\",\"title\":\"Fix login redirect bug\"},{\"url\":\"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\",\"title\":\"Fetch API - Web APIs | MDN\"},{\"url\":\"https://docs.internal.com/ai-agent-design\",\"title\":\"AI Agent Design Guidelines\"},{\"url\":\"https://github.com/org/repo/pull/456\",\"title\":\"Refactor auth middleware (#456)\"}],\"recentHistory\":[{\"url\":\"https://github.com/org/repo/pull/456\",\"title\":\"Refactor auth middleware (#456)\",\"lastVisitTime\":1793762962896.764},{\"url\":\"https://docs.internal.com/ai-agent-design\",\"title\":\"AI Agent Design Guidelines\",\"lastVisitTime\":1793762962855.713},{\"url\":\"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\",\"title\":\"Fetch API - Web APIs | MDN\",\"lastVisitTime\":1793762962810.509},{\"url\":\"https://github.com/org/repo/issues/123\",\"title\":\"Fix login redirect bug\",\"lastVisitTime\":1793762962772.524}]},\"startedAt\":1793762963034,\"sequence\":1}],\"responses\":[{\"url\":\"http://127.0.0.1:4300/api/recommendations/next\",\"status\":200}],\"failures\":[],\"syncRequests\":[]}"
+      ]
+    }
+  ]
+}

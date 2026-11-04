@@ -1,0 +1,54 @@
+/* @code C-FE-CLEAN-04 */
+[data-slot="cleanup"] .cleanup-group {
+  display: grid;
+  gap: 10px;
+  margin: 14px 0;
+}
+
+[data-slot="cleanup"] .cleanup-group h3 {
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+[data-slot="cleanup"] .cleanup-item {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+[data-slot="cleanup"] .cleanup-item-title {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+[data-slot="cleanup"] .cleanup-item-url {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 11px;
+}
+
+[data-slot="cleanup"] .cleanup-item-reason,
+[data-slot="cleanup"] .cleanup-rule {
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+}
+
+[data-slot="cleanup"] .cleanup-rule .badge {
+  margin-right: 6px;
+}
+
+[data-slot="cleanup"] .cleanup-item-actions,
+[data-slot="cleanup"] .cleanup-undo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+[data-slot="cleanup"] .cleanup-action-status {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}

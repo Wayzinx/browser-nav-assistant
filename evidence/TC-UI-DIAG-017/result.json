@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-UI-DIAG-017",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:21.418Z",
+  "tests": [
+    {
+      "testId": "8931e93ebdae289c14c8-e56dd3631a47072f843a",
+      "title": "TC-UI-DIAG-017 最近一次同步失败时显示失败与失败原因，并建议先处理「后端服务连接」",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-DIAG-017.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 852,
+      "startedAt": "2026-11-04T03:28:20.566Z",
+      "endedAt": "2026-11-04T03:28:21.418Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 2,
+      "screenshots": [
+        "evidence/TC-UI-DIAG-017/screenshots/01-S2-同步失败诊断.png"
+      ],
+      "serverLogLines": 14,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1072,
+          "after": 1073
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

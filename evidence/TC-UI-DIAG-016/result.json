@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-UI-DIAG-016",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:20.547Z",
+  "tests": [
+    {
+      "testId": "201493c140bbffe5659b-78545b7f313f5760d4bf",
+      "title": "TC-UI-DIAG-016 最近一次成功同步在 10 分钟前时显示通过，并显示最近同步时间与上传条数",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-DIAG-016.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 987,
+      "startedAt": "2026-11-04T03:28:19.560Z",
+      "endedAt": "2026-11-04T03:28:20.547Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 6,
+      "screenshots": [
+        "evidence/TC-UI-DIAG-016/screenshots/01-S3-最近同步通过.png"
+      ],
+      "serverLogLines": 21,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1071,
+          "after": 1071
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

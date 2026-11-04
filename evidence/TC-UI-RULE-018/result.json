@@ -1,0 +1,60 @@
+{
+  "caseId": "TC-UI-RULE-018",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:45.443Z",
+  "tests": [
+    {
+      "testId": "521b48be91a365d43d6f-639edb9407bcdf03621d",
+      "title": "TC-UI-RULE-018 确认删除保护规则后列表和整理建议立即更新",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RULE-018.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1024,
+      "startedAt": "2026-11-04T03:29:44.419Z",
+      "endedAt": "2026-11-04T03:29:45.443Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 8,
+      "screenshots": [
+        "evidence/TC-UI-RULE-018/screenshots/01-删除前两条.png",
+        "evidence/TC-UI-RULE-018/screenshots/02-行内删除确认.png",
+        "evidence/TC-UI-RULE-018/screenshots/03-确认后剩一条.png",
+        "evidence/TC-UI-RULE-018/screenshots/04-整理页不再保留目标.png"
+      ],
+      "serverLogLines": 26,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1188,
+          "after": 1189
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 1,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "删除响应：{\"deleted\":\"rule_2\",\"ruleCount\":1}"
+      ]
+    }
+  ]
+}

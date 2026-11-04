@@ -1,0 +1,33 @@
+- banner:
+  - heading "导航助手" [level=1]
+  - button "连接状态：检测尚未实现" [disabled]: 连接检测尚未实现
+- region "当前页面":
+  - heading "当前页面" [level=2]
+  - paragraph: Mock /org/repo/pull/456
+  - paragraph: https://github.com/org/repo/pull/456
+  - button "标记为重要": ☆
+  - button "添加到分析"
+- region "浏览器上下文同步":
+  - button "同步浏览器上下文"
+  - status:
+    - paragraph: 同步成功
+    - paragraph: 上传 3 条 · 过滤 0 条
+    - time: 03:53 · 刚刚
+  - button "全量同步"
+  - paragraph: 当前模式：全量
+- tablist "导航助手功能":
+  - tab "首页"
+  - tab "上下文"
+  - tab "排序"
+  - tab "整理" [selected]
+  - tab "规则"
+  - tab "诊断"
+- main:
+  - tabpanel "整理":
+    - status: 以下为 03:53 同步时缓存的结果
+    - heading "整理建议" [level=2]
+    - paragraph: 还没有整理建议，点击上方「同步浏览器上下文」开始
+    - heading "归档 0" [level=3]
+    - heading "重复 0" [level=3]
+    - heading "保留 0" [level=3]
+    - button "全部归档" [disabled]

@@ -1,0 +1,31 @@
+{
+  "reqId": "TC-API-CLEAN-029-03",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/pages/archive",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-CLEAN-029-03",
+    "content-type": "text/plain"
+  },
+  "requestBody": "{\"urls\":[\"https://github.com/org/repo/issues/100\"]}",
+  "status": 415,
+  "responseHeaders": {
+    "x-request-id": "TC-API-CLEAN-029-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "95",
+    "date": "Wed, 04 Nov 2026 03:25:45 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "error": {
+      "code": "UNSUPPORTED_MEDIA_TYPE",
+      "message": "Content-Type 必须是 application/json"
+    }
+  },
+  "ms": 1.5,
+  "mutated": null
+}

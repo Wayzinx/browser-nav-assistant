@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RULE-033",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:05.438Z",
+  "tests": [
+    {
+      "testId": "3957997a460d21782df6-4bc0b291ab08baf3a632",
+      "title": "TC-API-RULE-033 用保存返回id删除never_archive后列表仅剩原归档规则",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-033.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 18,
+      "startedAt": "2026-11-04T03:27:05.420Z",
+      "endedAt": "2026-11-04T03:27:05.438Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 9,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 804,
+          "after": 805
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 1,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

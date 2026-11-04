@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-API-PRIV-009",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:02.875Z",
+  "tests": [
+    {
+      "testId": "4f79f3a22ff9f0eca0a4-47b53023ecb10a5f5a08",
+      "title": "TC-API-PRIV-009 PUT 新增 session 关键词后查询一致且同步被过滤",
+      "project": "api",
+      "file": "tests/api/TC-API-PRIV-009.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 15,
+      "startedAt": "2026-11-04T03:27:02.860Z",
+      "endedAt": "2026-11-04T03:27:02.875Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 8,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 604,
+          "after": 606
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [
+          "privacySensitiveKeywords"
+        ],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

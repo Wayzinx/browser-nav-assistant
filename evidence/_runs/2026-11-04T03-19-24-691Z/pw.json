@@ -1,0 +1,818 @@
+{
+  "config": {
+    "argv": [
+      "<project>/...",
+      "./node_modules/.bin/playwright",
+      "test",
+      "--reporter=json",
+      "tests/api/TC-API-CLEAN-001.spec.mjs",
+      "tests/api/TC-API-DIAG-001.spec.mjs",
+      "tests/api/TC-API-RULE-010.spec.mjs",
+      "tests/api/TC-API-SYNC-003.spec.mjs",
+      "tests/e2e/TC-E2E-FLOW-001.spec.mjs",
+      "tests/e2e/TC-E2E-FLOW-002.spec.mjs",
+      "tests/ui/TC-UI-CACHE-003.spec.mjs",
+      "tests/ui/TC-UI-DIAG-004.spec.mjs",
+      "tests/ui/TC-UI-RULE-003.spec.mjs",
+      "tests/ui/TC-UI-SYNC-001.spec.mjs"
+    ],
+    "configFile": "./playwright.config.mjs",
+    "rootDir": "./tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "./test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "api",
+        "name": "api",
+        "testDir": "./tests/api",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.mjs"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "./test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "e2e",
+        "name": "e2e",
+        "testDir": "./tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.mjs"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "./test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "ui",
+        "name": "ui",
+        "testDir": "./tests/ui",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.mjs"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "./test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "api",
+        "testDir": "./tests/api",
+        "snapshotDir": "./tests/api",
+        "testIgnore": [],
+        "testMatch": "**/*.spec.mjs",
+        "timeout": 30000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4300",
+          "trace": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "api"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "./test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "e2e",
+        "testDir": "./tests/e2e",
+        "snapshotDir": "./tests/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.spec.mjs",
+        "timeout": 30000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4300",
+          "trace": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "e2e"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "./test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "ui",
+        "testDir": "./tests/ui",
+        "snapshotDir": "./tests/ui",
+        "testIgnore": [],
+        "testMatch": "**/*.spec.mjs",
+        "timeout": 60000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4300",
+          "trace": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "ui"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node server/src/index.js",
+      "url": "http://127.0.0.1:4300/api/health",
+      "reuseExistingServer": false,
+      "timeout": 30000,
+      "env": {
+        "PORT": "4300",
+        "HOST": "127.0.0.1",
+        "ENABLE_TEST_API": "1",
+        "LOG_FILE": "./evidence/_runtime/server-4300.log",
+        "LOG_LEVEL": "debug"
+      },
+      "gracefulShutdown": {
+        "signal": "SIGTERM",
+        "timeout": 5000
+      },
+      "stdout": "ignore",
+      "stderr": "pipe"
+    }
+  },
+  "suites": [
+    {
+      "title": "api/TC-API-CLEAN-001.spec.mjs",
+      "file": "api/TC-API-CLEAN-001.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TC-API-CLEAN-001 样例整理建议的汇总、顺序和字段完整",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "api",
+              "projectName": "api",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 54,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "S1：POST /api/sync 导入平移后的样例",
+                      "duration": 5
+                    },
+                    {
+                      "title": "S2：GET /api/pages/cleanup-suggestions 固定时间读取建议",
+                      "duration": 9
+                    }
+                  ],
+                  "startTime": "2026-11-04T03:19:26.306Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "276366369171878b3ba7-69bbdc786ead5f1deefc",
+          "file": "api/TC-API-CLEAN-001.spec.mjs",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "api/TC-API-DIAG-001.spec.mjs",
+      "file": "api/TC-API-DIAG-001.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TC-API-DIAG-001 后端数据为空时 GET /api/health 返回 200、version=1.0.0、页面数和规则数为 0",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "api",
+              "projectName": "api",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 18,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "S1：POST /api/__test__/reset",
+                      "duration": 2
+                    },
+                    {
+                      "title": "S2：GET /api/health",
+                      "duration": 3
+                    }
+                  ],
+                  "startTime": "2026-11-04T03:19:26.375Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "924d92d699c8486eda45-6c8e204f76efd07931c8",
+          "file": "api/TC-API-DIAG-001.spec.mjs",
+          "line": 5,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "api/TC-API-RULE-010.spec.mjs",
+      "file": "api/TC-API-RULE-010.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TC-API-RULE-010 分号把两条规则拆开并保留各自子句原文",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "api",
+              "projectName": "api",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "S1：通过真实 HTTP 重置本例状态",
+                      "duration": 1
+                    },
+                    {
+                      "title": "S2：解析分号连接的两条规则",
+                      "duration": 3
+                    }
+                  ],
+                  "startTime": "2026-11-04T03:19:26.401Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a8977449fb5796c717dd-dc50651610f18e5e7d33",
+          "file": "api/TC-API-RULE-010.spec.mjs",
+          "line": 6,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "api/TC-API-SYNC-003.spec.mjs",
+      "file": "api/TC-API-SYNC-003.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TC-API-SYNC-003 D-01 平移样例首次导入并保留时间和来源",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "api",
+              "projectName": "api",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 39,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "S1：清空后端状态",
+                      "duration": 6
+                    },
+                    {
+                      "title": "S2：构造 D-01 平移样例并保留历史时间",
+                      "duration": 0
+                    },
+                    {
+                      "title": "S3：首次同步平移样例",
+                      "duration": 3
+                    },
+                    {
+                      "title": "S4：回读全部页面并核对时间、次数、来源及健康状态",
+                      "duration": 5
+                    }
+                  ],
+                  "startTime": "2026-11-04T03:19:26.422Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "be08a34628d44bafb063-c5ef67ed2ecd17beefff",
+          "file": "api/TC-API-SYNC-003.spec.mjs",
+          "line": 7,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "e2e/TC-E2E-FLOW-001.spec.mjs",
+      "file": "e2e/TC-E2E-FLOW-001.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TC-E2E-FLOW-001 排序返回的页面驱动推荐，同步时间贯通健康信息",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "e2e",
+              "projectName": "e2e",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 66,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "S1：通过真实同步接口导入平移样例",
+                      "duration": 6
+                    },
+                    {
+                      "title": "S2：读取完整排序和前三条，从排序响应提取当前页及打开页",
+                      "duration": 12
+                    },
+                    {
+                      "title": "S3：将排序返回的当前页、打开页和访问时间传给推荐",
+                      "duration": 5
+                    },
+                    {
+                      "title": "S4：健康信息读回本次同步状态",
+                      "duration": 2
+                    }
+                  ],
+                  "startTime": "2026-11-04T03:19:26.646Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0f87c95141d065ac7a30-0d4a5b5c159e0d521afd",
+          "file": "e2e/TC-E2E-FLOW-001.spec.mjs",
+          "line": 11,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "e2e/TC-E2E-FLOW-002.spec.mjs",
+      "file": "e2e/TC-E2E-FLOW-002.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TC-E2E-FLOW-002 同步、排序、推荐、规则生效和删除恢复的完整验收链",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "e2e",
+              "projectName": "e2e",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 72,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "S1：导入样例并读取空规则基线",
+                      "duration": 4
+                    },
+                    {
+                      "title": "S2：消费排序响应请求推荐，记录整理建议基线",
+                      "duration": 9
+                    },
+                    {
+                      "title": "S3：解析双规则，验证预览未入库",
+                      "duration": 5
+                    },
+                    {
+                      "title": "S4：将完整预览规则原样保存并提取正式 id",
+                      "duration": 3
+                    },
+                    {
+                      "title": "S5：列表与健康信息读回正式规则及同步状态",
+                      "duration": 3
+                    },
+                    {
+                      "title": "S6：整理建议引用保存响应的正式规则 id",
+                      "duration": 3
+                    },
+                    {
+                      "title": "S7：删除正式保护规则，读回剩余规则及整理建议",
+                      "duration": 7
+                    },
+                    {
+                      "title": "S8：删除正式归档规则并验证所有整理建议恢复基线",
+                      "duration": 10
+                    }
+                  ],
+                  "startTime": "2026-11-04T03:19:26.728Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fa1e219091a5c8775809-a370bed09fdee77eef54",
+          "file": "e2e/TC-E2E-FLOW-002.spec.mjs",
+          "line": 13,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ui/TC-UI-CACHE-003.spec.mjs",
+      "file": "ui/TC-UI-CACHE-003.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TC-UI-CACHE-003 已有缓存后连接拒绝：三个红色时间横幅与离线数据均等于缓存",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui",
+              "projectName": "ui",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2631,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "S1：保存独立同步的完整缓存A，改到端口9后重开并等待真实连接失败",
+                      "duration": 312
+                    },
+                    {
+                      "title": "S2：逐页核对时间横幅、实际红色和缓存数据的显示投影",
+                      "duration": 233
+                    },
+                    {
+                      "title": "S3：等待所有失败请求、响应解析与消息完成后核对完整缓存及连接状态",
+                      "duration": 182
+                    }
+                  ],
+                  "startTime": "2026-11-04T03:19:26.983Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot online-cache-A",
+                      "contentType": "image/png",
+                      "path": "./evidence/TC-UI-CACHE-003/screenshots/01-online-cache-A.png"
+                    },
+                    {
+                      "name": "screenshot offline-home-ready",
+                      "contentType": "image/png",
+                      "path": "./evidence/TC-UI-CACHE-003/screenshots/02-offline-home-ready.png"
+                    },
+                    {
+                      "name": "screenshot offline-ranked-projection",
+                      "contentType": "image/png",
+                      "path": "./evidence/TC-UI-CACHE-003/screenshots/03-offline-ranked-projection.png"
+                    },
+                    {
+                      "name": "screenshot offline-cleanup-projection",
+                      "contentType": "image/png",
+                      "path": "./evidence/TC-UI-CACHE-003/screenshots/04-offline-cleanup-projection.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d1ea485cacbddef0c733-917b5c6c9c758ce6c9c5",
+          "file": "ui/TC-UI-CACHE-003.spec.mjs",
+          "line": 214,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ui/TC-UI-DIAG-004.spec.mjs",
+      "file": "ui/TC-UI-DIAG-004.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TC-UI-DIAG-004 存储中没有 apiBaseUrl 时诊断页显示默认地址 http://127.0.0.1:3000",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui",
+              "projectName": "ui",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 839,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "S1：在 service worker 中删除 apiBaseUrl，打开 popup 并进入诊断页签",
+                      "duration": 235
+                    },
+                    {
+                      "title": "S2：读取当前地址、输入框 value 与 API Base URL 检查项",
+                      "duration": 46
+                    }
+                  ],
+                  "startTime": "2026-11-04T03:19:29.629Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot S1-默认地址诊断",
+                      "contentType": "image/png",
+                      "path": "./evidence/TC-UI-DIAG-004/screenshots/01-S1-默认地址诊断.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4121f57b8e98cea912cd-ce909de40a022aed370d",
+          "file": "ui/TC-UI-DIAG-004.spec.mjs",
+          "line": 5,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ui/TC-UI-RULE-003.spec.mjs",
+      "file": "ui/TC-UI-RULE-003.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TC-UI-RULE-003 无动作文本显示原因和例句且不能保存",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui",
+              "projectName": "ui",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 812,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "S1：打开规则页签",
+                      "duration": 139
+                    },
+                    {
+                      "title": "S2：解析没有动作的文本",
+                      "duration": 82
+                    },
+                    {
+                      "title": "S3：核对原因、例句、保存状态与后端",
+                      "duration": 51
+                    }
+                  ],
+                  "startTime": "2026-11-04T03:19:30.474Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot 无法识别提示",
+                      "contentType": "image/png",
+                      "path": "./evidence/TC-UI-RULE-003/screenshots/01-无法识别提示.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "cd138a5ded422d7b0f03-6d51bcc465fa032fe8af",
+          "file": "ui/TC-UI-RULE-003.spec.mjs",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ui/TC-UI-SYNC-001.spec.mjs",
+      "file": "ui/TC-UI-SYNC-001.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TC-UI-SYNC-001 两条普通页面首次同步：真实上报三个上下文字段并展示上传5条、过滤0条",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui",
+              "projectName": "ui",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1082,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "S1：离线打开 A/B 并核对真实浏览器历史",
+                      "duration": 157
+                    },
+                    {
+                      "title": "S2：首次打开 popup，点击一次并等待本批同步与缓存刷新",
+                      "duration": 302
+                    },
+                    {
+                      "title": "S3：核对后端、数字状态、持久化时间和本批缓存",
+                      "duration": 68
+                    }
+                  ],
+                  "startTime": "2026-11-04T03:19:31.293Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot 首次打开-同步前",
+                      "contentType": "image/png",
+                      "path": "./evidence/TC-UI-SYNC-001/screenshots/01-首次打开-同步前.png"
+                    },
+                    {
+                      "name": "screenshot 首次同步成功",
+                      "contentType": "image/png",
+                      "path": "./evidence/TC-UI-SYNC-001/screenshots/02-首次同步成功.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "964cfffa0d024d35dea6-0038274474ff64c16f5b",
+          "file": "ui/TC-UI-SYNC-001.spec.mjs",
+          "line": 159,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-04T03:19:25.985Z",
+    "duration": 6435.924,
+    "expected": 10,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

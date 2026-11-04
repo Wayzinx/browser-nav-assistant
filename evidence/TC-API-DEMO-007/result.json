@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-API-DEMO-007",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:46.591Z",
+  "tests": [
+    {
+      "testId": "045fdf74794a5bb50e8b-ec229ded348776e5fac9",
+      "title": "TC-API-DEMO-007 后端不可达时导入脚本以非 0 退出码结束，不影响正在运行的后端",
+      "project": "api",
+      "file": "tests/api/TC-API-DEMO-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 130,
+      "startedAt": "2026-11-04T03:25:46.461Z",
+      "endedAt": "2026-11-04T03:25:46.591Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 3,
+      "screenshots": [],
+      "serverLogLines": 5,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 77,
+          "after": 78
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "import-sample pid=53025 API_BASE=http://127.0.0.1:9（不可达）",
+        "import-sample 退出 {\"code\":1,\"signal\":null}；输出已写入 ./evidence/TC-API-DEMO-007"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1765 @@
+{
+  "generatedAt": "2026-11-03T00:06:33.965Z",
+  "root": "./",
+  "requirements": {
+    "collected": true,
+    "total": 121,
+    "coverage": {
+      "num": 121,
+      "den": 121,
+      "value": 1
+    },
+    "mandatoryCoverage": {
+      "num": 96,
+      "den": 96,
+      "value": 1
+    },
+    "verified": {
+      "num": 121,
+      "den": 121,
+      "value": 1
+    },
+    "mandatoryVerified": {
+      "num": 96,
+      "den": 96,
+      "value": 1
+    },
+    "uncovered": [],
+    "unverified": []
+  },
+  "features": {
+    "total": 75,
+    "inScope": 70,
+    "designCoverage": {
+      "num": 70,
+      "den": 70,
+      "value": 1
+    },
+    "caseCoverage": {
+      "num": 70,
+      "den": 70,
+      "value": 1
+    },
+    "verified": {
+      "num": 70,
+      "den": 70,
+      "value": 1
+    },
+    "p0Verified": {
+      "num": 57,
+      "den": 57,
+      "value": 1
+    },
+    "byPriority": {
+      "P0": {
+        "total": 57,
+        "designCovered": 57,
+        "caseCovered": 57,
+        "verified": 57
+      },
+      "P1": {
+        "total": 13,
+        "designCovered": 13,
+        "caseCovered": 13,
+        "verified": 13
+      }
+    },
+    "byModule": {
+      "CACHE": {
+        "total": 2,
+        "designCovered": 2,
+        "caseCovered": 2,
+        "verified": 2
+      },
+      "CLEAN": {
+        "total": 8,
+        "designCovered": 8,
+        "caseCovered": 8,
+        "verified": 8
+      },
+      "CTX": {
+        "total": 7,
+        "designCovered": 7,
+        "caseCovered": 7,
+        "verified": 7
+      },
+      "DEMO": {
+        "total": 2,
+        "designCovered": 2,
+        "caseCovered": 2,
+        "verified": 2
+      },
+      "DIAG": {
+        "total": 11,
+        "designCovered": 11,
+        "caseCovered": 11,
+        "verified": 11
+      },
+      "INCR": {
+        "total": 1,
+        "designCovered": 1,
+        "caseCovered": 1,
+        "verified": 1
+      },
+      "MENU": {
+        "total": 1,
+        "designCovered": 1,
+        "caseCovered": 1,
+        "verified": 1
+      },
+      "PERF": {
+        "total": 2,
+        "designCovered": 2,
+        "caseCovered": 2,
+        "verified": 2
+      },
+      "PERSIST": {
+        "total": 1,
+        "designCovered": 1,
+        "caseCovered": 1,
+        "verified": 1
+      },
+      "PRIV": {
+        "total": 5,
+        "designCovered": 5,
+        "caseCovered": 5,
+        "verified": 5
+      },
+      "RANK": {
+        "total": 5,
+        "designCovered": 5,
+        "caseCovered": 5,
+        "verified": 5
+      },
+      "REC": {
+        "total": 8,
+        "designCovered": 8,
+        "caseCovered": 8,
+        "verified": 8
+      },
+      "RULE": {
+        "total": 10,
+        "designCovered": 10,
+        "caseCovered": 10,
+        "verified": 10
+      },
+      "SYNC": {
+        "total": 7,
+        "designCovered": 7,
+        "caseCovered": 7,
+        "verified": 7
+      }
+    },
+    "notVerified": []
+  },
+  "acceptance": {
+    "collected": true,
+    "total": 190,
+    "coverage": {
+      "num": 190,
+      "den": 190,
+      "value": 1
+    },
+    "verified": {
+      "num": 190,
+      "den": 190,
+      "value": 1
+    },
+    "uncovered": [],
+    "danglingRefs": []
+  },
+  "codePoints": {
+    "total": 118,
+    "caseCoverage": {
+      "num": 118,
+      "den": 118,
+      "value": 1
+    },
+    "verified": {
+      "num": 118,
+      "den": 118,
+      "value": 1
+    },
+    "annotated": {
+      "num": 118,
+      "den": 118,
+      "value": 1
+    },
+    "be": {
+      "total": 60,
+      "caseCoverage": {
+        "num": 60,
+        "den": 60,
+        "value": 1
+      },
+      "verified": {
+        "num": 60,
+        "den": 60,
+        "value": 1
+      },
+      "annotated": {
+        "num": 60,
+        "den": 60,
+        "value": 1
+      }
+    },
+    "fe": {
+      "total": 58,
+      "caseCoverage": {
+        "num": 58,
+        "den": 58,
+        "value": 1
+      },
+      "verified": {
+        "num": 58,
+        "den": 58,
+        "value": 1
+      },
+      "annotated": {
+        "num": 58,
+        "den": 58,
+        "value": 1
+      }
+    },
+    "notReferenced": [],
+    "notAnnotated": [],
+    "notVerified": [],
+    "unregisteredInSource": []
+  },
+  "cases": {
+    "total": 370,
+    "pass": 370,
+    "fail": 0,
+    "flaky": 0,
+    "notRun": 0,
+    "passRate": {
+      "num": 370,
+      "den": 370,
+      "value": 1
+    },
+    "p0PassRate": {
+      "num": 106,
+      "den": 106,
+      "value": 1
+    },
+    "statusSource": {
+      "validator": 370,
+      "runCases": 0,
+      "evidence": 0,
+      "none": 0
+    },
+    "byType": {
+      "API": {
+        "total": 219,
+        "pass": 219,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "E2E": {
+        "total": 8,
+        "pass": 8,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "UI": {
+        "total": 143,
+        "pass": 143,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      }
+    },
+    "byModule": {
+      "CACHE": {
+        "total": 7,
+        "pass": 7,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "CLEAN": {
+        "total": 41,
+        "pass": 41,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "CTX": {
+        "total": 21,
+        "pass": 21,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "DEMO": {
+        "total": 8,
+        "pass": 8,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "DIAG": {
+        "total": 43,
+        "pass": 43,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "FLOW": {
+        "total": 8,
+        "pass": 8,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "INCR": {
+        "total": 7,
+        "pass": 7,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "MENU": {
+        "total": 21,
+        "pass": 21,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "PERF": {
+        "total": 4,
+        "pass": 4,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "PERSIST": {
+        "total": 6,
+        "pass": 6,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "PRIV": {
+        "total": 27,
+        "pass": 27,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "RANK": {
+        "total": 33,
+        "pass": 33,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "REC": {
+        "total": 37,
+        "pass": 37,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "RULE": {
+        "total": 70,
+        "pass": 70,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "SYNC": {
+        "total": 37,
+        "pass": 37,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      }
+    },
+    "byPriority": {
+      "P0": {
+        "total": 106,
+        "pass": 106,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "P1": {
+        "total": 205,
+        "pass": 205,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "P2": {
+        "total": 59,
+        "pass": 59,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      }
+    },
+    "byCategory": {
+      "boundary": {
+        "total": 75,
+        "pass": 75,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "compatibility": {
+        "total": 1,
+        "pass": 1,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "exception": {
+        "total": 54,
+        "pass": 54,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "negative": {
+        "total": 66,
+        "pass": 66,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "performance": {
+        "total": 5,
+        "pass": 5,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "positive": {
+        "total": 140,
+        "pass": 140,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "security": {
+        "total": 5,
+        "pass": 5,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      },
+      "state": {
+        "total": 24,
+        "pass": 24,
+        "fail": 0,
+        "flaky": 0,
+        "not_run": 0
+      }
+    },
+    "open": []
+  },
+  "coverage": {
+    "collected": true,
+    "generatedAt": "2026-11-03T00:05:04.957Z",
+    "run": {
+      "total": 389,
+      "passed": 388,
+      "failed": 1,
+      "flaky": 0,
+      "skipped": 0
+    },
+    "be": {
+      "lines": {
+        "total": 3202,
+        "covered": 2960,
+        "pct": 92.44
+      },
+      "statements": {
+        "total": 3202,
+        "covered": 2960,
+        "pct": 92.44
+      },
+      "functions": {
+        "total": 233,
+        "covered": 212,
+        "pct": 90.98
+      },
+      "branches": {
+        "total": 1092,
+        "covered": 964,
+        "pct": 88.27
+      },
+      "lowFiles": [
+        {
+          "file": "server/src/store/snapshot-loader.js",
+          "lines": 0
+        },
+        {
+          "file": "server/src/store/snapshot-writer.js",
+          "lines": 41.02
+        }
+      ],
+      "files": 65
+    },
+    "fe": {
+      "lines": {
+        "total": 2441,
+        "covered": 2042,
+        "pct": 83.65
+      },
+      "statements": {
+        "total": 2951,
+        "covered": 2317,
+        "pct": 78.51
+      },
+      "functions": {
+        "total": 630,
+        "covered": 532,
+        "pct": 84.44
+      },
+      "branches": {
+        "total": 2323,
+        "covered": 1508,
+        "pct": 64.91
+      },
+      "lowFiles": [
+        {
+          "file": "extension/background/handlers/cleanup-actions.js",
+          "lines": 2.5
+        }
+      ],
+      "files": 63
+    },
+    "notes": [
+      "覆盖率采集运行中有 1 个测试失败，覆盖率可能偏低（失败用例没有执行完）"
+    ]
+  },
+  "assertions": {
+    "tagCoverage": {
+      "num": 1634,
+      "den": 1634,
+      "value": 1
+    },
+    "weakAssertions": 0,
+    "lintErrors": 0,
+    "lintWarnings": 0,
+    "lintErrorSamples": [],
+    "mutation": {
+      "collected": true,
+      "generatedAt": "2026-11-02T23:39:46.255Z",
+      "killRate": {
+        "num": 1136,
+        "den": 1323,
+        "value": 0.8587
+      },
+      "ops": [
+        "status",
+        "drop-item",
+        "reverse",
+        "num-shift",
+        "str-blank",
+        "drop-key"
+      ],
+      "survived": [
+        {
+          "caseId": "TC-API-CLEAN-002",
+          "ops": [
+            "str-blank"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-003",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-004",
+          "ops": [
+            "drop-item",
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-005",
+          "ops": [
+            "reverse",
+            "drop-key"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-008",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-009",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-010",
+          "ops": [
+            "str-blank"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-011",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-013",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-015",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-016",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-017",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-018",
+          "ops": [
+            "drop-item",
+            "str-blank"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-019",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-020",
+          "ops": [
+            "drop-item",
+            "str-blank"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-022",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-023",
+          "ops": [
+            "drop-item",
+            "reverse",
+            "str-blank"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-024",
+          "ops": [
+            "drop-item",
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-025",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-026",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-027",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-028",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-CLEAN-029",
+          "ops": [
+            "drop-item",
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-DEMO-001",
+          "ops": [
+            "num-shift"
+          ]
+        },
+        {
+          "caseId": "TC-API-DEMO-002",
+          "ops": [
+            "num-shift"
+          ]
+        },
+        {
+          "caseId": "TC-API-DEMO-004",
+          "ops": [
+            "str-blank",
+            "drop-key"
+          ]
+        },
+        {
+          "caseId": "TC-API-DEMO-005",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-DEMO-006",
+          "ops": [
+            "reverse",
+            "num-shift",
+            "drop-key"
+          ]
+        },
+        {
+          "caseId": "TC-API-DEMO-007",
+          "ops": [
+            "str-blank",
+            "drop-key"
+          ]
+        },
+        {
+          "caseId": "TC-API-DEMO-008",
+          "ops": [
+            "str-blank",
+            "drop-key"
+          ]
+        },
+        {
+          "caseId": "TC-API-DIAG-002",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-DIAG-004",
+          "ops": [
+            "drop-item",
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-DIAG-005",
+          "ops": [
+            "num-shift",
+            "str-blank",
+            "drop-key"
+          ]
+        },
+        {
+          "caseId": "TC-API-DIAG-007",
+          "ops": [
+            "num-shift",
+            "drop-key"
+          ]
+        },
+        {
+          "caseId": "TC-API-DIAG-009",
+          "ops": [
+            "drop-key"
+          ]
+        },
+        {
+          "caseId": "TC-API-DIAG-011",
+          "ops": [
+            "drop-item",
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-DIAG-012",
+          "ops": [
+            "drop-item",
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-DIAG-013",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-MENU-001",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-MENU-002",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-MENU-003",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-MENU-005",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-MENU-006",
+          "ops": [
+            "reverse",
+            "reverse",
+            "reverse",
+            "reverse",
+            "str-blank",
+            "str-blank",
+            "str-blank",
+            "str-blank"
+          ]
+        },
+        {
+          "caseId": "TC-API-MENU-007",
+          "ops": [
+            "reverse",
+            "reverse",
+            "reverse",
+            "reverse",
+            "reverse",
+            "reverse",
+            "reverse",
+            "reverse",
+            "reverse",
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-MENU-008",
+          "ops": [
+            "reverse",
+            "reverse",
+            "reverse",
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-MENU-009",
+          "ops": [
+            "reverse",
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-MENU-010",
+          "ops": [
+            "reverse",
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-MENU-011",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-PERF-001",
+          "ops": [
+            "drop-item",
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-PERF-002",
+          "ops": [
+            "reverse",
+            "str-blank"
+          ]
+        },
+        {
+          "caseId": "TC-API-PERF-004",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-PERSIST-001",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-PERSIST-005",
+          "ops": [
+            "str-blank",
+            "drop-key"
+          ]
+        },
+        {
+          "caseId": "TC-API-PERSIST-006",
+          "ops": [
+            "drop-key"
+          ]
+        },
+        {
+          "caseId": "TC-API-PRIV-001",
+          "ops": [
+            "str-blank"
+          ]
+        },
+        {
+          "caseId": "TC-API-PRIV-002",
+          "ops": [
+            "str-blank",
+            "drop-key"
+          ]
+        },
+        {
+          "caseId": "TC-API-PRIV-005",
+          "ops": [
+            "str-blank"
+          ]
+        },
+        {
+          "caseId": "TC-API-PRIV-006",
+          "ops": [
+            "drop-item",
+            "reverse",
+            "str-blank",
+            "drop-key"
+          ]
+        },
+        {
+          "caseId": "TC-API-PRIV-008",
+          "ops": [
+            "drop-item",
+            "str-blank"
+          ]
+        },
+        {
+          "caseId": "TC-API-PRIV-011",
+          "ops": [
+            "num-shift"
+          ]
+        },
+        {
+          "caseId": "TC-API-PRIV-014",
+          "ops": [
+            "drop-item",
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-PRIV-015",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-RANK-005",
+          "ops": [
+            "str-blank"
+          ]
+        },
+        {
+          "caseId": "TC-API-RANK-006",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-RANK-007",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-RANK-008",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-RANK-010",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-RANK-011",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-RANK-012",
+          "ops": [
+            "drop-item",
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-RANK-013",
+          "ops": [
+            "reverse",
+            "str-blank"
+          ]
+        },
+        {
+          "caseId": "TC-API-RANK-016",
+          "ops": [
+            "status",
+            "reverse",
+            "num-shift"
+          ]
+        },
+        {
+          "caseId": "TC-API-RANK-017",
+          "ops": [
+            "status",
+            "drop-item",
+            "reverse",
+            "num-shift"
+          ]
+        },
+        {
+          "caseId": "TC-API-RANK-018",
+          "ops": [
+            "status",
+            "reverse",
+            "num-shift"
+          ]
+        },
+        {
+          "caseId": "TC-API-RANK-019",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-RANK-020",
+          "ops": [
+            "status",
+            "reverse",
+            "num-shift"
+          ]
+        },
+        {
+          "caseId": "TC-API-RANK-022",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-RANK-024",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-REC-009",
+          "ops": [
+            "str-blank"
+          ]
+        },
+        {
+          "caseId": "TC-API-REC-011",
+          "ops": [
+            "str-blank"
+          ]
+        },
+        {
+          "caseId": "TC-API-REC-012",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-REC-013",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-REC-014",
+          "ops": [
+            "drop-item",
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-REC-022",
+          "ops": [
+            "drop-item",
+            "reverse",
+            "str-blank"
+          ]
+        },
+        {
+          "caseId": "TC-API-REC-025",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-REC-031",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-002",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-012",
+          "ops": [
+            "num-shift"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-013",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-014",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-018",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-019",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-020",
+          "ops": [
+            "drop-item"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-021",
+          "ops": [
+            "drop-item"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-022",
+          "ops": [
+            "drop-item"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-023",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-025",
+          "ops": [
+            "drop-item"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-027",
+          "ops": [
+            "drop-item"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-028",
+          "ops": [
+            "drop-item"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-029",
+          "ops": [
+            "drop-item",
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-030",
+          "ops": [
+            "drop-item"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-032",
+          "ops": [
+            "str-blank"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-033",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-034",
+          "ops": [
+            "drop-item"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-037",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-038",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-039",
+          "ops": [
+            "drop-item"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-042",
+          "ops": [
+            "str-blank"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-043",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-RULE-045",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-SYNC-002",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-SYNC-003",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-SYNC-005",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-SYNC-007",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-SYNC-009",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-SYNC-011",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-SYNC-012",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-SYNC-013",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-SYNC-014",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-SYNC-015",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-SYNC-016",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-SYNC-018",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-SYNC-019",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-SYNC-021",
+          "ops": [
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-SYNC-024",
+          "ops": [
+            "drop-item",
+            "reverse"
+          ]
+        },
+        {
+          "caseId": "TC-API-SYNC-027",
+          "ops": [
+            "drop-item"
+          ]
+        },
+        {
+          "caseId": "TC-API-SYNC-028",
+          "ops": [
+            "reverse"
+          ]
+        }
+      ],
+      "waived": [],
+      "baselineFailed": [
+        "TC-API-PERF-001",
+        "TC-API-PERF-002",
+        "TC-API-SYNC-001",
+        "TC-API-SYNC-025"
+      ]
+    }
+  },
+  "evidence": {
+    "executed": 370,
+    "completeness": {
+      "num": 370,
+      "den": 370,
+      "value": 1
+    },
+    "incomplete": [],
+    "unregisteredDirs": []
+  },
+  "process": {
+    "tddIterations": 8,
+    "gates": [
+      {
+        "iter": 1,
+        "pass": false,
+        "total": 389,
+        "passed": 57,
+        "failed": 332,
+        "errors": 64
+      },
+      {
+        "iter": 2,
+        "pass": false,
+        "total": 389,
+        "passed": 120,
+        "failed": 269,
+        "errors": 45
+      },
+      {
+        "iter": 3,
+        "pass": false,
+        "total": 389,
+        "passed": 120,
+        "failed": 269,
+        "errors": 45
+      },
+      {
+        "iter": 4,
+        "pass": false,
+        "total": 389,
+        "passed": 314,
+        "failed": 75,
+        "errors": 32
+      },
+      {
+        "iter": 5,
+        "pass": false,
+        "total": 389,
+        "passed": 318,
+        "failed": 71,
+        "errors": 32
+      },
+      {
+        "iter": 6,
+        "pass": true,
+        "total": 389,
+        "passed": 389,
+        "failed": 0,
+        "errors": 0
+      },
+      {
+        "iter": 7,
+        "pass": true,
+        "total": 389,
+        "passed": 389,
+        "failed": 0,
+        "errors": 0
+      },
+      {
+        "iter": 8,
+        "pass": true,
+        "total": 389,
+        "passed": 389,
+        "failed": 0,
+        "errors": 0
+      }
+    ],
+    "explore": {
+      "pass": 143,
+      "product_bug": 0,
+      "script_stale": 0,
+      "missing": 0
+    },
+    "openProductBugs": [],
+    "validatorFinal": {
+      "pass": true,
+      "errors": 0
+    }
+  },
+  "spec": {
+    "be": {
+      "collected": true,
+      "pass": true,
+      "errors": 0,
+      "warnings": 0
+    },
+    "fe": {
+      "collected": true,
+      "pass": true,
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "performance": [
+    {
+      "caseId": "TC-API-DIAG-009",
+      "name": "health.maxMs",
+      "value": 1,
+      "unit": "ms"
+    },
+    {
+      "caseId": "TC-API-PERF-001",
+      "name": "recommendations.p50",
+      "value": 0.6,
+      "unit": "ms"
+    },
+    {
+      "caseId": "TC-API-PERF-001",
+      "name": "recommendations.p95",
+      "value": 1.8,
+      "unit": "ms"
+    },
+    {
+      "caseId": "TC-API-PERF-001",
+      "name": "recommendations.max",
+      "value": 1.8,
+      "unit": "ms"
+    },
+    {
+      "caseId": "TC-API-PERF-002",
+      "name": "ranked.p50",
+      "value": 0.7,
+      "unit": "ms"
+    },
+    {
+      "caseId": "TC-API-PERF-002",
+      "name": "ranked.p95",
+      "value": 1.2,
+      "unit": "ms"
+    },
+    {
+      "caseId": "TC-API-PERF-002",
+      "name": "ranked.max",
+      "value": 1.4,
+      "unit": "ms"
+    },
+    {
+      "caseId": "TC-API-PERSIST-005",
+      "name": "sigterm.afterSyncStarted",
+      "value": 105.63037500000064,
+      "unit": "ms"
+    }
+  ],
+  "sources": {
+    "docs/trace/features.json": {
+      "exists": true,
+      "mtime": "2026-11-02T10:53:22.517Z"
+    },
+    "docs/trace/requirements.json": {
+      "exists": true,
+      "mtime": "2026-11-02T09:04:03.114Z"
+    },
+    "docs/trace/code-points-be.json": {
+      "exists": true,
+      "mtime": "2026-11-02T14:28:19.516Z"
+    },
+    "docs/trace/code-points-fe.json": {
+      "exists": true,
+      "mtime": "2026-11-02T22:05:58.889Z"
+    },
+    "docs/trace/cases-api.json": {
+      "exists": true,
+      "mtime": "2026-11-02T23:50:07.042Z"
+    },
+    "docs/trace/cases-ui.json": {
+      "exists": true,
+      "mtime": "2026-11-02T23:50:07.043Z"
+    },
+    ".workflow/reports/case-status.json": {
+      "exists": true,
+      "mtime": "2026-11-02T23:53:50.280Z"
+    },
+    "evidence/_runs/latest.json": {
+      "exists": true,
+      "mtime": "2026-11-02T23:39:47.133Z"
+    },
+    "coverage/summary.json": {
+      "exists": true,
+      "mtime": "2026-11-03T00:05:04.958Z"
+    },
+    "evidence/_runs/mutation-latest.json": {
+      "exists": true,
+      "mtime": "2026-11-02T23:39:46.256Z"
+    },
+    ".workflow/reports/validate-final.json": {
+      "exists": true,
+      "mtime": "2026-11-02T23:53:50.318Z"
+    },
+    "docs/quality/spec-check-be.json": {
+      "exists": true,
+      "mtime": "2026-11-02T23:50:09.861Z"
+    },
+    "docs/quality/spec-check-fe.json": {
+      "exists": true,
+      "mtime": "2026-11-02T23:50:09.862Z"
+    },
+    "docs/quality/exit-criteria.json": {
+      "exists": false,
+      "mtime": null
+    },
+    "evidence/index.json": {
+      "exists": true,
+      "mtime": "2026-11-03T00:06:33.965Z"
+    }
+  },
+  "exit": {
+    "verdict": "准出",
+    "criteria": [
+      {
+        "id": "H1",
+        "kind": "hard",
+        "name": "P0 Feature 验证率",
+        "threshold": 1,
+        "thresholdDisplay": "= 100%",
+        "actual": 1,
+        "display": "100.0%（57/57）",
+        "met": true,
+        "note": ""
+      },
+      {
+        "id": "H2",
+        "kind": "hard",
+        "name": "mandatory 需求点覆盖率",
+        "threshold": 1,
+        "thresholdDisplay": "= 100%",
+        "actual": 1,
+        "display": "100.0%（96/96）",
+        "met": true,
+        "note": ""
+      },
+      {
+        "id": "H3",
+        "kind": "hard",
+        "name": "P0 用例通过率",
+        "threshold": 1,
+        "thresholdDisplay": "= 100%",
+        "actual": 1,
+        "display": "100.0%（106/106）",
+        "met": true,
+        "note": ""
+      },
+      {
+        "id": "H4",
+        "kind": "hard",
+        "name": "整体用例通过率",
+        "threshold": 0.95,
+        "thresholdDisplay": "≥ 95%",
+        "actual": 1,
+        "display": "100.0%（370/370）",
+        "met": true,
+        "note": ""
+      },
+      {
+        "id": "H5",
+        "kind": "hard",
+        "name": "Code ID 用例覆盖率",
+        "threshold": 1,
+        "thresholdDisplay": "= 100%",
+        "actual": 1,
+        "display": "100.0%（118/118）",
+        "met": true,
+        "note": ""
+      },
+      {
+        "id": "H6",
+        "kind": "hard",
+        "name": "@code 标注率",
+        "threshold": 1,
+        "thresholdDisplay": "= 100%",
+        "actual": 1,
+        "display": "100.0%（118/118）",
+        "met": true,
+        "note": ""
+      },
+      {
+        "id": "H7",
+        "kind": "hard",
+        "name": "证据完整率",
+        "threshold": 1,
+        "thresholdDisplay": "= 100%",
+        "actual": 1,
+        "display": "100.0%（370/370）",
+        "met": true,
+        "note": ""
+      },
+      {
+        "id": "T1",
+        "kind": "target",
+        "name": "后端行覆盖率",
+        "threshold": 0.8,
+        "thresholdDisplay": "≥ 80%",
+        "actual": 0.9244,
+        "display": "92.4%（2960/3202）",
+        "met": true,
+        "note": ""
+      },
+      {
+        "id": "T2",
+        "kind": "target",
+        "name": "后端分支覆盖率",
+        "threshold": 0.65,
+        "thresholdDisplay": "≥ 65%",
+        "actual": 0.8826999999999999,
+        "display": "88.3%（964/1092）",
+        "met": true,
+        "note": ""
+      },
+      {
+        "id": "T3",
+        "kind": "target",
+        "name": "前端行覆盖率",
+        "threshold": 0.6,
+        "thresholdDisplay": "≥ 60%",
+        "actual": 0.8365,
+        "display": "83.7%（2042/2441）",
+        "met": true,
+        "note": ""
+      },
+      {
+        "id": "T4",
+        "kind": "target",
+        "name": "变异杀死率（API / E2E）",
+        "threshold": 0.8,
+        "thresholdDisplay": "≥ 80%",
+        "actual": 0.8587,
+        "display": "85.9%（1136/1323）",
+        "met": true,
+        "note": ""
+      },
+      {
+        "id": "T5",
+        "kind": "target",
+        "name": "[En] 断言标签覆盖率",
+        "threshold": 1,
+        "thresholdDisplay": "= 100%",
+        "actual": 1,
+        "display": "100.0%（1634/1634）",
+        "met": true,
+        "note": ""
+      },
+      {
+        "id": "T6",
+        "kind": "target",
+        "name": "spec-check error 数（BE + FE）",
+        "threshold": 0,
+        "thresholdDisplay": "≤ 0",
+        "actual": 0,
+        "display": "0",
+        "met": true,
+        "note": ""
+      }
+    ],
+    "hardFailed": [],
+    "targetFailed": [],
+    "overridden": []
+  }
+}

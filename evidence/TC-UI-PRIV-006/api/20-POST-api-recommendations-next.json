@@ -1,0 +1,34 @@
+{
+  "reqId": "TC-UI-PRIV-006-sw-18",
+  "observed": true,
+  "setup": false,
+  "method": "POST",
+  "url": "http://127.0.0.1:9/api/recommendations/next",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762944760_18"
+  },
+  "requestBody": {
+    "currentPage": {
+      "url": "https://example.com/docs",
+      "title": "合成测试页 2"
+    },
+    "openTabs": [
+      {
+        "url": "https://example.com/docs",
+        "title": "合成测试页 2"
+      }
+    ],
+    "recentHistory": []
+  },
+  "status": null,
+  "responseHeaders": {},
+  "responseBody": {
+    "networkError": "net::ERR_UNSAFE_PORT"
+  },
+  "ms": 0
+}

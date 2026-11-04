@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-UI-DIAG-026",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:31.088Z",
+  "tests": [
+    {
+      "testId": "3af127adbdf7796d8498-c0f036c06d004dd7c972",
+      "title": "TC-UI-DIAG-026 从首页诊断入口进入诊断页签后「重新检测」：11 项重新执行、检测时间更新",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-DIAG-026.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 2040,
+      "startedAt": "2026-11-04T03:28:29.048Z",
+      "endedAt": "2026-11-04T03:28:31.088Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [
+        "evidence/TC-UI-DIAG-026/screenshots/01-S1-首次诊断.png",
+        "evidence/TC-UI-DIAG-026/screenshots/02-S3-重新检测后.png"
+      ],
+      "serverLogLines": 18,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1083,
+          "after": 1083
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 2,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [
+          "enablePrivacyFilter"
+        ],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

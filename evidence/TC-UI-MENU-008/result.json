@@ -1,0 +1,60 @@
+{
+  "caseId": "TC-UI-MENU-008",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:54.267Z",
+  "tests": [
+    {
+      "testId": "efe8517d686f05fbe9fb-33a94f711382967c4969",
+      "title": "TC-UI-MENU-008 已标记页面再次点击星标取消重要且重载保持未标记",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-MENU-008.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1370,
+      "startedAt": "2026-11-04T03:28:52.897Z",
+      "endedAt": "2026-11-04T03:28:54.267Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [
+        "evidence/TC-UI-MENU-008/screenshots/01-已标记.png",
+        "evidence/TC-UI-MENU-008/screenshots/02-已取消.png",
+        "evidence/TC-UI-MENU-008/screenshots/03-reload后.png"
+      ],
+      "serverLogLines": 31,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1119,
+          "after": 1121
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "toggle 观察到的写请求：[{\"sequence\":1,\"phase\":\"toggle\",\"method\":\"POST\",\"url\":\"http://127.0.0.1:4300/api/pages/important\",\"origin\":\"http://127.0.0.1:4300\",\"path\":\"/api/pages/important\",\"fromServiceWorker\":true,\"startedAt\":1793762933607,\"transport\":\"finished\",\"status\":200,\"failure\":null,\"endedAt\":1793762933609,\"persisted\":true}]",
+        "toggle 观察到的写请求：[{\"sequence\":1,\"phase\":\"toggle\",\"method\":\"POST\",\"url\":\"http://127.0.0.1:4300/api/pages/important\",\"origin\":\"http://127.0.0.1:4300\",\"path\":\"/api/pages/important\",\"fromServiceWorker\":true,\"startedAt\":1793762933607,\"transport\":\"finished\",\"status\":200,\"failure\":null,\"endedAt\":1793762933609,\"persisted\":true},{\"sequence\":2,\"phase\":\"toggle\",\"method\":\"POST\",\"url\":\"http://127.0.0.1:4300/api/pages/important\",\"origin\":\"http://127.0.0.1:4300\",\"path\":\"/api/pages/important\",\"fromServiceWorker\":true,\"startedAt\":1793762933784,\"transport\":\"finished\",\"status\":200,\"failure\":null,\"endedAt\":1793762933785,\"persisted\":true}]"
+      ]
+    }
+  ]
+}

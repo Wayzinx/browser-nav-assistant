@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-SYNC-026",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:06.656Z",
+  "tests": [
+    {
+      "testId": "5b674c82e18d6f498ad0-0c06419ae716db2c6cf1",
+      "title": "TC-API-SYNC-026 未来十分钟历史按服务器同步时间截断",
+      "project": "api",
+      "file": "tests/api/TC-API-SYNC-026.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 24,
+      "startedAt": "2026-11-04T03:27:06.632Z",
+      "endedAt": "2026-11-04T03:27:06.656Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 8,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 916,
+          "after": 918
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "reqId": "TC-API-REC-011-03",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/recommendations/next",
+  "params": {
+    "now": 1793762824007
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-REC-011-03"
+  },
+  "requestBody": {
+    "currentPage": null,
+    "openTabs": [
+      {
+        "url": "https://github.com/org/repo/pull/456"
+      },
+      {
+        "url": "https://github.com/org/repo/issues/123"
+      },
+      {
+        "url": "https://github.com/org/repo/actions"
+      },
+      {
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"
+      },
+      {
+        "url": "https://docs.internal.com/ai-agent-design"
+      },
+      {
+        "url": "https://github.com/org/repo/issues/100"
+      },
+      {
+        "url": "https://www.google.com/search?q=chrome+extension+manifest+v3"
+      },
+      {
+        "url": "https://github.com/org/repo/issues/123?tab=comments"
+      },
+      {
+        "url": "https://react.dev/reference/react/useState"
+      },
+      {
+        "url": "https://react.dev/learn"
+      }
+    ],
+    "recentHistory": []
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-REC-011-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "65",
+    "date": "Wed, 04 Nov 2026 03:27:04 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "recommendations": [],
+    "cached": false,
+    "generatedAt": 1793762824007
+  },
+  "ms": 1.2,
+  "mutated": null
+}

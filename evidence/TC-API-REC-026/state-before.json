@@ -1,0 +1,95 @@
+{
+  "dataVersion": 725,
+  "versions": {
+    "data": 725,
+    "rule": 210,
+    "config": 186
+  },
+  "counts": {
+    "pages": 1,
+    "rules": 1,
+    "openPages": 0,
+    "archivedPages": 0,
+    "syncLogs": 1
+  },
+  "pagesTruncated": false,
+  "pagesHash": "5a245698e07bc8b666443a350c1e5e9f68f9a1073c45a6b5a6c4aa5778c39284",
+  "pages": [
+    {
+      "id": "page_1",
+      "url": "https://react.dev/learn",
+      "normalizedUrl": "https://react.dev/learn",
+      "domain": "react.dev",
+      "title": "React Learn",
+      "visitCount": 1,
+      "lastVisitedAt": 1793676424361,
+      "firstSeenAt": 1793676424361,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    }
+  ],
+  "rules": [
+    {
+      "domain": null,
+      "urlPattern": null,
+      "inactiveDays": null,
+      "enabled": true,
+      "confidence": "high",
+      "createdAt": 1793762824364,
+      "updatedAt": 1793762824364,
+      "rawText": "如果我连续看了 3 个 React 文档，推荐相关 MDN 页面",
+      "type": "recommend_related",
+      "trigger": {
+        "domain": "react.dev",
+        "minCount": 3,
+        "label": "React"
+      },
+      "target": {
+        "domain": "developer.mozilla.org",
+        "label": "MDN"
+      },
+      "action": "recommend",
+      "id": "rule_1"
+    }
+  ],
+  "config": {
+    "cleanupThresholdDays": 14,
+    "maxHistoryItems": 100,
+    "historyLookbackDays": 30,
+    "enablePrivacyFilter": true,
+    "privacySensitiveKeywords": [
+      "password",
+      "token",
+      "bank",
+      "secret"
+    ]
+  },
+  "sequences": {
+    "page": 1,
+    "rule": 1,
+    "sync": 1
+  },
+  "lastSync": {
+    "id": "sync_1",
+    "syncedAt": 1793762824362,
+    "mode": "full",
+    "received": 1,
+    "created": 1,
+    "updated": 0,
+    "rejected": 0,
+    "durationMs": 0.05133400000340771,
+    "ok": true,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 0
+    }
+  },
+  "persist": null
+}

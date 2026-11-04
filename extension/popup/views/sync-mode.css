@@ -1,0 +1,15 @@
+/* @code C-FE-INCR-02 */
+[data-slot='sync-mode'] .sync-mode {
+  display: grid;
+  gap: 4px;
+  justify-items: end;
+}
+
+[data-slot='sync-mode'] [data-testid='sync-full-button'] {
+  white-space: nowrap;
+}
+
+[data-slot='sync-mode'] .sync-mode-label {
+  margin: 0;
+  white-space: nowrap;
+}

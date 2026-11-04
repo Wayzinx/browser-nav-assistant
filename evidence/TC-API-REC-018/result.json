@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-API-REC-018",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:04.184Z",
+  "tests": [
+    {
+      "testId": "9f90a45cbd126f863a74-16b8b65c138a403f022c",
+      "title": "TC-API-REC-018 当前普通站点与全部历史域名不同则不触发 same_domain",
+      "project": "api",
+      "file": "tests/api/TC-API-REC-018.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 13,
+      "startedAt": "2026-11-04T03:27:04.171Z",
+      "endedAt": "2026-11-04T03:27:04.184Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 709,
+          "after": 711
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 2
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "{\"T\":1793762824177,\"N\":1793762824177}"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "caseId": "TC-UI-DIAG-026",
+  "verdict": "pass",
+  "observed": "首页 home-diag-entry 可见「启动诊断 · 尚未检测 ›」，点击进入诊断：T1 有效、privacy=ok、rule value「1」；改配置/加规则/写失败 syncState 后点击重新检测：T2>T1，lastDiagnostics.checkedAt=T2、items=11；privacy ok→warn，last-sync=fail 含「诊断重检输入已变化」，rule-count=warn「规则数不一致」value「2」，cache 读回 2；本轮 SW 发出 GET /api/health、/api/config、/api/rules，API Base URL 仍为测试后端。E1–E3、E5 已在 UI 上确认；E4（插桩函数计数增量）由 spec 的 Istanbul 插桩副本验证，本轮 spec 通过。",
+  "steps": [
+    "PORT=4183 启动后端（ENABLE_TEST_API=1），每条前 POST /api/__test__/reset",
+    "headless chromium（channel=chromium）加载 extension/（DIAG-010/012 为删权限临时副本），apiBaseUrl 指向 http://127.0.0.1:4183，只 route 外部站点",
+    "S1 首页入口（截图 evidence/TC-UI-DIAG-026/explore/1.png）",
+    "S1 首轮（截图 evidence/TC-UI-DIAG-026/explore/2.png）",
+    "S3 重新检测（截图 evidence/TC-UI-DIAG-026/explore/3.png）",
+    "探索脚本：tests/explore/tmp/x4183-diag.mjs；观测数据与 aria 快照：tests/explore/tmp/x4183-diag.out.json",
+    "TEST_PORT=4183 npx playwright test tests/ui/TC-UI-DIAG-026.spec.mjs 通过（2026-11-03 07:27 续跑：产品代码与 UI-DIAG/RULE 用例分片未变；探索脚本 52/52 ok，观测与 aria 快照除数字/时间外与上轮完全一致；TEST_PORT=4183 隔离 --output 批量 52 passed）"
+  ],
+  "screenshots": [
+    "evidence/TC-UI-DIAG-026/explore/1.png",
+    "evidence/TC-UI-DIAG-026/explore/2.png",
+    "evidence/TC-UI-DIAG-026/explore/3.png"
+  ],
+  "spec": "tests/ui/TC-UI-DIAG-026.spec.mjs",
+  "solidified": true
+}

@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-API-REC-026",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:04.401Z",
+  "tests": [
+    {
+      "testId": "40fbf57cde71a8f80316-659cff6d72f0863460fa",
+      "title": "TC-API-REC-026 缺少 currentPage 或字段类型非法返回400且不改写数据",
+      "project": "api",
+      "file": "tests/api/TC-API-REC-026.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 23,
+      "startedAt": "2026-11-04T03:27:04.378Z",
+      "endedAt": "2026-11-04T03:27:04.401Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 725,
+          "after": 727
+        },
+        "pages": {
+          "added": 9,
+          "removed": 0,
+          "changed": 1
+        },
+        "rules": {
+          "added": 0,
+          "removed": 1,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 9,
+          "rules": -1,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "{\"T\":1793762824385,\"N\":1793762824386}"
+      ]
+    }
+  ]
+}

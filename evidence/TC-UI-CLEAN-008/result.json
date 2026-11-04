@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-UI-CLEAN-008",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:34.583Z",
+  "tests": [
+    {
+      "testId": "91802eb4b5d217699218-d2923b30489a244f9243",
+      "title": "TC-UI-CLEAN-008 渲染后的归档建议在后端reset后失效：404提示刷新且无副作用",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CLEAN-008.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1240,
+      "startedAt": "2026-11-04T03:27:33.343Z",
+      "endedAt": "2026-11-04T03:27:34.583Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 20,
+      "screenshots": [
+        "evidence/TC-UI-CLEAN-008/screenshots/01-旧归档卡片.png",
+        "evidence/TC-UI-CLEAN-008/screenshots/02-归档失效错误.png"
+      ],
+      "serverLogLines": 23,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1006,
+          "after": 1010
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 3,
+      "notes": [
+        "{\"phase\":\"失效归档后\",\"storage\":{}}"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-UI-CLEAN-012",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:39.912Z",
+  "tests": [
+    {
+      "testId": "bcd9fed275c6f5a69e2c-f56c9cbdffd8c93026f9",
+      "title": "TC-UI-CLEAN-012 点击全部归档：只提交归档组两个URL，重复和保留页面仍存在",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CLEAN-012.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1212,
+      "startedAt": "2026-11-04T03:27:38.700Z",
+      "endedAt": "2026-11-04T03:27:39.912Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 22,
+      "screenshots": [
+        "evidence/TC-UI-CLEAN-012/screenshots/01-全部归档前.png",
+        "evidence/TC-UI-CLEAN-012/screenshots/02-全部归档后.png"
+      ],
+      "serverLogLines": 25,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1025,
+          "after": 1029
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 2,
+      "notes": [
+        "{\"savedRules\":[{\"domain\":\"github.com\",\"urlPattern\":\"/issues/\",\"inactiveDays\":7,\"enabled\":true,\"confidence\":\"high\",\"createdAt\":1793762859191,\"updatedAt\":1793762859191,\"rawText\":\"把 7 天没访问过的 GitHub issue 建议归档\",\"type\":\"archive_candidate\",\"action\":\"suggest_archive\",\"id\":\"rule_1\"},{\"domain\":\"docs.internal.com\",\"urlPattern\":null,\"inactiveDays\":null,\"enabled\":true,\"confidence\":\"high\",\"createdAt\":1793762859191,\"updatedAt\":1793762859191,\"rawText\":\"docs.internal.com 的页面永远不要归档\",\"type\":\"never_archive\",\"action\":\"keep\",\"id\":\"rule_2\"}]}"
+      ]
+    }
+  ]
+}

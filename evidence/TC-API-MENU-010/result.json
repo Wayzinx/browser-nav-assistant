@@ -1,0 +1,98 @@
+{
+  "caseId": "TC-API-MENU-010",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:49.444Z",
+  "tests": [
+    {
+      "testId": "8e91a0110f3008ae5367-af0402413a8aa7d57dc7",
+      "title": "TC-API-MENU-010 /api/pages/manual text/plain 返回 415 且不写入页面",
+      "project": "api",
+      "file": "tests/api/TC-API-MENU-010.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 35,
+      "startedAt": "2026-11-04T03:25:49.378Z",
+      "endedAt": "2026-11-04T03:25:49.413Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 164,
+          "after": 166
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    },
+    {
+      "testId": "8e91a0110f3008ae5367-7fd2123d49db650917a1",
+      "title": "TC-API-MENU-010 /api/pages/important text/plain 返回 415 且不写入页面",
+      "project": "api",
+      "file": "tests/api/TC-API-MENU-010.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 26,
+      "startedAt": "2026-11-04T03:25:49.418Z",
+      "endedAt": "2026-11-04T03:25:49.444Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 166,
+          "after": 168
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

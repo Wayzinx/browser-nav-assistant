@@ -1,0 +1,72 @@
+{
+  "dataVersion": 118,
+  "versions": {
+    "data": 118,
+    "rule": 80,
+    "config": 65
+  },
+  "counts": {
+    "pages": 1,
+    "rules": 0,
+    "openPages": 0,
+    "archivedPages": 0,
+    "syncLogs": 1
+  },
+  "pagesTruncated": false,
+  "pagesHash": "c9fbbdd7ce5617e65b89a9e83c600ba50de89cf4703d0f363b4a730dd504c4fa",
+  "pages": [
+    {
+      "id": "page_1",
+      "url": "https://example.com/important-note",
+      "normalizedUrl": "https://example.com/important-note",
+      "domain": "example.com",
+      "title": "https://example.com/important-note",
+      "visitCount": 1,
+      "lastVisitedAt": 1793762748667,
+      "firstSeenAt": 1793762748667,
+      "sources": [
+        "manual"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": true
+    }
+  ],
+  "rules": [],
+  "config": {
+    "cleanupThresholdDays": 14,
+    "maxHistoryItems": 100,
+    "historyLookbackDays": 30,
+    "enablePrivacyFilter": true,
+    "privacySensitiveKeywords": [
+      "password",
+      "token",
+      "bank",
+      "secret"
+    ]
+  },
+  "sequences": {
+    "page": 1,
+    "rule": 0,
+    "sync": 1
+  },
+  "lastSync": {
+    "id": "sync_1",
+    "syncedAt": 1793762748664,
+    "mode": "full",
+    "received": 0,
+    "created": 0,
+    "updated": 0,
+    "rejected": 0,
+    "durationMs": 0.018082999999933236,
+    "ok": true,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 0
+    }
+  },
+  "persist": null
+}

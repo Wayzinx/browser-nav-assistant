@@ -1,0 +1,86 @@
+{
+  "dataVersion": 28,
+  "versions": {
+    "data": 28,
+    "rule": 18,
+    "config": 14
+  },
+  "counts": {
+    "pages": 1,
+    "rules": 1,
+    "openPages": 0,
+    "archivedPages": 0,
+    "syncLogs": 1
+  },
+  "pagesTruncated": false,
+  "pagesHash": "153495521b2c656a4c2bf82d9beb6d4a3c786eba3216a73c02f2add64652f460",
+  "pages": [
+    {
+      "id": "page_1",
+      "url": "https://docs.internal.com/old",
+      "normalizedUrl": "https://docs.internal.com/old",
+      "domain": "docs.internal.com",
+      "title": "https://docs.internal.com/old",
+      "visitCount": 1,
+      "lastVisitedAt": 1791170744415,
+      "firstSeenAt": 1791170744415,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    }
+  ],
+  "rules": [
+    {
+      "domain": "docs.internal.com",
+      "urlPattern": null,
+      "inactiveDays": null,
+      "enabled": false,
+      "confidence": "high",
+      "createdAt": 1793762744420,
+      "updatedAt": 1793762744420,
+      "rawText": "docs.internal.com 的页面永远不要归档",
+      "type": "never_archive",
+      "action": "keep",
+      "id": "rule_1"
+    }
+  ],
+  "config": {
+    "cleanupThresholdDays": 14,
+    "maxHistoryItems": 100,
+    "historyLookbackDays": 30,
+    "enablePrivacyFilter": true,
+    "privacySensitiveKeywords": [
+      "password",
+      "token",
+      "bank",
+      "secret"
+    ]
+  },
+  "sequences": {
+    "page": 1,
+    "rule": 1,
+    "sync": 1
+  },
+  "lastSync": {
+    "id": "sync_1",
+    "syncedAt": 1793762744416,
+    "mode": "full",
+    "received": 1,
+    "created": 1,
+    "updated": 0,
+    "rejected": 0,
+    "durationMs": 0.15016700000023775,
+    "ok": true,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 0
+    }
+  },
+  "persist": null
+}

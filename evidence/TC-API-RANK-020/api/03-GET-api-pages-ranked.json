@@ -1,0 +1,161 @@
+{
+  "reqId": "TC-API-RANK-020-03",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/ranked",
+  "params": {
+    "limit": 500,
+    "now": 1793762823653
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-RANK-020-03"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RANK-020-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "2227",
+    "date": "Wed, 04 Nov 2026 03:27:03 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "pages": [
+      {
+        "id": "page_1",
+        "url": "https://example.com/p0",
+        "normalizedUrl": "https://example.com/p0",
+        "title": "p0",
+        "domain": "example.com",
+        "visitCount": 1,
+        "lastVisitedAt": 1793690823653,
+        "firstSeenAt": 1793690823653,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.77,
+        "scoreDetail": {
+          "recency": 0.92,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "今天访问过，常用域名 example.com"
+      },
+      {
+        "id": "page_2",
+        "url": "https://example.com/p1",
+        "normalizedUrl": "https://example.com/p1",
+        "title": "p1",
+        "domain": "example.com",
+        "visitCount": 1,
+        "lastVisitedAt": 1793590023653,
+        "firstSeenAt": 1793590023653,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.73,
+        "scoreDetail": {
+          "recency": 0.82,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "最近 3 天内访问，常用域名 example.com"
+      },
+      {
+        "id": "page_3",
+        "url": "https://example.com/p2",
+        "normalizedUrl": "https://example.com/p2",
+        "title": "p2",
+        "domain": "example.com",
+        "visitCount": 1,
+        "lastVisitedAt": 1793500023653,
+        "firstSeenAt": 1793500023653,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.7,
+        "scoreDetail": {
+          "recency": 0.74,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "3 天前访问，常用域名 example.com"
+      },
+      {
+        "id": "page_4",
+        "url": "https://example.com/p3",
+        "normalizedUrl": "https://example.com/p3",
+        "title": "p3",
+        "domain": "example.com",
+        "visitCount": 1,
+        "lastVisitedAt": 1792639623653,
+        "firstSeenAt": 1792639623653,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.51,
+        "scoreDetail": {
+          "recency": 0.28,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "13 天前访问，常用域名 example.com"
+      },
+      {
+        "id": "page_5",
+        "url": "https://example.com/p4",
+        "normalizedUrl": "https://example.com/p4",
+        "title": "p4",
+        "domain": "example.com",
+        "visitCount": 1,
+        "lastVisitedAt": 1792553223653,
+        "firstSeenAt": 1792553223653,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.5,
+        "scoreDetail": {
+          "recency": 0.25,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "已 14 天未访问，常用域名 example.com"
+      }
+    ],
+    "total": 5,
+    "domains": [
+      "example.com"
+    ],
+    "generatedAt": 1793762823653
+  },
+  "ms": 0.6,
+  "mutated": null
+}

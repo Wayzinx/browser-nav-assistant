@@ -1,0 +1,115 @@
+[
+  {
+    "seed": {
+      "ok": true,
+      "syncedAt": 1793659264923,
+      "received": 2,
+      "created": 2,
+      "updated": 0,
+      "rejected": 0,
+      "rejectedByReason": {
+        "invalid_url": 0,
+        "privacy": 0
+      },
+      "pageCount": 2,
+      "mode": "full"
+    }
+  },
+  {
+    "shot": "evidence/TC-UI-PRIV-009/explore/1.png",
+    "aria": "- banner:\n  - heading \"导航助手\" [level=1]\n  - button \"后端已连接\"\n- region \"当前页面\":\n  - heading \"当前页面\" [level=2]\n  - paragraph: 合成页\n  - paragraph: https://example.com/login?TOKEN=abc\n  - button \"标记为重要\" [disabled]: ☆\n  - button \"添加到分析\"\n- region \"浏览器上下文同步\":\n  - button \"同步浏览器上下文\"\n  - status:\n    - paragraph: 尚未同步\n  - button \"全量同步\"\n  - paragraph: 当前模式：全量\n- tablist \"导航助手功能\":\n  - tab \"首页\" [selected]\n  - tab \"上下文\"\n  - tab \"排序\"\n  - tab \"整理\"\n  - tab \"规则\"\n  - tab \"诊断\"\n- main:\n  - tabpanel \"首页\":\n    - heading \"下一步推荐\" [level=2]\n    - list:\n      - listitem:\n        - button \"Guide 1 0.50 近期综合评分较高的页面，可作为备选\"\n      - listitem:\n        - button \"Guide 2 0.50 近期综合评分较高的页面，可作为备选\"\n    - heading \"历史排序 Top 5\" [level=2]\n    - list:\n      - listitem:\n        - text: Guide 1 0.80 https://example.com/guide/a\n        - paragraph: 最近 3 天内多次访问（10 次），常用域名 example.com\n      - listitem:\n        - text: Guide 2 0.80 https://example.com/guide/b\n        - paragraph: 最近 3 天内多次访问（10 次），常用域名 example.com\n    - heading \"整理建议\" [level=2]\n    - paragraph: 还没有整理建议，点击上方「同步浏览器上下文」开始\n    - button \"查看整理建议\": 归档 0 重复 0 保留 0\n    - heading \"用一句话配置规则\" [level=2]\n    - text: 规则内容\n    - textbox \"规则内容\":\n      - /placeholder: 输入一句话配置规则\n    - button \"解析\"\n    - button \"启动诊断 · 尚未检测 ›\""
+  },
+  {
+    "recRequests": [
+      "{\"currentPage\":null,\"openTabs\":[],\"recentHistory\":[]}"
+    ]
+  },
+  {
+    "sync": {
+      "status": "success",
+      "statusText": "同步成功上传 0 条 · 过滤 3 条06:41 · 刚刚",
+      "filtered": "3",
+      "uploaded": "0",
+      "bodies": [
+        {
+          "activeTab": null,
+          "openTabs": [],
+          "history": [],
+          "mode": "full",
+          "clientVersion": "1.0.0"
+        }
+      ]
+    },
+    "recCache": {
+      "__none__": {
+        "cachedAt": 1793659267090,
+        "data": {
+          "cached": false,
+          "generatedAt": 1793659267089,
+          "recommendations": [
+            {
+              "contextUrl": null,
+              "createdAt": 1793659267089,
+              "id": "rec_1",
+              "reason": "近期综合评分较高的页面，可作为备选",
+              "score": 0.5,
+              "strategy": "global_top",
+              "title": "Guide 1",
+              "type": "next_visit",
+              "url": "https://example.com/guide/a"
+            },
+            {
+              "contextUrl": null,
+              "createdAt": 1793659267089,
+              "id": "rec_2",
+              "reason": "近期综合评分较高的页面，可作为备选",
+              "score": 0.5,
+              "strategy": "global_top",
+              "title": "Guide 2",
+              "type": "next_visit",
+              "url": "https://example.com/guide/b"
+            }
+          ]
+        }
+      }
+    },
+    "sensitiveInStorage": 0
+  },
+  {
+    "recResp": {
+      "status": 200,
+      "body": {
+        "recommendations": [
+          {
+            "id": "rec_1",
+            "type": "next_visit",
+            "url": "https://example.com/guide/a",
+            "title": "Guide 1",
+            "score": 0.5,
+            "reason": "近期综合评分较高的页面，可作为备选",
+            "strategy": "global_top",
+            "contextUrl": null,
+            "createdAt": 1793659267089
+          },
+          {
+            "id": "rec_2",
+            "type": "next_visit",
+            "url": "https://example.com/guide/b",
+            "title": "Guide 2",
+            "score": 0.5,
+            "reason": "近期综合评分较高的页面，可作为备选",
+            "strategy": "global_top",
+            "contextUrl": null,
+            "createdAt": 1793659267089
+          }
+        ],
+        "cached": true,
+        "generatedAt": 1793659267089
+      }
+    }
+  },
+  {
+    "shot": "evidence/TC-UI-PRIV-009/explore/2.png",
+    "aria": "- banner:\n  - heading \"导航助手\" [level=1]\n  - button \"后端已连接\"\n- region \"当前页面\":\n  - heading \"当前页面\" [level=2]\n  - paragraph: 合成页\n  - paragraph: https://example.com/login?TOKEN=abc\n  - button \"标记为重要\" [disabled]: ☆\n  - button \"添加到分析\"\n- region \"浏览器上下文同步\":\n  - button \"同步浏览器上下文\"\n  - status:\n    - paragraph: 同步成功\n    - paragraph: 上传 0 条 · 过滤 3 条\n    - time: 06:41 · 刚刚\n  - button \"全量同步\"\n  - paragraph: 当前模式：全量\n- tablist \"导航助手功能\":\n  - tab \"首页\" [selected]\n  - tab \"上下文\"\n  - tab \"排序\"\n  - tab \"整理\"\n  - tab \"规则\"\n  - tab \"诊断\"\n- main:\n  - tabpanel \"首页\":\n    - heading \"下一步推荐\" [level=2]\n    - list:\n      - listitem:\n        - button \"Guide 1 0.50 近期综合评分较高的页面，可作为备选\"\n      - listitem:\n        - button \"Guide 2 0.50 近期综合评分较高的页面，可作为备选\"\n    - heading \"历史排序 Top 5\" [level=2]\n    - list:\n      - listitem:\n        - text: Guide 1 0.80 https://example.com/guide/a\n        - paragraph: 最近 3 天内多次访问（10 次），常用域名 example.com\n      - listitem:\n        - text: Guide 2 0.80 https://example.com/guide/b\n        - paragraph: 最近 3 天内多次访问（10 次），常用域名 example.com\n    - heading \"整理建议\" [level=2]\n    - paragraph: 还没有整理建议，点击上方「同步浏览器上下文」开始\n    - button \"查看整理建议\": 归档 0 重复 0 保留 0\n    - heading \"用一句话配置规则\" [level=2]\n    - text: 规则内容\n    - textbox \"规则内容\":\n      - /placeholder: 输入一句话配置规则\n    - button \"解析\"\n    - button \"启动诊断 · 尚未检测 ›\""
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "reqId": "TC-UI-CACHE-002-prepare-A-sw-7",
+  "observed": true,
+  "setup": false,
+  "method": "GET",
+  "url": "http://127.0.0.1:4300/api/rules",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762831174_13"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "ext_1793762831174_13",
+    "access-control-expose-headers": "x-request-id",
+    "connection": "keep-alive",
+    "content-length": "22",
+    "keep-alive": "timeout=5",
+    "date": "Wed, 04 Nov 2026 03:27:11 GMT",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin"
+  },
+  "responseBody": {
+    "rules": [],
+    "total": 0
+  },
+  "transport": "finished",
+  "ms": 3
+}

@@ -1,0 +1,47 @@
+{
+  "reqId": "TC-API-SYNC-008-07",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/sync",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-SYNC-008-07"
+  },
+  "requestBody": {
+    "history": [
+      {
+        "url": "https://example.com/merge",
+        "title": "New",
+        "visitCount": 12,
+        "lastVisitTime": 1793762526018
+      }
+    ]
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-SYNC-008-07",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "163",
+    "date": "Wed, 04 Nov 2026 03:27:06 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "ok": true,
+    "syncedAt": 1793762826032,
+    "received": 1,
+    "created": 0,
+    "updated": 1,
+    "rejected": 0,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 0
+    },
+    "pageCount": 1,
+    "mode": "full"
+  },
+  "ms": 1.2,
+  "mutated": null
+}

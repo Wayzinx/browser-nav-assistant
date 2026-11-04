@@ -1,0 +1,34 @@
+{
+  "reqId": "TC-UI-CLEAN-002-03",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/cleanup-suggestions",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-UI-CLEAN-002-03"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-UI-CLEAN-002-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "108",
+    "date": "Wed, 04 Nov 2026 03:27:25 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "summary": {
+      "archive": 0,
+      "merge": 0,
+      "keep": 0
+    },
+    "suggestions": [],
+    "thresholdDays": 14,
+    "generatedAt": 1793762845146
+  },
+  "ms": 0.9,
+  "mutated": null
+}

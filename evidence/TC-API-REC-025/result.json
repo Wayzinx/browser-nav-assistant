@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-API-REC-025",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:04.371Z",
+  "tests": [
+    {
+      "testId": "2f4d94491575de9e85d9-ca75c338a1f070d25716",
+      "title": "TC-API-REC-025 触发规则但库中没有 MDN 页面时给出站内搜索兜底",
+      "project": "api",
+      "file": "tests/api/TC-API-REC-025.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 17,
+      "startedAt": "2026-11-04T03:27:04.354Z",
+      "endedAt": "2026-11-04T03:27:04.371Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 723,
+          "after": 725
+        },
+        "pages": {
+          "added": 0,
+          "removed": 9,
+          "changed": 1
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 1
+        },
+        "counts": {
+          "pages": -9,
+          "rules": 0,
+          "openPages": -4,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "{\"T\":1793762824361,\"N\":1793762824362}",
+        "{\"ruleId\":\"rule_1\"}"
+      ]
+    }
+  ]
+}

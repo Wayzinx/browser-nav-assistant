@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-UI-DIAG-021",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:25.320Z",
+  "tests": [
+    {
+      "testId": "00d2d4ad05399e30e929-3669d3ef12c076a2021f",
+      "title": "TC-UI-DIAG-021 规则数离线时警告，恢复同一后端并重检后2条一致且通过",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-DIAG-021.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1110,
+      "startedAt": "2026-11-04T03:28:24.210Z",
+      "endedAt": "2026-11-04T03:28:25.320Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [
+        "evidence/TC-UI-DIAG-021/screenshots/01-S2-离线规则数警告.png",
+        "evidence/TC-UI-DIAG-021/screenshots/02-S3-恢复后规则数通过.png"
+      ],
+      "serverLogLines": 34,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1077,
+          "after": 1078
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 2,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

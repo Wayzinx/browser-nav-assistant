@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-UI-DIAG-025",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:29.027Z",
+  "tests": [
+    {
+      "testId": "627a81e6bbca0038f600-503c3ebc3cf6270333cf",
+      "title": "TC-UI-DIAG-025 失败项不只显示错误码：每个失败项都有原因说明与至少 1 条可直接执行的排查步骤",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-DIAG-025.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 933,
+      "startedAt": "2026-11-04T03:28:28.094Z",
+      "endedAt": "2026-11-04T03:28:29.027Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-DIAG-025/screenshots/01-S1-失败场景诊断.png"
+      ],
+      "serverLogLines": 3,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1082,
+          "after": 1082
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 2,
+      "notes": []
+    }
+  ]
+}

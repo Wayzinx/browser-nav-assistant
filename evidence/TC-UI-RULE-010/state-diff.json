@@ -1,0 +1,92 @@
+{
+  "summary": {
+    "dataVersion": {
+      "before": 1180,
+      "after": 1180
+    },
+    "pages": {
+      "added": 0,
+      "removed": 0,
+      "changed": 0
+    },
+    "rules": {
+      "added": 2,
+      "removed": 0,
+      "changed": 0
+    },
+    "counts": {
+      "pages": 0,
+      "rules": 2,
+      "openPages": 0,
+      "archivedPages": 0,
+      "syncLogs": 0
+    },
+    "configChanged": [],
+    "persistChanged": false
+  },
+  "counts": {
+    "pages": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "rules": {
+      "before": 0,
+      "after": 2,
+      "delta": 2
+    },
+    "openPages": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "archivedPages": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "syncLogs": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    }
+  },
+  "pages": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  "rules": {
+    "added": [
+      {
+        "domain": "github.com",
+        "urlPattern": "/issues/",
+        "inactiveDays": 7,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762977603,
+        "updatedAt": 1793762977603,
+        "rawText": "把 7 天没访问过的 GitHub issue 建议归档",
+        "type": "archive_candidate",
+        "action": "suggest_archive",
+        "id": "rule_1"
+      },
+      {
+        "domain": "docs.internal.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762977603,
+        "updatedAt": 1793762977603,
+        "rawText": "docs.internal.com 的页面永远不要归档",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_2"
+      }
+    ],
+    "removed": [],
+    "changed": []
+  },
+  "config": {}
+}

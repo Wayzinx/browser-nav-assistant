@@ -1,0 +1,57 @@
+{
+  "caseId": "TC-API-DEMO-002",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "failed",
+  "updatedAt": "2026-11-04T03:25:45.549Z",
+  "tests": [
+    {
+      "testId": "618bb0b84193ea352ebd-a0798e9c431f4fed9c9c",
+      "title": "TC-API-DEMO-002 不设置 PORT 执行 start.sh：默认监听 3000 并打印 health",
+      "project": "api",
+      "file": "tests/api/TC-API-DEMO-002.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "failed",
+      "expectedStatus": "passed",
+      "durationMs": 22,
+      "startedAt": "2026-11-04T03:25:45.527Z",
+      "endedAt": "2026-11-04T03:25:45.549Z",
+      "failedExpect": [],
+      "errors": [
+        "Error: [ENV] 端口 3000 必须空闲：被占用时本用例显式失败并记录 blockedBy（禁止 skip，禁止停他人进程）\n\nexpect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false"
+      ],
+      "apiCalls": 0,
+      "screenshots": [],
+      "serverLogLines": 2,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 67,
+          "after": 67
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "blockedBy=端口 3000 已被其他进程占用（ENV）：显式失败，不 skip，也不会停掉他人进程"
+      ]
+    }
+  ]
+}

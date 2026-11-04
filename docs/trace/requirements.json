@@ -1,0 +1,1572 @@
+{
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "section": "背景",
+      "quote": "把 7 天没访问过的 GitHub issue 建议归档",
+      "kind": "hint",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-RULE-02",
+        "F-CLEAN-05"
+      ],
+      "note": "RULE：archive_candidate 句式示例"
+    },
+    {
+      "id": "REQ-002",
+      "section": "背景",
+      "quote": "如果我连续看了 3 个 React 文档，推荐相关 MDN 页面",
+      "kind": "hint",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-RULE-10",
+        "F-REC-07"
+      ],
+      "note": "RULE / REC：recommend_related 句式示例"
+    },
+    {
+      "id": "REQ-003",
+      "section": "背景",
+      "quote": "docs.internal.com 的页面永远不要归档",
+      "kind": "hint",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-RULE-03",
+        "F-CLEAN-04"
+      ],
+      "note": "RULE：never_archive 句式示例（否定识别）"
+    },
+    {
+      "id": "REQ-004",
+      "section": "背景",
+      "quote": "不要上传包含 password、token 的 URL",
+      "kind": "hint",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-RULE-10",
+        "F-PRIV-05"
+      ],
+      "note": "RULE / PRIV：privacy_filter 句式示例"
+    },
+    {
+      "id": "REQ-005",
+      "section": "总体约束",
+      "quote": "浏览器插件必须基于 Chrome Extension Manifest V3 实现",
+      "kind": "constraint",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CTX-01",
+        "F-CTX-02"
+      ],
+      "note": "CTX"
+    },
+    {
+      "id": "REQ-006",
+      "section": "总体约束",
+      "quote": "后端不限语言和框架，选择你熟悉的即可",
+      "kind": "constraint",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-DEMO-01"
+      ],
+      "note": "DEMO：技术选型（Node.js），由技术方案承接"
+    },
+    {
+      "id": "REQ-007",
+      "section": "总体约束",
+      "quote": "可以使用内存存储，但需要能解释真实持久化方案",
+      "kind": "constraint",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-PERSIST-01",
+        "F-PERSIST-02"
+      ],
+      "note": "SYNC / 交付文档：内存存储 + 持久化方案说明"
+    },
+    {
+      "id": "REQ-008",
+      "section": "总体约束",
+      "quote": "不要求真实调用 LLM，推荐和规则解析均可 mock 或用规则引擎实现",
+      "kind": "constraint",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RULE-02",
+        "F-REC-01"
+      ],
+      "note": "REC / RULE"
+    },
+    {
+      "id": "REQ-009",
+      "section": "总体约束",
+      "quote": "不允许直接使用完整成熟的推荐系统平台作为核心实现",
+      "kind": "constraint",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RANK-02",
+        "F-REC-01"
+      ],
+      "note": "REC / RANK：评分与推荐自行实现"
+    },
+    {
+      "id": "REQ-010",
+      "section": "总体约束",
+      "quote": "隐私敏感页面（含 password、token、bank 等关键词的 URL）不应上传到后端",
+      "kind": "nfr",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-PRIV-01",
+        "F-PRIV-03",
+        "F-PRIV-06"
+      ],
+      "note": "PRIV：插件端过滤 + 后端兜底"
+    },
+    {
+      "id": "REQ-011",
+      "section": "总体约束",
+      "quote": "所有功能需要能在本地完整演示",
+      "kind": "constraint",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-DEMO-01",
+        "F-DEMO-02"
+      ],
+      "note": "DEMO"
+    },
+    {
+      "id": "REQ-012",
+      "section": "总体约束",
+      "quote": "可以使用 AI / Coding Agent 辅助开发，但需要能解释插件结构、权限配置、通信逻辑和数据模型",
+      "kind": "constraint",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CTX-01",
+        "F-CTX-02",
+        "F-SYNC-01"
+      ],
+      "note": "讲解类：映射到 CTX / 交付文档相关 Feature"
+    },
+    {
+      "id": "REQ-013",
+      "section": "系统架构说明",
+      "quote": "插件至少包含以下三个模块：",
+      "kind": "constraint",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CTX-01",
+        "F-CTX-02"
+      ],
+      "note": "CTX：popup / background / 可选 content"
+    },
+    {
+      "id": "REQ-014",
+      "section": "系统架构说明 > 浏览器插件 > Popup 页面",
+      "quote": "用户点击插件图标后打开，展示：",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CTX-02",
+        "F-CTX-03"
+      ],
+      "note": "CTX：popup 入口"
+    },
+    {
+      "id": "REQ-015",
+      "section": "系统架构说明 > 浏览器插件 > Popup 页面",
+      "quote": "当前页面标题和 URL",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CTX-03",
+        "F-CTX-04"
+      ],
+      "note": "CTX"
+    },
+    {
+      "id": "REQ-016",
+      "section": "系统架构说明 > 浏览器插件 > Popup 页面",
+      "quote": "同步按钮和同步状态",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-SYNC-01",
+        "F-SYNC-06"
+      ],
+      "note": "SYNC"
+    },
+    {
+      "id": "REQ-017",
+      "section": "系统架构说明 > 浏览器插件 > Popup 页面",
+      "quote": "推荐的下一步访问页面",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-REC-08"
+      ],
+      "note": "REC"
+    },
+    {
+      "id": "REQ-018",
+      "section": "系统架构说明 > 浏览器插件 > Popup 页面",
+      "quote": "历史排序概览",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RANK-05"
+      ],
+      "note": "RANK"
+    },
+    {
+      "id": "REQ-019",
+      "section": "系统架构说明 > 浏览器插件 > Popup 页面",
+      "quote": "整理建议摘要",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CLEAN-07"
+      ],
+      "note": "CLEAN"
+    },
+    {
+      "id": "REQ-020",
+      "section": "系统架构说明 > 浏览器插件 > Popup 页面",
+      "quote": "自然语言配置输入框",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RULE-01"
+      ],
+      "note": "RULE"
+    },
+    {
+      "id": "REQ-021",
+      "section": "系统架构说明 > 浏览器插件 > Popup 页面",
+      "quote": "诊断状态入口",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-DIAG-01",
+        "F-DIAG-11"
+      ],
+      "note": "DIAG"
+    },
+    {
+      "id": "REQ-022",
+      "section": "系统架构说明 > 浏览器插件 > Background Service Worker",
+      "quote": "响应 popup 操作",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CTX-03",
+        "F-SYNC-01"
+      ],
+      "note": "CTX：popup ↔ background 消息"
+    },
+    {
+      "id": "REQ-023",
+      "section": "系统架构说明 > 浏览器插件 > Background Service Worker",
+      "quote": "调用浏览器 tabs / history API",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CTX-05",
+        "F-CTX-06"
+      ],
+      "note": "CTX"
+    },
+    {
+      "id": "REQ-024",
+      "section": "系统架构说明 > 浏览器插件 > Background Service Worker",
+      "quote": "与后端 API 通信",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-SYNC-01",
+        "F-DIAG-01"
+      ],
+      "note": "SYNC"
+    },
+    {
+      "id": "REQ-025",
+      "section": "系统架构说明 > 浏览器插件 > Background Service Worker",
+      "quote": "管理同步状态和本地缓存",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-SYNC-06",
+        "F-CACHE-01"
+      ],
+      "note": "SYNC / CACHE"
+    },
+    {
+      "id": "REQ-026",
+      "section": "系统架构说明 > 浏览器插件 > （可选）Content Script",
+      "quote": "如需在网页内注入功能（如高亮推荐关键词）可使用，不强制要求。",
+      "kind": "advanced",
+      "mandatory": false,
+      "inScope": false,
+      "features": [
+        "F-HL-01"
+      ],
+      "note": "可选模块；页面高亮不在本次范围"
+    },
+    {
+      "id": "REQ-027",
+      "section": "系统架构说明 > 后端服务",
+      "quote": "接收并存储浏览器行为数据",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-SYNC-02",
+        "F-SYNC-03"
+      ],
+      "note": "SYNC"
+    },
+    {
+      "id": "REQ-028",
+      "section": "系统架构说明 > 后端服务",
+      "quote": "对页面进行评分和排序",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RANK-01",
+        "F-RANK-02"
+      ],
+      "note": "RANK"
+    },
+    {
+      "id": "REQ-029",
+      "section": "系统架构说明 > 后端服务",
+      "quote": "推荐下一步访问页面",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-REC-01"
+      ],
+      "note": "REC"
+    },
+    {
+      "id": "REQ-030",
+      "section": "系统架构说明 > 后端服务",
+      "quote": "识别旧页面和重复页面",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CLEAN-02",
+        "F-CLEAN-03",
+        "F-CLEAN-09"
+      ],
+      "note": "CLEAN"
+    },
+    {
+      "id": "REQ-031",
+      "section": "系统架构说明 > 后端服务",
+      "quote": "解析自然语言规则为结构化配置",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RULE-02"
+      ],
+      "note": "RULE"
+    },
+    {
+      "id": "REQ-032",
+      "section": "系统架构说明 > 后端服务",
+      "quote": "提供健康检查和配置查询接口",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-DIAG-09",
+        "F-DIAG-10"
+      ],
+      "note": "DIAG"
+    },
+    {
+      "id": "REQ-033",
+      "section": "核心数据模型",
+      "quote": "页面记录（Page）",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-SYNC-02",
+        "F-SYNC-03",
+        "F-SYNC-04",
+        "F-SYNC-05",
+        "F-CLEAN-08"
+      ],
+      "note": "SYNC：Page 数据模型"
+    },
+    {
+      "id": "REQ-034",
+      "section": "核心数据模型",
+      "quote": "规则（Rule）",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RULE-02",
+        "F-RULE-06",
+        "F-RULE-09"
+      ],
+      "note": "RULE：Rule 数据模型"
+    },
+    {
+      "id": "REQ-035",
+      "section": "核心数据模型",
+      "quote": "推荐（Recommendation）",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-REC-01"
+      ],
+      "note": "REC：Recommendation 数据模型"
+    },
+    {
+      "id": "REQ-036",
+      "section": "必做功能 > 1. 插件可以正确加载并读取浏览器上下文",
+      "quote": "提供合法的 manifest.json，包含必要的权限声明（至少 tabs、history、storage、activeTab）",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CTX-01"
+      ],
+      "note": "CTX"
+    },
+    {
+      "id": "REQ-037",
+      "section": "必做功能 > 1. 插件可以正确加载并读取浏览器上下文",
+      "quote": "可以在 Chrome 开发者模式下加载",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CTX-02"
+      ],
+      "note": "CTX"
+    },
+    {
+      "id": "REQ-038",
+      "section": "必做功能 > 1. 插件可以正确加载并读取浏览器上下文",
+      "quote": "插件 popup 能展示：",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CTX-03",
+        "F-CTX-05",
+        "F-CTX-06"
+      ],
+      "note": "CTX"
+    },
+    {
+      "id": "REQ-039",
+      "section": "必做功能 > 1. 插件可以正确加载并读取浏览器上下文",
+      "quote": "当前 active tab 的 URL 和 title",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CTX-03",
+        "F-CTX-04"
+      ],
+      "note": "CTX"
+    },
+    {
+      "id": "REQ-040",
+      "section": "必做功能 > 1. 插件可以正确加载并读取浏览器上下文",
+      "quote": "当前窗口打开的 tabs 列表（URL、title）",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CTX-05"
+      ],
+      "note": "CTX"
+    },
+    {
+      "id": "REQ-041",
+      "section": "必做功能 > 1. 插件可以正确加载并读取浏览器上下文",
+      "quote": "最近 N 条浏览历史（建议 N=50 或 100）",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CTX-06"
+      ],
+      "note": "CTX"
+    },
+    {
+      "id": "REQ-042",
+      "section": "必做功能 > 2. 浏览器数据同步到后端",
+      "quote": "插件提供\"同步浏览器上下文\"按钮，点击后：",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-SYNC-01"
+      ],
+      "note": "SYNC"
+    },
+    {
+      "id": "REQ-043",
+      "section": "必做功能 > 2. 浏览器数据同步到后端",
+      "quote": "将当前 tab、open tabs、最近历史发送给后端",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-SYNC-01"
+      ],
+      "note": "SYNC"
+    },
+    {
+      "id": "REQ-044",
+      "section": "必做功能 > 2. 浏览器数据同步到后端",
+      "quote": "后端保存页面记录，按 URL 去重",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-SYNC-02"
+      ],
+      "note": "SYNC"
+    },
+    {
+      "id": "REQ-045",
+      "section": "必做功能 > 2. 浏览器数据同步到后端",
+      "quote": "更新 visitCount / lastVisitedAt",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-SYNC-03"
+      ],
+      "note": "SYNC"
+    },
+    {
+      "id": "REQ-046",
+      "section": "必做功能 > 2. 浏览器数据同步到后端",
+      "quote": "区分 source：active_tab / open_tab / history",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-SYNC-04"
+      ],
+      "note": "SYNC"
+    },
+    {
+      "id": "REQ-047",
+      "section": "必做功能 > 2. 浏览器数据同步到后端",
+      "quote": "插件展示同步成功状态",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-SYNC-06"
+      ],
+      "note": "SYNC"
+    },
+    {
+      "id": "REQ-048",
+      "section": "必做功能 > 2. 浏览器数据同步到后端",
+      "quote": "POST /api/sync",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-SYNC-01",
+        "F-SYNC-07"
+      ],
+      "note": "SYNC：接口"
+    },
+    {
+      "id": "REQ-049",
+      "section": "必做功能 > 3. 历史排序接口",
+      "quote": "后端提供按评分排序的页面列表：",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RANK-01"
+      ],
+      "note": "RANK"
+    },
+    {
+      "id": "REQ-050",
+      "section": "必做功能 > 3. 历史排序接口",
+      "quote": "GET /api/pages/ranked",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RANK-01"
+      ],
+      "note": "RANK：接口"
+    },
+    {
+      "id": "REQ-051",
+      "section": "必做功能 > 3. 历史排序接口",
+      "quote": "评分策略需能解释，例如：",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RANK-02",
+        "F-RANK-03"
+      ],
+      "note": "RANK：reason / 评分说明"
+    },
+    {
+      "id": "REQ-052",
+      "section": "必做功能 > 3. 历史排序接口",
+      "quote": "score = recencyScore * 0.4 + frequencyScore * 0.3 + isOpenBoost * 0.2 + domainBoost * 0.1",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RANK-02"
+      ],
+      "note": "RANK：评分公式"
+    },
+    {
+      "id": "REQ-053",
+      "section": "必做功能 > 3. 历史排序接口",
+      "quote": "候选人不一定要实现复杂算法，但需要能解释评分维度和取舍。",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RANK-02"
+      ],
+      "note": "RANK：讲解类，映射到评分公式 Feature"
+    },
+    {
+      "id": "REQ-054",
+      "section": "必做功能 > 4. 推荐下一步访问页面",
+      "quote": "后端根据当前上下文推荐下一步访问：",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-REC-01"
+      ],
+      "note": "REC"
+    },
+    {
+      "id": "REQ-055",
+      "section": "必做功能 > 4. 推荐下一步访问页面",
+      "quote": "POST /api/recommendations/next",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-REC-01"
+      ],
+      "note": "REC：接口"
+    },
+    {
+      "id": "REQ-056",
+      "section": "必做功能 > 4. 推荐下一步访问页面",
+      "quote": "最小实现可以基于规则：",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-REC-02",
+        "F-REC-03",
+        "F-REC-04",
+        "F-REC-06"
+      ],
+      "note": "REC"
+    },
+    {
+      "id": "REQ-057",
+      "section": "必做功能 > 4. 推荐下一步访问页面",
+      "quote": "当前是 GitHub PR，推荐同 repo 的 issue / actions",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-REC-02"
+      ],
+      "note": "REC"
+    },
+    {
+      "id": "REQ-058",
+      "section": "必做功能 > 4. 推荐下一步访问页面",
+      "quote": "当前是文档页，推荐同域名高频访问页面",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-REC-03"
+      ],
+      "note": "REC"
+    },
+    {
+      "id": "REQ-059",
+      "section": "必做功能 > 4. 推荐下一步访问页面",
+      "quote": "当前页面域名与历史某些页面相同，推荐同域名高分页面",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-REC-04"
+      ],
+      "note": "REC"
+    },
+    {
+      "id": "REQ-060",
+      "section": "必做功能 > 4. 推荐下一步访问页面",
+      "quote": "排除当前已打开页面或重复 URL",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-REC-05"
+      ],
+      "note": "REC"
+    },
+    {
+      "id": "REQ-061",
+      "section": "必做功能 > 5. 旧页面与重复页面整理建议",
+      "quote": "GET /api/pages/cleanup-suggestions",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CLEAN-01"
+      ],
+      "note": "CLEAN：接口"
+    },
+    {
+      "id": "REQ-062",
+      "section": "必做功能 > 5. 旧页面与重复页面整理建议",
+      "quote": "超过 X 天未访问，且不是当前打开的 tab，建议归档",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CLEAN-02",
+        "F-CLEAN-06",
+        "F-SYNC-05"
+      ],
+      "note": "CLEAN：archive"
+    },
+    {
+      "id": "REQ-063",
+      "section": "必做功能 > 5. 旧页面与重复页面整理建议",
+      "quote": "URL 去掉 query/hash 后相同，认为可能重复",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CLEAN-03"
+      ],
+      "note": "CLEAN：merge"
+    },
+    {
+      "id": "REQ-064",
+      "section": "必做功能 > 5. 旧页面与重复页面整理建议",
+      "quote": "被 never_archive 规则保护的域名不归档",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CLEAN-04",
+        "F-CLEAN-06"
+      ],
+      "note": "CLEAN：keep"
+    },
+    {
+      "id": "REQ-065",
+      "section": "必做功能 > 6. 自然语言规则配置",
+      "quote": "插件提供规则输入框，用户输入自然语言，例如：",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RULE-01"
+      ],
+      "note": "RULE"
+    },
+    {
+      "id": "REQ-066",
+      "section": "必做功能 > 6. 自然语言规则配置",
+      "quote": "后端提供规则解析接口：",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RULE-02"
+      ],
+      "note": "RULE"
+    },
+    {
+      "id": "REQ-067",
+      "section": "必做功能 > 6. 自然语言规则配置",
+      "quote": "POST /api/rules/parse",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RULE-01",
+        "F-RULE-02",
+        "F-RULE-05"
+      ],
+      "note": "RULE：接口"
+    },
+    {
+      "id": "REQ-068",
+      "section": "必做功能 > 6. 自然语言规则配置",
+      "quote": "不要求真实 LLM，可以用关键词规则解析器实现（识别：N 天没访问、域名、动作词等）。",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RULE-02",
+        "F-RULE-03",
+        "F-RULE-04"
+      ],
+      "note": "RULE：解析器句式"
+    },
+    {
+      "id": "REQ-069",
+      "section": "必做功能 > 6. 自然语言规则配置",
+      "quote": "插件需展示解析结果，用户确认后调用保存接口：",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RULE-01",
+        "F-RULE-06"
+      ],
+      "note": "RULE：解析预览 + 确认保存"
+    },
+    {
+      "id": "REQ-070",
+      "section": "必做功能 > 6. 自然语言规则配置",
+      "quote": "POST /api/rules",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RULE-06"
+      ],
+      "note": "RULE：保存接口"
+    },
+    {
+      "id": "REQ-071",
+      "section": "必做功能 > 6. 自然语言规则配置",
+      "quote": "可查看已有规则列表",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RULE-07"
+      ],
+      "note": "RULE：GET /api/rules（推断路径）"
+    },
+    {
+      "id": "REQ-072",
+      "section": "必做功能 > 6. 自然语言规则配置",
+      "quote": "可删除规则",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RULE-08"
+      ],
+      "note": "RULE：DELETE /api/rules/:id（推断路径）"
+    },
+    {
+      "id": "REQ-073",
+      "section": "必做功能 > 6. 自然语言规则配置",
+      "quote": "整理建议和排序接口需要读取规则执行",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RANK-04",
+        "F-CLEAN-04",
+        "F-CLEAN-05"
+      ],
+      "note": "RULE / RANK / CLEAN"
+    },
+    {
+      "id": "REQ-074",
+      "section": "必做功能 > 7. 启动诊断与配置检查",
+      "quote": "这是本题的一个重要考察点，考察候选人是否具备全栈启动、配置和排障能力。",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-DIAG-01",
+        "F-DIAG-11"
+      ],
+      "note": "DIAG"
+    },
+    {
+      "id": "REQ-075",
+      "section": "必做功能 > 7. 启动诊断与配置检查 > 插件端需要展示诊断状态",
+      "quote": "后端服务是否可连接 | 调用 /api/health 检查",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-DIAG-01"
+      ],
+      "note": "DIAG"
+    },
+    {
+      "id": "REQ-076",
+      "section": "必做功能 > 7. 启动诊断与配置检查 > 插件端需要展示诊断状态",
+      "quote": "tabs 权限是否已授权 | 检查 manifest 权限配置",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-DIAG-03"
+      ],
+      "note": "DIAG"
+    },
+    {
+      "id": "REQ-077",
+      "section": "必做功能 > 7. 启动诊断与配置检查 > 插件端需要展示诊断状态",
+      "quote": "history 权限是否已授权 | 检查 manifest 权限配置",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-DIAG-04"
+      ],
+      "note": "DIAG"
+    },
+    {
+      "id": "REQ-078",
+      "section": "必做功能 > 7. 启动诊断与配置检查 > 插件端需要展示诊断状态",
+      "quote": "storage 权限是否可用 | 检查本地存储可用性",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-DIAG-05"
+      ],
+      "note": "DIAG"
+    },
+    {
+      "id": "REQ-079",
+      "section": "必做功能 > 7. 启动诊断与配置检查 > 插件端需要展示诊断状态",
+      "quote": "API base URL 配置是否正确 | 展示当前配置的后端地址",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-DIAG-02"
+      ],
+      "note": "DIAG"
+    },
+    {
+      "id": "REQ-080",
+      "section": "必做功能 > 7. 启动诊断与配置检查 > 插件端需要展示诊断状态",
+      "quote": "最近一次同步是否成功 | 展示最近同步时间和结果",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-DIAG-06"
+      ],
+      "note": "DIAG"
+    },
+    {
+      "id": "REQ-081",
+      "section": "必做功能 > 7. 启动诊断与配置检查 > 插件端需要展示诊断状态",
+      "quote": "当前规则数量 | 已保存的规则条数",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-DIAG-07"
+      ],
+      "note": "DIAG"
+    },
+    {
+      "id": "REQ-082",
+      "section": "必做功能 > 7. 启动诊断与配置检查 > 后端需要提供",
+      "quote": "GET /api/health",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-DIAG-09"
+      ],
+      "note": "DIAG：接口"
+    },
+    {
+      "id": "REQ-083",
+      "section": "必做功能 > 7. 启动诊断与配置检查 > 后端需要提供",
+      "quote": "GET /api/config",
+      "kind": "functional",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-DIAG-10"
+      ],
+      "note": "DIAG：接口"
+    },
+    {
+      "id": "REQ-084",
+      "section": "进阶要求 > 隐私过滤",
+      "quote": "同步前检查 URL 是否包含敏感关键词（password、token、bank、secret 等）",
+      "kind": "advanced",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-PRIV-01"
+      ],
+      "note": "PRIV（P0/P1，inScope）"
+    },
+    {
+      "id": "REQ-085",
+      "section": "进阶要求 > 隐私过滤",
+      "quote": "符合条件的 URL 不上传，在插件本地过滤掉",
+      "kind": "advanced",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-PRIV-01"
+      ],
+      "note": "PRIV"
+    },
+    {
+      "id": "REQ-086",
+      "section": "进阶要求 > 隐私过滤",
+      "quote": "可配置敏感关键词列表",
+      "kind": "advanced",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-PRIV-02",
+        "F-PRIV-05"
+      ],
+      "note": "PRIV：关键词可配置（P1）"
+    },
+    {
+      "id": "REQ-087",
+      "section": "进阶要求 > 支持右键菜单",
+      "quote": "在任意网页右键，出现\"添加到分析\"或\"标记为重要\"选项",
+      "kind": "advanced",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-MENU-01"
+      ],
+      "note": "MENU（P1）：按 D-15 纳入本期"
+    },
+    {
+      "id": "REQ-088",
+      "section": "进阶要求 > 本地持久化",
+      "quote": "使用 chrome.storage.local 或 IndexedDB 缓存推荐结果和历史排序",
+      "kind": "advanced",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-CACHE-01"
+      ],
+      "note": "CACHE（P1）"
+    },
+    {
+      "id": "REQ-089",
+      "section": "进阶要求 > 本地持久化",
+      "quote": "离线状态下可以查看上次缓存的结果",
+      "kind": "advanced",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-CACHE-02"
+      ],
+      "note": "CACHE（P1）"
+    },
+    {
+      "id": "REQ-090",
+      "section": "进阶要求 > 增量同步",
+      "quote": "记录上次同步游标（时间戳）",
+      "kind": "advanced",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-INCR-01"
+      ],
+      "note": "INCR（P1）"
+    },
+    {
+      "id": "REQ-091",
+      "section": "进阶要求 > 增量同步",
+      "quote": "每次只上传增量历史，避免重复上传",
+      "kind": "advanced",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-INCR-01"
+      ],
+      "note": "INCR（P1）"
+    },
+    {
+      "id": "REQ-092",
+      "section": "进阶要求 > 页面高亮",
+      "quote": "在网页中通过 content script 高亮推荐关键词或相关 issue 编号",
+      "kind": "advanced",
+      "mandatory": false,
+      "inScope": false,
+      "features": [
+        "F-HL-01"
+      ],
+      "note": "HL（P3，inScope=false）"
+    },
+    {
+      "id": "REQ-093",
+      "section": "进阶要求 > 向量相似度 mock",
+      "quote": "对页面 title 做简单相似度聚合，识别相关页面",
+      "kind": "advanced",
+      "mandatory": false,
+      "inScope": false,
+      "features": [
+        "F-SIM-01"
+      ],
+      "note": "SIM（P3，inScope=false）"
+    },
+    {
+      "id": "REQ-094",
+      "section": "进阶要求 > 后端持久化",
+      "quote": "使用 SQLite、文件或真实数据库持久化页面记录和规则",
+      "kind": "advanced",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-PERSIST-01",
+        "F-PERSIST-02"
+      ],
+      "note": "PERSIST（P1）：按 D-15 本期实现 JSON 快照持久化（F-PERSIST-01）；SQLite 只做方案说明（F-PERSIST-02，范围外）"
+    },
+    {
+      "id": "REQ-095",
+      "section": "进阶要求 > 后端持久化",
+      "quote": "重启后数据不丢失",
+      "kind": "advanced",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-PERSIST-01"
+      ],
+      "note": "PERSIST（P1）：按 D-15 由 JSON 快照持久化（F-PERSIST-01）满足"
+    },
+    {
+      "id": "REQ-096",
+      "section": "进阶要求 > 快速响应优化",
+      "quote": "对推荐结果进行缓存",
+      "kind": "advanced",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-PERF-02"
+      ],
+      "note": "PERF（P1）"
+    },
+    {
+      "id": "REQ-097",
+      "section": "进阶要求 > 快速响应优化",
+      "quote": "预计算页面评分，避免每次请求全量扫描",
+      "kind": "advanced",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-PERF-01"
+      ],
+      "note": "PERF（P1）"
+    },
+    {
+      "id": "REQ-098",
+      "section": "验收要求",
+      "quote": "启动后端服务",
+      "kind": "acceptance",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-DEMO-01"
+      ],
+      "note": "验收第 1 步：DEMO"
+    },
+    {
+      "id": "REQ-099",
+      "section": "验收要求",
+      "quote": "在 Chrome 开发者模式加载插件",
+      "kind": "acceptance",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CTX-01",
+        "F-CTX-02"
+      ],
+      "note": "验收第 2 步：CTX"
+    },
+    {
+      "id": "REQ-100",
+      "section": "验收要求",
+      "quote": "插件诊断页显示：后端连接正常、tabs 和 history 权限正常",
+      "kind": "acceptance",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-DIAG-01",
+        "F-DIAG-03",
+        "F-DIAG-04"
+      ],
+      "note": "验收第 3 步：DIAG"
+    },
+    {
+      "id": "REQ-101",
+      "section": "验收要求",
+      "quote": "打开几个测试页面（例如 GitHub、MDN、搜索页）",
+      "kind": "acceptance",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CTX-03",
+        "F-CTX-05",
+        "F-CTX-06"
+      ],
+      "note": "验收第 4 步：CTX"
+    },
+    {
+      "id": "REQ-102",
+      "section": "验收要求",
+      "quote": "点击\"同步浏览器上下文\"，插件显示同步成功",
+      "kind": "acceptance",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-SYNC-01",
+        "F-SYNC-06"
+      ],
+      "note": "验收第 5 步：SYNC"
+    },
+    {
+      "id": "REQ-103",
+      "section": "验收要求",
+      "quote": "插件展示历史排序结果，分数和排序理由可见",
+      "kind": "acceptance",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RANK-05",
+        "F-RANK-03"
+      ],
+      "note": "验收第 6 步：RANK"
+    },
+    {
+      "id": "REQ-104",
+      "section": "验收要求",
+      "quote": "插件展示推荐下一步访问的页面（至少 1 条，有 reason）",
+      "kind": "acceptance",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-REC-08",
+        "F-REC-06"
+      ],
+      "note": "验收第 7 步：REC"
+    },
+    {
+      "id": "REQ-105",
+      "section": "验收要求",
+      "quote": "输入自然语言规则，后端解析为结构化规则，用户确认保存",
+      "kind": "acceptance",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RULE-01",
+        "F-RULE-02",
+        "F-RULE-06"
+      ],
+      "note": "验收第 8 步：RULE"
+    },
+    {
+      "id": "REQ-106",
+      "section": "验收要求",
+      "quote": "展示旧页面整理建议，建议与规则配置一致",
+      "kind": "acceptance",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CLEAN-05",
+        "F-CLEAN-07",
+        "F-DEMO-02"
+      ],
+      "note": "验收第 9 步：CLEAN"
+    },
+    {
+      "id": "REQ-107",
+      "section": "验收要求",
+      "quote": "候选人能解释数据模型、评分策略、规则解析和诊断设计",
+      "kind": "acceptance",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-SYNC-02",
+        "F-RANK-02",
+        "F-RULE-02",
+        "F-DIAG-11"
+      ],
+      "note": "验收第 10 步：讲解类，映射到对应功能 Feature"
+    },
+    {
+      "id": "REQ-108",
+      "section": "交付物",
+      "quote": "完整源码（插件 + 后端）",
+      "kind": "deliverable",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CTX-02",
+        "F-DEMO-01"
+      ],
+      "note": "DEMO"
+    },
+    {
+      "id": "REQ-109",
+      "section": "交付物",
+      "quote": "启动说明（如何安装插件、启动后端）",
+      "kind": "deliverable",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-DEMO-01",
+        "F-CTX-02"
+      ],
+      "note": "DEMO：README 启动章节"
+    },
+    {
+      "id": "REQ-110",
+      "section": "交付物",
+      "quote": "架构说明（插件各模块职责、后端 API 列表、数据模型）",
+      "kind": "deliverable",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CTX-01",
+        "F-SYNC-01",
+        "F-SYNC-02"
+      ],
+      "note": "交付文档：映射到 CTX / 数据模型相关 Feature"
+    },
+    {
+      "id": "REQ-111",
+      "section": "交付物",
+      "quote": "评分策略说明（排序维度和权重取舍）",
+      "kind": "deliverable",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RANK-02"
+      ],
+      "note": "RANK：评分公式 Feature"
+    },
+    {
+      "id": "REQ-112",
+      "section": "交付物",
+      "quote": "规则解析说明（支持哪些自然语言模式）",
+      "kind": "deliverable",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-RULE-02",
+        "F-RULE-05"
+      ],
+      "note": "RULE：解析器句式 Feature"
+    },
+    {
+      "id": "REQ-113",
+      "section": "交付物",
+      "quote": "诊断说明（诊断项含义和排查方法）",
+      "kind": "deliverable",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-DIAG-11"
+      ],
+      "note": "DIAG：提示与排查建议 Feature"
+    },
+    {
+      "id": "REQ-114",
+      "section": "提示",
+      "quote": "建议先把 manifest 权限配置好并验证可以读取 tabs 和 history，再写业务逻辑",
+      "kind": "hint",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-CTX-01"
+      ],
+      "note": "CTX"
+    },
+    {
+      "id": "REQ-115",
+      "section": "提示",
+      "quote": "插件的 background service worker 和 popup 不能共享内存，需要通过消息通信",
+      "kind": "hint",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CTX-03",
+        "F-SYNC-01"
+      ],
+      "note": "CTX：消息通信（隐含硬约束）"
+    },
+    {
+      "id": "REQ-116",
+      "section": "提示",
+      "quote": "chrome.history.search 可以读取浏览历史，chrome.tabs.query 可以读取打开的 tabs",
+      "kind": "hint",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-CTX-05",
+        "F-CTX-06"
+      ],
+      "note": "CTX"
+    },
+    {
+      "id": "REQ-117",
+      "section": "提示",
+      "quote": "当前页面为 chrome:// 等系统页面时，content script 无法注入，需要做降级处理",
+      "kind": "hint",
+      "mandatory": true,
+      "inScope": true,
+      "features": [
+        "F-CTX-07"
+      ],
+      "note": "CTX：系统页面降级（隐含硬约束）"
+    },
+    {
+      "id": "REQ-118",
+      "section": "提示",
+      "quote": "规则解析不要求 LLM，先用关键词匹配实现，能解析 \"N 天\"、\"域名\"、\"动作\"即可",
+      "kind": "hint",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-RULE-02"
+      ],
+      "note": "RULE"
+    },
+    {
+      "id": "REQ-119",
+      "section": "提示",
+      "quote": "快速响应很重要：推荐接口应该尽量快，不要每次全量扫描大量历史记录",
+      "kind": "nfr",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-PERF-01"
+      ],
+      "note": "PERF / REC"
+    },
+    {
+      "id": "REQ-120",
+      "section": "提示",
+      "quote": "面试官可能会追问：",
+      "kind": "interview",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-PERF-01",
+        "F-CACHE-02",
+        "F-RULE-05",
+        "F-PRIV-04"
+      ],
+      "note": "追问的引导句，映射到 REQ-121~124 各自承接的 Feature"
+    },
+    {
+      "id": "REQ-121",
+      "section": "提示",
+      "quote": "如果历史记录有 10 万条，推荐接口如何保持 100ms 内返回？",
+      "kind": "interview",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-PERF-01"
+      ],
+      "note": "PERF：推荐接口 100ms"
+    },
+    {
+      "id": "REQ-122",
+      "section": "提示",
+      "quote": "如果后端不可用，插件应该怎么降级处理？",
+      "kind": "interview",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-CACHE-02"
+      ],
+      "note": "CACHE：离线降级"
+    },
+    {
+      "id": "REQ-123",
+      "section": "提示",
+      "quote": "你的规则解析能处理哪些边界情况？不能处理的怎么告知用户？",
+      "kind": "interview",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-RULE-05"
+      ],
+      "note": "RULE：无法识别时告知用户"
+    },
+    {
+      "id": "REQ-124",
+      "section": "提示",
+      "quote": "如果用户在隐身模式下，history API 会有什么变化？",
+      "kind": "interview",
+      "mandatory": false,
+      "inScope": true,
+      "features": [
+        "F-PRIV-04",
+        "F-DIAG-08"
+      ],
+      "note": "PRIV / CTX：隐身 tab 不上传"
+    }
+  ]
+}

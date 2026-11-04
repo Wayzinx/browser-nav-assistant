@@ -1,0 +1,54 @@
+{
+  "reqId": "TC-API-CLEAN-009-03",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/cleanup-suggestions",
+  "params": {
+    "now": 1793762744216
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-CLEAN-009-03"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-CLEAN-009-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "492",
+    "date": "Wed, 04 Nov 2026 03:25:44 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "summary": {
+      "archive": 0,
+      "merge": 1,
+      "keep": 0
+    },
+    "suggestions": [
+      {
+        "key": "merge:example.com/doc",
+        "action": "merge",
+        "urls": [
+          "https://example.com/doc",
+          "https://example.com/doc?tab=a",
+          "https://example.com/doc?tab=b"
+        ],
+        "titles": [
+          "https://example.com/doc",
+          "https://example.com/doc?tab=a",
+          "https://example.com/doc?tab=b"
+        ],
+        "keepUrl": "https://example.com/doc",
+        "title": "https://example.com/doc",
+        "reason": "去掉 query 参数后 URL 相同，疑似重复页面"
+      }
+    ],
+    "thresholdDays": 14,
+    "generatedAt": 1793762744216
+  },
+  "ms": 1.5,
+  "mutated": null
+}

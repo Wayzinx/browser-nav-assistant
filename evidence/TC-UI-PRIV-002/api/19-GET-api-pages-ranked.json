@@ -1,0 +1,59 @@
+{
+  "reqId": "TC-UI-PRIV-002-03",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/ranked",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-UI-PRIV-002-03"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-UI-PRIV-002-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "548",
+    "date": "Wed, 04 Nov 2026 03:28:59 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "pages": [
+      {
+        "id": "page_1",
+        "url": "https://example.com/docs",
+        "normalizedUrl": "https://example.com/docs",
+        "title": "合成测试页 2",
+        "domain": "example.com",
+        "visitCount": 1,
+        "lastVisitedAt": 1793762939559,
+        "firstSeenAt": 1793762939244.243,
+        "sources": [
+          "open_tab",
+          "active_tab"
+        ],
+        "isOpen": true,
+        "isActive": true,
+        "isImportant": false,
+        "score": 1,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 1,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "正在浏览，今天访问过，常用域名 example.com"
+      }
+    ],
+    "total": 1,
+    "domains": [
+      "example.com"
+    ],
+    "generatedAt": 1793762939560
+  },
+  "ms": 1.4,
+  "mutated": null
+}

@@ -1,0 +1,58 @@
+{
+  "reqId": "TC-API-PRIV-004-04",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/ranked",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-PRIV-004-04"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-PRIV-004-04",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "526",
+    "date": "Wed, 04 Nov 2026 03:27:02 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "pages": [
+      {
+        "id": "page_1",
+        "url": "https://example.com/docs-a",
+        "normalizedUrl": "https://example.com/docs-a",
+        "title": "password reset guide",
+        "domain": "example.com",
+        "visitCount": 1,
+        "lastVisitedAt": 1793759222752,
+        "firstSeenAt": 1793759222752,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.8,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "今天访问过，常用域名 example.com"
+      }
+    ],
+    "total": 1,
+    "domains": [
+      "example.com"
+    ],
+    "generatedAt": 1793762822752
+  },
+  "ms": 0.6,
+  "mutated": null
+}

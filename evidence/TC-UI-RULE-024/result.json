@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-UI-RULE-024",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:51.540Z",
+  "tests": [
+    {
+      "testId": "af9dfbdab600266f794c-c7858cc470c38af33f38",
+      "title": "TC-UI-RULE-024 停用状态重开仍保持，启用数一到零到一",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RULE-024.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1145,
+      "startedAt": "2026-11-04T03:29:50.395Z",
+      "endedAt": "2026-11-04T03:29:51.540Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 6,
+      "screenshots": [
+        "evidence/TC-UI-RULE-024/screenshots/01-初始启用一条.png",
+        "evidence/TC-UI-RULE-024/screenshots/02-停用后启用数零.png",
+        "evidence/TC-UI-RULE-024/screenshots/03-重开仍停用.png",
+        "evidence/TC-UI-RULE-024/screenshots/04-启用数恢复一.png"
+      ],
+      "serverLogLines": 34,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1196,
+          "after": 1196
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 1,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-CLEAN-028",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:45.110Z",
+  "tests": [
+    {
+      "testId": "b16538baf00747450658-e1909d6fb96967f15838",
+      "title": "TC-API-CLEAN-028 部分 URL 存在时只归档存在的页面",
+      "project": "api",
+      "file": "tests/api/TC-API-CLEAN-028.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 28,
+      "startedAt": "2026-11-04T03:25:45.082Z",
+      "endedAt": "2026-11-04T03:25:45.110Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 63,
+          "after": 65
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 1,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

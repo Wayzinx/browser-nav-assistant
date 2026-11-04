@@ -1,0 +1,60 @@
+{
+  "caseId": "TC-UI-RULE-011",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:38.849Z",
+  "tests": [
+    {
+      "testId": "a3fd3420cfeff35d8a7a-6814ed1cd5b7d6ea8e95",
+      "title": "TC-UI-RULE-011 勾选数二到一到零到一，仅保存归档规则",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RULE-011.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1029,
+      "startedAt": "2026-11-04T03:29:37.820Z",
+      "endedAt": "2026-11-04T03:29:38.849Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 2,
+      "screenshots": [
+        "evidence/TC-UI-RULE-011/screenshots/01-默认两条.png",
+        "evidence/TC-UI-RULE-011/screenshots/02-选择一条.png",
+        "evidence/TC-UI-RULE-011/screenshots/03-零条不可保存.png",
+        "evidence/TC-UI-RULE-011/screenshots/04-保存一条.png",
+        "evidence/TC-UI-RULE-011/screenshots/05-只剩归档规则.png",
+        "evidence/TC-UI-RULE-011/screenshots/06-final.png"
+      ],
+      "serverLogLines": 18,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1181,
+          "after": 1181
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 1,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

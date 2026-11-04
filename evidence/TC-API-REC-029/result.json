@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-API-REC-029",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:04.475Z",
+  "tests": [
+    {
+      "testId": "854465cffbc3ff0b4d19-757d0d511176ef8e9165",
+      "title": "TC-API-REC-029 now 为零、负数、小数或非数字时均返回400",
+      "project": "api",
+      "file": "tests/api/TC-API-REC-029.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 22,
+      "startedAt": "2026-11-04T03:27:04.453Z",
+      "endedAt": "2026-11-04T03:27:04.475Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 731,
+          "after": 733
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "{\"T\":1793762824461,\"N\":1793762824462}"
+      ]
+    }
+  ]
+}

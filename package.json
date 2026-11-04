@@ -1,0 +1,25 @@
+{
+  "name": "browser-nav-assistant",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server/src/index.js",
+    "test": "playwright test",
+    "test:api": "playwright test --project=api",
+    "test:e2e": "playwright test --project=e2e",
+    "test:ui": "playwright test --project=ui",
+    "test:case": "node .agents/skills/nav-case-to-script/scripts/run-cases.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "c8": "^12.0.0",
+    "gifenc": "1.0.3",
+    "istanbul-lib-coverage": "^3.2.2",
+    "istanbul-lib-instrument": "^6.0.3",
+    "istanbul-lib-report": "^3.0.1",
+    "istanbul-reports": "^3.2.0",
+    "jpeg-js": "^0.4.4",
+    "pngjs": "^7.0.0"
+  }
+}

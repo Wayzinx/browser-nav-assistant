@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-UI-RANK-009",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:21.064Z",
+  "tests": [
+    {
+      "testId": "a4813b3b98606a31d15d-3cef645d5bcaed5ce304",
+      "title": "TC-UI-RANK-009 展开第 9 条 issues/100 显示时效 0.09、频次 0.32、打开 0.00、域名 1.00，再点收起后明细隐藏",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RANK-009.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 866,
+      "startedAt": "2026-11-04T03:29:20.198Z",
+      "endedAt": "2026-11-04T03:29:21.064Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 2,
+      "screenshots": [
+        "evidence/TC-UI-RANK-009/screenshots/01-第9条展开明细.png",
+        "evidence/TC-UI-RANK-009/screenshots/02-第9条收起后.png"
+      ],
+      "serverLogLines": 12,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1159,
+          "after": 1160
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

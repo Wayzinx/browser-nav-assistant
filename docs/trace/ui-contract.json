@@ -1,0 +1,2320 @@
+{
+  "_note": "前端架构师维护。开发阶段只允许新增 element / message / storageKey，不得删除或改名。消息信封：请求 { type, payload, requestId }；响应 { ok: true, data } | { ok: false, error: { code, message } }",
+  "pages": [
+    {
+      "name": "popup",
+      "path": "extension/popup/popup.html",
+      "description": "400×600 弹窗；也可以 chrome-extension://<id>/popup/popup.html 以标签页方式打开（测试夹具使用）",
+      "elements": [
+        {
+          "testId": "app-title",
+          "description": "顶栏标题，文本「导航助手」",
+          "codePoints": [
+            "C-FE-CORE-06"
+          ],
+          "features": [
+            "F-CTX-02"
+          ]
+        },
+        {
+          "testId": "tab-home",
+          "description": "页签按钮「首页」（button，aria-selected 表示当前页签）",
+          "codePoints": [
+            "C-FE-CORE-06"
+          ],
+          "features": [
+            "F-CTX-02"
+          ]
+        },
+        {
+          "testId": "panel-home",
+          "description": "「首页」页签面板（未选中时 hidden）",
+          "codePoints": [
+            "C-FE-CORE-06"
+          ],
+          "features": [
+            "F-CTX-02"
+          ]
+        },
+        {
+          "testId": "tab-context",
+          "description": "页签按钮「上下文」（button，aria-selected 表示当前页签）",
+          "codePoints": [
+            "C-FE-CORE-06"
+          ],
+          "features": [
+            "F-CTX-02"
+          ]
+        },
+        {
+          "testId": "panel-context",
+          "description": "「上下文」页签面板（未选中时 hidden）",
+          "codePoints": [
+            "C-FE-CORE-06"
+          ],
+          "features": [
+            "F-CTX-02"
+          ]
+        },
+        {
+          "testId": "tab-ranked",
+          "description": "页签按钮「排序」（button，aria-selected 表示当前页签）",
+          "codePoints": [
+            "C-FE-CORE-06"
+          ],
+          "features": [
+            "F-CTX-02"
+          ]
+        },
+        {
+          "testId": "panel-ranked",
+          "description": "「排序」页签面板（未选中时 hidden）",
+          "codePoints": [
+            "C-FE-CORE-06"
+          ],
+          "features": [
+            "F-CTX-02"
+          ]
+        },
+        {
+          "testId": "tab-cleanup",
+          "description": "页签按钮「整理」（button，aria-selected 表示当前页签）",
+          "codePoints": [
+            "C-FE-CORE-06"
+          ],
+          "features": [
+            "F-CTX-02"
+          ]
+        },
+        {
+          "testId": "panel-cleanup",
+          "description": "「整理」页签面板（未选中时 hidden）",
+          "codePoints": [
+            "C-FE-CORE-06"
+          ],
+          "features": [
+            "F-CTX-02"
+          ]
+        },
+        {
+          "testId": "tab-rules",
+          "description": "页签按钮「规则」（button，aria-selected 表示当前页签）",
+          "codePoints": [
+            "C-FE-CORE-06"
+          ],
+          "features": [
+            "F-CTX-02"
+          ]
+        },
+        {
+          "testId": "panel-rules",
+          "description": "「规则」页签面板（未选中时 hidden）",
+          "codePoints": [
+            "C-FE-CORE-06"
+          ],
+          "features": [
+            "F-CTX-02"
+          ]
+        },
+        {
+          "testId": "tab-diag",
+          "description": "页签按钮「诊断」（button，aria-selected 表示当前页签）",
+          "codePoints": [
+            "C-FE-CORE-06"
+          ],
+          "features": [
+            "F-CTX-02"
+          ]
+        },
+        {
+          "testId": "panel-diag",
+          "description": "「诊断」页签面板（未选中时 hidden）",
+          "codePoints": [
+            "C-FE-CORE-06"
+          ],
+          "features": [
+            "F-CTX-02"
+          ]
+        },
+        {
+          "testId": "tab-cleanup-count",
+          "description": "整理页签上的待处理数（无待处理时隐藏）",
+          "codePoints": [
+            "C-FE-CLEAN-04",
+            "C-FE-CORE-06"
+          ],
+          "features": [
+            "F-CLEAN-07"
+          ]
+        },
+        {
+          "testId": "tab-diag-alert",
+          "description": "诊断页签上的红点（后端未连接或诊断有失败项时显示）",
+          "codePoints": [
+            "C-FE-DIAG-02",
+            "C-FE-CORE-06"
+          ],
+          "features": [
+            "F-DIAG-01"
+          ]
+        },
+        {
+          "testId": "toast",
+          "description": "底部提示（同步成功等，约 2.6 秒）",
+          "codePoints": [
+            "C-FE-CORE-06"
+          ],
+          "features": [
+            "F-SYNC-06"
+          ]
+        },
+        {
+          "testId": "error-diag-link",
+          "description": "各区块错误 / 离线状态里的「诊断」入口（可多处出现，点击切到诊断页签）",
+          "codePoints": [
+            "C-FE-CORE-06",
+            "C-FE-CACHE-02"
+          ],
+          "features": [
+            "F-CACHE-02",
+            "F-DIAG-11"
+          ]
+        },
+        {
+          "testId": "connection-status",
+          "description": "顶栏连接状态：「后端已连接」/「后端未连接」/「检测中」，data-state=online|offline|checking，点击进入诊断",
+          "codePoints": [
+            "C-FE-DIAG-02"
+          ],
+          "features": [
+            "F-DIAG-01"
+          ]
+        },
+        {
+          "testId": "current-page-card",
+          "description": "当前页面卡片（外壳静态 section，内含 data-slot=current-page 与 data-slot=current-page-actions；系统页时卡片黄色，内容由 CTX 视图渲染）",
+          "codePoints": [
+            "C-FE-CTX-05",
+            "C-FE-CORE-06"
+          ],
+          "features": [
+            "F-CTX-03",
+            "F-CTX-04",
+            "F-CTX-07"
+          ]
+        },
+        {
+          "testId": "current-page-title",
+          "description": "当前页面标题",
+          "codePoints": [
+            "C-FE-CTX-05"
+          ],
+          "features": [
+            "F-CTX-03",
+            "F-CTX-04"
+          ]
+        },
+        {
+          "testId": "current-page-url",
+          "description": "当前页面完整 URL",
+          "codePoints": [
+            "C-FE-CTX-05"
+          ],
+          "features": [
+            "F-CTX-03",
+            "F-CTX-04"
+          ]
+        },
+        {
+          "testId": "current-page-system-badge",
+          "description": "系统页标识「系统页 · 不采集」（仅系统页显示）",
+          "codePoints": [
+            "C-FE-CTX-05"
+          ],
+          "features": [
+            "F-CTX-04",
+            "F-CTX-07"
+          ]
+        },
+        {
+          "testId": "current-page-star",
+          "description": "☆ 标记重要按钮，aria-pressed 表示是否已标记（系统页不显示；敏感页 disabled + aria-disabled=true，title「敏感页面不采集」）",
+          "codePoints": [
+            "C-FE-MENU-03"
+          ],
+          "features": [
+            "F-MENU-01"
+          ]
+        },
+        {
+          "testId": "current-page-add",
+          "description": "「添加到分析」按钮（button，系统页不显示；点击发送 ADD_TO_ANALYSIS，与右键菜单「添加到分析」同一 addToAnalysis 路径；结果以 toast 呈现：「已添加到分析」/「含敏感词未上传」）",
+          "codePoints": [
+            "C-FE-MENU-03",
+            "C-FE-MENU-01"
+          ],
+          "features": [
+            "F-MENU-01"
+          ]
+        },
+        {
+          "testId": "sync-button",
+          "description": "「同步浏览器上下文」按钮，同步中 disabled",
+          "codePoints": [
+            "C-FE-SYNC-01"
+          ],
+          "features": [
+            "F-SYNC-01",
+            "F-SYNC-06"
+          ]
+        },
+        {
+          "testId": "sync-full-button",
+          "description": "「全量同步」按钮（忽略游标）",
+          "codePoints": [
+            "C-FE-INCR-02"
+          ],
+          "features": [
+            "F-INCR-01"
+          ]
+        },
+        {
+          "testId": "sync-status",
+          "description": "同步状态行，data-status=idle|syncing|success|error；文本含「同步成功」「同步失败」「同步中」「尚未同步」",
+          "codePoints": [
+            "C-FE-SYNC-01"
+          ],
+          "features": [
+            "F-SYNC-06"
+          ]
+        },
+        {
+          "testId": "sync-status-time",
+          "description": "上次同步时间（HH:mm 与相对时间）",
+          "codePoints": [
+            "C-FE-SYNC-01"
+          ],
+          "features": [
+            "F-SYNC-06"
+          ]
+        },
+        {
+          "testId": "sync-uploaded-count",
+          "description": "本次上传条数（纯数字）",
+          "codePoints": [
+            "C-FE-SYNC-01"
+          ],
+          "features": [
+            "F-SYNC-06"
+          ]
+        },
+        {
+          "testId": "sync-filtered-count",
+          "description": "本次过滤条数（纯数字，只计数不展示 URL）",
+          "codePoints": [
+            "C-FE-SYNC-01"
+          ],
+          "features": [
+            "F-SYNC-06",
+            "F-PRIV-01"
+          ]
+        },
+        {
+          "testId": "sync-error-message",
+          "description": "同步失败原因（失败时显示，中断时包含「中断」）",
+          "codePoints": [
+            "C-FE-SYNC-01"
+          ],
+          "features": [
+            "F-SYNC-06"
+          ]
+        },
+        {
+          "testId": "sync-diag-link",
+          "description": "同步失败时的「诊断」入口",
+          "codePoints": [
+            "C-FE-SYNC-01"
+          ],
+          "features": [
+            "F-SYNC-06"
+          ]
+        },
+        {
+          "testId": "context-loading",
+          "description": "上下文页签加载中",
+          "codePoints": [
+            "C-FE-CTX-06"
+          ],
+          "features": [
+            "F-CTX-05"
+          ]
+        },
+        {
+          "testId": "context-error",
+          "description": "上下文读取失败",
+          "codePoints": [
+            "C-FE-CTX-06"
+          ],
+          "features": [
+            "F-CTX-05"
+          ]
+        },
+        {
+          "testId": "context-tabs-list",
+          "description": "「当前窗口标签页」列表",
+          "codePoints": [
+            "C-FE-CTX-06"
+          ],
+          "features": [
+            "F-CTX-05"
+          ]
+        },
+        {
+          "testId": "context-tab-item",
+          "description": "标签页列表项（重复出现）",
+          "codePoints": [
+            "C-FE-CTX-06"
+          ],
+          "features": [
+            "F-CTX-05",
+            "F-PRIV-04"
+          ]
+        },
+        {
+          "testId": "context-tab-title",
+          "description": "标签页列表项标题（context-tab-item 的子元素）",
+          "codePoints": [
+            "C-FE-CTX-06"
+          ],
+          "features": [
+            "F-CTX-05"
+          ]
+        },
+        {
+          "testId": "context-tab-url",
+          "description": "标签页列表项 URL（子元素）",
+          "codePoints": [
+            "C-FE-CTX-06"
+          ],
+          "features": [
+            "F-CTX-05"
+          ]
+        },
+        {
+          "testId": "context-tab-badge",
+          "description": "标签页列表项标注：「系统页 · 跳过」或「含 <关键词> · 不上传」（子元素，无标注时不渲染）",
+          "codePoints": [
+            "C-FE-CTX-06"
+          ],
+          "features": [
+            "F-CTX-07",
+            "F-PRIV-01",
+            "F-PRIV-02"
+          ]
+        },
+        {
+          "testId": "context-tabs-empty",
+          "description": "标签页列表空状态",
+          "codePoints": [
+            "C-FE-CTX-06"
+          ],
+          "features": [
+            "F-CTX-05"
+          ]
+        },
+        {
+          "testId": "context-history-list",
+          "description": "「最近浏览历史」列表（按 lastVisitTime 倒序）",
+          "codePoints": [
+            "C-FE-CTX-06"
+          ],
+          "features": [
+            "F-CTX-06"
+          ]
+        },
+        {
+          "testId": "context-history-item",
+          "description": "历史列表项（重复出现）",
+          "codePoints": [
+            "C-FE-CTX-06"
+          ],
+          "features": [
+            "F-CTX-06"
+          ]
+        },
+        {
+          "testId": "context-history-title",
+          "description": "历史列表项标题（子元素）",
+          "codePoints": [
+            "C-FE-CTX-06"
+          ],
+          "features": [
+            "F-CTX-06"
+          ]
+        },
+        {
+          "testId": "context-history-url",
+          "description": "历史列表项 URL（子元素）",
+          "codePoints": [
+            "C-FE-CTX-06"
+          ],
+          "features": [
+            "F-CTX-06"
+          ]
+        },
+        {
+          "testId": "context-history-time",
+          "description": "历史列表项访问时间（子元素，data-ts=毫秒）",
+          "codePoints": [
+            "C-FE-CTX-06"
+          ],
+          "features": [
+            "F-CTX-06"
+          ]
+        },
+        {
+          "testId": "context-history-badge",
+          "description": "历史列表项标注（同 context-tab-badge）",
+          "codePoints": [
+            "C-FE-CTX-06"
+          ],
+          "features": [
+            "F-PRIV-01",
+            "F-PRIV-02"
+          ]
+        },
+        {
+          "testId": "context-history-empty",
+          "description": "历史列表空状态",
+          "codePoints": [
+            "C-FE-CTX-06"
+          ],
+          "features": [
+            "F-CTX-06"
+          ]
+        },
+        {
+          "testId": "context-history-count",
+          "description": "历史条数（纯数字）",
+          "codePoints": [
+            "C-FE-CTX-06"
+          ],
+          "features": [
+            "F-CTX-06"
+          ]
+        },
+        {
+          "testId": "context-history-query",
+          "description": "历史查询范围说明，data-start-time / data-max-results 为实际传给 history.search 的参数",
+          "codePoints": [
+            "C-FE-CTX-06",
+            "C-FE-CTX-03"
+          ],
+          "features": [
+            "F-CTX-06"
+          ]
+        },
+        {
+          "testId": "context-privacy-keywords",
+          "description": "敏感关键词说明（关键词列表与来源：后端 / 本地缓存 / 内置默认）",
+          "codePoints": [
+            "C-FE-CTX-06",
+            "C-FE-PRIV-02"
+          ],
+          "features": [
+            "F-PRIV-02"
+          ]
+        },
+        {
+          "testId": "rec-list",
+          "description": "首页「下一步推荐」列表（最多 3 条）",
+          "codePoints": [
+            "C-FE-REC-02"
+          ],
+          "features": [
+            "F-REC-08"
+          ]
+        },
+        {
+          "testId": "rec-item",
+          "description": "推荐项（button，点击在新标签页打开）",
+          "codePoints": [
+            "C-FE-REC-02",
+            "C-FE-REC-03"
+          ],
+          "features": [
+            "F-REC-08"
+          ]
+        },
+        {
+          "testId": "rec-item-title",
+          "description": "推荐项标题（子元素）",
+          "codePoints": [
+            "C-FE-REC-02"
+          ],
+          "features": [
+            "F-REC-08"
+          ]
+        },
+        {
+          "testId": "rec-item-score",
+          "description": "推荐项分数，两位小数（子元素）",
+          "codePoints": [
+            "C-FE-REC-02"
+          ],
+          "features": [
+            "F-REC-08"
+          ]
+        },
+        {
+          "testId": "rec-item-reason",
+          "description": "推荐项理由（子元素）",
+          "codePoints": [
+            "C-FE-REC-02"
+          ],
+          "features": [
+            "F-REC-08"
+          ]
+        },
+        {
+          "testId": "rec-loading",
+          "description": "推荐加载中",
+          "codePoints": [
+            "C-FE-REC-02"
+          ],
+          "features": [
+            "F-REC-08"
+          ]
+        },
+        {
+          "testId": "rec-empty",
+          "description": "推荐空状态，文案含「同步浏览器上下文」",
+          "codePoints": [
+            "C-FE-REC-02"
+          ],
+          "features": [
+            "F-REC-08"
+          ]
+        },
+        {
+          "testId": "rec-error",
+          "description": "推荐错误状态（后端未连接且无缓存），含 error-diag-link",
+          "codePoints": [
+            "C-FE-REC-02"
+          ],
+          "features": [
+            "F-REC-08",
+            "F-CACHE-02"
+          ]
+        },
+        {
+          "testId": "home-ranked-list",
+          "description": "首页「历史排序」Top 5 列表",
+          "codePoints": [
+            "C-FE-RANK-02"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "home-ranked-item",
+          "description": "首页排序项（重复出现）",
+          "codePoints": [
+            "C-FE-RANK-02"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "ranked-item-title",
+          "description": "排序项标题（home-ranked-item / ranked-item 的子元素）",
+          "codePoints": [
+            "C-FE-RANK-02",
+            "C-FE-RANK-03"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "ranked-item-url",
+          "description": "排序项 URL（子元素）",
+          "codePoints": [
+            "C-FE-RANK-02",
+            "C-FE-RANK-03"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "ranked-item-score",
+          "description": "排序项分数，两位小数（子元素）",
+          "codePoints": [
+            "C-FE-RANK-02",
+            "C-FE-RANK-03"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "ranked-item-reason",
+          "description": "排序项理由（子元素）",
+          "codePoints": [
+            "C-FE-RANK-02",
+            "C-FE-RANK-03"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "home-ranked-loading",
+          "description": "首页排序加载中",
+          "codePoints": [
+            "C-FE-RANK-02"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "home-ranked-empty",
+          "description": "首页排序空状态，文案含「同步浏览器上下文」",
+          "codePoints": [
+            "C-FE-RANK-02"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "home-ranked-error",
+          "description": "首页排序错误状态，含 error-diag-link",
+          "codePoints": [
+            "C-FE-RANK-02"
+          ],
+          "features": [
+            "F-RANK-05",
+            "F-CACHE-02"
+          ]
+        },
+        {
+          "testId": "ranked-list",
+          "description": "排序页签完整列表",
+          "codePoints": [
+            "C-FE-RANK-03"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "ranked-item",
+          "description": "排序页签列表项（重复出现）",
+          "codePoints": [
+            "C-FE-RANK-03"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "ranked-item-toggle",
+          "description": "展开 / 收起评分明细按钮（子元素）",
+          "codePoints": [
+            "C-FE-RANK-03"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "ranked-item-detail",
+          "description": "评分明细容器（展开后可见）",
+          "codePoints": [
+            "C-FE-RANK-03"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "ranked-detail-recency",
+          "description": "时效得分（两位小数）",
+          "codePoints": [
+            "C-FE-RANK-03"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "ranked-detail-frequency",
+          "description": "频次得分（两位小数）",
+          "codePoints": [
+            "C-FE-RANK-03"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "ranked-detail-open",
+          "description": "打开得分（两位小数）",
+          "codePoints": [
+            "C-FE-RANK-03"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "ranked-detail-domain",
+          "description": "域名得分（两位小数）",
+          "codePoints": [
+            "C-FE-RANK-03"
+          ],
+          "features": [
+            "F-RANK-05",
+            "F-MENU-01"
+          ]
+        },
+        {
+          "testId": "ranked-filter-open",
+          "description": "「打开中」筛选开关（button，aria-pressed）",
+          "codePoints": [
+            "C-FE-RANK-03"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "ranked-filter-domain",
+          "description": "域名筛选下拉框（select，空值 = 全部）",
+          "codePoints": [
+            "C-FE-RANK-03"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "ranked-total",
+          "description": "当前筛选下的条数（纯数字）",
+          "codePoints": [
+            "C-FE-RANK-03"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "ranked-formula",
+          "description": "评分公式说明（常驻）",
+          "codePoints": [
+            "C-FE-RANK-03"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "ranked-loading",
+          "description": "排序页签加载中",
+          "codePoints": [
+            "C-FE-RANK-03"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "ranked-empty",
+          "description": "排序页签空状态，文案含「同步浏览器上下文」",
+          "codePoints": [
+            "C-FE-RANK-03"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "ranked-error",
+          "description": "排序页签错误状态，含 error-diag-link",
+          "codePoints": [
+            "C-FE-RANK-03"
+          ],
+          "features": [
+            "F-RANK-05"
+          ]
+        },
+        {
+          "testId": "ranked-filter-offline-hint",
+          "description": "带筛选（打开中 / 域名）的请求在后端不可达时的提示「筛选需要在线」（GET_RANKED 返回 NO_CACHE）；筛选结果不读写缓存",
+          "codePoints": [
+            "C-FE-RANK-03",
+            "C-FE-RANK-01"
+          ],
+          "features": [
+            "F-RANK-05",
+            "F-CACHE-02"
+          ]
+        },
+        {
+          "testId": "home-cleanup-summary",
+          "description": "首页「整理建议」摘要（点击进入整理页签）",
+          "codePoints": [
+            "C-FE-CLEAN-03"
+          ],
+          "features": [
+            "F-CLEAN-07"
+          ]
+        },
+        {
+          "testId": "home-cleanup-archive-count",
+          "description": "首页摘要「归档 N」",
+          "codePoints": [
+            "C-FE-CLEAN-03"
+          ],
+          "features": [
+            "F-CLEAN-07"
+          ]
+        },
+        {
+          "testId": "home-cleanup-merge-count",
+          "description": "首页摘要「重复 N」",
+          "codePoints": [
+            "C-FE-CLEAN-03"
+          ],
+          "features": [
+            "F-CLEAN-07"
+          ]
+        },
+        {
+          "testId": "home-cleanup-keep-count",
+          "description": "首页摘要「保留 N」",
+          "codePoints": [
+            "C-FE-CLEAN-03"
+          ],
+          "features": [
+            "F-CLEAN-07"
+          ]
+        },
+        {
+          "testId": "home-cleanup-loading",
+          "description": "首页整理加载中",
+          "codePoints": [
+            "C-FE-CLEAN-03"
+          ],
+          "features": [
+            "F-CLEAN-07"
+          ]
+        },
+        {
+          "testId": "home-cleanup-empty",
+          "description": "首页整理空状态，文案含「同步浏览器上下文」",
+          "codePoints": [
+            "C-FE-CLEAN-03"
+          ],
+          "features": [
+            "F-CLEAN-07"
+          ]
+        },
+        {
+          "testId": "home-cleanup-error",
+          "description": "首页整理错误状态，含 error-diag-link",
+          "codePoints": [
+            "C-FE-CLEAN-03"
+          ],
+          "features": [
+            "F-CLEAN-07",
+            "F-CACHE-02"
+          ]
+        },
+        {
+          "testId": "cleanup-group-archive",
+          "description": "「归档」分组容器",
+          "codePoints": [
+            "C-FE-CLEAN-04"
+          ],
+          "features": [
+            "F-CLEAN-07"
+          ]
+        },
+        {
+          "testId": "cleanup-group-merge",
+          "description": "「重复」分组容器",
+          "codePoints": [
+            "C-FE-CLEAN-04"
+          ],
+          "features": [
+            "F-CLEAN-07"
+          ]
+        },
+        {
+          "testId": "cleanup-group-keep",
+          "description": "「保留」分组容器",
+          "codePoints": [
+            "C-FE-CLEAN-04"
+          ],
+          "features": [
+            "F-CLEAN-07"
+          ]
+        },
+        {
+          "testId": "cleanup-item",
+          "description": "整理建议项（重复出现），data-action=archive|merge|keep",
+          "codePoints": [
+            "C-FE-CLEAN-04"
+          ],
+          "features": [
+            "F-CLEAN-07",
+            "F-CLEAN-08"
+          ]
+        },
+        {
+          "testId": "cleanup-item-title",
+          "description": "建议项标题（子元素）",
+          "codePoints": [
+            "C-FE-CLEAN-04"
+          ],
+          "features": [
+            "F-CLEAN-07"
+          ]
+        },
+        {
+          "testId": "cleanup-item-url",
+          "description": "建议项 URL；merge 项为组内全部 URL，每个一行（子元素）",
+          "codePoints": [
+            "C-FE-CLEAN-04"
+          ],
+          "features": [
+            "F-CLEAN-07"
+          ]
+        },
+        {
+          "testId": "cleanup-item-reason",
+          "description": "建议项理由（子元素）",
+          "codePoints": [
+            "C-FE-CLEAN-04"
+          ],
+          "features": [
+            "F-CLEAN-07"
+          ]
+        },
+        {
+          "testId": "cleanup-item-rule-tag",
+          "description": "「规则」标签（命中规则时显示，子元素）",
+          "codePoints": [
+            "C-FE-CLEAN-04"
+          ],
+          "features": [
+            "F-CLEAN-07"
+          ]
+        },
+        {
+          "testId": "cleanup-item-rule-text",
+          "description": "命中规则的原文（子元素）",
+          "codePoints": [
+            "C-FE-CLEAN-04"
+          ],
+          "features": [
+            "F-CLEAN-07"
+          ]
+        },
+        {
+          "testId": "cleanup-archive-button",
+          "description": "「归档」按钮（archive 项）",
+          "codePoints": [
+            "C-FE-CLEAN-05"
+          ],
+          "features": [
+            "F-CLEAN-08"
+          ]
+        },
+        {
+          "testId": "cleanup-merge-button",
+          "description": "「合并」按钮（merge 项）",
+          "codePoints": [
+            "C-FE-CLEAN-05"
+          ],
+          "features": [
+            "F-CLEAN-08"
+          ]
+        },
+        {
+          "testId": "cleanup-ignore-button",
+          "description": "「忽略」按钮（7 天内不再出现）",
+          "codePoints": [
+            "C-FE-CLEAN-05"
+          ],
+          "features": [
+            "F-CLEAN-08"
+          ]
+        },
+        {
+          "testId": "cleanup-undo-button",
+          "description": "「撤销」按钮（归档 / 合并成功后出现）",
+          "codePoints": [
+            "C-FE-CLEAN-05"
+          ],
+          "features": [
+            "F-CLEAN-08"
+          ]
+        },
+        {
+          "testId": "cleanup-archive-all-button",
+          "description": "「全部归档」按钮",
+          "codePoints": [
+            "C-FE-CLEAN-05"
+          ],
+          "features": [
+            "F-CLEAN-08"
+          ]
+        },
+        {
+          "testId": "cleanup-action-error",
+          "description": "整理操作失败提示",
+          "codePoints": [
+            "C-FE-CLEAN-05"
+          ],
+          "features": [
+            "F-CLEAN-08"
+          ]
+        },
+        {
+          "testId": "cleanup-loading",
+          "description": "整理页签加载中",
+          "codePoints": [
+            "C-FE-CLEAN-04"
+          ],
+          "features": [
+            "F-CLEAN-07"
+          ]
+        },
+        {
+          "testId": "cleanup-empty",
+          "description": "整理页签空状态，文案含「同步浏览器上下文」",
+          "codePoints": [
+            "C-FE-CLEAN-04"
+          ],
+          "features": [
+            "F-CLEAN-07"
+          ]
+        },
+        {
+          "testId": "cleanup-error",
+          "description": "整理页签错误状态，含 error-diag-link",
+          "codePoints": [
+            "C-FE-CLEAN-04"
+          ],
+          "features": [
+            "F-CLEAN-07"
+          ]
+        },
+        {
+          "testId": "home-rule-input",
+          "description": "首页「用一句话配置规则」输入框",
+          "codePoints": [
+            "C-FE-RULE-05"
+          ],
+          "features": [
+            "F-RULE-01"
+          ]
+        },
+        {
+          "testId": "home-rule-parse-button",
+          "description": "首页「解析」按钮（切到规则页签并解析；离线时 disabled）",
+          "codePoints": [
+            "C-FE-RULE-05"
+          ],
+          "features": [
+            "F-RULE-01"
+          ]
+        },
+        {
+          "testId": "rule-input",
+          "description": "规则页签输入框（textarea，1–500 字）",
+          "codePoints": [
+            "C-FE-RULE-02"
+          ],
+          "features": [
+            "F-RULE-01"
+          ]
+        },
+        {
+          "testId": "rule-parse-button",
+          "description": "「解析」按钮（离线时 disabled）",
+          "codePoints": [
+            "C-FE-RULE-02"
+          ],
+          "features": [
+            "F-RULE-01"
+          ]
+        },
+        {
+          "testId": "rule-offline-hint",
+          "description": "离线提示「后端未连接，暂时无法解析」",
+          "codePoints": [
+            "C-FE-RULE-02"
+          ],
+          "features": [
+            "F-RULE-01"
+          ]
+        },
+        {
+          "testId": "rule-parse-loading",
+          "description": "解析中",
+          "codePoints": [
+            "C-FE-RULE-02"
+          ],
+          "features": [
+            "F-RULE-01"
+          ]
+        },
+        {
+          "testId": "rule-parse-error",
+          "description": "解析请求失败提示",
+          "codePoints": [
+            "C-FE-RULE-02"
+          ],
+          "features": [
+            "F-RULE-01"
+          ]
+        },
+        {
+          "testId": "rule-preview-list",
+          "description": "解析结果卡片列表",
+          "codePoints": [
+            "C-FE-RULE-02"
+          ],
+          "features": [
+            "F-RULE-01"
+          ]
+        },
+        {
+          "testId": "rule-card",
+          "description": "规则卡片（重复出现），data-type=规则类型",
+          "codePoints": [
+            "C-FE-RULE-02"
+          ],
+          "features": [
+            "F-RULE-01"
+          ]
+        },
+        {
+          "testId": "rule-card-checkbox",
+          "description": "卡片勾选框（默认勾选）",
+          "codePoints": [
+            "C-FE-RULE-03"
+          ],
+          "features": [
+            "F-RULE-06"
+          ]
+        },
+        {
+          "testId": "rule-card-type",
+          "description": "卡片类型标签：「建议归档」「永不归档」「隐私过滤」「关联推荐」「排序加权」",
+          "codePoints": [
+            "C-FE-RULE-02"
+          ],
+          "features": [
+            "F-RULE-01"
+          ]
+        },
+        {
+          "testId": "rule-card-fields",
+          "description": "结构化字段摘要，例如「github.com · /issues/ · 7 天」",
+          "codePoints": [
+            "C-FE-RULE-02"
+          ],
+          "features": [
+            "F-RULE-01"
+          ]
+        },
+        {
+          "testId": "rule-card-raw",
+          "description": "规则原文",
+          "codePoints": [
+            "C-FE-RULE-02"
+          ],
+          "features": [
+            "F-RULE-01"
+          ]
+        },
+        {
+          "testId": "rule-card-confidence",
+          "description": "置信度（高 / 中）",
+          "codePoints": [
+            "C-FE-RULE-02"
+          ],
+          "features": [
+            "F-RULE-01"
+          ]
+        },
+        {
+          "testId": "rule-card-json-toggle",
+          "description": "「查看 JSON」按钮",
+          "codePoints": [
+            "C-FE-RULE-02"
+          ],
+          "features": [
+            "F-RULE-01"
+          ]
+        },
+        {
+          "testId": "rule-card-json",
+          "description": "规则 JSON（展开后可见，textContent 渲染）",
+          "codePoints": [
+            "C-FE-RULE-02"
+          ],
+          "features": [
+            "F-RULE-01"
+          ]
+        },
+        {
+          "testId": "rule-unparsed",
+          "description": "黄色提示框：无法识别 / 使用默认值 / 冲突的说明与例句",
+          "codePoints": [
+            "C-FE-RULE-02"
+          ],
+          "features": [
+            "F-RULE-01"
+          ]
+        },
+        {
+          "testId": "rule-save-button",
+          "description": "「确认保存 N 条」按钮（N 为勾选数，N=0 时 disabled）",
+          "codePoints": [
+            "C-FE-RULE-03"
+          ],
+          "features": [
+            "F-RULE-06"
+          ]
+        },
+        {
+          "testId": "rule-save-result",
+          "description": "保存结果提示（成功条数或错误）",
+          "codePoints": [
+            "C-FE-RULE-03"
+          ],
+          "features": [
+            "F-RULE-06"
+          ]
+        },
+        {
+          "testId": "rules-list",
+          "description": "已保存规则列表",
+          "codePoints": [
+            "C-FE-RULE-04"
+          ],
+          "features": [
+            "F-RULE-07"
+          ]
+        },
+        {
+          "testId": "rules-count",
+          "description": "已保存规则数（纯数字）",
+          "codePoints": [
+            "C-FE-RULE-04"
+          ],
+          "features": [
+            "F-RULE-07"
+          ]
+        },
+        {
+          "testId": "rules-item",
+          "description": "已保存规则项（重复出现），data-rule-id、data-type",
+          "codePoints": [
+            "C-FE-RULE-04"
+          ],
+          "features": [
+            "F-RULE-07",
+            "F-RULE-08",
+            "F-RULE-09"
+          ]
+        },
+        {
+          "testId": "rules-item-type",
+          "description": "规则项类型标签",
+          "codePoints": [
+            "C-FE-RULE-04"
+          ],
+          "features": [
+            "F-RULE-07"
+          ]
+        },
+        {
+          "testId": "rules-item-summary",
+          "description": "规则项摘要",
+          "codePoints": [
+            "C-FE-RULE-04"
+          ],
+          "features": [
+            "F-RULE-07"
+          ]
+        },
+        {
+          "testId": "rules-item-raw",
+          "description": "规则项原文",
+          "codePoints": [
+            "C-FE-RULE-04"
+          ],
+          "features": [
+            "F-RULE-07"
+          ]
+        },
+        {
+          "testId": "rules-item-toggle",
+          "description": "启停开关（input type=checkbox role=switch，checked=enabled）",
+          "codePoints": [
+            "C-FE-RULE-04"
+          ],
+          "features": [
+            "F-RULE-07",
+            "F-RULE-09"
+          ]
+        },
+        {
+          "testId": "rules-item-delete",
+          "description": "删除按钮（点击后出现行内确认）",
+          "codePoints": [
+            "C-FE-RULE-04"
+          ],
+          "features": [
+            "F-RULE-07",
+            "F-RULE-08"
+          ]
+        },
+        {
+          "testId": "rules-item-delete-confirm",
+          "description": "行内「确认删除」按钮",
+          "codePoints": [
+            "C-FE-RULE-04"
+          ],
+          "features": [
+            "F-RULE-08"
+          ]
+        },
+        {
+          "testId": "rules-list-loading",
+          "description": "规则列表加载中",
+          "codePoints": [
+            "C-FE-RULE-04"
+          ],
+          "features": [
+            "F-RULE-07"
+          ]
+        },
+        {
+          "testId": "rules-list-empty",
+          "description": "规则列表空状态",
+          "codePoints": [
+            "C-FE-RULE-04"
+          ],
+          "features": [
+            "F-RULE-07"
+          ]
+        },
+        {
+          "testId": "rules-list-error",
+          "description": "规则列表错误状态",
+          "codePoints": [
+            "C-FE-RULE-04"
+          ],
+          "features": [
+            "F-RULE-07"
+          ]
+        },
+        {
+          "testId": "home-diag-entry",
+          "description": "首页「启动诊断」入口行（汇总文本，点击进入诊断页签）",
+          "codePoints": [
+            "C-FE-DIAG-12"
+          ],
+          "features": [
+            "F-DIAG-11"
+          ]
+        },
+        {
+          "testId": "diag-summary",
+          "description": "诊断汇总（通过 / 警告 / 失败数）",
+          "codePoints": [
+            "C-FE-DIAG-11"
+          ],
+          "features": [
+            "F-DIAG-11"
+          ]
+        },
+        {
+          "testId": "diag-checked-at",
+          "description": "检测时间，data-ts=毫秒",
+          "codePoints": [
+            "C-FE-DIAG-11"
+          ],
+          "features": [
+            "F-DIAG-11"
+          ]
+        },
+        {
+          "testId": "diag-loading",
+          "description": "诊断进行中",
+          "codePoints": [
+            "C-FE-DIAG-11"
+          ],
+          "features": [
+            "F-DIAG-11"
+          ]
+        },
+        {
+          "testId": "diag-rerun-button",
+          "description": "「重新检测」按钮",
+          "codePoints": [
+            "C-FE-DIAG-11"
+          ],
+          "features": [
+            "F-DIAG-11"
+          ]
+        },
+        {
+          "testId": "diag-copy-report-button",
+          "description": "「复制诊断报告」按钮",
+          "codePoints": [
+            "C-FE-DIAG-11",
+            "C-FE-DIAG-10"
+          ],
+          "features": [
+            "F-DIAG-11"
+          ]
+        },
+        {
+          "testId": "diag-report-output",
+          "description": "复制后显示的报告 JSON（与剪贴板内容一致）",
+          "codePoints": [
+            "C-FE-DIAG-11",
+            "C-FE-DIAG-10"
+          ],
+          "features": [
+            "F-DIAG-11"
+          ]
+        },
+        {
+          "testId": "diag-check-backend",
+          "description": "检查项「后端服务连接」容器，data-status=ok|warn|fail|info",
+          "codePoints": [
+            "C-FE-DIAG-11",
+            "C-FE-DIAG-01"
+          ],
+          "features": [
+            "F-DIAG-01"
+          ]
+        },
+        {
+          "testId": "diag-check-tabs",
+          "description": "检查项「tabs 权限」",
+          "codePoints": [
+            "C-FE-DIAG-11",
+            "C-FE-DIAG-04"
+          ],
+          "features": [
+            "F-DIAG-03"
+          ]
+        },
+        {
+          "testId": "diag-check-history",
+          "description": "检查项「history 权限」",
+          "codePoints": [
+            "C-FE-DIAG-11",
+            "C-FE-DIAG-04"
+          ],
+          "features": [
+            "F-DIAG-04"
+          ]
+        },
+        {
+          "testId": "diag-check-storage",
+          "description": "检查项「storage 可用」（detail 含已用字节数）",
+          "codePoints": [
+            "C-FE-DIAG-11",
+            "C-FE-DIAG-05"
+          ],
+          "features": [
+            "F-DIAG-05"
+          ]
+        },
+        {
+          "testId": "diag-check-api-base-url",
+          "description": "检查项「API Base URL」",
+          "codePoints": [
+            "C-FE-DIAG-11",
+            "C-FE-DIAG-03"
+          ],
+          "features": [
+            "F-DIAG-02"
+          ]
+        },
+        {
+          "testId": "diag-check-last-sync",
+          "description": "检查项「最近一次同步」",
+          "codePoints": [
+            "C-FE-DIAG-11",
+            "C-FE-DIAG-06"
+          ],
+          "features": [
+            "F-DIAG-06"
+          ]
+        },
+        {
+          "testId": "diag-check-rule-count",
+          "description": "检查项「当前规则数量」",
+          "codePoints": [
+            "C-FE-DIAG-11",
+            "C-FE-DIAG-07"
+          ],
+          "features": [
+            "F-DIAG-07"
+          ]
+        },
+        {
+          "testId": "diag-check-active-tab",
+          "description": "检查项「activeTab 权限」",
+          "codePoints": [
+            "C-FE-DIAG-11",
+            "C-FE-DIAG-04"
+          ],
+          "features": [
+            "F-DIAG-08"
+          ]
+        },
+        {
+          "testId": "diag-check-privacy",
+          "description": "检查项「隐私过滤」",
+          "codePoints": [
+            "C-FE-DIAG-11",
+            "C-FE-DIAG-08"
+          ],
+          "features": [
+            "F-DIAG-08"
+          ]
+        },
+        {
+          "testId": "diag-check-incognito",
+          "description": "检查项「无痕模式」（status=info，说明无痕窗口的数据不会被采集）",
+          "codePoints": [
+            "C-FE-DIAG-11",
+            "C-FE-DIAG-08"
+          ],
+          "features": [
+            "F-DIAG-08"
+          ]
+        },
+        {
+          "testId": "diag-check-version",
+          "description": "检查项「版本兼容」",
+          "codePoints": [
+            "C-FE-DIAG-11",
+            "C-FE-DIAG-08"
+          ],
+          "features": [
+            "F-DIAG-08"
+          ]
+        },
+        {
+          "testId": "diag-item-name",
+          "description": "检查项名称（diag-check-* 的子元素）",
+          "codePoints": [
+            "C-FE-DIAG-11"
+          ],
+          "features": [
+            "F-DIAG-11"
+          ]
+        },
+        {
+          "testId": "diag-item-status",
+          "description": "检查项状态文本：通过 / 警告 / 失败 / 提示（子元素，data-status）",
+          "codePoints": [
+            "C-FE-DIAG-11"
+          ],
+          "features": [
+            "F-DIAG-11"
+          ]
+        },
+        {
+          "testId": "diag-item-detail",
+          "description": "检查项详情（发生了什么、数值、耗时、错误类型）（子元素）",
+          "codePoints": [
+            "C-FE-DIAG-11"
+          ],
+          "features": [
+            "F-DIAG-11"
+          ]
+        },
+        {
+          "testId": "diag-item-value",
+          "description": "检查项的关键数值（例如 version、规则数、字节数，子元素）",
+          "codePoints": [
+            "C-FE-DIAG-11"
+          ],
+          "features": [
+            "F-DIAG-01",
+            "F-DIAG-05",
+            "F-DIAG-07"
+          ]
+        },
+        {
+          "testId": "diag-item-hint",
+          "description": "排查步骤列表 ol（warn / fail 时显示，子元素）",
+          "codePoints": [
+            "C-FE-DIAG-11",
+            "C-FE-DIAG-09"
+          ],
+          "features": [
+            "F-DIAG-11"
+          ]
+        },
+        {
+          "testId": "diag-item-hint-step",
+          "description": "排查步骤 li（hint 的子元素，重复出现）",
+          "codePoints": [
+            "C-FE-DIAG-11",
+            "C-FE-DIAG-09"
+          ],
+          "features": [
+            "F-DIAG-11"
+          ]
+        },
+        {
+          "testId": "diag-sync-now-button",
+          "description": "「最近一次同步」项中的「立即同步」入口（从未同步时显示）",
+          "codePoints": [
+            "C-FE-DIAG-11"
+          ],
+          "features": [
+            "F-DIAG-06"
+          ]
+        },
+        {
+          "testId": "diag-api-base-url-current",
+          "description": "当前 API Base URL",
+          "codePoints": [
+            "C-FE-DIAG-03"
+          ],
+          "features": [
+            "F-DIAG-02"
+          ]
+        },
+        {
+          "testId": "diag-api-base-url-input",
+          "description": "API Base URL 输入框",
+          "codePoints": [
+            "C-FE-DIAG-03"
+          ],
+          "features": [
+            "F-DIAG-02"
+          ]
+        },
+        {
+          "testId": "diag-api-base-url-save",
+          "description": "API Base URL 保存按钮",
+          "codePoints": [
+            "C-FE-DIAG-03"
+          ],
+          "features": [
+            "F-DIAG-02"
+          ]
+        },
+        {
+          "testId": "diag-api-base-url-error",
+          "description": "保存校验错误「地址格式错误」",
+          "codePoints": [
+            "C-FE-DIAG-03"
+          ],
+          "features": [
+            "F-DIAG-02"
+          ]
+        },
+        {
+          "testId": "diag-api-base-url-saved",
+          "description": "保存成功提示（含未授权 warning 时附说明）",
+          "codePoints": [
+            "C-FE-DIAG-03"
+          ],
+          "features": [
+            "F-DIAG-02"
+          ]
+        },
+        {
+          "testId": "offline-banner-home",
+          "description": "首页顶部红色提示条「以下为 HH:mm 同步时缓存的结果」",
+          "codePoints": [
+            "C-FE-CACHE-02"
+          ],
+          "features": [
+            "F-CACHE-02"
+          ]
+        },
+        {
+          "testId": "offline-banner-ranked",
+          "description": "排序页顶部红色提示条",
+          "codePoints": [
+            "C-FE-CACHE-02"
+          ],
+          "features": [
+            "F-CACHE-02"
+          ]
+        },
+        {
+          "testId": "offline-banner-cleanup",
+          "description": "整理页顶部红色提示条",
+          "codePoints": [
+            "C-FE-CACHE-02"
+          ],
+          "features": [
+            "F-CACHE-02"
+          ]
+        }
+      ]
+    }
+  ],
+  "messages": [
+    {
+      "type": "GET_CONTEXT",
+      "request": {},
+      "response": {
+        "currentPage": "{ url: string|null, title: string, isSystem: boolean, tabId?: number, badge: null | { kind: \"system\"|\"sensitive\", keyword?: string, label: string } }",
+        "tabs": "[{ tabId, url, title, isSystem, badge: null | { kind: \"system\"|\"sensitive\", keyword?: string, label: string } }]",
+        "history": "[{ url, title, lastVisitTime, visitCount, badge }]",
+        "historyQuery": "{ startTime: number, maxResults: number }",
+        "privacy": "{ enabled: boolean, keywords: string[], source: \"server\"|\"cache\"|\"default\" }"
+      },
+      "codePoints": [
+        "C-FE-CTX-04",
+        "C-FE-CTX-01",
+        "C-FE-CTX-02",
+        "C-FE-CTX-03"
+      ],
+      "features": [
+        "F-CTX-03",
+        "F-CTX-04",
+        "F-CTX-05",
+        "F-CTX-06",
+        "F-CTX-07",
+        "F-PRIV-01",
+        "F-PRIV-02",
+        "F-PRIV-04"
+      ]
+    },
+    {
+      "type": "SYNC_NOW",
+      "request": {
+        "mode": "\"auto\"(默认，有游标则增量) | \"full\"",
+        "trigger": "\"user\"(默认) | \"auto\""
+      },
+      "response": {
+        "syncState": "SyncState（见 storageKeys.syncState）",
+        "result": "{ received, created, updated, rejected, rejectedByReason: { invalid_url, privacy }, pageCount, syncedAt, mode } | null",
+        "alreadyRunning": "boolean：调用时本 SW 已有同步在进行（runSync 单飞），本次复用同一次同步的结果，未发第二次 POST /api/sync",
+        "fullReason": "string|null（游标失效自动改为全量时的原因：api_base_changed | server_restarted | server_empty）"
+      },
+      "codePoints": [
+        "C-FE-SYNC-02",
+        "C-FE-SYNC-03"
+      ],
+      "features": [
+        "F-SYNC-01",
+        "F-SYNC-06",
+        "F-INCR-01"
+      ],
+      "note": "失败时 ok:false，error.code ∈ BACKEND_UNREACHABLE|TIMEOUT|VALIDATION_FAILED|…；syncState 同步写入 storage。防并发靠 services/sync.js 模块级 inFlight Promise 单飞（与 RECOVER_IF_NEEDED 共用），不靠 storage 的 syncState.status；popup 点击时同步置 sync-button / sync-full-button disabled"
+    },
+    {
+      "type": "GET_SYNC_STATE",
+      "request": {},
+      "response": {
+        "syncState": "SyncState（读取时做 30 秒中断检测）"
+      },
+      "codePoints": [
+        "C-FE-SYNC-02",
+        "C-FE-SYNC-04"
+      ],
+      "features": [
+        "F-SYNC-06"
+      ]
+    },
+    {
+      "type": "GET_RANKED",
+      "request": {
+        "limit": "number，默认 50（DEFAULTS.RANKED_LIMIT；首页取前 5）",
+        "openOnly": "boolean（透传为 ?openOnly=true，插件端不二次过滤）",
+        "domain": "string|null",
+        "source": "\"cache\"|\"network\"（默认 network）"
+      },
+      "response": {
+        "pages": "RankedPage[]（字段同 GET /api/pages/ranked）",
+        "total": "number",
+        "domains": "string[]（直接取 GET /api/pages/ranked 响应的 domains，不受本次 domain / openOnly / limit 影响）",
+        "fromCache": "boolean",
+        "offline": "boolean",
+        "cachedAt": "number|null"
+      },
+      "codePoints": [
+        "C-FE-RANK-01",
+        "C-FE-CACHE-01"
+      ],
+      "features": [
+        "F-RANK-05",
+        "F-CACHE-01",
+        "F-CACHE-02"
+      ],
+      "note": "缓存口径：只有无筛选（openOnly=false 且 domain 为空）且 limit=默认值的请求读写 cache.ranked（首页 Top 5 与离线展示的唯一来源）；带筛选或非默认 limit 的请求只走网络、不读不写缓存，后端不可达或 source='cache' 时返回 ok:false，error.code=NO_CACHE，message「筛选需要在线」（视图显示 ranked-filter-offline-hint）"
+    },
+    {
+      "type": "GET_RECOMMENDATIONS",
+      "request": {
+        "source": "\"cache\"|\"network\""
+      },
+      "response": {
+        "recommendations": "Recommendation[]（最多 5，popup 展示前 3）",
+        "contextUrl": "string|null（实际发送的 currentPage.url；系统页 / 无痕 / 敏感页为 null）",
+        "fromCache": "boolean",
+        "offline": "boolean",
+        "cachedAt": "number|null"
+      },
+      "codePoints": [
+        "C-FE-REC-01",
+        "C-FE-CACHE-01"
+      ],
+      "features": [
+        "F-REC-08",
+        "F-CACHE-01"
+      ]
+    },
+    {
+      "type": "OPEN_URL",
+      "request": {
+        "url": "string（仅 http/https）"
+      },
+      "response": {
+        "tabId": "number"
+      },
+      "codePoints": [
+        "C-FE-REC-03"
+      ],
+      "features": [
+        "F-REC-08"
+      ]
+    },
+    {
+      "type": "GET_CLEANUP",
+      "request": {
+        "source": "\"cache\"|\"network\""
+      },
+      "response": {
+        "summary": "{ archive, merge, keep }（已剔除忽略项）",
+        "suggestions": "CleanupSuggestion[]（字段同 api-contract，含后端稳定 key，前端不改写）",
+        "pendingCount": "number = archive + merge",
+        "fromCache": "boolean",
+        "offline": "boolean",
+        "cachedAt": "number|null"
+      },
+      "codePoints": [
+        "C-FE-CLEAN-01",
+        "C-FE-CACHE-01"
+      ],
+      "features": [
+        "F-CLEAN-07",
+        "F-CLEAN-08",
+        "F-CACHE-01"
+      ]
+    },
+    {
+      "type": "CLEANUP_ARCHIVE",
+      "request": {
+        "urls": "string[]"
+      },
+      "response": {
+        "archived": "number（= 后端 affected）",
+        "notFound": "number",
+        "undoToken": "{ kind: \"archive\", urls }"
+      },
+      "codePoints": [
+        "C-FE-CLEAN-02"
+      ],
+      "features": [
+        "F-CLEAN-08"
+      ],
+      "note": "后端 404（urls 全部不存在）时 ok:false，error.code=NOT_FOUND，message「建议已失效，已刷新列表」，cleanup 缓存失效"
+    },
+    {
+      "type": "CLEANUP_UNARCHIVE",
+      "request": {
+        "urls": "string[]"
+      },
+      "response": {
+        "unarchived": "number（= 后端 affected）",
+        "notFound": "number"
+      },
+      "codePoints": [
+        "C-FE-CLEAN-02"
+      ],
+      "features": [
+        "F-CLEAN-08"
+      ],
+      "note": "后端 404 时 ok:false，error.code=NOT_FOUND"
+    },
+    {
+      "type": "CLEANUP_MERGE",
+      "request": {
+        "urls": "string[]",
+        "keepUrl": "string"
+      },
+      "response": {
+        "archived": "number（= 后端 merged）",
+        "keepUrl": "string",
+        "undoToken": "{ kind: \"merge\", urls: urls 去掉 keepUrl }"
+      },
+      "codePoints": [
+        "C-FE-CLEAN-02"
+      ],
+      "features": [
+        "F-CLEAN-08"
+      ],
+      "note": "keepUrl 对应页面不存在时后端 404，ok:false，error.code=NOT_FOUND，message「建议已失效，已刷新列表」，cleanup 缓存失效"
+    },
+    {
+      "type": "CLEANUP_IGNORE",
+      "request": {
+        "key": "string（后端 suggestion.key 原样，如 archive:<normalizedUrl>、merge:<dupKey>；前端不自造 key）"
+      },
+      "response": {
+        "ignoredAt": "number"
+      },
+      "codePoints": [
+        "C-FE-CLEAN-02"
+      ],
+      "features": [
+        "F-CLEAN-08"
+      ]
+    },
+    {
+      "type": "PARSE_RULE",
+      "request": {
+        "text": "string（1–500 字）"
+      },
+      "response": {
+        "rules": "Rule[]（预览 id rule_1…，不写库）",
+        "unparsed": "[{ text, reason, examples: string[]（≥1 条例句） }]（与 api-contract 一致，原样透传）",
+        "warnings": "string[]（冲突等提示，原样透传，视图按字符串渲染）"
+      },
+      "codePoints": [
+        "C-FE-RULE-01"
+      ],
+      "features": [
+        "F-RULE-01"
+      ]
+    },
+    {
+      "type": "SAVE_RULES",
+      "request": {
+        "rules": "Rule[]（用户勾选的预览规则）"
+      },
+      "response": {
+        "rules": "Rule[]（后端分配正式 id；POST /api/rules 返回 201）",
+        "ruleCount": "number"
+      },
+      "codePoints": [
+        "C-FE-RULE-01"
+      ],
+      "features": [
+        "F-RULE-06"
+      ]
+    },
+    {
+      "type": "LIST_RULES",
+      "request": {
+        "source": "\"cache\"|\"network\""
+      },
+      "response": {
+        "rules": "Rule[]",
+        "fromCache": "boolean",
+        "offline": "boolean",
+        "cachedAt": "number|null"
+      },
+      "codePoints": [
+        "C-FE-RULE-01",
+        "C-FE-CACHE-01"
+      ],
+      "features": [
+        "F-RULE-07"
+      ]
+    },
+    {
+      "type": "DELETE_RULE",
+      "request": {
+        "id": "string"
+      },
+      "response": {
+        "id": "string（= 后端响应 deleted）",
+        "deleted": "true",
+        "ruleCount": "number"
+      },
+      "codePoints": [
+        "C-FE-RULE-01"
+      ],
+      "features": [
+        "F-RULE-08"
+      ],
+      "note": "后端 404 时 ok:false，error.code=NOT_FOUND"
+    },
+    {
+      "type": "TOGGLE_RULE",
+      "request": {
+        "id": "string",
+        "enabled": "boolean"
+      },
+      "response": {
+        "rule": "Rule（= PATCH /api/rules/:id 响应体）"
+      },
+      "codePoints": [
+        "C-FE-RULE-01"
+      ],
+      "features": [
+        "F-RULE-09"
+      ],
+      "note": "后端 404 时 ok:false，error.code=NOT_FOUND"
+    },
+    {
+      "type": "CHECK_CONNECTION",
+      "request": {
+        "timeoutMs": "number，默认 1500"
+      },
+      "response": {
+        "connected": "boolean",
+        "latencyMs": "number",
+        "version": "string|null",
+        "error": "null | { kind: \"refused\"|\"timeout\"|\"http\"|\"not_json\", message }"
+      },
+      "codePoints": [
+        "C-FE-DIAG-09",
+        "C-FE-DIAG-01"
+      ],
+      "features": [
+        "F-DIAG-01"
+      ]
+    },
+    {
+      "type": "RUN_DIAGNOSTICS",
+      "request": {},
+      "response": {
+        "checkedAt": "number",
+        "summary": "{ ok, warn, fail, info }",
+        "items": "[{ id, name, status: \"ok\"|\"warn\"|\"fail\"|\"info\", detail, value?, hint: string[], action?: \"sync\" }]（11 项，id 见文档 §9）"
+      },
+      "codePoints": [
+        "C-FE-DIAG-09"
+      ],
+      "features": [
+        "F-DIAG-01",
+        "F-DIAG-03",
+        "F-DIAG-04",
+        "F-DIAG-05",
+        "F-DIAG-06",
+        "F-DIAG-07",
+        "F-DIAG-08",
+        "F-DIAG-11"
+      ]
+    },
+    {
+      "type": "GET_DIAG_REPORT",
+      "request": {},
+      "response": {
+        "report": "object（不含浏览 URL）",
+        "text": "string（JSON.stringify(report, null, 2)）"
+      },
+      "codePoints": [
+        "C-FE-DIAG-09",
+        "C-FE-DIAG-10"
+      ],
+      "features": [
+        "F-DIAG-11"
+      ]
+    },
+    {
+      "type": "GET_API_BASE_URL",
+      "request": {},
+      "response": {
+        "apiBaseUrl": "string",
+        "isDefault": "boolean"
+      },
+      "codePoints": [
+        "C-FE-DIAG-03"
+      ],
+      "features": [
+        "F-DIAG-02"
+      ]
+    },
+    {
+      "type": "SET_API_BASE_URL",
+      "request": {
+        "apiBaseUrl": "string"
+      },
+      "response": {
+        "apiBaseUrl": "string（规范化后）",
+        "permissionGranted": "boolean",
+        "warning": "string|null"
+      },
+      "codePoints": [
+        "C-FE-DIAG-03"
+      ],
+      "features": [
+        "F-DIAG-02"
+      ],
+      "note": "格式错误返回 ok:false，error.code=INVALID_URL，message「地址格式错误」，storage 不变"
+    },
+    {
+      "type": "RECOVER_IF_NEEDED",
+      "request": {},
+      "response": {
+        "resynced": "boolean",
+        "reason": "not-needed|backend-down|synced|sync-failed|in-flight"
+      },
+      "codePoints": [
+        "C-FE-CACHE-03"
+      ],
+      "features": [
+        "F-CACHE-02"
+      ]
+    },
+    {
+      "type": "ADD_TO_ANALYSIS",
+      "request": {
+        "url": "string",
+        "title": "string"
+      },
+      "response": {
+        "accepted": "boolean（本地隐私过滤命中或后端 accepted:false 时为 false）",
+        "reason": "null | \"sensitive\" | \"system\"",
+        "created": "boolean|undefined（仅发请求时有值）",
+        "pageCount": "number|undefined"
+      },
+      "codePoints": [
+        "C-FE-MENU-02",
+        "C-FE-MENU-01"
+      ],
+      "features": [
+        "F-MENU-01"
+      ],
+      "note": "与右键菜单「添加到分析」共用 addToAnalysis(url,title)；本地命中不发 POST /api/pages/manual；结果写 lastMenuAction（不含 URL）"
+    },
+    {
+      "type": "MARK_IMPORTANT",
+      "request": {
+        "url": "string",
+        "title": "string",
+        "important": "boolean"
+      },
+      "response": {
+        "accepted": "boolean（本地隐私过滤命中或后端 accepted:false 时为 false）",
+        "reason": "null | \"sensitive\" | \"system\"",
+        "important": "boolean（accepted=false 时为原状态）",
+        "importantUrls": "string[]"
+      },
+      "codePoints": [
+        "C-FE-MENU-02"
+      ],
+      "features": [
+        "F-MENU-01"
+      ],
+      "note": "accepted=false 时不发请求或回滚，不写 importantUrls；视图 toast「敏感页面不采集」"
+    }
+  ],
+  "storageKeys": [
+    {
+      "key": "apiBaseUrl",
+      "description": "后端地址字符串，未配置时默认 http://127.0.0.1:3000（FE-API-02：http://127.0.0.1:<defaultPort>；PRD D-11 写的 localhost 以规范为准更正）；测试夹具写入该 key 指向测试后端",
+      "codePoints": [
+        "C-FE-CORE-03",
+        "C-FE-DIAG-03"
+      ]
+    },
+    {
+      "key": "syncState",
+      "description": "{ status: idle|syncing|success|error, startedAt, lastSyncAt, lastSuccessAt, lastError: {code,message}|null, cursor: number|null, cursorBase: { apiBaseUrl, serverStartedAt } | null, fullReason: string|null, mode: full|incremental, trigger: user|auto|manual, stats: { uploaded, filtered, received, created, updated, rejected } }",
+      "codePoints": [
+        "C-FE-SYNC-04",
+        "C-FE-INCR-01"
+      ]
+    },
+    {
+      "key": "cache",
+      "description": "{ ranked: {data,cachedAt}, recommendations: { [normalizedCurrentUrl | '__none__']: {data,cachedAt} }（最多 20 个 key，LRU；敏感 / 系统页统一用 '__none__'，不保存原始敏感 URL）, cleanup: {data,cachedAt}, rules: {data,cachedAt}, config: {data,cachedAt}, cachedAt }",
+      "codePoints": [
+        "C-FE-CACHE-01",
+        "C-FE-PRIV-02"
+      ]
+    },
+    {
+      "key": "connection",
+      "description": "{ status: online|offline|unknown, since, lastCheckedAt, lastErrorCode, recoverPending: boolean }；status 由 api-client 按每次请求结果写入（供离线提示条）；recoverPending 为粘性标记：api-client 在转为 offline 时置 true，后续成功请求不清除，只由 RECOVER_IF_NEEDED 在 runSync({trigger:auto}) 成功后清除（供自动恢复）",
+      "codePoints": [
+        "C-FE-CORE-03",
+        "C-FE-CACHE-03"
+      ]
+    },
+    {
+      "key": "settings",
+      "description": "{ historyLimit: 100 }，本地设置（预留）",
+      "codePoints": [
+        "C-FE-CTX-03"
+      ]
+    },
+    {
+      "key": "importantUrls",
+      "description": "string[]，被标记为重要的 URL（右键菜单 / ☆）；只保存通过隐私过滤且后端 accepted=true 的 URL",
+      "codePoints": [
+        "C-FE-MENU-02"
+      ]
+    },
+    {
+      "key": "ignoredSuggestions",
+      "description": "{ [suggestion.key（后端返回）]: ignoredAt }，忽略的整理建议，7 天后失效",
+      "codePoints": [
+        "C-FE-CLEAN-02"
+      ]
+    },
+    {
+      "key": "lastCleanupAction",
+      "description": "{ kind: archive|merge, urls, at }，最近一次可撤销的整理操作",
+      "codePoints": [
+        "C-FE-CLEAN-02"
+      ]
+    },
+    {
+      "key": "lastDiagnostics",
+      "description": "{ checkedAt, summary, items }，最近一次诊断结果（首页诊断入口与红点使用）",
+      "codePoints": [
+        "C-FE-DIAG-09"
+      ]
+    },
+    {
+      "key": "__diag__",
+      "description": "storage 诊断的探测 key，写 → 读 → 删，诊断结束后不得残留",
+      "codePoints": [
+        "C-FE-DIAG-05"
+      ]
+    },
+    {
+      "key": "lastMenuAction",
+      "description": "{ kind: add|important, accepted: boolean, reason: null|\"sensitive\"|\"system\"|string, at }，最近一次「添加到分析」/「标记为重要」操作结果（右键菜单或卡片按钮，只存结果，不存 URL），popup 打开时 toast 提示",
+      "codePoints": [
+        "C-FE-MENU-01",
+        "C-FE-MENU-03"
+      ]
+    }
+  ]
+}

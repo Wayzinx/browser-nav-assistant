@@ -1,0 +1,36 @@
+{
+  "caseId": "TC-UI-RANK-002",
+  "verdict": "pass",
+  "observed": "排序页签选中、panel 可见、empty/error 不可见；公式「score = 0.4 × 时效 + 0.3 × 频次 + 0.2 × 打开 + 0.1 × 域名」常驻；ranked-total=10、10 项，首项 Fix login redirect bug 1.00，末项 0.11，非递增；展开前明细不可见，展开后时效 0.99、频次 1.00、打开 1.00、域名 1.00。",
+  "steps": [
+    "启动 4181 测试后端，POST /api/__test__/reset；channel=chromium 加载 extension/，apiBaseUrl=http://127.0.0.1:4181",
+    "通过真实接口准备数据（样例 /api/sync、规则 /api/rules 等），以 tab 打开 popup，按用例步骤实际点击 getByTestId 元素",
+    "每个关键步骤截图并记录 aria 快照，回读真实后端接口与 chrome.storage.local",
+    "截图 1：排序页签",
+    "截图 2：展开第1条",
+    "TEST_PORT=4181 npx playwright test tests/ui/TC-UI-RANK-002.spec.mjs 通过（21 条一并运行 21 passed）",
+    "复测（2026-11-03 07:07，产品代码自上轮未变）：4181 后端重跑 rank-4181.mjs，截图/aria/后端回读与上轮结论一致；TEST_PORT=4181 21 条 spec 中 20 passed，RANK-009 首轮因并发 trace ENOENT（非断言失败）单独重跑通过",
+    "复测（2026-11-03 07:27，续跑；产品代码与脚本自上轮 07:09 未变）：4181 后端重跑 clean/rank-4181.mjs，截图、aria 与后端回读和上轮结论一致；关闭探索后端后 TEST_PORT=4181 21 条 spec 21 passed"
+  ],
+  "screenshots": [
+    "evidence/TC-UI-RANK-002/explore/1.png",
+    "evidence/TC-UI-RANK-002/explore/2.png"
+  ],
+  "spec": "tests/ui/TC-UI-RANK-002.spec.mjs",
+  "solidified": true,
+  "exploreScript": "tests/explore/tmp/rank-4181.mjs",
+  "ariaSnapshots": [
+    {
+      "n": 1,
+      "label": "排序页签",
+      "aria": "- banner:\n  - heading \"导航助手\" [level=1]\n  - button \"后端已连接\"\n- region \"当前页面\":\n  - heading \"当前页面\" [level=2]\n  - paragraph: about:blank\n  - paragraph: about:blank\n  - text: 系统页 · 不采集\n- region \"浏览器上下文同步\":\n  - button \"同步浏览器上下文\"\n  - status:\n    - paragraph: 尚未同步\n  - button \"全量同步\"\n  - paragraph: 当前模式：全量\n- tablist \"导航助手功能\":\n  - tab \"首页\"\n  - tab \"上下文\"\n  - tab \"排序\" [selected]\n  - tab \"整理 3\"\n  - tab \"规则\"\n  - tab \"诊断\"\n- main:\n  - tabpanel \"排序\":\n    - heading \"历史排序\" [level=2]\n    - paragraph: score = 0.4 × 时效 + 0.3 × 频次 + 0.2 × 打开 + 0.1 × 域名\n    - button \"打开中\"\n    - text: 域名筛选\n    - combobox \"域名筛选\":\n      - option \"全部域名\" [selected]\n      - option \"github.com\"\n      - option \"react.dev\"\n      - option \"developer.mozilla.org\"\n      - option \"docs.internal.com\"\n      - option \"google.com\"\n    - paragraph: 共 10 条\n    - list:\n      - listitem:\n        - text: Fix login redirect bug 1.00 https://github.com/org/repo/issues/123\n        - paragraph: 最近 3 天内多次访问（8 次），当前仍处于打开状态，常用域名 github.com\n        - button \"展开明细\"\n      - listitem:\n        - text: Refactor auth middleware (#456) 0.94 https://github.com/org/repo/pull/456\n        - paragraph: 正在浏览，最近 3 天内多次访问（5 次），常用域名 github.com\n        - button \"展开明细\"\n      - listitem:\n        - text: Fetch API - Web APIs | MDN 0.83 https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\n        - paragraph: 最近 3 天内多次访问（4 次），当前仍处于打开状态\n        - button \"展开明细\"\n      - listitem:\n        - text: useState – React 0.69 https://react.dev/reference/react/useState\n        - paragraph: 最近 3 天内多次访问（6 次）\n        - button \"展开明细\"\n      - listitem:\n        - text: Fix login redirect bug - Comments 0.68 https://github.com/org/repo/issues/123?tab=comments\n        - paragraph: 最近 3 天内多次访问（3 次），常用域名 github.com\n        - button \"展开明细\"\n      - listitem:\n        - text: Actions · org/repo 0.68 https://github.com/org/repo/actions\n        - paragraph: 最近 3 天内多次访问（3 次），常用域名 github.com\n        - button \"展开明细\"\n      - listitem:\n        - text: Quick Start – React 0.57 https://react.dev/learn\n        - paragraph: 今天访问过\n        - button \"展开明细\"\n      - listitem:\n        - text: AI Agent Design Guidelines 0.56 https://docs.internal.com/ai-agent-design\n        - paragraph: 6 天前访问，当前仍处于打开状态\n        - button \"展开明细\"\n      - listitem:\n        - text: Old bug report from last sprint 0.23 https://github.com/org/repo/issues/100\n        - paragraph: 已 24 天未访问，常用域名 github.com\n        - button \"展开明细\"\n      - listitem:\n        - text: chrome extension manifest v3 - Google Search 0.11 https://www.google.com/search?q=chrome+extension+manifest+v3\n        - paragraph: 已 35 天未访问\n        - button \"展开明细\""
+    },
+    {
+      "n": 2,
+      "label": "展开第1条",
+      "aria": "- banner:\n  - heading \"导航助手\" [level=1]\n  - button \"后端已连接\"\n- region \"当前页面\":\n  - heading \"当前页面\" [level=2]\n  - paragraph: about:blank\n  - paragraph: about:blank\n  - text: 系统页 · 不采集\n- region \"浏览器上下文同步\":\n  - button \"同步浏览器上下文\"\n  - status:\n    - paragraph: 尚未同步\n  - button \"全量同步\"\n  - paragraph: 当前模式：全量\n- tablist \"导航助手功能\":\n  - tab \"首页\"\n  - tab \"上下文\"\n  - tab \"排序\" [selected]\n  - tab \"整理 3\"\n  - tab \"规则\"\n  - tab \"诊断\"\n- main:\n  - tabpanel \"排序\":\n    - heading \"历史排序\" [level=2]\n    - paragraph: score = 0.4 × 时效 + 0.3 × 频次 + 0.2 × 打开 + 0.1 × 域名\n    - button \"打开中\"\n    - text: 域名筛选\n    - combobox \"域名筛选\":\n      - option \"全部域名\" [selected]\n      - option \"github.com\"\n      - option \"react.dev\"\n      - option \"developer.mozilla.org\"\n      - option \"docs.internal.com\"\n      - option \"google.com\"\n    - paragraph: 共 10 条\n    - list:\n      - listitem:\n        - text: Fix login redirect bug 1.00 https://github.com/org/repo/issues/123\n        - paragraph: 最近 3 天内多次访问（8 次），当前仍处于打开状态，常用域名 github.com\n        - button \"收起明细\" [expanded]\n        - term: 时效\n        - definition: \"0.99\"\n        - term: 频次\n        - definition: \"1.00\"\n        - term: 打开\n        - definition: \"1.00\"\n        - term: 域名\n        - definition: \"1.00\"\n      - listitem:\n        - text: Refactor auth middleware (#456) 0.94 https://github.com/org/repo/pull/456\n        - paragraph: 正在浏览，最近 3 天内多次访问（5 次），常用域名 github.com\n        - button \"展开明细\"\n      - listitem:\n        - text: Fetch API - Web APIs | MDN 0.83 https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\n        - paragraph: 最近 3 天内多次访问（4 次），当前仍处于打开状态\n        - button \"展开明细\"\n      - listitem:\n        - text: useState – React 0.69 https://react.dev/reference/react/useState\n        - paragraph: 最近 3 天内多次访问（6 次）\n        - button \"展开明细\"\n      - listitem:\n        - text: Fix login redirect bug - Comments 0.68 https://github.com/org/repo/issues/123?tab=comments\n        - paragraph: 最近 3 天内多次访问（3 次），常用域名 github.com\n        - button \"展开明细\"\n      - listitem:\n        - text: Actions · org/repo 0.68 https://github.com/org/repo/actions\n        - paragraph: 最近 3 天内多次访问（3 次），常用域名 github.com\n        - button \"展开明细\"\n      - listitem:\n        - text: Quick Start – React 0.57 https://react.dev/learn\n        - paragraph: 今天访问过\n        - button \"展开明细\"\n      - listitem:\n        - text: AI Agent Design Guidelines 0.56 https://docs.internal.com/ai-agent-design\n        - paragraph: 6 天前访问，当前仍处于打开状态\n        - button \"展开明细\"\n      - listitem:\n        - text: Old bug report from last sprint 0.23 https://github.com/org/repo/issues/100\n        - paragraph: 已 24 天未访问，常用域名 github.com\n        - button \"展开明细\"\n      - listitem:\n        - text: chrome extension manifest v3 - Google Search 0.11 https://www.google.com/search?q=chrome+extension+manifest+v3\n        - paragraph: 已 35 天未访问\n        - button \"展开明细\""
+    }
+  ],
+  "exploredAt": "2026-11-02T22:46:10.086Z",
+  "reverifiedAt": "2026-11-03T07:10:00+08:00"
+}

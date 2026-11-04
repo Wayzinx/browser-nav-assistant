@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-UI-CTX-013",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:54.230Z",
+  "tests": [
+    {
+      "testId": "0aaa777d0564db8f3fe9-dd2b01acbb86b13319a8",
+      "title": "TC-UI-CTX-013 三条真实新增历史按最后访问时间从新到旧显示",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CTX-013.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 891,
+      "startedAt": "2026-11-04T03:27:53.339Z",
+      "endedAt": "2026-11-04T03:27:54.230Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-CTX-013/screenshots/01-S2-三条真实历史倒序.png"
+      ],
+      "serverLogLines": 16,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1042,
+          "after": 1042
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "{\"history\":[{\"id\":\"3\",\"lastVisitTime\":1793762873911.846,\"title\":\"\",\"typedCount\":0,\"url\":\"https://history.example/ctx/c\",\"visitCount\":1},{\"id\":\"2\",\"lastVisitTime\":1793762873908.395,\"title\":\"\",\"typedCount\":0,\"url\":\"https://history.example/ctx/b\",\"visitCount\":1},{\"id\":\"1\",\"lastVisitTime\":1793762873901.157,\"title\":\"\",\"typedCount\":1,\"url\":\"https://history.example/ctx/a\",\"visitCount\":1}]}",
+        "{\"popupPageErrors\":[],\"swExceptions\":[]}"
+      ]
+    }
+  ]
+}

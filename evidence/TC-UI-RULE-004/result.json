@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-UI-RULE-004",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:32.626Z",
+  "tests": [
+    {
+      "testId": "7376a2a8040c15642367-3c7605571bcfa8dad0d2",
+      "title": "TC-UI-RULE-004 离线时首页和规则页的解析均禁用",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RULE-004.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 993,
+      "startedAt": "2026-11-04T03:29:31.633Z",
+      "endedAt": "2026-11-04T03:29:32.626Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-RULE-004/screenshots/01-离线首页.png",
+        "evidence/TC-UI-RULE-004/screenshots/02-离线规则页.png"
+      ],
+      "serverLogLines": 3,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1174,
+          "after": 1174
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

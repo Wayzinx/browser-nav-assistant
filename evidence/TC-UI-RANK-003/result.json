@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-UI-RANK-003",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:15.384Z",
+  "tests": [
+    {
+      "testId": "09df169f564730fe0954-a063d9b70c243ea42ab7",
+      "title": "TC-UI-RANK-003 排序页签点击「打开中」筛选：只显示 4 条，再次点击恢复 10 条",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RANK-003.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 880,
+      "startedAt": "2026-11-04T03:29:14.504Z",
+      "endedAt": "2026-11-04T03:29:15.384Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 2,
+      "screenshots": [
+        "evidence/TC-UI-RANK-003/screenshots/01-打开中筛选结果4条.png",
+        "evidence/TC-UI-RANK-003/screenshots/02-取消筛选恢复10条.png"
+      ],
+      "serverLogLines": 14,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1149,
+          "after": 1150
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

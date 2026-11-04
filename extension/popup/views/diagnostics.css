@@ -1,0 +1,11 @@
+[data-slot="diagnostics"] .diag-item { margin-top: 12px; padding: 10px; border: 1px solid #d0d5dd; border-radius: 8px; overflow-wrap: anywhere; }
+[data-slot="diagnostics"] .diag-item-heading { display: flex; justify-content: space-between; gap: 8px; }
+[data-slot="diagnostics"] .diag-item p { margin: 8px 0; }
+[data-slot="diagnostics"] [data-status="fail"] { border-color: #fda29b; }
+[data-slot="diagnostics"] [data-status="warn"] { border-color: #fec84b; }
+[data-slot="diagnostics"] [data-testid="diag-item-status"][data-status="ok"] { color: #067647; }
+[data-slot="diagnostics"] [data-testid="diag-item-status"][data-status="fail"] { color: #b42318; }
+[data-slot="diagnostics"] [data-testid="diag-item-status"][data-status="warn"] { color: #93370d; }
+[data-slot="diagnostics"] [data-testid="diag-item-hint"] { padding-left: 22px; margin-bottom: 0; }
+[data-slot="diagnostics"] [data-testid="diag-checked-at"] { font-size: 12px; color: #475467; }
+[data-slot="diagnostics"] [data-testid="diag-report-output"] { white-space: pre-wrap; overflow-wrap: anywhere; padding: 10px; background: #f2f4f7; border-radius: 6px; }

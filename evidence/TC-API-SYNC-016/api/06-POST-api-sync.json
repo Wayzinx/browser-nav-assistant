@@ -1,0 +1,55 @@
+{
+  "reqId": "TC-API-SYNC-016-06",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/sync",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-SYNC-016-06"
+  },
+  "requestBody": {
+    "activeTab": {
+      "url": "https://react.dev/learn",
+      "title": "Must not replace"
+    },
+    "openTabs": "not-an-array",
+    "history": [
+      {
+        "url": "https://github.com/org/repo/pull/456",
+        "title": "Must not replace",
+        "lastVisitTime": 1793762526265,
+        "visitCount": 999
+      },
+      {
+        "url": "https://example.com/partial",
+        "title": "Must not exist",
+        "lastVisitTime": 1793762526271,
+        "visitCount": 1
+      }
+    ]
+  },
+  "status": 400,
+  "responseHeaders": {
+    "x-request-id": "TC-API-SYNC-016-06",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "121",
+    "date": "Wed, 04 Nov 2026 03:27:06 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "error": {
+      "code": "VALIDATION_FAILED",
+      "message": "请求字段类型或取值不合法",
+      "details": {
+        "fields": [
+          "openTabs"
+        ]
+      }
+    }
+  },
+  "ms": 1,
+  "mutated": null
+}

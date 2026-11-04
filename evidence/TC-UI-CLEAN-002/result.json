@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-UI-CLEAN-002",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:25.633Z",
+  "tests": [
+    {
+      "testId": "eafa2ee7a56dbbd9bfa6-55d8f2ce01fa9fea4bfe",
+      "title": "TC-UI-CLEAN-002 空库：首页和整理页展示同步引导，待处理数隐藏",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CLEAN-002.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 906,
+      "startedAt": "2026-11-04T03:27:24.727Z",
+      "endedAt": "2026-11-04T03:27:25.633Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 13,
+      "screenshots": [
+        "evidence/TC-UI-CLEAN-002/screenshots/01-首页空状态.png",
+        "evidence/TC-UI-CLEAN-002/screenshots/02-整理空状态.png"
+      ],
+      "serverLogLines": 15,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 979,
+          "after": 981
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

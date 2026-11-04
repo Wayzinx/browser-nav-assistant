@@ -1,0 +1,104 @@
+{
+  "summary": {
+    "dataVersion": {
+      "before": 1134,
+      "after": 1135
+    },
+    "pages": {
+      "added": 1,
+      "removed": 0,
+      "changed": 0
+    },
+    "rules": {
+      "added": 0,
+      "removed": 0,
+      "changed": 0
+    },
+    "counts": {
+      "pages": 1,
+      "rules": 0,
+      "openPages": 1,
+      "archivedPages": 0,
+      "syncLogs": 1
+    },
+    "configChanged": [
+      "privacySensitiveKeywords"
+    ],
+    "persistChanged": false
+  },
+  "counts": {
+    "pages": {
+      "before": 0,
+      "after": 1,
+      "delta": 1
+    },
+    "rules": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "openPages": {
+      "before": 0,
+      "after": 1,
+      "delta": 1
+    },
+    "archivedPages": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "syncLogs": {
+      "before": 0,
+      "after": 1,
+      "delta": 1
+    }
+  },
+  "pages": {
+    "added": [
+      {
+        "id": "page_1",
+        "url": "https://example.com/docs",
+        "normalizedUrl": "https://example.com/docs",
+        "domain": "example.com",
+        "title": "合成测试页 2",
+        "visitCount": 1,
+        "lastVisitedAt": 1793762943572,
+        "firstSeenAt": 1793762943232.427,
+        "sources": [
+          "open_tab",
+          "active_tab"
+        ],
+        "isOpen": true,
+        "isActive": true,
+        "isArchived": false,
+        "archivedAt": null,
+        "mergedInto": null,
+        "isImportant": false
+      }
+    ],
+    "removed": [],
+    "changed": []
+  },
+  "rules": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  "config": {
+    "privacySensitiveKeywords": {
+      "before": [
+        "password",
+        "token",
+        "bank",
+        "secret"
+      ],
+      "after": [
+        "password",
+        "token",
+        "bank",
+        "secret",
+        "cookie"
+      ]
+    }
+  }
+}

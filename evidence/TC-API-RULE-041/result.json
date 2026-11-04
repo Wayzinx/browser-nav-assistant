@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RULE-041",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:05.729Z",
+  "tests": [
+    {
+      "testId": "ca29c4ce39234cd72580-3d40a256b05b3fd47700",
+      "title": "TC-API-RULE-041 五种解析结果都能保存并按创建顺序列出准确type/action字段",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-041.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 23,
+      "startedAt": "2026-11-04T03:27:05.706Z",
+      "endedAt": "2026-11-04T03:27:05.729Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 9,
+      "screenshots": [],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 823,
+          "after": 824
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 5,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 5,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

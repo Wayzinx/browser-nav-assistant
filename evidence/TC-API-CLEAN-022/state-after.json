@@ -1,0 +1,106 @@
+{
+  "dataVersion": 48,
+  "versions": {
+    "data": 48,
+    "rule": 34,
+    "config": 22
+  },
+  "counts": {
+    "pages": 2,
+    "rules": 1,
+    "openPages": 1,
+    "archivedPages": 0,
+    "syncLogs": 1
+  },
+  "pagesTruncated": false,
+  "pagesHash": "cf839d6d3c66634c20fef7f00c27e0cfd6c95e57927d1e64bebeb54289361e0e",
+  "pages": [
+    {
+      "id": "page_1",
+      "url": "https://docs.internal.com/both",
+      "normalizedUrl": "https://docs.internal.com/both",
+      "domain": "docs.internal.com",
+      "title": "https://docs.internal.com/both",
+      "visitCount": 1,
+      "lastVisitedAt": 1791170744761,
+      "firstSeenAt": 1791170744761,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": true
+    },
+    {
+      "id": "page_2",
+      "url": "https://example.com/open-important",
+      "normalizedUrl": "https://example.com/open-important",
+      "domain": "example.com",
+      "title": "https://example.com/open-important",
+      "visitCount": 1,
+      "lastVisitedAt": 1793759144761,
+      "firstSeenAt": 1793759144761,
+      "sources": [
+        "history",
+        "open_tab"
+      ],
+      "isOpen": true,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": true
+    }
+  ],
+  "rules": [
+    {
+      "domain": "docs.internal.com",
+      "urlPattern": null,
+      "inactiveDays": null,
+      "enabled": true,
+      "confidence": "high",
+      "createdAt": 1793762744766,
+      "updatedAt": 1793762744766,
+      "rawText": "docs.internal.com 的页面永远不要归档",
+      "type": "never_archive",
+      "action": "keep",
+      "id": "rule_1"
+    }
+  ],
+  "config": {
+    "cleanupThresholdDays": 14,
+    "maxHistoryItems": 100,
+    "historyLookbackDays": 30,
+    "enablePrivacyFilter": true,
+    "privacySensitiveKeywords": [
+      "password",
+      "token",
+      "bank",
+      "secret"
+    ]
+  },
+  "sequences": {
+    "page": 2,
+    "rule": 1,
+    "sync": 1
+  },
+  "lastSync": {
+    "id": "sync_1",
+    "syncedAt": 1793762744763,
+    "mode": "full",
+    "received": 3,
+    "created": 2,
+    "updated": 1,
+    "rejected": 0,
+    "durationMs": 0.13120799999978772,
+    "ok": true,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 0
+    }
+  },
+  "persist": null
+}

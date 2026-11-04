@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-DIAG-015",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:48.496Z",
+  "tests": [
+    {
+      "testId": "ff214d7aad654dd6e31d-3382e900be132f101fb7",
+      "title": "TC-API-DIAG-015 保存 privacy_filter 规则后 privacySensitiveKeywords 合并 cookie、baseSensitiveKeywords 不变；删除规则后恢复 4 个默认词",
+      "project": "api",
+      "file": "tests/api/TC-API-DIAG-015.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 27,
+      "startedAt": "2026-11-04T03:25:48.469Z",
+      "endedAt": "2026-11-04T03:25:48.496Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 103,
+          "after": 103
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

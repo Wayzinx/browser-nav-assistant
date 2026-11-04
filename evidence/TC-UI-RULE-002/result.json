@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-UI-RULE-002",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:30.658Z",
+  "tests": [
+    {
+      "testId": "21f649e0ad8e308e3378-f64b8c72942f5fc22385",
+      "title": "TC-UI-RULE-002 仅解析不写库，重开列表仍为空",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RULE-002.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1059,
+      "startedAt": "2026-11-04T03:29:29.599Z",
+      "endedAt": "2026-11-04T03:29:30.658Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [
+        "evidence/TC-UI-RULE-002/screenshots/01-仅解析未保存.png",
+        "evidence/TC-UI-RULE-002/screenshots/02-重开仍为空.png"
+      ],
+      "serverLogLines": 21,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1172,
+          "after": 1172
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

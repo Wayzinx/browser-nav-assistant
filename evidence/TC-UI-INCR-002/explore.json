@@ -1,0 +1,43 @@
+{
+  "caseId": "TC-UI-INCR-002",
+  "verdict": "pass",
+  "observed": "第7轮复测（extension/、server/、tests/ui 本例脚本自第6轮后均未改动）：首次 sync-button 成功得 cursor=T 后点 sync-full-button：POST mode=full 且无 cursor，采集 history.query.maxResults=100、startTime=startedAt−2592000000（在 [t0−30天,t1−30天] 内），history={A,B}，HTTP 200；syncState.mode=full、cursor=本批 startedAt，sync-status=success，两按钮恢复 enabled。[En] 全部满足；关闭探索后端后 TEST_PORT=4184 下 16 条批量运行本例通过，脚本无需修改。 ‖ 前一轮：第6轮复测（产品代码自第5轮后未改动，extension/ 最后修改 23:20）：有效游标下点 sync-full-button：POST mode=full 无 cursor，history.query maxResults=100、startTime≈点击时间−30天，history={A,B}，HTTP 200 pageCount=2。[En] 全部满足；TEST_PORT=4184 下 16 条批量运行 TC-UI-INCR-002 通过，脚本无需修改。",
+  "steps": [
+    "第7轮：127.0.0.1:4184 启动真实后端（ENABLE_TEST_API=1，LOG_FILE=evidence/_runtime/explore-4184.log），headless Chromium(channel=chromium) 加载 extension/，只离线化外站",
+    "第7轮：node tests/explore/tmp/explore-incr-4184-r7.mjs TC-UI-INCR-002（输出 tests/explore/tmp/incr-r7-002.out.txt），截图 + ariaSnapshot + 请求体/storage/health 比对 [En]",
+    "第7轮：Read 截图核对 UI 状态",
+    "第7轮：关闭探索后端后 TEST_PORT=4184 npx playwright test（INCR-001..007、SYNC-001..009 共 16 条），本例通过",
+    "第6轮：127.0.0.1:4184 启动真实后端（ENABLE_TEST_API=1，LOG_FILE=evidence/_runtime/explore-4184.log），headless Chromium(channel=chromium) 加载 extension/，只离线化外站",
+    "第6轮：node tests/explore/tmp/explore-incr-4184-r6.mjs TC-UI-INCR-002（输出 tests/explore/tmp/incr-r6-002.out.txt），截图 + ariaSnapshot + 请求体/storage/health 比对 [En]",
+    "第6轮：Read 截图核对 UI 状态",
+    "第6轮：关闭探索后端后 TEST_PORT=4184 npx playwright test（INCR-001..007、SYNC-001..009 共 16 条）16 passed",
+    "第5轮：127.0.0.1:4184 启动真实后端（ENABLE_TEST_API=1，LOG_FILE=evidence/_runtime/explore-4184.log），headless Chromium(channel=chromium) 加载 extension/，apiBaseUrl 指向 4184，只离线化外站",
+    "第5轮：node tests/explore/tmp/explore-incr-4184-r5.mjs TC-UI-INCR-002，输出 tests/explore/tmp/incr-r5-002.out.txt（POST 体、history.query 日志、syncState、ariaSnapshot）",
+    "第5轮：Read 截图核对 UI 状态，结合请求体、storage 和后端 health/ranked 逐条比对 [En]",
+    "第5轮：关闭探索后端后执行 TEST_PORT=4184 npx playwright test tests/ui/TC-UI-INCR-002.spec.mjs（16 条批量）通过；脚本无需修改",
+    "第5轮：TC-UI-DIAG-010/012 与 INCR-001、SYNC-001 同批运行 4/4 通过，确认 EXT_DIR 泄漏已消除",
+    "127.0.0.1:4183 起真实后端（ENABLE_TEST_API=1）并 reset；headless Chromium(channel=chromium) 加载 extension/，apiBaseUrl 指向 4183，仅离线化外站",
+    "离线打开 A/B（B 最后活动），chrome.history.addUrl 写 A/B",
+    "以 tab 打开 popup，等待初始请求结束，确认无自发 POST /api/sync（0 次），截图 + ariaSnapshot",
+    "点 sync-button 首批成功，记录 T",
+    "点 sync-full-button，读 POST、history.query、syncState、按钮状态",
+    "第4轮：tests/explore/tmp/explore-incr-4183-r4.mjs 对当前产品重新探索（127.0.0.1:4183 真实后端），输出见 tests/explore/tmp/incr-r4-002.out.txt",
+    "第4轮：TEST_PORT=4183 npx playwright test tests/ui/TC-UI-INCR-002.spec.mjs 单独运行通过；与 TC-UI-DIAG-012 同批运行可复现 gate 失败"
+  ],
+  "screenshots": [
+    "evidence/TC-UI-INCR-002/explore/r7-1.png",
+    "evidence/TC-UI-INCR-002/explore/r7-2.png",
+    "evidence/TC-UI-INCR-002/explore/r7-3.png",
+    "evidence/TC-UI-INCR-002/explore/r6-1.png",
+    "evidence/TC-UI-INCR-002/explore/r6-2.png",
+    "evidence/TC-UI-INCR-002/explore/r6-3.png",
+    "evidence/TC-UI-INCR-002/explore/r5-1.png",
+    "evidence/TC-UI-INCR-002/explore/r5-2.png",
+    "evidence/TC-UI-INCR-002/explore/r5-3.png",
+    "evidence/TC-UI-INCR-002/explore/1.png",
+    "evidence/TC-UI-INCR-002/explore/2.png",
+    "evidence/TC-UI-INCR-002/explore/3.png"
+  ],
+  "spec": "tests/ui/TC-UI-INCR-002.spec.mjs",
+  "solidified": true
+}

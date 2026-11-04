@@ -1,0 +1,82 @@
+{
+  "browser": "chrome",
+  "scenario": "S3 首次安装·后端在其他端口·通过诊断页修改 API 地址",
+  "id": "S3",
+  "pass": true,
+  "required": true,
+  "popupSize": [
+    400,
+    498
+  ],
+  "errors": [],
+  "steps": [
+    {
+      "name": "1. 点击工具栏图标打开真实 popup",
+      "pass": true,
+      "detail": "已打开真实 action popup（apogdiijbmmelomlehodilcejcmocaki）"
+    },
+    {
+      "name": "2. popup 尺寸不塌缩",
+      "pass": true,
+      "detail": "400×498"
+    },
+    {
+      "name": "3. 默认地址连不上",
+      "pass": true,
+      "detail": "data-state=offline"
+    },
+    {
+      "name": "4. 进入诊断页签",
+      "pass": true,
+      "detail": "点击 tab-diag"
+    },
+    {
+      "name": "5. 填写新的 API 地址",
+      "pass": true,
+      "detail": "填写 diag-api-base-url-input"
+    },
+    {
+      "name": "6. 保存",
+      "pass": true,
+      "detail": "点击 diag-api-base-url-save"
+    },
+    {
+      "name": "7. 保存成功提示",
+      "pass": true,
+      "detail": "可见 1 个"
+    },
+    {
+      "name": "8. 当前地址已更新",
+      "pass": true,
+      "detail": "http://127.0.0.1:64881"
+    },
+    {
+      "name": "9. 顶栏显示后端已连接",
+      "pass": true,
+      "detail": "data-state=online"
+    },
+    {
+      "name": "10. 点击「重新检测」（保存地址不会自动重跑诊断，PRD 未要求）",
+      "pass": true,
+      "detail": "点击 diag-rerun-button"
+    },
+    {
+      "name": "11. 诊断：后端连接通过",
+      "pass": true,
+      "detail": "data-status=ok"
+    },
+    {
+      "name": "12. 截图：修改地址后已连接",
+      "pass": true,
+      "detail": "evidence/_smoke/chrome/S3/01-截图-修改地址后已连接.png"
+    }
+  ],
+  "screenshots": [
+    "evidence/_smoke/chrome/S3/01-截图-修改地址后已连接.png"
+  ],
+  "startedAt": "2026-11-04T03:35:57.177Z",
+  "version": "Chrome/149.0.7827.54",
+  "exceptions": 0,
+  "consoleErrors": 0,
+  "endedAt": "2026-11-04T03:35:59.874Z"
+}

@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-E2E-FLOW-005",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:07.606Z",
+  "tests": [
+    {
+      "testId": "4ac219da2e96c09c190a-f19b1406be29c8965ffd",
+      "title": "TC-E2E-FLOW-005 敏感历史被服务端拒收，读侧及后端日志不泄露",
+      "project": "e2e",
+      "file": "tests/e2e/TC-E2E-FLOW-005.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 28,
+      "startedAt": "2026-11-04T03:27:07.578Z",
+      "endedAt": "2026-11-04T03:27:07.606Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 8,
+      "screenshots": [],
+      "serverLogLines": 12,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 942,
+          "after": 944
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 2
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "敏感请求后端日志字节区间 [1134553, 1135031)；requestId=TC-E2E-FLOW-005-02"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "reqId": "TC-UI-REC-005-sw-1",
+  "setup": false,
+  "observed": true,
+  "method": "POST",
+  "url": "http://127.0.0.1:4300/api/recommendations/next",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762967296_6"
+  },
+  "requestBody": {
+    "currentPage": {
+      "url": "https://github.com/org/repo/pull/456",
+      "title": "Refactor auth middleware (#456)"
+    },
+    "openTabs": [
+      {
+        "url": "https://github.com/org/repo/issues/123",
+        "title": "Fix login redirect bug"
+      },
+      {
+        "url": "https://github.com/org/repo/actions",
+        "title": "Actions · org/repo"
+      },
+      {
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+        "title": "Fetch API - Web APIs | MDN"
+      },
+      {
+        "url": "https://docs.internal.com/ai-agent-design",
+        "title": "AI Agent Design Guidelines"
+      },
+      {
+        "url": "https://github.com/org/repo/issues/100",
+        "title": "Old bug report from last sprint"
+      },
+      {
+        "url": "https://www.google.com/search?q=chrome+extension+manifest+v3",
+        "title": "chrome extension manifest v3 - Google Search"
+      },
+      {
+        "url": "https://github.com/org/repo/issues/123?tab=comments",
+        "title": "Fix login redirect bug - Comments"
+      },
+      {
+        "url": "https://react.dev/reference/react/useState",
+        "title": "useState – React"
+      },
+      {
+        "url": "https://react.dev/learn",
+        "title": "Quick Start – React"
+      },
+      {
+        "url": "https://github.com/org/repo/pull/456",
+        "title": "Refactor auth middleware (#456)"
+      }
+    ],
+    "recentHistory": [
+      {
+        "url": "https://github.com/org/repo/pull/456",
+        "title": "Refactor auth middleware (#456)",
+        "lastVisitTime": 1793762967166.385
+      },
+      {
+        "url": "https://react.dev/learn",
+        "title": "Quick Start – React",
+        "lastVisitTime": 1793762967105.568
+      },
+      {
+        "url": "https://react.dev/reference/react/useState",
+        "title": "useState – React",
+        "lastVisitTime": 1793762967043.509
+      },
+      {
+        "url": "https://github.com/org/repo/issues/123?tab=comments",
+        "title": "Fix login redirect bug - Comments",
+        "lastVisitTime": 1793762966989.837
+      },
+      {
+        "url": "https://www.google.com/search?q=chrome+extension+manifest+v3",
+        "title": "chrome extension manifest v3 - Google Search",
+        "lastVisitTime": 1793762966944.296
+      },
+      {
+        "url": "https://github.com/org/repo/issues/100",
+        "title": "Old bug report from last sprint",
+        "lastVisitTime": 1793762966901.556
+      },
+      {
+        "url": "https://docs.internal.com/ai-agent-design",
+        "title": "AI Agent Design Guidelines",
+        "lastVisitTime": 1793762966853.135
+      },
+      {
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+        "title": "Fetch API - Web APIs | MDN",
+        "lastVisitTime": 1793762966812.655
+      },
+      {
+        "url": "https://github.com/org/repo/actions",
+        "title": "Actions · org/repo",
+        "lastVisitTime": 1793762966770.866
+      },
+      {
+        "url": "https://github.com/org/repo/issues/123",
+        "title": "Fix login redirect bug",
+        "lastVisitTime": 1793762966731.52
+      }
+    ]
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "ext_1793762967296_6",
+    "access-control-expose-headers": "x-request-id",
+    "connection": "keep-alive",
+    "access-control-allow-origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "content-length": "65",
+    "keep-alive": "timeout=5",
+    "date": "Wed, 04 Nov 2026 03:29:27 GMT",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin"
+  },
+  "responseBody": {
+    "recommendations": [],
+    "cached": false,
+    "generatedAt": 1793762967298
+  },
+  "ms": 3
+}

@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-SYNC-027",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:06.738Z",
+  "tests": [
+    {
+      "testId": "0d1481cf549efcf533e5-3282fe482535de186729",
+      "title": "TC-API-SYNC-027 八种非法类型均返回 400 且不写入页面",
+      "project": "api",
+      "file": "tests/api/TC-API-SYNC-027.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 74,
+      "startedAt": "2026-11-04T03:27:06.664Z",
+      "endedAt": "2026-11-04T03:27:06.738Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 34,
+      "screenshots": [],
+      "serverLogLines": 36,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 919,
+          "after": 928
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

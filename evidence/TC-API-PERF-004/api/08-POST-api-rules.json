@@ -1,0 +1,51 @@
+{
+  "reqId": "TC-API-PERF-004-08",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/rules",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-PERF-004-08"
+  },
+  "requestBody": {
+    "rules": [
+      {
+        "rawText": "example.org 优先显示",
+        "type": "boost_domain",
+        "domain": "example.org",
+        "action": "boost"
+      }
+    ]
+  },
+  "status": 201,
+  "responseHeaders": {
+    "x-request-id": "TC-API-PERF-004-08",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "265",
+    "date": "Wed, 04 Nov 2026 03:26:55 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "rules": [
+      {
+        "domain": "example.org",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762815458,
+        "updatedAt": 1793762815458,
+        "rawText": "example.org 优先显示",
+        "type": "boost_domain",
+        "action": "boost",
+        "id": "rule_1"
+      }
+    ],
+    "ruleCount": 1
+  },
+  "ms": 0.9,
+  "mutated": null
+}

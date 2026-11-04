@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RULE-014",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:04.849Z",
+  "tests": [
+    {
+      "testId": "3e2d2b7a1a8fca307266-700a43e1bfb78a86dcd2",
+      "title": "TC-API-RULE-014 否定动作缺少可定位对象时返回unparsed而不生成全局保留规则",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-014.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 14,
+      "startedAt": "2026-11-04T03:27:04.835Z",
+      "endedAt": "2026-11-04T03:27:04.849Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 764,
+          "after": 765
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

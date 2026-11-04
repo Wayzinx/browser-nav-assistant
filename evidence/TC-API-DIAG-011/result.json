@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-DIAG-011",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:48.376Z",
+  "tests": [
+    {
+      "testId": "c3f71d5bd76ccdf80709-e1c424f1f6b504195ada",
+      "title": "TC-API-DIAG-011 GET /api/config 扩展字段：historyLookbackDays=30、半衰期 7、四项权重、推荐下限 0.3、apiVersion=\"1\" 和 4 项 limits",
+      "project": "api",
+      "file": "tests/api/TC-API-DIAG-011.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 11,
+      "startedAt": "2026-11-04T03:25:48.365Z",
+      "endedAt": "2026-11-04T03:25:48.376Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 2,
+      "screenshots": [],
+      "serverLogLines": 4,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 99,
+          "after": 99
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

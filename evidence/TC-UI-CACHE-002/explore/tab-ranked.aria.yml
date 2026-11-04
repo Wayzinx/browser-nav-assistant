@@ -1,0 +1,38 @@
+- banner:
+  - heading "导航助手" [level=1]
+  - button "连接状态：检测尚未实现" [disabled]: 连接检测尚未实现
+- region "当前页面":
+  - heading "当前页面" [level=2]
+  - alert:
+    - paragraph: 当前页面读取失败
+    - paragraph: NOT_IMPLEMENTED：getPrivacyConfig 尚未实现
+    - button "诊断"
+  - button "标记为重要（尚未实现）" [disabled]: ☆
+  - button "添加到分析" [disabled]
+- region "浏览器上下文同步":
+  - button "同步浏览器上下文"
+  - status:
+    - paragraph: 同步失败
+    - paragraph: 上传 0 条 · 过滤 0 条
+    - paragraph: getPrivacyConfig 尚未实现
+    - button "诊断"
+  - button "全量同步"
+  - paragraph: 当前模式：全量
+- tablist "导航助手功能":
+  - tab "首页"
+  - tab "上下文"
+  - tab "排序" [selected]
+  - tab "整理"
+  - tab "规则"
+  - tab "诊断"
+- main:
+  - tabpanel "排序":
+    - heading "历史排序" [level=2]
+    - paragraph: score = 0.4 × 时效 + 0.3 × 频次 + 0.2 × 打开 + 0.1 × 域名
+    - button "打开中"
+    - text: 域名筛选
+    - combobox "域名筛选":
+      - option "全部域名" [selected]
+    - alert:
+      - paragraph: 此功能尚未实现
+      - button "诊断"

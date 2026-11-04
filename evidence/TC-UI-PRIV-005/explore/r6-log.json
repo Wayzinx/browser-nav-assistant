@@ -1,0 +1,190 @@
+[
+  {
+    "put": {
+      "status": 200,
+      "body": {
+        "cleanupThresholdDays": 14,
+        "maxHistoryItems": 100,
+        "enablePrivacyFilter": true,
+        "privacySensitiveKeywords": [
+          "password",
+          "token",
+          "bank",
+          "secret",
+          "cookie"
+        ],
+        "baseSensitiveKeywords": [
+          "password",
+          "token",
+          "bank",
+          "secret",
+          "cookie"
+        ],
+        "historyLookbackDays": 30,
+        "recencyHalfLifeDays": 7,
+        "weights": {
+          "recency": 0.4,
+          "frequency": 0.3,
+          "open": 0.2,
+          "domain": 0.1
+        },
+        "minRecommendationScore": 0.3,
+        "apiVersion": "1",
+        "limits": {
+          "maxItemsPerSync": 500,
+          "maxUrlLength": 2048,
+          "maxRuleTextLength": 500,
+          "maxBodyBytes": 1048576
+        }
+      }
+    }
+  },
+  {
+    "privacy": {
+      "enabled": true,
+      "keywords": [
+        "password",
+        "token",
+        "bank",
+        "secret",
+        "cookie"
+      ],
+      "source": "server"
+    },
+    "keywordsText": "敏感关键词：password、token、bank、secret、cookie · 来源：后端",
+    "badges": [
+      {
+        "url": "https://example.com/?cookie=1",
+        "badge": "含 cookie · 不上传"
+      },
+      {
+        "url": "https://example.com/docs"
+      }
+    ]
+  },
+  {
+    "shot": "evidence/TC-UI-PRIV-005/explore/1.png",
+    "aria": "- banner:\n  - heading \"导航助手\" [level=1]\n  - button \"后端已连接\"\n- region \"当前页面\":\n  - heading \"当前页面\" [level=2]\n  - paragraph: 合成页\n  - paragraph: https://example.com/docs\n  - button \"标记为重要\": ☆\n  - button \"添加到分析\"\n- region \"浏览器上下文同步\":\n  - button \"同步浏览器上下文\"\n  - status:\n    - paragraph: 尚未同步\n  - button \"全量同步\"\n  - paragraph: 当前模式：全量\n- tablist \"导航助手功能\":\n  - tab \"首页\"\n  - tab \"上下文\" [selected]\n  - tab \"排序\"\n  - tab \"整理\"\n  - tab \"规则\"\n  - tab \"诊断\"\n- main:\n  - tabpanel \"上下文\":\n    - heading \"浏览器上下文\" [level=2]\n    - paragraph: 敏感关键词：password、token、bank、secret、cookie · 来源：后端\n    - heading \"当前窗口标签页\" [level=2]\n    - list:\n      - listitem:\n        - paragraph: 合成页\n        - paragraph: https://example.com/?cookie=1\n        - text: 含 cookie · 不上传\n      - listitem:\n        - paragraph: 合成页\n        - paragraph: https://example.com/docs\n    - heading \"最近浏览历史\" [level=2]\n    - text: \"0\"\n    - paragraph: 自 2026/10/4 07:13:30 起 · 最多 100 条\n    - list\n    - paragraph: 还没有数据，点击上方「同步浏览器上下文」开始"
+  },
+  {
+    "sync": {
+      "status": "success",
+      "statusText": "同步成功上传 2 条 · 过滤 1 条07:13 · 刚刚",
+      "filtered": "1",
+      "uploaded": "2",
+      "bodies": [
+        {
+          "activeTab": {
+            "url": "https://example.com/docs",
+            "title": "合成页"
+          },
+          "openTabs": [
+            {
+              "url": "https://example.com/docs",
+              "title": "合成页",
+              "lastAccessed": 1793661210125.552
+            }
+          ],
+          "history": [],
+          "mode": "full",
+          "clientVersion": "1.0.0"
+        }
+      ]
+    }
+  },
+  {
+    "cacheConfig": {
+      "cachedAt": 1793661210693,
+      "data": {
+        "apiVersion": "1",
+        "baseSensitiveKeywords": [
+          "password",
+          "token",
+          "bank",
+          "secret",
+          "cookie"
+        ],
+        "cleanupThresholdDays": 14,
+        "enablePrivacyFilter": true,
+        "historyLookbackDays": 30,
+        "limits": {
+          "maxBodyBytes": 1048576,
+          "maxItemsPerSync": 500,
+          "maxRuleTextLength": 500,
+          "maxUrlLength": 2048
+        },
+        "maxHistoryItems": 100,
+        "minRecommendationScore": 0.3,
+        "privacySensitiveKeywords": [
+          "password",
+          "token",
+          "bank",
+          "secret",
+          "cookie"
+        ],
+        "recencyHalfLifeDays": 7,
+        "weights": {
+          "domain": 0.1,
+          "frequency": 0.3,
+          "open": 0.2,
+          "recency": 0.4
+        }
+      }
+    }
+  },
+  {
+    "shot": "evidence/TC-UI-PRIV-005/explore/2.png",
+    "aria": "- banner:\n  - heading \"导航助手\" [level=1]\n  - button \"后端已连接\"\n- region \"当前页面\":\n  - heading \"当前页面\" [level=2]\n  - paragraph: 合成页\n  - paragraph: https://example.com/docs\n  - button \"标记为重要\": ☆\n  - button \"添加到分析\"\n- region \"浏览器上下文同步\":\n  - button \"同步浏览器上下文\"\n  - status:\n    - paragraph: 同步成功\n    - paragraph: 上传 2 条 · 过滤 1 条\n    - time: 07:13 · 刚刚\n  - button \"全量同步\"\n  - paragraph: 当前模式：全量\n- tablist \"导航助手功能\":\n  - tab \"首页\"\n  - tab \"上下文\" [selected]\n  - tab \"排序\"\n  - tab \"整理\"\n  - tab \"规则\"\n  - tab \"诊断\"\n- main:\n  - tabpanel \"上下文\":\n    - heading \"浏览器上下文\" [level=2]\n    - paragraph: 敏感关键词：password、token、bank、secret、cookie · 来源：后端\n    - heading \"当前窗口标签页\" [level=2]\n    - list:\n      - listitem:\n        - paragraph: 合成页\n        - paragraph: https://example.com/?cookie=1\n        - text: 含 cookie · 不上传\n      - listitem:\n        - paragraph: 合成页\n        - paragraph: https://example.com/docs\n    - heading \"最近浏览历史\" [level=2]\n    - text: \"0\"\n    - paragraph: 自 2026/10/4 07:13:30 起 · 最多 100 条\n    - list\n    - paragraph: 还没有数据，点击上方「同步浏览器上下文」开始"
+  },
+  {
+    "ranked": {
+      "status": 200,
+      "body": {
+        "pages": [
+          {
+            "id": "page_1",
+            "url": "https://example.com/docs",
+            "normalizedUrl": "https://example.com/docs",
+            "title": "合成页",
+            "domain": "example.com",
+            "visitCount": 1,
+            "lastVisitedAt": 1793661210687,
+            "firstSeenAt": 1793661210125.552,
+            "sources": [
+              "open_tab",
+              "active_tab"
+            ],
+            "isOpen": true,
+            "isActive": true,
+            "isImportant": false,
+            "score": 1,
+            "scoreDetail": {
+              "recency": 1,
+              "frequency": 1,
+              "open": 1,
+              "domain": 1,
+              "domainSource": "affinity"
+            },
+            "reason": "正在浏览，今天访问过，常用域名 example.com"
+          }
+        ],
+        "total": 1,
+        "domains": [
+          "example.com"
+        ],
+        "generatedAt": 1793661210688
+      }
+    },
+    "health": {
+      "status": "ok",
+      "version": "1.0.0",
+      "uptime": 474,
+      "pageCount": 1,
+      "ruleCount": 0,
+      "enabledRuleCount": 0,
+      "lastSyncAt": 1793661210687,
+      "persistence": "memory",
+      "startedAt": 1793660736717
+    }
+  }
+]

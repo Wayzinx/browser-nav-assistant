@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-SYNC-012",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:06.165Z",
+  "tests": [
+    {
+      "testId": "d724402c6cc8dc929816-151debb72554b100cc45",
+      "title": "TC-API-SYNC-012 重复 openTab、活动页和关闭后来源只累积三种",
+      "project": "api",
+      "file": "tests/api/TC-API-SYNC-012.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 25,
+      "startedAt": "2026-11-04T03:27:06.140Z",
+      "endedAt": "2026-11-04T03:27:06.165Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 9,
+      "screenshots": [],
+      "serverLogLines": 14,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 870,
+          "after": 874
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 3
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

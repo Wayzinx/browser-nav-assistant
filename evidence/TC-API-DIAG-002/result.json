@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-DIAG-002",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:46.902Z",
+  "tests": [
+    {
+      "testId": "88b7f4e12a75b8c13df4-15bb005c5c68ebd35c39",
+      "title": "TC-API-DIAG-002 导入 resource.json 样例并保存 2 条规则后：pageCount=10、ruleCount=2、lastSyncAt 等于导入的 syncedAt",
+      "project": "api",
+      "file": "tests/api/TC-API-DIAG-002.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 21,
+      "startedAt": "2026-11-04T03:25:46.881Z",
+      "endedAt": "2026-11-04T03:25:46.902Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 85,
+          "after": 86
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 2,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

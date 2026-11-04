@@ -1,0 +1,65 @@
+{
+  "caseId": "TC-API-PERF-001",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:26:23.763Z",
+  "tests": [
+    {
+      "testId": "d35cc2eb8079f04acb31-bedad55214dbf2155cef",
+      "title": "TC-API-PERF-001 10 万页面下连续推荐 20 次 p95 < 100ms",
+      "project": "api",
+      "file": "tests/api/TC-API-PERF-001.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 34267,
+      "startedAt": "2026-11-04T03:25:49.496Z",
+      "endedAt": "2026-11-04T03:26:23.763Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 222,
+      "screenshots": [],
+      "serverLogLines": 424,
+      "metrics": {
+        "recommendations.p50": {
+          "value": 1.1,
+          "unit": "ms"
+        },
+        "recommendations.p95": {
+          "value": 1.8,
+          "unit": "ms"
+        },
+        "recommendations.max": {
+          "value": 8.9,
+          "unit": "ms"
+        }
+      },
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 173,
+          "after": 373
+        },
+        "pages": {
+          "truncated": true,
+          "hashChanged": true
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 100000,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 50
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

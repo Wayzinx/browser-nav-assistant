@@ -1,0 +1,59 @@
+{
+  "caseId": "TC-UI-CTX-006",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:46.550Z",
+  "tests": [
+    {
+      "testId": "b4c60c5b808602a6edea-d254ffe767067e56c1a7",
+      "title": "TC-UI-CTX-006 依次访问 PR 和 MDN 再打开 popup：排除插件自身并选择最近活动 MDN",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CTX-006.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 980,
+      "startedAt": "2026-11-04T03:27:45.570Z",
+      "endedAt": "2026-11-04T03:27:46.550Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-CTX-006/screenshots/01-S1-最近活动MDN.png",
+        "evidence/TC-UI-CTX-006/screenshots/02-S2-popup回退MDN.png"
+      ],
+      "serverLogLines": 9,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1035,
+          "after": 1035
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "{\"tabs\":[{\"active\":false,\"audible\":false,\"autoDiscardable\":true,\"discarded\":false,\"frozen\":false,\"groupId\":-1,\"height\":673,\"highlighted\":false,\"id\":570779519,\"incognito\":false,\"index\":0,\"lastAccessed\":1793762865870.343,\"mutedInfo\":{\"muted\":false},\"pinned\":false,\"selected\":false,\"splitViewId\":-1,\"status\":\"complete\",\"title\":\"about:blank\",\"url\":\"about:blank\",\"width\":500,\"windowId\":570779518},{\"active\":false,\"audible\":false,\"autoDiscardable\":true,\"discarded\":false,\"frozen\":false,\"groupId\":-1,\"height\":673,\"highlighted\":false,\"id\":570779520,\"incognito\":false,\"index\":1,\"lastAccessed\":1793762866172.96,\"mutedInfo\":{\"muted\":false},\"openerTabId\":570779519,\"pinned\":false,\"selected\":false,\"splitViewId\":-1,\"status\":\"complete\",\"title\":\"PR 456\",\"url\":\"https://github.com/org/repo/pull/456\",\"width\":500,\"windowId\":570779518},{\"active\":true,\"audible\":false,\"autoDiscardable\":true,\"discarded\":false,\"frozen\":false,\"groupId\":-1,\"height\":673,\"highlighted\":true,\"id\":570779521,\"incognito\":false,\"index\":2,\"lastAccessed\":1793762866181.609,\"mutedInfo\":{\"muted\":false},\"openerTabId\":570779520,\"pinned\":false,\"selected\":true,\"splitViewId\":-1,\"status\":\"complete\",\"title\":\"Fetch API\",\"url\":\"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\",\"width\":500,\"windowId\":570779518}]}",
+        "{\"popupPageErrors\":[],\"swExceptions\":[]}"
+      ]
+    }
+  ]
+}

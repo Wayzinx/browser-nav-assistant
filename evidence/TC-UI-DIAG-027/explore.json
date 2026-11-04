@@ -1,0 +1,17 @@
+{
+  "caseId": "TC-UI-DIAG-027",
+  "verdict": "pass",
+  "observed": "导入样例后写入含隐私探针 URL 的失败 syncState：last-sync=fail 且 detail 含完整探针 URL；点击复制诊断报告后 diag-report-output 与真实剪贴板逐字一致，JSON 含 generatedAt、extensionVersion=1.0.0、apiBaseUrl=测试后端、11 项 checks、config.cleanupThresholdDays=14，不含探针 URL、github.com/org/repo，除 apiBaseUrl 外无 http(s) URL。E1–E4 满足。spec 执行本身通过，但对 grantPermissions 的 opaque origin 回退用了 try/catch，未写 lint-allow-catch 注释，validate scripts 报 L10 错误；已在该 catch 行补 lint-allow-catch 注释（行为不变，非 opaque 错误仍抛出），lint 通过、spec 通过。",
+  "steps": [
+    "PORT=4183 启动后端（ENABLE_TEST_API=1），每条前 POST /api/__test__/reset",
+    "headless chromium（channel=chromium）加载 extension/（DIAG-010/012 为删权限临时副本），apiBaseUrl 指向 http://127.0.0.1:4183，只 route 外部站点",
+    "S3 复制报告（截图 evidence/TC-UI-DIAG-027/explore/1.png）",
+    "探索脚本：tests/explore/tmp/x4183-diag.mjs；观测数据与 aria 快照：tests/explore/tmp/x4183-diag.out.json",
+    "TEST_PORT=4183 npx playwright test tests/ui/TC-UI-DIAG-027.spec.mjs 通过（2026-11-03 07:27 续跑：产品代码与 UI-DIAG/RULE 用例分片未变；探索脚本 52/52 ok，观测与 aria 快照除数字/时间外与上轮完全一致；TEST_PORT=4183 隔离 --output 批量 52 passed）"
+  ],
+  "screenshots": [
+    "evidence/TC-UI-DIAG-027/explore/1.png"
+  ],
+  "spec": "tests/ui/TC-UI-DIAG-027.spec.mjs",
+  "solidified": true
+}

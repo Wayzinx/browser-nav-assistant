@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-PRIV-005",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:02.778Z",
+  "tests": [
+    {
+      "testId": "e08a226b362dc5da9661-b70a370cd8b64c9e76f7",
+      "title": "TC-API-PRIV-005 无效 URL 和隐私拒收分别计数，不影响同批普通记录",
+      "project": "api",
+      "file": "tests/api/TC-API-PRIV-005.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 14,
+      "startedAt": "2026-11-04T03:27:02.764Z",
+      "endedAt": "2026-11-04T03:27:02.778Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 592,
+          "after": 594
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

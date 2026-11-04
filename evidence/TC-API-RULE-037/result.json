@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RULE-037",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:05.574Z",
+  "tests": [
+    {
+      "testId": "8464e0bd76ce35915bb9-2c0e7c438cc23e024206",
+      "title": "TC-API-RULE-037 停用再启用正式保护规则后keep消失再恢复",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-037.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 31,
+      "startedAt": "2026-11-04T03:27:05.543Z",
+      "endedAt": "2026-11-04T03:27:05.574Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 12,
+      "screenshots": [],
+      "serverLogLines": 15,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 813,
+          "after": 815
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 1,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

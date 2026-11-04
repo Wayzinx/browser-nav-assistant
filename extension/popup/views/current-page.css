@@ -1,0 +1,30 @@
+/* @code C-FE-CTX-05 */
+[data-slot='current-page'] .current-page,
+[data-slot='current-page'] .current-page-state {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+[data-slot='current-page'] .current-page-title {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+[data-slot='current-page'] .current-page-url {
+  color: var(--color-muted);
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+[data-slot='current-page'] .current-page-system-badge {
+  justify-self: start;
+  color: #795600;
+  background: #ffedb5;
+}
+
+/* 外壳由 CORE 管理；只由本插槽的系统页状态触发卡片着色。 */
+[data-testid='current-page-card']:has(> [data-slot='current-page'] > [data-system='true']) {
+  border-color: #e8cc7a;
+  background: #fff8df;
+}

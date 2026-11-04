@@ -1,0 +1,58 @@
+{
+  "reqId": "TC-UI-MENU-008-05",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/ranked?limit=500",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-UI-MENU-008-05"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-UI-MENU-008-05",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "568",
+    "date": "Wed, 04 Nov 2026 03:28:54 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "pages": [
+      {
+        "id": "page_1",
+        "url": "https://docs.internal.com/ai-agent-design",
+        "normalizedUrl": "https://docs.internal.com/ai-agent-design",
+        "title": "AI Agent Design",
+        "domain": "docs.internal.com",
+        "visitCount": 1,
+        "lastVisitedAt": 1793762933607,
+        "firstSeenAt": 1793762933607,
+        "sources": [
+          "manual"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.8,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "今天访问过，常用域名 docs.internal.com"
+      }
+    ],
+    "total": 1,
+    "domains": [
+      "docs.internal.com"
+    ],
+    "generatedAt": 1793762933785
+  },
+  "ms": 0.9,
+  "mutated": null
+}

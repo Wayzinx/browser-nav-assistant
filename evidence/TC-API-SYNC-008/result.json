@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-SYNC-008",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:06.043Z",
+  "tests": [
+    {
+      "testId": "bb5a7aa9879b814fbe21-90131d647c2f1fe52c80",
+      "title": "TC-API-SYNC-008 次数取 max、首次时间取 min 且空标题不覆盖",
+      "project": "api",
+      "file": "tests/api/TC-API-SYNC-008.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 35,
+      "startedAt": "2026-11-04T03:27:06.008Z",
+      "endedAt": "2026-11-04T03:27:06.043Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 9,
+      "screenshots": [],
+      "serverLogLines": 14,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 855,
+          "after": 859
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 3
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

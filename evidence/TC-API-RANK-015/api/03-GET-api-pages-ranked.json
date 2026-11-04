@@ -1,0 +1,61 @@
+{
+  "reqId": "TC-API-RANK-015-03",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/ranked",
+  "params": {
+    "limit": 500,
+    "now": 1793762823531
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-RANK-015-03"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RANK-015-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "535",
+    "date": "Wed, 04 Nov 2026 03:27:03 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "pages": [
+      {
+        "id": "page_1",
+        "url": "https://example.com/future",
+        "normalizedUrl": "https://example.com/future",
+        "title": "future",
+        "domain": "example.com",
+        "visitCount": 3,
+        "lastVisitedAt": 1793762823532,
+        "firstSeenAt": 1793762823532,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.8,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "最近 3 天内多次访问（3 次），常用域名 example.com"
+      }
+    ],
+    "total": 1,
+    "domains": [
+      "example.com"
+    ],
+    "generatedAt": 1793762823531
+  },
+  "ms": 0.7,
+  "mutated": null
+}

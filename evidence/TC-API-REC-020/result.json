@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-API-REC-020",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:04.230Z",
+  "tests": [
+    {
+      "testId": "321c2db49fed0b40924c-4c115f6257bc1bbd87d7",
+      "title": "TC-API-REC-020 最近三条只有两条 React 时规则不触发",
+      "project": "api",
+      "file": "tests/api/TC-API-REC-020.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 17,
+      "startedAt": "2026-11-04T03:27:04.213Z",
+      "endedAt": "2026-11-04T03:27:04.230Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 8,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 713,
+          "after": 715
+        },
+        "pages": {
+          "added": 10,
+          "removed": 1,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 9,
+          "rules": 1,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "{\"T\":1793762824219,\"N\":1793762824220}",
+        "{\"ruleId\":\"rule_1\"}"
+      ]
+    }
+  ]
+}

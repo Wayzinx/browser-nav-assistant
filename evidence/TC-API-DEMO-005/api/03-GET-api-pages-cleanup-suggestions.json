@@ -1,0 +1,70 @@
+{
+  "reqId": "TC-API-DEMO-005-03",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/cleanup-suggestions",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-DEMO-005-03"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-DEMO-005-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "1168",
+    "date": "Wed, 04 Nov 2026 03:25:46 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "summary": {
+      "archive": 2,
+      "merge": 1,
+      "keep": 0
+    },
+    "suggestions": [
+      {
+        "key": "archive:https://www.google.com/search?q=chrome+extension+manifest+v3",
+        "action": "archive",
+        "url": "https://www.google.com/search?q=chrome+extension+manifest+v3",
+        "title": "chrome extension manifest v3 - Google Search",
+        "reason": "超过 14 天未访问（已 35 天），且不在当前打开的 tab 中",
+        "ageDays": 35,
+        "ruleId": null,
+        "lastVisitedAt": 1790662446227
+      },
+      {
+        "key": "archive:https://github.com/org/repo/issues/100",
+        "action": "archive",
+        "url": "https://github.com/org/repo/issues/100",
+        "title": "Old bug report from last sprint",
+        "reason": "超过 14 天未访问（已 24 天），且不在当前打开的 tab 中",
+        "ageDays": 24,
+        "ruleId": null,
+        "lastVisitedAt": 1791662446227
+      },
+      {
+        "key": "merge:github.com/org/repo/issues/123",
+        "action": "merge",
+        "urls": [
+          "https://github.com/org/repo/issues/123",
+          "https://github.com/org/repo/issues/123?tab=comments"
+        ],
+        "titles": [
+          "Fix login redirect bug",
+          "Fix login redirect bug - Comments"
+        ],
+        "keepUrl": "https://github.com/org/repo/issues/123",
+        "title": "Fix login redirect bug",
+        "reason": "去掉 query 参数后 URL 相同，疑似重复页面"
+      }
+    ],
+    "thresholdDays": 14,
+    "generatedAt": 1793762746307
+  },
+  "ms": 2.3,
+  "mutated": null
+}

@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-API-DIAG-008",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:48.284Z",
+  "tests": [
+    {
+      "testId": "2ac59323a6f833b259f6-a0177a9b972150c9be8b",
+      "title": "TC-API-DIAG-008 地址指向没有服务的端口时请求被拒绝（ECONNREFUSED）；改回测试后端地址后 health 立即恢复 200",
+      "project": "api",
+      "file": "tests/api/TC-API-DIAG-008.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 16,
+      "startedAt": "2026-11-04T03:25:48.268Z",
+      "endedAt": "2026-11-04T03:25:48.284Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 2,
+      "screenshots": [],
+      "serverLogLines": 4,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 95,
+          "after": 95
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "S1 请求不可达地址 http://127.0.0.1:9/api/health，期望 ECONNREFUSED",
+        "S1 结果：apiRequestContext.fetch: connect ECONNREFUSED 127.0.0.1:9\nCall log:\n\u001b[2m  - → GET http://127.0.0.1:9/api/health\u001b[22m\n\u001b[2m    - user-agent: Playwright/1.64.1 (arm64; macOS 26.5) node/24.20\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\u001b[2m    - x-request-id: TC-API-D"
+      ]
+    }
+  ]
+}

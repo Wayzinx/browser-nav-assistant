@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-UI-MENU-006",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:51.504Z",
+  "tests": [
+    {
+      "testId": "e16c5938dfaf6c6d83f9-aea89552b445119cda0a",
+      "title": "TC-UI-MENU-006 敏感页面星标置灰并保持后端与本地重要状态为空",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-MENU-006.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 2051,
+      "startedAt": "2026-11-04T03:28:49.453Z",
+      "endedAt": "2026-11-04T03:28:51.504Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [
+        "evidence/TC-UI-MENU-006/screenshots/01-置灰星标.png"
+      ],
+      "serverLogLines": 19,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1115,
+          "after": 1115
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 2,
+      "notes": [
+        "sensitive-popup 观察到的写请求：[]",
+        "sensitive-popup 观察到的写请求：[]"
+      ]
+    }
+  ]
+}

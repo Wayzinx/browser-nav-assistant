@@ -1,0 +1,56 @@
+{
+  "reqId": "TC-API-RULE-043-03",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/rules/parse",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-RULE-043-03"
+  },
+  "requestBody": {
+    "text": "7 天没访问的 issue 归档；帮我整理一下"
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RULE-043-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "607",
+    "date": "Wed, 04 Nov 2026 03:27:05 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "rules": [
+      {
+        "id": "rule_1",
+        "rawText": "7 天没访问的 issue 归档",
+        "type": "archive_candidate",
+        "domain": null,
+        "urlPattern": "/issues/",
+        "inactiveDays": 7,
+        "action": "suggest_archive",
+        "enabled": true,
+        "confidence": "high",
+        "notes": []
+      }
+    ],
+    "unparsed": [
+      {
+        "text": "帮我整理一下",
+        "reason": "没有识别到动作（归档 / 不要归档 / 推荐 / 不上传 / 优先）",
+        "examples": [
+          "七天没访问的 GitHub issue 建议归档",
+          "别归档 github.com 的页面",
+          "如果我连续看了 3 个 React 文档，推荐相关 MDN 页面",
+          "不要上传包含 password、token 的 URL",
+          "飞书文档优先显示"
+        ]
+      }
+    ],
+    "warnings": []
+  },
+  "ms": 0.7,
+  "mutated": null
+}

@@ -1,0 +1,91 @@
+{
+  "dataVersion": 707,
+  "versions": {
+    "data": 707,
+    "rule": 194,
+    "config": 177
+  },
+  "counts": {
+    "pages": 2,
+    "rules": 0,
+    "openPages": 0,
+    "archivedPages": 0,
+    "syncLogs": 1
+  },
+  "pagesTruncated": false,
+  "pagesHash": "7cbfd91011c6d99fc59a0676d1df8e681bc64d182c6feaa02af05f4fa4eb2264",
+  "pages": [
+    {
+      "id": "page_1",
+      "url": "https://news.example.org/a",
+      "normalizedUrl": "https://news.example.org/a",
+      "domain": "news.example.org",
+      "title": "News A",
+      "visitCount": 5,
+      "lastVisitedAt": 1793676424134,
+      "firstSeenAt": 1793676424134,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    },
+    {
+      "id": "page_2",
+      "url": "https://news.example.org/b",
+      "normalizedUrl": "https://news.example.org/b",
+      "domain": "news.example.org",
+      "title": "News B",
+      "visitCount": 1,
+      "lastVisitedAt": 1793676424134,
+      "firstSeenAt": 1793676424134,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    }
+  ],
+  "rules": [],
+  "config": {
+    "cleanupThresholdDays": 14,
+    "maxHistoryItems": 100,
+    "historyLookbackDays": 30,
+    "enablePrivacyFilter": true,
+    "privacySensitiveKeywords": [
+      "password",
+      "token",
+      "bank",
+      "secret"
+    ]
+  },
+  "sequences": {
+    "page": 2,
+    "rule": 0,
+    "sync": 1
+  },
+  "lastSync": {
+    "id": "sync_1",
+    "syncedAt": 1793762824134,
+    "mode": "full",
+    "received": 2,
+    "created": 2,
+    "updated": 0,
+    "rejected": 0,
+    "durationMs": 0.055999999996856786,
+    "ok": true,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 0
+    }
+  },
+  "persist": null
+}

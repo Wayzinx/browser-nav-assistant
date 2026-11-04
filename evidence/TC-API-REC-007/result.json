@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-API-REC-007",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:03.905Z",
+  "tests": [
+    {
+      "testId": "5c1e19b8ef7e5e2b4394-c6b735e2c86f2d6913ba",
+      "title": "TC-API-REC-007 未知当前域名仍返回至少一条全局兜底",
+      "project": "api",
+      "file": "tests/api/TC-API-REC-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 15,
+      "startedAt": "2026-11-04T03:27:03.890Z",
+      "endedAt": "2026-11-04T03:27:03.905Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 3,
+      "screenshots": [],
+      "serverLogLines": 6,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 686,
+          "after": 688
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "{\"T\":1793762823897,\"N\":1793762823898}"
+      ]
+    }
+  ]
+}

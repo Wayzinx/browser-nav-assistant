@@ -1,0 +1,47 @@
+{
+  "source": "service-worker",
+  "phase": "manual-setup-sync",
+  "observationSequence": 9,
+  "reqId": "ext_1793762837683_9",
+  "method": "POST",
+  "url": "http://127.0.0.1:4300/api/sync",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762837683_9"
+  },
+  "requestBody": "{\"activeTab\":{\"url\":\"https://example.com/docs\",\"title\":\"Docs recovery current page\"},\"openTabs\":[{\"url\":\"https://example.com/docs\",\"title\":\"Docs recovery current page\",\"lastAccessed\":1793762837417.729}],\"history\":[{\"url\":\"https://example.com/docs\",\"title\":\"https://example.com/docs\",\"lastVisitTime\":1793762837465.947,\"visitCount\":1}],\"mode\":\"full\",\"clientVersion\":\"1.0.0\"}",
+  "status": 200,
+  "responseHeaders": {
+    "connection": "keep-alive",
+    "date": "Wed, 04 Nov 2026 03:27:17 GMT",
+    "keep-alive": "timeout=5",
+    "access-control-allow-origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "access-control-expose-headers": "x-request-id",
+    "content-length": "164",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin",
+    "x-request-id": "ext_1793762837683_9"
+  },
+  "responseBody": {
+    "ok": true,
+    "syncedAt": 1793762837685,
+    "received": 3,
+    "created": 1,
+    "updated": 2,
+    "rejected": 0,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 0
+    },
+    "pageCount": 11,
+    "mode": "full"
+  },
+  "responseText": "{\"ok\":true,\"syncedAt\":1793762837685,\"received\":3,\"created\":1,\"updated\":2,\"rejected\":0,\"rejectedByReason\":{\"invalid_url\":0,\"privacy\":0},\"pageCount\":11,\"mode\":\"full\"}",
+  "parseError": null,
+  "ms": 7,
+  "setup": true
+}

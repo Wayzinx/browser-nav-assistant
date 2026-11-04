@@ -1,0 +1,55 @@
+{
+  "reqId": "TC-API-CLEAN-020-02",
+  "setup": true,
+  "method": "POST",
+  "url": "/api/sync",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-CLEAN-020-02"
+  },
+  "requestBody": {
+    "activeTab": null,
+    "openTabs": [
+      {
+        "url": "https://github.com/org/repo/issues/90",
+        "title": "Issue 90",
+        "lastAccessed": 1792034744665
+      }
+    ],
+    "history": [
+      {
+        "url": "https://github.com/org/repo/issues/90",
+        "title": "Issue 90",
+        "lastVisitTime": 1792034744665,
+        "visitCount": 1
+      }
+    ]
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-CLEAN-020-02",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "163",
+    "date": "Wed, 04 Nov 2026 03:25:44 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "ok": true,
+    "syncedAt": 1793762744667,
+    "received": 2,
+    "created": 1,
+    "updated": 1,
+    "rejected": 0,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 0
+    },
+    "pageCount": 1,
+    "mode": "full"
+  },
+  "ms": 2.6,
+  "mutated": null
+}

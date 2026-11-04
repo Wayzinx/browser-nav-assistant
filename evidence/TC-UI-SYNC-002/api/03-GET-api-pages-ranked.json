@@ -1,0 +1,87 @@
+{
+  "reqId": "TC-UI-SYNC-002-02",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/ranked",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-UI-SYNC-002-02"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-UI-SYNC-002-02",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "1204",
+    "date": "Wed, 04 Nov 2026 03:29:54 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "pages": [
+      {
+        "id": "page_1",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+        "normalizedUrl": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+        "title": "Fetch API - Web APIs | MDN",
+        "domain": "developer.mozilla.org",
+        "visitCount": 2,
+        "lastVisitedAt": 1793762994815,
+        "firstSeenAt": 1793762994520.728,
+        "sources": [
+          "history",
+          "open_tab",
+          "active_tab"
+        ],
+        "isOpen": true,
+        "isActive": true,
+        "isImportant": false,
+        "score": 1,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 1,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "正在浏览，今天访问过，常用域名 developer.mozilla.org"
+      },
+      {
+        "id": "page_2",
+        "url": "https://github.com/org/repo/pull/456",
+        "normalizedUrl": "https://github.com/org/repo/pull/456",
+        "title": "Refactor auth middleware (#456)",
+        "domain": "github.com",
+        "visitCount": 2,
+        "lastVisitedAt": 1793762994520.617,
+        "firstSeenAt": 1793762994438.528,
+        "sources": [
+          "history",
+          "open_tab"
+        ],
+        "isOpen": true,
+        "isActive": false,
+        "isImportant": false,
+        "score": 1,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 1,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "今天访问过，当前仍处于打开状态，常用域名 github.com"
+      }
+    ],
+    "total": 2,
+    "domains": [
+      "developer.mozilla.org",
+      "github.com"
+    ],
+    "generatedAt": 1793762994816
+  },
+  "ms": 1.8,
+  "mutated": null
+}

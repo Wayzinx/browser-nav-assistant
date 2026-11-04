@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-UI-RANK-008",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:20.172Z",
+  "tests": [
+    {
+      "testId": "c97f37de25db7e1cd5b0-96653b4944fea36b2259",
+      "title": "TC-UI-RANK-008 后端只有 3 个页面时首页历史排序显示 3 条（不足 5 条不补位），排序页签 ranked-total 为 3",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RANK-008.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 825,
+      "startedAt": "2026-11-04T03:29:19.347Z",
+      "endedAt": "2026-11-04T03:29:20.172Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 2,
+      "screenshots": [
+        "evidence/TC-UI-RANK-008/screenshots/01-首页3条排序.png",
+        "evidence/TC-UI-RANK-008/screenshots/02-排序页签3条.png"
+      ],
+      "serverLogLines": 12,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1157,
+          "after": 1158
+        },
+        "pages": {
+          "added": 3,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 3,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

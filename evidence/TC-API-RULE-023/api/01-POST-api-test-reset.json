@@ -1,0 +1,27 @@
+{
+  "reqId": "TC-API-RULE-023-01",
+  "setup": true,
+  "method": "POST",
+  "url": "/api/__test__/reset",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-RULE-023-01"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RULE-023-01",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "11",
+    "date": "Wed, 04 Nov 2026 03:27:05 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "ok": true
+  },
+  "ms": 1.1,
+  "mutated": null
+}

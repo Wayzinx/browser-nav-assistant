@@ -1,0 +1,9 @@
+{"method":"GET","path":"/api/__test__/state","status":200,"ms":0.25,"reqId":"TC-API-REC-023-state","ts":"2026-11-04T03:27:04.304Z","level":"info","msg":"access"}
+{"method":"POST","path":"/api/__test__/reset","status":200,"ms":0.13,"reqId":"TC-API-REC-023-01","ts":"2026-11-04T03:27:04.305Z","level":"info","msg":"access"}
+{"reqId":"TC-API-REC-023-02","ok":true,"syncedAt":1793762824307,"received":14,"created":10,"updated":4,"rejected":0,"rejectedByReason":{"invalid_url":0,"privacy":0},"pageCount":10,"mode":"full","rejectedDomains":{},"durationMs":0.3604169999889564,"ts":"2026-11-04T03:27:04.308Z","level":"info","msg":"sync done"}
+{"method":"POST","path":"/api/sync","status":200,"ms":0.84,"reqId":"TC-API-REC-023-02","ts":"2026-11-04T03:27:04.308Z","level":"info","msg":"access"}
+{"method":"POST","path":"/api/rules","status":201,"ms":0.24,"reqId":"TC-API-REC-023-03","ts":"2026-11-04T03:27:04.310Z","level":"info","msg":"access"}
+{"method":"PATCH","path":"/api/rules/rule_1","status":200,"ms":0.21,"reqId":"TC-API-REC-023-04","ts":"2026-11-04T03:27:04.312Z","level":"info","msg":"access"}
+{"method":"POST","path":"/api/recommendations/next","status":200,"ms":0.31,"reqId":"TC-API-REC-023-05","ts":"2026-11-04T03:27:04.314Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/health","status":200,"ms":0.09,"reqId":"TC-API-REC-023-06","ts":"2026-11-04T03:27:04.315Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/__test__/state","status":200,"ms":0.28,"reqId":"TC-API-REC-023-state","ts":"2026-11-04T03:27:04.317Z","level":"info","msg":"access"}

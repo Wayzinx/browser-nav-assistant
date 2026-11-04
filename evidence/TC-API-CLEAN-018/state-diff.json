@@ -1,0 +1,118 @@
+{
+  "summary": {
+    "dataVersion": {
+      "before": 35,
+      "after": 36
+    },
+    "pages": {
+      "added": 2,
+      "removed": 0,
+      "changed": 0
+    },
+    "rules": {
+      "added": 1,
+      "removed": 0,
+      "changed": 0
+    },
+    "counts": {
+      "pages": 2,
+      "rules": 1,
+      "openPages": 0,
+      "archivedPages": 0,
+      "syncLogs": 1
+    },
+    "configChanged": [],
+    "persistChanged": false
+  },
+  "counts": {
+    "pages": {
+      "before": 0,
+      "after": 2,
+      "delta": 2
+    },
+    "rules": {
+      "before": 0,
+      "after": 1,
+      "delta": 1
+    },
+    "openPages": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "archivedPages": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "syncLogs": {
+      "before": 0,
+      "after": 1,
+      "delta": 1
+    }
+  },
+  "pages": {
+    "added": [
+      {
+        "id": "page_1",
+        "url": "https://github.com/org/repo/pull/77",
+        "normalizedUrl": "https://github.com/org/repo/pull/77",
+        "domain": "github.com",
+        "title": "https://github.com/org/repo/pull/77",
+        "visitCount": 1,
+        "lastVisitedAt": 1792898744590,
+        "firstSeenAt": 1792898744590,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isArchived": false,
+        "archivedAt": null,
+        "mergedInto": null,
+        "isImportant": false
+      },
+      {
+        "id": "page_2",
+        "url": "https://gitlab.com/org/repo/issues/77",
+        "normalizedUrl": "https://gitlab.com/org/repo/issues/77",
+        "domain": "gitlab.com",
+        "title": "https://gitlab.com/org/repo/issues/77",
+        "visitCount": 1,
+        "lastVisitedAt": 1792898744590,
+        "firstSeenAt": 1792898744590,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isArchived": false,
+        "archivedAt": null,
+        "mergedInto": null,
+        "isImportant": false
+      }
+    ],
+    "removed": [],
+    "changed": []
+  },
+  "rules": {
+    "added": [
+      {
+        "domain": "github.com",
+        "urlPattern": "/issues/",
+        "inactiveDays": 7,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762744595,
+        "updatedAt": 1793762744595,
+        "rawText": "把 7 天没访问过的 GitHub issue 建议归档",
+        "type": "archive_candidate",
+        "action": "suggest_archive",
+        "id": "rule_1"
+      }
+    ],
+    "removed": [],
+    "changed": []
+  },
+  "config": {}
+}

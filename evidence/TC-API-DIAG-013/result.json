@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-API-DIAG-013",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:48.433Z",
+  "tests": [
+    {
+      "testId": "5b3daa6e0561e9300901-f5e9eb218df37a2edc89",
+      "title": "TC-API-DIAG-013 阈值取边界值 1 / 365 时 GET /api/config 如实返回，0 / 366 被拒绝且配置保持上一次的有效值",
+      "project": "api",
+      "file": "tests/api/TC-API-DIAG-013.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 26,
+      "startedAt": "2026-11-04T03:25:48.407Z",
+      "endedAt": "2026-11-04T03:25:48.433Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 8,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 101,
+          "after": 101
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [
+          "cleanupThresholdDays",
+          "maxHistoryItems"
+        ],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

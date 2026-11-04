@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-UI-DIAG-006",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:10.743Z",
+  "tests": [
+    {
+      "testId": "c00931822044a9f97507-aa7bb6fc1bcd78fc22f1",
+      "title": "TC-UI-DIAG-006 输入 not-a-url 保存时提示「地址格式错误」，storage 中的 apiBaseUrl 保持原值",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-DIAG-006.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 932,
+      "startedAt": "2026-11-04T03:28:09.811Z",
+      "endedAt": "2026-11-04T03:28:10.743Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-DIAG-006/screenshots/01-S1-保存非法地址.png",
+        "evidence/TC-UI-DIAG-006/screenshots/02-S3-重检后地址未变.png"
+      ],
+      "serverLogLines": 14,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1060,
+          "after": 1060
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 2,
+      "notes": []
+    }
+  ]
+}

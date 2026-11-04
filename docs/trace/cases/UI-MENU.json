@@ -1,0 +1,418 @@
+{
+  "cases": [
+    {
+      "id": "TC-UI-MENU-001",
+      "type": "UI",
+      "module": "MENU",
+      "title": "插件安装后两个右键菜单 ID 均已注册（AC1 代理检查）",
+      "priority": "P1",
+      "category": "positive",
+      "technique": "scenario",
+      "features": [
+        "F-MENU-01"
+      ],
+      "acceptanceRefs": [
+        "F-MENU-01#AC1"
+      ],
+      "codePoints": [
+        "C-FE-CORE-01",
+        "C-FE-MENU-01"
+      ],
+      "preconditions": [
+        "每条用例使用独立的 Chromium persistent context 加载真实 extension/ 插件；通过真实 POST /api/__test__/reset 清空测试后端；清空插件 storage/history，设置 apiBaseUrl 为真实测试服务（TEST_PORT，默认 4100），importantUrls=[]。",
+        "外部 http(s) 页面仅用 route 离线 HTML；禁止 route 后端、替换 fetch、动态 import module SW 或伪派发 contextMenus.onClicked；popup 以 chrome-extension://<id>/popup/popup.html 的 tab 打开。",
+        "受测外站 tab 在打开 popup 前为最近访问的非插件 tab；不点击同步按钮、不导入无关历史。需要历史时只使用 chrome.history.addUrl，旧页面只经真实 POST /api/sync 导入。测试结束关闭全部插件/页面 context。"
+      ],
+      "testData": "http://example.com/menu 与 https://example.com/menu，各返回离线 HTML；菜单 ID=nav-add、nav-important。依据前端方案 §10 的 AC1 自动化代理，仅证明注册，原生菜单文字/外观/实际点击未验证。",
+      "steps": [
+        "S1：完成本例独立 reset 并加载真实插件，依次打开两个离线外站 tab；打开真实 popup tab。",
+        "S2：在已加载插件的 SW 中分别调用 chrome.contextMenus.update('nav-add', {}, callback) 与 chrome.contextMenus.update('nav-important', {}, callback)，在各自 callback 内立即读取 chrome.runtime.lastError 并记录结果；不调用 create，也不触发点击事件。",
+        "S3：读取真实 GET /api/health；记录代理验证范围，结束后关闭本例 context。"
+      ],
+      "expected": [
+        "E1：nav-add 的 update callback 中 chrome.runtime.lastError 为空；该 ID 已注册。",
+        "E2：nav-important 的 update callback 中 chrome.runtime.lastError 为空；该 ID 已注册。",
+        "E3：GET /api/health 的 pageCount=0；注册检查未产生业务写入。"
+      ],
+      "evidence": [
+        "evidence/TC-UI-MENU-001/：popup 截图、两个 update 回调的 lastError 结果；注明原生菜单未打开。",
+        "evidence/TC-UI-MENU-001/：api/health 响应、extension.log；执行时按夹具生成 result.json、flow.gif、explore.json。"
+      ]
+    },
+    {
+      "id": "TC-UI-MENU-002",
+      "type": "UI",
+      "module": "MENU",
+      "title": "普通页面点击添加后以 manual 来源入库且 popup 提示成功",
+      "priority": "P1",
+      "category": "positive",
+      "technique": "scenario",
+      "features": [
+        "F-MENU-01"
+      ],
+      "acceptanceRefs": [
+        "F-MENU-01#AC2"
+      ],
+      "codePoints": [
+        "C-FE-MENU-01",
+        "C-FE-MENU-02",
+        "C-FE-MENU-03"
+      ],
+      "preconditions": [
+        "每条用例使用独立的 Chromium persistent context 加载真实 extension/ 插件；通过真实 POST /api/__test__/reset 清空测试后端；清空插件 storage/history，设置 apiBaseUrl 为真实测试服务（TEST_PORT，默认 4100），importantUrls=[]。",
+        "外部 http(s) 页面仅用 route 离线 HTML；禁止 route 后端、替换 fetch、动态 import module SW 或伪派发 contextMenus.onClicked；popup 以 chrome-extension://<id>/popup/popup.html 的 tab 打开。",
+        "受测外站 tab 在打开 popup 前为最近访问的非插件 tab；不点击同步按钮、不导入无关历史。需要历史时只使用 chrome.history.addUrl，旧页面只经真实 POST /api/sync 导入。测试结束关闭全部插件/页面 context。"
+      ],
+      "testData": "当前页 https://example.com/note，离线 title=Note；初始 pageCount=0，lastMenuAction 未设置。",
+      "steps": [
+        "S1：完成本例独立 reset；打开目标离线外站，再以 tab 方式打开真实 popup，等待 current-page-url 显示目标 URL。",
+        "S2：安装只读的真实网络观察，点击 getByTestId('current-page-add')；等待真实 POST /api/pages/manual 完成并读取 toast，不直接发送 ADD_TO_ANALYSIS。",
+        "S3：读取真实 GET /api/pages/ranked、GET /api/health，并在 SW 读取 chrome.storage.local 的 lastMenuAction；重新加载 popup 读回 toast。"
+      ],
+      "expected": [
+        "E1：真实 POST /api/pages/manual 请求体 url=https://example.com/note、title=Note；响应 accepted=true、created=true、pageCount=1。",
+        "E2：getByTestId('toast') 包含「已添加到分析」。",
+        "E3：ranked.pages 中恰有 1 条 normalizedUrl=https://example.com/note 的记录，sources 包含 manual。",
+        "E4：health.pageCount=1。",
+        "E5：lastMenuAction.kind=add、accepted=true、reason=null、at 为数字，且不含 url/normalizedUrl 或完整目标 URL。",
+        "E6：重新加载 popup 后 toast 包含「已添加到分析」，lastMenuAction.accepted 仍为 true。"
+      ],
+      "evidence": [
+        "evidence/TC-UI-MENU-002/：点击前后与重载 popup 截图。",
+        "evidence/TC-UI-MENU-002/：真实 manual 请求/响应、ranked/health 响应、lastMenuAction 读回、extension.log。"
+      ]
+    },
+    {
+      "id": "TC-UI-MENU-003",
+      "type": "UI",
+      "module": "MENU",
+      "title": "含 token 的页面点击添加在本地拒绝且不上传不泄漏 URL",
+      "priority": "P0",
+      "category": "negative",
+      "technique": "equivalence",
+      "features": [
+        "F-MENU-01"
+      ],
+      "acceptanceRefs": [
+        "F-MENU-01#AC2"
+      ],
+      "codePoints": [
+        "C-FE-MENU-01",
+        "C-FE-MENU-02",
+        "C-FE-MENU-03"
+      ],
+      "preconditions": [
+        "每条用例使用独立的 Chromium persistent context 加载真实 extension/ 插件；通过真实 POST /api/__test__/reset 清空测试后端；清空插件 storage/history，设置 apiBaseUrl 为真实测试服务（TEST_PORT，默认 4100），importantUrls=[]。",
+        "外部 http(s) 页面仅用 route 离线 HTML；禁止 route 后端、替换 fetch、动态 import module SW 或伪派发 contextMenus.onClicked；popup 以 chrome-extension://<id>/popup/popup.html 的 tab 打开。",
+        "受测外站 tab 在打开 popup 前为最近访问的非插件 tab；不点击同步按钮、不导入无关历史。需要历史时只使用 chrome.history.addUrl，旧页面只经真实 POST /api/sync 导入。测试结束关闭全部插件/页面 context。"
+      ],
+      "testData": "当前页 https://example.com/reset?token=1，离线 title=Reset；真实 GET /api/config 返回 enablePrivacyFilter=true，privacySensitiveKeywords 包含 token。",
+      "steps": [
+        "S1：完成本例独立 reset；确认真实 config 启用敏感过滤；打开目标离线页及 popup，等待 current-page-url 为目标 URL。",
+        "S2：在受测点击前开始只读观察 SW 真实出站请求并记录 storage 基线；点击 current-page-add，等待 toast「含敏感词未上传」作为操作完成信号。",
+        "S3：读取真实 ranked/health、SW 中 lastMenuAction 与全部 storage；reload popup 并再次读取提示及 storage。"
+      ],
+      "expected": [
+        "E1：toast 包含「含敏感词未上传」。",
+        "E2：本次操作产生的 POST /api/pages/manual 请求数=0；真实后端日志中也没有本次 manual 请求。",
+        "E3：ranked.pages 中目标 URL 的记录数=0，health.pageCount=0。",
+        "E4：lastMenuAction.kind=add、accepted=false、reason=sensitive，且其字段仅为 kind/accepted/reason/at。",
+        "E5：全部 storage 的序列化值中不包含完整目标 URL 或 token=1；importantUrls=[]。",
+        "E6：reload popup 后 toast 包含「含敏感词未上传」，storage 仍不包含目标敏感 URL。"
+      ],
+      "evidence": [
+        "evidence/TC-UI-MENU-003/：敏感页提示与 reload 截图。",
+        "evidence/TC-UI-MENU-003/：覆盖点击到提示完成的真实请求观察和后端日志、ranked/health、storage 脱敏审计结果。"
+      ]
+    },
+    {
+      "id": "TC-UI-MENU-004",
+      "type": "UI",
+      "module": "MENU",
+      "title": "普通页面点击星标后 domain 分为 1.00 且重要状态持久读回",
+      "priority": "P1",
+      "category": "positive",
+      "technique": "state-transition",
+      "features": [
+        "F-MENU-01"
+      ],
+      "acceptanceRefs": [
+        "F-MENU-01#AC3"
+      ],
+      "codePoints": [
+        "C-FE-MENU-02",
+        "C-FE-MENU-03"
+      ],
+      "preconditions": [
+        "每条用例使用独立的 Chromium persistent context 加载真实 extension/ 插件；通过真实 POST /api/__test__/reset 清空测试后端；清空插件 storage/history，设置 apiBaseUrl 为真实测试服务（TEST_PORT，默认 4100），importantUrls=[]。",
+        "外部 http(s) 页面仅用 route 离线 HTML；禁止 route 后端、替换 fetch、动态 import module SW 或伪派发 contextMenus.onClicked；popup 以 chrome-extension://<id>/popup/popup.html 的 tab 打开。",
+        "受测外站 tab 在打开 popup 前为最近访问的非插件 tab；不点击同步按钮、不导入无关历史。需要历史时只使用 chrome.history.addUrl，旧页面只经真实 POST /api/sync 导入。测试结束关闭全部插件/页面 context。"
+      ],
+      "testData": "当前页 https://docs.internal.com/ai-agent-design，离线 title=AI Agent Design；初始 pageCount=0、importantUrls=[]；无规则与其他域名加权。",
+      "steps": [
+        "S1：完成本例独立 reset；打开目标离线外站与真实 popup，等待 current-page-url 为目标 URL；确认 current-page-star 的 aria-pressed=false。",
+        "S2：只读观察真实请求，点击 current-page-star，等待 POST /api/pages/important 响应并等待 aria-pressed=true。",
+        "S3：读取真实 ranked/health 和 SW storage.importantUrls；reload popup，重新读取 current-page-star 与 importantUrls。"
+      ],
+      "expected": [
+        "E1：POST /api/pages/important 请求 url 为目标 URL、important=true；响应 accepted=true、isImportant=true、created=true。",
+        "E2：current-page-star 的 aria-pressed=true。",
+        "E3：ranked 中目标页面 isImportant=true、scoreDetail.domain=1.00、scoreDetail.domainSource=important。",
+        "E4：同一 ranked 记录的 reason 包含精确短语「已被你标记为重要」。",
+        "E5：health.pageCount=1，importantUrls 恰为 [https://docs.internal.com/ai-agent-design]。",
+        "E6：reload 后 current-page-star 的 aria-pressed=true，storage.importantUrls 仍恰为目标 URL 数组。"
+      ],
+      "evidence": [
+        "evidence/TC-UI-MENU-004/：星标前后与 reload 截图。",
+        "evidence/TC-UI-MENU-004/：真实 important 请求/响应、ranked/health、importantUrls 前后读回、extension.log。"
+      ]
+    },
+    {
+      "id": "TC-UI-MENU-005",
+      "type": "UI",
+      "module": "MENU",
+      "title": "仅有系统页时当前页添加与星标入口均不显示",
+      "priority": "P2",
+      "category": "negative",
+      "technique": "decision-table",
+      "features": [
+        "F-MENU-01"
+      ],
+      "acceptanceRefs": [
+        "F-MENU-01#AC2",
+        "F-MENU-01#AC3"
+      ],
+      "codePoints": [
+        "C-FE-MENU-01",
+        "C-FE-MENU-02",
+        "C-FE-MENU-03"
+      ],
+      "preconditions": [
+        "每条用例使用独立的 Chromium persistent context 加载真实 extension/ 插件；通过真实 POST /api/__test__/reset 清空测试后端；清空插件 storage/history，设置 apiBaseUrl 为真实测试服务（TEST_PORT，默认 4100），importantUrls=[]。",
+        "外部 http(s) 页面仅用 route 离线 HTML；禁止 route 后端、替换 fetch、动态 import module SW 或伪派发 contextMenus.onClicked；popup 以 chrome-extension://<id>/popup/popup.html 的 tab 打开。",
+        "受测外站 tab 在打开 popup 前为最近访问的非插件 tab；不点击同步按钮、不导入无关历史。需要历史时只使用 chrome.history.addUrl，旧页面只经真实 POST /api/sync 导入。测试结束关闭全部插件/页面 context。"
+      ],
+      "testData": "仅保留一个非插件 tab，URL=chrome://version/；关闭其他 http(s) tab，避免当前页选择退回其他可上传页面。此例验证产品卡片的系统页保护，不作为原生菜单是否出现的证据。",
+      "steps": [
+        "S1：完成本例独立 reset；关闭所有 http(s) 页面，打开 chrome://version/ 并置为最近访问的非插件 tab，再打开真实 popup tab。",
+        "S2：等待 current-page-system-badge 显示；只读观察网络后，检查 current-page-add 和 current-page-star 的渲染状态，不强制点击隐藏元素。",
+        "S3：读取真实 ranked/health 以及 SW storage.importantUrls。"
+      ],
+      "expected": [
+        "E1：current-page-system-badge 包含「系统页 · 不采集」。",
+        "E2：current-page-add 与 current-page-star 均不可见。",
+        "E3：本例 popup 检查期间 POST /api/pages/manual 与 POST /api/pages/important 的请求数均为 0。",
+        "E4：ranked.pages.length=0、health.pageCount=0，importantUrls=[]。"
+      ],
+      "evidence": [
+        "evidence/TC-UI-MENU-005/：系统页卡片、动作隐藏截图。",
+        "evidence/TC-UI-MENU-005/：只读请求记录、真实 ranked/health、importantUrls 读回、extension.log。"
+      ]
+    },
+    {
+      "id": "TC-UI-MENU-006",
+      "type": "UI",
+      "module": "MENU",
+      "title": "敏感页面星标置灰并保持后端与本地重要状态为空",
+      "priority": "P0",
+      "category": "negative",
+      "technique": "equivalence",
+      "features": [
+        "F-MENU-01"
+      ],
+      "acceptanceRefs": [
+        "F-MENU-01#AC3"
+      ],
+      "codePoints": [
+        "C-FE-MENU-02",
+        "C-FE-MENU-03"
+      ],
+      "preconditions": [
+        "每条用例使用独立的 Chromium persistent context 加载真实 extension/ 插件；通过真实 POST /api/__test__/reset 清空测试后端；清空插件 storage/history，设置 apiBaseUrl 为真实测试服务（TEST_PORT，默认 4100），importantUrls=[]。",
+        "外部 http(s) 页面仅用 route 离线 HTML；禁止 route 后端、替换 fetch、动态 import module SW 或伪派发 contextMenus.onClicked；popup 以 chrome-extension://<id>/popup/popup.html 的 tab 打开。",
+        "受测外站 tab 在打开 popup 前为最近访问的非插件 tab；不点击同步按钮、不导入无关历史。需要历史时只使用 chrome.history.addUrl，旧页面只经真实 POST /api/sync 导入。测试结束关闭全部插件/页面 context。"
+      ],
+      "testData": "当前页 https://example.com/reset?token=1；真实 config 开启过滤且关键词包含 token；importantUrls=[]。不强制点击 disabled 元素。",
+      "steps": [
+        "S1：完成本例独立 reset；确认真实 config 后打开敏感离线外站与真实 popup，等待 current-page-url 为目标 URL。",
+        "S2：读取 current-page-star 的 disabled、aria-disabled、title、aria-pressed；观察该 popup 初始化完成期间的真实重要写请求。",
+        "S3：读取真实 ranked/health 与全部 storage；reload popup 再读取星标属性和 storage。"
+      ],
+      "expected": [
+        "E1：current-page-star 的 disabled=true、aria-disabled=true，title 等于「敏感页面不采集」。",
+        "E2：current-page-star 的 aria-pressed=false；reload 后仍为 false 且 disabled=true。",
+        "E3：POST /api/pages/important 请求数=0，ranked.pages.length=0、health.pageCount=0。",
+        "E4：importantUrls=[]，全部 storage 的序列化值中不包含完整敏感 URL 或 token=1；reload 后仍符合。"
+      ],
+      "evidence": [
+        "evidence/TC-UI-MENU-006/：置灰星标 title 与属性、reload 截图。",
+        "evidence/TC-UI-MENU-006/：真实请求观察、ranked/health、storage 脱敏审计结果、extension.log。"
+      ]
+    },
+    {
+      "id": "TC-UI-MENU-007",
+      "type": "UI",
+      "module": "MENU",
+      "title": "同一页面连续两次添加只保留一个 manual 页面",
+      "priority": "P2",
+      "category": "boundary",
+      "technique": "boundary",
+      "features": [
+        "F-MENU-01"
+      ],
+      "acceptanceRefs": [
+        "F-MENU-01#AC2"
+      ],
+      "codePoints": [
+        "C-FE-MENU-01",
+        "C-FE-MENU-02",
+        "C-FE-MENU-03"
+      ],
+      "preconditions": [
+        "每条用例使用独立的 Chromium persistent context 加载真实 extension/ 插件；通过真实 POST /api/__test__/reset 清空测试后端；清空插件 storage/history，设置 apiBaseUrl 为真实测试服务（TEST_PORT，默认 4100），importantUrls=[]。",
+        "外部 http(s) 页面仅用 route 离线 HTML；禁止 route 后端、替换 fetch、动态 import module SW 或伪派发 contextMenus.onClicked；popup 以 chrome-extension://<id>/popup/popup.html 的 tab 打开。",
+        "受测外站 tab 在打开 popup 前为最近访问的非插件 tab；不点击同步按钮、不导入无关历史。需要历史时只使用 chrome.history.addUrl，旧页面只经真实 POST /api/sync 导入。测试结束关闭全部插件/页面 context。"
+      ],
+      "testData": "当前页 https://example.com/note，title=Note；次数边界 1 次→2 次；每次等待前次真实请求和 UI 处理完成，不模拟并发。",
+      "steps": [
+        "S1：完成本例独立 reset，打开目标离线页与真实 popup。",
+        "S2：点击 current-page-add 并等待第一次真实 manual 响应及成功 toast；再次点击同一按钮并等待第二次响应及成功提示。",
+        "S3：读取真实 ranked/health、lastMenuAction；reload popup 后再次读真实 ranked/health。"
+      ],
+      "expected": [
+        "E1：第一次 manual 响应 accepted=true、created=true、pageCount=1。",
+        "E2：第二次 manual 响应 accepted=true、created=false、pageCount=1；共观察到 2 次真实 manual 请求。",
+        "E3：toast 包含「已添加到分析」，lastMenuAction.kind=add、accepted=true。",
+        "E4：ranked 中 normalizedUrl=https://example.com/note 的记录数=1、sources 包含 manual；health.pageCount=1。",
+        "E5：reload 后再次读取 ranked，该 URL 记录数仍为 1，health.pageCount 仍为 1。"
+      ],
+      "evidence": [
+        "evidence/TC-UI-MENU-007/：两次操作和 reload 截图。",
+        "evidence/TC-UI-MENU-007/：两次真实 manual 请求/响应、前后 ranked/health、lastMenuAction 读回。"
+      ]
+    },
+    {
+      "id": "TC-UI-MENU-008",
+      "type": "UI",
+      "module": "MENU",
+      "title": "已标记页面再次点击星标取消重要且重载保持未标记",
+      "priority": "P2",
+      "category": "state",
+      "technique": "state-transition",
+      "features": [
+        "F-MENU-01"
+      ],
+      "acceptanceRefs": [
+        "F-MENU-01#AC3"
+      ],
+      "codePoints": [
+        "C-FE-MENU-02",
+        "C-FE-MENU-03"
+      ],
+      "preconditions": [
+        "每条用例使用独立的 Chromium persistent context 加载真实 extension/ 插件；通过真实 POST /api/__test__/reset 清空测试后端；清空插件 storage/history，设置 apiBaseUrl 为真实测试服务（TEST_PORT，默认 4100），importantUrls=[]。",
+        "外部 http(s) 页面仅用 route 离线 HTML；禁止 route 后端、替换 fetch、动态 import module SW 或伪派发 contextMenus.onClicked；popup 以 chrome-extension://<id>/popup/popup.html 的 tab 打开。",
+        "受测外站 tab 在打开 popup 前为最近访问的非插件 tab；不点击同步按钮、不导入无关历史。需要历史时只使用 chrome.history.addUrl，旧页面只经真实 POST /api/sync 导入。测试结束关闭全部插件/页面 context。"
+      ],
+      "testData": "当前页 https://docs.internal.com/ai-agent-design；在本例通过真实产品星标先建立重要状态再取消，不依赖其他用例。取消后不硬编码域名亲和分。",
+      "steps": [
+        "S1：完成本例独立 reset；打开目标离线外站与真实 popup，点击 current-page-star，等待真实 important=true 响应和 aria-pressed=true，读取 importantUrls 含目标 URL。",
+        "S2：再次点击 current-page-star，等待真实 POST /api/pages/important 的 important=false 响应。",
+        "S3：读取真实 ranked/health 与 importantUrls；reload popup 再读取星标、storage 和真实 ranked。"
+      ],
+      "expected": [
+        "E1：首次建立状态响应 accepted=true、isImportant=true，current-page-star 的 aria-pressed=true。",
+        "E2：第二次 important 请求 url 为目标 URL、important=false；响应 accepted=true、isImportant=false。",
+        "E3：取消后 current-page-star 的 aria-pressed=false、importantUrls=[]。",
+        "E4：ranked 中目标页 isImportant=false，health.pageCount=1；取消重要不删除页面。",
+        "E5：reload 后 current-page-star 的 aria-pressed=false、importantUrls=[]，真实 ranked 中该页面 isImportant=false。"
+      ],
+      "evidence": [
+        "evidence/TC-UI-MENU-008/：标记、取消与 reload 截图。",
+        "evidence/TC-UI-MENU-008/：两次真实 important 请求/响应、ranked/health、importantUrls 读回、extension.log。"
+      ]
+    },
+    {
+      "id": "TC-UI-MENU-009",
+      "type": "UI",
+      "module": "MENU",
+      "title": "重要写入后端不可达时星标保持未标记且不乐观写 storage",
+      "priority": "P1",
+      "category": "exception",
+      "technique": "error-guessing",
+      "features": [
+        "F-MENU-01"
+      ],
+      "acceptanceRefs": [
+        "F-MENU-01#AC3"
+      ],
+      "codePoints": [
+        "C-FE-MENU-02",
+        "C-FE-MENU-03"
+      ],
+      "preconditions": [
+        "每条用例使用独立的 Chromium persistent context 加载真实 extension/ 插件；通过真实 POST /api/__test__/reset 清空测试后端；清空插件 storage/history，设置 apiBaseUrl 为真实测试服务（TEST_PORT，默认 4100），importantUrls=[]。",
+        "外部 http(s) 页面仅用 route 离线 HTML；禁止 route 后端、替换 fetch、动态 import module SW 或伪派发 contextMenus.onClicked；popup 以 chrome-extension://<id>/popup/popup.html 的 tab 打开。",
+        "受测外站 tab 在打开 popup 前为最近访问的非插件 tab；不点击同步按钮、不导入无关历史。需要历史时只使用 chrome.history.addUrl，旧页面只经真实 POST /api/sync 导入。测试结束关闭全部插件/页面 context。"
+      ],
+      "testData": "当前页 https://docs.internal.com/ai-agent-design；正常后端 reset 且 pageCount=0；仅在发起写前设置 apiBaseUrl=http://127.0.0.1:9，该端口确认无服务；不 route 后端。",
+      "steps": [
+        "S1：完成本例独立 reset；在正常真实后端下打开目标页和 popup，确认 current-page-star 的 aria-pressed=false、importantUrls=[]。",
+        "S2：通过 SW chrome.storage.local.set 仅将 apiBaseUrl 改为 http://127.0.0.1:9；开始只读网络观察，点击 current-page-star，等待真实连接失败和本次异步处理结束。",
+        "S3：读取 current-page-star 与 importantUrls；保持不可达地址 reload popup 后再读回。用独立 HTTP 客户端直接读取原正常后端 ranked/health；finally 恢复地址并关闭本例 context。"
+      ],
+      "expected": [
+        "E1：只读网络观察记录到发往 http://127.0.0.1:9/api/pages/important 的真实连接失败，未收到 accepted=true 响应。",
+        "E2：本次处理结束后 current-page-star 的 aria-pressed=false，importantUrls=[]。",
+        "E3：保持不可达地址 reload 后 current-page-star 的 aria-pressed=false，importantUrls=[]。",
+        "E4：原正常后端 ranked.pages.length=0、health.pageCount=0；无成功写入。"
+      ],
+      "evidence": [
+        "evidence/TC-UI-MENU-009/：失败前后与 reload 截图；不对未登记的错误 DOM 或错误文案作断言。",
+        "evidence/TC-UI-MENU-009/：真实连接失败记录、原正常后端 ranked/health、importantUrls、extension.log。"
+      ]
+    },
+    {
+      "id": "TC-UI-MENU-010",
+      "type": "UI",
+      "module": "MENU",
+      "title": "添加写入后端不可达时无成功提示且后端页面数不变",
+      "priority": "P1",
+      "category": "exception",
+      "technique": "error-guessing",
+      "features": [
+        "F-MENU-01"
+      ],
+      "acceptanceRefs": [
+        "F-MENU-01#AC2"
+      ],
+      "codePoints": [
+        "C-FE-MENU-01",
+        "C-FE-MENU-02",
+        "C-FE-MENU-03"
+      ],
+      "preconditions": [
+        "每条用例使用独立的 Chromium persistent context 加载真实 extension/ 插件；通过真实 POST /api/__test__/reset 清空测试后端；清空插件 storage/history，设置 apiBaseUrl 为真实测试服务（TEST_PORT，默认 4100），importantUrls=[]。",
+        "外部 http(s) 页面仅用 route 离线 HTML；禁止 route 后端、替换 fetch、动态 import module SW 或伪派发 contextMenus.onClicked；popup 以 chrome-extension://<id>/popup/popup.html 的 tab 打开。",
+        "受测外站 tab 在打开 popup 前为最近访问的非插件 tab；不点击同步按钮、不导入无关历史。需要历史时只使用 chrome.history.addUrl，旧页面只经真实 POST /api/sync 导入。测试结束关闭全部插件/页面 context。"
+      ],
+      "testData": "当前页 https://example.com/note；正常后端 pageCount=0；lastMenuAction 未设置；写前仅设置 apiBaseUrl=http://127.0.0.1:9，无服务端口，不 route 后端。",
+      "steps": [
+        "S1：完成本例独立 reset；正常后端下打开目标离线页与真实 popup，记录 lastMenuAction 未设置。",
+        "S2：通过 SW storage 将 apiBaseUrl 改为 http://127.0.0.1:9；开始只读网络观察，点击 current-page-add，等待真实连接失败和本次异步处理结束。",
+        "S3：读取 toast、lastMenuAction、importantUrls；保持不可达地址 reload 后再读回；独立 HTTP 客户端读取原正常后端 ranked/health；finally 恢复地址并关闭 context。"
+      ],
+      "expected": [
+        "E1：只读网络观察记录到发往 http://127.0.0.1:9/api/pages/manual 的真实连接失败，未收到 accepted=true 响应。",
+        "E2：本次操作没有 toast「已添加到分析」；lastMenuAction 中不存在 accepted=true 的成功结果。",
+        "E3：原正常后端 ranked.pages.length=0、health.pageCount=0，importantUrls=[]。",
+        "E4：reload 后 lastMenuAction 中仍不存在 accepted=true 的成功结果，toast 不包含「已添加到分析」。"
+      ],
+      "evidence": [
+        "evidence/TC-UI-MENU-010/：失败与 reload 截图；错误区域和错误文案不在本例断言范围。",
+        "evidence/TC-UI-MENU-010/：真实连接失败记录、原正常后端 ranked/health、lastMenuAction、importantUrls、extension.log。"
+      ]
+    }
+  ],
+  "waivers": []
+}

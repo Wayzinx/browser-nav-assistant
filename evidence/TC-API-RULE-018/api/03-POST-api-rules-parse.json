@@ -1,0 +1,43 @@
+{
+  "reqId": "TC-API-RULE-018-03",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/rules/parse",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-RULE-018-03"
+  },
+  "requestBody": {
+    "text": "不要上传敏感页面"
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RULE-018-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "382",
+    "date": "Wed, 04 Nov 2026 03:27:04 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "rules": [],
+    "unparsed": [
+      {
+        "text": "不要上传敏感页面",
+        "reason": "识别到“不上传”，但没找到要过滤的关键词",
+        "examples": [
+          "七天没访问的 GitHub issue 建议归档",
+          "别归档 github.com 的页面",
+          "如果我连续看了 3 个 React 文档，推荐相关 MDN 页面",
+          "不要上传包含 password、token 的 URL",
+          "飞书文档优先显示"
+        ]
+      }
+    ],
+    "warnings": []
+  },
+  "ms": 0.9,
+  "mutated": null
+}

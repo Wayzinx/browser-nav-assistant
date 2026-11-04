@@ -1,0 +1,59 @@
+{
+  "caseId": "TC-UI-CTX-003",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:43.587Z",
+  "tests": [
+    {
+      "testId": "f3df6b8be7dd5021327f-dad3514c86d85a10dbc4",
+      "title": "TC-UI-CTX-003 后端不可达时真实 SW 与 popup 外壳仍加载且无未捕获错误",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CTX-003.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1184,
+      "startedAt": "2026-11-04T03:27:42.403Z",
+      "endedAt": "2026-11-04T03:27:43.587Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-CTX-003/screenshots/01-S1-离线popup外壳.png",
+        "evidence/TC-UI-CTX-003/screenshots/02-S2-离线上下文.png",
+        "evidence/TC-UI-CTX-003/screenshots/03-S2-离线返回首页.png"
+      ],
+      "serverLogLines": 3,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1032,
+          "after": 1032
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "{\"popupPageErrors\":[],\"swExceptions\":[]}"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RANK-013",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:03.490Z",
+  "tests": [
+    {
+      "testId": "8042b5ff1f2cc47227f7-98a0c75061b86b9a4951",
+      "title": "TC-API-RANK-013 全部页面 score 与分量都在 [0,1] 且符合加权公式",
+      "project": "api",
+      "file": "tests/api/TC-API-RANK-013.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 22,
+      "startedAt": "2026-11-04T03:27:03.468Z",
+      "endedAt": "2026-11-04T03:27:03.490Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 3,
+      "screenshots": [],
+      "serverLogLines": 6,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 650,
+          "after": 651
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

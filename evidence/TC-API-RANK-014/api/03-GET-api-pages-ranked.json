@@ -1,0 +1,87 @@
+{
+  "reqId": "TC-API-RANK-014-03",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/ranked",
+  "params": {
+    "limit": 500,
+    "now": 1793762823506
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-RANK-014-03"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RANK-014-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "937",
+    "date": "Wed, 04 Nov 2026 03:27:03 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "pages": [
+      {
+        "id": "page_1",
+        "url": "https://a.example/new",
+        "normalizedUrl": "https://a.example/new",
+        "title": "new",
+        "domain": "a.example",
+        "visitCount": 10,
+        "lastVisitedAt": 1793762763506,
+        "firstSeenAt": 1793762763506,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.8,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "最近 3 天内多次访问（10 次），常用域名 a.example"
+      },
+      {
+        "id": "page_2",
+        "url": "https://b.example/old",
+        "normalizedUrl": "https://b.example/old",
+        "title": "old",
+        "domain": "b.example",
+        "visitCount": 1,
+        "lastVisitedAt": 1789442823506,
+        "firstSeenAt": 1789442823506,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.1,
+        "scoreDetail": {
+          "recency": 0.01,
+          "frequency": 0.29,
+          "open": 0,
+          "domain": 0.1,
+          "domainSource": "affinity"
+        },
+        "reason": "已 50 天未访问"
+      }
+    ],
+    "total": 2,
+    "domains": [
+      "a.example",
+      "b.example"
+    ],
+    "generatedAt": 1793762823506
+  },
+  "ms": 0.9,
+  "mutated": null
+}

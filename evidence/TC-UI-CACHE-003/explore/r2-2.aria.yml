@@ -1,0 +1,36 @@
+- banner:
+  - heading "导航助手" [level=1]
+  - button "连接状态：检测尚未实现" [disabled]: 连接检测尚未实现
+- region "当前页面":
+  - heading "当前页面" [level=2]
+  - paragraph: Mock /org/repo/pull/456
+  - paragraph: https://github.com/org/repo/pull/456
+  - button "标记为重要": ☆
+  - button "添加到分析"
+- region "浏览器上下文同步":
+  - button "同步浏览器上下文"
+  - status:
+    - paragraph: 同步成功
+    - paragraph: 上传 3 条 · 过滤 0 条
+    - time: 03:53 · 刚刚
+  - button "全量同步"
+  - paragraph: 当前模式：全量
+- tablist "导航助手功能":
+  - tab "首页"
+  - tab "上下文"
+  - tab "排序" [selected]
+  - tab "整理"
+  - tab "规则"
+  - tab "诊断"
+- main:
+  - tabpanel "排序":
+    - status: 以下为 03:53 同步时缓存的结果
+    - heading "历史排序" [level=2]
+    - paragraph: score = 0.4 × 时效 + 0.3 × 频次 + 0.2 × 打开 + 0.1 × 域名
+    - button "打开中"
+    - text: 域名筛选
+    - combobox "域名筛选":
+      - option "全部域名" [selected]
+    - alert:
+      - paragraph: 无法连接后端，请检查后端服务和 API 地址
+      - button "诊断"

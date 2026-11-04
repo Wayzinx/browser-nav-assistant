@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-SYNC-020",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:06.417Z",
+  "tests": [
+    {
+      "testId": "197b7fccdbfa40a1cc49-9af426771bb9d9e5727b",
+      "title": "TC-API-SYNC-020 history 超限 501 条整批拒绝且不部分写入",
+      "project": "api",
+      "file": "tests/api/TC-API-SYNC-020.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 19,
+      "startedAt": "2026-11-04T03:27:06.398Z",
+      "endedAt": "2026-11-04T03:27:06.417Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 899,
+          "after": 900
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

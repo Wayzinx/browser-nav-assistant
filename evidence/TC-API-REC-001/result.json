@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-API-REC-001",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:03.787Z",
+  "tests": [
+    {
+      "testId": "f719e5b6961f5012a86b-63ce80c44cffe9dcf7c7",
+      "title": "TC-API-REC-001 PR 样例返回精确三条推荐并排除当前、打开、重复和待归档页面",
+      "project": "api",
+      "file": "tests/api/TC-API-REC-001.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 16,
+      "startedAt": "2026-11-04T03:27:03.771Z",
+      "endedAt": "2026-11-04T03:27:03.787Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 674,
+          "after": 676
+        },
+        "pages": {
+          "added": 10,
+          "removed": 6,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 1,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 4,
+          "rules": -1,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "{\"T\":1793762823778,\"N\":1793762823778}"
+      ]
+    }
+  ]
+}

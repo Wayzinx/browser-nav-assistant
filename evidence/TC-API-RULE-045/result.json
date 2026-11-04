@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RULE-045",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:05.822Z",
+  "tests": [
+    {
+      "testId": "5d6e46c0e720acdc09e1-5f582c8da57f287304b4",
+      "title": "TC-API-RULE-045 不支持的相对日期不会被静默当成默认14天归档",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-045.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 12,
+      "startedAt": "2026-11-04T03:27:05.810Z",
+      "endedAt": "2026-11-04T03:27:05.822Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 831,
+          "after": 832
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

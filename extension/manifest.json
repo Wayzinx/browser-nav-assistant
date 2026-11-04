@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "浏览器导航助手",
+  "version": "1.0.0",
+  "description": "采集浏览器上下文，查看历史排序、访问推荐和整理建议。",
+  "permissions": ["tabs", "history", "storage", "activeTab", "contextMenus"],
+  "host_permissions": ["http://localhost/*", "http://127.0.0.1/*"],
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "导航助手"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "caseId": "TC-UI-CTX-005",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:45.546Z",
+  "tests": [
+    {
+      "testId": "29c2447cad51123866a2-e2a775e21a6142385cf6",
+      "title": "TC-UI-CTX-005 后端不可达时当前页面仍显示 GitHub PR 标题和 URL",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CTX-005.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 938,
+      "startedAt": "2026-11-04T03:27:44.608Z",
+      "endedAt": "2026-11-04T03:27:45.546Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-CTX-005/screenshots/01-S1-离线活动PR.png",
+        "evidence/TC-UI-CTX-005/screenshots/02-S2-离线PR卡片.png"
+      ],
+      "serverLogLines": 3,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1034,
+          "after": 1034
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "{\"active\":[{\"active\":true,\"audible\":false,\"autoDiscardable\":true,\"discarded\":false,\"frozen\":false,\"groupId\":-1,\"height\":673,\"highlighted\":true,\"id\":1439200019,\"incognito\":false,\"index\":1,\"lastAccessed\":1793762865153.666,\"mutedInfo\":{\"muted\":false},\"openerTabId\":1439200018,\"pinned\":false,\"selected\":true,\"splitViewId\":-1,\"status\":\"complete\",\"title\":\"Refactor auth middleware (#456)\",\"url\":\"https://github.com/org/repo/pull/456\",\"width\":500,\"windowId\":1439200017}]}",
+        "{\"popupPageErrors\":[],\"swExceptions\":[]}"
+      ]
+    }
+  ]
+}

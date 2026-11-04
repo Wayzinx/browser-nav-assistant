@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-CLEAN-018",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:44.605Z",
+  "tests": [
+    {
+      "testId": "5477395ad58f6f903dd0-022dd7a7dce7cd315e5d",
+      "title": "TC-API-CLEAN-018 路径或域名不匹配的页面不受归档规则影响",
+      "project": "api",
+      "file": "tests/api/TC-API-CLEAN-018.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 24,
+      "startedAt": "2026-11-04T03:25:44.581Z",
+      "endedAt": "2026-11-04T03:25:44.605Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 35,
+          "after": 36
+        },
+        "pages": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 2,
+          "rules": 1,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

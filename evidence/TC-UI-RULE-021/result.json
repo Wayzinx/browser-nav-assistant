@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-UI-RULE-021",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:48.412Z",
+  "tests": [
+    {
+      "testId": "3b408068a7a702401a99-aceb29b30607f97b295f",
+      "title": "TC-UI-RULE-021 中途断网删除失败，UI 和后端均保留两条",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RULE-021.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 924,
+      "startedAt": "2026-11-04T03:29:47.488Z",
+      "endedAt": "2026-11-04T03:29:48.412Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [
+        "evidence/TC-UI-RULE-021/screenshots/01-断网前两条规则.png",
+        "evidence/TC-UI-RULE-021/screenshots/02-删除失败列表保持.png"
+      ],
+      "serverLogLines": 13,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1192,
+          "after": 1192
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 2,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "删除连接失败：net::ERR_UNSAFE_PORT"
+      ]
+    }
+  ]
+}

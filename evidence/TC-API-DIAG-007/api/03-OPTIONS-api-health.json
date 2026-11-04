@@ -1,0 +1,29 @@
+{
+  "reqId": "TC-API-DIAG-007-03",
+  "setup": false,
+  "method": "OPTIONS",
+  "url": "/api/health",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-DIAG-007-03",
+    "origin": "chrome-extension://abcdefghijklmnopabcdefghijklmnop",
+    "access-control-request-method": "GET"
+  },
+  "requestBody": null,
+  "status": 204,
+  "responseHeaders": {
+    "x-request-id": "TC-API-DIAG-007-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "access-control-allow-origin": "chrome-extension://abcdefghijklmnopabcdefghijklmnop",
+    "access-control-allow-methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
+    "access-control-allow-headers": "content-type, x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "date": "Wed, 04 Nov 2026 03:25:48 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": "",
+  "ms": 0.8,
+  "mutated": null
+}

@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-CLEAN-023",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:44.852Z",
+  "tests": [
+    {
+      "testId": "6e7ff298df1f8dc7f4d3-ff3370fb6dd43bd7b1b8",
+      "title": "TC-API-CLEAN-023 归档后从建议、排序与推荐中移除但总数不变",
+      "project": "api",
+      "file": "tests/api/TC-API-CLEAN-023.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 48,
+      "startedAt": "2026-11-04T03:25:44.804Z",
+      "endedAt": "2026-11-04T03:25:44.852Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 49,
+          "after": 51
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 1,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

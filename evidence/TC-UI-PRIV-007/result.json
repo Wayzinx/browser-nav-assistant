@@ -1,0 +1,63 @@
+{
+  "caseId": "TC-UI-PRIV-007",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:07.519Z",
+  "tests": [
+    {
+      "testId": "5f7ae00bd8b329b7623f-eeb103dcd10f7afad22d",
+      "title": "TC-UI-PRIV-007 真实无痕窗口存在时：普通窗口同步及上下文均排除私密标签",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-PRIV-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 2324,
+      "startedAt": "2026-11-04T03:29:05.195Z",
+      "endedAt": "2026-11-04T03:29:07.519Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 18,
+      "screenshots": [
+        "evidence/TC-UI-PRIV-007/screenshots/01-真实无痕存在且普通页活动.png",
+        "evidence/TC-UI-PRIV-007/screenshots/02-上下文排除真实无痕标签.png",
+        "evidence/TC-UI-PRIV-007/screenshots/03-无痕未上传且后端只有普通页.png"
+      ],
+      "serverLogLines": 21,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1137,
+          "after": 1138
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 1,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "真实无痕授权核验：true",
+        "真实无痕外站已离线化：host=example.com",
+        "真实无痕窗口存在：{\"windowId\":297862085,\"tabId\":297862086,\"incognito\":true}",
+        "真实无痕窗口存在：{\"windowId\":297862085,\"tabId\":297862086,\"incognito\":true}",
+        "真实无痕窗口存在：{\"windowId\":297862085,\"tabId\":297862086,\"incognito\":true}"
+      ]
+    }
+  ]
+}

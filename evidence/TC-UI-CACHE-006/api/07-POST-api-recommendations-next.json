@@ -1,0 +1,38 @@
+{
+  "reqId": "ext_1793762840071_6",
+  "method": "POST",
+  "url": "http://127.0.0.1:4300/api/recommendations/next",
+  "setup": false,
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762840071_6"
+  },
+  "requestBody": {
+    "currentPage": null,
+    "openTabs": [],
+    "recentHistory": []
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "ext_1793762840071_6",
+    "access-control-expose-headers": "x-request-id",
+    "connection": "keep-alive",
+    "access-control-allow-origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "content-length": "65",
+    "keep-alive": "timeout=5",
+    "date": "Wed, 04 Nov 2026 03:27:20 GMT",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin"
+  },
+  "responseBody": {
+    "recommendations": [],
+    "cached": false,
+    "generatedAt": 1793762840072
+  },
+  "failure": null,
+  "ms": 2
+}

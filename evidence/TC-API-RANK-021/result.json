@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RANK-021",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:03.687Z",
+  "tests": [
+    {
+      "testId": "3d33276a8a272f397884-3b2e5d26aa6d64d373aa",
+      "title": "TC-API-RANK-021 保存 never_archive 后 docs 页加权，删除规则后恢复",
+      "project": "api",
+      "file": "tests/api/TC-API-RANK-021.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 21,
+      "startedAt": "2026-11-04T03:27:03.666Z",
+      "endedAt": "2026-11-04T03:27:03.687Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 667,
+          "after": 668
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

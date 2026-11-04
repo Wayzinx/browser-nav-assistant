@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RANK-007",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:03.336Z",
+  "tests": [
+    {
+      "testId": "e0ba3d39285c9fd1b71b-aa8a628ff74c0c9461a1",
+      "title": "TC-API-RANK-007 非法查询参数返回 400 VALIDATION_FAILED 且无副作用",
+      "project": "api",
+      "file": "tests/api/TC-API-RANK-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 39,
+      "startedAt": "2026-11-04T03:27:03.297Z",
+      "endedAt": "2026-11-04T03:27:03.336Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 11,
+      "screenshots": [],
+      "serverLogLines": 14,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 638,
+          "after": 639
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

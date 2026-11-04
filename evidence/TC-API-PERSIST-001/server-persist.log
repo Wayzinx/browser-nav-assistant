@@ -1,0 +1,13 @@
+{"reason":"NOT_FOUND","ts":"2026-11-04T03:26:55.563Z","level":"warn","msg":"未加载快照，以空数据启动"}
+{"port":62254,"host":"127.0.0.1","persistence":"snapshot","enableTestApi":false,"ts":"2026-11-04T03:26:55.569Z","level":"info","msg":"服务已启动"}
+{"method":"GET","path":"/api/health","status":200,"ms":1.04,"reqId":"TC-API-PERSIST-001-01","ts":"2026-11-04T03:26:55.572Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/health","status":200,"ms":0.26,"reqId":"TC-API-PERSIST-001-02","ts":"2026-11-04T03:26:55.574Z","level":"info","msg":"access"}
+{"reqId":"TC-API-PERSIST-001-03","ok":true,"syncedAt":1793762815576,"received":14,"created":10,"updated":4,"rejected":0,"rejectedByReason":{"invalid_url":0,"privacy":0},"pageCount":10,"mode":"full","rejectedDomains":{},"durationMs":1.1929159999999968,"ts":"2026-11-04T03:26:55.578Z","level":"info","msg":"sync done"}
+{"method":"POST","path":"/api/sync","status":200,"ms":2.3,"reqId":"TC-API-PERSIST-001-03","ts":"2026-11-04T03:26:55.578Z","level":"info","msg":"access"}
+{"method":"POST","path":"/api/rules","status":201,"ms":0.57,"reqId":"TC-API-PERSIST-001-04","ts":"2026-11-04T03:26:55.584Z","level":"info","msg":"access"}
+{"port":62262,"host":"127.0.0.1","persistence":"snapshot","enableTestApi":false,"ts":"2026-11-04T03:26:57.643Z","level":"info","msg":"服务已启动"}
+{"method":"GET","path":"/api/health","status":200,"ms":1.01,"reqId":"TC-API-PERSIST-001-05","ts":"2026-11-04T03:26:57.674Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/health","status":200,"ms":0.24,"reqId":"TC-API-PERSIST-001-06","ts":"2026-11-04T03:26:57.675Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/rules","status":200,"ms":0.15,"reqId":"TC-API-PERSIST-001-07","ts":"2026-11-04T03:26:57.676Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/pages/cleanup-suggestions","status":200,"ms":0.58,"reqId":"TC-API-PERSIST-001-08","ts":"2026-11-04T03:26:57.678Z","level":"info","msg":"access"}
+{"signal":"SIGTERM","ts":"2026-11-04T03:26:57.679Z","level":"info","msg":"服务正在退出"}

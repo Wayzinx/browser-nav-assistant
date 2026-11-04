@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-UI-RANK-006",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:18.206Z",
+  "tests": [
+    {
+      "testId": "fdcd49b76ec7b06adb9e-3fb518a656f5c4b5ab17",
+      "title": "TC-UI-RANK-006 后端不可达且无缓存：首页显示 home-ranked-error 并带诊断入口，排序页签显示 ranked-error",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RANK-006.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1016,
+      "startedAt": "2026-11-04T03:29:17.190Z",
+      "endedAt": "2026-11-04T03:29:18.206Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-RANK-006/screenshots/01-首页排序错误状态.png",
+        "evidence/TC-UI-RANK-006/screenshots/02-排序页签错误状态.png"
+      ],
+      "serverLogLines": 3,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1154,
+          "after": 1154
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

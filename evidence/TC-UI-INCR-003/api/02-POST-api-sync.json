@@ -1,0 +1,650 @@
+{
+  "reqId": "TC-UI-INCR-003-sw-sync-1",
+  "setup": false,
+  "observed": true,
+  "method": "POST",
+  "url": "http://127.0.0.1:4300/api/sync",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762916473_9"
+  },
+  "requestBody": {
+    "activeTab": null,
+    "openTabs": [],
+    "history": [
+      {
+        "url": "https://example.com/h/101",
+        "title": "https://example.com/h/101",
+        "lastVisitTime": 1793762916272.38,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/100",
+        "title": "https://example.com/h/100",
+        "lastVisitTime": 1793762916269.321,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/099",
+        "title": "https://example.com/h/099",
+        "lastVisitTime": 1793762916267.271,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/098",
+        "title": "https://example.com/h/098",
+        "lastVisitTime": 1793762916266.943,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/097",
+        "title": "https://example.com/h/097",
+        "lastVisitTime": 1793762916264.374,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/096",
+        "title": "https://example.com/h/096",
+        "lastVisitTime": 1793762916260.8,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/095",
+        "title": "https://example.com/h/095",
+        "lastVisitTime": 1793762916258.776,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/094",
+        "title": "https://example.com/h/094",
+        "lastVisitTime": 1793762916257.191,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/093",
+        "title": "https://example.com/h/093",
+        "lastVisitTime": 1793762916255.433,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/092",
+        "title": "https://example.com/h/092",
+        "lastVisitTime": 1793762916252.616,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/091",
+        "title": "https://example.com/h/091",
+        "lastVisitTime": 1793762916250.382,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/090",
+        "title": "https://example.com/h/090",
+        "lastVisitTime": 1793762916248.138,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/089",
+        "title": "https://example.com/h/089",
+        "lastVisitTime": 1793762916246.316,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/088",
+        "title": "https://example.com/h/088",
+        "lastVisitTime": 1793762916244.026,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/087",
+        "title": "https://example.com/h/087",
+        "lastVisitTime": 1793762916242.25,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/086",
+        "title": "https://example.com/h/086",
+        "lastVisitTime": 1793762916241.926,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/085",
+        "title": "https://example.com/h/085",
+        "lastVisitTime": 1793762916240.274,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/084",
+        "title": "https://example.com/h/084",
+        "lastVisitTime": 1793762916239.927,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/083",
+        "title": "https://example.com/h/083",
+        "lastVisitTime": 1793762916237.552,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/082",
+        "title": "https://example.com/h/082",
+        "lastVisitTime": 1793762916234.091,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/081",
+        "title": "https://example.com/h/081",
+        "lastVisitTime": 1793762916232.307,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/080",
+        "title": "https://example.com/h/080",
+        "lastVisitTime": 1793762916231.85,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/079",
+        "title": "https://example.com/h/079",
+        "lastVisitTime": 1793762916230.273,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/078",
+        "title": "https://example.com/h/078",
+        "lastVisitTime": 1793762916228.489,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/077",
+        "title": "https://example.com/h/077",
+        "lastVisitTime": 1793762916226.291,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/076",
+        "title": "https://example.com/h/076",
+        "lastVisitTime": 1793762916225.936,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/075",
+        "title": "https://example.com/h/075",
+        "lastVisitTime": 1793762916224.128,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/074",
+        "title": "https://example.com/h/074",
+        "lastVisitTime": 1793762916222.149,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/073",
+        "title": "https://example.com/h/073",
+        "lastVisitTime": 1793762916221.92,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/072",
+        "title": "https://example.com/h/072",
+        "lastVisitTime": 1793762916220.044,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/071",
+        "title": "https://example.com/h/071",
+        "lastVisitTime": 1793762916218.097,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/070",
+        "title": "https://example.com/h/070",
+        "lastVisitTime": 1793762916216.289,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/069",
+        "title": "https://example.com/h/069",
+        "lastVisitTime": 1793762916215.93,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/068",
+        "title": "https://example.com/h/068",
+        "lastVisitTime": 1793762916214.149,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/067",
+        "title": "https://example.com/h/067",
+        "lastVisitTime": 1793762916213.75,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/066",
+        "title": "https://example.com/h/066",
+        "lastVisitTime": 1793762916212.01,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/065",
+        "title": "https://example.com/h/065",
+        "lastVisitTime": 1793762916210.295,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/064",
+        "title": "https://example.com/h/064",
+        "lastVisitTime": 1793762916209.962,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/063",
+        "title": "https://example.com/h/063",
+        "lastVisitTime": 1793762916208.089,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/062",
+        "title": "https://example.com/h/062",
+        "lastVisitTime": 1793762916206.267,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/061",
+        "title": "https://example.com/h/061",
+        "lastVisitTime": 1793762916205.998,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/060",
+        "title": "https://example.com/h/060",
+        "lastVisitTime": 1793762916204.321,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/059",
+        "title": "https://example.com/h/059",
+        "lastVisitTime": 1793762916203.963,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/058",
+        "title": "https://example.com/h/058",
+        "lastVisitTime": 1793762916202.092,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/057",
+        "title": "https://example.com/h/057",
+        "lastVisitTime": 1793762916200.111,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/056",
+        "title": "https://example.com/h/056",
+        "lastVisitTime": 1793762916198.139,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/055",
+        "title": "https://example.com/h/055",
+        "lastVisitTime": 1793762916197.77,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/054",
+        "title": "https://example.com/h/054",
+        "lastVisitTime": 1793762916196.07,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/053",
+        "title": "https://example.com/h/053",
+        "lastVisitTime": 1793762916194.059,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/052",
+        "title": "https://example.com/h/052",
+        "lastVisitTime": 1793762916190.552,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/051",
+        "title": "https://example.com/h/051",
+        "lastVisitTime": 1793762916189.082,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/050",
+        "title": "https://example.com/h/050",
+        "lastVisitTime": 1793762916188.874,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/049",
+        "title": "https://example.com/h/049",
+        "lastVisitTime": 1793762916187.111,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/048",
+        "title": "https://example.com/h/048",
+        "lastVisitTime": 1793762916185.522,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/047",
+        "title": "https://example.com/h/047",
+        "lastVisitTime": 1793762916183.704,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/046",
+        "title": "https://example.com/h/046",
+        "lastVisitTime": 1793762916182.173,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/045",
+        "title": "https://example.com/h/045",
+        "lastVisitTime": 1793762916181.881,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/044",
+        "title": "https://example.com/h/044",
+        "lastVisitTime": 1793762916180.135,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/043",
+        "title": "https://example.com/h/043",
+        "lastVisitTime": 1793762916178.195,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/042",
+        "title": "https://example.com/h/042",
+        "lastVisitTime": 1793762916177.858,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/041",
+        "title": "https://example.com/h/041",
+        "lastVisitTime": 1793762916176.272,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/040",
+        "title": "https://example.com/h/040",
+        "lastVisitTime": 1793762916174.231,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/039",
+        "title": "https://example.com/h/039",
+        "lastVisitTime": 1793762916173.802,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/038",
+        "title": "https://example.com/h/038",
+        "lastVisitTime": 1793762916170.084,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/037",
+        "title": "https://example.com/h/037",
+        "lastVisitTime": 1793762916169.803,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/036",
+        "title": "https://example.com/h/036",
+        "lastVisitTime": 1793762916168.083,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/035",
+        "title": "https://example.com/h/035",
+        "lastVisitTime": 1793762916166.178,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/034",
+        "title": "https://example.com/h/034",
+        "lastVisitTime": 1793762916164.602,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/033",
+        "title": "https://example.com/h/033",
+        "lastVisitTime": 1793762916162.696,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/032",
+        "title": "https://example.com/h/032",
+        "lastVisitTime": 1793762916160.531,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/031",
+        "title": "https://example.com/h/031",
+        "lastVisitTime": 1793762916158.586,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/030",
+        "title": "https://example.com/h/030",
+        "lastVisitTime": 1793762916156.547,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/029",
+        "title": "https://example.com/h/029",
+        "lastVisitTime": 1793762916154.048,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/028",
+        "title": "https://example.com/h/028",
+        "lastVisitTime": 1793762916152.121,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/027",
+        "title": "https://example.com/h/027",
+        "lastVisitTime": 1793762916151.778,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/026",
+        "title": "https://example.com/h/026",
+        "lastVisitTime": 1793762916150.127,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/025",
+        "title": "https://example.com/h/025",
+        "lastVisitTime": 1793762916149.761,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/024",
+        "title": "https://example.com/h/024",
+        "lastVisitTime": 1793762916147.708,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/023",
+        "title": "https://example.com/h/023",
+        "lastVisitTime": 1793762916140.111,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/022",
+        "title": "https://example.com/h/022",
+        "lastVisitTime": 1793762916138.324,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/021",
+        "title": "https://example.com/h/021",
+        "lastVisitTime": 1793762916136.766,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/020",
+        "title": "https://example.com/h/020",
+        "lastVisitTime": 1793762916135.11,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/019",
+        "title": "https://example.com/h/019",
+        "lastVisitTime": 1793762916134.881,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/018",
+        "title": "https://example.com/h/018",
+        "lastVisitTime": 1793762916129.168,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/017",
+        "title": "https://example.com/h/017",
+        "lastVisitTime": 1793762916128.979,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/016",
+        "title": "https://example.com/h/016",
+        "lastVisitTime": 1793762916127.145,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/015",
+        "title": "https://example.com/h/015",
+        "lastVisitTime": 1793762916126.924,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/014",
+        "title": "https://example.com/h/014",
+        "lastVisitTime": 1793762916125.112,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/013",
+        "title": "https://example.com/h/013",
+        "lastVisitTime": 1793762916124.858,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/012",
+        "title": "https://example.com/h/012",
+        "lastVisitTime": 1793762916122.483,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/011",
+        "title": "https://example.com/h/011",
+        "lastVisitTime": 1793762916120.614,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/010",
+        "title": "https://example.com/h/010",
+        "lastVisitTime": 1793762916115.821,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/009",
+        "title": "https://example.com/h/009",
+        "lastVisitTime": 1793762916114.242,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/008",
+        "title": "https://example.com/h/008",
+        "lastVisitTime": 1793762916113.916,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/007",
+        "title": "https://example.com/h/007",
+        "lastVisitTime": 1793762916112.153,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/006",
+        "title": "https://example.com/h/006",
+        "lastVisitTime": 1793762916110.039,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/005",
+        "title": "https://example.com/h/005",
+        "lastVisitTime": 1793762916108.208,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/004",
+        "title": "https://example.com/h/004",
+        "lastVisitTime": 1793762916106.166,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/003",
+        "title": "https://example.com/h/003",
+        "lastVisitTime": 1793762916103.499,
+        "visitCount": 1
+      },
+      {
+        "url": "https://example.com/h/002",
+        "title": "https://example.com/h/002",
+        "lastVisitTime": 1793762916101.482,
+        "visitCount": 1
+      }
+    ],
+    "mode": "full",
+    "clientVersion": "1.0.0"
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "ext_1793762916473_9",
+    "access-control-expose-headers": "x-request-id",
+    "connection": "keep-alive",
+    "access-control-allow-origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "content-length": "169",
+    "keep-alive": "timeout=5",
+    "date": "Wed, 04 Nov 2026 03:28:36 GMT",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin"
+  },
+  "responseBody": {
+    "ok": true,
+    "syncedAt": 1793762916474,
+    "received": 100,
+    "created": 100,
+    "updated": 0,
+    "rejected": 0,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 0
+    },
+    "pageCount": 100,
+    "mode": "full"
+  },
+  "ms": 5
+}

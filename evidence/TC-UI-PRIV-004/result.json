@@ -1,0 +1,59 @@
+{
+  "caseId": "TC-UI-PRIV-004",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:02.611Z",
+  "tests": [
+    {
+      "testId": "4076712a64007d0dd719-46eb2e9c647a4c62adb9",
+      "title": "TC-UI-PRIV-004 后端不可达且无配置缓存：内置关键词仍标注并过滤敏感项",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-PRIV-004.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1261,
+      "startedAt": "2026-11-04T03:29:01.350Z",
+      "endedAt": "2026-11-04T03:29:02.611Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 20,
+      "screenshots": [
+        "evidence/TC-UI-PRIV-004/screenshots/01-断网前置且普通页活动.png",
+        "evidence/TC-UI-PRIV-004/screenshots/02-内置默认及三条敏感标注.png",
+        "evidence/TC-UI-PRIV-004/screenshots/03-同步失败但敏感记录仍可读.png"
+      ],
+      "serverLogLines": 3,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1133,
+          "after": 1133
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "GET_CONTEXT {\"privacy\":{\"enabled\":true,\"keywords\":[\"password\",\"token\",\"bank\",\"secret\"],\"source\":\"default\"},\"tabs\":4,\"history\":0}"
+      ]
+    }
+  ]
+}

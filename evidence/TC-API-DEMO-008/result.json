@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-API-DEMO-008",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:46.846Z",
+  "tests": [
+    {
+      "testId": "ff1cf384dc20128ac4f9-31d7c16f40f3f73ac554",
+      "title": "TC-API-DEMO-008 连续执行两次样例导入：页面数保持 10",
+      "project": "api",
+      "file": "tests/api/TC-API-DEMO-008.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 245,
+      "startedAt": "2026-11-04T03:25:46.601Z",
+      "endedAt": "2026-11-04T03:25:46.846Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 3,
+      "screenshots": [],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 79,
+          "after": 82
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 2
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "第 1 次 import-sample pid=53036 API_BASE=http://127.0.0.1:4300",
+        "第 1 次 import-sample 退出 {\"code\":0,\"signal\":null}",
+        "第 2 次 import-sample pid=53039 API_BASE=http://127.0.0.1:4300",
+        "第 2 次 import-sample 退出 {\"code\":0,\"signal\":null}"
+      ]
+    }
+  ]
+}

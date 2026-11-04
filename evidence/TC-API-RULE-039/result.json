@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RULE-039",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:05.655Z",
+  "tests": [
+    {
+      "testId": "d3280f95258d9c4bd5e9-7f3bd3a22677b45f0c36",
+      "title": "TC-API-RULE-039 PATCH不存在规则返回404且已有规则状态不变",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-039.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 33,
+      "startedAt": "2026-11-04T03:27:05.622Z",
+      "endedAt": "2026-11-04T03:27:05.655Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 9,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 819,
+          "after": 820
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 1,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

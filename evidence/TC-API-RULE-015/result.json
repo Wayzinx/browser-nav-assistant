@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RULE-015",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:04.866Z",
+  "tests": [
+    {
+      "testId": "cd948dd327a717915d3a-285a1db4eafbe651e433",
+      "title": "TC-API-RULE-015 同域归档与永不归档都返回并给出一条优先级冲突告知",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-015.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 11,
+      "startedAt": "2026-11-04T03:27:04.855Z",
+      "endedAt": "2026-11-04T03:27:04.866Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 6,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 766,
+          "after": 767
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

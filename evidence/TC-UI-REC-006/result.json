@@ -1,0 +1,60 @@
+{
+  "caseId": "TC-UI-REC-006",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:28.587Z",
+  "tests": [
+    {
+      "testId": "bb05c615272a7b1d6052-100bc940c840a0c4c064",
+      "title": "TC-UI-REC-006 无缓存且真实后端连接失败时显示错误与诊断入口",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-REC-006.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 953,
+      "startedAt": "2026-11-04T03:29:27.634Z",
+      "endedAt": "2026-11-04T03:29:28.587Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 2,
+      "screenshots": [
+        "evidence/TC-UI-REC-006/screenshots/01-真实连接失败与诊断入口.png"
+      ],
+      "serverLogLines": 4,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1170,
+          "after": 1170
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "打开 popup 前的恢复状态：{}",
+        "打开 popup 前读回：{\"apiBaseUrl\":\"http://127.0.0.1:9\"}",
+        "真实推荐连接失败（无 HTTP 响应码）：{\"method\":\"POST\",\"url\":\"http://127.0.0.1:9/api/recommendations/next\",\"requestBody\":{\"currentPage\":{\"url\":\"https://github.com/org/repo/pull/456\",\"title\":\"Refactor auth middleware (#456)\"},\"openTabs\":[{\"url\":\"https://github.com/org/repo/pull/456\",\"title\":\"Refactor auth middleware (#456)\"}],\"recentHistory\":[{\"url\":\"https://github.com/org/repo/pull/456\",\"title\":\"Refactor auth middleware (#456)\",\"lastVisitTime\":1793762968180.884}]},\"errorText\":\"net::ERR_UNSAFE_PORT\"}",
+        "SW 网络观察汇总：{\"requests\":[{\"url\":\"http://127.0.0.1:9/api/recommendations/next\",\"method\":\"POST\",\"body\":{\"currentPage\":{\"url\":\"https://github.com/org/repo/pull/456\",\"title\":\"Refactor auth middleware (#456)\"},\"openTabs\":[{\"url\":\"https://github.com/org/repo/pull/456\",\"title\":\"Refactor auth middleware (#456)\"}],\"recentHistory\":[{\"url\":\"https://github.com/org/repo/pull/456\",\"title\":\"Refactor auth middleware (#456)\",\"lastVisitTime\":1793762968180.884}]},\"startedAt\":1793762968321,\"sequence\":1}],\"responses\":[],\"failures\":[{\"method\":\"POST\",\"url\":\"http://127.0.0.1:9/api/recommendations/next\",\"requestBody\":{\"currentPage\":{\"url\":\"https://github.com/org/repo/pull/456\",\"title\":\"Refactor auth middleware (#456)\"},\"openTabs\":[{\"url\":\"https://github.com/org/repo/pull/456\",\"title\":\"Refactor auth middleware (#456)\"}],\"recentHistory\":[{\"url\":\"https://github.com/org/repo/pull/456\",\"title\":\"Refactor auth middleware (#456)\",\"lastVisitTime\":1793762968180.884}]},\"errorText\":\"net::ERR_UNSAFE_PORT\"}],\"syncRequests\":[]}"
+      ]
+    }
+  ]
+}

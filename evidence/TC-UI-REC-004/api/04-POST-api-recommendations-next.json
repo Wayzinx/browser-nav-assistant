@@ -1,0 +1,108 @@
+{
+  "reqId": "TC-UI-REC-004-sw-1",
+  "setup": false,
+  "observed": true,
+  "method": "POST",
+  "url": "http://127.0.0.1:4300/api/recommendations/next",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762965897_6"
+  },
+  "requestBody": {
+    "currentPage": {
+      "url": "https://news.example.org/c",
+      "title": "同域当前页"
+    },
+    "openTabs": [
+      {
+        "url": "https://news.example.org/c",
+        "title": "同域当前页"
+      }
+    ],
+    "recentHistory": [
+      {
+        "url": "https://news.example.org/c",
+        "title": "同域当前页",
+        "lastVisitTime": 1793762965780.042
+      }
+    ]
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "ext_1793762965897_6",
+    "access-control-expose-headers": "x-request-id",
+    "connection": "keep-alive",
+    "access-control-allow-origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "content-length": "1374",
+    "keep-alive": "timeout=5",
+    "date": "Wed, 04 Nov 2026 03:29:25 GMT",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin"
+  },
+  "responseBody": {
+    "recommendations": [
+      {
+        "id": "rec_1",
+        "type": "next_visit",
+        "url": "https://news.example.org/a1",
+        "title": "候选1",
+        "score": 0.68,
+        "reason": "与当前页面同域名，历史评分较高（0.80）",
+        "strategy": "same_domain",
+        "contextUrl": "https://news.example.org/c",
+        "createdAt": 1793762965898
+      },
+      {
+        "id": "rec_2",
+        "type": "next_visit",
+        "url": "https://news.example.org/a2",
+        "title": "候选2",
+        "score": 0.67,
+        "reason": "与当前页面同域名，历史评分较高（0.77）",
+        "strategy": "same_domain",
+        "contextUrl": "https://news.example.org/c",
+        "createdAt": 1793762965898
+      },
+      {
+        "id": "rec_3",
+        "type": "next_visit",
+        "url": "https://news.example.org/a3",
+        "title": "候选3",
+        "score": 0.66,
+        "reason": "与当前页面同域名，历史评分较高（0.74）",
+        "strategy": "same_domain",
+        "contextUrl": "https://news.example.org/c",
+        "createdAt": 1793762965898
+      },
+      {
+        "id": "rec_4",
+        "type": "next_visit",
+        "url": "https://news.example.org/a4",
+        "title": "候选4",
+        "score": 0.64,
+        "reason": "与当前页面同域名，历史评分较高（0.70）",
+        "strategy": "same_domain",
+        "contextUrl": "https://news.example.org/c",
+        "createdAt": 1793762965898
+      },
+      {
+        "id": "rec_5",
+        "type": "next_visit",
+        "url": "https://news.example.org/a5",
+        "title": "候选5",
+        "score": 0.62,
+        "reason": "与当前页面同域名，历史评分较高（0.64）",
+        "strategy": "same_domain",
+        "contextUrl": "https://news.example.org/c",
+        "createdAt": 1793762965898
+      }
+    ],
+    "cached": false,
+    "generatedAt": 1793762965898
+  },
+  "ms": 2
+}

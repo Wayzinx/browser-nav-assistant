@@ -1,0 +1,111 @@
+{
+  "reqId": "TC-API-SYNC-009-04",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/ranked",
+  "params": {
+    "limit": 500,
+    "now": 1793762826059
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-SYNC-009-04"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-SYNC-009-04",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "1488",
+    "date": "Wed, 04 Nov 2026 03:27:06 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "pages": [
+      {
+        "id": "page_1",
+        "url": "https://example.com/count-zero",
+        "normalizedUrl": "https://example.com/count-zero",
+        "title": "https://example.com/count-zero",
+        "domain": "example.com",
+        "visitCount": 1,
+        "lastVisitedAt": 1793762226057,
+        "firstSeenAt": 1793762226057,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.8,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "今天访问过，常用域名 example.com"
+      },
+      {
+        "id": "page_2",
+        "url": "https://example.com/count-missing",
+        "normalizedUrl": "https://example.com/count-missing",
+        "title": "https://example.com/count-missing",
+        "domain": "example.com",
+        "visitCount": 1,
+        "lastVisitedAt": 1793762226057,
+        "firstSeenAt": 1793762226057,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.8,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "今天访问过，常用域名 example.com"
+      },
+      {
+        "id": "page_3",
+        "url": "https://example.com/count-one",
+        "normalizedUrl": "https://example.com/count-one",
+        "title": "https://example.com/count-one",
+        "domain": "example.com",
+        "visitCount": 1,
+        "lastVisitedAt": 1793762226057,
+        "firstSeenAt": 1793762226057,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.8,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "今天访问过，常用域名 example.com"
+      }
+    ],
+    "total": 3,
+    "domains": [
+      "example.com"
+    ],
+    "generatedAt": 1793762826059
+  },
+  "ms": 0.7,
+  "mutated": null
+}

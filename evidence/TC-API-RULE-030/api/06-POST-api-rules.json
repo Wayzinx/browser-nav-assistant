@@ -1,0 +1,46 @@
+{
+  "reqId": "TC-API-RULE-030-06",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/rules",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-RULE-030-06"
+  },
+  "requestBody": {
+    "rules": [
+      {
+        "rawText": "负天数",
+        "type": "archive_candidate",
+        "domain": "github.com",
+        "urlPattern": "/issues/",
+        "inactiveDays": -1,
+        "action": "suggest_archive"
+      }
+    ]
+  },
+  "status": 400,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RULE-030-06",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "134",
+    "date": "Wed, 04 Nov 2026 03:27:05 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "error": {
+      "code": "VALIDATION_FAILED",
+      "message": "请求字段类型或取值不合法",
+      "details": {
+        "fields": [
+          "rules[0].inactiveDays"
+        ]
+      }
+    }
+  },
+  "ms": 0.9,
+  "mutated": null
+}

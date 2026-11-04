@@ -1,0 +1,57 @@
+{
+  "caseId": "TC-UI-DIAG-012",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:16.719Z",
+  "tests": [
+    {
+      "testId": "8a8728d7c262b17fc72b-2b7938f255a906cfada3",
+      "title": "TC-UI-DIAG-012 加载删掉 history 权限的扩展副本时「history 权限」失败，并提示检查 manifest 的 permissions",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-DIAG-012.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1060,
+      "startedAt": "2026-11-04T03:28:15.659Z",
+      "endedAt": "2026-11-04T03:28:16.719Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-DIAG-012/screenshots/01-S1-缺失-history-权限的诊断.png"
+      ],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1067,
+          "after": 1067
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 2,
+      "notes": [
+        "本用例加载删掉 history 权限的扩展副本：/var/folders/v1/n6z6msv922g3jqc1ylnmb2qm0000gn/T/nav-ext-no-history-cr4ZPh"
+      ]
+    }
+  ]
+}

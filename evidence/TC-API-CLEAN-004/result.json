@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-CLEAN-004",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:44.031Z",
+  "tests": [
+    {
+      "testId": "af681f809f51e262a0de-7bd8cb72994c06e48610",
+      "title": "TC-API-CLEAN-004 不支持的 POST 返回 405 和 Allow 头",
+      "project": "api",
+      "file": "tests/api/TC-API-CLEAN-004.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 35,
+      "startedAt": "2026-11-04T03:25:43.996Z",
+      "endedAt": "2026-11-04T03:25:44.031Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 6,
+          "after": 7
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

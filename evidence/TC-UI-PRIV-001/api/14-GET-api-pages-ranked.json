@@ -1,0 +1,62 @@
+{
+  "reqId": "TC-UI-PRIV-001-sw-12",
+  "observed": true,
+  "setup": false,
+  "method": "GET",
+  "url": "http://127.0.0.1:4300/api/pages/ranked?limit=50",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762938362_12"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "ext_1793762938362_12",
+    "access-control-expose-headers": "x-request-id",
+    "connection": "keep-alive",
+    "content-length": "548",
+    "keep-alive": "timeout=5",
+    "date": "Wed, 04 Nov 2026 03:28:58 GMT",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin"
+  },
+  "responseBody": {
+    "pages": [
+      {
+        "id": "page_1",
+        "url": "https://example.com/docs",
+        "normalizedUrl": "https://example.com/docs",
+        "title": "合成测试页 3",
+        "domain": "example.com",
+        "visitCount": 1,
+        "lastVisitedAt": 1793762938359,
+        "firstSeenAt": 1793762938005.792,
+        "sources": [
+          "open_tab",
+          "active_tab"
+        ],
+        "isOpen": true,
+        "isActive": true,
+        "isImportant": false,
+        "score": 1,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 1,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "正在浏览，今天访问过，常用域名 example.com"
+      }
+    ],
+    "total": 1,
+    "domains": [
+      "example.com"
+    ],
+    "generatedAt": 1793762938360
+  },
+  "ms": 5
+}

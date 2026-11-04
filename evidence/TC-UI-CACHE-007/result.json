@@ -1,0 +1,63 @@
+{
+  "caseId": "TC-UI-CACHE-007",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:23.656Z",
+  "tests": [
+    {
+      "testId": "9b98d1e8019d4b59a3e0-1d4e36be52faa324098b",
+      "title": "TC-UI-CACHE-007 离线筛选反例：不冒用默认缓存，清除筛选后恢复默认缓存",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CACHE-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 2433,
+      "startedAt": "2026-11-04T03:27:21.223Z",
+      "endedAt": "2026-11-04T03:27:23.656Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 37,
+      "screenshots": [
+        "evidence/TC-UI-CACHE-007/screenshots/01-online-default-cache-A.png",
+        "evidence/TC-UI-CACHE-007/screenshots/02-offline-default-ranked.png",
+        "evidence/TC-UI-CACHE-007/screenshots/03-offline-open-filter-error.png",
+        "evidence/TC-UI-CACHE-007/screenshots/04-open-filter-cleared-default-restored.png",
+        "evidence/TC-UI-CACHE-007/screenshots/05-offline-domain-filter-error.png",
+        "evidence/TC-UI-CACHE-007/screenshots/06-all-filters-cleared-cache-preserved.png"
+      ],
+      "serverLogLines": 21,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 972,
+          "after": 974
+        },
+        "pages": {
+          "added": 11,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 11,
+          "rules": 0,
+          "openPages": 1,
+          "archivedPages": 0,
+          "syncLogs": 2
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "open-only actual GET_RANKED replies: [{\"request\":{\"type\":\"GET_RANKED\",\"payload\":{\"limit\":50,\"openOnly\":true,\"domain\":null,\"source\":\"network\"},\"requestId\":\"pop_1793762842701_15\"},\"settled\":true,\"response\":{\"ok\":false,\"error\":{\"code\":\"NO_CACHE\",\"message\":\"筛选需要在线\"}},\"error\":null}]",
+        "domain-only actual GET_RANKED replies: [{\"request\":{\"type\":\"GET_RANKED\",\"payload\":{\"limit\":50,\"openOnly\":false,\"domain\":\"github.com\",\"source\":\"network\"},\"requestId\":\"pop_1793762843083_18\"},\"settled\":true,\"response\":{\"ok\":false,\"error\":{\"code\":\"NO_CACHE\",\"message\":\"筛选需要在线\"}},\"error\":null}]"
+      ]
+    }
+  ]
+}

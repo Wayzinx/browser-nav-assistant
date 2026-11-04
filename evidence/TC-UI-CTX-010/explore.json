@@ -1,0 +1,19 @@
+{
+  "caseId": "TC-UI-CTX-010",
+  "verdict": "pass",
+  "observed": "本轮复测：context-tabs-list 含 PR 456 / Issue 123 / Fetch API / AI Agent Design 四条，标题与 URL 一致，about:blank 标「系统页 · 跳过」；无 error/loading。 上轮：上下文页签 context-tabs-list：PR 456|https://github.com/org/repo/pull/456；Issue 123|https://github.com/org/repo/issues/123；Fetch API|https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API；AI Agent Design|https://docs.internal.com/ai-agent-design 各 1 条（另有 about:blank 行标「系统页 · 跳过」，用例不要求总数）；context-error 不存在。",
+  "steps": [
+    "后台启动 PORT=4182 HOST=127.0.0.1 ENABLE_TEST_API=1 LOG_FILE=evidence/_runtime/explore-4182.log 后端，每个场景前 POST /api/__test__/reset",
+    "launchPersistentContext(channel=chromium, headless) 加载 extension/，apiBaseUrl 指向 http://127.0.0.1:4182（离线场景为 http://127.0.0.1:9），外部 https 站点 route fulfill 离线化",
+    "按用例步骤操作真实插件（tests/explore/tmp/ctx-r3-4182.mjs），截图并输出 body ariaSnapshot，结果见 tests/explore/tmp/ctx-r3-4182.out.json",
+    "停止探索后端后 TEST_PORT=4182 npx playwright test tests/ui/TC-UI-CTX-010.spec.mjs 通过（18 个脚本共 20 个 test 全部通过）；gate-iter 中的失败（connection-status=not-implemented、chrome.history 未定义、trace ENOENT）在当前真实插件上不复现，属于运行环境/并发 test-results 干扰，脚本无需修改",
+    "本轮（r4，续跑）：停止探索后端后 TEST_PORT=4182 npx playwright test tests/ui/TC-UI-CTX-0*.spec.mjs tests/ui/TC-UI-REC-00*.spec.mjs → 29 passed，脚本无需修改",
+    "本轮（r5，续跑）：确认 extension/、server/ 自 r4 以来无改动；4182 后端重跑探索脚本（ctx-r4-001-003-4182.mjs、ctx-r3-4182.mjs、rec-r4-4182.mjs），截图与 aria 快照与 r4 一致；停止探索后端后 TEST_PORT=4182 npx playwright test tests/ui/TC-UI-CTX-0*.spec.mjs tests/ui/TC-UI-REC-00*.spec.mjs → 29 passed，脚本无需修改",
+    "本轮（r6，续跑）：确认 extension/、server/ 自 r5 以来无改动（popup.css 仍与 dev-FE-CTX 第 6 轮修复前快照一致）；4182 后端重跑探索脚本（r6-ctx-r4-001-003-4182.mjs、r6-ctx-r3-4182.mjs、r6-rec-r4-4182.mjs），去掉时间戳后输出与 r4/r5 一致，截图复核无异常；停止探索后端后 TEST_PORT=4182 npx playwright test tests/ui/TC-UI-CTX-0*.spec.mjs tests/ui/TC-UI-REC-00*.spec.mjs --output=<独立目录> → 29 passed（首次用共享 test-results 时 CTX-015 N=101、REC-002 因并行变异检查清理 trace 目录报 ENOENT/EINVAL，属基础设施冲突，隔离输出目录后通过），脚本无需修改"
+  ],
+  "screenshots": [
+    "evidence/TC-UI-CTX-010/explore/1.png"
+  ],
+  "spec": "tests/ui/TC-UI-CTX-010.spec.mjs",
+  "solidified": true
+}

@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-UI-PRIV-009",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:10.697Z",
+  "tests": [
+    {
+      "testId": "d5fa1113bf9b8b00d0b0-6947aeca35f5ae983e5a",
+      "title": "TC-UI-PRIV-009 敏感当前页同时进入历史：同步过滤且推荐发送 null、缓存键不泄漏",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-PRIV-009.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1076,
+      "startedAt": "2026-11-04T03:29:09.621Z",
+      "endedAt": "2026-11-04T03:29:10.697Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 18,
+      "screenshots": [
+        "evidence/TC-UI-PRIV-009/screenshots/01-敏感当前页首页推荐已过滤.png",
+        "evidence/TC-UI-PRIV-009/screenshots/02-同步过滤三条并完成推荐刷新.png"
+      ],
+      "serverLogLines": 22,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1140,
+          "after": 1142
+        },
+        "pages": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 2,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 2
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 2,
+      "notes": []
+    }
+  ]
+}

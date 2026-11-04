@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RULE-006",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:04.690Z",
+  "tests": [
+    {
+      "testId": "84a304d824e2761215f3-3daa0ecacddc5e420e5c",
+      "title": "TC-API-RULE-006 未指定天数时采用14天并返回medium及默认值说明",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-006.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 11,
+      "startedAt": "2026-11-04T03:27:04.679Z",
+      "endedAt": "2026-11-04T03:27:04.690Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 3,
+      "screenshots": [],
+      "serverLogLines": 5,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 748,
+          "after": 749
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

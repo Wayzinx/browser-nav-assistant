@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-UI-PRIV-003",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:01.324Z",
+  "tests": [
+    {
+      "testId": "dec981890f5ed9d751ae-638dceb56efb0faaab0d",
+      "title": "TC-UI-PRIV-003 普通 URL 反对照：不含敏感词时不误过滤且同 URL 按来源上传",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-PRIV-003.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1064,
+      "startedAt": "2026-11-04T03:29:00.260Z",
+      "endedAt": "2026-11-04T03:29:01.324Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 20,
+      "screenshots": [
+        "evidence/TC-UI-PRIV-003/screenshots/01-普通页与一条真实历史.png",
+        "evidence/TC-UI-PRIV-003/screenshots/02-零过滤且三来源去重.png"
+      ],
+      "serverLogLines": 23,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1131,
+          "after": 1132
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 1,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "GET_CONTEXT {\"privacy\":{\"enabled\":true,\"keywords\":[\"password\",\"token\",\"bank\",\"secret\"],\"source\":\"server\"},\"tabs\":1,\"history\":1}"
+      ]
+    }
+  ]
+}

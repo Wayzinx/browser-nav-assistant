@@ -1,0 +1,61 @@
+{
+  "caseId": "TC-UI-CLEAN-010",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:37.102Z",
+  "tests": [
+    {
+      "testId": "96ac60ba1a12dbf4e5d9-d518a6fdc5fe33fdf1aa",
+      "title": "TC-UI-CLEAN-010 无缓存且后端不可达：首页和整理页显示错误与诊断入口",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CLEAN-010.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1245,
+      "startedAt": "2026-11-04T03:27:35.857Z",
+      "endedAt": "2026-11-04T03:27:37.102Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 27,
+      "screenshots": [
+        "evidence/TC-UI-CLEAN-010/screenshots/01-断网前基线.png",
+        "evidence/TC-UI-CLEAN-010/screenshots/02-无缓存首页错误.png",
+        "evidence/TC-UI-CLEAN-010/screenshots/03-无缓存整理错误.png"
+      ],
+      "serverLogLines": 16,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1016,
+          "after": 1019
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "{\"savedRules\":[{\"domain\":\"github.com\",\"urlPattern\":\"/issues/\",\"inactiveDays\":7,\"enabled\":true,\"confidence\":\"high\",\"createdAt\":1793762856343,\"updatedAt\":1793762856343,\"rawText\":\"把 7 天没访问过的 GitHub issue 建议归档\",\"type\":\"archive_candidate\",\"action\":\"suggest_archive\",\"id\":\"rule_1\"},{\"domain\":\"docs.internal.com\",\"urlPattern\":null,\"inactiveDays\":null,\"enabled\":true,\"confidence\":\"high\",\"createdAt\":1793762856343,\"updatedAt\":1793762856343,\"rawText\":\"docs.internal.com 的页面永远不要归档\",\"type\":\"never_archive\",\"action\":\"keep\",\"id\":\"rule_2\"}]}",
+        "{\"phase\":\"无缓存故障注入后\",\"storage\":{\"apiBaseUrl\":\"http://127.0.0.1:9\"}}",
+        "{\"phase\":\"无缓存故障后\",\"storage\":{\"connection\":{\"lastCheckedAt\":1793762856821,\"lastErrorCode\":\"BACKEND_UNREACHABLE\",\"recoverPending\":true,\"since\":1793762856727,\"status\":\"offline\"}},\"networkError\":{\"errorText\":\"net::ERR_UNSAFE_PORT\"},\"httpResponse\":null}"
+      ]
+    }
+  ]
+}

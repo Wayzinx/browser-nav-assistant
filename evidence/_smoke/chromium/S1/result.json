@@ -1,0 +1,83 @@
+{
+  "browser": "chromium",
+  "scenario": "S1 首次安装·后端未启动",
+  "id": "S1",
+  "pass": true,
+  "required": true,
+  "popupSize": [
+    400,
+    498
+  ],
+  "errors": [],
+  "steps": [
+    {
+      "name": "1. 点击工具栏图标打开真实 popup",
+      "pass": true,
+      "detail": "已打开真实 action popup（apogdiijbmmelomlehodilcejcmocaki）"
+    },
+    {
+      "name": "2. popup 尺寸不塌缩",
+      "pass": true,
+      "detail": "400×498"
+    },
+    {
+      "name": "3. 首屏关键区块可见",
+      "pass": true,
+      "detail": "6 个元素可见"
+    },
+    {
+      "name": "4. 当前页面识别为打开的网页",
+      "pass": true,
+      "detail": "http://docs.smoke.test/guide"
+    },
+    {
+      "name": "5. 顶栏提示后端未连接",
+      "pass": true,
+      "detail": "data-state=offline"
+    },
+    {
+      "name": "6. 推荐区显示后端未连接的提示而不是空白",
+      "pass": true,
+      "detail": "可见 1 个"
+    },
+    {
+      "name": "7. 截图：首次打开（后端未启动）",
+      "pass": true,
+      "detail": "evidence/_smoke/chromium/S1/01-截图-首次打开-后端未启动.png"
+    },
+    {
+      "name": "8. 进入诊断页签",
+      "pass": true,
+      "detail": "点击 tab-diag"
+    },
+    {
+      "name": "9. 诊断：后端连接项失败",
+      "pass": true,
+      "detail": "data-status=fail"
+    },
+    {
+      "name": "10. 诊断：给出排查步骤",
+      "pass": true,
+      "detail": "可见 8 个（要求 ≥ 1）"
+    },
+    {
+      "name": "11. 诊断：显示默认 API 地址",
+      "pass": true,
+      "detail": "http://127.0.0.1:3000"
+    },
+    {
+      "name": "12. 截图：诊断与排查建议",
+      "pass": true,
+      "detail": "evidence/_smoke/chromium/S1/02-截图-诊断与排查建议.png"
+    }
+  ],
+  "screenshots": [
+    "evidence/_smoke/chromium/S1/01-截图-首次打开-后端未启动.png",
+    "evidence/_smoke/chromium/S1/02-截图-诊断与排查建议.png"
+  ],
+  "startedAt": "2026-11-04T03:35:41.080Z",
+  "version": "Chrome/156.0.8078.4",
+  "exceptions": 0,
+  "consoleErrors": 0,
+  "endedAt": "2026-11-04T03:35:44.329Z"
+}

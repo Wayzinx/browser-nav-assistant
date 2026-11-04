@@ -1,0 +1,34 @@
+{
+  "source": "extension",
+  "method": "POST",
+  "url": "http://127.0.0.1:4300/api/recommendations/next",
+  "reqId": "ext_1793762845250_6",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762845250_6"
+  },
+  "requestBody": "{\"currentPage\":null,\"openTabs\":[],\"recentHistory\":[]}",
+  "status": 200,
+  "responseHeaders": {
+    "connection": "keep-alive",
+    "date": "Wed, 04 Nov 2026 03:27:25 GMT",
+    "keep-alive": "timeout=5",
+    "access-control-allow-origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "access-control-expose-headers": "x-request-id",
+    "content-length": "65",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin",
+    "x-request-id": "ext_1793762845250_6"
+  },
+  "responseBody": {
+    "recommendations": [],
+    "cached": false,
+    "generatedAt": 1793762845251
+  },
+  "ms": 1.125,
+  "setup": false
+}

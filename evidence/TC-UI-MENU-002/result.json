@@ -1,0 +1,59 @@
+{
+  "caseId": "TC-UI-MENU-002",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:44.939Z",
+  "tests": [
+    {
+      "testId": "06cca5a512b5e1daf822-620740038ee9196eb5f3",
+      "title": "TC-UI-MENU-002 普通页面点击添加后以 manual 来源入库且 popup 提示成功",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-MENU-002.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1225,
+      "startedAt": "2026-11-04T03:28:43.714Z",
+      "endedAt": "2026-11-04T03:28:44.939Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [
+        "evidence/TC-UI-MENU-002/screenshots/01-点击前.png",
+        "evidence/TC-UI-MENU-002/screenshots/02-添加成功.png",
+        "evidence/TC-UI-MENU-002/screenshots/03-重载popup.png"
+      ],
+      "serverLogLines": 22,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1109,
+          "after": 1110
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "add 观察到的写请求：[{\"sequence\":1,\"phase\":\"add\",\"method\":\"POST\",\"url\":\"http://127.0.0.1:4300/api/pages/manual\",\"origin\":\"http://127.0.0.1:4300\",\"path\":\"/api/pages/manual\",\"fromServiceWorker\":true,\"startedAt\":1793762924503,\"transport\":\"finished\",\"status\":200,\"failure\":null,\"endedAt\":1793762924506,\"persisted\":true}]"
+      ]
+    }
+  ]
+}

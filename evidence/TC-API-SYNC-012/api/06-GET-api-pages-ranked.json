@@ -1,0 +1,63 @@
+{
+  "reqId": "TC-API-SYNC-012-06",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/ranked",
+  "params": {
+    "limit": 500,
+    "now": 1793762826153
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-SYNC-012-06"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-SYNC-012-06",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "570",
+    "date": "Wed, 04 Nov 2026 03:27:06 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "pages": [
+      {
+        "id": "page_1",
+        "url": "https://example.com/sources",
+        "normalizedUrl": "https://example.com/sources",
+        "title": "https://example.com/sources",
+        "domain": "example.com",
+        "visitCount": 1,
+        "lastVisitedAt": 1793762826153,
+        "firstSeenAt": 1793762226149,
+        "sources": [
+          "history",
+          "open_tab",
+          "active_tab"
+        ],
+        "isOpen": true,
+        "isActive": true,
+        "isImportant": false,
+        "score": 1,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 1,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "正在浏览，今天访问过，常用域名 example.com"
+      }
+    ],
+    "total": 1,
+    "domains": [
+      "example.com"
+    ],
+    "generatedAt": 1793762826153
+  },
+  "ms": 0.7,
+  "mutated": null
+}

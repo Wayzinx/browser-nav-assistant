@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RULE-035",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:05.497Z",
+  "tests": [
+    {
+      "testId": "4863ede15b944f755e42-749b39240d7688f81eab",
+      "title": "TC-API-RULE-035 最后一条规则删除后归零且重复删除返回404",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-035.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 25,
+      "startedAt": "2026-11-04T03:27:05.472Z",
+      "endedAt": "2026-11-04T03:27:05.497Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 9,
+      "screenshots": [],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 808,
+          "after": 809
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

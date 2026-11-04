@@ -1,0 +1,36 @@
+{
+  "reqId": "TC-API-CLEAN-027-05",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/pages/merge",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-CLEAN-027-05"
+  },
+  "requestBody": {
+    "urls": [
+      "https://example.com/x",
+      "https://example.com/x?tab=1"
+    ],
+    "keepUrl": "https://example.com/x"
+  },
+  "status": 404,
+  "responseHeaders": {
+    "x-request-id": "TC-API-CLEAN-027-05",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "58",
+    "date": "Wed, 04 Nov 2026 03:25:45 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "error": {
+      "code": "NOT_FOUND",
+      "message": "页面不存在"
+    }
+  },
+  "ms": 2.4,
+  "mutated": null
+}

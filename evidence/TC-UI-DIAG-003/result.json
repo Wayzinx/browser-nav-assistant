@@ -1,0 +1,57 @@
+{
+  "caseId": "TC-UI-DIAG-003",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:07.682Z",
+  "tests": [
+    {
+      "testId": "4e8e67f725b39b43b8b1-0a64e679f6c8f3793d6b",
+      "title": "TC-UI-DIAG-003 后端不可达时顶栏「后端未连接」且诊断页签出现红点，改回可用地址后重新打开 popup 显示「后端已连接」",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-DIAG-003.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1017,
+      "startedAt": "2026-11-04T03:28:06.665Z",
+      "endedAt": "2026-11-04T03:28:07.682Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-DIAG-003/screenshots/01-S1-后端未连接与红点.png",
+        "evidence/TC-UI-DIAG-003/screenshots/02-S2-保存可用地址.png",
+        "evidence/TC-UI-DIAG-003/screenshots/03-S4-重新打开后已连接.png"
+      ],
+      "serverLogLines": 21,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1055,
+          "after": 1056
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

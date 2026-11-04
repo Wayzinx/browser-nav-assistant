@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-UI-DIAG-007",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:11.559Z",
+  "tests": [
+    {
+      "testId": "cf327917a007ffd88076-afc46e3bd5e9435db24b",
+      "title": "TC-UI-DIAG-007 端口越界的地址（65536）按格式错误拒绝，storage 中的 apiBaseUrl 保持原值",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-DIAG-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 792,
+      "startedAt": "2026-11-04T03:28:10.767Z",
+      "endedAt": "2026-11-04T03:28:11.559Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-DIAG-007/screenshots/01-S1-保存越界端口.png"
+      ],
+      "serverLogLines": 12,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1061,
+          "after": 1061
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 2,
+      "notes": []
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-API-PRIV-010",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:02.903Z",
+  "tests": [
+    {
+      "testId": "614e30143a2a8ecd007b-aa230d138c1b4f2c6cd5",
+      "title": "TC-API-PRIV-010 关键词整体替换并转小写去重，session 拦截且 token 放行",
+      "project": "api",
+      "file": "tests/api/TC-API-PRIV-010.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 20,
+      "startedAt": "2026-11-04T03:27:02.883Z",
+      "endedAt": "2026-11-04T03:27:02.903Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 6,
+      "screenshots": [],
+      "serverLogLines": 9,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 607,
+          "after": 609
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [
+          "privacySensitiveKeywords"
+        ],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

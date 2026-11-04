@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RULE-036",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:05.535Z",
+  "tests": [
+    {
+      "testId": "c405c25aafee1ed08c04-5a554028f44695b31cee",
+      "title": "TC-API-RULE-036 删除保护规则后样例docs的keep消失且pageCount保持10",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-036.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 31,
+      "startedAt": "2026-11-04T03:27:05.504Z",
+      "endedAt": "2026-11-04T03:27:05.535Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 10,
+      "screenshots": [],
+      "serverLogLines": 13,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 810,
+          "after": 812
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 1,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

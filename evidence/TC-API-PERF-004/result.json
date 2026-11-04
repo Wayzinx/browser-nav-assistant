@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-PERF-004",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:26:55.468Z",
+  "tests": [
+    {
+      "testId": "da64a0e5cb580baff1b1-718aafb05623acc6bcdb",
+      "title": "TC-API-PERF-004 同步或保存规则后推荐缓存失效并重新命中",
+      "project": "api",
+      "file": "tests/api/TC-API-PERF-004.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 36,
+      "startedAt": "2026-11-04T03:26:55.432Z",
+      "endedAt": "2026-11-04T03:26:55.468Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 10,
+      "screenshots": [],
+      "serverLogLines": 14,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 577,
+          "after": 579
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 1,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 2
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

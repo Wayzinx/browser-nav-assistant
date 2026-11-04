@@ -1,0 +1,48 @@
+/* @code C-FE-SYNC-01 */
+[data-slot="sync"] .view-block {
+  display: grid;
+  gap: 8px;
+}
+
+[data-slot="sync"] .sync-state {
+  display: grid;
+  gap: 4px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+[data-slot="sync"] .sync-state p {
+  margin: 0;
+}
+
+[data-slot="sync"] .sync-label {
+  font-weight: 600;
+}
+
+[data-slot="sync"] [data-status="success"] .sync-label {
+  color: var(--success, #167044);
+}
+
+[data-slot="sync"] [data-status="error"] .sync-label,
+[data-slot="sync"] [data-testid="sync-error-message"] {
+  color: var(--danger, #b42318);
+  overflow-wrap: anywhere;
+}
+
+[data-slot="sync"] .sync-counts,
+[data-slot="sync"] time {
+  color: var(--muted, #64748b);
+}
+
+[data-slot="sync"] [data-testid="sync-diag-link"] {
+  justify-self: start;
+}
+
+[data-slot="sync"] button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+[data-slot="sync"] [hidden] {
+  display: none;
+}

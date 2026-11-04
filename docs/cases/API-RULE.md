@@ -1,0 +1,1151 @@
+# RULE 接口测试用例
+
+本分片仅设计 API 用例，全部通过真实 HTTP 请求执行；每个用例自行 reset，页面数据通过 POST /api/sync 导入。当前产物是用例设计，尚未生成脚本、运行产品或取得运行证据。
+
+API 投影边界：F-RULE-01#AC1/AC3 只证明预览卡片和提示所需的数据；AC4 只证明后端不可达的传输前提。F-RULE-06#AC1/AC2 只证明提交所选规则子集与保存结果；F-RULE-07#AC2 只证明列表渲染所需字段。UI 按钮、卡片、勾选、黄色提示、列表开关/删除按钮、离线文案由 UI 分片验收，不能以本分片的 acceptanceRefs 或 HTTP 成功判作 UI PASS。
+
+D-01 样例配方：reset 后只捕获一次固定 N=Date.now()；delta=N-300000-max(resource.history.lastVisitTime)，仅将 history 的 lastVisitTime 加 delta，activeTab/openTabs 保留。真实 POST /api/sync 导入后所有 cleanup 查询使用 ?now=N。预期 received=14、created=10、updated=4、pageCount=10。双规则下 archive=2、merge=1、keep=1；docs 页面仍打开且仅 6.95 天，删除/停用保护后只撤销 keep，不期待它进入 archive。
+
+统计来自 checkCases({root: ".workflow/context/logs/case-API-RULE-stats-root"}) 的 stats；此投影 root 只保留 RULE 原始 Feature、API 分片与空 UI。它保留完整 Feature 的 FE 属性，另行记录全项目 E2E 缺口。F-RULE-09 的 enabled 仅有 Boolean 两种合法值，独立 API 统计投影补充 boundary waiver；全量项目已有 UI 边界覆盖，本项不进入公共分片以免产生过时豁免。没有修改上游或虚构用例。
+
+## TC-API-RULE-001 题目双规则解析返回有序完整预览，确认前规则库仍为空
+
+- 优先级：P0 ｜ 类别：positive ｜ 技术：scenario
+- 关联 Feature：F-RULE-01、F-RULE-02
+- AC：F-RULE-01#AC1、F-RULE-01#AC2、F-RULE-02#AC1
+- 关联 Code：C-BE-RULE-02、C-BE-RULE-03、C-BE-RULE-07
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：text=把 7 天没访问过的 GitHub issue 建议归档，但 docs.internal.com 的页面永远不要归档；JSON字段以 api-contract POST /api/rules/parse responseExample 为准；API 投影：只验证真实 HTTP 响应与服务端状态；卡片、按钮、黄色提示、勾选、列表控件与离线文案由 UI 分片验收。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules/parse，JSON {"text":"把 7 天没访问过的 GitHub issue 建议归档，但 docs.internal.com 的页面永远不要归档"}。
+  - S3：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回 HTTP 200，rules.length=2，规则顺序为 archive_candidate、never_archive。
+  - E3：S2 rules[0] 等于预览字段 {id:"rule_1",rawText:"把 7 天没访问过的 GitHub issue 建议归档",type:"archive_candidate",domain:"github.com",urlPattern:"/issues/",inactiveDays:7,action:"suggest_archive",enabled:true,confidence:"high",notes:[]}。
+  - E4：S2 rules[1] 等于预览字段 {id:"rule_2",rawText:"docs.internal.com 的页面永远不要归档",type:"never_archive",domain:"docs.internal.com",urlPattern:null,inactiveDays:null,action:"keep",enabled:true,confidence:"high",notes:[]}。
+  - E5：S2 unparsed=[]，warnings=[]。
+  - E6：S3 规则列表为 {rules:[],total:0}。
+  - E7：S3 health.ruleCount=0，pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-001/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-001/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-001/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-002 库中已保存两条规则时再解析不会修改规则与计数
+
+- 优先级：P0 ｜ 类别：positive ｜ 技术：state-transition
+- 关联 Feature：F-RULE-01、F-RULE-07
+- AC：F-RULE-01#AC2、F-RULE-07#AC1
+- 关联 Code：C-BE-RULE-07、C-BE-RULE-06、C-BE-CORE-11
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：本用例自行解析并保存双规则，然后只预览新规则；API 投影：只验证真实 HTTP 响应与服务端状态；卡片、按钮、黄色提示、勾选、列表控件与离线文案由 UI 分片验收。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules/parse 解析题目双规则句「把 7 天没访问过的 GitHub issue 建议归档，但 docs.internal.com 的页面永远不要归档」，POST /api/rules 提交返回的全部 rules，保存响应中的正式 id。
+  - S3：GET /api/rules 与 GET /api/health，保存完整规则快照 R0 和计数 H0。
+  - S4：POST /api/rules/parse，text="飞书文档优先显示"。
+  - S5：GET /api/rules 与 GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 保存返回 HTTP 201，rules.length=2，ruleCount=2。
+  - E3：S3 列表 total=2，顺序为 archive_candidate、never_archive；R0 每条含 id、rawText、type、action、enabled。
+  - E4：S4 返回 HTTP 200，rules.length=1，rules[0].type="boost_domain"。
+  - E5：S5 列表与 R0 深度相等（含两个正式 id、原文、启停状态、createdAt、updatedAt）。
+  - E6：S5 health.ruleCount=2、enabledRuleCount=2、pageCount=0，与 H0 对应计数相等。
+- 证据：
+  - evidence/TC-API-RULE-002/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-002/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-002/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-003 中文七天抽取为7且GitHub issue映射完整
+
+- 优先级：P0 ｜ 类别：positive ｜ 技术：equivalence
+- 关联 Feature：F-RULE-02
+- AC：F-RULE-02#AC2
+- 关联 Code：C-BE-RULE-02、C-BE-RULE-03
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：PRD §6.6 中文数字+天单位，七→7。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules/parse，text="七天没访问的 GitHub issue 建议归档"。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回 HTTP 200，rules.length=1。
+  - E3：S2 rules[0] 的 type="archive_candidate"、domain="github.com"、urlPattern="/issues/"、inactiveDays=7、action="suggest_archive"。
+  - E4：S2 rules[0].rawText="七天没访问的 GitHub issue 建议归档"，confidence="high"，enabled=true。
+  - E5：S2 unparsed=[]，warnings=[]。
+- 证据：
+  - evidence/TC-API-RULE-003/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-003/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-003/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-004 中文两周换算14天且搜索结果映射/search
+
+- 优先级：P0 ｜ 类别：positive ｜ 技术：equivalence
+- 关联 Feature：F-RULE-02
+- AC：F-RULE-02#AC3
+- 关联 Code：C-BE-RULE-02、C-BE-RULE-03
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：两周=2×7=14；没有显式域名，domain=null。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules/parse，text="两周没看的搜索结果页建议归档"。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回 HTTP 200，rules.length=1。
+  - E3：S2 rules[0] 的 type="archive_candidate"、domain=null、urlPattern="/search"、inactiveDays=14、action="suggest_archive"。
+  - E4：S2 rules[0].rawText="两周没看的搜索结果页建议归档"，confidence="high"。
+  - E5：S2 unparsed=[]。
+- 证据：
+  - evidence/TC-API-RULE-004/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-004/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-004/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-005 数字一个月与中文一个月均换算为30天
+
+- 优先级：P0 ｜ 类别：positive ｜ 技术：equivalence
+- 关联 Feature：F-RULE-02
+- AC：F-RULE-02#AC4
+- 关联 Code：C-BE-RULE-02、C-BE-RULE-03
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：PRD §6.6 单位个月×30，中文一与阿拉伯1同义；不引入额外天数上限。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：分别 POST /api/rules/parse：text="1 个月没访问的 GitHub issue 建议归档"、text="一个月没访问的 GitHub issue 建议归档"；分别保存响应。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 两个请求分别返回 HTTP 200，每个 rules.length=1。
+  - E3：S2 两个 rules[0] 均为 type="archive_candidate"、domain="github.com"、urlPattern="/issues/"、inactiveDays=30、action="suggest_archive"、confidence="high"。
+  - E4：S2 每个 rules[0].rawText 分别等于该次请求原句。
+  - E5：S2 两个 unparsed 均为 []。
+- 证据：
+  - evidence/TC-API-RULE-005/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-005/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-005/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-006 未指定天数时采用14天并返回medium及默认值说明
+
+- 优先级：P0 ｜ 类别：positive ｜ 技术：equivalence
+- 关联 Feature：F-RULE-02
+- AC：F-RULE-02#AC5
+- 关联 Code：C-BE-RULE-02、C-BE-RULE-03
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：省略天数是合法输入，不应返回400；notes是解析过程信息。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules/parse，text="GitHub 的页面建议归档"。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回 HTTP 200，rules.length=1。
+  - E3：S2 rules[0].inactiveDays=14，confidence="medium"。
+  - E4：S2 rules[0].notes 包含精确字符串「未指定天数，使用默认 14 天」。
+  - E5：S2 rules[0] 的 domain="github.com"、urlPattern=null、type="archive_candidate"、action="suggest_archive"。
+  - E6：S2 unparsed=[]。
+- 证据：
+  - evidence/TC-API-RULE-006/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-006/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-006/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-007 永远不要归档解析为keep，不能误产生archive_candidate
+
+- 优先级：P0 ｜ 类别：positive ｜ 技术：error-guessing
+- 关联 Feature：F-RULE-03
+- AC：F-RULE-03#AC1
+- 关联 Code：C-BE-RULE-03
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：否定在动作之前判定；即使句子包含归档也必须保留。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules/parse，text="docs.internal.com 的页面永远不要归档"。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回 HTTP 200，rules.length=1。
+  - E3：S2 rules[0].rawText="docs.internal.com 的页面永远不要归档"，type="never_archive"、domain="docs.internal.com"、action="keep"。
+  - E4：S2 rules 中 type="archive_candidate" 的数量为0。
+  - E5：S2 unparsed=[]。
+- 证据：
+  - evidence/TC-API-RULE-007/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-007/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-007/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-008 别归档识别github.com并保持never_archive
+
+- 优先级：P0 ｜ 类别：positive ｜ 技术：error-guessing
+- 关联 Feature：F-RULE-03
+- AC：F-RULE-03#AC2
+- 关联 Code：C-BE-RULE-03
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：否定词「别」的独立等价类。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules/parse，text="别归档 github.com 的页面"。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回 HTTP 200，rules.length=1。
+  - E3：S2 rules[0] 的 type="never_archive"、domain="github.com"、action="keep"，rawText="别归档 github.com 的页面"。
+  - E4：S2 rules 中 type="archive_candidate" 的数量为0。
+- 证据：
+  - evidence/TC-API-RULE-008/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-008/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-008/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-009 不要与禁止否定变体不落入肯定归档分支
+
+- 优先级：P1 ｜ 类别：negative ｜ 技术：error-guessing
+- 关联 Feature：F-RULE-03
+- AC：F-RULE-03#AC1、F-RULE-03#AC2
+- 关联 Code：C-BE-RULE-03
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：这是自然语言反向意图的反例，合法输入返回200；不能机械期待HTTP400。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：分别 POST /api/rules/parse，text="不要归档 github.com 的页面"、text="禁止清理 docs.internal.com 的页面"。
+  - S3：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 每个请求返回 HTTP 200，每个 rules.length=1。
+  - E3：S2 第一个 rules[0] 为 type="never_archive"、domain="github.com"、action="keep"。
+  - E4：S2 第二个 rules[0] 为 type="never_archive"、domain="docs.internal.com"、action="keep"。
+  - E5：S2 两个响应中 archive_candidate 的总数为0，unparsed均为[]。
+  - E6：S3 total=0、rules=[]，health.ruleCount=0、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-009/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-009/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-009/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-010 分号把两条规则拆开并保留各自子句原文
+
+- 优先级：P0 ｜ 类别：positive ｜ 技术：equivalence
+- 关联 Feature：F-RULE-04
+- AC：F-RULE-04#AC1
+- 关联 Code：C-BE-RULE-01
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：rawText必须是子句，不得将整句复制到两条规则。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules/parse，text="7 天没访问的 issue 归档；github.com 永远不要归档"。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回 HTTP 200，rules.length=2。
+  - E3：S2 rules[0].rawText="7 天没访问的 issue 归档"，type="archive_candidate"、urlPattern="/issues/"、inactiveDays=7。
+  - E4：S2 rules[1].rawText="github.com 永远不要归档"，type="never_archive"、domain="github.com"、action="keep"。
+  - E5：S2 unparsed=[]。
+- 证据：
+  - evidence/TC-API-RULE-010/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-010/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-010/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-011 条件句中的逗号保持一个关联推荐规则及完整原文
+
+- 优先级：P0 ｜ 类别：positive ｜ 技术：equivalence
+- 关联 Feature：F-RULE-04、F-RULE-10
+- AC：F-RULE-04#AC2、F-RULE-10#AC2
+- 关联 Code：C-BE-RULE-01、C-BE-RULE-02、C-BE-RULE-03
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：条件逗号不拆；trigger与target中的label若存在须为字符串，未冻结具体label文本。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules/parse，text="如果我连续看了 3 个 React 文档，推荐相关 MDN 页面"。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回 HTTP 200，rules.length=1。
+  - E3：S2 rules[0].rawText="如果我连续看了 3 个 React 文档，推荐相关 MDN 页面"。
+  - E4：S2 rules[0] 的 type="recommend_related"、action="recommend"、trigger.domain="react.dev"、trigger.minCount=3、target.domain="developer.mozilla.org"。
+  - E5：S2 rules[0].enabled=true、confidence="high"，unparsed=[]。
+- 证据：
+  - evidence/TC-API-RULE-011/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-011/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-011/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-012 单子句到双子句的普通分隔符不会丢失或产生空规则
+
+- 优先级：P1 ｜ 类别：boundary ｜ 技术：boundary
+- 关联 Feature：F-RULE-04
+- AC：F-RULE-04#AC1
+- 关联 Code：C-BE-RULE-01
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：边界为1个完整子句→2个完整子句；条件逗号的不可拆反边界由本分片条件句用例单独断言。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules/parse，text="7 天没访问的 issue 归档"，记录单子句响应。
+  - S3：以分隔符「；」「。」「
+」「并且」「，」分别连接 A="7 天没访问的 issue 归档" 与 B="github.com 永远不要归档"，逐次 POST /api/rules/parse。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回 HTTP 200，rules.length=1，rawText="7 天没访问的 issue 归档"。
+  - E3：S3 五个请求分别返回 HTTP 200，每个 rules.length=2，顺序为 archive_candidate、never_archive。
+  - E4：S3 每个响应的 rules.map(rawText) 精确等于 ["7 天没访问的 issue 归档","github.com 永远不要归档"]。
+  - E5：S3 每个 unparsed=[]。
+- 证据：
+  - evidence/TC-API-RULE-012/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-012/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-012/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-013 合法但没有动作的文本返回200、空规则和原因例句
+
+- 优先级：P1 ｜ 类别：negative ｜ 技术：equivalence
+- 关联 Feature：F-RULE-01、F-RULE-05
+- AC：F-RULE-01#AC3、F-RULE-05#AC1
+- 关联 Code：C-BE-RULE-04、C-BE-RULE-07
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：文本长度合法但语义不支持，必须200+unparsed，不应报400；API 投影：只验证真实 HTTP 响应与服务端状态；卡片、按钮、黄色提示、勾选、列表控件与离线文案由 UI 分片验收。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules/parse，text="帮我整理一下"。
+  - S3：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回 HTTP 200，rules=[]。
+  - E3：S2 unparsed.length=1，unparsed[0].text="帮我整理一下"，reason="没有识别到动作（归档 / 不要归档 / 推荐 / 不上传 / 优先）"。
+  - E4：S2 unparsed[0].examples.length≥1，每项均为非空字符串。
+  - E5：S3 列表 {rules:[],total:0}，health.ruleCount=0、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-013/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-013/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-013/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-014 否定动作缺少可定位对象时返回unparsed而不生成全局保留规则
+
+- 优先级：P1 ｜ 类别：negative ｜ 技术：error-guessing
+- 关联 Feature：F-RULE-03、F-RULE-05
+- AC：F-RULE-03#AC1、F-RULE-05#AC2
+- 关联 Code：C-BE-RULE-03、C-BE-RULE-04
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：docs不是显式域名或支持别名；合法语义未识别不是请求结构错误。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules/parse，text="别关闭 docs 页面"。
+  - S3：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回 HTTP 200，rules=[]。
+  - E3：S2 unparsed.length=1，unparsed[0].text="别关闭 docs 页面"，reason 包含「没找到作用的域名或页面类型」。
+  - E4：S2 unparsed[0].examples.length≥1，每项为非空字符串。
+  - E5：S3 total=0，health.ruleCount=0、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-014/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-014/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-014/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-015 同域归档与永不归档都返回并给出一条优先级冲突告知
+
+- 优先级：P0 ｜ 类别：positive ｜ 技术：decision-table
+- 关联 Feature：F-RULE-05
+- AC：F-RULE-05#AC3
+- 关联 Code：C-BE-RULE-04
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：范围同为github.com构成冲突，告知不能通过丢弃任一规则来规避。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules/parse，text="7 天没访问的 GitHub issue 建议归档；github.com 永远不要归档"。
+  - S3：GET /api/rules。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回 HTTP 200，rules.length=2，类型顺序为 archive_candidate、never_archive。
+  - E3：S2 warnings.length=1，warnings[0] 同时包含「冲突」与「永不归档」。
+  - E4：S2 两条 rawText 依次为「7 天没访问的 GitHub issue 建议归档」「github.com 永远不要归档」。
+  - E5：S3 total=0、rules=[]。
+- 证据：
+  - evidence/TC-API-RULE-015/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-015/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-015/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-016 不上传关键词解析为privacy_filter并保持关键词顺序
+
+- 优先级：P1 ｜ 类别：positive ｜ 技术：equivalence
+- 关联 Feature：F-RULE-10
+- AC：F-RULE-10#AC1
+- 关联 Code：C-BE-RULE-02、C-BE-RULE-03
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：只验证解析结构；实际关键词影响上传由PRIV分片验收。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules/parse，text="不要上传包含 password、token 的 URL"。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回 HTTP 200，rules.length=1。
+  - E3：S2 rules[0] 的 type="privacy_filter"、action="exclude_upload"、keywords=["password","token"]。
+  - E4：S2 rules[0].rawText="不要上传包含 password、token 的 URL"，enabled=true、confidence="high"。
+  - E5：S2 unparsed=[]，warnings=[]。
+- 证据：
+  - evidence/TC-API-RULE-016/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-016/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-016/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-017 飞书别名解析为feishu.cn排序加权规则
+
+- 优先级：P1 ｜ 类别：positive ｜ 技术：equivalence
+- 关联 Feature：F-RULE-10
+- AC：F-RULE-10#AC3
+- 关联 Code：C-BE-RULE-02、C-BE-RULE-03
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：只验证别名和type/action；排序分数由RANK分片验收。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules/parse，text="飞书文档优先显示"。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回 HTTP 200，rules.length=1。
+  - E3：S2 rules[0] 的 type="boost_domain"、domain="feishu.cn"、action="boost"。
+  - E4：S2 rules[0].rawText="飞书文档优先显示"，enabled=true、confidence="high"。
+  - E5：S2 unparsed=[]。
+- 证据：
+  - evidence/TC-API-RULE-017/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-017/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-017/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-018 扩展规则缺关键词或推荐站点时只返回未识别片段
+
+- 优先级：P2 ｜ 类别：negative ｜ 技术：equivalence
+- 关联 Feature：F-RULE-10
+- AC：F-RULE-10#AC1、F-RULE-10#AC2
+- 关联 Code：C-BE-RULE-02、C-BE-RULE-03
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：无效的是自然语言要素，协议与text长度合法所以HTTP200。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：分别 POST /api/rules/parse：text="不要上传敏感页面"、text="连续看 3 个文档就推荐"。
+  - S3：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 两个请求分别返回 HTTP 200，两个 rules=[]。
+  - E3：S2 第一个 unparsed.length=1，reason 包含「没找到要过滤的关键词」。
+  - E4：S2 第二个 unparsed.length=1，reason 同时包含「触发站点」和「推荐站点」。
+  - E5：S2 两个 unparsed[0].examples 均至少1条非空例句。
+  - E6：S3 total=0，health.ruleCount=0、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-018/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-018/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-018/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-019 trim后1字符和500字符均接受，500字符规则仍抽取7天
+
+- 优先级：P1 ｜ 类别：boundary ｜ 技术：boundary
+- 关联 Feature：F-RULE-01、F-RULE-02、F-RULE-05
+- AC：F-RULE-01#AC1、F-RULE-02#AC1、F-RULE-05#AC4
+- 关联 Code：C-BE-RULE-02、C-BE-RULE-07、C-BE-CORE-08
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：JavaScript字符串长度计数；前后空白不计入1–500限制；A语义不支持仍200，B具体字段证明长度上限可解析；API 投影：只验证真实 HTTP 响应与服务端状态；卡片、按钮、黄色提示、勾选、列表控件与离线文案由 UI 分片验收。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：令 A="甲"，B="甲".repeat(500-BASE.length)+BASE，BASE="7 天没访问的 GitHub issue 建议归档"；断言 A.length=1、B.length=500。
+  - S3：分别 POST /api/rules/parse，text="  "+A+"  "、text="  "+B+"  "。
+  - S4：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S3 两个请求分别返回 HTTP 200。
+  - E3：S3 长度1响应 rules=[]，unparsed.length=1，unparsed[0].text="甲"，examples至少1条。
+  - E4：S3 长度500响应 rules.length=1，rules[0].type="archive_candidate"、domain="github.com"、urlPattern="/issues/"、inactiveDays=7。
+  - E5：S3 长度500响应 rules[0].rawText=B（不含外围空格）。
+  - E6：S4 total=0，health.ruleCount=0、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-019/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-019/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-019/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-020 trim后0字符及501字符返回400且不改变已保存规则
+
+- 优先级：P1 ｜ 类别：boundary ｜ 技术：boundary
+- 关联 Feature：F-RULE-01、F-RULE-05
+- AC：F-RULE-01#AC2、F-RULE-05#AC4
+- 关联 Code：C-BE-RULE-07、C-BE-CORE-08
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：text合法边界外值0/501；使用已有规则验证校验失败没有副作用。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules 保存 {rules:[{rawText:"保护已有规则",type:"never_archive",domain:"docs.internal.com"}]}；GET /api/rules 保存快照R0。
+  - S3：分别 POST /api/rules/parse，JSON text=""、"  	
+ "、"甲".repeat(501)。
+  - S4：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 保存返回 HTTP 201，ruleCount=1。
+  - E3：S3 三个请求分别返回 HTTP 400。
+  - E4：S3 三个响应 error.code="VALIDATION_FAILED"，error.message 均为非空字符串。
+  - E5：S4 列表与 R0 深度相等，total=1。
+  - E6：S4 health.ruleCount=1、enabledRuleCount=1、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-020/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-020/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-020/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-021 缺少text或text类型错误返回400并保留原规则
+
+- 优先级：P1 ｜ 类别：negative ｜ 技术：equivalence
+- 关联 Feature：F-RULE-01、F-RULE-05
+- AC：F-RULE-01#AC2、F-RULE-05#AC4
+- 关联 Code：C-BE-RULE-07、C-BE-CORE-08
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：不同无效类型各取一个代表；错误响应不是空rules的成功响应。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules 保存 {rules:[{rawText:"保护已有规则",type:"never_archive",domain:"docs.internal.com"}]}；GET /api/rules 记录R0。
+  - S3：分别 POST /api/rules/parse，请求体为 {}、{"text":null}、{"text":7}、{"text":[]}、{"text":{}}。
+  - S4：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回 HTTP 201，ruleCount=1。
+  - E3：S3 五个请求分别返回 HTTP 400，error.code="VALIDATION_FAILED"。
+  - E4：S3 每个 error.message 为非空字符串。
+  - E5：S4 列表与R0深度相等，total=1，health.ruleCount=1、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-021/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-021/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-021/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-022 解析入口遇到坏JSON及错误媒体类型返回统一协议错误且不落库
+
+- 优先级：P1 ｜ 类别：exception ｜ 技术：error-guessing
+- 关联 Feature：F-RULE-01、F-RULE-05
+- AC：F-RULE-01#AC2、F-RULE-05#AC4
+- 关联 Code：C-BE-RULE-07
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：协议异常由真实HTTP请求原始字节触发；不伪造500。AC4的字段校验在长度/类型反例中验证，此处补充同一解析入口的异常路径。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules 保存 {rules:[{rawText:"保留基线",type:"never_archive",domain:"docs.internal.com"}]}；GET /api/rules 记录R0。
+  - S3：POST /api/rules/parse，Content-Type=application/json，请求体原始字节为 {bad。
+  - S4：POST /api/rules/parse，Content-Type=text/plain，请求体为合法JSON字符串 {"text":"飞书文档优先显示"}。
+  - S5：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S3 返回 HTTP 400，error.code="INVALID_JSON"。
+  - E3：S3 error.message 为非空字符串。
+  - E4：S4 返回 HTTP 415，error.code="UNSUPPORTED_MEDIA_TYPE"。
+  - E5：S4 error.message 为非空字符串。
+  - E6：S5 列表与R0深度相等，total=1，health.ruleCount=1、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-022/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-022/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-022/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-023 解析双规则后完整确认保存返回201及可渲染列表字段
+
+- 优先级：P0 ｜ 类别：positive ｜ 技术：scenario
+- 关联 Feature：F-RULE-06、F-RULE-07
+- AC：F-RULE-06#AC1、F-RULE-07#AC1、F-RULE-07#AC2
+- 关联 Code：C-BE-RULE-05、C-BE-RULE-06、C-BE-RULE-08、C-BE-CORE-11
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：保存采用parse真实返回；不要求正式id与预览id不同；API 投影：只验证真实 HTTP 响应与服务端状态；卡片、按钮、黄色提示、勾选、列表控件与离线文案由 UI 分片验收。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules/parse，text="把 7 天没访问过的 GitHub issue 建议归档，但 docs.internal.com 的页面永远不要归档"；保存预览rules。
+  - S3：POST /api/rules，JSON {rules: S2返回的两条预览规则}，保存正式规则数组R及两个id。
+  - S4：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回 HTTP 200，rules.length=2。
+  - E3：S3 返回 HTTP 201，rules.length=2，ruleCount=2。
+  - E4：S3 两条正式规则id均为非空字符串且在本次返回中互不相同；后续只使用这些返回值。
+  - E5：S3 两条规则enabled=true，type/action顺序为 archive_candidate/suggest_archive、never_archive/keep。
+  - E6：S3 rules.map(rawText)=["把 7 天没访问过的 GitHub issue 建议归档","docs.internal.com 的页面永远不要归档"]，confidence均为"high"，createdAt与updatedAt均为数值。
+  - E7：S4 GET 返回 HTTP 200、total=2，rules与R按创建顺序对应，逐条包含 id、rawText、type、action、enabled、domain、urlPattern、inactiveDays、confidence、createdAt、updatedAt。
+  - E8：S4 health.ruleCount=2、enabledRuleCount=2、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-023/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-023/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-023/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-024 只确认双规则中的第一条时仅保存archive_candidate
+
+- 优先级：P0 ｜ 类别：positive ｜ 技术：scenario
+- 关联 Feature：F-RULE-06
+- AC：F-RULE-06#AC2
+- 关联 Code：C-BE-RULE-05、C-BE-RULE-06、C-BE-RULE-08
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：API只验证用户选择后的请求子集，不验证勾选框；API 投影：只验证真实 HTTP 响应与服务端状态；卡片、按钮、黄色提示、勾选、列表控件与离线文案由 UI 分片验收。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules/parse，text="把 7 天没访问过的 GitHub issue 建议归档，但 docs.internal.com 的页面永远不要归档"。
+  - S3：POST /api/rules，JSON {rules:[S2.rules[0]]}，不提交S2.rules[1]。
+  - S4：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回 HTTP 200，rules.length=2。
+  - E3：S3 返回 HTTP 201，rules.length=1、ruleCount=1。
+  - E4：S4 total=1，唯一规则type="archive_candidate"、domain="github.com"、urlPattern="/issues/"、inactiveDays=7、enabled=true。
+  - E5：S4 没有type="never_archive"的规则，唯一id等于S3.rules[0].id。
+  - E6：S4 health.ruleCount=1、enabledRuleCount=1、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-024/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-024/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-024/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-025 混合合法规则与unknown_type时整批拒绝且已有规则不变
+
+- 优先级：P1 ｜ 类别：negative ｜ 技术：decision-table
+- 关联 Feature：F-RULE-06
+- AC：F-RULE-06#AC3
+- 关联 Code：C-BE-RULE-05、C-BE-RULE-06、C-BE-RULE-08、C-BE-CORE-11
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：批次全部通过才写入；使用已有规则和合法项在前的顺序检测部分落库。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules 保存 {rules:[{rawText:"已有保护",type:"never_archive",domain:"docs.internal.com"}]}；GET /api/rules 记录R0。
+  - S3：POST /api/rules，JSON {rules:[{rawText:"本批合法项",type:"boost_domain",domain:"feishu.cn"},{rawText:"本批非法项",type:"unknown_type",domain:"example.com"}]}。
+  - S4：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回 HTTP 201，ruleCount=1。
+  - E3：S3 返回 HTTP 400，error.code="VALIDATION_FAILED"。
+  - E4：S3 error.message 为非空字符串。
+  - E5：S4 列表与R0深度相等，total=1，不能写入本批第一条合法项。
+  - E6：S4 health.ruleCount=1、enabledRuleCount=1、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-025/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-025/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-025/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-026 保存数组最小1条与最大20条均接受且id唯一
+
+- 优先级：P1 ｜ 类别：boundary ｜ 技术：boundary
+- 关联 Feature：F-RULE-06
+- AC：F-RULE-06#AC1
+- 关联 Code：C-BE-RULE-05、C-BE-RULE-06、C-BE-RULE-08
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：同一个脚本内参数化两轮，每轮reset且自行造数；1–20来自POST /api/rules契约，不假设跨reset正式id不同。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：对n=1、20各执行一轮：POST /api/__test__/reset；构造rules=Array.from({length:n},(_,i)=>({rawText:"保护边界"+i,type:"never_archive",domain:"edge"+i+".example.com"}))。
+  - S3：各轮 POST /api/rules，提交本轮rules；立即 GET /api/rules 与 GET /api/health，分别留存结果。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S3 两轮保存均返回 HTTP 201，各自rules.length=n、ruleCount=n。
+  - E3：S3 每轮返回的n个正式id均非空且在该轮内互不重复，enabled均为true。
+  - E4：S3 各轮列表total=n，rawText顺序为「保护边界0」直到「保护边界」+(n-1)，id与该轮保存响应顺序相同。
+  - E5：S3 各轮health.ruleCount=n、enabledRuleCount=n、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-026/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-026/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-026/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-027 保存数组0条与21条返回400且不部分写入
+
+- 优先级：P1 ｜ 类别：boundary ｜ 技术：boundary
+- 关联 Feature：F-RULE-06
+- AC：F-RULE-06#AC1、F-RULE-06#AC3
+- 关联 Code：C-BE-RULE-05、C-BE-RULE-06、C-BE-RULE-08
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：同一批21条均为合法规则，错误仅来自数组上限；0条来自数组下限。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules 保存 {rules:[{rawText:"基线保护",type:"never_archive",domain:"baseline.example.com"}]}；GET /api/rules记录R0。
+  - S3：分别 POST /api/rules：{rules:[]} 与 {rules:Array.from({length:21},(_,i)=>({rawText:"越界"+i,type:"never_archive",domain:"overflow"+i+".example.com"}))}。
+  - S4：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S3 两个请求分别返回 HTTP 400，error.code="VALIDATION_FAILED"。
+  - E3：S3 两个error.message均为非空字符串。
+  - E4：S4 列表与R0深度相等，total=1。
+  - E5：S4 health.ruleCount=1、enabledRuleCount=1、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-027/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-027/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-027/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-028 rules缺失或不是数组返回400且保留已有规则
+
+- 优先级：P1 ｜ 类别：negative ｜ 技术：equivalence
+- 关联 Feature：F-RULE-06
+- AC：F-RULE-06#AC3
+- 关联 Code：C-BE-RULE-05、C-BE-RULE-08
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：字段缺失与非数组各等价类；不依赖预览结果。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules 保存 {rules:[{rawText:"基线保护",type:"never_archive",domain:"baseline.example.com"}]}；GET /api/rules记录R0。
+  - S3：分别 POST /api/rules，JSON为 {}、{"rules":null}、{"rules":{}}、{"rules":"x"}。
+  - S4：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S3 四个请求分别返回 HTTP 400，error.code="VALIDATION_FAILED"。
+  - E3：S3 每个error.message为非空字符串。
+  - E4：S4 列表与R0深度相等，total=1，health.ruleCount=1、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-028/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-028/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-028/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-029 各规则必填字段缺失时逐批返回400且已有规则不变
+
+- 优先级：P1 ｜ 类别：negative ｜ 技术：pairwise
+- 关联 Feature：F-RULE-06
+- AC：F-RULE-06#AC3
+- 关联 Code：C-BE-RULE-05、C-BE-RULE-08
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：独立invalid对象：{type:"never_archive",domain:"example.com"}（缺rawText）；{rawText:"缺type",domain:"example.com"}；{rawText:"缺保护范围",type:"never_archive"}（domain与urlPattern均缺）；{rawText:"缺关键词",type:"privacy_filter"}；{rawText:"缺触发站点",type:"recommend_related",target:{domain:"developer.mozilla.org"}}；{rawText:"缺目标站点",type:"recommend_related",trigger:{domain:"react.dev",minCount:3}}；{rawText:"缺加权域名",type:"boost_domain"}。archive_candidate负数校验另列；不假设never_archive必须有domain而禁止仅urlPattern。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules 保存 {rules:[{rawText:"基线保护",type:"never_archive",domain:"baseline.example.com"}]}；GET /api/rules记录R0。
+  - S3：对testData中的每条invalid单独 POST /api/rules，JSON {rules:[invalid]}；每次错误后 GET /api/rules 与 GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S3 每个保存请求返回 HTTP 400，error.code="VALIDATION_FAILED"。
+  - E3：S3 每个error.message为非空字符串。
+  - E4：S3 每次回读列表均与R0深度相等，total=1。
+  - E5：S3 每次health.ruleCount=1、enabledRuleCount=1、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-029/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-029/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-029/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-030 action与type不匹配及负inactiveDays均拒绝且不改原规则
+
+- 优先级：P1 ｜ 类别：negative ｜ 技术：decision-table
+- 关联 Feature：F-RULE-06
+- AC：F-RULE-06#AC3
+- 关联 Code：C-BE-RULE-05、C-BE-RULE-08
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：action/type映射来自PRD §6.6；-1来自模块测试点库明确反例，不自创inactiveDays最大值。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules 保存 {rules:[{rawText:"基线保护",type:"never_archive",domain:"baseline.example.com"}]}；GET /api/rules记录R0。
+  - S3：分别 POST /api/rules，JSON {rules:[{rawText:"错误动作",type:"never_archive",domain:"docs.internal.com",action:"suggest_archive"}]} 与 {rules:[{rawText:"负天数",type:"archive_candidate",domain:"github.com",urlPattern:"/issues/",inactiveDays:-1,action:"suggest_archive"}]}。
+  - S4：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S3 两个请求分别返回 HTTP 400，error.code="VALIDATION_FAILED"。
+  - E3：S3 两个error.message均为非空字符串。
+  - E4：S4 列表与R0深度相等，total=1。
+  - E5：S4 health.ruleCount=1、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-030/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-030/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-030/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-031 保存补齐action和默认值并忽略客户端id与解析notes
+
+- 优先级：P0 ｜ 类别：positive ｜ 技术：equivalence
+- 关联 Feature：F-RULE-06、F-RULE-07
+- AC：F-RULE-06#AC1、F-RULE-07#AC1
+- 关联 Code：C-BE-RULE-05、C-BE-RULE-06、C-BE-CORE-11
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：契约明确id/notes忽略，action/type映射补齐，confidence默认high、enabled默认true；不要求正式id与parse预览id不同。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules，JSON {rules:[{id:"client_injected_id",notes:["客户端解析提示"],rawText:"保护docs",type:"never_archive",domain:"docs.internal.com"}]}。
+  - S3：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回 HTTP 201，rules.length=1、ruleCount=1。
+  - E3：S2 rules[0].id为后端生成的非空rule_前缀字符串，不等于传入的"client_injected_id"。
+  - E4：S2 rules[0] 的 action="keep"、enabled=true、confidence="high"。
+  - E5：S2 rules[0] 不保留客户端提示「客户端解析提示」；notes缺省或空数组均可，不能回显该输入值。
+  - E6：S2 rules[0].createdAt与updatedAt均为数值。
+  - E7：S3 GET返回HTTP200、total=1，唯一规则深度等于S2.rules[0]。
+  - E8：S3 health.ruleCount=1、enabledRuleCount=1、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-031/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-031/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-031/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-032 空规则库返回200空数组及total=0
+
+- 优先级：P1 ｜ 类别：boundary ｜ 技术：boundary
+- 关联 Feature：F-RULE-07
+- AC：F-RULE-07#AC1、F-RULE-07#AC2
+- 关联 Code：C-BE-RULE-06、C-BE-RULE-08、C-BE-CORE-11
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：空集合用于列表空态的API投影；不声称看到了空态控件；API 投影：只验证真实 HTTP 响应与服务端状态；卡片、按钮、黄色提示、勾选、列表控件与离线文案由 UI 分片验收。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 GET /api/rules 返回 HTTP 200，rules=[]，total=0。
+  - E3：S2 health.ruleCount=0、enabledRuleCount=0、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-032/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-032/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-032/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-033 用保存返回id删除never_archive后列表仅剩原归档规则
+
+- 优先级：P0 ｜ 类别：positive ｜ 技术：state-transition
+- 关联 Feature：F-RULE-08、F-RULE-07
+- AC：F-RULE-08#AC1、F-RULE-07#AC1
+- 关联 Code：C-BE-RULE-06、C-BE-RULE-08、C-BE-CORE-11
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：所有正式id取自本例保存响应；API 投影：只验证真实 HTTP 响应与服务端状态；卡片、按钮、黄色提示、勾选、列表控件与离线文案由 UI 分片验收。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules/parse，text="把 7 天没访问过的 GitHub issue 建议归档，但 docs.internal.com 的页面永远不要归档"；POST /api/rules保存返回rules，记录正式archiveId与keepId。
+  - S3：DELETE /api/rules/<keepId>。
+  - S4：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 保存返回 HTTP 201，ruleCount=2。
+  - E3：S3 返回 HTTP 200，deleted=keepId，ruleCount=1。
+  - E4：S4 返回 HTTP 200，total=1，唯一规则id=archiveId、type="archive_candidate"、enabled=true。
+  - E5：S4 health.ruleCount=1、enabledRuleCount=1、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-033/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-033/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-033/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-034 删除不存在id返回404统一错误并保留已有规则
+
+- 优先级：P1 ｜ 类别：negative ｜ 技术：equivalence
+- 关联 Feature：F-RULE-08
+- AC：F-RULE-08#AC2
+- 关联 Code：C-BE-RULE-06、C-BE-RULE-08、C-BE-CORE-04、C-BE-CORE-11
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：rule_not_exist为契约指定的不存id；core路由匹配DELETE /api/rules/:id后进入业务404。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules 保存 {rules:[{rawText:"基线保护",type:"never_archive",domain:"docs.internal.com"}]}；GET /api/rules记录R0。
+  - S3：DELETE /api/rules/rule_not_exist。
+  - S4：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S3 返回 HTTP 404，error.code="NOT_FOUND"。
+  - E3：S3 error.message为非空字符串。
+  - E4：S4 列表与R0深度相等，total=1。
+  - E5：S4 health.ruleCount=1、enabledRuleCount=1、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-034/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-034/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-034/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-035 最后一条规则删除后归零且重复删除返回404
+
+- 优先级：P1 ｜ 类别：boundary ｜ 技术：state-transition
+- 关联 Feature：F-RULE-08
+- AC：F-RULE-08#AC1、F-RULE-08#AC2
+- 关联 Code：C-BE-RULE-06、C-BE-RULE-08、C-BE-CORE-11
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：对象计数1→0的下边界与重复非法迁移，必须使用第一次保存返回的相同id。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules 保存 {rules:[{rawText:"保护docs",type:"never_archive",domain:"docs.internal.com"}]}，记录正式id。
+  - S3：DELETE /api/rules/<S2正式id>；GET /api/rules与GET /api/health记录空库快照。
+  - S4：再次 DELETE /api/rules/<同一正式id>；再次GET /api/rules与GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S3 第一次DELETE返回 HTTP 200，deleted等于S2正式id，ruleCount=0。
+  - E3：S3 列表为 {rules:[],total:0}，health.ruleCount=0、enabledRuleCount=0。
+  - E4：S4 第二次DELETE返回 HTTP 404，error.code="NOT_FOUND"。
+  - E5：S4 error.message为非空字符串。
+  - E6：S4 列表与S3空库快照相等，health.ruleCount=0、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-035/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-035/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-035/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-036 删除保护规则后样例docs的keep消失且pageCount保持10
+
+- 优先级：P0 ｜ 类别：positive ｜ 技术：state-transition
+- 关联 Feature：F-RULE-08
+- AC：F-RULE-08#AC1、F-RULE-08#AC3
+- 关联 Code：C-BE-RULE-06、C-BE-RULE-08、C-BE-CORE-11
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：每个用例独立读取resource.json；reset后捕获一次固定N=Date.now()，delta=N-300000-max(resource.history.lastVisitTime)，仅将全部history.lastVisitTime加delta，activeTab/openTabs原样；经真实POST /api/sync导入；本例全部cleanup查询均使用?now=N。最新history=N-5分钟，received14、created10、updated4、pageCount10，遵循D-01与PRD §13。 docs只有6.95天且仍打开，保护消失后不应虚构默认归档。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：按testData的D-01配方POST /api/sync导入resource.json。
+  - S3：POST /api/rules/parse，text="把 7 天没访问过的 GitHub issue 建议归档，但 docs.internal.com 的页面永远不要归档"；POST /api/rules保存两条rules，记录archiveId与keepId。
+  - S4：GET /api/pages/cleanup-suggestions?now=N，记录保护启用时建议。
+  - S5：DELETE /api/rules/<keepId>；GET /api/pages/cleanup-suggestions?now=N。
+  - S6：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回 HTTP 200，received=14、created=10、updated=4、rejected=0、pageCount=10。
+  - E3：S3 保存返回 HTTP 201，ruleCount=2。
+  - E4：S4 summary={archive:2,merge:1,keep:1}，suggestions action顺序为 archive、archive、merge、keep。
+  - E5：S4 唯一keep.url="https://docs.internal.com/ai-agent-design"、ruleId=keepId，reason包含「被保护域名配置（docs.internal.com）」。
+  - E6：S5 DELETE返回 HTTP 200，deleted=keepId、ruleCount=1。
+  - E7：S5 cleanup summary={archive:2,merge:1,keep:0}，suggestions中没有 url="https://docs.internal.com/ai-agent-design" 的keep，也没有该url的archive。
+  - E8：S5 issues/100仍为archive，ruleId=archiveId，reason包含「7 天」。
+  - E9：S6 列表total=1，health.ruleCount=1、enabledRuleCount=1、pageCount=10。
+- 证据：
+  - evidence/TC-API-RULE-036/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-036/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-036/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-037 停用再启用正式保护规则后keep消失再恢复
+
+- 优先级：P1 ｜ 类别：positive ｜ 技术：state-transition
+- 关联 Feature：F-RULE-09
+- AC：F-RULE-09#AC1、F-RULE-09#AC2
+- 关联 Code：C-BE-RULE-06、C-BE-RULE-08
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：每个用例独立读取resource.json；reset后捕获一次固定N=Date.now()，delta=N-300000-max(resource.history.lastVisitTime)，仅将全部history.lastVisitTime加delta，activeTab/openTabs原样；经真实POST /api/sync导入；本例全部cleanup查询均使用?now=N。最新history=N-5分钟，received14、created10、updated4、pageCount10，遵循D-01与PRD §13。 同一正式id完成enabled:true→false→true；API 投影：只验证真实 HTTP 响应与服务端状态；卡片、按钮、黄色提示、勾选、列表控件与离线文案由 UI 分片验收。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：按testData的D-01配方POST /api/sync导入resource.json。
+  - S3：POST /api/rules 保存 {rules:[{rawText:"docs.internal.com 的页面永远不要归档",type:"never_archive",domain:"docs.internal.com",action:"keep"}]}，记录正式keepId；GET /api/pages/cleanup-suggestions?now=N。
+  - S4：PATCH /api/rules/<keepId>，JSON {enabled:false}；GET /api/pages/cleanup-suggestions?now=N；GET /api/health。
+  - S5：PATCH /api/rules/<keepId>，JSON {enabled:true}；GET /api/pages/cleanup-suggestions?now=N；GET /api/rules与GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回 HTTP 200，pageCount=10。
+  - E3：S3 保存返回HTTP201、ruleCount=1，初始cleanup存在url="https://docs.internal.com/ai-agent-design"、ruleId=keepId的keep。
+  - E4：S4 PATCH返回HTTP200，响应顶层id=keepId、enabled=false，updatedAt为数值；不得假设响应是{rule:...}。
+  - E5：S4 cleanup summary={archive:2,merge:1,keep:0}，没有url="https://docs.internal.com/ai-agent-design"的keep或archive。
+  - E6：S4 health.ruleCount=1、enabledRuleCount=0、pageCount=10。
+  - E7：S5 PATCH返回HTTP200，响应顶层id=keepId、enabled=true。
+  - E8：S5 cleanup summary={archive:2,merge:1,keep:1}，恢复唯一keep.url="https://docs.internal.com/ai-agent-design"、ruleId=keepId。
+  - E9：S5 列表total=1、唯一规则id=keepId且enabled=true，health.ruleCount=1、enabledRuleCount=1、pageCount=10。
+- 证据：
+  - evidence/TC-API-RULE-037/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-037/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-037/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-038 PATCH缺少或非布尔enabled返回400且保护规则仍生效
+
+- 优先级：P2 ｜ 类别：negative ｜ 技术：equivalence
+- 关联 Feature：F-RULE-09
+- AC：F-RULE-09#AC1
+- 关联 Code：C-BE-RULE-06、C-BE-RULE-08
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：每个用例独立读取resource.json；reset后捕获一次固定N=Date.now()，delta=N-300000-max(resource.history.lastVisitTime)，仅将全部history.lastVisitTime加delta，activeTab/openTabs原样；经真实POST /api/sync导入；本例全部cleanup查询均使用?now=N。最新history=N-5分钟，received14、created10、updated4、pageCount10，遵循D-01与PRD §13。 字符串"false"不能被强制转换成布尔false；错误后不仅数目不变，enabled和建议也不变。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：按testData的D-01配方POST /api/sync导入resource.json；POST /api/rules保存 {rules:[{rawText:"保护docs",type:"never_archive",domain:"docs.internal.com"}]}，记录keepId；GET /api/rules记录R0。
+  - S3：对同一keepId分别 PATCH，JSON为 {}、{enabled:"false"}、{enabled:0}、{enabled:null}。
+  - S4：GET /api/rules；GET /api/pages/cleanup-suggestions?now=N；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S3 四个PATCH分别返回HTTP400，error.code="VALIDATION_FAILED"。
+  - E3：S3 每个error.message为非空字符串。
+  - E4：S4 列表与R0深度相等（含enabled=true、updatedAt），total=1。
+  - E5：S4 cleanup仍存在url="https://docs.internal.com/ai-agent-design"、ruleId=keepId的keep，summary.keep=1。
+  - E6：S4 health.ruleCount=1、enabledRuleCount=1、pageCount=10。
+- 证据：
+  - evidence/TC-API-RULE-038/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-038/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-038/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-039 PATCH不存在规则返回404且已有规则状态不变
+
+- 优先级：P2 ｜ 类别：negative ｜ 技术：equivalence
+- 关联 Feature：F-RULE-09
+- AC：F-RULE-09#AC1、F-RULE-09#AC2
+- 关联 Code：C-BE-RULE-06、C-BE-RULE-08
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：未知id不能创建新规则、不能修改其它规则。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules保存 {rules:[{rawText:"保护docs",type:"never_archive",domain:"docs.internal.com"}]}；GET /api/rules记录R0。
+  - S3：PATCH /api/rules/rule_not_exist，JSON {enabled:false}。
+  - S4：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S3 返回HTTP404，error.code="NOT_FOUND"。
+  - E3：S3 error.message为非空字符串。
+  - E4：S4 列表与R0深度相等，total=1，已有规则enabled=true。
+  - E5：S4 health.ruleCount=1、enabledRuleCount=1、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-039/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-039/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-039/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-040 规则id路径使用不支持的POST方法返回405且不删除规则
+
+- 优先级：P1 ｜ 类别：negative ｜ 技术：error-guessing
+- 关联 Feature：F-RULE-08
+- AC：F-RULE-08#AC1
+- 关联 Code：C-BE-CORE-04、C-BE-RULE-08
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：后端设计统一路由表：路径存在但方法不支持返回405；不能被DELETE路由误处理。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules 保存 {rules:[{rawText:"保护docs",type:"never_archive",domain:"docs.internal.com"}]}，记录正式id；GET /api/rules记录R0。
+  - S3：POST /api/rules/<正式id>，Content-Type=application/json，请求体 {}。
+  - S4：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S3 返回HTTP405，error.code="METHOD_NOT_ALLOWED"。
+  - E3：S3 error.message为非空字符串。
+  - E4：S4 列表与R0深度相等，total=1，正式id仍在列表。
+  - E5：S4 health.ruleCount=1、enabledRuleCount=1、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-040/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-040/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-040/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-041 五种解析结果都能保存并按创建顺序列出准确type/action字段
+
+- 优先级：P1 ｜ 类别：positive ｜ 技术：scenario
+- 关联 Feature：F-RULE-06、F-RULE-07、F-RULE-10
+- AC：F-RULE-06#AC1、F-RULE-07#AC1、F-RULE-10#AC1、F-RULE-10#AC2、F-RULE-10#AC3
+- 关联 Code：C-BE-RULE-02、C-BE-RULE-03、C-BE-RULE-05、C-BE-RULE-06、C-BE-CORE-11
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：只证明五种类型的解析/入库/列表数据；不以此声称已验证上传过滤、排序加权或推荐业务生效。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：依次POST /api/rules/parse：题目双规则句「把 7 天没访问过的 GitHub issue 建议归档，但 docs.internal.com 的页面永远不要归档」、「不要上传包含 password、token 的 URL」、「如果我连续看了 3 个 React 文档，推荐相关 MDN 页面」、「飞书文档优先显示」；按请求顺序拼接返回rules，共5条。
+  - S3：POST /api/rules，提交拼接后的5条；记录返回正式规则数组R。
+  - S4：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 四个请求均返回HTTP200，rules长度依次2、1、1、1。
+  - E3：S2 合并后types=["archive_candidate","never_archive","privacy_filter","recommend_related","boost_domain"]，actions=["suggest_archive","keep","exclude_upload","recommend","boost"]。
+  - E4：S3 返回HTTP201，rules.length=5、ruleCount=5。
+  - E5：S3 五个正式id非空且互不重复，enabled均true；五类type/action顺序保持S2顺序。
+  - E6：S3 privacy_filter.keywords=["password","token"]；recommend_related.trigger.domain="react.dev"、trigger.minCount=3、target.domain="developer.mozilla.org"；boost_domain.domain="feishu.cn"。
+  - E7：S4 返回HTTP200、total=5，rules与R按创建顺序对应，rawText、type、action、enabled及三类扩展的结构字段逐项相等。
+  - E8：S4 health.ruleCount=5、enabledRuleCount=5、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-041/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-041/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-041/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-042 后端不可达时六种规则请求真实连接拒绝且健康实例不变
+
+- 优先级：P1 ｜ 类别：exception ｜ 技术：error-guessing
+- 关联 Feature：F-RULE-01、F-RULE-06、F-RULE-07、F-RULE-08、F-RULE-09
+- AC：F-RULE-01#AC4、F-RULE-06#AC1、F-RULE-07#AC1、F-RULE-08#AC1、F-RULE-09#AC1
+- 关联 Code：C-BE-RULE-07、C-BE-RULE-08、C-BE-RULE-06
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：传输失败没有HTTP状态码/error响应体，不能虚构503；使用node:http避免fetch端口黑名单提前拒绝；除AC4网络前提外，CRUD引用用于离线路径投影，不能据此宣称对应AC UI动作完成；API 投影：只验证真实 HTTP 响应与服务端状态；卡片、按钮、黄色提示、勾选、列表控件与离线文案由 UI 分片验收。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：在正常测试后端POST /api/rules保存 {rules:[{rawText:"保护docs",type:"never_archive",domain:"docs.internal.com"}]}，记录keepId；GET /api/rules记录R0与GET /api/health计数H0。
+  - S3：使用node:net临时监听127.0.0.1:0取得大于1024的端口U，关闭监听；随后真实net.connect(127.0.0.1,U)确认其error.code="ECONNREFUSED"。若端口被接管则重新分配，禁止对仍监听的端口继续。
+  - S4：使用node:http对http://127.0.0.1:U分别发出：POST /api/rules/parse {text:"飞书文档优先显示"}、POST /api/rules {rules:[{rawText:"新保护",type:"never_archive",domain:"example.com"}]}、GET /api/rules、DELETE /api/rules/<keepId>、PATCH /api/rules/<keepId> {enabled:false}、PATCH /api/rules/<keepId> {enabled:true}；记录每个真实error事件，不伪造HTTP响应。
+  - S5：回正常测试后端GET /api/rules与GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S3 端口预检真实连接失败，异常对象code="ECONNREFUSED"、address="127.0.0.1"、port=U。
+  - E3：S4 parse请求触发真实连接拒绝error.code="ECONNREFUSED"，没有HTTP response事件。
+  - E4：S4 save请求触发真实连接拒绝error.code="ECONNREFUSED"，没有HTTP response事件。
+  - E5：S4 list请求触发真实连接拒绝error.code="ECONNREFUSED"，没有HTTP response事件。
+  - E6：S4 delete请求触发真实连接拒绝error.code="ECONNREFUSED"，没有HTTP response事件。
+  - E7：S4 两个PATCH请求均触发真实连接拒绝error.code="ECONNREFUSED"，没有HTTP response事件。
+  - E8：S5 列表与R0深度相等，total=1、已有规则enabled=true；health.ruleCount=1、enabledRuleCount=1、pageCount=0，与H0对应计数相等。
+- 证据：
+  - evidence/TC-API-RULE-042/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-042/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-042/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-043 多子句中未识别片段单独告知且不丢失合法规则
+
+- 优先级：P1 ｜ 类别：negative ｜ 技术：error-guessing
+- 关联 Feature：F-RULE-04、F-RULE-05
+- AC：F-RULE-04#AC1、F-RULE-05#AC1
+- 关联 Code：C-BE-RULE-01、C-BE-RULE-04
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：合法子句+合法但无法识别子句构成拆分的负类；整批不是400，原文必须各自保留。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules/parse，text="7 天没访问的 issue 归档；帮我整理一下"。
+  - S3：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回HTTP200，rules.length=1，唯一规则type="archive_candidate"、urlPattern="/issues/"、inactiveDays=7、rawText="7 天没访问的 issue 归档"。
+  - E3：S2 unparsed.length=1，text="帮我整理一下"，reason="没有识别到动作（归档 / 不要归档 / 推荐 / 不上传 / 优先）"。
+  - E4：S2 unparsed[0].examples至少1条非空字符串；rules中不能把未识别片段生成第二条规则。
+  - E5：S3 total=0、rules=[]，health.ruleCount=0、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-043/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-043/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-043/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-044 关联推荐次数1与3及隐私关键词1与2均保持精确计数
+
+- 优先级：P2 ｜ 类别：boundary ｜ 技术：boundary
+- 关联 Feature：F-RULE-10
+- AC：F-RULE-10#AC1、F-RULE-10#AC2
+- 关联 Code：C-BE-RULE-02、C-BE-RULE-03
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：1个为连续计数的最小正值，3个为AC样例；关键词集合1→2边界。无minCount上限契约，因此不编造上限或0的接受规则。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：分别POST /api/rules/parse，text="如果我连续看了 1 个 React 文档，推荐相关 MDN 页面"、text="如果我连续看了 3 个 React 文档，推荐相关 MDN 页面"。
+  - S3：分别POST /api/rules/parse，text="不要上传包含 password 的 URL"、text="不要上传包含 password、token 的 URL"。
+  - S4：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 两个请求分别返回HTTP200，每个rules.length=1、type="recommend_related"、trigger.domain="react.dev"、target.domain="developer.mozilla.org"。
+  - E3：S2 trigger.minCount依次为1、3，不得将显式1替换为默认3。
+  - E4：S3 两个请求分别返回HTTP200，每个rules.length=1、type="privacy_filter"、action="exclude_upload"。
+  - E5：S3 keywords依次精确为["password"]、["password","token"]，顺序与个数均正确。
+  - E6：S4 total=0，health.ruleCount=0、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-044/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-044/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-044/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## TC-API-RULE-045 不支持的相对日期不会被静默当成默认14天归档
+
+- 优先级：P1 ｜ 类别：negative ｜ 技术：equivalence
+- 关联 Feature：F-RULE-02
+- AC：F-RULE-02#AC5
+- 关联 Code：C-BE-RULE-02、C-BE-RULE-03
+- 前置条件：后端由独立测试进程启动，ENABLE_TEST_API=1；真实 HTTP、禁止 mock/route 后端、禁止导入服务端源码；本用例自行 reset，不依赖其他用例。
+- 测试数据：PRD §6.6明确相对日期（上周以后）当前不支持并进入unparsed；这与完全未写时间时的合法默认14天区分，不自创错误码或固定reason文本。
+- 步骤：
+  - S1：POST /api/__test__/reset，Content-Type=application/json，请求体 {}，清空页面、规则和缓存。
+  - S2：POST /api/rules/parse，text="上周以后没访问的 GitHub issue 建议归档"。
+  - S3：GET /api/rules；GET /api/health。
+- 预期：
+  - E1：S1 返回 HTTP 200，body.ok=true。
+  - E2：S2 返回HTTP200，rules=[]。
+  - E3：S2 unparsed.length=1，unparsed[0].text="上周以后没访问的 GitHub issue 建议归档"，reason为非空字符串。
+  - E4：S2 unparsed[0].examples至少1条非空字符串。
+  - E5：S3 total=0、rules=[]，health.ruleCount=0、pageCount=0。
+- 证据：
+  - evidence/TC-API-RULE-045/result.json：各 En 断言结论。
+  - evidence/TC-API-RULE-045/api/：保存本用例所有真实 HTTP 请求体、响应状态、响应体，x-request-id 使用本 Case ID 加序号。
+  - evidence/TC-API-RULE-045/server.log：从用例开始到结束的后端日志；网络异常另存异常对象的 code、address、port 和端口预检结果。
+
+## Feature → Case 覆盖表
+
+| Feature | AC | 覆盖用例 | 类别分布 | waiver |
+|---|---|---|---|---|
+| F-RULE-01 | AC1 | TC-API-RULE-001、TC-API-RULE-019 | {"positive":2,"negative":2,"boundary":2,"exception":2} | 无 |
+| F-RULE-01 | AC2 | TC-API-RULE-001、TC-API-RULE-002、TC-API-RULE-020、TC-API-RULE-021、TC-API-RULE-022 | {"positive":2,"negative":2,"boundary":2,"exception":2} | 无 |
+| F-RULE-01 | AC3 | TC-API-RULE-013 | {"positive":2,"negative":2,"boundary":2,"exception":2} | 无 |
+| F-RULE-01 | AC4 | TC-API-RULE-042 | {"positive":2,"negative":2,"boundary":2,"exception":2} | 无 |
+| F-RULE-02 | AC1 | TC-API-RULE-001、TC-API-RULE-019 | {"positive":5,"boundary":1,"negative":1} | 无 |
+| F-RULE-02 | AC2 | TC-API-RULE-003 | {"positive":5,"boundary":1,"negative":1} | 无 |
+| F-RULE-02 | AC3 | TC-API-RULE-004 | {"positive":5,"boundary":1,"negative":1} | 无 |
+| F-RULE-02 | AC4 | TC-API-RULE-005 | {"positive":5,"boundary":1,"negative":1} | 无 |
+| F-RULE-02 | AC5 | TC-API-RULE-006、TC-API-RULE-045 | {"positive":5,"boundary":1,"negative":1} | 无 |
+| F-RULE-03 | AC1 | TC-API-RULE-007、TC-API-RULE-009、TC-API-RULE-014 | {"positive":2,"negative":2} | boundary：否定识别没有数值或长度入参；AC中的1条是输出对象数而非可配置阈值。001/007/008已断言单条且无archive_candidate，019覆盖共享text的1/500边界、020覆盖0/501，012覆盖1/2子句边界，故不为否定类型另造数值上限。 |
+| F-RULE-03 | AC2 | TC-API-RULE-008、TC-API-RULE-009 | {"positive":2,"negative":2} | boundary：否定识别没有数值或长度入参；AC中的1条是输出对象数而非可配置阈值。001/007/008已断言单条且无archive_candidate，019覆盖共享text的1/500边界、020覆盖0/501，012覆盖1/2子句边界，故不为否定类型另造数值上限。 |
+| F-RULE-04 | AC1 | TC-API-RULE-010、TC-API-RULE-012、TC-API-RULE-043 | {"positive":2,"boundary":1,"negative":1} | 无 |
+| F-RULE-04 | AC2 | TC-API-RULE-011 | {"positive":2,"boundary":1,"negative":1} | 无 |
+| F-RULE-05 | AC1 | TC-API-RULE-013、TC-API-RULE-043 | {"negative":4,"positive":1,"boundary":2,"exception":1} | 无 |
+| F-RULE-05 | AC2 | TC-API-RULE-014 | {"negative":4,"positive":1,"boundary":2,"exception":1} | 无 |
+| F-RULE-05 | AC3 | TC-API-RULE-015 | {"negative":4,"positive":1,"boundary":2,"exception":1} | 无 |
+| F-RULE-05 | AC4 | TC-API-RULE-019、TC-API-RULE-020、TC-API-RULE-021、TC-API-RULE-022 | {"negative":4,"positive":1,"boundary":2,"exception":1} | 无 |
+| F-RULE-06 | AC1 | TC-API-RULE-023、TC-API-RULE-026、TC-API-RULE-027、TC-API-RULE-031、TC-API-RULE-041、TC-API-RULE-042 | {"positive":4,"negative":4,"boundary":2,"exception":1} | 无 |
+| F-RULE-06 | AC2 | TC-API-RULE-024 | {"positive":4,"negative":4,"boundary":2,"exception":1} | 无 |
+| F-RULE-06 | AC3 | TC-API-RULE-025、TC-API-RULE-027、TC-API-RULE-028、TC-API-RULE-029、TC-API-RULE-030 | {"positive":4,"negative":4,"boundary":2,"exception":1} | 无 |
+| F-RULE-07 | AC1 | TC-API-RULE-002、TC-API-RULE-023、TC-API-RULE-031、TC-API-RULE-032、TC-API-RULE-033、TC-API-RULE-041、TC-API-RULE-042 | {"positive":5,"boundary":1,"exception":1} | 无 |
+| F-RULE-07 | AC2 | TC-API-RULE-023、TC-API-RULE-032 | {"positive":5,"boundary":1,"exception":1} | 无 |
+| F-RULE-08 | AC1 | TC-API-RULE-033、TC-API-RULE-035、TC-API-RULE-036、TC-API-RULE-040、TC-API-RULE-042 | {"positive":2,"negative":2,"boundary":1,"exception":1} | 无 |
+| F-RULE-08 | AC2 | TC-API-RULE-034、TC-API-RULE-035 | {"positive":2,"negative":2,"boundary":1,"exception":1} | 无 |
+| F-RULE-08 | AC3 | TC-API-RULE-036 | {"positive":2,"negative":2,"boundary":1,"exception":1} | 无 |
+| F-RULE-09 | AC1 | TC-API-RULE-037、TC-API-RULE-038、TC-API-RULE-039、TC-API-RULE-042 | {"positive":1,"negative":2,"exception":1} | boundary：API独立投影仅enabled:Boolean有限枚举，无数值阈值；037覆盖true→false→true及enabledRuleCount的1→0→1，038覆盖缺失/null/非布尔拒绝。D-01标号触发数字启发式，不新增虚构数值边界；全量项目现有UI边界用例另行满足此槽位，故本豁免仅用于API统计投影、不进入公共分片。 |
+| F-RULE-09 | AC2 | TC-API-RULE-037、TC-API-RULE-039 | {"positive":1,"negative":2,"exception":1} | boundary：API独立投影仅enabled:Boolean有限枚举，无数值阈值；037覆盖true→false→true及enabledRuleCount的1→0→1，038覆盖缺失/null/非布尔拒绝。D-01标号触发数字启发式，不新增虚构数值边界；全量项目现有UI边界用例另行满足此槽位，故本豁免仅用于API统计投影、不进入公共分片。 |
+| F-RULE-10 | AC1 | TC-API-RULE-016、TC-API-RULE-018、TC-API-RULE-041、TC-API-RULE-044 | {"positive":4,"negative":1,"boundary":1} | exception：扩展类型是纯后端规则计算，没有独立外部依赖；password中的sw误命中检查器SW外部资源启发式。共享解析入口的真实协议错误由022覆盖、连接拒绝由042覆盖；隐私上传/推荐/排序的实际依赖异常归各业务分片。 |
+| F-RULE-10 | AC2 | TC-API-RULE-011、TC-API-RULE-018、TC-API-RULE-041、TC-API-RULE-044 | {"positive":4,"negative":1,"boundary":1} | exception：扩展类型是纯后端规则计算，没有独立外部依赖；password中的sw误命中检查器SW外部资源启发式。共享解析入口的真实协议错误由022覆盖、连接拒绝由042覆盖；隐私上传/推荐/排序的实际依赖异常归各业务分片。 |
+| F-RULE-10 | AC3 | TC-API-RULE-017、TC-API-RULE-041 | {"positive":4,"negative":1,"boundary":1} | exception：扩展类型是纯后端规则计算，没有独立外部依赖；password中的sw误命中检查器SW外部资源启发式。共享解析入口的真实协议错误由022覆盖、连接拒绝由042覆盖；隐私上传/推荐/排序的实际依赖异常归各业务分片。 |
+
+## 类别分布统计
+
+| 类别 | 数量 |
+|---|---:|
+| positive | 20 |
+| negative | 15 |
+| boundary | 8 |
+| exception | 2 |
+
+类型分布：{"API":45}；优先级分布：{"P0":16,"P1":25,"P2":4}；设计技术分布：{"scenario":4,"state-transition":5,"equivalence":17,"error-guessing":8,"boundary":7,"decision-table":3,"pairwise":1}。
+AC 引用覆盖：30/30（100%）；类别缺口：0；waiver=3。
+
+## 自检边界
+
+投影检查：1 个错误、0 个警告；其中非 API 的全项目 E2E 数量要求独立保留。
+- E2E 用例只有 0 条，本技能要求至少 5 条（validator 下限为 3 条），需覆盖 PROBLEM.md 验收流程
+
+自检结果验证用例结构、追溯、AC 引用和类别矩阵，不代表真实产品已执行或通过。网络失败、业务状态联动与证据完整性仍须后续脚本执行、逐项断言和 readback。
+
+正式模块校验：`node .workflow/validators/validate.mjs cases --module=RULE --brief` 返回 pass=true、errors=0、warnings=0；模块报告位于 `.workflow/reports/validate-cases-RULE.json`。静态逐字镜像、S/E编号、Feature/Code交集检查无错误；本分片引用全部8个RULE后端代码点及关联CORE-04/08/11共3个代码点。
+
+指定技能命令 `node .agents/skills/nav-test-case-design/scripts/check-cases.mjs --module=RULE --type=API --json` 已运行；源码只支持 `--root`、`--json`，两个筛选参数实际被忽略，因此输出是全量项目检查。该次快照为114个非RULE错误、0警告，RULE相关错误/警告均为0。剩余分类：E2E 1、CTX 34、SYNC 49、PRIV 14、CACHE 10、INCR 5、MENU 1；这些来自其它分片尚未交付的API/UI覆盖与全项目E2E要求，不是RULE API失败。完整结果与分类见 `.workflow/context/logs/case-API-RULE-check-full.json`、`case-API-RULE-validation-summary.json`。独立纯API投影的唯一E2E错误与正式RULE模块校验通过互不矛盾。

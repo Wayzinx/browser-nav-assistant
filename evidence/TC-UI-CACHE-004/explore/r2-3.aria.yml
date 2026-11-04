@@ -1,0 +1,34 @@
+- banner:
+  - heading "导航助手" [level=1]
+  - button "连接状态：检测尚未实现" [disabled]: 连接检测尚未实现
+- region "当前页面":
+  - heading "当前页面" [level=2]
+  - paragraph: Mock /docs
+  - paragraph: https://example.com/docs
+  - button "标记为重要": ☆
+  - button "添加到分析"
+- region "浏览器上下文同步":
+  - button "同步浏览器上下文"
+  - status:
+    - paragraph: 尚未同步
+  - button "全量同步"
+  - paragraph: 当前模式：全量
+- tablist "导航助手功能":
+  - tab "首页"
+  - tab "上下文"
+  - tab "排序"
+  - tab "整理"
+  - tab "规则"
+  - tab "诊断" [selected]
+- main:
+  - tabpanel "诊断":
+    - heading "后端地址" [level=2]
+    - paragraph: 后端地址设置尚未实现
+    - text: API Base URL
+    - textbox "API Base URL" [disabled]:
+      - /placeholder: 后端地址尚未读取
+    - button "保存" [disabled]
+    - heading "运行诊断" [level=2]
+    - paragraph: 诊断模块尚未实现，尚无检测结果。
+    - button "重新检测" [disabled]
+    - button "复制诊断报告" [disabled]

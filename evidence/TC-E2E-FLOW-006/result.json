@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-E2E-FLOW-006",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:07.652Z",
+  "tests": [
+    {
+      "testId": "02695596d16d475b5492-7e9305476d532521aaba",
+      "title": "TC-E2E-FLOW-006 增量游标取前次同步时间，窗口重放保持页面及打开快照",
+      "project": "e2e",
+      "file": "tests/e2e/TC-E2E-FLOW-006.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 39,
+      "startedAt": "2026-11-04T03:27:07.613Z",
+      "endedAt": "2026-11-04T03:27:07.652Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 9,
+      "screenshots": [],
+      "serverLogLines": 14,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 945,
+          "after": 948
+        },
+        "pages": {
+          "added": 11,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 11,
+          "rules": 0,
+          "openPages": 2,
+          "archivedPages": 0,
+          "syncLogs": 3
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "S2 增量 cursor 直接使用 full.syncedAt=1793762827624",
+        "S3 重放 cursor 直接使用 inc1.syncedAt=1793762827633"
+      ]
+    }
+  ]
+}

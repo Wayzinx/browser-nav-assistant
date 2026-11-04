@@ -1,0 +1,93 @@
+# 接口用例：PERF
+
+执行约定：每条用例前测试夹具自动调用 `POST /api/__test__/reset` 隔离状态；数据一律通过真实的 `POST /api/sync` 构造，10 万页面用夹具 `bulkHistory(100000)` 确定性生成（无随机数），分 200 批 ×500 条导入；耗时在客户端用单调时钟包住单次 HTTP 调用测量，p50 / p95 / max 随结果 metric 写入 `evidence/<CaseID>/`。
+
+## PERF 性能（后端接口）
+
+### TC-API-PERF-001 10 万页面下以 GitHub PR 为当前页连续推荐 20 次：每次 200 且 p95 耗时 < 100ms
+- 优先级：P1 ｜ 类别：performance ｜ 技术：scenario
+- 关联 Feature：F-PERF-01（AC1） ｜ 关联 Code：C-BE-CORE-10、C-BE-REC-07、C-BE-RANK-04、C-BE-PERF-02、C-BE-PERF-03
+- 前置条件：后端以 ENABLE_TEST_API=1 启动，测试夹具已调用 POST /api/__test__/reset；没有任何规则
+- 测试数据：bulkHistory(100000, { now: T }) 确定性生成 10 万条 history（T=Date.now()，6 个域名轮转，GitHub 路径 /org/repo<i%50>/issues/<i>，lastVisitTime 按 i%60 天 + i%24 小时分布，visitCount=1+(i%9)）；切 200 批 ×500 条（openTabs=[]、activeTab=null，单请求体约 50KB < 1MB），累计 created=100000；推荐请求体固定：{ currentPage:{ url:"https://github.com/org/repo0/pull/777", title:"PR 777" }, openTabs:[], recentHistory:[] }，20 次完全相同；p95=耗时升序第 Math.ceil(0.95×20)=19 个值；构造方式与 scripts/bench-perf.mjs（C-BE-PERF-03）一致
+- 步骤：
+  - S1：POST /api/__test__/reset 后，分 200 批 POST /api/sync 导入 bulkHistory(100000)，每批 500 条
+  - S2：GET /api/health 确认 pageCount=100000
+  - S3：用完全相同的请求体连续调用 POST /api/recommendations/next 共 20 次，逐次记录状态码与耗时 d1…d20（毫秒）
+- 预期：
+  - E1：S1 的 200 次同步都返回 200，body.ok=true，最终 created 累计为 100000
+  - E2：S2 返回 200，body.pageCount=100000
+  - E3：S3 的 20 次响应都为 200，0 ≤ body.recommendations.length ≤ 5，且按 score 非严格降序
+  - E4：20 次耗时的 p95 < 100（p95=升序第 19 个值，单位 ms）
+  - E5：每次 body.generatedAt 为正整数毫秒，recommendations 每项含 id（"rec_" 前缀）、strategy（五种枚举之一）、score（2 位小数）
+  - E6：p50、p95、max 三个耗时数值写入 evidence/TC-API-PERF-001/ 的 metric 留痕
+- 证据：evidence/TC-API-PERF-001/（metric: p50/p95/max；api: S1 同步统计、S3 第 1 与第 20 次响应；server.log）
+
+### TC-API-PERF-002 10 万页面下连续请求 ranked?limit=20 共 20 次：每次 200 且 p95 耗时 < 50ms
+- 优先级：P1 ｜ 类别：performance ｜ 技术：scenario
+- 关联 Feature：F-PERF-01（AC2） ｜ 关联 Code：C-BE-CORE-10、C-BE-RANK-04、C-BE-PERF-03
+- 前置条件：后端以 ENABLE_TEST_API=1 启动，测试夹具已调用 POST /api/__test__/reset；没有任何规则
+- 测试数据：bulkHistory(100000, { now: T }) 确定性生成 10 万条 history，分 200 批 ×500 条经 POST /api/sync 导入（openTabs=[]、activeTab=null），累计 created=100000；GET /api/pages/ranked?limit=20 走写后预计算的排序快照（C-BE-RANK-04），不扫全表；p95=耗时升序第 19 个值；构造方式与 scripts/bench-perf.mjs 一致
+- 步骤：
+  - S1：POST /api/__test__/reset 后，分 200 批 POST /api/sync 导入 bulkHistory(100000)，每批 500 条
+  - S2：GET /api/health 确认 pageCount=100000
+  - S3：连续调用 GET /api/pages/ranked?limit=20 共 20 次，逐次记录状态码与耗时 d1…d20（毫秒）
+- 预期：
+  - E1：S1 的 200 次同步都返回 200，created 累计为 100000
+  - E2：S2 返回 200，body.pageCount=100000
+  - E3：S3 的 20 次响应都为 200，body.pages.length=20，body.total=100000
+  - E4：每次 pages 的 score 非严格降序，每项 0 ≤ score ≤ 1 且含 url、scoreDetail、reason
+  - E5：20 次耗时的 p95 < 50（p95=升序第 19 个值，单位 ms）
+  - E6：p50、p95、max 三个耗时数值写入 evidence/TC-API-PERF-002/ 的 metric 留痕
+- 证据：evidence/TC-API-PERF-002/（metric: p50/p95/max；api: S3 第 1 次响应；server.log）
+
+### TC-API-PERF-003 相同推荐请求连打 2 次：第 1 次 cached=false、第 2 次 cached=true 且推荐结果完全相同
+- 优先级：P1 ｜ 类别：performance ｜ 技术：equivalence
+- 关联 Feature：F-PERF-02（AC1） ｜ 关联 Code：C-BE-PERF-01、C-BE-CORE-12
+- 前置条件：后端以 ENABLE_TEST_API=1 启动，测试夹具已调用 POST /api/__test__/reset；没有任何规则
+- 测试数据：样例 samplePayload({ now: T })（D-01），pageCount=10；推荐请求体固定（PRD 13.4）：currentPage=resource.json 的 activeTab（pull/456），openTabs=样例 3 个，recentHistory=平移后的 10 条 history；缓存 key=（当前页 normalizedUrl、打开页集合 hash、数据版本、规则版本），TTL 60 秒；请求带 ?now=T
+- 步骤：
+  - S1：POST /api/sync 导入平移后的样例
+  - S2：POST /api/recommendations/next?now=T（第 1 次，请求体见测试数据）
+  - S3：POST /api/recommendations/next?now=T（第 2 次，请求体与 S2 逐字节相同）
+- 预期：
+  - E1：S1 返回 200，body.created=10、body.pageCount=10
+  - E2：S2 返回 200，body.cached=false，body.recommendations.length=3
+  - E3：S2 推荐 url 依次为 github actions、useState、react.dev/learn，strategy 依次为 ["same_repo","global_top","global_top"]，score 依次为 [0.87,0.46,0.41]（PRD 13.4）
+  - E4：S3 返回 200，body.cached=true，body.recommendations 与 S2 深相等（url、id、strategy、score、reason 逐项相同）
+- 证据：evidence/TC-API-PERF-003/（api: S2、S3 请求体与响应，对比 cached 字段）
+
+### TC-API-PERF-004 同步或保存规则后推荐缓存失效：失效请求 cached=false，随后相同请求重新 cached=true
+- 优先级：P1 ｜ 类别：performance ｜ 技术：state-transition
+- 关联 Feature：F-PERF-02（AC2） ｜ 关联 Code：C-BE-PERF-01、C-BE-CORE-12
+- 前置条件：后端以 ENABLE_TEST_API=1 启动，测试夹具已调用 POST /api/__test__/reset；没有任何规则
+- 测试数据：样例 samplePayload({ now: T })；推荐请求体：currentPage=resource.json 的 activeTab（pull/456），openTabs=样例 3 个，recentHistory=平移后的 10 条 history，6 次推荐调用请求体完全相同；失效事件①再次 POST /api/sync 同一批样例（数据版本 +1，内容不变，created=0、updated=14）；失效事件②保存规则 { rawText:"example.org 优先显示", type:"boost_domain", domain:"example.org", action:"boost" }（规则版本 +1，样例中无 example.org 页面，推荐内容不变）；请求带 ?now=T，全部在缓存 TTL 60 秒内完成
+- 步骤：
+  - S1：POST /api/sync 导入平移后的样例
+  - S2：POST /api/recommendations/next?now=T（R1）
+  - S3：POST /api/recommendations/next?now=T（R2）
+  - S4：POST /api/sync 再次导入同一批样例（失效事件①）
+  - S5：POST /api/recommendations/next?now=T（R3）；紧接再请求一次（R4）
+  - S6：POST /api/rules 保存 boost_domain(example.org) 规则（失效事件②），记录返回 id
+  - S7：POST /api/recommendations/next?now=T（R5）；紧接再请求一次（R6）
+- 预期：
+  - E1：S4 返回 200，body.created=0、body.updated=14（同批数据重复同步，不新增页面）
+  - E2：R1 返回 200 且 cached=false，R2 返回 200 且 cached=true，两次 recommendations 深相等
+  - E3：R3 返回 200 且 cached=false（同步使数据版本变化），R4 返回 200 且 cached=true；R3、R4 的 recommendations 与 R1 深相等
+  - E4：S6 返回 201，body.ruleCount=1，返回的规则 id 为非空字符串
+  - E5：R5 返回 200 且 cached=false（保存规则使规则版本变化），R6 返回 200 且 cached=true；R5、R6 的 recommendations 与 R1 深相等
+- 证据：evidence/TC-API-PERF-004/（api: R1–R6 的 cached 字段、S4 同步响应、S6 规则响应）
+
+## Feature → Case 覆盖表
+
+| Feature | AC | 覆盖用例 | 类别分布（正 / 反 / 边 / 异 / 其他） | waiver |
+|---|---|---|---|---|
+| F-PERF-01 | AC1、AC2 | TC-API-PERF-001、TC-API-PERF-002 | 0 / 0 / 0 / 0 / performance 2 | — |
+| F-PERF-02 | AC1、AC2 | TC-API-PERF-003、TC-API-PERF-004 | 0 / 0 / 0 / 0 / performance 2 | — |
+
+## 类别分布统计
+
+| 模块 | positive | negative | boundary | exception | state | security | performance | compatibility | 合计 |
+|---|---|---|---|---|---|---|---|---|---|
+| PERF | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 4 |
+
+（统计口径与 `check-cases.mjs --json` 的 stats 一致：按用例的主类别 category 计数。nfr Feature 的正例槽位由 performance 类用例满足。）

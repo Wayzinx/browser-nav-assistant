@@ -1,0 +1,291 @@
+{
+  "cases": [
+    {
+      "id": "TC-UI-RANK-001",
+      "type": "UI",
+      "module": "RANK",
+      "title": "导入样例后打开 popup 首页：「历史排序」展示 5 条，分数 1.00/0.94/0.83/0.69/0.68 降序且理由非空",
+      "priority": "P0",
+      "category": "positive",
+      "technique": "scenario",
+      "features": ["F-RANK-05"],
+      "acceptanceRefs": ["F-RANK-05#AC1"],
+      "codePoints": ["C-FE-RANK-01", "C-FE-RANK-02"],
+      "preconditions": [
+        "每条用例使用独立 persistent Chromium context（channel=chromium）加载真实扩展，以 tab 打开 popup；真实产品后端启用 ENABLE_TEST_API=1，api 夹具在本条开始前调用 POST /api/__test__/reset；只 route 外部站点，不 route 任何后端地址。",
+        "夹具已把 chrome.storage.local.apiBaseUrl 写成测试后端地址（http://127.0.0.1:<TEST_PORT>，默认 4100）",
+        "本条开始前没有点击过「同步浏览器上下文」，浏览器内没有打开 resource.json 中的外部页面（避免插件同步覆盖导入的 isOpen 快照）"
+      ],
+      "testData": "通过 api.loadSample()（POST /api/sync 导入按 D-01 平移后的 resource.json：最新 lastVisitTime = 导入时刻 − 5 分钟）。期望值取自 PRD 13.3：Top 5 依次为 issues/123「Fix login redirect bug」1.00、pull/456「Refactor auth middleware (#456)」0.94、Fetch_API「Fetch API - Web APIs | MDN」0.83、useState「useState – React」0.69、issues/123?tab=comments「Fix login redirect bug - Comments」0.68（与 actions 同分，按 lastVisitedAt 倒序在前）。popup 请求不带 ?now=，导入到打开 popup 相差数秒，不影响两位小数。",
+      "steps": [
+        "S1：调用 api.loadSample() 导入样例，断言响应 200",
+        "S2：以 tab 方式打开 popup（chrome-extension://<扩展 id>/popup/popup.html），确认 tab-home 的 aria-selected=\"true\"，等待 home-ranked-loading 消失、home-ranked-list 出现",
+        "S3：在 home-ranked-list 内读取全部 home-ranked-item，以及每项子元素 ranked-item-title、ranked-item-score、ranked-item-reason 的文本"
+      ],
+      "expected": [
+        "E1：S1 响应 200，body.created=10",
+        "E2：S2 后 home-ranked-list 可见，home-ranked-loading、home-ranked-empty、home-ranked-error 均不可见",
+        "E3：home-ranked-item 数量恰好为 5",
+        "E4：5 项 ranked-item-title 依次为「Fix login redirect bug」「Refactor auth middleware (#456)」「Fetch API - Web APIs | MDN」「useState – React」「Fix login redirect bug - Comments」",
+        "E5：5 项 ranked-item-score 文本依次为 \"1.00\"、\"0.94\"、\"0.83\"、\"0.69\"、\"0.68\"，每项都匹配 /^\\d\\.\\d{2}$/，且数值非递增",
+        "E6：5 项 ranked-item-reason 文本 trim 后均非空；第 1 项为「最近 3 天内多次访问（8 次），当前仍处于打开状态，常用域名 github.com」，第 2 项以「正在浏览」开头"
+      ],
+      "evidence": ["screenshot: 首页历史排序 Top 5", "api: POST /api/sync 导入请求与响应", "extension.log: GET_RANKED 调用"]
+    },
+    {
+      "id": "TC-UI-RANK-002",
+      "type": "UI",
+      "module": "RANK",
+      "title": "排序页签展示完整 10 条且公式常驻，展开第 1 条显示时效 0.99、频次 1.00、打开 1.00、域名 1.00",
+      "priority": "P0",
+      "category": "positive",
+      "technique": "scenario",
+      "features": ["F-RANK-05"],
+      "acceptanceRefs": ["F-RANK-05#AC2"],
+      "codePoints": ["C-FE-RANK-03", "C-FE-RANK-01"],
+      "preconditions": [
+        "每条用例使用独立 persistent Chromium context（channel=chromium）加载真实扩展，以 tab 打开 popup；真实产品后端启用 ENABLE_TEST_API=1，api 夹具在本条开始前调用 POST /api/__test__/reset；只 route 外部站点，不 route 任何后端地址。",
+        "夹具已把 chrome.storage.local.apiBaseUrl 写成测试后端地址",
+        "本条开始前没有点击过「同步浏览器上下文」"
+      ],
+      "testData": "api.loadSample() 导入平移后的 resource.json。期望值取自 PRD 13.3 第 1 行：issues/123 recency=0.99、frequency=1.00、open=1、domain=1.00、score=1.00；第 10 行 Google 搜索页 score=0.11。",
+      "steps": [
+        "S1：调用 api.loadSample() 导入样例",
+        "S2：打开 popup，点击 tab-ranked，等待 ranked-loading 消失、ranked-list 出现",
+        "S3：读取 ranked-formula 文本、ranked-total 文本、ranked-list 内全部 ranked-item 的 ranked-item-title 与 ranked-item-score",
+        "S4：展开前读取第 1 个 ranked-item 内 ranked-item-detail 是否可见，然后点击该项的 ranked-item-toggle",
+        "S5：读取第 1 个 ranked-item 内 ranked-item-detail 以及 ranked-detail-recency、ranked-detail-frequency、ranked-detail-open、ranked-detail-domain 的文本"
+      ],
+      "expected": [
+        "E1：S2 后 tab-ranked 的 aria-selected=\"true\"，panel-ranked 可见，ranked-empty 与 ranked-error 不可见",
+        "E2：ranked-formula 可见，文本包含「0.4」「0.3」「0.2」「0.1」",
+        "E3：ranked-total 文本为 \"10\"，ranked-item 数量为 10",
+        "E4：第 1 项 ranked-item-title 为「Fix login redirect bug」、ranked-item-score 为 \"1.00\"；第 10 项 ranked-item-score 为 \"0.11\"；10 项分数非递增",
+        "E5：S4 点击前第 1 项 ranked-item-detail 不可见；S5 后 ranked-item-detail 可见",
+        "E6：ranked-detail-recency=\"0.99\"、ranked-detail-frequency=\"1.00\"、ranked-detail-open=\"1.00\"、ranked-detail-domain=\"1.00\"（四项均匹配 /^\\d\\.\\d{2}$/）"
+      ],
+      "evidence": ["screenshot: 排序页签完整列表", "screenshot: 第 1 条展开评分明细"]
+    },
+    {
+      "id": "TC-UI-RANK-003",
+      "type": "UI",
+      "module": "RANK",
+      "title": "排序页签点击「打开中」筛选：只显示 4 条（issues/123、pull/456、Fetch_API、ai-agent-design），再次点击恢复 10 条",
+      "priority": "P1",
+      "category": "positive",
+      "technique": "equivalence",
+      "features": ["F-RANK-05"],
+      "acceptanceRefs": ["F-RANK-05#AC3"],
+      "codePoints": ["C-FE-RANK-03", "C-FE-RANK-01"],
+      "preconditions": [
+        "每条用例使用独立 persistent Chromium context（channel=chromium）加载真实扩展，以 tab 打开 popup；真实产品后端启用 ENABLE_TEST_API=1，api 夹具在本条开始前调用 POST /api/__test__/reset；只 route 外部站点，不 route 任何后端地址。",
+        "夹具已把 chrome.storage.local.apiBaseUrl 写成测试后端地址",
+        "本条开始前没有点击过「同步浏览器上下文」（否则 isOpen 快照被测试浏览器的真实标签页覆盖）"
+      ],
+      "testData": "resource.json 中 activeTab=pull/456，openTabs=issues/123、Fetch_API、docs.internal.com/ai-agent-design，共 4 个 isOpen=true；按分数排序为 1.00、0.94、0.83、0.56。筛选只走后端 ?openOnly=true，插件端不二次过滤。",
+      "steps": [
+        "S1：调用 api.loadSample() 导入样例",
+        "S2：打开 popup，点击 tab-ranked，等待 ranked-list 出现且 ranked-total 为 \"10\"",
+        "S3：点击 ranked-filter-open，等待 ranked-total 文本变化",
+        "S4：读取 ranked-filter-open 的 aria-pressed、ranked-total 文本、全部 ranked-item 的 ranked-item-title 与 ranked-item-score",
+        "S5：再次点击 ranked-filter-open，等待 ranked-total 恢复，读取 ranked-item 数量"
+      ],
+      "expected": [
+        "E1：S4 中 ranked-filter-open 的 aria-pressed=\"true\"",
+        "E2：S4 中 ranked-total 文本为 \"4\"，ranked-item 数量为 4",
+        "E3：4 项 ranked-item-title 依次为「Fix login redirect bug」「Refactor auth middleware (#456)」「Fetch API - Web APIs | MDN」「AI Agent Design Guidelines」，ranked-item-score 依次为 \"1.00\"、\"0.94\"、\"0.83\"、\"0.56\"",
+        "E4：S5 后 ranked-filter-open 的 aria-pressed=\"false\"，ranked-total 为 \"10\"，ranked-item 数量为 10"
+      ],
+      "evidence": ["screenshot: 打开中筛选结果", "server.log: GET /api/pages/ranked?openOnly=true"]
+    },
+    {
+      "id": "TC-UI-RANK-004",
+      "type": "UI",
+      "module": "RANK",
+      "title": "排序页签域名下拉选 react.dev：只显示 useState 与 learn 2 条，下拉仍保留全部 5 个域名选项",
+      "priority": "P1",
+      "category": "positive",
+      "technique": "equivalence",
+      "features": ["F-RANK-05"],
+      "acceptanceRefs": ["F-RANK-05#AC3"],
+      "codePoints": ["C-FE-RANK-03", "C-FE-RANK-01"],
+      "preconditions": [
+        "每条用例使用独立 persistent Chromium context（channel=chromium）加载真实扩展，以 tab 打开 popup；真实产品后端启用 ENABLE_TEST_API=1，api 夹具在本条开始前调用 POST /api/__test__/reset；只 route 外部站点，不 route 任何后端地址。",
+        "夹具已把 chrome.storage.local.apiBaseUrl 写成测试后端地址"
+      ],
+      "testData": "后端 domains 按页面数降序、同数字母序：github.com(5)、react.dev(2)、developer.mozilla.org(1)、docs.internal.com(1)、google.com(1)（www. 已去掉）。react.dev 两页：useState 0.69、learn 0.57。下拉空值 = 全部。",
+      "steps": [
+        "S1：调用 api.loadSample() 导入样例",
+        "S2：打开 popup，点击 tab-ranked，等待 ranked-list 出现",
+        "S3：读取 ranked-filter-domain 的全部 option 的 value（按 DOM 顺序）",
+        "S4：对 ranked-filter-domain 执行 selectOption('react.dev')，等待 ranked-total 变化后读取 ranked-total、ranked-item 的 ranked-item-title 与 ranked-item-score",
+        "S5：再次读取 ranked-filter-domain 的全部非空 option value",
+        "S6：对 ranked-filter-domain 执行 selectOption('')，等待列表恢复后读取 ranked-total"
+      ],
+      "expected": [
+        "E1：S3 的非空 option value 依次为 github.com、react.dev、developer.mozilla.org、docs.internal.com、google.com，且存在一个 value 为空的「全部」选项",
+        "E2：S4 后 ranked-total 文本为 \"2\"，ranked-item 数量为 2",
+        "E3：2 项 ranked-item-title 依次为「useState – React」「Quick Start – React」，ranked-item-score 依次为 \"0.69\"、\"0.57\"",
+        "E4：S5 的非空 option 仍为 5 个，与 E1 列表完全相同（选中后选项不收缩）",
+        "E5：S6 后 ranked-total 文本为 \"10\""
+      ],
+      "evidence": ["screenshot: 域名筛选 react.dev 结果", "server.log: GET /api/pages/ranked?domain=react.dev"]
+    },
+    {
+      "id": "TC-UI-RANK-005",
+      "type": "UI",
+      "module": "RANK",
+      "title": "后端数据为空时首页与排序页签都显示空状态，文案包含「同步浏览器上下文」且没有排序项",
+      "priority": "P1",
+      "category": "state",
+      "technique": "equivalence",
+      "features": ["F-RANK-05"],
+      "acceptanceRefs": ["F-RANK-05#AC4"],
+      "codePoints": ["C-FE-RANK-02", "C-FE-RANK-03", "C-FE-RANK-01"],
+      "preconditions": [
+        "每条用例使用独立 persistent Chromium context（channel=chromium）加载真实扩展，以 tab 打开 popup；真实产品后端启用 ENABLE_TEST_API=1，api 夹具在本条开始前调用 POST /api/__test__/reset；只 route 外部站点，不 route 任何后端地址。",
+        "夹具已把 chrome.storage.local.apiBaseUrl 写成测试后端地址",
+        "本条不导入任何数据，也不点击同步"
+      ],
+      "testData": "reset 后后端 pageCount=0，GET /api/pages/ranked 返回 { pages: [], total: 0, domains: [] }。",
+      "steps": [
+        "S1：用 api.call('GET','/api/health') 确认 pageCount=0",
+        "S2：打开 popup，等待 home-ranked-loading 消失",
+        "S3：读取 home-ranked-empty 的可见性与文本、home-ranked-item 数量",
+        "S4：点击 tab-ranked，等待 ranked-loading 消失，读取 ranked-empty 的可见性与文本、ranked-item 数量"
+      ],
+      "expected": [
+        "E1：S1 返回 200，body.pageCount=0",
+        "E2：S3 中 home-ranked-empty 可见，文本包含「同步浏览器上下文」；home-ranked-error 不可见",
+        "E3：S3 中 home-ranked-item 数量为 0",
+        "E4：S4 中 ranked-empty 可见，文本包含「同步浏览器上下文」；ranked-item 数量为 0；ranked-error 不可见"
+      ],
+      "evidence": ["screenshot: 首页排序空状态", "screenshot: 排序页签空状态"]
+    },
+    {
+      "id": "TC-UI-RANK-006",
+      "type": "UI",
+      "module": "RANK",
+      "title": "后端不可达且无缓存：首页显示 home-ranked-error 并带「诊断」入口，排序页签显示 ranked-error",
+      "priority": "P1",
+      "category": "exception",
+      "technique": "error-guessing",
+      "features": ["F-RANK-05"],
+      "acceptanceRefs": ["F-RANK-05#AC4"],
+      "codePoints": ["C-FE-RANK-02", "C-FE-RANK-03", "C-FE-RANK-01"],
+      "preconditions": [
+        "每条用例使用独立 persistent Chromium context（channel=chromium）加载真实扩展，以 tab 打开 popup；只 route 外部站点，不 route 任何后端地址。",
+        "后端不可达由「没有服务监听的端口」构造：ext.useUnreachableBackend() 把 apiBaseUrl 写成 http://127.0.0.1:9，不是 route/mock",
+        "新 context，chrome.storage.local 中没有 cache.ranked"
+      ],
+      "testData": "apiBaseUrl=http://127.0.0.1:9；GET_RANKED 返回 BACKEND_UNREACHABLE 且无缓存可回退（C-FE-CACHE-01：网络错误无缓存时返回错误）。",
+      "steps": [
+        "S1：调用 ext.useUnreachableBackend()，并读取 storage 确认没有 cache.ranked",
+        "S2：打开 popup，等待 home-ranked-loading 消失",
+        "S3：读取 home-ranked-error 的可见性、其内部 error-diag-link 的可见性、home-ranked-item 数量",
+        "S4：点击 tab-ranked，等待 ranked-loading 消失，读取 ranked-error 的可见性、其内部 error-diag-link、ranked-item 数量"
+      ],
+      "expected": [
+        "E1：S1 读取到的 chrome.storage.local.cache 中没有 ranked 项（或 cache 不存在）",
+        "E2：S3 中 home-ranked-error 可见，且其内部 error-diag-link 可见；home-ranked-empty 不可见",
+        "E3：S3 中 home-ranked-item 数量为 0",
+        "E4：S4 中 ranked-error 可见且内部含可见的 error-diag-link，ranked-item 数量为 0"
+      ],
+      "evidence": ["screenshot: 首页排序错误状态", "extension.log: GET_RANKED 返回 BACKEND_UNREACHABLE"]
+    },
+    {
+      "id": "TC-UI-RANK-007",
+      "type": "UI",
+      "module": "RANK",
+      "title": "排序页签离线时点「打开中」筛选：显示「筛选需要在线」提示且筛选控件保留，取消筛选回到 10 条缓存列表",
+      "priority": "P2",
+      "category": "exception",
+      "technique": "state-transition",
+      "features": ["F-RANK-05"],
+      "acceptanceRefs": ["F-RANK-05#AC3"],
+      "codePoints": ["C-FE-RANK-03", "C-FE-RANK-01"],
+      "preconditions": [
+        "每条用例使用独立 persistent Chromium context（channel=chromium）加载真实扩展，以 tab 打开 popup；真实产品后端启用 ENABLE_TEST_API=1，api 夹具在本条开始前调用 POST /api/__test__/reset；只 route 外部站点，不 route 任何后端地址。",
+        "先在线让无筛选默认列表写入 cache.ranked，再用 ext.useUnreachableBackend() 切到不可达端口模拟离线，不 route 后端"
+      ],
+      "testData": "缓存口径（C-FE-RANK-01）：只有无筛选、limit=50 的 GET_RANKED 读写 cache.ranked；带筛选请求在后端不可达时返回 NO_CACHE「筛选需要在线」，且不读写缓存。",
+      "steps": [
+        "S1：调用 api.loadSample() 导入样例",
+        "S2：打开 popup，点击 tab-ranked，等待 ranked-total 为 \"10\"；读取 storage 中 cache.ranked.data.pages 的长度",
+        "S3：调用 ext.useUnreachableBackend()，关闭并以 ext.reopenPopup() 重新打开 popup，点击 tab-ranked，等待 ranked-list 渲染缓存",
+        "S4：点击 ranked-filter-open，等待 ranked-filter-offline-hint 出现；读取其文本、ranked-filter-open 与 ranked-filter-domain 的可见性",
+        "S5：读取 storage 中 cache.ranked.data.pages 的长度",
+        "S6：再次点击 ranked-filter-open 取消筛选，读取 ranked-filter-offline-hint 可见性、ranked-total 与 offline-banner-ranked 可见性"
+      ],
+      "expected": [
+        "E1：S2 中 cache.ranked.data.pages 长度为 10",
+        "E2：S4 中 ranked-filter-offline-hint 可见，文本包含「筛选需要在线」",
+        "E3：S4 中 ranked-filter-open 与 ranked-filter-domain 仍可见",
+        "E4：S5 中 cache.ranked.data.pages 长度仍为 10（筛选结果没有写入缓存）",
+        "E5：S6 后 ranked-filter-offline-hint 不可见，ranked-total 文本为 \"10\"，offline-banner-ranked 可见"
+      ],
+      "evidence": ["screenshot: 离线筛选提示", "screenshot: 取消筛选后的缓存列表"]
+    },
+    {
+      "id": "TC-UI-RANK-008",
+      "type": "UI",
+      "module": "RANK",
+      "title": "后端只有 3 个页面时首页历史排序显示 3 条（不足 5 条不补位），排序页签 ranked-total 为 3",
+      "priority": "P2",
+      "category": "boundary",
+      "technique": "boundary",
+      "features": ["F-RANK-05"],
+      "acceptanceRefs": ["F-RANK-05#AC1"],
+      "codePoints": ["C-FE-RANK-02", "C-FE-RANK-03"],
+      "preconditions": [
+        "每条用例使用独立 persistent Chromium context（channel=chromium）加载真实扩展，以 tab 打开 popup；真实产品后端启用 ENABLE_TEST_API=1，api 夹具在本条开始前调用 POST /api/__test__/reset；只 route 外部站点，不 route 任何后端地址。",
+        "夹具已把 chrome.storage.local.apiBaseUrl 写成测试后端地址"
+      ],
+      "testData": "api.seed({ history: [historyItem('https://example.com/a',{title:'Page A',daysAgo:0,visitCount:5}), historyItem('https://example.com/b',{title:'Page B',daysAgo:1,visitCount:3}), historyItem('https://example.com/c',{title:'Page C',daysAgo:10,visitCount:1})] })，openTabs=[]、activeTab=null；与 Top 5 上限 5 相比取下边界 3 条（< 5）。",
+      "steps": [
+        "S1：用 api.seed 导入 3 条历史，断言 body.created=3",
+        "S2：打开 popup，等待 home-ranked-loading 消失、home-ranked-list 出现",
+        "S3：读取 home-ranked-item 数量、各项 ranked-item-title 与 ranked-item-score",
+        "S4：点击 tab-ranked，读取 ranked-total 与 ranked-item 数量"
+      ],
+      "expected": [
+        "E1：S1 响应 200，body.created=3",
+        "E2：S3 中 home-ranked-item 数量为 3，home-ranked-empty 不可见",
+        "E3：3 项 ranked-item-title 依次为「Page A」「Page B」「Page C」，ranked-item-score 都匹配 /^\\d\\.\\d{2}$/ 且非递增",
+        "E4：S4 中 ranked-total 文本为 \"3\"，ranked-item 数量为 3"
+      ],
+      "evidence": ["screenshot: 首页 3 条排序"]
+    },
+    {
+      "id": "TC-UI-RANK-009",
+      "type": "UI",
+      "module": "RANK",
+      "title": "展开第 9 条 issues/100 显示时效 0.09、频次 0.32、打开 0.00、域名 1.00，再点收起后明细隐藏",
+      "priority": "P2",
+      "category": "state",
+      "technique": "state-transition",
+      "features": ["F-RANK-05"],
+      "acceptanceRefs": ["F-RANK-05#AC2"],
+      "codePoints": ["C-FE-RANK-03"],
+      "preconditions": [
+        "每条用例使用独立 persistent Chromium context（channel=chromium）加载真实扩展，以 tab 打开 popup；真实产品后端启用 ENABLE_TEST_API=1，api 夹具在本条开始前调用 POST /api/__test__/reset；只 route 外部站点，不 route 任何后端地址。",
+        "夹具已把 chrome.storage.local.apiBaseUrl 写成测试后端地址",
+        "本条开始前没有点击过「同步浏览器上下文」"
+      ],
+      "testData": "api.loadSample()。PRD 13.3 第 9 行：issues/100「Old bug report from last sprint」recency=0.09、frequency=0.32、open=0、domain=1.00、score=0.23，用于验证明细中低值与 0 分的两位小数展示。",
+      "steps": [
+        "S1：调用 api.loadSample() 导入样例",
+        "S2：打开 popup，点击 tab-ranked，等待 ranked-item 数量为 10",
+        "S3：在第 9 个 ranked-item 内点击 ranked-item-toggle，读取 ranked-item-title、ranked-item-score 以及 ranked-detail-recency、ranked-detail-frequency、ranked-detail-open、ranked-detail-domain 的文本",
+        "S4：再次点击同一 ranked-item-toggle，读取该项 ranked-item-detail 的可见性，以及第 1 个 ranked-item 内 ranked-item-detail 的可见性"
+      ],
+      "expected": [
+        "E1：S3 中第 9 项 ranked-item-title 为「Old bug report from last sprint」，ranked-item-score 为 \"0.23\"",
+        "E2：S3 中 ranked-detail-recency=\"0.09\"、ranked-detail-frequency=\"0.32\"、ranked-detail-open=\"0.00\"、ranked-detail-domain=\"1.00\"",
+        "E3：S4 后第 9 项 ranked-item-detail 不可见，第 1 项 ranked-item-detail 也不可见（未被连带展开）"
+      ],
+      "evidence": ["screenshot: 第 9 条展开明细", "screenshot: 收起后"]
+    }
+  ],
+  "waivers": []
+}

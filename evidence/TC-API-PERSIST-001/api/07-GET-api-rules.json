@@ -1,0 +1,55 @@
+{
+  "reqId": "TC-API-PERSIST-001-07",
+  "setup": false,
+  "method": "GET",
+  "url": "http://127.0.0.1:62262/api/rules",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-PERSIST-001-07"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-PERSIST-001-07",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "571",
+    "date": "Wed, 04 Nov 2026 03:26:57 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "rules": [
+      {
+        "rawText": "把 7 天没访问过的 GitHub issue 建议归档",
+        "type": "archive_candidate",
+        "domain": "github.com",
+        "urlPattern": "/issues/",
+        "inactiveDays": 7,
+        "action": "suggest_archive",
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762815584,
+        "updatedAt": 1793762815584,
+        "id": "rule_1"
+      },
+      {
+        "rawText": "docs.internal.com 的页面永远不要归档",
+        "type": "never_archive",
+        "domain": "docs.internal.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "action": "keep",
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762815584,
+        "updatedAt": 1793762815584,
+        "id": "rule_2"
+      }
+    ],
+    "total": 2
+  },
+  "ms": 0.6,
+  "mutated": null
+}

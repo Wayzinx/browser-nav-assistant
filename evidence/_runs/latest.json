@@ -1,0 +1,393 @@
+{
+  "runId": "2026-11-04T03-19-24-691Z",
+  "startedAt": "2026-11-04T03:19:24.692Z",
+  "selection": {
+    "ids": [
+      "TC-API-SYNC-003",
+      "TC-API-RULE-010",
+      "TC-API-CLEAN-001",
+      "TC-API-DIAG-001",
+      "TC-E2E-FLOW-001",
+      "TC-E2E-FLOW-002",
+      "TC-UI-SYNC-001",
+      "TC-UI-RULE-003",
+      "TC-UI-CACHE-003",
+      "TC-UI-DIAG-004"
+    ],
+    "module": null,
+    "type": null
+  },
+  "port": "4300",
+  "steps": {
+    "select": {
+      "cases": [
+        "TC-API-CLEAN-001",
+        "TC-API-DIAG-001",
+        "TC-API-RULE-010",
+        "TC-API-SYNC-003",
+        "TC-E2E-FLOW-001",
+        "TC-E2E-FLOW-002",
+        "TC-UI-CACHE-003",
+        "TC-UI-DIAG-004",
+        "TC-UI-RULE-003",
+        "TC-UI-SYNC-001"
+      ]
+    },
+    "lint": {
+      "pass": true,
+      "errors": [],
+      "warnings": [],
+      "stats": {
+        "files": 10,
+        "cases": 10,
+        "expectedTotal": 67,
+        "taggedTotal": 67,
+        "weakTotal": 0,
+        "tagCoverage": 1
+      }
+    },
+    "list": {
+      "pass": true,
+      "errors": []
+    },
+    "run": {
+      "pass": true,
+      "total": 10,
+      "passed": 10,
+      "failed": 0,
+      "flaky": 0,
+      "notRun": 0,
+      "globalErrors": [],
+      "cases": [
+        {
+          "caseId": "TC-API-CLEAN-001",
+          "type": "API",
+          "status": "pass",
+          "tests": 1,
+          "passed": 1,
+          "failed": 0,
+          "flaky": 0,
+          "durationMs": 54,
+          "failures": [],
+          "evidence": {
+            "dir": "evidence/TC-API-CLEAN-001",
+            "complete": true,
+            "missing": [],
+            "warnings": [],
+            "files": {
+              "result": true,
+              "apiCalls": 3,
+              "realCalls": 2,
+              "screenshots": 0,
+              "gif": false,
+              "serverLog": true,
+              "extensionLog": false,
+              "explore": false,
+              "state": {
+                "before": true,
+                "after": true,
+                "diff": true
+              }
+            }
+          }
+        },
+        {
+          "caseId": "TC-API-DIAG-001",
+          "type": "API",
+          "status": "pass",
+          "tests": 1,
+          "passed": 1,
+          "failed": 0,
+          "flaky": 0,
+          "durationMs": 18,
+          "failures": [],
+          "evidence": {
+            "dir": "evidence/TC-API-DIAG-001",
+            "complete": true,
+            "missing": [],
+            "warnings": [],
+            "files": {
+              "result": true,
+              "apiCalls": 3,
+              "realCalls": 2,
+              "screenshots": 0,
+              "gif": false,
+              "serverLog": true,
+              "extensionLog": false,
+              "explore": false,
+              "state": {
+                "before": true,
+                "after": true,
+                "diff": true
+              }
+            }
+          }
+        },
+        {
+          "caseId": "TC-API-RULE-010",
+          "type": "API",
+          "status": "pass",
+          "tests": 1,
+          "passed": 1,
+          "failed": 0,
+          "flaky": 0,
+          "durationMs": 16,
+          "failures": [],
+          "evidence": {
+            "dir": "evidence/TC-API-RULE-010",
+            "complete": true,
+            "missing": [],
+            "warnings": [],
+            "files": {
+              "result": true,
+              "apiCalls": 3,
+              "realCalls": 2,
+              "screenshots": 0,
+              "gif": false,
+              "serverLog": true,
+              "extensionLog": false,
+              "explore": false,
+              "state": {
+                "before": true,
+                "after": true,
+                "diff": true
+              }
+            }
+          }
+        },
+        {
+          "caseId": "TC-API-SYNC-003",
+          "type": "API",
+          "status": "pass",
+          "tests": 1,
+          "passed": 1,
+          "failed": 0,
+          "flaky": 0,
+          "durationMs": 39,
+          "failures": [],
+          "evidence": {
+            "dir": "evidence/TC-API-SYNC-003",
+            "complete": true,
+            "missing": [],
+            "warnings": [],
+            "files": {
+              "result": true,
+              "apiCalls": 5,
+              "realCalls": 4,
+              "screenshots": 0,
+              "gif": false,
+              "serverLog": true,
+              "extensionLog": false,
+              "explore": false,
+              "state": {
+                "before": true,
+                "after": true,
+                "diff": true
+              }
+            }
+          }
+        },
+        {
+          "caseId": "TC-E2E-FLOW-001",
+          "type": "E2E",
+          "status": "pass",
+          "tests": 1,
+          "passed": 1,
+          "failed": 0,
+          "flaky": 0,
+          "durationMs": 66,
+          "failures": [],
+          "evidence": {
+            "dir": "evidence/TC-E2E-FLOW-001",
+            "complete": true,
+            "missing": [],
+            "warnings": [],
+            "files": {
+              "result": true,
+              "apiCalls": 6,
+              "realCalls": 5,
+              "screenshots": 0,
+              "gif": false,
+              "serverLog": true,
+              "extensionLog": false,
+              "explore": false,
+              "state": {
+                "before": true,
+                "after": true,
+                "diff": true
+              }
+            }
+          }
+        },
+        {
+          "caseId": "TC-E2E-FLOW-002",
+          "type": "E2E",
+          "status": "pass",
+          "tests": 1,
+          "passed": 1,
+          "failed": 0,
+          "flaky": 0,
+          "durationMs": 72,
+          "failures": [],
+          "evidence": {
+            "dir": "evidence/TC-E2E-FLOW-002",
+            "complete": true,
+            "missing": [],
+            "warnings": [],
+            "files": {
+              "result": true,
+              "apiCalls": 20,
+              "realCalls": 19,
+              "screenshots": 0,
+              "gif": false,
+              "serverLog": true,
+              "extensionLog": false,
+              "explore": false,
+              "state": {
+                "before": true,
+                "after": true,
+                "diff": true
+              }
+            }
+          }
+        },
+        {
+          "caseId": "TC-UI-CACHE-003",
+          "type": "UI",
+          "status": "pass",
+          "tests": 1,
+          "passed": 1,
+          "failed": 0,
+          "flaky": 0,
+          "durationMs": 2631,
+          "failures": [],
+          "evidence": {
+            "dir": "evidence/TC-UI-CACHE-003",
+            "complete": true,
+            "missing": [],
+            "warnings": [],
+            "files": {
+              "result": true,
+              "apiCalls": 33,
+              "realCalls": 31,
+              "screenshots": 4,
+              "gif": true,
+              "serverLog": true,
+              "extensionLog": true,
+              "explore": true,
+              "state": {
+                "before": true,
+                "after": true,
+                "diff": true
+              }
+            }
+          }
+        },
+        {
+          "caseId": "TC-UI-DIAG-004",
+          "type": "UI",
+          "status": "pass",
+          "tests": 1,
+          "passed": 1,
+          "failed": 0,
+          "flaky": 0,
+          "durationMs": 839,
+          "failures": [],
+          "evidence": {
+            "dir": "evidence/TC-UI-DIAG-004",
+            "complete": true,
+            "missing": [],
+            "warnings": [],
+            "files": {
+              "result": true,
+              "apiCalls": 1,
+              "realCalls": 0,
+              "screenshots": 1,
+              "gif": true,
+              "serverLog": true,
+              "extensionLog": true,
+              "explore": true,
+              "state": {
+                "before": true,
+                "after": true,
+                "diff": true
+              }
+            }
+          }
+        },
+        {
+          "caseId": "TC-UI-RULE-003",
+          "type": "UI",
+          "status": "pass",
+          "tests": 1,
+          "passed": 1,
+          "failed": 0,
+          "flaky": 0,
+          "durationMs": 812,
+          "failures": [],
+          "evidence": {
+            "dir": "evidence/TC-UI-RULE-003",
+            "complete": true,
+            "missing": [],
+            "warnings": [],
+            "files": {
+              "result": true,
+              "apiCalls": 2,
+              "realCalls": 1,
+              "screenshots": 1,
+              "gif": true,
+              "serverLog": true,
+              "extensionLog": true,
+              "explore": true,
+              "state": {
+                "before": true,
+                "after": true,
+                "diff": true
+              }
+            }
+          }
+        },
+        {
+          "caseId": "TC-UI-SYNC-001",
+          "type": "UI",
+          "status": "pass",
+          "tests": 1,
+          "passed": 1,
+          "failed": 0,
+          "flaky": 0,
+          "durationMs": 1082,
+          "failures": [],
+          "evidence": {
+            "dir": "evidence/TC-UI-SYNC-001",
+            "complete": true,
+            "missing": [],
+            "warnings": [],
+            "files": {
+              "result": true,
+              "apiCalls": 4,
+              "realCalls": 3,
+              "screenshots": 2,
+              "gif": true,
+              "serverLog": true,
+              "extensionLog": true,
+              "explore": true,
+              "state": {
+                "before": true,
+                "after": true,
+                "diff": true
+              }
+            }
+          }
+        }
+      ],
+      "webServerStderr": []
+    },
+    "evidence": {
+      "complete": 10,
+      "total": 10,
+      "incomplete": []
+    }
+  },
+  "pass": true,
+  "endedAt": "2026-11-04T03:19:33.748Z"
+}

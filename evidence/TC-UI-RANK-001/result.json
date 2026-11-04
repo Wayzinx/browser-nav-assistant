@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-UI-RANK-001",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:13.561Z",
+  "tests": [
+    {
+      "testId": "5fa0094a0e9574939edd-ea33d4b166e0e3705c45",
+      "title": "TC-UI-RANK-001 导入样例后打开 popup 首页：历史排序展示 5 条，分数 1.00/0.94/0.83/0.69/0.68 降序且理由非空",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RANK-001.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 784,
+      "startedAt": "2026-11-04T03:29:12.777Z",
+      "endedAt": "2026-11-04T03:29:13.561Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 2,
+      "screenshots": [
+        "evidence/TC-UI-RANK-001/screenshots/01-首页历史排序Top5.png"
+      ],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1145,
+          "after": 1146
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

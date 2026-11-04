@@ -1,0 +1,36 @@
+// 来源：docs/trace/cases/API-REC.json；REC API，独立真实 HTTP 用例。
+import { test, expect } from '../fixtures/api.mjs';
+
+// S1 显式发送 JSON 重置请求，替代夹具在步骤外的自动重置。
+test.use({ autoReset: false });
+
+test("TC-API-REC-009 空库固定 PR 当前页时返回空数组而非错误", async ({ api, evidence }) => {
+  await test.step('S1：POST /api/__test__/reset，以 JSON 空对象重置数据与缓存', async () => {
+    const r = await api.post('/api/__test__/reset', {}, { setup: true });
+    expect(r.status, 'S1 重置返回 200').toBe(200);
+    expect(r.body, 'S1 重置成功').toMatchObject({ ok: true });
+  });
+
+  const N = await test.step('S2：真实同步空数据，记录 syncedAt 为 N', async () => {
+    const r = await api.seed({ activeTab: null, openTabs: [], history: [] });
+    expect(r.status, '[E1] 空同步返回 200').toBe(200);
+    expect(r.body, '[E1] 空同步没有新建页面').toMatchObject({ received: 0, created: 0, pageCount: 0 });
+    expect(r.body.syncedAt, 'S2 后端生成时间基准').toEqual(expect.any(Number));
+    evidence.note(JSON.stringify({ N: r.body.syncedAt }));
+    return r.body.syncedAt;
+  });
+  const r = await test.step('S3：空库以固定 PR 当前页请求推荐', () =>
+    api.post('/api/recommendations/next', {
+      currentPage: { url: 'https://github.com/org/repo/pull/456' }, openTabs: [], recentHistory: [],
+    }, { params: { now: N } }));
+  expect(r.status, '[E2] 空结果仍返回 200').toBe(200);
+  expect(r.body, '[E2] 空推荐、未命中缓存且生成时间精确').toMatchObject({
+    recommendations: [], cached: false, generatedAt: N,
+  });
+
+  await test.step('S4：GET /api/health，读回计数并核对查询没有写入副作用', async () => {
+    const r = await api.get('/api/health');
+    expect(r.status, '[E3] 健康检查返回 200').toBe(200);
+    expect(r.body, '[E3] 页面、规则及同步状态保持预期').toMatchObject({ pageCount: 0, ruleCount: 0 });
+  });
+});

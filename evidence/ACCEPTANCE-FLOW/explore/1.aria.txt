@@ -1,0 +1,78 @@
+- banner:
+  - heading "导航助手" [level=1]
+  - button "后端已连接"
+- region "当前页面":
+  - heading "当前页面" [level=2]
+  - paragraph: github.com/org/repo/pull/456
+  - paragraph: https://github.com/org/repo/pull/456
+  - button "标记为重要": ☆
+  - button "添加到分析"
+- region "浏览器上下文同步":
+  - button "同步浏览器上下文"
+  - status:
+    - paragraph: 尚未同步
+  - button "全量同步"
+  - paragraph: 当前模式：全量
+- tablist "导航助手功能":
+  - tab "首页"
+  - tab "上下文"
+  - tab "排序"
+  - tab "整理 3"
+  - tab "规则"
+  - tab "诊断" [selected]
+- main:
+  - tabpanel "诊断":
+    - heading "后端地址" [level=2]
+    - paragraph: http://127.0.0.1:4180
+    - text: API Base URL
+    - textbox "API Base URL": http://127.0.0.1:4180
+    - button "保存"
+    - heading "运行诊断" [level=2]
+    - button "重新检测"
+    - button "复制诊断报告"
+    - status: 通过 8 · 警告 2 · 失败 0 · 提示 1
+    - time: 检测时间：2026/11/3 07:28:48
+    - strong: 后端服务连接
+    - text: 通过
+    - paragraph: 后端服务连接正常；耗时 3 ms
+    - text: version=1.0.0，3 ms
+    - strong: tabs 权限
+    - text: 通过
+    - paragraph: tabs 权限已授权，标签页 URL 可读
+    - strong: history 权限
+    - text: 通过
+    - paragraph: history 权限已授权，历史查询可用
+    - strong: storage 可用
+    - text: 通过
+    - paragraph: storage 写入、读取和删除正常，已使用 8777 字节
+    - text: "8777"
+    - strong: API Base URL
+    - text: 通过
+    - paragraph: 地址格式有效，已获访问授权
+    - text: http://127.0.0.1:4180
+    - strong: 最近一次同步
+    - text: 警告
+    - paragraph: 从未同步
+    - list:
+      - listitem: 点击「立即同步」同步浏览器上下文
+    - button "立即同步"
+    - strong: 当前规则数量
+    - text: 警告
+    - paragraph: 规则数不一致：本地 未缓存，后端 0；已自动重新拉取 0 条规则，请重新检测核对
+    - text: "0"
+    - list:
+      - listitem: 在规则页签刷新规则，再重新检测
+    - strong: activeTab 权限
+    - text: 通过
+    - paragraph: activeTab 权限已授权
+    - strong: 隐私过滤
+    - text: 通过
+    - paragraph: 隐私过滤已启用，关键词 4 个；来源：server
+    - text: "4"
+    - strong: 无痕模式
+    - text: 提示
+    - paragraph: 无痕访问未授权；无痕窗口的数据不会被采集
+    - strong: 版本兼容
+    - text: 通过
+    - paragraph: 后端版本 1.0.0，主版本兼容
+    - text: 1.0.0

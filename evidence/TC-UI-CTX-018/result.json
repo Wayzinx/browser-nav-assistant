@@ -1,0 +1,59 @@
+{
+  "caseId": "TC-UI-CTX-018",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:01.598Z",
+  "tests": [
+    {
+      "testId": "6d93f37bbb8efca155df-0351a5570cb882216e18",
+      "title": "TC-UI-CTX-018 后端不可达时最近三条浏览器历史及查询参数仍可读取",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CTX-018.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 922,
+      "startedAt": "2026-11-04T03:28:00.676Z",
+      "endedAt": "2026-11-04T03:28:01.598Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-CTX-018/screenshots/01-S2-离线真实历史与查询参数.png"
+      ],
+      "serverLogLines": 3,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1049,
+          "after": 1049
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "{\"history\":[{\"id\":\"3\",\"lastVisitTime\":1793762881241.805,\"title\":\"\",\"typedCount\":0,\"url\":\"https://history.example/ctx/offline/c\",\"visitCount\":1},{\"id\":\"2\",\"lastVisitTime\":1793762881238.462,\"title\":\"\",\"typedCount\":0,\"url\":\"https://history.example/ctx/offline/b\",\"visitCount\":1},{\"id\":\"1\",\"lastVisitTime\":1793762881233.341,\"title\":\"\",\"typedCount\":1,\"url\":\"https://history.example/ctx/offline/a\",\"visitCount\":1}]}",
+        "{\"before\":1793762881245,\"after\":1793762881370,\"maxResults\":100,\"startTime\":1791170881342}",
+        "{\"popupPageErrors\":[],\"swExceptions\":[]}"
+      ]
+    }
+  ]
+}

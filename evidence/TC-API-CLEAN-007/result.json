@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-CLEAN-007",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:44.154Z",
+  "tests": [
+    {
+      "testId": "41b41edcb301ff017f7d-f17cc20f55782779c3a1",
+      "title": "TC-API-CLEAN-007 整天数超过 14 才归档的毫秒边界",
+      "project": "api",
+      "file": "tests/api/TC-API-CLEAN-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 39,
+      "startedAt": "2026-11-04T03:25:44.115Z",
+      "endedAt": "2026-11-04T03:25:44.154Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 8,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 13,
+          "after": 14
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

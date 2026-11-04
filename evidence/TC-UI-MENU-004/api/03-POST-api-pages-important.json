@@ -1,0 +1,13 @@
+{
+  "reqId": "TC-UI-MENU-004-star-observed-1",
+  "observed": true,
+  "setup": false,
+  "method": "POST",
+  "url": "http://127.0.0.1:4300/api/pages/important",
+  "requestBody": "{\"url\":\"https://docs.internal.com/ai-agent-design\",\"title\":\"AI Agent Design\",\"important\":true}",
+  "status": 200,
+  "responseBody": "{\"accepted\":true,\"rejected\":0,\"url\":\"https://docs.internal.com/ai-agent-design\",\"normalizedUrl\":\"https://docs.internal.com/ai-agent-design\",\"isImportant\":true,\"created\":true}",
+  "transport": "finished",
+  "fromServiceWorker": true,
+  "ms": 2
+}

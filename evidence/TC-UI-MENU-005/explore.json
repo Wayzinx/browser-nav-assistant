@@ -1,0 +1,16 @@
+{
+  "caseId": "TC-UI-MENU-005",
+  "verdict": "pass",
+  "observed": "仅 chrome://version 时 current-page-system-badge=「系统页 · 不采集」；current-page-add 与 current-page-star 不可见；无 manual/important 请求；ranked 空、pageCount=0、importantUrls=[]。 本轮（2026-11-03 r7）重新探索：产品代码与 spec 自 r6 后均无变更，tests/explore/tmp/menu-explore-r7.mjs 结果与截图、aria 快照复核一致；spec 未改动，TEST_PORT=4185 npx playwright test 10/10 通过。",
+  "steps": [
+    "后台启动 PORT=4185 HOST=127.0.0.1 ENABLE_TEST_API=1 后端",
+    "node tests/explore/tmp/menu-explore-r7.mjs（reset → 加载真实 extension/ → 打开目标页与 popup → 操作 → 截图 + aria 快照 → 读 storage/ranked/health）",
+    "阅读截图与 aria 快照逐条核对 [En]",
+    "关闭探索后端；TEST_PORT=4185 npx playwright test tests/ui/TC-UI-MENU-005.spec.mjs → passed"
+  ],
+  "screenshots": [
+    "evidence/TC-UI-MENU-005/explore/1.png"
+  ],
+  "spec": "tests/ui/TC-UI-MENU-005.spec.mjs",
+  "solidified": true
+}

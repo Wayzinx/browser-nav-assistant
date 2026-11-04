@@ -1,0 +1,58 @@
+{
+  "source": "extension",
+  "method": "GET",
+  "url": "http://127.0.0.1:4300/api/rules",
+  "reqId": "ext_1793762844431_7",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762844431_7"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "connection": "keep-alive",
+    "date": "Wed, 04 Nov 2026 03:27:24 GMT",
+    "keep-alive": "timeout=5",
+    "access-control-expose-headers": "x-request-id",
+    "content-length": "571",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin",
+    "x-request-id": "ext_1793762844431_7"
+  },
+  "responseBody": {
+    "rules": [
+      {
+        "domain": "github.com",
+        "urlPattern": "/issues/",
+        "inactiveDays": 7,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762844134,
+        "updatedAt": 1793762844134,
+        "rawText": "把 7 天没访问过的 GitHub issue 建议归档",
+        "type": "archive_candidate",
+        "action": "suggest_archive",
+        "id": "rule_1"
+      },
+      {
+        "domain": "docs.internal.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762844134,
+        "updatedAt": 1793762844134,
+        "rawText": "docs.internal.com 的页面永远不要归档",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_2"
+      }
+    ],
+    "total": 2
+  },
+  "ms": 1.501,
+  "setup": false
+}

@@ -1,0 +1,31 @@
+{
+  "reqId": "TC-API-DIAG-012-03",
+  "setup": false,
+  "method": "DELETE",
+  "url": "/api/config",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-DIAG-012-03"
+  },
+  "requestBody": null,
+  "status": 405,
+  "responseHeaders": {
+    "x-request-id": "TC-API-DIAG-012-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "allow": "GET, PUT",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "85",
+    "date": "Wed, 04 Nov 2026 03:25:48 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "error": {
+      "code": "METHOD_NOT_ALLOWED",
+      "message": "此接口不支持该请求方法"
+    }
+  },
+  "ms": 0.7,
+  "mutated": null
+}

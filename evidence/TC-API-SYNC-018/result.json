@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-SYNC-018",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:06.353Z",
+  "tests": [
+    {
+      "testId": "3b9357d77d3927aab71a-5c4159a22028cdb6334c",
+      "title": "TC-API-SYNC-018 JSON 解析异常后快照不变且合法重试幂等",
+      "project": "api",
+      "file": "tests/api/TC-API-SYNC-018.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 31,
+      "startedAt": "2026-11-04T03:27:06.322Z",
+      "endedAt": "2026-11-04T03:27:06.353Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 11,
+      "screenshots": [],
+      "serverLogLines": 15,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 892,
+          "after": 895
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 2
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

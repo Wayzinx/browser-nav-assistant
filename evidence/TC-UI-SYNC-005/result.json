@@ -1,0 +1,60 @@
+{
+  "caseId": "TC-UI-SYNC-005",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:58.602Z",
+  "tests": [
+    {
+      "testId": "1733ad0698d02883c662-c1370740b9829f6b88b8",
+      "title": "TC-UI-SYNC-005 成功后关闭重开popup：恢复相同同步结果和上次时间且不重复上报",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-SYNC-005.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1138,
+      "startedAt": "2026-11-04T03:29:57.464Z",
+      "endedAt": "2026-11-04T03:29:58.602Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 2,
+      "screenshots": [
+        "evidence/TC-UI-SYNC-005/screenshots/01-首次打开-同步前.png",
+        "evidence/TC-UI-SYNC-005/screenshots/02-关闭前-成功状态和时间.png",
+        "evidence/TC-UI-SYNC-005/screenshots/03-重开后-成功统计和时间恢复.png"
+      ],
+      "serverLogLines": 25,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1207,
+          "after": 1208
+        },
+        "pages": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 2,
+          "rules": 0,
+          "openPages": 2,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "{\"savedState\":{\"cursor\":1793762998258,\"cursorBase\":{\"apiBaseUrl\":\"http://127.0.0.1:4300\",\"serverStartedAt\":1793762741762},\"fullReason\":null,\"lastError\":null,\"lastSuccessAt\":1793762998258,\"lastSyncAt\":1793762998266,\"mode\":\"full\",\"startedAt\":1793762998258,\"stats\":{\"created\":2,\"filtered\":0,\"received\":5,\"rejected\":0,\"updated\":3,\"uploaded\":5},\"status\":\"success\",\"trigger\":\"user\"},\"firstHHmm\":\"11:29\",\"clickedAt\":1793762998228}",
+        "{\"restoredState\":{\"cursor\":1793762998258,\"cursorBase\":{\"apiBaseUrl\":\"http://127.0.0.1:4300\",\"serverStartedAt\":1793762741762},\"fullReason\":null,\"lastError\":null,\"lastSuccessAt\":1793762998258,\"lastSyncAt\":1793762998266,\"mode\":\"full\",\"startedAt\":1793762998258,\"stats\":{\"created\":2,\"filtered\":0,\"received\":5,\"rejected\":0,\"updated\":3,\"uploaded\":5},\"status\":\"success\",\"trigger\":\"user\"},\"firstHHmm\":\"11:29\",\"posts\":1}"
+      ]
+    }
+  ]
+}

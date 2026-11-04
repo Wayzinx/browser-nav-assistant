@@ -1,0 +1,59 @@
+- banner:
+  - heading "导航助手" [level=1]
+  - button "后端已连接"
+- region "当前页面":
+  - heading "当前页面" [level=2]
+  - paragraph: github.com/org/repo/pull/456
+  - paragraph: https://github.com/org/repo/pull/456
+  - button "标记为重要": ☆
+  - button "添加到分析"
+- region "浏览器上下文同步":
+  - button "同步浏览器上下文"
+  - status:
+    - paragraph: 同步成功
+    - paragraph: 上传 9 条 · 过滤 0 条
+    - time: 07:28 · 刚刚
+  - button "全量同步"
+  - paragraph: 当前模式：全量
+- tablist "导航助手功能":
+  - tab "首页" [selected]
+  - tab "上下文"
+  - tab "排序"
+  - tab "整理 3"
+  - tab "规则"
+  - tab "诊断"
+- main:
+  - tabpanel "首页":
+    - heading "下一步推荐" [level=2]
+    - list:
+      - listitem:
+        - button "Actions · org/repo 0.87 你正在查看 PR，同仓库 CI 页面最近访问频率较高，可能需要检查构建状态"
+      - listitem:
+        - button "Fix login redirect bug 0.80 你正在查看 PR，同仓库的 Issue 可能与本次改动相关"
+      - listitem:
+        - button "useState – React 0.46 近期综合评分较高的页面，可作为备选"
+    - heading "历史排序 Top 5" [level=2]
+    - list:
+      - listitem:
+        - text: github.com/org/repo/pull/456 0.94 https://github.com/org/repo/pull/456
+        - paragraph: 正在浏览，最近 3 天内多次访问（5 次），常用域名 github.com
+      - listitem:
+        - text: docs.internal.com/ai-agent-design 0.85 https://docs.internal.com/ai-agent-design
+        - paragraph: 今天访问过，当前仍处于打开状态，属于受保护域名
+      - listitem:
+        - text: developer.mozilla.org/en-US/docs/Web/API/Fetch_API 0.84 https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+        - paragraph: 最近 3 天内多次访问（4 次），当前仍处于打开状态
+      - listitem:
+        - text: Fix login redirect bug 0.80 https://github.com/org/repo/issues/123
+        - paragraph: 最近 3 天内多次访问（8 次），常用域名 github.com
+      - listitem:
+        - text: www.google.com/search 0.70 https://www.google.com/search?q=chrome+extension
+        - paragraph: 今天访问过，当前仍处于打开状态
+    - heading "整理建议" [level=2]
+    - button "查看整理建议": 归档 2 重复 1 保留 1
+    - heading "用一句话配置规则" [level=2]
+    - text: 规则内容
+    - textbox "规则内容":
+      - /placeholder: 输入一句话配置规则
+    - button "解析"
+    - button "启动诊断 · 2 项异常 ›"

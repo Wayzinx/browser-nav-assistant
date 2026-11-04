@@ -1,0 +1,62 @@
+{
+  "caseId": "TC-UI-CLEAN-006",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:31.497Z",
+  "tests": [
+    {
+      "testId": "092dcf0dcdb74eeea54b-f94ffa321fc05cb5a232",
+      "title": "TC-UI-CLEAN-006 忽略7天−1分钟边界：Google建议仍被过滤",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CLEAN-006.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1699,
+      "startedAt": "2026-11-04T03:27:29.798Z",
+      "endedAt": "2026-11-04T03:27:31.497Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 28,
+      "screenshots": [
+        "evidence/TC-UI-CLEAN-006/screenshots/01-忽略前.png",
+        "evidence/TC-UI-CLEAN-006/screenshots/02-真实忽略后.png",
+        "evidence/TC-UI-CLEAN-006/screenshots/03-边界整理页.png",
+        "evidence/TC-UI-CLEAN-006/screenshots/04-边界首页.png"
+      ],
+      "serverLogLines": 31,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 998,
+          "after": 1001
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "{\"phase\":\"真实忽略后\",\"googleKey\":\"archive:https://www.google.com/search?q=chrome+extension+manifest+v3\",\"storage\":{\"ignoredSuggestions\":{\"archive:https://www.google.com/search?q=chrome+extension+manifest+v3\":1793762850765}}}",
+        "{\"googleKey\":\"archive:https://www.google.com/search?q=chrome+extension+manifest+v3\",\"targetAge\":604740000,\"constructedAt\":1793762850834,\"ignoredAt\":1793158110834}",
+        "{\"swNow\":1793762851180,\"age\":604740346,\"targetAge\":604740000,\"ignoredAt\":1793158110834}"
+      ]
+    }
+  ]
+}

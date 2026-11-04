@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RULE-002",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:04.608Z",
+  "tests": [
+    {
+      "testId": "f2533015182cae6e9d59-17609e8246ba86f42b36",
+      "title": "TC-API-RULE-002 库中已保存两条规则时再解析不会修改规则与计数",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-002.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 28,
+      "startedAt": "2026-11-04T03:27:04.580Z",
+      "endedAt": "2026-11-04T03:27:04.608Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 9,
+      "screenshots": [],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 740,
+          "after": 741
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 2,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

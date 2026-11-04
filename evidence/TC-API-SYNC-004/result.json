@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-SYNC-004",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:05.908Z",
+  "tests": [
+    {
+      "testId": "ba0f348a160ae323452e-09db4d24b9bccbef61c7",
+      "title": "TC-API-SYNC-004 主机大小写、跟踪参数、hash 和尾斜杠归为同页",
+      "project": "api",
+      "file": "tests/api/TC-API-SYNC-004.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 16,
+      "startedAt": "2026-11-04T03:27:05.892Z",
+      "endedAt": "2026-11-04T03:27:05.908Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 8,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 842,
+          "after": 844
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

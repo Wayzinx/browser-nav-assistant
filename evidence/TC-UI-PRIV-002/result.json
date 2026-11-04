@@ -1,0 +1,60 @@
+{
+  "caseId": "TC-UI-PRIV-002",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:00.208Z",
+  "tests": [
+    {
+      "testId": "ef743878aff4c849ccff-f914f968454274770ac9",
+      "title": "TC-UI-PRIV-002 关键词大小写边界：大写 TOKEN 与小写 token 均在上传前被过滤",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-PRIV-002.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1554,
+      "startedAt": "2026-11-04T03:28:58.654Z",
+      "endedAt": "2026-11-04T03:29:00.208Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 37,
+      "screenshots": [
+        "evidence/TC-UI-PRIV-002/screenshots/01-U-普通页活动.png",
+        "evidence/TC-UI-PRIV-002/screenshots/02-U-同步前.png",
+        "evidence/TC-UI-PRIV-002/screenshots/03-U-过滤一条并成功.png",
+        "evidence/TC-UI-PRIV-002/screenshots/04-L-普通页活动.png",
+        "evidence/TC-UI-PRIV-002/screenshots/05-L-同步前.png",
+        "evidence/TC-UI-PRIV-002/screenshots/06-L-过滤一条并成功.png"
+      ],
+      "serverLogLines": 41,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1126,
+          "after": 1130
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 1,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

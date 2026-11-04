@@ -1,0 +1,105 @@
+{
+  "dataVersion": 36,
+  "versions": {
+    "data": 36,
+    "rule": 27,
+    "config": 18
+  },
+  "counts": {
+    "pages": 2,
+    "rules": 1,
+    "openPages": 0,
+    "archivedPages": 0,
+    "syncLogs": 1
+  },
+  "pagesTruncated": false,
+  "pagesHash": "f32462d44a5489d7238726b043444397c9f59006930b30371bc2906bcb1c817a",
+  "pages": [
+    {
+      "id": "page_1",
+      "url": "https://github.com/org/repo/pull/77",
+      "normalizedUrl": "https://github.com/org/repo/pull/77",
+      "domain": "github.com",
+      "title": "https://github.com/org/repo/pull/77",
+      "visitCount": 1,
+      "lastVisitedAt": 1792898744590,
+      "firstSeenAt": 1792898744590,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    },
+    {
+      "id": "page_2",
+      "url": "https://gitlab.com/org/repo/issues/77",
+      "normalizedUrl": "https://gitlab.com/org/repo/issues/77",
+      "domain": "gitlab.com",
+      "title": "https://gitlab.com/org/repo/issues/77",
+      "visitCount": 1,
+      "lastVisitedAt": 1792898744590,
+      "firstSeenAt": 1792898744590,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    }
+  ],
+  "rules": [
+    {
+      "domain": "github.com",
+      "urlPattern": "/issues/",
+      "inactiveDays": 7,
+      "enabled": true,
+      "confidence": "high",
+      "createdAt": 1793762744595,
+      "updatedAt": 1793762744595,
+      "rawText": "把 7 天没访问过的 GitHub issue 建议归档",
+      "type": "archive_candidate",
+      "action": "suggest_archive",
+      "id": "rule_1"
+    }
+  ],
+  "config": {
+    "cleanupThresholdDays": 14,
+    "maxHistoryItems": 100,
+    "historyLookbackDays": 30,
+    "enablePrivacyFilter": true,
+    "privacySensitiveKeywords": [
+      "password",
+      "token",
+      "bank",
+      "secret"
+    ]
+  },
+  "sequences": {
+    "page": 2,
+    "rule": 1,
+    "sync": 1
+  },
+  "lastSync": {
+    "id": "sync_1",
+    "syncedAt": 1793762744592,
+    "mode": "full",
+    "received": 2,
+    "created": 2,
+    "updated": 0,
+    "rejected": 0,
+    "durationMs": 0.11683300000004238,
+    "ok": true,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 0
+    }
+  },
+  "persist": null
+}

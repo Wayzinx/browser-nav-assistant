@@ -1,0 +1,72 @@
+{
+  "dataVersion": 591,
+  "versions": {
+    "data": 591,
+    "rule": 117,
+    "config": 101
+  },
+  "counts": {
+    "pages": 1,
+    "rules": 0,
+    "openPages": 0,
+    "archivedPages": 0,
+    "syncLogs": 1
+  },
+  "pagesTruncated": false,
+  "pagesHash": "b370af8b258c13575c4a8d2375f65aa211a8292def0f9391a86d8c962ade10fe",
+  "pages": [
+    {
+      "id": "page_1",
+      "url": "https://example.com/docs-a",
+      "normalizedUrl": "https://example.com/docs-a",
+      "domain": "example.com",
+      "title": "password reset guide",
+      "visitCount": 1,
+      "lastVisitedAt": 1793759222752,
+      "firstSeenAt": 1793759222752,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    }
+  ],
+  "rules": [],
+  "config": {
+    "cleanupThresholdDays": 14,
+    "maxHistoryItems": 100,
+    "historyLookbackDays": 30,
+    "enablePrivacyFilter": true,
+    "privacySensitiveKeywords": [
+      "password",
+      "token",
+      "bank",
+      "secret"
+    ]
+  },
+  "sequences": {
+    "page": 1,
+    "rule": 0,
+    "sync": 1
+  },
+  "lastSync": {
+    "id": "sync_1",
+    "syncedAt": 1793762822752,
+    "mode": "full",
+    "received": 2,
+    "created": 1,
+    "updated": 0,
+    "rejected": 1,
+    "durationMs": 0.05374999999185093,
+    "ok": true,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 1
+    }
+  },
+  "persist": null
+}

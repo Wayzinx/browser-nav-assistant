@@ -1,0 +1,14 @@
+node_modules/
+dist/
+build/
+.DS_Store
+.idea/
+test-results/
+playwright-report/
+bundles/
+evidence/_runtime/
+tests/explore/tmp/
+.workflow/context/
+.workflow/archive/
+# 运行时持久化快照，含真实浏览记录，不入库
+data/snapshot.json

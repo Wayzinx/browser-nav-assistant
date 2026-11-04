@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-CLEAN-029",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:45.153Z",
+  "tests": [
+    {
+      "testId": "48dd5baf93b918cf3910-3fa1ba656ae42490a264",
+      "title": "TC-API-CLEAN-029 错误媒体类型和截断 JSON 不归档页面",
+      "project": "api",
+      "file": "tests/api/TC-API-CLEAN-029.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 34,
+      "startedAt": "2026-11-04T03:25:45.119Z",
+      "endedAt": "2026-11-04T03:25:45.153Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 8,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 66,
+          "after": 67
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "reqId": "TC-UI-MENU-010-unreachable-add-observed-1",
+  "observed": true,
+  "setup": false,
+  "method": "POST",
+  "url": "http://127.0.0.1:9/api/pages/manual",
+  "requestBody": "{\"url\":\"https://example.com/note\",\"title\":\"Note\"}",
+  "status": null,
+  "responseBody": {
+    "failure": "net::ERR_UNSAFE_PORT"
+  },
+  "transport": "failed",
+  "fromServiceWorker": true,
+  "ms": 0
+}

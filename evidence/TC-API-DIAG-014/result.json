@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-DIAG-014",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:48.461Z",
+  "tests": [
+    {
+      "testId": "b59b3b7805fd5fd726bd-157821ab73c727c0da02",
+      "title": "TC-API-DIAG-014 PUT /api/config 请求体非法 JSON 或 Content-Type 错误时返回 400 / 415，GET /api/config 仍为默认值",
+      "project": "api",
+      "file": "tests/api/TC-API-DIAG-014.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 20,
+      "startedAt": "2026-11-04T03:25:48.441Z",
+      "endedAt": "2026-11-04T03:25:48.461Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 6,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 102,
+          "after": 102
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

@@ -1,0 +1,1368 @@
+{
+  "$comment": "后端代码点（阶段 2 技术方案，owner：后端架构师）。module=CORE 的文件由 lead 维护；其余文件归各业务模块所有。文档：docs/03-技术方案-后端.md",
+  "codePoints": [
+    {
+      "id": "C-BE-CORE-01",
+      "side": "BE",
+      "module": "CORE",
+      "name": "入口：启动、端口占用提示与优雅退出",
+      "description": "读取 config → createApp → listen(HOST, PORT)；启动日志打印端口、持久化模式、测试接口开关；EADDRINUSE 时输出排查提示并 exit(1)。只有配置了 SNAPSHOT_FILE 才 import 调用 PERSIST（loadSnapshot / createSnapshotWriter / flushSnapshotSync）。SIGTERM / SIGINT：registerShutdown 中 try { 若启用快照则 flushSnapshotSync() } catch { 记 error 日志 } finally { server.close() → process.exit(0) }，另设 3 秒 unref 定时器强制 exit(0)；PERSIST 抛错或未实现都不能阻止退出（BE-RUN-03）。入口不写业务逻辑（BE-DIR-01）。",
+      "files": [
+        "server/src/index.js"
+      ],
+      "symbols": [
+        "main",
+        "registerShutdown"
+      ],
+      "features": [
+        "F-DEMO-01"
+      ]
+    },
+    {
+      "id": "C-BE-CORE-02",
+      "side": "BE",
+      "module": "CORE",
+      "name": "配置读取与跨模块共享常量",
+      "description": "唯一读取 process.env 的位置（BE-RUN-01）：PORT（默认 3000）、HOST（默认 127.0.0.1）、ENABLE_TEST_API、LOG_FILE、LOG_LEVEL、SNAPSHOT_FILE。只放「被两个及以上模块使用、或经 GET /api/config 对外输出」的共享常量（清单见 docs/03 §1.4），由 lead 在骨架阶段一次写全并逐个注释理由（BE-STYLE-06），骨架后冻结：DAY_MS、DEFAULT_SETTINGS（cleanupThresholdDays 14、maxHistoryItems 100、historyLookbackDays 30、enablePrivacyFilter true、privacySensitiveKeywords）、SCORE_WEIGHTS（0.4/0.3/0.2/0.1）、RECENCY_HALF_LIFE_DAYS（7）、MIN_RECOMMENDATION_SCORE（0.3）、LIMITS（maxItemsPerSync 500、maxUrlLength 2048、maxRuleTextLength 500、maxBodyBytes 1 MB、maxArrayItems 500）、APP_VERSION（\"1.0.0\"）、API_VERSION（\"1\"）。模块私有算法常量不进本文件，写在所属模块文件顶部（docs/03 §1.2 差异表）。",
+      "files": [
+        "server/src/config.js"
+      ],
+      "symbols": [
+        "loadConfig",
+        "DEFAULT_SETTINGS",
+        "SCORE_WEIGHTS",
+        "LIMITS",
+        "DAY_MS",
+        "RECENCY_HALF_LIFE_DAYS",
+        "MIN_RECOMMENDATION_SCORE",
+        "APP_VERSION",
+        "API_VERSION"
+      ],
+      "features": [
+        "F-DIAG-10",
+        "F-DEMO-01"
+      ],
+      "interfaces": [
+        "GET /api/config"
+      ]
+    },
+    {
+      "id": "C-BE-CORE-03",
+      "side": "BE",
+      "module": "CORE",
+      "name": "应用组装：CORS、请求 ID、access 日志、集中错误处理",
+      "description": "每个请求：读取或生成 x-request-id（req_<随机>）并回传；CORS 只放行 chrome-extension://*、http://localhost:*、http://127.0.0.1:*，OPTIONS 预检返回 204；查路由表 → 调 handler；AppError 按 code/status 输出，其他异常返回 500 INTERNAL（details 只含 reqId，堆栈只进日志）；请求结束写一条 access 日志（reqId/method/path/status/ms，不含 query）。",
+      "files": [
+        "server/src/app.js"
+      ],
+      "symbols": [
+        "createApp",
+        "handleRequest",
+        "applyCors"
+      ],
+      "features": [
+        "F-SYNC-07",
+        "F-DIAG-09"
+      ],
+      "interfaces": [
+        "POST /api/sync",
+        "GET /api/pages/ranked",
+        "POST /api/recommendations/next",
+        "GET /api/pages/cleanup-suggestions",
+        "POST /api/rules/parse",
+        "POST /api/rules",
+        "GET /api/rules",
+        "DELETE /api/rules/:id",
+        "PATCH /api/rules/:id",
+        "GET /api/health",
+        "GET /api/config",
+        "PUT /api/config",
+        "POST /api/pages/archive",
+        "POST /api/pages/unarchive",
+        "POST /api/pages/merge",
+        "POST /api/pages/important",
+        "POST /api/pages/manual"
+      ]
+    },
+    {
+      "id": "C-BE-CORE-04",
+      "side": "BE",
+      "module": "CORE",
+      "name": "路由注册表与匹配（404 / 405）",
+      "description": "注册表模式：每个模块的路由文件导出 `xxxRoutes` 数组（{ method, path, handler }），routes/index.js 汇总；lead 预先登记所有模块路由文件，模块开发只改自己的文件。支持 :id 路径参数；路径存在但方法不支持返回 405 METHOD_NOT_ALLOWED（带 Allow 头），路径不存在返回 404 NOT_FOUND；ENABLE_TEST_API=1 时才并入 test-api 路由。",
+      "files": [
+        "server/src/routes/index.js"
+      ],
+      "symbols": [
+        "buildRouteTable",
+        "matchRoute"
+      ],
+      "features": [
+        "F-SYNC-07",
+        "F-RULE-08"
+      ],
+      "interfaces": [
+        "POST /api/sync",
+        "GET /api/pages/ranked",
+        "POST /api/recommendations/next",
+        "GET /api/pages/cleanup-suggestions",
+        "POST /api/rules/parse",
+        "POST /api/rules",
+        "GET /api/rules",
+        "DELETE /api/rules/:id",
+        "PATCH /api/rules/:id",
+        "GET /api/health",
+        "GET /api/config",
+        "PUT /api/config",
+        "POST /api/pages/archive",
+        "POST /api/pages/unarchive",
+        "POST /api/pages/merge",
+        "POST /api/pages/important",
+        "POST /api/pages/manual"
+      ]
+    },
+    {
+      "id": "C-BE-CORE-05",
+      "side": "BE",
+      "module": "CORE",
+      "name": "HTTP 与错误工具：请求体读取、统一响应、AppError",
+      "description": "流式读取请求体，超过 1 MB 立即停止读取并抛 413 PAYLOAD_TOO_LARGE（BE-API-05）；有请求体但 Content-Type 不是 application/json 抛 415；JSON.parse 失败抛 400 INVALID_JSON；sendJson / sendError 统一写 `application/json; charset=utf-8`（BE-API-01/08）。",
+      "files": [
+        "server/src/lib/http.js",
+        "server/src/lib/errors.js"
+      ],
+      "symbols": [
+        "readJsonBody",
+        "sendJson",
+        "sendError",
+        "AppError"
+      ],
+      "features": [
+        "F-SYNC-07"
+      ],
+      "interfaces": [
+        "POST /api/sync",
+        "POST /api/rules/parse",
+        "POST /api/rules"
+      ]
+    },
+    {
+      "id": "C-BE-CORE-06",
+      "side": "BE",
+      "module": "CORE",
+      "name": "结构化日志（stdout + LOG_FILE 同步追加）",
+      "description": "一行一条 JSON：ts/level/msg（请求日志另含 reqId/method/path/status/ms）；LOG_LEVEL 控制级别；LOG_FILE 设置时用 fs.appendFileSync 同步追加，首次写入前 mkdirSync(dirname, { recursive: true })（BE-LOG-02）；只有本文件可以用 console（BE-LOG-04）；日志字段只放域名和数量，不放完整 URL（BE-LOG-05）。",
+      "files": [
+        "server/src/lib/logger.js"
+      ],
+      "symbols": [
+        "log",
+        "setLogLevel",
+        "childLogger"
+      ],
+      "features": [
+        "F-PRIV-03",
+        "F-DIAG-09"
+      ]
+    },
+    {
+      "id": "C-BE-CORE-07",
+      "side": "BE",
+      "module": "CORE",
+      "name": "时钟与 ?now= 时间覆盖",
+      "description": "Date.now() 只出现在这里（BE-TIME-01）；resolveNow(query) 解析 ?now=<毫秒>：缺省返回系统时间，非正整数抛 400 VALIDATION_FAILED（fields: [now]）；覆盖值由路由层作为参数逐层传入，不设全局可变时间（BE-TIME-02，PRD D-01）。",
+      "files": [
+        "server/src/lib/clock.js"
+      ],
+      "symbols": [
+        "now",
+        "resolveNow"
+      ],
+      "features": [
+        "F-CLEAN-02",
+        "F-RANK-02"
+      ],
+      "interfaces": [
+        "GET /api/pages/ranked",
+        "POST /api/recommendations/next",
+        "GET /api/pages/cleanup-suggestions"
+      ]
+    },
+    {
+      "id": "C-BE-CORE-08",
+      "side": "BE",
+      "module": "CORE",
+      "name": "路由边界入参校验工具",
+      "description": "校验器累积错误字段，最终抛 400 VALIDATION_FAILED，details.fields 列出全部出错字段；数组超长抛 413 PAYLOAD_TOO_LARGE（details.limit）；只按白名单读取字段，未知字段忽略（BE-API-06、BE-SEC-04）。",
+      "files": [
+        "server/src/lib/validate.js"
+      ],
+      "symbols": [
+        "createValidator",
+        "readArray",
+        "readString",
+        "readInt",
+        "readBool",
+        "readEnum"
+      ],
+      "features": [
+        "F-SYNC-07",
+        "F-REC-01",
+        "F-RULE-05"
+      ],
+      "interfaces": [
+        "POST /api/sync",
+        "POST /api/recommendations/next",
+        "POST /api/rules/parse",
+        "POST /api/rules"
+      ]
+    },
+    {
+      "id": "C-BE-CORE-09",
+      "side": "BE",
+      "module": "CORE",
+      "name": "URL 归一化、判重 key、域名与 GitHub 仓库解析",
+      "description": "normalizedUrl（D-03）：小写 host（URL API 自动转 punycode）、去 hash、去跟踪参数（utm_*、ref、ref_src、spm、from、fbclid、gclid、_ga）、参数按 key 排序、去末尾 /（根路径保留 /）。dupKey（D-07）：host 去 www. + path 去末尾 / + 语义参数（q、query、wd、keyword、search、v、id）。parseGithubRepo 返回 { repo: owner/name, kind: pull|issues|actions|… }。纯函数，被 SYNC / CLEAN / REC / RANK 共用。",
+      "files": [
+        "server/src/domain/url.js"
+      ],
+      "symbols": [
+        "parseHttpUrl",
+        "normalizeUrl",
+        "buildDupKey",
+        "domainOf",
+        "parseGithubRepo"
+      ],
+      "features": [
+        "F-SYNC-02",
+        "F-CLEAN-03",
+        "F-REC-05"
+      ],
+      "interfaces": [
+        "POST /api/sync"
+      ]
+    },
+    {
+      "id": "C-BE-CORE-10",
+      "side": "BE",
+      "module": "CORE",
+      "name": "页面仓储与内存索引",
+      "description": "主表 Map<normalizedUrl, Page>；二级索引 byDupKey、byDomain、byRepo（Set<normalizedUrl>）与 openSet，在 upsert 时 O(1) 维护（BE-PERF-02）；对外只暴露仓储函数，services 不直接碰 Map（BE-DIR-06），以后换 SQLite 只改 store/。",
+      "files": [
+        "server/src/store/page-repo.js",
+        "server/src/store/indexes.js"
+      ],
+      "symbols": [
+        "upsertPage",
+        "getPage",
+        "listPages",
+        "listOpenPages",
+        "listByDupKey",
+        "listByDomain",
+        "listByRepo",
+        "countPages",
+        "clearPages"
+      ],
+      "features": [
+        "F-SYNC-02",
+        "F-PERF-01"
+      ],
+      "interfaces": [
+        "POST /api/sync"
+      ]
+    },
+    {
+      "id": "C-BE-CORE-11",
+      "side": "BE",
+      "module": "CORE",
+      "name": "规则仓储",
+      "description": "Map<id, Rule> 按插入顺序保存；正式 id 为 rule_<自增序号>（序号不复用，reset 后归 1，D-08）；返回副本，防止调用方直接改存储。",
+      "files": [
+        "server/src/store/rule-repo.js"
+      ],
+      "symbols": [
+        "insertRule",
+        "listRules",
+        "getRule",
+        "removeRule",
+        "updateRule",
+        "countRules",
+        "clearRules",
+        "nextRuleId"
+      ],
+      "features": [
+        "F-RULE-06",
+        "F-RULE-07",
+        "F-RULE-08"
+      ],
+      "interfaces": [
+        "POST /api/rules",
+        "GET /api/rules",
+        "DELETE /api/rules/:id"
+      ]
+    },
+    {
+      "id": "C-BE-CORE-12",
+      "side": "BE",
+      "module": "CORE",
+      "name": "运行状态：版本号、同步日志与配置覆盖",
+      "description": "dataVersion（页面变化）、ruleVersion（规则变化）、configVersion（配置变化）三个计数器，进程内单调递增、永不归零，作为排序快照、推荐缓存、有效关键词表的失效依据；onStateChange 供快照持久化与排序快照预建订阅；onReset(fn) 供各模块注册重置回调（page-repo 的 clearPages、rule-repo 的 clearRules、RANK 的 resetRankCache、PERF 的 clearRecCache、PRIV 的 resetKeywordCache）；SyncLog 环形保留最近 50 条，lastSyncAt 供 health；settings-repo 保存 PUT /api/config 的覆盖值。resetState：清空同步日志、配置覆盖与 id 序号，三个版本号各加 1（不归零，保证 reset 前后的缓存 key 不会重合），然后按注册顺序同步调用全部 onReset 回调，最后触发 onStateChange。",
+      "files": [
+        "server/src/store/state.js",
+        "server/src/store/settings-repo.js"
+      ],
+      "symbols": [
+        "getVersions",
+        "bumpDataVersion",
+        "bumpRuleVersion",
+        "bumpConfigVersion",
+        "onStateChange",
+        "onReset",
+        "appendSyncLog",
+        "getLastSync",
+        "getSettings",
+        "patchSettings",
+        "resetState"
+      ],
+      "features": [
+        "F-PERF-02",
+        "F-DIAG-09",
+        "F-PRIV-05"
+      ],
+      "interfaces": [
+        "GET /api/health",
+        "PUT /api/config"
+      ]
+    },
+    {
+      "id": "C-BE-CORE-13",
+      "side": "BE",
+      "module": "CORE",
+      "name": "规则作用范围匹配",
+      "description": "规则 enabled=false 时不匹配；domain 匹配 = 页面域名等于规则域名或以 .domain 结尾（internal.com 覆盖 docs.internal.com）；urlPattern 对 path+query 做包含匹配；两者都为空表示作用于全部页面。纯函数，被 RANK / CLEAN / REC 共用。",
+      "files": [
+        "server/src/domain/rule-match.js"
+      ],
+      "symbols": [
+        "matchesRule",
+        "domainMatches"
+      ],
+      "features": [
+        "F-CLEAN-04",
+        "F-RANK-04"
+      ]
+    },
+    {
+      "id": "C-BE-CORE-14",
+      "side": "BE",
+      "module": "CORE",
+      "name": "测试重置接口 POST /api/__test__/reset",
+      "description": "仅 ENABLE_TEST_API=1 时注册（BE-RUN-02），否则该路径 404。resetAll 只调用 resetState()：由它把三个版本号各加 1，并触发各模块经 onReset 注册的清理回调（页面与索引、规则、排序快照与 ?now= LRU、推荐缓存、有效关键词表），同时清空同步日志、配置覆盖与 id 序号；启用快照时经 onStateChange 写入空快照。test-api.js 不直接 import 业务模块。不得用于任何业务分支（BE-RUN-05）。",
+      "files": [
+        "server/src/routes/test-api.js"
+      ],
+      "symbols": [
+        "testApiRoutes",
+        "resetAll"
+      ],
+      "features": [
+        "F-DIAG-09"
+      ],
+      "interfaces": [
+        "POST /api/__test__/reset"
+      ]
+    },
+    {
+      "id": "C-BE-CORE-15",
+      "side": "BE",
+      "module": "CORE",
+      "name": "GET /api/health 最小可用实现（骨架就绪探针）",
+      "description": "第 4 轮评审新增：validate.mjs skeleton 与 playwright webServer 都以 GET /api/health 返回 2xx 作为就绪条件，因此 health 不能是抛错桩，由 lead 在骨架阶段直接实现完整字段：status \"ok\"、version = APP_VERSION、uptime = floor((Date.now() − startedAt)/1000)、pageCount（page-repo.countPages）、ruleCount / enabledRuleCount（rule-repo.countRules / listRules 过滤 enabled）、lastSyncAt（state.getLastSync，未同步为 null）、persistence（config.snapshotFile ? \"snapshot\" : \"memory\"）、startedAt。数据只取 CORE 的 repo / state，不 import 任何业务模块，因此业务模块未实现时也返回 200。与 C-BE-DIAG-01 共用文件，所有者 CORE。",
+      "files": [
+        "server/src/routes/health.js",
+        "server/src/services/health-service.js"
+      ],
+      "symbols": [
+        "healthRoutes",
+        "getHealth"
+      ],
+      "features": [
+        "F-DIAG-09",
+        "F-DIAG-01",
+        "F-DEMO-01"
+      ],
+      "interfaces": [
+        "GET /api/health"
+      ]
+    },
+    {
+      "id": "C-BE-SYNC-01",
+      "side": "BE",
+      "module": "SYNC",
+      "name": "POST /api/sync 路由与请求结构校验",
+      "description": "请求体必须是对象；activeTab 为对象或 null（可缺省）；openTabs / history 为数组（可缺省，视为 []），类型错误 400 VALIDATION_FAILED；任一数组超过 500 条返回 413 PAYLOAD_TOO_LARGE；mode 只接受 full / incremental；单条记录的问题不在这里报错，交给清洗计入 rejected。",
+      "files": [
+        "server/src/routes/sync.js"
+      ],
+      "symbols": [
+        "syncRoutes",
+        "parseSyncBody"
+      ],
+      "features": [
+        "F-SYNC-01",
+        "F-SYNC-07"
+      ],
+      "interfaces": [
+        "POST /api/sync"
+      ]
+    },
+    {
+      "id": "C-BE-SYNC-02",
+      "side": "BE",
+      "module": "SYNC",
+      "name": "单条记录清洗与时钟偏差处理",
+      "description": "白名单构造 { url, title, lastVisitTime, visitCount, lastAccessed }（BE-SEC-04）；url 非字符串、超过 2048 字符、无法解析或不是 http/https → rejected(invalid_url)；命中敏感关键词 → rejected(privacy)；title 截断到 500 字符；时间戳超过 now+5 分钟按 now 处理（D-01）；visitCount 取正整数，缺省 1。",
+      "files": [
+        "server/src/domain/sync-sanitize.js"
+      ],
+      "symbols": [
+        "sanitizeEntry",
+        "clampTimestamp"
+      ],
+      "features": [
+        "F-SYNC-07",
+        "F-SYNC-03",
+        "F-PRIV-03"
+      ],
+      "interfaces": [
+        "POST /api/sync"
+      ]
+    },
+    {
+      "id": "C-BE-SYNC-03",
+      "side": "BE",
+      "module": "SYNC",
+      "name": "页面合并口径（visitCount / 时间 / 标题 / 来源）",
+      "description": "visitCount = max(已有, 新值, 1)（D-02，不累加）；lastVisitedAt = max(已有, lastVisitTime, lastAccessed)，active_tab 记为本次 syncedAt；firstSeenAt = min；title 非空才覆盖，新建且为空时用 URL；sources 取并集（active_tab / open_tab / history / manual）。纯函数。",
+      "files": [
+        "server/src/domain/page-merge.js"
+      ],
+      "symbols": [
+        "createPageRecord",
+        "mergeObservation"
+      ],
+      "features": [
+        "F-SYNC-02",
+        "F-SYNC-03",
+        "F-SYNC-04"
+      ],
+      "interfaces": [
+        "POST /api/sync"
+      ]
+    },
+    {
+      "id": "C-BE-SYNC-04",
+      "side": "BE",
+      "module": "SYNC",
+      "name": "同步编排：按 normalizedUrl 批量 upsert 与统计",
+      "description": "处理顺序 history → openTabs → activeTab（保证 openTab 不带 lastAccessed 时保留历史时间）；O(n) 批量 upsert（BE-PERF-05）；统计 received / created / updated / rejected；调用打开状态快照；写 SyncLog（只含数量和域名计数）；bumpDataVersion 让排序快照和推荐缓存失效，并调度排序快照异步重建。",
+      "files": [
+        "server/src/services/sync-service.js"
+      ],
+      "symbols": [
+        "syncContext"
+      ],
+      "features": [
+        "F-SYNC-01",
+        "F-SYNC-02",
+        "F-SYNC-04"
+      ],
+      "interfaces": [
+        "POST /api/sync"
+      ]
+    },
+    {
+      "id": "C-BE-SYNC-05",
+      "side": "BE",
+      "module": "SYNC",
+      "name": "打开状态快照（isOpen / isActive）",
+      "description": "本次 activeTab / openTabs 中出现的页面 isOpen=true，上次 openSet 中本次未出现的页面置为 false（只遍历上次 openSet，不扫全表）；isActive 只属于本次 activeTab；activeTab 为 null 时没有 isActive 页面（D-04）。",
+      "files": [
+        "server/src/services/open-snapshot.js"
+      ],
+      "symbols": [
+        "applyOpenSnapshot"
+      ],
+      "features": [
+        "F-SYNC-05"
+      ],
+      "interfaces": [
+        "POST /api/sync"
+      ]
+    },
+    {
+      "id": "C-BE-PRIV-01",
+      "side": "BE",
+      "module": "PRIV",
+      "name": "敏感关键词匹配",
+      "description": "完整 URL 转小写后做包含判断，返回命中的关键词或 null（D-18，只查 URL 不查标题）；normalizeKeywords 去空白、转小写、去重。已知误伤（tokenizer 含 token）写进 README。",
+      "files": [
+        "server/src/domain/privacy.js"
+      ],
+      "symbols": [
+        "findSensitiveKeyword",
+        "normalizeKeywords"
+      ],
+      "features": [
+        "F-PRIV-03",
+        "F-PRIV-05"
+      ],
+      "interfaces": [
+        "POST /api/sync"
+      ]
+    },
+    {
+      "id": "C-BE-PRIV-02",
+      "side": "BE",
+      "module": "PRIV",
+      "name": "有效关键词表与拒收统计",
+      "description": "有效关键词 = settings.privacySensitiveKeywords ∪ 所有启用的 privacy_filter 规则的 keywords（按 ruleVersion + configVersion 缓存；resetKeywordCache 经 onReset 注册，reset 时清空）；enablePrivacyFilter=false 时后端兜底过滤关闭；summarizeRejected 只输出 { privacy, invalid_url } 计数和被拒域名计数，供日志使用，不含 URL（BE-SEC-05、BE-LOG-05）。",
+      "files": [
+        "server/src/services/privacy-service.js"
+      ],
+      "symbols": [
+        "getEffectiveKeywords",
+        "isPrivacyFilterEnabled",
+        "summarizeRejected",
+        "resetKeywordCache"
+      ],
+      "features": [
+        "F-PRIV-03",
+        "F-PRIV-05"
+      ],
+      "interfaces": [
+        "POST /api/sync",
+        "GET /api/config"
+      ]
+    },
+    {
+      "id": "C-BE-PRIV-03",
+      "side": "BE",
+      "module": "PRIV",
+      "name": "PUT /api/config 修改阈值与敏感关键词",
+      "description": "白名单字段：cleanupThresholdDays(1–365)、maxHistoryItems(1–500)、historyLookbackDays(1–90)、enablePrivacyFilter(boolean)、privacySensitiveKeywords(string[] ≤50，每项 1–50 字符)；没有任何可识别字段或取值越界返回 400；成功后 bumpConfigVersion，返回与 GET /api/config 相同结构。",
+      "files": [
+        "server/src/routes/config-update.js",
+        "server/src/services/settings-service.js"
+      ],
+      "symbols": [
+        "configUpdateRoutes",
+        "updateSettings"
+      ],
+      "features": [
+        "F-PRIV-05"
+      ],
+      "interfaces": [
+        "PUT /api/config"
+      ]
+    },
+    {
+      "id": "C-BE-RANK-01",
+      "side": "BE",
+      "module": "RANK",
+      "name": "评分公式与归一化因子",
+      "description": "score = 0.4·recency + 0.3·frequency + 0.2·open + 0.1·domain（D-05）；recency = 0.5^(未访问天数/7)；frequency = ln(1+visitCount)/ln(1+最大 visitCount)；domain 默认 = 该域名访问量/最大域名访问量；未归档页面参与归一化；保留 2 位小数。纯函数，now 由参数传入。",
+      "files": [
+        "server/src/domain/scoring.js"
+      ],
+      "symbols": [
+        "computeNormalizers",
+        "computeScoreDetail",
+        "combineScore",
+        "round2"
+      ],
+      "features": [
+        "F-RANK-02"
+      ],
+      "interfaces": [
+        "GET /api/pages/ranked"
+      ]
+    },
+    {
+      "id": "C-BE-RANK-02",
+      "side": "BE",
+      "module": "RANK",
+      "name": "域名分加权来源（重要 / 受保护 / 优先）",
+      "description": "按优先级判断：isImportant → never_archive 规则命中 → boost_domain 规则命中 → 默认域名亲和度；前三种 domain 取 1，返回 { value, source: important|protected|boost|affinity }；archive_candidate 不降权。",
+      "files": [
+        "server/src/domain/domain-boost.js"
+      ],
+      "symbols": [
+        "resolveDomainBoost"
+      ],
+      "features": [
+        "F-RANK-04",
+        "F-MENU-01"
+      ],
+      "interfaces": [
+        "GET /api/pages/ranked"
+      ]
+    },
+    {
+      "id": "C-BE-RANK-03",
+      "side": "BE",
+      "module": "RANK",
+      "name": "排序理由生成",
+      "description": "按 PRD 6.3 顺序最多取 3 句，用「，」连接（D-23）：正在浏览 → 时效句（3 天内且 ≥3 次 / 今天 / 3 天内 / 已 N 天未访问 / N 天前访问）→ 高频访问 → 当前仍处于打开状态 → 已被你标记为重要 / 属于受保护域名 / 命中优先域名规则 / 常用域名 xxx（domain ≥ 0.6）。",
+      "files": [
+        "server/src/domain/rank-reason.js"
+      ],
+      "symbols": [
+        "buildRankReason"
+      ],
+      "features": [
+        "F-RANK-03",
+        "F-RANK-04",
+        "F-MENU-01"
+      ],
+      "interfaces": [
+        "GET /api/pages/ranked"
+      ]
+    },
+    {
+      "id": "C-BE-RANK-04",
+      "side": "BE",
+      "module": "RANK",
+      "name": "排序快照：写后预计算、版本失效与查询",
+      "description": "快照 = 全部未归档页面按 score 降序（同分按 lastVisitedAt 倒序）+ 每页 scoreDetail/reason + 按域名 / 仓库的 Top-K 桶 + dupKey→最佳页映射 + 域名列表 domainList（按页面数降序、同数字母序）；key = (dataVersion, ruleVersion, configVersion)，builtAt 记录构建所用的 now。写操作 bump 版本号后 setImmediate 异步预建（BE-PERF-01）。读路径：① 版本号一致且 now − builtAt ≤ 60 秒直接返回；② 版本一致且 60 秒 < now − builtAt ≤ 1 小时（RANK_STALE_MAX_MS）返回旧快照，同时 setImmediate 异步重建（stale-while-revalidate）；③ 版本一致但超过 1 小时过时上限时同步重建一次（每小时最多一次），保证 score / reason 最多落后请求时刻 1 小时；④ 版本号不一致且预建尚未完成（写后极短窗口、冷启动、reset 后）时同步构建一次，保证写后首读看到新数据。ranked 的 generatedAt = 快照 builtAt（实际计算所用的 now）。带 ?now= 时按 (versions, now) 放进容量 8 的 LRU，单独计算且不污染默认快照，该路径仅用于测试与复算。resetRankCache 清空默认快照、LRU 并取消待执行的重建，经 onReset 注册。queryRanked 支持 limit / domain / openOnly。",
+      "files": [
+        "server/src/services/rank-service.js"
+      ],
+      "symbols": [
+        "getRankSnapshot",
+        "buildRankSnapshot",
+        "scheduleRankRebuild",
+        "queryRanked",
+        "listRankedDomains",
+        "resetRankCache"
+      ],
+      "features": [
+        "F-RANK-01",
+        "F-PERF-01"
+      ],
+      "interfaces": [
+        "GET /api/pages/ranked",
+        "POST /api/recommendations/next"
+      ]
+    },
+    {
+      "id": "C-BE-RANK-05",
+      "side": "BE",
+      "module": "RANK",
+      "name": "GET /api/pages/ranked 路由与 DTO",
+      "description": "解析 limit（1–500，默认 20）、domain、openOnly（true/false）、now；输出 { pages, total, domains, generatedAt }（domains 取快照 domainList 前 50 个，不受过滤影响，契约 v1.1.0 新增），每页包含题目字段 + isOpen、sources、scoreDetail（字段只增不减）。",
+      "files": [
+        "server/src/routes/ranked.js"
+      ],
+      "symbols": [
+        "rankedRoutes",
+        "toRankedPageDto"
+      ],
+      "features": [
+        "F-RANK-01"
+      ],
+      "interfaces": [
+        "GET /api/pages/ranked"
+      ]
+    },
+    {
+      "id": "C-BE-REC-01",
+      "side": "BE",
+      "module": "REC",
+      "name": "POST /api/recommendations/next 路由与校验",
+      "description": "currentPage 字段必须存在（对象或 null；null 表示系统页），缺失 400；openTabs / recentHistory 必须是数组（可缺省为 []），超过 500 条 413；只取 recentHistory 按 lastVisitTime 倒序的前 20 条；支持 ?now=。",
+      "files": [
+        "server/src/routes/recommendations.js"
+      ],
+      "symbols": [
+        "recommendationRoutes",
+        "parseRecommendBody"
+      ],
+      "features": [
+        "F-REC-01"
+      ],
+      "interfaces": [
+        "POST /api/recommendations/next"
+      ]
+    },
+    {
+      "id": "C-BE-REC-02",
+      "side": "BE",
+      "module": "REC",
+      "name": "同仓库召回（same_repo）",
+      "description": "当前页与候选同属 github.com/{owner}/{repo}：PR→Actions rel=1.0、PR→Issue 0.8、Issue→PR 0.9、其他 0.7，并给出对应理由模板（含「PR」「CI」等关键词，D-22）。",
+      "files": [
+        "server/src/domain/rec-same-repo.js"
+      ],
+      "symbols": [
+        "matchSameRepo"
+      ],
+      "features": [
+        "F-REC-02"
+      ],
+      "interfaces": [
+        "POST /api/recommendations/next"
+      ]
+    },
+    {
+      "id": "C-BE-REC-03",
+      "side": "BE",
+      "module": "REC",
+      "name": "同文档站 / 同域名召回（same_doc_site / same_domain）",
+      "description": "文档页判定（D-17）：域名属于 developer.mozilla.org、react.dev、docs.internal.com、vuejs.org、nodejs.org，或路径含 /docs、/reference、/learn、/guide；文档页同域候选 rel=0.8（理由含域名和访问次数），非文档页同域候选 rel=0.6（理由含「同域名」和页面评分）。",
+      "files": [
+        "server/src/domain/rec-site.js"
+      ],
+      "symbols": [
+        "isDocPage",
+        "matchSameDocSite",
+        "matchSameDomain"
+      ],
+      "features": [
+        "F-REC-03",
+        "F-REC-04"
+      ],
+      "interfaces": [
+        "POST /api/recommendations/next"
+      ]
+    },
+    {
+      "id": "C-BE-REC-04",
+      "side": "BE",
+      "module": "REC",
+      "name": "全局兜底召回（global_top）",
+      "description": "其他策略都不命中的候选，或当前页为 null（系统页）时：rel=0.3，理由固定为「近期综合评分较高的页面，可作为备选」。",
+      "files": [
+        "server/src/domain/rec-fallback.js"
+      ],
+      "symbols": [
+        "matchGlobalTop"
+      ],
+      "features": [
+        "F-REC-06"
+      ],
+      "interfaces": [
+        "POST /api/recommendations/next"
+      ]
+    },
+    {
+      "id": "C-BE-REC-05",
+      "side": "BE",
+      "module": "REC",
+      "name": "关联推荐规则触发（recommend_related）",
+      "description": "从 recentHistory 最近一条往前数，连续属于触发域名的不同页面（按 dupKey 去重）≥ minCount 即触发；目标域名的候选 rel=0.95、strategy=rule，理由「你已连续浏览 N 个 X 页面，按你的规则推荐相关 Y 页面」；库里没有目标域名页面时给出目标站点站内搜索兜底（score 0.8）。",
+      "files": [
+        "server/src/domain/rec-rule-trigger.js"
+      ],
+      "symbols": [
+        "detectTriggeredRules",
+        "matchRuleTarget",
+        "buildSiteSearchFallback"
+      ],
+      "features": [
+        "F-REC-07"
+      ],
+      "interfaces": [
+        "POST /api/recommendations/next"
+      ]
+    },
+    {
+      "id": "C-BE-REC-06",
+      "side": "BE",
+      "module": "REC",
+      "name": "推荐过滤、最终打分与截断",
+      "description": "final = 0.6·rel + 0.4·页面 score（2 位小数）；排除当前页和已打开页（按 dupKey）、已归档页、正在被建议归档的页（复用整理判定）、final < 0.3 的结果；同一 dupKey 只保留最高分；按 final 降序取 Top 5。",
+      "files": [
+        "server/src/domain/rec-rank.js"
+      ],
+      "symbols": [
+        "buildExclusionKeys",
+        "rankRecommendations"
+      ],
+      "features": [
+        "F-REC-05"
+      ],
+      "interfaces": [
+        "POST /api/recommendations/next"
+      ]
+    },
+    {
+      "id": "C-BE-REC-07",
+      "side": "BE",
+      "module": "REC",
+      "name": "推荐编排：索引桶召回（候选上限 200）",
+      "description": "候选只来自排序快照的索引桶：同仓库 Top-50、同域名 Top-50、规则目标域名 Top-50、全局 Top-50，合并后最多 200 条（BE-PERF-03，不扫全表）；每个候选取命中策略中 rel 最高的一个；先查推荐缓存，未命中再计算并写回；输出 { recommendations, cached, generatedAt }。",
+      "files": [
+        "server/src/services/recommend-service.js"
+      ],
+      "symbols": [
+        "recommendNext",
+        "collectCandidates"
+      ],
+      "features": [
+        "F-REC-01",
+        "F-REC-02",
+        "F-PERF-01"
+      ],
+      "interfaces": [
+        "POST /api/recommendations/next"
+      ]
+    },
+    {
+      "id": "C-BE-PERF-01",
+      "side": "BE",
+      "module": "PERF",
+      "name": "推荐结果缓存与失效",
+      "description": "key = 当前页 normalizedUrl + 打开页 dupKey 集合摘要 + 最近 20 条历史 dupKey 摘要 + dataVersion + ruleVersion + configVersion + now 覆盖值；TTL 60 秒，最多 500 条（超出淘汰最旧）；命中时返回同一份结果并标 cached=true（BE-PERF-04）。clearRecCache 在模块加载时经 onReset 注册，reset 时清空。",
+      "files": [
+        "server/src/services/rec-cache.js"
+      ],
+      "symbols": [
+        "buildRecCacheKey",
+        "getCachedRecs",
+        "putCachedRecs",
+        "clearRecCache"
+      ],
+      "features": [
+        "F-PERF-02"
+      ],
+      "interfaces": [
+        "POST /api/recommendations/next"
+      ]
+    },
+    {
+      "id": "C-BE-PERF-02",
+      "side": "BE",
+      "module": "PERF",
+      "name": "桶内 Top-K 维护",
+      "description": "在排序快照构建时一次遍历已排序页面，为每个域名、每个 GitHub 仓库保留前 K=50 个（已按 score 降序，直接追加即可，O(n)）；推荐召回只读这些桶。纯函数。",
+      "files": [
+        "server/src/domain/top-k.js"
+      ],
+      "symbols": [
+        "buildBucketTopK",
+        "pushTopK"
+      ],
+      "features": [
+        "F-PERF-01"
+      ],
+      "interfaces": [
+        "POST /api/recommendations/next"
+      ]
+    },
+    {
+      "id": "C-BE-PERF-03",
+      "side": "BE",
+      "module": "PERF",
+      "name": "性能基准脚本（10 万页面）",
+      "description": "对已启动的后端：每批 500 条通过真实 POST /api/sync 导入 10 万合成页面，再各调用推荐 / 排序 20 次，打印 p50 / p95；用于本地自测与 README 中的性能说明（不 spawn 子进程，BE-SEC-01）。",
+      "files": [
+        "scripts/bench-perf.mjs"
+      ],
+      "symbols": [
+        "runBench",
+        "percentile"
+      ],
+      "features": [
+        "F-PERF-01"
+      ],
+      "interfaces": [
+        "POST /api/sync",
+        "POST /api/recommendations/next",
+        "GET /api/pages/ranked"
+      ]
+    },
+    {
+      "id": "C-BE-CLEAN-01",
+      "side": "BE",
+      "module": "CLEAN",
+      "name": "单页归档判定（优先级与阈值边界）",
+      "description": "优先级（D-24，命中即停）：never_archive → 标记为重要 → 当前打开（无建议）→ archive_candidate（多条命中取 inactiveDays 最小）→ 默认 cleanupThresholdDays；ageDays = floor((now − lastVisitedAt)/DAY_MS)，ageDays > N 才归档（严格大于，D-20）。返回 { verdict: 'archive'|'keep'|'open'|'none', ageDays, threshold: number|null, ruleId: string|null, reason }（与 03 §12 跨模块接口表一致）：never_archive / 重要 → keep，打开中 → open，超阈值 → archive，其余 → none。REC 只按 verdict==='archive' 排除候选；CLEAN 只输出 archive / keep 建议。",
+      "files": [
+        "server/src/domain/archive-verdict.js"
+      ],
+      "symbols": [
+        "decideArchive",
+        "ageInDays"
+      ],
+      "features": [
+        "F-CLEAN-02",
+        "F-CLEAN-04",
+        "F-CLEAN-05",
+        "F-CLEAN-06"
+      ],
+      "interfaces": [
+        "GET /api/pages/cleanup-suggestions",
+        "POST /api/recommendations/next"
+      ]
+    },
+    {
+      "id": "C-BE-CLEAN-02",
+      "side": "BE",
+      "module": "CLEAN",
+      "name": "重复页面分组（merge）",
+      "description": "未归档页面按 dupKey 分组，组内 ≥ 2 个输出 merge：urls 按 URL 长度升序（同长按字典序），keepUrl 取最短的 URL，理由「去掉 query 参数后 URL 相同，疑似重复页面」。",
+      "files": [
+        "server/src/domain/duplicate-groups.js"
+      ],
+      "symbols": [
+        "buildMergeGroups"
+      ],
+      "features": [
+        "F-CLEAN-03"
+      ],
+      "interfaces": [
+        "GET /api/pages/cleanup-suggestions"
+      ]
+    },
+    {
+      "id": "C-BE-CLEAN-03",
+      "side": "BE",
+      "module": "CLEAN",
+      "name": "整理建议组装、理由文案与汇总",
+      "description": "顺序：archive（ageDays 降序）→ merge → keep；archive 理由「超过 N 天未访问（已 M 天），且不在当前打开的 tab 中」，命中规则时追加「；命中规则「原文」」并带 ruleId；keep 理由「被保护域名配置（domain），不建议归档[，虽已 N 天未访问]」或「你已标记为重要，不建议归档」；每条带稳定 key 供插件「忽略」使用；summary 统计三类数量。",
+      "files": [
+        "server/src/domain/cleanup.js"
+      ],
+      "symbols": [
+        "buildCleanupSuggestions",
+        "summarizeSuggestions",
+        "buildSuggestionKey"
+      ],
+      "features": [
+        "F-CLEAN-01",
+        "F-CLEAN-02",
+        "F-CLEAN-04",
+        "F-CLEAN-05",
+        "F-CLEAN-06"
+      ],
+      "interfaces": [
+        "GET /api/pages/cleanup-suggestions"
+      ]
+    },
+    {
+      "id": "C-BE-CLEAN-04",
+      "side": "BE",
+      "module": "CLEAN",
+      "name": "GET /api/pages/cleanup-suggestions 服务与路由",
+      "description": "读取页面、启用的规则与 settings.cleanupThresholdDays，按 ?now= 计算；输出 { summary, suggestions, thresholdDays, generatedAt }。",
+      "files": [
+        "server/src/services/cleanup-service.js",
+        "server/src/routes/cleanup.js"
+      ],
+      "symbols": [
+        "getCleanupSuggestions",
+        "cleanupRoutes"
+      ],
+      "features": [
+        "F-CLEAN-01"
+      ],
+      "interfaces": [
+        "GET /api/pages/cleanup-suggestions"
+      ]
+    },
+    {
+      "id": "C-BE-CLEAN-05",
+      "side": "BE",
+      "module": "CLEAN",
+      "name": "执行整理建议：归档 / 撤销归档 / 合并",
+      "description": "archive：按 normalizedUrl 找到页面置 isArchived=true、archivedAt；unarchive 反之（含被合并的页面）；merge：把其余页面的 visitCount(max)、lastVisitedAt(max)、firstSeenAt(min)、sources(并集) 并入 keepUrl 页面，其余页面归档并记 mergedInto；归档页面不参与排序、推荐、整理；全部 URL 都不存在时 404；成功后 bumpDataVersion。",
+      "files": [
+        "server/src/services/page-action-service.js",
+        "server/src/routes/page-actions.js"
+      ],
+      "symbols": [
+        "archivePages",
+        "unarchivePages",
+        "mergePages",
+        "pageActionRoutes"
+      ],
+      "features": [
+        "F-CLEAN-08"
+      ],
+      "interfaces": [
+        "POST /api/pages/archive",
+        "POST /api/pages/unarchive",
+        "POST /api/pages/merge"
+      ]
+    },
+    {
+      "id": "C-BE-RULE-01",
+      "side": "BE",
+      "module": "RULE",
+      "name": "多子句拆分",
+      "description": "先按 ；; 。 换行 和「但是 / 但 / 另外 / 同时 / 而且 / 并且」强分隔，再按逗号拆；以「如果 / 若 / 当 / 要是」开头的条件句与后一段合并，不拆开；返回去空白后的子句原文（rawText，D-09）。",
+      "files": [
+        "server/src/domain/rule-clauses.js"
+      ],
+      "symbols": [
+        "splitClauses"
+      ],
+      "features": [
+        "F-RULE-04"
+      ],
+      "interfaces": [
+        "POST /api/rules/parse"
+      ]
+    },
+    {
+      "id": "C-BE-RULE-02",
+      "side": "BE",
+      "module": "RULE",
+      "name": "规则要素抽取（天数、域名、页面类型、关键词、次数）",
+      "description": "天数：数字或中文数字 + 天/日/周/星期/个月/月（周 ×7、月 ×30）；域名：显式域名正则 + 别名表（GitHub、MDN、React、Google/谷歌、Stack Overflow、npm、飞书、语雀）按出现位置排序；页面类型：issue→/issues/、PR→/pull/、actions/CI→/actions、搜索结果→/search；关键词：「包含 / 含有 / 带有 / 含 X、Y 的」；次数：「连续 + 看/访问/浏览了 + N + 个/篇/次」。",
+      "files": [
+        "server/src/domain/rule-lexicon.js"
+      ],
+      "symbols": [
+        "parseChineseNumber",
+        "extractDays",
+        "extractDomains",
+        "extractPageType",
+        "extractKeywords",
+        "extractCount"
+      ],
+      "features": [
+        "F-RULE-02",
+        "F-RULE-10"
+      ],
+      "interfaces": [
+        "POST /api/rules/parse"
+      ]
+    },
+    {
+      "id": "C-BE-RULE-03",
+      "side": "BE",
+      "module": "RULE",
+      "name": "类型判定与否定识别",
+      "description": "判定顺序：不上传(privacy_filter) → 推荐(recommend_related) → 否定归档(never_archive，先于归档识别：永远/始终 + 不要/别/不/禁止 + 归档/清理/关闭、保留、保护、白名单) → 归档(archive_candidate) → 优先(boost_domain)；未写天数用默认 14 天并标 confidence=medium + 提示；预览 id 为 rule_1、rule_2…（D-08），不写库。",
+      "files": [
+        "server/src/domain/rule-parser.js"
+      ],
+      "symbols": [
+        "parseRuleText",
+        "classifyClause"
+      ],
+      "features": [
+        "F-RULE-02",
+        "F-RULE-03",
+        "F-RULE-10"
+      ],
+      "interfaces": [
+        "POST /api/rules/parse"
+      ]
+    },
+    {
+      "id": "C-BE-RULE-04",
+      "side": "BE",
+      "module": "RULE",
+      "name": "无法识别、默认值与冲突的告知",
+      "description": "unparsed 项 = { text, reason, examples[] }：没有动作 →「没有识别到动作（归档 / 不要归档 / 推荐 / 不上传 / 优先）」；有否定动作但没有域名或页面类型 →「识别到“不要归档”，但没找到作用的域名或页面类型」；冲突检测：同一范围（域名相同或互为子域）同时有 archive_candidate 与 never_archive（含已保存的启用规则）→ warning「…冲突，执行时“永不归档”优先」。",
+      "files": [
+        "server/src/domain/rule-diagnose.js"
+      ],
+      "symbols": [
+        "buildUnparsed",
+        "detectConflicts",
+        "RULE_EXAMPLES"
+      ],
+      "features": [
+        "F-RULE-05"
+      ],
+      "interfaces": [
+        "POST /api/rules/parse"
+      ]
+    },
+    {
+      "id": "C-BE-RULE-05",
+      "side": "BE",
+      "module": "RULE",
+      "name": "保存前规则校验",
+      "description": "type 必须是 5 种之一；action 缺省按 type 补齐，提供但不匹配则报错；按 type 校验必填字段（archive_candidate: inactiveDays 1–3650；never_archive: domain 或 urlPattern；privacy_filter: keywords 1–20；recommend_related: trigger.domain、trigger.minCount 1–20、target.domain；boost_domain: domain）；rawText 1–500 字符；confidence 只接受 high / medium（缺省 high，随规则保存供列表展示）；返回白名单构造的规则对象或错误字段列表。",
+      "files": [
+        "server/src/domain/rule-schema.js"
+      ],
+      "symbols": [
+        "validateRuleInput",
+        "RULE_TYPES",
+        "ACTION_BY_TYPE"
+      ],
+      "features": [
+        "F-RULE-06"
+      ],
+      "interfaces": [
+        "POST /api/rules"
+      ]
+    },
+    {
+      "id": "C-BE-RULE-06",
+      "side": "BE",
+      "module": "RULE",
+      "name": "规则服务：保存、列表、删除、启停与版本号",
+      "description": "一次保存多条，全部校验通过才写入（任一条失败整体 400，不部分写入）；分配正式 id、enabled 默认 true、createdAt/updatedAt；删除不存在返回 404；每次变更 bumpRuleVersion（使排序快照、推荐缓存、有效关键词表失效）；previewRules 调用解析器并带上已保存规则做冲突检测。",
+      "files": [
+        "server/src/services/rule-service.js"
+      ],
+      "symbols": [
+        "previewRules",
+        "saveRules",
+        "listAllRules",
+        "deleteRule",
+        "setRuleEnabled"
+      ],
+      "features": [
+        "F-RULE-06",
+        "F-RULE-07",
+        "F-RULE-08",
+        "F-RULE-09"
+      ],
+      "interfaces": [
+        "POST /api/rules",
+        "GET /api/rules",
+        "DELETE /api/rules/:id",
+        "PATCH /api/rules/:id"
+      ]
+    },
+    {
+      "id": "C-BE-RULE-07",
+      "side": "BE",
+      "module": "RULE",
+      "name": "POST /api/rules/parse 路由",
+      "description": "text 必须是字符串，trim 后长度 1–500，否则 400 VALIDATION_FAILED；返回 { rules, unparsed, warnings }，不写库（D-08）。",
+      "files": [
+        "server/src/routes/rules-parse.js"
+      ],
+      "symbols": [
+        "ruleParseRoutes"
+      ],
+      "features": [
+        "F-RULE-01",
+        "F-RULE-05"
+      ],
+      "interfaces": [
+        "POST /api/rules/parse"
+      ]
+    },
+    {
+      "id": "C-BE-RULE-08",
+      "side": "BE",
+      "module": "RULE",
+      "name": "规则 CRUD 路由",
+      "description": "POST 返回 201 { rules: 新保存的规则, ruleCount }；GET 返回 { rules, total }；DELETE 返回 200 { deleted, ruleCount }；PATCH 只接受 { enabled: boolean }，返回更新后的规则对象。",
+      "files": [
+        "server/src/routes/rules.js"
+      ],
+      "symbols": [
+        "ruleRoutes"
+      ],
+      "features": [
+        "F-RULE-06",
+        "F-RULE-07",
+        "F-RULE-08",
+        "F-RULE-09"
+      ],
+      "interfaces": [
+        "POST /api/rules",
+        "GET /api/rules",
+        "DELETE /api/rules/:id",
+        "PATCH /api/rules/:id"
+      ]
+    },
+    {
+      "id": "C-BE-DIAG-01",
+      "side": "BE",
+      "module": "DIAG",
+      "name": "GET /api/health 健康信息",
+      "description": "{ status: \"ok\", version: \"1.0.0\", uptime: 整数秒, pageCount, ruleCount, enabledRuleCount, lastSyncAt(从未同步为 null), persistence: memory|snapshot, startedAt }；只读内存计数，O(1)，适合插件 1.5 秒轻量探测。第 4 轮评审后：两个文件与 C-BE-CORE-15 共用、所有者为 CORE，由 lead 在骨架阶段一次完整实现（health 是 validate skeleton 与 playwright webServer 的就绪探针，不能是抛错桩）；DIAG 模块组负责本接口的字段口径、用例与验收，需要改文件时写 blockedBy 由 lead 合并。",
+      "files": [
+        "server/src/routes/health.js",
+        "server/src/services/health-service.js"
+      ],
+      "symbols": [
+        "healthRoutes",
+        "getHealth"
+      ],
+      "features": [
+        "F-DIAG-09",
+        "F-DIAG-01"
+      ],
+      "interfaces": [
+        "GET /api/health"
+      ]
+    },
+    {
+      "id": "C-BE-DIAG-02",
+      "side": "BE",
+      "module": "DIAG",
+      "name": "GET /api/config 配置查询",
+      "description": "返回题目字段 + historyLookbackDays、recencyHalfLifeDays、weights、minRecommendationScore、apiVersion、limits；privacySensitiveKeywords 为合并 privacy_filter 规则后的有效列表，baseSensitiveKeywords 为未合并的配置值。",
+      "files": [
+        "server/src/routes/config.js",
+        "server/src/services/config-service.js"
+      ],
+      "symbols": [
+        "configRoutes",
+        "getPublicConfig"
+      ],
+      "features": [
+        "F-DIAG-10"
+      ],
+      "interfaces": [
+        "GET /api/config"
+      ]
+    },
+    {
+      "id": "C-BE-MENU-01",
+      "side": "BE",
+      "module": "MENU",
+      "name": "右键「添加到分析」POST /api/pages/manual",
+      "description": "单条 upsert，source=manual，lastVisitedAt=now；不触碰打开状态快照（因此不复用 /api/sync）；URL 非 http(s) 返回 400，命中敏感关键词返回 200 { accepted:false, rejected:1 } 且不入库；成功后 bumpDataVersion。",
+      "files": [
+        "server/src/routes/manual-pages.js",
+        "server/src/services/manual-page-service.js"
+      ],
+      "symbols": [
+        "manualPageRoutes",
+        "addManualPage"
+      ],
+      "features": [
+        "F-MENU-01"
+      ],
+      "interfaces": [
+        "POST /api/pages/manual"
+      ]
+    },
+    {
+      "id": "C-BE-MENU-02",
+      "side": "BE",
+      "module": "MENU",
+      "name": "右键「标记为重要」POST /api/pages/important",
+      "description": "{ url, title?, important } 设置 isImportant；页面不存在时以 manual 来源新建；排序中 domain 取 1 并带「已被你标记为重要」，整理中输出 keep；敏感 URL 同上拒收；成功后 bumpDataVersion。",
+      "files": [
+        "server/src/routes/important.js",
+        "server/src/services/important-service.js"
+      ],
+      "symbols": [
+        "importantRoutes",
+        "setImportant"
+      ],
+      "features": [
+        "F-MENU-01"
+      ],
+      "interfaces": [
+        "POST /api/pages/important"
+      ]
+    },
+    {
+      "id": "C-BE-PERSIST-01",
+      "side": "BE",
+      "module": "PERSIST",
+      "name": "JSON 快照写入（防抖 + 原子替换）",
+      "description": "配置了 SNAPSHOT_FILE 才启用：订阅 onStateChange，1 秒防抖（PERSIST 私有常量 SNAPSHOT_DEBOUNCE_MS，写在本文件顶部）；写 `<file>.<pid>.tmp` → fsync → rename 覆盖正式文件（rename 原子，进程中途崩溃最多留下 tmp）；SIGTERM 时 flushSnapshotSync 同步落盘。骨架桩：createSnapshotWriter 返回 { schedule() {} }、writeSnapshotAtomic 与 flushSnapshotSync 为 no-op，均不抛错（否则 SIGTERM 无法退出，违反 BE-RUN-03）。",
+      "files": [
+        "server/src/store/snapshot-writer.js"
+      ],
+      "symbols": [
+        "createSnapshotWriter",
+        "writeSnapshotAtomic",
+        "flushSnapshotSync"
+      ],
+      "features": [
+        "F-PERSIST-01"
+      ]
+    },
+    {
+      "id": "C-BE-PERSIST-02",
+      "side": "BE",
+      "module": "PERSIST",
+      "name": "快照加载与损坏回退",
+      "description": "启动时读取正式快照并校验 schemaVersion 与结构；忽略并清理残留的 *.tmp（写了一半的文件）；正式文件损坏时记录 warn 日志并以空数据启动（不让进程崩溃）；加载后恢复页面、规则、配置覆盖、id 序号与 lastSyncAt，并重建索引。 骨架桩：loadSnapshot 返回 { ok: false, reason: \"NOT_IMPLEMENTED\" }、不抛错，index.js 据此以空数据启动。",
+      "files": [
+        "server/src/store/snapshot-loader.js"
+      ],
+      "symbols": [
+        "loadSnapshot"
+      ],
+      "features": [
+        "F-PERSIST-01"
+      ],
+      "interfaces": [
+        "GET /api/health"
+      ]
+    },
+    {
+      "id": "C-BE-DEMO-01",
+      "side": "BE",
+      "module": "DEMO",
+      "name": "一条命令启动后端并打印 health",
+      "description": "start.sh：cd 到项目根，默认 PORT=3000、SNAPSHOT_FILE=data/snapshot.json（可用环境变量覆盖），后台启动 print-health.mjs 轮询 /api/health（最多 10 秒）并打印返回，然后 `exec node server/src/index.js`（BE-RUN-04，信号直达 node）。",
+      "files": [
+        "scripts/start.sh",
+        "scripts/print-health.mjs"
+      ],
+      "symbols": [
+        "start.sh",
+        "waitAndPrintHealth"
+      ],
+      "features": [
+        "F-DEMO-01"
+      ],
+      "interfaces": [
+        "GET /api/health"
+      ]
+    },
+    {
+      "id": "C-BE-DEMO-02",
+      "side": "BE",
+      "module": "DEMO",
+      "name": "样例数据文件",
+      "description": "与 resource.json 内容一致的副本（真相源只读，样例从这里读取），时间戳保持原值，由导入脚本平移。",
+      "files": [
+        "resources/sample-history.json",
+        "scripts/import-sample.mjs"
+      ],
+      "symbols": [
+        "activeTab",
+        "openTabs",
+        "history"
+      ],
+      "features": [
+        "F-DEMO-02"
+      ],
+      "interfaces": [
+        "POST /api/sync"
+      ]
+    },
+    {
+      "id": "C-BE-DEMO-03",
+      "side": "BE",
+      "module": "DEMO",
+      "name": "样例导入脚本（时间平移，走真实 /api/sync）",
+      "description": "读取 resources/sample-history.json，按 D-01 把全部 lastVisitTime 平移到「最新一条 = 当前时间 − 5 分钟」，POST 到 API_BASE（默认 http://127.0.0.1:${PORT:-3000}）/api/sync，打印同步统计和 health；后端不可达时给出启动提示并以非 0 退出。",
+      "files": [
+        "scripts/import-sample.mjs"
+      ],
+      "symbols": [
+        "shiftSampleTimes",
+        "importSample"
+      ],
+      "features": [
+        "F-DEMO-02"
+      ],
+      "interfaces": [
+        "POST /api/sync",
+        "GET /api/health"
+      ]
+    }
+  ]
+}

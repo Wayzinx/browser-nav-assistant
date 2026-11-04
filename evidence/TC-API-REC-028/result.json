@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-API-REC-028",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:04.445Z",
+  "tests": [
+    {
+      "testId": "012076669127d85768b0-d15f65104865704ea42f",
+      "title": "TC-API-REC-028 有请求体但媒体类型为 text/plain 返回415且不写入",
+      "project": "api",
+      "file": "tests/api/TC-API-REC-028.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 14,
+      "startedAt": "2026-11-04T03:27:04.431Z",
+      "endedAt": "2026-11-04T03:27:04.445Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 729,
+          "after": 731
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "{\"T\":1793762824437,\"N\":1793762824437}"
+      ]
+    }
+  ]
+}

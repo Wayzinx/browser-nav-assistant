@@ -1,0 +1,9 @@
+{"method":"POST","path":"/api/__test__/reset","status":200,"ms":0.24,"reqId":"TC-API-CLEAN-027-01","ts":"2026-11-04T03:25:45.031Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/__test__/state","status":200,"ms":0.35,"reqId":"TC-API-CLEAN-027-state","ts":"2026-11-04T03:25:45.034Z","level":"info","msg":"access"}
+{"reqId":"TC-API-CLEAN-027-02","ok":true,"syncedAt":1793762745037,"received":14,"created":10,"updated":4,"rejected":0,"rejectedByReason":{"invalid_url":0,"privacy":0},"pageCount":10,"mode":"full","rejectedDomains":{},"durationMs":0.620958999999857,"ts":"2026-11-04T03:25:45.038Z","level":"info","msg":"sync done"}
+{"method":"POST","path":"/api/sync","status":200,"ms":1.45,"reqId":"TC-API-CLEAN-027-02","ts":"2026-11-04T03:25:45.039Z","level":"info","msg":"access"}
+{"method":"POST","path":"/api/pages/merge","status":400,"ms":0.48,"reqId":"TC-API-CLEAN-027-03","ts":"2026-11-04T03:25:45.042Z","level":"info","msg":"access"}
+{"method":"POST","path":"/api/pages/merge","status":400,"ms":0.48,"reqId":"TC-API-CLEAN-027-04","ts":"2026-11-04T03:25:45.050Z","level":"info","msg":"access"}
+{"method":"POST","path":"/api/pages/merge","status":404,"ms":0.45,"reqId":"TC-API-CLEAN-027-05","ts":"2026-11-04T03:25:45.054Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/pages/ranked","status":200,"ms":0.29,"reqId":"TC-API-CLEAN-027-06","ts":"2026-11-04T03:25:45.060Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/__test__/state","status":200,"ms":0.53,"reqId":"TC-API-CLEAN-027-state","ts":"2026-11-04T03:25:45.064Z","level":"info","msg":"access"}

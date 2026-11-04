@@ -1,0 +1,35 @@
+{
+  "reqId": "TC-API-MENU-009-07",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/health",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-MENU-009-07"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-MENU-009-07",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "170",
+    "date": "Wed, 04 Nov 2026 03:25:49 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "status": "ok",
+    "version": "1.0.0",
+    "uptime": 7,
+    "pageCount": 10,
+    "ruleCount": 0,
+    "enabledRuleCount": 0,
+    "lastSyncAt": 1793762749347,
+    "persistence": "memory",
+    "startedAt": 1793762741762
+  },
+  "ms": 1,
+  "mutated": null
+}

@@ -1,0 +1,21 @@
+{"method":"POST","path":"/api/__test__/reset","status":200,"ms":0.31,"reqId":"TC-UI-DIAG-016-01","ts":"2026-11-04T03:28:19.933Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/__test__/state","status":200,"ms":0.23,"reqId":"TC-UI-DIAG-016-state","ts":"2026-11-04T03:28:19.936Z","level":"info","msg":"access"}
+{"reason":"NOT_FOUND","ts":"2026-11-04T03:28:20.114Z","level":"warn","msg":"未加载快照，以空数据启动"}
+{"port":62986,"host":"127.0.0.1","persistence":"snapshot","enableTestApi":true,"ts":"2026-11-04T03:28:20.119Z","level":"info","msg":"服务已启动"}
+{"method":"GET","path":"/api/health","status":200,"ms":1.27,"reqId":"TC-UI-DIAG-016-03","ts":"2026-11-04T03:28:20.145Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/health","status":200,"ms":0.44,"reqId":"TC-UI-DIAG-016-04","ts":"2026-11-04T03:28:20.147Z","level":"info","msg":"access"}
+{"method":"POST","path":"/api/__test__/reset","status":200,"ms":0.55,"reqId":"TC-UI-DIAG-016-05","ts":"2026-11-04T03:28:20.149Z","level":"info","msg":"access"}
+{"reqId":"TC-UI-DIAG-016-06","ok":true,"syncedAt":1793762900151,"received":14,"created":10,"updated":4,"rejected":0,"rejectedByReason":{"invalid_url":0,"privacy":0},"pageCount":10,"mode":"full","rejectedDomains":{},"durationMs":1.2036250000000024,"ts":"2026-11-04T03:28:20.153Z","level":"info","msg":"sync done"}
+{"method":"POST","path":"/api/sync","status":200,"ms":2.27,"reqId":"TC-UI-DIAG-016-06","ts":"2026-11-04T03:28:20.153Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/health","status":200,"ms":0.26,"reqId":"TC-UI-DIAG-016-07","ts":"2026-11-04T03:28:20.159Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/config","status":200,"ms":0.57,"reqId":"ext_1793762900250_1","ts":"2026-11-04T03:28:20.253Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/health","status":200,"ms":0.26,"reqId":"ext_1793762900251_2","ts":"2026-11-04T03:28:20.254Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/pages/ranked","status":200,"ms":0.67,"reqId":"ext_1793762900266_3","ts":"2026-11-04T03:28:20.268Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/pages/cleanup-suggestions","status":200,"ms":0.84,"reqId":"ext_1793762900266_4","ts":"2026-11-04T03:28:20.273Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/config","status":200,"ms":0.26,"reqId":"ext_1793762900266_5","ts":"2026-11-04T03:28:20.275Z","level":"info","msg":"access"}
+{"method":"POST","path":"/api/recommendations/next","status":200,"ms":1.28,"reqId":"ext_1793762900279_6","ts":"2026-11-04T03:28:20.282Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/health","status":200,"ms":0.2,"reqId":"ext_1793762900313_7","ts":"2026-11-04T03:28:20.315Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/rules","status":200,"ms":0.27,"reqId":"ext_1793762900319_8","ts":"2026-11-04T03:28:20.320Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/config","status":200,"ms":0.23,"reqId":"ext_1793762900323_9","ts":"2026-11-04T03:28:20.325Z","level":"info","msg":"access"}
+{"signal":"SIGTERM","ts":"2026-11-04T03:28:20.400Z","level":"info","msg":"服务正在退出"}
+{"method":"GET","path":"/api/__test__/state","status":200,"ms":0.17,"reqId":"TC-UI-DIAG-016-state","ts":"2026-11-04T03:28:20.433Z","level":"info","msg":"access"}

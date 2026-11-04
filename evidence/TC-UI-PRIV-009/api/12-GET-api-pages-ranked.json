@@ -1,0 +1,86 @@
+{
+  "reqId": "TC-UI-PRIV-009-sw-10",
+  "observed": true,
+  "setup": false,
+  "method": "GET",
+  "url": "http://127.0.0.1:4300/api/pages/ranked?limit=50",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762950437_10"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "ext_1793762950437_10",
+    "access-control-expose-headers": "x-request-id",
+    "connection": "keep-alive",
+    "content-length": "1005",
+    "keep-alive": "timeout=5",
+    "date": "Wed, 04 Nov 2026 03:29:10 GMT",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin"
+  },
+  "responseBody": {
+    "pages": [
+      {
+        "id": "page_1",
+        "url": "https://example.org/guide-a",
+        "normalizedUrl": "https://example.org/guide-a",
+        "title": "Guide 1",
+        "domain": "example.org",
+        "visitCount": 10,
+        "lastVisitedAt": 1793762950092,
+        "firstSeenAt": 1793762950092,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.8,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "最近 3 天内多次访问（10 次），常用域名 example.org"
+      },
+      {
+        "id": "page_2",
+        "url": "https://example.org/guide-b",
+        "normalizedUrl": "https://example.org/guide-b",
+        "title": "Guide 2",
+        "domain": "example.org",
+        "visitCount": 10,
+        "lastVisitedAt": 1793762950092,
+        "firstSeenAt": 1793762950092,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.8,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "最近 3 天内多次访问（10 次），常用域名 example.org"
+      }
+    ],
+    "total": 2,
+    "domains": [
+      "example.org"
+    ],
+    "generatedAt": 1793762950436
+  },
+  "ms": 3
+}

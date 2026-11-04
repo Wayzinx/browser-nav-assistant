@@ -1,0 +1,59 @@
+{
+  "caseId": "TC-UI-MENU-010",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:57.344Z",
+  "tests": [
+    {
+      "testId": "547f938619f381837e38-fca29f6c5c77f102c9f4",
+      "title": "TC-UI-MENU-010 添加写入后端不可达时无成功提示且后端页面数不变",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-MENU-010.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1579,
+      "startedAt": "2026-11-04T03:28:55.765Z",
+      "endedAt": "2026-11-04T03:28:57.344Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [
+        "evidence/TC-UI-MENU-010/screenshots/01-失败前.png",
+        "evidence/TC-UI-MENU-010/screenshots/02-失败后.png",
+        "evidence/TC-UI-MENU-010/screenshots/03-reload后.png"
+      ],
+      "serverLogLines": 12,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1123,
+          "after": 1123
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "unreachable-add 观察到的写请求：[{\"sequence\":1,\"phase\":\"unreachable-add\",\"method\":\"POST\",\"url\":\"http://127.0.0.1:9/api/pages/manual\",\"origin\":\"http://127.0.0.1:9\",\"path\":\"/api/pages/manual\",\"fromServiceWorker\":true,\"startedAt\":1793762936582,\"transport\":\"failed\",\"status\":null,\"failure\":\"net::ERR_UNSAFE_PORT\",\"endedAt\":1793762936582,\"persisted\":true}]"
+      ]
+    }
+  ]
+}

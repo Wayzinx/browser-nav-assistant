@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RULE-031",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:05.394Z",
+  "tests": [
+    {
+      "testId": "ead772bb2f60e19c5b42-a9b49be2cc6b8b43470f",
+      "title": "TC-API-RULE-031 保存补齐action和默认值并忽略客户端id与解析notes",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-031.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 17,
+      "startedAt": "2026-11-04T03:27:05.377Z",
+      "endedAt": "2026-11-04T03:27:05.394Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 800,
+          "after": 801
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 1,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

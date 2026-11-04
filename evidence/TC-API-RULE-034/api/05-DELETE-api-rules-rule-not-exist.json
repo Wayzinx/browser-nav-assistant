@@ -1,0 +1,30 @@
+{
+  "reqId": "TC-API-RULE-034-05",
+  "setup": false,
+  "method": "DELETE",
+  "url": "/api/rules/rule_not_exist",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-RULE-034-05"
+  },
+  "requestBody": null,
+  "status": 404,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RULE-034-05",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "74",
+    "date": "Wed, 04 Nov 2026 03:27:05 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "error": {
+      "code": "NOT_FOUND",
+      "message": "规则 rule_not_exist 不存在"
+    }
+  },
+  "ms": 1.3,
+  "mutated": null
+}

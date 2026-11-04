@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-SYNC-021",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:06.470Z",
+  "tests": [
+    {
+      "testId": "47beaa90bf2f6482529b-0b93ab22e6dc15ed7189",
+      "title": "TC-API-SYNC-021 openTabs 从 500 到 501 时保留上次合法快照",
+      "project": "api",
+      "file": "tests/api/TC-API-SYNC-021.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 46,
+      "startedAt": "2026-11-04T03:27:06.424Z",
+      "endedAt": "2026-11-04T03:27:06.470Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 8,
+      "screenshots": [],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 901,
+          "after": 903
+        },
+        "pages": {
+          "added": 500,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 500,
+          "rules": 0,
+          "openPages": 500,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

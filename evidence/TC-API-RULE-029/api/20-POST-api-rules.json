@@ -1,0 +1,46 @@
+{
+  "reqId": "TC-API-RULE-029-20",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/rules",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-RULE-029-20"
+  },
+  "requestBody": {
+    "rules": [
+      {
+        "rawText": "缺目标站点",
+        "type": "recommend_related",
+        "trigger": {
+          "domain": "react.dev",
+          "minCount": 3
+        }
+      }
+    ]
+  },
+  "status": 400,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RULE-029-20",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "135",
+    "date": "Wed, 04 Nov 2026 03:27:05 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "error": {
+      "code": "VALIDATION_FAILED",
+      "message": "请求字段类型或取值不合法",
+      "details": {
+        "fields": [
+          "rules[0].target.domain"
+        ]
+      }
+    }
+  },
+  "ms": 1.1,
+  "mutated": null
+}

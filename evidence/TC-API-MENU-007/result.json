@@ -1,0 +1,458 @@
+{
+  "caseId": "TC-API-MENU-007",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:49.156Z",
+  "tests": [
+    {
+      "testId": "67e56d008f09c91269c0-73c7a9655f280310f1e4",
+      "title": "TC-API-MENU-007 /api/pages/manual 拒绝缺少 url且不改变已存页面",
+      "project": "api",
+      "file": "tests/api/TC-API-MENU-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 41,
+      "startedAt": "2026-11-04T03:25:48.844Z",
+      "endedAt": "2026-11-04T03:25:48.885Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 130,
+          "after": 132
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    },
+    {
+      "testId": "67e56d008f09c91269c0-f2013841ebc13928b312",
+      "title": "TC-API-MENU-007 /api/pages/manual 拒绝url 为空字符串且不改变已存页面",
+      "project": "api",
+      "file": "tests/api/TC-API-MENU-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 24,
+      "startedAt": "2026-11-04T03:25:48.890Z",
+      "endedAt": "2026-11-04T03:25:48.914Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 132,
+          "after": 134
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    },
+    {
+      "testId": "67e56d008f09c91269c0-7ba6bb633867b0382d53",
+      "title": "TC-API-MENU-007 /api/pages/manual 拒绝chrome 协议且不改变已存页面",
+      "project": "api",
+      "file": "tests/api/TC-API-MENU-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 24,
+      "startedAt": "2026-11-04T03:25:48.920Z",
+      "endedAt": "2026-11-04T03:25:48.944Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 134,
+          "after": 136
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    },
+    {
+      "testId": "67e56d008f09c91269c0-8a1460fe877b80706fa1",
+      "title": "TC-API-MENU-007 /api/pages/manual 拒绝javascript 协议且不改变已存页面",
+      "project": "api",
+      "file": "tests/api/TC-API-MENU-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 30,
+      "startedAt": "2026-11-04T03:25:48.949Z",
+      "endedAt": "2026-11-04T03:25:48.979Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 136,
+          "after": 138
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    },
+    {
+      "testId": "67e56d008f09c91269c0-aecd92a7d8a99b871b5e",
+      "title": "TC-API-MENU-007 /api/pages/manual 拒绝非 URL 字符串且不改变已存页面",
+      "project": "api",
+      "file": "tests/api/TC-API-MENU-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 24,
+      "startedAt": "2026-11-04T03:25:48.984Z",
+      "endedAt": "2026-11-04T03:25:49.008Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 138,
+          "after": 140
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    },
+    {
+      "testId": "67e56d008f09c91269c0-24cb1a82d25d9dc11d3f",
+      "title": "TC-API-MENU-007 /api/pages/important 拒绝缺少 url且不改变已存页面",
+      "project": "api",
+      "file": "tests/api/TC-API-MENU-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 24,
+      "startedAt": "2026-11-04T03:25:49.013Z",
+      "endedAt": "2026-11-04T03:25:49.037Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 140,
+          "after": 142
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    },
+    {
+      "testId": "67e56d008f09c91269c0-a9bd8aa51aa478dd92b6",
+      "title": "TC-API-MENU-007 /api/pages/important 拒绝url 为空字符串且不改变已存页面",
+      "project": "api",
+      "file": "tests/api/TC-API-MENU-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 24,
+      "startedAt": "2026-11-04T03:25:49.042Z",
+      "endedAt": "2026-11-04T03:25:49.066Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 142,
+          "after": 144
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    },
+    {
+      "testId": "67e56d008f09c91269c0-3aae2350ac75c66ce83e",
+      "title": "TC-API-MENU-007 /api/pages/important 拒绝chrome 协议且不改变已存页面",
+      "project": "api",
+      "file": "tests/api/TC-API-MENU-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 23,
+      "startedAt": "2026-11-04T03:25:49.071Z",
+      "endedAt": "2026-11-04T03:25:49.094Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 144,
+          "after": 146
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    },
+    {
+      "testId": "67e56d008f09c91269c0-881871b9adedbe5a5bab",
+      "title": "TC-API-MENU-007 /api/pages/important 拒绝javascript 协议且不改变已存页面",
+      "project": "api",
+      "file": "tests/api/TC-API-MENU-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 20,
+      "startedAt": "2026-11-04T03:25:49.099Z",
+      "endedAt": "2026-11-04T03:25:49.119Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 146,
+          "after": 148
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    },
+    {
+      "testId": "67e56d008f09c91269c0-1bed4451d8934d01b520",
+      "title": "TC-API-MENU-007 /api/pages/important 拒绝非 URL 字符串且不改变已存页面",
+      "project": "api",
+      "file": "tests/api/TC-API-MENU-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 33,
+      "startedAt": "2026-11-04T03:25:49.123Z",
+      "endedAt": "2026-11-04T03:25:49.156Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 148,
+          "after": 150
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

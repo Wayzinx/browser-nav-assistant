@@ -1,0 +1,189 @@
+{
+  "reqId": "TC-API-RANK-024-05",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/ranked",
+  "params": {
+    "limit": 500,
+    "now": 1793762823752
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-RANK-024-05"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RANK-024-05",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "2754",
+    "date": "Wed, 04 Nov 2026 03:27:03 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "pages": [
+      {
+        "id": "page_1",
+        "url": "https://react.dev/a",
+        "normalizedUrl": "https://react.dev/a",
+        "title": "https://react.dev/a",
+        "domain": "react.dev",
+        "visitCount": 1,
+        "lastVisitedAt": 1793759223752,
+        "firstSeenAt": 1793759223752,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.8,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "boost"
+        },
+        "reason": "今天访问过，命中优先域名规则"
+      },
+      {
+        "id": "page_2",
+        "url": "https://sub.react.dev/b",
+        "normalizedUrl": "https://sub.react.dev/b",
+        "title": "https://sub.react.dev/b",
+        "domain": "sub.react.dev",
+        "visitCount": 1,
+        "lastVisitedAt": 1793759223752,
+        "firstSeenAt": 1793759223752,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.8,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "boost"
+        },
+        "reason": "今天访问过，命中优先域名规则"
+      },
+      {
+        "id": "page_4",
+        "url": "https://example.com/p1",
+        "normalizedUrl": "https://example.com/p1",
+        "title": "https://example.com/p1",
+        "domain": "example.com",
+        "visitCount": 1,
+        "lastVisitedAt": 1793759223752,
+        "firstSeenAt": 1793759223752,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.8,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "今天访问过，常用域名 example.com"
+      },
+      {
+        "id": "page_5",
+        "url": "https://example.com/p2",
+        "normalizedUrl": "https://example.com/p2",
+        "title": "https://example.com/p2",
+        "domain": "example.com",
+        "visitCount": 1,
+        "lastVisitedAt": 1793759223752,
+        "firstSeenAt": 1793759223752,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.8,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "今天访问过，常用域名 example.com"
+      },
+      {
+        "id": "page_6",
+        "url": "https://example.com/p3",
+        "normalizedUrl": "https://example.com/p3",
+        "title": "https://example.com/p3",
+        "domain": "example.com",
+        "visitCount": 1,
+        "lastVisitedAt": 1793759223752,
+        "firstSeenAt": 1793759223752,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.8,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "今天访问过，常用域名 example.com"
+      },
+      {
+        "id": "page_3",
+        "url": "https://notreact.dev/c",
+        "normalizedUrl": "https://notreact.dev/c",
+        "title": "https://notreact.dev/c",
+        "domain": "notreact.dev",
+        "visitCount": 1,
+        "lastVisitedAt": 1793759223752,
+        "firstSeenAt": 1793759223752,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.73,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 0,
+          "domain": 0.33,
+          "domainSource": "affinity"
+        },
+        "reason": "今天访问过"
+      }
+    ],
+    "total": 6,
+    "domains": [
+      "example.com",
+      "notreact.dev",
+      "react.dev",
+      "sub.react.dev"
+    ],
+    "generatedAt": 1793762823752
+  },
+  "ms": 0.8,
+  "mutated": null
+}

@@ -1,0 +1,59 @@
+{
+  "caseId": "TC-UI-SYNC-007",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:30:03.575Z",
+  "tests": [
+    {
+      "testId": "e13c9348952f682a64a9-78e71a785735519f9e27",
+      "title": "TC-UI-SYNC-007 冷态SW遗留31秒syncing：判为SYNC_INTERRUPTED并持久化失败",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-SYNC-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 865,
+      "startedAt": "2026-11-04T03:30:02.710Z",
+      "endedAt": "2026-11-04T03:30:03.575Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 2,
+      "screenshots": [
+        "evidence/TC-UI-SYNC-007/screenshots/01-首次加载-中断已判定并持久化.png"
+      ],
+      "serverLogLines": 16,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1211,
+          "after": 1211
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 2,
+      "notes": [
+        "{\"coldState\":{\"writtenAt\":1793763003163,\"readAt\":1793763003164,\"connection\":{\"lastCheckedAt\":null,\"lastErrorCode\":null,\"recoverPending\":false,\"since\":1793763003163,\"status\":\"unknown\"},\"syncState\":{\"cursor\":null,\"cursorBase\":null,\"fullReason\":null,\"lastError\":null,\"lastSuccessAt\":null,\"lastSyncAt\":null,\"mode\":\"full\",\"startedAt\":1793762972163,\"stats\":{\"created\":0,\"filtered\":0,\"received\":0,\"rejected\":0,\"updated\":0,\"uploaded\":0},\"status\":\"syncing\",\"trigger\":\"user\"}},\"syncNowSent\":false}",
+        "{\"firstReadback\":{\"cursor\":null,\"cursorBase\":null,\"fullReason\":null,\"lastError\":{\"code\":\"SYNC_INTERRUPTED\",\"message\":\"同步中断（超过 30 秒未完成），请重试\"},\"lastSuccessAt\":null,\"lastSyncAt\":null,\"mode\":\"full\",\"startedAt\":1793762972163,\"stats\":{\"created\":0,\"filtered\":0,\"received\":0,\"rejected\":0,\"updated\":0,\"uploaded\":0},\"status\":\"error\",\"trigger\":\"user\"},\"posts\":0}",
+        "{\"reopenedReadback\":{\"cursor\":null,\"cursorBase\":null,\"fullReason\":null,\"lastError\":{\"code\":\"SYNC_INTERRUPTED\",\"message\":\"同步中断（超过 30 秒未完成），请重试\"},\"lastSuccessAt\":null,\"lastSyncAt\":null,\"mode\":\"full\",\"startedAt\":1793762972163,\"stats\":{\"created\":0,\"filtered\":0,\"received\":0,\"rejected\":0,\"updated\":0,\"uploaded\":0},\"status\":\"error\",\"trigger\":\"user\"},\"posts\":0}"
+      ]
+    }
+  ]
+}

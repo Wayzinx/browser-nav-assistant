@@ -1,0 +1,10 @@
+{"method":"GET","path":"/api/__test__/state","status":200,"ms":0.22,"reqId":"TC-API-REC-030-state","ts":"2026-11-04T03:27:04.489Z","level":"info","msg":"access"}
+{"method":"POST","path":"/api/__test__/reset","status":200,"ms":0.1,"reqId":"TC-API-REC-030-01","ts":"2026-11-04T03:27:04.490Z","level":"info","msg":"access"}
+{"reqId":"TC-API-REC-030-02","ok":true,"syncedAt":1793762824492,"received":14,"created":10,"updated":4,"rejected":0,"rejectedByReason":{"invalid_url":0,"privacy":0},"pageCount":10,"mode":"full","rejectedDomains":{},"durationMs":0.2430000000022119,"ts":"2026-11-04T03:27:04.492Z","level":"info","msg":"sync done"}
+{"method":"POST","path":"/api/sync","status":200,"ms":0.57,"reqId":"TC-API-REC-030-02","ts":"2026-11-04T03:27:04.492Z","level":"info","msg":"access"}
+{"method":"POST","path":"/api/recommendations/next","status":200,"ms":1.79,"reqId":"TC-API-REC-030-03","ts":"2026-11-04T03:27:04.496Z","level":"info","msg":"access"}
+{"method":"POST","path":"/api/recommendations/next","status":200,"ms":1.06,"reqId":"TC-API-REC-030-04","ts":"2026-11-04T03:27:04.500Z","level":"info","msg":"access"}
+{"method":"POST","path":"/api/recommendations/next","status":413,"ms":0.27,"reqId":"TC-API-REC-030-05","ts":"2026-11-04T03:27:04.502Z","level":"info","msg":"access"}
+{"method":"POST","path":"/api/recommendations/next","status":413,"ms":0.19,"reqId":"TC-API-REC-030-06","ts":"2026-11-04T03:27:04.504Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/health","status":200,"ms":0.08,"reqId":"TC-API-REC-030-07","ts":"2026-11-04T03:27:04.506Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/__test__/state","status":200,"ms":0.2,"reqId":"TC-API-REC-030-state","ts":"2026-11-04T03:27:04.507Z","level":"info","msg":"access"}

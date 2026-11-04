@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-SYNC-001",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:05.844Z",
+  "tests": [
+    {
+      "testId": "7b382d8aa06b8f49b509-a2e54fc17800c645164e",
+      "title": "TC-API-SYNC-001 一次上下文上报接收三个字段并保存两页",
+      "project": "api",
+      "file": "tests/api/TC-API-SYNC-001.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 15,
+      "startedAt": "2026-11-04T03:27:05.829Z",
+      "endedAt": "2026-11-04T03:27:05.844Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 8,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 833,
+          "after": 835
+        },
+        "pages": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 2,
+          "rules": 0,
+          "openPages": 2,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

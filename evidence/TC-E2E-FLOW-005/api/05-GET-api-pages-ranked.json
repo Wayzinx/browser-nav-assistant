@@ -1,0 +1,60 @@
+{
+  "reqId": "TC-E2E-FLOW-005-05",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/ranked",
+  "params": {
+    "now": 1793762827585
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-E2E-FLOW-005-05"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-E2E-FLOW-005-05",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "511",
+    "date": "Wed, 04 Nov 2026 03:27:07 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "pages": [
+      {
+        "id": "page_1",
+        "url": "https://example.com/old",
+        "normalizedUrl": "https://example.com/old",
+        "title": "Old",
+        "domain": "example.com",
+        "visitCount": 1,
+        "lastVisitedAt": 1792466827585,
+        "firstSeenAt": 1792466827585,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.49,
+        "scoreDetail": {
+          "recency": 0.23,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "已 15 天未访问，常用域名 example.com"
+      }
+    ],
+    "total": 1,
+    "domains": [
+      "example.com"
+    ],
+    "generatedAt": 1793762827585
+  },
+  "ms": 0.8,
+  "mutated": null
+}

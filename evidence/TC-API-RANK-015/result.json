@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RANK-015",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:03.540Z",
+  "tests": [
+    {
+      "testId": "bd847a29a744785f0eda-f249ae7d370323d42f4a",
+      "title": "TC-API-RANK-015 未来时间戳按现在处理，recency 不超过 1",
+      "project": "api",
+      "file": "tests/api/TC-API-RANK-015.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 16,
+      "startedAt": "2026-11-04T03:27:03.524Z",
+      "endedAt": "2026-11-04T03:27:03.540Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 3,
+      "screenshots": [],
+      "serverLogLines": 6,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 654,
+          "after": 655
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

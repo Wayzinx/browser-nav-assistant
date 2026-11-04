@@ -1,0 +1,35 @@
+- banner:
+  - heading "导航助手" [level=1]
+  - button "连接状态：检测尚未实现" [disabled]: 连接检测尚未实现
+- region "当前页面":
+  - heading "当前页面" [level=2]
+  - paragraph: Mock /docs
+  - paragraph: https://example.com/docs
+  - button "标记为重要": ☆
+  - button "添加到分析"
+- region "浏览器上下文同步":
+  - button "同步浏览器上下文"
+  - status:
+    - paragraph: 尚未同步
+  - button "全量同步"
+  - paragraph: 当前模式：全量
+- tablist "导航助手功能":
+  - tab "首页"
+  - tab "上下文"
+  - tab "排序"
+  - tab "整理"
+  - tab "规则" [selected]
+  - tab "诊断"
+- main:
+  - tabpanel "规则":
+    - heading "解析规则" [level=2]
+    - text: 规则内容
+    - textbox "规则内容" [disabled]:
+      - /placeholder: 规则解析尚未实现
+    - button "解析" [disabled]
+    - text: 规则解析与保存模块尚未实现。
+    - button "诊断"
+    - button "确认保存 0 条" [disabled]
+    - heading "已保存规则" [level=2]
+    - text: 规则列表模块尚未实现。
+    - button "诊断"

@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-UI-DIAG-019",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:23.303Z",
+  "tests": [
+    {
+      "testId": "5bea479ec6084e3dfc11-cb8a1698b3269183b031",
+      "title": "TC-UI-DIAG-019 后端 2 条规则且插件缓存也是 2 条时「当前规则数量」显示 2 并通过",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-DIAG-019.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 858,
+      "startedAt": "2026-11-04T03:28:22.445Z",
+      "endedAt": "2026-11-04T03:28:23.303Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [
+        "evidence/TC-UI-DIAG-019/screenshots/01-S3-规则数一致.png"
+      ],
+      "serverLogLines": 15,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1075,
+          "after": 1075
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 2,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

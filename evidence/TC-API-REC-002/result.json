@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-API-REC-002",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:03.805Z",
+  "tests": [
+    {
+      "testId": "8b12c3a69b15abf77d46-09b629609d27dd128443",
+      "title": "TC-API-REC-002 Issue 当前页且请求没有打开页时首推同仓库 PR",
+      "project": "api",
+      "file": "tests/api/TC-API-REC-002.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 11,
+      "startedAt": "2026-11-04T03:27:03.794Z",
+      "endedAt": "2026-11-04T03:27:03.805Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 3,
+      "screenshots": [],
+      "serverLogLines": 6,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 676,
+          "after": 678
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "{\"T\":1793762823799,\"N\":1793762823800}"
+      ]
+    }
+  ]
+}

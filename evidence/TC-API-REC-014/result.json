@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-API-REC-014",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:04.098Z",
+  "tests": [
+    {
+      "testId": "935bfe359d6cba6ce462-a80b034bbe80beb3d94a",
+      "title": "TC-API-REC-014 不同仓库当前页不能把 GitHub 样例错标为同仓库",
+      "project": "api",
+      "file": "tests/api/TC-API-REC-014.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 16,
+      "startedAt": "2026-11-04T03:27:04.082Z",
+      "endedAt": "2026-11-04T03:27:04.098Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 701,
+          "after": 703
+        },
+        "pages": {
+          "added": 10,
+          "removed": 3,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 7,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "{\"T\":1793762824088,\"N\":1793762824089}"
+      ]
+    }
+  ]
+}

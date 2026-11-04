@@ -1,0 +1,57 @@
+{
+  "caseId": "TC-API-PERSIST-003",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:00.022Z",
+  "tests": [
+    {
+      "testId": "bab3f2aaf8494abe2c01-c1960845f657e79465a4",
+      "title": "TC-API-PERSIST-003 仅有半截 tmp 时空库启动并清理 tmp",
+      "project": "api",
+      "file": "tests/api/TC-API-PERSIST-003.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 113,
+      "startedAt": "2026-11-04T03:26:59.909Z",
+      "endedAt": "2026-11-04T03:27:00.022Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 3,
+      "screenshots": [],
+      "serverLogLines": 2,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 579,
+          "after": 579
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "启动独立后端 pid=58777 port=62283 snapshot=true",
+        "清理后的快照目录：[]",
+        "独立后端退出 {\"pid\":58777,\"requestedSignal\":\"SIGTERM\",\"code\":0,\"signal\":null}"
+      ]
+    }
+  ]
+}

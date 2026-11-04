@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-PERF-003",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:26:55.421Z",
+  "tests": [
+    {
+      "testId": "f0582fb724af2803b411-0dad2de0aff44a96f418",
+      "title": "TC-API-PERF-003 相同推荐请求第 2 次命中缓存且结果相同",
+      "project": "api",
+      "file": "tests/api/TC-API-PERF-003.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 23,
+      "startedAt": "2026-11-04T03:26:55.398Z",
+      "endedAt": "2026-11-04T03:26:55.421Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 575,
+          "after": 576
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

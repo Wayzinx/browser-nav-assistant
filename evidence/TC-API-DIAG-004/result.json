@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-DIAG-004",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:46.981Z",
+  "tests": [
+    {
+      "testId": "5c7d27579ece392d8ee0-720182675665e6e2b7f5",
+      "title": "TC-API-DIAG-004 停用 1 条规则后 ruleCount 仍为 2、enabledRuleCount=1；删除该规则后 ruleCount=1",
+      "project": "api",
+      "file": "tests/api/TC-API-DIAG-004.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 32,
+      "startedAt": "2026-11-04T03:25:46.949Z",
+      "endedAt": "2026-11-04T03:25:46.981Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 9,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 91,
+          "after": 91
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 1,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

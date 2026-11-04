@@ -1,0 +1,59 @@
+{
+  "caseId": "TC-UI-SYNC-008",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:30:04.447Z",
+  "tests": [
+    {
+      "testId": "57e78cf219652547483a-1ed163c8d22210d3f171",
+      "title": "TC-UI-SYNC-008 无普通标签和历史：未同步空态经一次同步变为上传0条的成功态",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-SYNC-008.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 855,
+      "startedAt": "2026-11-04T03:30:03.592Z",
+      "endedAt": "2026-11-04T03:30:04.447Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 3,
+      "screenshots": [
+        "evidence/TC-UI-SYNC-008/screenshots/01-同步前-尚未同步空态.png",
+        "evidence/TC-UI-SYNC-008/screenshots/02-同步后-上传零条的成功态.png"
+      ],
+      "serverLogLines": 20,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1212,
+          "after": 1213
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "{\"browserTabs\":[{\"active\":true,\"audible\":false,\"autoDiscardable\":true,\"discarded\":false,\"favIconUrl\":\"chrome://theme/current-channel-logo\",\"frozen\":false,\"groupId\":-1,\"height\":673,\"highlighted\":true,\"id\":1052493685,\"incognito\":false,\"index\":0,\"lastAccessed\":1793763004034.533,\"mutedInfo\":{\"muted\":false},\"pinned\":false,\"selected\":true,\"splitViewId\":-1,\"status\":\"complete\",\"title\":\"关于版本\",\"url\":\"chrome://version/\",\"width\":500,\"windowId\":1052493681}],\"history\":[{\"id\":\"1\",\"lastVisitTime\":1793763004126.787,\"title\":\"导航助手\",\"typedCount\":1,\"url\":\"chrome-extension://apogdiijbmmelomlehodilcejcmocaki/popup/popup.html\",\"visitCount\":1}]}",
+        "{\"storage\":{\"cache\":{\"cachedAt\":1793763004300,\"cleanup\":{\"cachedAt\":1793763004298,\"data\":{\"generatedAt\":1793763004296,\"suggestions\":[],\"summary\":{\"archive\":0,\"keep\":0,\"merge\":0},\"thresholdDays\":14}},\"config\":{\"cachedAt\":1793763004298,\"data\":{\"apiVersion\":\"1\",\"baseSensitiveKeywords\":[\"password\",\"token\",\"bank\",\"secret\"],\"cleanupThresholdDays\":14,\"enablePrivacyFilter\":true,\"historyLookbackDays\":30,\"limits\":{\"maxBodyBytes\":1048576,\"maxItemsPerSync\":500,\"maxRuleTextLength\":500,\"maxUrlLength\":2048},\"maxHistoryItems\":100,\"minRecommendationScore\":0.3,\"privacySensitiveKeywords\":[\"password\",\"token\",\"bank\",\"secret\"],\"recencyHalfLifeDays\":7,\"weights\":{\"domain\":0.1,\"frequency\":0.3,\"open\":0.2,\"recency\":0.4}}},\"ranked\":{\"cachedAt\":1793763004295,\"data\":{\"domains\":[],\"generatedAt\":1793763004291,\"pages\":[],\"total\":0}},\"recommendations\":{\"__none__\":{\"cachedAt\":1793763004300,\"data\":{\"cached\":false,\"generatedAt\":1793763004299,\"recommendations\":[]}}},\"rules\":{\"cachedAt\":1793763004296,\"data\":{\"rules\":[],\"total\":0}}},\"syncState\":{\"cursor\":1793763004283,\"cursorBase\":{\"apiBaseUrl\":\"http://127.0.0.1:4300\",\"serverStartedAt\":1793762741762},\"fullReason\":null,\"lastError\":null,\"lastSuccessAt\":1793763004283,\"lastSyncAt\":1793763004290,\"mode\":\"full\",\"startedAt\":1793763004283,\"stats\":{\"created\":0,\"filtered\":0,\"received\":0,\"rejected\":0,\"updated\":0,\"uploaded\":0},\"status\":\"success\",\"trigger\":\"user\"}}}"
+      ]
+    }
+  ]
+}

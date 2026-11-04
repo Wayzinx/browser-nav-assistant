@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RULE-022",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:05.070Z",
+  "tests": [
+    {
+      "testId": "bcfee69a2c4d3fa5c5e3-37fc704b9303f373d74b",
+      "title": "TC-API-RULE-022 解析入口遇到坏JSON及错误媒体类型返回统一协议错误且不落库",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-022.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 25,
+      "startedAt": "2026-11-04T03:27:05.045Z",
+      "endedAt": "2026-11-04T03:27:05.070Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 8,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 780,
+          "after": 781
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 1,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

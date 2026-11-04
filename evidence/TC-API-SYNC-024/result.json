@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-SYNC-024",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:06.583Z",
+  "tests": [
+    {
+      "testId": "6e0fc3d3cfd7918e82d3-7c0c41a9437de3d630f1",
+      "title": "TC-API-SYNC-024 text/plain 返回 415 且页面和同步时间不变",
+      "project": "api",
+      "file": "tests/api/TC-API-SYNC-024.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 28,
+      "startedAt": "2026-11-04T03:27:06.555Z",
+      "endedAt": "2026-11-04T03:27:06.583Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 8,
+      "screenshots": [],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 910,
+          "after": 912
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

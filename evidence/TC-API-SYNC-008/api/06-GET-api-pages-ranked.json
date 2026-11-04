@@ -1,0 +1,61 @@
+{
+  "reqId": "TC-API-SYNC-008-06",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/ranked",
+  "params": {
+    "limit": 500,
+    "now": 1793762826025
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-SYNC-008-06"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-SYNC-008-06",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "535",
+    "date": "Wed, 04 Nov 2026 03:27:06 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "pages": [
+      {
+        "id": "page_1",
+        "url": "https://example.com/merge",
+        "normalizedUrl": "https://example.com/merge",
+        "title": "Original",
+        "domain": "example.com",
+        "visitCount": 8,
+        "lastVisitedAt": 1793762226018,
+        "firstSeenAt": 1793761626018,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.8,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "最近 3 天内多次访问（8 次），常用域名 example.com"
+      }
+    ],
+    "total": 1,
+    "domains": [
+      "example.com"
+    ],
+    "generatedAt": 1793762826025
+  },
+  "ms": 1,
+  "mutated": null
+}

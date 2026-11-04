@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-E2E-FLOW-004",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:07.569Z",
+  "tests": [
+    {
+      "testId": "09c5c5bbcd50a2ef41ac-2f09a6919d2499601508",
+      "title": "TC-E2E-FLOW-004 重放不累加访问次数，关闭快照联动排序、整理和推荐",
+      "project": "e2e",
+      "file": "tests/e2e/TC-E2E-FLOW-004.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 52,
+      "startedAt": "2026-11-04T03:27:07.517Z",
+      "endedAt": "2026-11-04T03:27:07.569Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 11,
+      "screenshots": [],
+      "serverLogLines": 16,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 938,
+          "after": 941
+        },
+        "pages": {
+          "added": 11,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 11,
+          "rules": 0,
+          "openPages": 2,
+          "archivedPages": 0,
+          "syncLogs": 3
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

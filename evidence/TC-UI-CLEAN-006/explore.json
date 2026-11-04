@@ -1,0 +1,43 @@
+{
+  "caseId": "TC-UI-CLEAN-006",
+  "verdict": "pass",
+  "observed": "忽略后把 ignoredAt 改为 7 天−1 分钟前，重开时差 604743107ms（<7 天，偏离目标约 3s）；Google 建议仍被过滤，首页「归档 1」，tab-cleanup-count=2；后端 cleanup summary.archive=2、ranked 仍含 Google 且 total=10。",
+  "steps": [
+    "启动 4181 测试后端，POST /api/__test__/reset；channel=chromium 加载 extension/，apiBaseUrl=http://127.0.0.1:4181",
+    "通过真实接口准备数据（样例 /api/sync、规则 /api/rules 等），以 tab 打开 popup，按用例步骤实际点击 getByTestId 元素",
+    "每个关键步骤截图并记录 aria 快照，回读真实后端接口与 chrome.storage.local",
+    "截图 1：忽略后",
+    "截图 2：重开整理页",
+    "截图 3：重开首页",
+    "TEST_PORT=4181 npx playwright test tests/ui/TC-UI-CLEAN-006.spec.mjs 通过（21 条一并运行 21 passed）",
+    "复测（2026-11-03 07:07，产品代码自上轮未变）：4181 后端重跑 clean-4181.mjs，截图/aria/后端回读与上轮结论一致；TEST_PORT=4181 21 条 spec 中 20 passed，RANK-009 首轮因并发 trace ENOENT（非断言失败）单独重跑通过",
+    "复测（2026-11-03 07:27，续跑；产品代码与脚本自上轮 07:09 未变）：4181 后端重跑 clean/rank-4181.mjs，截图、aria 与后端回读和上轮结论一致；关闭探索后端后 TEST_PORT=4181 21 条 spec 21 passed"
+  ],
+  "screenshots": [
+    "evidence/TC-UI-CLEAN-006/explore/1.png",
+    "evidence/TC-UI-CLEAN-006/explore/2.png",
+    "evidence/TC-UI-CLEAN-006/explore/3.png"
+  ],
+  "spec": "tests/ui/TC-UI-CLEAN-006.spec.mjs",
+  "solidified": true,
+  "exploreScript": "tests/explore/tmp/clean-4181.mjs",
+  "ariaSnapshots": [
+    {
+      "n": 1,
+      "label": "忽略后",
+      "aria": "- banner:\n  - heading \"导航助手\" [level=1]\n  - button \"后端已连接\"\n- region \"当前页面\":\n  - heading \"当前页面\" [level=2]\n  - paragraph: about:blank\n  - paragraph: about:blank\n  - text: 系统页 · 不采集\n- region \"浏览器上下文同步\":\n  - button \"同步浏览器上下文\"\n  - status:\n    - paragraph: 尚未同步\n  - button \"全量同步\"\n  - paragraph: 当前模式：全量\n- tablist \"导航助手功能\":\n  - tab \"首页\"\n  - tab \"上下文\"\n  - tab \"排序\"\n  - tab \"整理 2\" [selected]\n  - tab \"规则\"\n  - tab \"诊断\"\n- main:\n  - tabpanel \"整理 2\":\n    - heading \"整理建议\" [level=2]\n    - heading \"归档 1\" [level=3]\n    - article:\n      - text: Old bug report from last sprint\n      - paragraph: https://github.com/org/repo/issues/100\n      - paragraph: 超过 14 天未访问（已 24 天），且不在当前打开的 tab 中\n      - paragraph: 已 24 天未访问\n      - button \"归档\"\n      - button \"忽略\"\n    - heading \"重复 1\" [level=3]\n    - article:\n      - text: Fix login redirect bug\n      - paragraph: https://github.com/org/repo/issues/123 https://github.com/org/repo/issues/123?tab=comments\n      - paragraph: 去掉 query 参数后 URL 相同，疑似重复页面\n      - button \"合并\"\n      - button \"忽略\"\n    - heading \"保留 0\" [level=3]\n    - button \"全部归档\""
+    },
+    {
+      "n": 2,
+      "label": "重开整理页",
+      "aria": "- banner:\n  - heading \"导航助手\" [level=1]\n  - button \"后端已连接\"\n- region \"当前页面\":\n  - heading \"当前页面\" [level=2]\n  - paragraph: about:blank\n  - paragraph: about:blank\n  - text: 系统页 · 不采集\n- region \"浏览器上下文同步\":\n  - button \"同步浏览器上下文\"\n  - status:\n    - paragraph: 尚未同步\n  - button \"全量同步\"\n  - paragraph: 当前模式：全量\n- tablist \"导航助手功能\":\n  - tab \"首页\"\n  - tab \"上下文\"\n  - tab \"排序\"\n  - tab \"整理 2\" [selected]\n  - tab \"规则\"\n  - tab \"诊断\"\n- main:\n  - tabpanel \"整理 2\":\n    - heading \"整理建议\" [level=2]\n    - heading \"归档 1\" [level=3]\n    - article:\n      - text: Old bug report from last sprint\n      - paragraph: https://github.com/org/repo/issues/100\n      - paragraph: 超过 14 天未访问（已 24 天），且不在当前打开的 tab 中\n      - paragraph: 已 24 天未访问\n      - button \"归档\"\n      - button \"忽略\"\n    - heading \"重复 1\" [level=3]\n    - article:\n      - text: Fix login redirect bug\n      - paragraph: https://github.com/org/repo/issues/123 https://github.com/org/repo/issues/123?tab=comments\n      - paragraph: 去掉 query 参数后 URL 相同，疑似重复页面\n      - button \"合并\"\n      - button \"忽略\"\n    - heading \"保留 0\" [level=3]\n    - button \"全部归档\""
+    },
+    {
+      "n": 3,
+      "label": "重开首页",
+      "aria": "- banner:\n  - heading \"导航助手\" [level=1]\n  - button \"后端已连接\"\n- region \"当前页面\":\n  - heading \"当前页面\" [level=2]\n  - paragraph: about:blank\n  - paragraph: about:blank\n  - text: 系统页 · 不采集\n- region \"浏览器上下文同步\":\n  - button \"同步浏览器上下文\"\n  - status:\n    - paragraph: 尚未同步\n  - button \"全量同步\"\n  - paragraph: 当前模式：全量\n- tablist \"导航助手功能\":\n  - tab \"首页\" [selected]\n  - tab \"上下文\"\n  - tab \"排序\"\n  - tab \"整理 2\"\n  - tab \"规则\"\n  - tab \"诊断\"\n- main:\n  - tabpanel \"首页\":\n    - heading \"下一步推荐\" [level=2]\n    - list:\n      - listitem:\n        - button \"Fix login redirect bug 0.58 近期综合评分较高的页面，可作为备选\"\n      - listitem:\n        - button \"Refactor auth middleware (#456) 0.56 近期综合评分较高的页面，可作为备选\"\n      - listitem:\n        - button \"Fetch API - Web APIs | MDN 0.51 近期综合评分较高的页面，可作为备选\"\n    - heading \"历史排序 Top 5\" [level=2]\n    - list:\n      - listitem:\n        - text: Fix login redirect bug 1.00 https://github.com/org/repo/issues/123\n        - paragraph: 最近 3 天内多次访问（8 次），当前仍处于打开状态，常用域名 github.com\n      - listitem:\n        - text: Refactor auth middleware (#456) 0.94 https://github.com/org/repo/pull/456\n        - paragraph: 正在浏览，最近 3 天内多次访问（5 次），常用域名 github.com\n      - listitem:\n        - text: Fetch API - Web APIs | MDN 0.83 https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\n        - paragraph: 最近 3 天内多次访问（4 次），当前仍处于打开状态\n      - listitem:\n        - text: useState – React 0.69 https://react.dev/reference/react/useState\n        - paragraph: 最近 3 天内多次访问（6 次）\n      - listitem:\n        - text: Fix login redirect bug - Comments 0.68 https://github.com/org/repo/issues/123?tab=comments\n        - paragraph: 最近 3 天内多次访问（3 次），常用域名 github.com\n    - heading \"整理建议\" [level=2]\n    - button \"查看整理建议\": 归档 1 重复 1 保留 0\n    - heading \"用一句话配置规则\" [level=2]\n    - text: 规则内容\n    - textbox \"规则内容\":\n      - /placeholder: 输入一句话配置规则\n    - button \"解析\"\n    - button \"启动诊断 · 尚未检测 ›\""
+    }
+  ],
+  "exploredAt": "2026-11-02T22:46:10.083Z",
+  "reverifiedAt": "2026-11-03T07:10:00+08:00"
+}

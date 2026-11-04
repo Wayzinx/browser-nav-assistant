@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-UI-RULE-012",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:39.841Z",
+  "tests": [
+    {
+      "testId": "aac34457c7d905887799-6c908c3b78e620391029",
+      "title": "TC-UI-RULE-012 SAVE_RULES 拒绝非法类型且不改变规则数",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RULE-012.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 941,
+      "startedAt": "2026-11-04T03:29:38.900Z",
+      "endedAt": "2026-11-04T03:29:39.841Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [
+        "evidence/TC-UI-RULE-012/screenshots/01-非法类型消息完成.png",
+        "evidence/TC-UI-RULE-012/screenshots/02-非法保存未写库.png"
+      ],
+      "serverLogLines": 14,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1182,
+          "after": 1182
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

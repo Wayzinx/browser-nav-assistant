@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-PRIV-012",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:02.968Z",
+  "tests": [
+    {
+      "testId": "d44b39e5b36f10af0ec9-4750ff04addd81666949",
+      "title": "TC-API-PRIV-012 空关键词列表不拦截 password，重置恢复默认关键词",
+      "project": "api",
+      "file": "tests/api/TC-API-PRIV-012.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 22,
+      "startedAt": "2026-11-04T03:27:02.946Z",
+      "endedAt": "2026-11-04T03:27:02.968Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 6,
+      "screenshots": [],
+      "serverLogLines": 9,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 612,
+          "after": 615
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

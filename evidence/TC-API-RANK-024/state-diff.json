@@ -1,0 +1,194 @@
+{
+  "summary": {
+    "dataVersion": {
+      "before": 673,
+      "after": 674
+    },
+    "pages": {
+      "added": 6,
+      "removed": 0,
+      "changed": 0
+    },
+    "rules": {
+      "added": 1,
+      "removed": 0,
+      "changed": 0
+    },
+    "counts": {
+      "pages": 6,
+      "rules": 1,
+      "openPages": 0,
+      "archivedPages": 0,
+      "syncLogs": 1
+    },
+    "configChanged": [],
+    "persistChanged": false
+  },
+  "counts": {
+    "pages": {
+      "before": 0,
+      "after": 6,
+      "delta": 6
+    },
+    "rules": {
+      "before": 0,
+      "after": 1,
+      "delta": 1
+    },
+    "openPages": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "archivedPages": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "syncLogs": {
+      "before": 0,
+      "after": 1,
+      "delta": 1
+    }
+  },
+  "pages": {
+    "added": [
+      {
+        "id": "page_4",
+        "url": "https://example.com/p1",
+        "normalizedUrl": "https://example.com/p1",
+        "domain": "example.com",
+        "title": "https://example.com/p1",
+        "visitCount": 1,
+        "lastVisitedAt": 1793759223752,
+        "firstSeenAt": 1793759223752,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isArchived": false,
+        "archivedAt": null,
+        "mergedInto": null,
+        "isImportant": false
+      },
+      {
+        "id": "page_5",
+        "url": "https://example.com/p2",
+        "normalizedUrl": "https://example.com/p2",
+        "domain": "example.com",
+        "title": "https://example.com/p2",
+        "visitCount": 1,
+        "lastVisitedAt": 1793759223752,
+        "firstSeenAt": 1793759223752,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isArchived": false,
+        "archivedAt": null,
+        "mergedInto": null,
+        "isImportant": false
+      },
+      {
+        "id": "page_6",
+        "url": "https://example.com/p3",
+        "normalizedUrl": "https://example.com/p3",
+        "domain": "example.com",
+        "title": "https://example.com/p3",
+        "visitCount": 1,
+        "lastVisitedAt": 1793759223752,
+        "firstSeenAt": 1793759223752,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isArchived": false,
+        "archivedAt": null,
+        "mergedInto": null,
+        "isImportant": false
+      },
+      {
+        "id": "page_3",
+        "url": "https://notreact.dev/c",
+        "normalizedUrl": "https://notreact.dev/c",
+        "domain": "notreact.dev",
+        "title": "https://notreact.dev/c",
+        "visitCount": 1,
+        "lastVisitedAt": 1793759223752,
+        "firstSeenAt": 1793759223752,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isArchived": false,
+        "archivedAt": null,
+        "mergedInto": null,
+        "isImportant": false
+      },
+      {
+        "id": "page_1",
+        "url": "https://react.dev/a",
+        "normalizedUrl": "https://react.dev/a",
+        "domain": "react.dev",
+        "title": "https://react.dev/a",
+        "visitCount": 1,
+        "lastVisitedAt": 1793759223752,
+        "firstSeenAt": 1793759223752,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isArchived": false,
+        "archivedAt": null,
+        "mergedInto": null,
+        "isImportant": false
+      },
+      {
+        "id": "page_2",
+        "url": "https://sub.react.dev/b",
+        "normalizedUrl": "https://sub.react.dev/b",
+        "domain": "sub.react.dev",
+        "title": "https://sub.react.dev/b",
+        "visitCount": 1,
+        "lastVisitedAt": 1793759223752,
+        "firstSeenAt": 1793759223752,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isArchived": false,
+        "archivedAt": null,
+        "mergedInto": null,
+        "isImportant": false
+      }
+    ],
+    "removed": [],
+    "changed": []
+  },
+  "rules": {
+    "added": [
+      {
+        "domain": "react.dev",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762823757,
+        "updatedAt": 1793762823757,
+        "rawText": "react.dev 优先显示",
+        "type": "boost_domain",
+        "action": "boost",
+        "id": "rule_1"
+      }
+    ],
+    "removed": [],
+    "changed": []
+  },
+  "config": {}
+}

@@ -1,0 +1,26 @@
+{
+  "reqId": "TC-API-RULE-042-offline-1",
+  "setup": false,
+  "method": "POST",
+  "url": "http://127.0.0.1:62436/api/rules/parse",
+  "requestHeaders": {
+    "x-request-id": "TC-API-RULE-042-offline-1",
+    "content-type": "application/json",
+    "content-length": 35
+  },
+  "requestBody": {
+    "text": "飞书文档优先显示"
+  },
+  "responseHeaders": null,
+  "responseBody": null,
+  "status": null,
+  "responseReceived": false,
+  "transportError": {
+    "name": "Error",
+    "message": "connect ECONNREFUSED 127.0.0.1:62436",
+    "code": "ECONNREFUSED",
+    "address": "127.0.0.1",
+    "port": 62436
+  },
+  "ms": 0.32341700000688434
+}

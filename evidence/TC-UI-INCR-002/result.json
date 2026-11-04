@@ -1,0 +1,59 @@
+{
+  "caseId": "TC-UI-INCR-002",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:35.540Z",
+  "tests": [
+    {
+      "testId": "dd51682c17bf5dceac48-6c904e2ba57aeb81ac0b",
+      "title": "TC-UI-INCR-002 已有有效游标时点全量同步：忽略游标并按30天窗口重新采集",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-INCR-002.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1213,
+      "startedAt": "2026-11-04T03:28:34.327Z",
+      "endedAt": "2026-11-04T03:28:35.540Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [
+        "evidence/TC-UI-INCR-002/screenshots/01-打开popup.png",
+        "evidence/TC-UI-INCR-002/screenshots/02-全量同步成功.png"
+      ],
+      "serverLogLines": 30,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1089,
+          "after": 1091
+        },
+        "pages": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 2,
+          "rules": 0,
+          "openPages": 2,
+          "archivedPages": 0,
+          "syncLogs": 2
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "首次同步 syncState={\"cursor\":1793762915108,\"cursorBase\":{\"apiBaseUrl\":\"http://127.0.0.1:4300\",\"serverStartedAt\":1793762741762},\"fullReason\":null,\"lastError\":null,\"lastSuccessAt\":1793762915108,\"lastSyncAt\":1793762915116,\"mode\":\"full\",\"startedAt\":1793762915108,\"stats\":{\"created\":2,\"filtered\":0,\"received\":5,\"rejected\":0,\"updated\":3,\"uploaded\":5},\"status\":\"success\",\"trigger\":\"user\"} health={\"status\":\"ok\",\"version\":\"1.0.0\",\"uptime\":173,\"pageCount\":2,\"ruleCount\":0,\"enabledRuleCount\":0,\"lastSyncAt\":1793762915116,\"persistence\":\"memory\",\"startedAt\":1793762741762}",
+        "全量批 t0=1793762915218 t1=1793762915248 history.query=[{\"ts\":1793762915246,\"startTime\":1791170915240,\"maxResults\":100}] syncState={\"cursor\":1793762915240,\"cursorBase\":{\"apiBaseUrl\":\"http://127.0.0.1:4300\",\"serverStartedAt\":1793762741762},\"fullReason\":null,\"lastError\":null,\"lastSuccessAt\":1793762915240,\"lastSyncAt\":1793762915248,\"mode\":\"full\",\"startedAt\":1793762915240,\"stats\":{\"created\":0,\"filtered\":0,\"received\":5,\"rejected\":0,\"updated\":5,\"uploaded\":5},\"status\":\"success\",\"trigger\":\"user\"}"
+      ]
+    }
+  ]
+}

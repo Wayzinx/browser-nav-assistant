@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-API-REC-021",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:04.257Z",
+  "tests": [
+    {
+      "testId": "b8f1ad99c3076d7867ee-696646ee08410dbc79af",
+      "title": "TC-API-REC-021 三个 React 记录只有两个不同 dupKey 时不满足三页阈值",
+      "project": "api",
+      "file": "tests/api/TC-API-REC-021.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 19,
+      "startedAt": "2026-11-04T03:27:04.238Z",
+      "endedAt": "2026-11-04T03:27:04.257Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 715,
+          "after": 717
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 1
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "{\"T\":1793762824246,\"N\":1793762824246}",
+        "{\"ruleId\":\"rule_1\"}"
+      ]
+    }
+  ]
+}

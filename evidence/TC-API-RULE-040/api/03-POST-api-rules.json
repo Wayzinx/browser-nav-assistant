@@ -1,0 +1,50 @@
+{
+  "reqId": "TC-API-RULE-040-03",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/rules",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-RULE-040-03"
+  },
+  "requestBody": {
+    "rules": [
+      {
+        "rawText": "保护docs",
+        "type": "never_archive",
+        "domain": "docs.internal.com"
+      }
+    ]
+  },
+  "status": 201,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RULE-040-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "257",
+    "date": "Wed, 04 Nov 2026 03:27:05 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "rules": [
+      {
+        "domain": "docs.internal.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825677,
+        "updatedAt": 1793762825677,
+        "rawText": "保护docs",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_1"
+      }
+    ],
+    "ruleCount": 1
+  },
+  "ms": 0.8,
+  "mutated": null
+}

@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-UI-REC-001",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:22.226Z",
+  "tests": [
+    {
+      "testId": "02d7471a88c823d79aa3-e0dab87efdd15707678a",
+      "title": "TC-UI-REC-001 样例 PR 首页展示三条精确推荐、分数与理由",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-REC-001.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1134,
+      "startedAt": "2026-11-04T03:29:21.092Z",
+      "endedAt": "2026-11-04T03:29:22.226Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [
+        "evidence/TC-UI-REC-001/screenshots/01-三条推荐与分数理由.png"
+      ],
+      "serverLogLines": 12,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1161,
+          "after": 1162
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "打开 popup 前的恢复状态：{}",
+        "SW 网络观察汇总：{\"requests\":[{\"url\":\"http://127.0.0.1:4300/api/recommendations/next\",\"method\":\"POST\",\"body\":{\"currentPage\":{\"url\":\"https://github.com/org/repo/pull/456\",\"title\":\"Refactor auth middleware (#456)\"},\"openTabs\":[{\"url\":\"https://github.com/org/repo/issues/123\",\"title\":\"Fix login redirect bug\"},{\"url\":\"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\",\"title\":\"Fetch API - Web APIs | MDN\"},{\"url\":\"https://docs.internal.com/ai-agent-design\",\"title\":\"AI Agent Design Guidelines\"},{\"url\":\"https://github.com/org/repo/pull/456\",\"title\":\"Refactor auth middleware (#456)\"}],\"recentHistory\":[{\"url\":\"https://github.com/org/repo/pull/456\",\"title\":\"Refactor auth middleware (#456)\",\"lastVisitTime\":1793762961783.915},{\"url\":\"https://docs.internal.com/ai-agent-design\",\"title\":\"AI Agent Design Guidelines\",\"lastVisitTime\":1793762961731.223},{\"url\":\"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\",\"title\":\"Fetch API - Web APIs | MDN\",\"lastVisitTime\":1793762961689.189},{\"url\":\"https://github.com/org/repo/issues/123\",\"title\":\"Fix login redirect bug\",\"lastVisitTime\":1793762961641.718}]},\"startedAt\":1793762961906,\"sequence\":1}],\"responses\":[{\"url\":\"http://127.0.0.1:4300/api/recommendations/next\",\"status\":200}],\"failures\":[],\"syncRequests\":[]}"
+      ]
+    }
+  ]
+}

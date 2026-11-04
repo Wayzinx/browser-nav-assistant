@@ -1,0 +1,105 @@
+{
+  "dataVersion": 26,
+  "versions": {
+    "data": 26,
+    "rule": 16,
+    "config": 13
+  },
+  "counts": {
+    "pages": 2,
+    "rules": 1,
+    "openPages": 0,
+    "archivedPages": 0,
+    "syncLogs": 1
+  },
+  "pagesTruncated": false,
+  "pagesHash": "021708489031ac3fd1f2489860c5dc3c2787e686533a56269214b14c563ad437",
+  "pages": [
+    {
+      "id": "page_1",
+      "url": "https://docs.internal.com/old",
+      "normalizedUrl": "https://docs.internal.com/old",
+      "domain": "docs.internal.com",
+      "title": "https://docs.internal.com/old",
+      "visitCount": 1,
+      "lastVisitedAt": 1791170744373,
+      "firstSeenAt": 1791170744373,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    },
+    {
+      "id": "page_2",
+      "url": "https://notinternal.com/old",
+      "normalizedUrl": "https://notinternal.com/old",
+      "domain": "notinternal.com",
+      "title": "https://notinternal.com/old",
+      "visitCount": 1,
+      "lastVisitedAt": 1791170744373,
+      "firstSeenAt": 1791170744373,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    }
+  ],
+  "rules": [
+    {
+      "domain": "internal.com",
+      "urlPattern": null,
+      "inactiveDays": null,
+      "enabled": true,
+      "confidence": "high",
+      "createdAt": 1793762744377,
+      "updatedAt": 1793762744377,
+      "rawText": "internal.com 的页面永远不要归档",
+      "type": "never_archive",
+      "action": "keep",
+      "id": "rule_1"
+    }
+  ],
+  "config": {
+    "cleanupThresholdDays": 14,
+    "maxHistoryItems": 100,
+    "historyLookbackDays": 30,
+    "enablePrivacyFilter": true,
+    "privacySensitiveKeywords": [
+      "password",
+      "token",
+      "bank",
+      "secret"
+    ]
+  },
+  "sequences": {
+    "page": 2,
+    "rule": 1,
+    "sync": 1
+  },
+  "lastSync": {
+    "id": "sync_1",
+    "syncedAt": 1793762744374,
+    "mode": "full",
+    "received": 2,
+    "created": 2,
+    "updated": 0,
+    "rejected": 0,
+    "durationMs": 0.09016599999995378,
+    "ok": true,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 0
+    }
+  },
+  "persist": null
+}

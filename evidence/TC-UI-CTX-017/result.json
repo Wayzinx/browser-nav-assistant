@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-UI-CTX-017",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:00.653Z",
+  "tests": [
+    {
+      "testId": "5e992c97ea54f7178789-226d5ebb3475fc75c086",
+      "title": "TC-UI-CTX-017 上下文展示真实历史查询参数：30 天窗口与 maxResults=100",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CTX-017.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1005,
+      "startedAt": "2026-11-04T03:27:59.648Z",
+      "endedAt": "2026-11-04T03:28:00.653Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-CTX-017/screenshots/01-S1-实际历史查询参数.png"
+      ],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1048,
+          "after": 1048
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 2,
+      "notes": [
+        "{\"before\":1793762880361,\"after\":1793762880445,\"maxResults\":100,\"startTime\":1791170880419}",
+        "{\"popupPageErrors\":[],\"swExceptions\":[]}"
+      ]
+    }
+  ]
+}

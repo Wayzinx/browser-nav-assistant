@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-UI-RULE-010",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:37.796Z",
+  "tests": [
+    {
+      "testId": "4b808960c32019a6e528-2579faa6d386ebff50cd",
+      "title": "TC-UI-RULE-010 默认勾选两条并保存，列表与后端一致",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RULE-010.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 920,
+      "startedAt": "2026-11-04T03:29:36.876Z",
+      "endedAt": "2026-11-04T03:29:37.796Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 3,
+      "screenshots": [
+        "evidence/TC-UI-RULE-010/screenshots/01-保存前预览.png",
+        "evidence/TC-UI-RULE-010/screenshots/02-保存完成.png"
+      ],
+      "serverLogLines": 19,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1180,
+          "after": 1180
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 2,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 2,
+      "notes": [
+        "保存响应：{\"rules\":[{\"domain\":\"github.com\",\"urlPattern\":\"/issues/\",\"inactiveDays\":7,\"enabled\":true,\"confidence\":\"high\",\"createdAt\":1793762977603,\"updatedAt\":1793762977603,\"rawText\":\"把 7 天没访问过的 GitHub issue 建议归档\",\"type\":\"archive_candidate\",\"action\":\"suggest_archive\",\"id\":\"rule_1\"},{\"domain\":\"docs.internal.com\",\"urlPattern\":null,\"inactiveDays\":null,\"enabled\":true,\"confidence\":\"high\",\"createdAt\":1793762977603,\"updatedAt\":1793762977603,\"rawText\":\"docs.internal.com 的页面永远不要归档\",\"type\":\"never_archive\",\"action\":\"keep\",\"id\":\"rule_2\"}],\"ruleCount\":2}"
+      ]
+    }
+  ]
+}

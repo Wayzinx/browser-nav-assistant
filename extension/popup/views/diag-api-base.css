@@ -1,0 +1,6 @@
+[data-slot="diag-api-base"] form { display: grid; gap: 8px; }
+[data-slot="diag-api-base"] input { width: 100%; box-sizing: border-box; }
+[data-slot="diag-api-base"] [data-testid="diag-api-base-url-current"] { overflow-wrap: anywhere; margin: 0; }
+[data-slot="diag-api-base"] [data-testid="diag-api-base-url-error"] { color: #b42318; margin: 0; }
+[data-slot="diag-api-base"] [data-testid="diag-api-base-url-saved"] { color: #067647; margin: 0; }
+[data-slot="diag-api-base"] button { justify-self: start; }

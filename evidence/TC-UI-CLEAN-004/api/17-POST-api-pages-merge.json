@@ -1,0 +1,34 @@
+{
+  "source": "extension",
+  "method": "POST",
+  "url": "http://127.0.0.1:4300/api/pages/merge",
+  "reqId": "ext_1793762847671_9",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762847671_9"
+  },
+  "requestBody": "{\"urls\":[\"https://github.com/org/repo/issues/123\",\"https://github.com/org/repo/issues/123?tab=comments\"],\"keepUrl\":\"https://github.com/org/repo/issues/123\"}",
+  "status": 200,
+  "responseHeaders": {
+    "connection": "keep-alive",
+    "date": "Wed, 04 Nov 2026 03:27:27 GMT",
+    "keep-alive": "timeout=5",
+    "access-control-allow-origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "access-control-expose-headers": "x-request-id",
+    "content-length": "73",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin",
+    "x-request-id": "ext_1793762847671_9"
+  },
+  "responseBody": {
+    "ok": true,
+    "keepUrl": "https://github.com/org/repo/issues/123",
+    "merged": 1
+  },
+  "ms": 1.764,
+  "setup": false
+}

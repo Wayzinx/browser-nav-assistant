@@ -1,0 +1,38 @@
+{
+  "reqId": "TC-API-RANK-007-06",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/ranked",
+  "params": {
+    "limit": "1.5",
+    "now": 1793762823307
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-RANK-007-06"
+  },
+  "requestBody": null,
+  "status": 400,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RANK-007-06",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "118",
+    "date": "Wed, 04 Nov 2026 03:27:03 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "error": {
+      "code": "VALIDATION_FAILED",
+      "message": "请求字段类型或取值不合法",
+      "details": {
+        "fields": [
+          "limit"
+        ]
+      }
+    }
+  },
+  "ms": 1.2,
+  "mutated": null
+}

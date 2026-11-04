@@ -1,0 +1,100 @@
+{
+  "summary": {
+    "dataVersion": {
+      "before": 607,
+      "after": 609
+    },
+    "pages": {
+      "added": 1,
+      "removed": 0,
+      "changed": 0
+    },
+    "rules": {
+      "added": 0,
+      "removed": 0,
+      "changed": 0
+    },
+    "counts": {
+      "pages": 1,
+      "rules": 0,
+      "openPages": 0,
+      "archivedPages": 0,
+      "syncLogs": 1
+    },
+    "configChanged": [
+      "privacySensitiveKeywords"
+    ],
+    "persistChanged": false
+  },
+  "counts": {
+    "pages": {
+      "before": 0,
+      "after": 1,
+      "delta": 1
+    },
+    "rules": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "openPages": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "archivedPages": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "syncLogs": {
+      "before": 0,
+      "after": 1,
+      "delta": 1
+    }
+  },
+  "pages": {
+    "added": [
+      {
+        "id": "page_1",
+        "url": "https://example.com/?token=1",
+        "normalizedUrl": "https://example.com/?token=1",
+        "domain": "example.com",
+        "title": "removed keyword",
+        "visitCount": 1,
+        "lastVisitedAt": 1793759222895,
+        "firstSeenAt": 1793759222895,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isArchived": false,
+        "archivedAt": null,
+        "mergedInto": null,
+        "isImportant": false
+      }
+    ],
+    "removed": [],
+    "changed": []
+  },
+  "rules": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  "config": {
+    "privacySensitiveKeywords": {
+      "before": [
+        "password",
+        "token",
+        "bank",
+        "secret"
+      ],
+      "after": [
+        "session",
+        "password"
+      ]
+    }
+  }
+}

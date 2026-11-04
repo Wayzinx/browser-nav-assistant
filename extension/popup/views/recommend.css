@@ -1,0 +1,36 @@
+/* @code C-FE-REC-02 */
+[data-slot="recommend"] .recommend-item {
+  width: 100%;
+  text-align: left;
+  white-space: normal;
+}
+
+[data-slot="recommend"] .recommend-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+[data-slot="recommend"] [data-testid="rec-item-title"] {
+  flex: 1;
+  min-width: 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+[data-slot="recommend"] [data-testid="rec-item-score"] {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+}
+
+[data-slot="recommend"] [data-testid="rec-item-reason"] {
+  display: block;
+  margin-top: 6px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+[data-slot="recommend"] [data-testid="rec-error"] .link {
+  display: block;
+  margin-top: 8px;
+}

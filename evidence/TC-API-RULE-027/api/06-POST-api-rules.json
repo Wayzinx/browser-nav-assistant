@@ -1,0 +1,143 @@
+{
+  "reqId": "TC-API-RULE-027-06",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/rules",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-RULE-027-06"
+  },
+  "requestBody": {
+    "rules": [
+      {
+        "rawText": "越界0",
+        "type": "never_archive",
+        "domain": "overflow0.example.com"
+      },
+      {
+        "rawText": "越界1",
+        "type": "never_archive",
+        "domain": "overflow1.example.com"
+      },
+      {
+        "rawText": "越界2",
+        "type": "never_archive",
+        "domain": "overflow2.example.com"
+      },
+      {
+        "rawText": "越界3",
+        "type": "never_archive",
+        "domain": "overflow3.example.com"
+      },
+      {
+        "rawText": "越界4",
+        "type": "never_archive",
+        "domain": "overflow4.example.com"
+      },
+      {
+        "rawText": "越界5",
+        "type": "never_archive",
+        "domain": "overflow5.example.com"
+      },
+      {
+        "rawText": "越界6",
+        "type": "never_archive",
+        "domain": "overflow6.example.com"
+      },
+      {
+        "rawText": "越界7",
+        "type": "never_archive",
+        "domain": "overflow7.example.com"
+      },
+      {
+        "rawText": "越界8",
+        "type": "never_archive",
+        "domain": "overflow8.example.com"
+      },
+      {
+        "rawText": "越界9",
+        "type": "never_archive",
+        "domain": "overflow9.example.com"
+      },
+      {
+        "rawText": "越界10",
+        "type": "never_archive",
+        "domain": "overflow10.example.com"
+      },
+      {
+        "rawText": "越界11",
+        "type": "never_archive",
+        "domain": "overflow11.example.com"
+      },
+      {
+        "rawText": "越界12",
+        "type": "never_archive",
+        "domain": "overflow12.example.com"
+      },
+      {
+        "rawText": "越界13",
+        "type": "never_archive",
+        "domain": "overflow13.example.com"
+      },
+      {
+        "rawText": "越界14",
+        "type": "never_archive",
+        "domain": "overflow14.example.com"
+      },
+      {
+        "rawText": "越界15",
+        "type": "never_archive",
+        "domain": "overflow15.example.com"
+      },
+      {
+        "rawText": "越界16",
+        "type": "never_archive",
+        "domain": "overflow16.example.com"
+      },
+      {
+        "rawText": "越界17",
+        "type": "never_archive",
+        "domain": "overflow17.example.com"
+      },
+      {
+        "rawText": "越界18",
+        "type": "never_archive",
+        "domain": "overflow18.example.com"
+      },
+      {
+        "rawText": "越界19",
+        "type": "never_archive",
+        "domain": "overflow19.example.com"
+      },
+      {
+        "rawText": "越界20",
+        "type": "never_archive",
+        "domain": "overflow20.example.com"
+      }
+    ]
+  },
+  "status": 400,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RULE-027-06",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "118",
+    "date": "Wed, 04 Nov 2026 03:27:05 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "error": {
+      "code": "VALIDATION_FAILED",
+      "message": "请求字段类型或取值不合法",
+      "details": {
+        "fields": [
+          "rules"
+        ]
+      }
+    }
+  },
+  "ms": 0.7,
+  "mutated": null
+}

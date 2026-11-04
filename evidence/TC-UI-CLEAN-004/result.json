@@ -1,0 +1,60 @@
+{
+  "caseId": "TC-UI-CLEAN-004",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:27.979Z",
+  "tests": [
+    {
+      "testId": "2bf850c84df5a4c71bb4-4c5bde451d3e6f7f6866",
+      "title": "TC-UI-CLEAN-004 点击合并再撤销：保留无query页面，并恢复被并入页面",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CLEAN-004.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1156,
+      "startedAt": "2026-11-04T03:27:26.823Z",
+      "endedAt": "2026-11-04T03:27:27.979Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 29,
+      "screenshots": [
+        "evidence/TC-UI-CLEAN-004/screenshots/01-合并前.png",
+        "evidence/TC-UI-CLEAN-004/screenshots/02-合并后.png",
+        "evidence/TC-UI-CLEAN-004/screenshots/03-撤销合并后.png",
+        "evidence/TC-UI-CLEAN-004/screenshots/04-结束状态.png"
+      ],
+      "serverLogLines": 32,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 988,
+          "after": 993
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "{\"lastCleanupAction\":{\"at\":1793762847674,\"kind\":\"merge\",\"urls\":[\"https://github.com/org/repo/issues/123?tab=comments\"]}}"
+      ]
+    }
+  ]
+}

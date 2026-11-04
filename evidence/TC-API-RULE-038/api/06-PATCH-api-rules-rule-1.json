@@ -1,0 +1,35 @@
+{
+  "reqId": "TC-API-RULE-038-06",
+  "setup": false,
+  "method": "PATCH",
+  "url": "/api/rules/rule_1",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-RULE-038-06"
+  },
+  "requestBody": {},
+  "status": 400,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RULE-038-06",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "120",
+    "date": "Wed, 04 Nov 2026 03:27:05 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "error": {
+      "code": "VALIDATION_FAILED",
+      "message": "请求字段类型或取值不合法",
+      "details": {
+        "fields": [
+          "enabled"
+        ]
+      }
+    }
+  },
+  "ms": 1,
+  "mutated": null
+}

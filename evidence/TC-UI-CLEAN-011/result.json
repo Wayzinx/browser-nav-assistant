@@ -1,0 +1,63 @@
+{
+  "caseId": "TC-UI-CLEAN-011",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:38.651Z",
+  "tests": [
+    {
+      "testId": "e08430907b7d7416164a-5d48d731f9ad8b42d07d",
+      "title": "TC-UI-CLEAN-011 有缓存且归档请求不可达：保留离线建议，恢复连接后实际归档成功",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CLEAN-011.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1513,
+      "startedAt": "2026-11-04T03:27:37.138Z",
+      "endedAt": "2026-11-04T03:27:38.651Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 39,
+      "screenshots": [
+        "evidence/TC-UI-CLEAN-011/screenshots/01-离线前真实缓存.png",
+        "evidence/TC-UI-CLEAN-011/screenshots/02-离线缓存整理页.png",
+        "evidence/TC-UI-CLEAN-011/screenshots/03-离线归档失败.png",
+        "evidence/TC-UI-CLEAN-011/screenshots/04-恢复后归档成功.png"
+      ],
+      "serverLogLines": 27,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1020,
+          "after": 1024
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 3,
+      "notes": [
+        "{\"savedRules\":[{\"domain\":\"github.com\",\"urlPattern\":\"/issues/\",\"inactiveDays\":7,\"enabled\":true,\"confidence\":\"high\",\"createdAt\":1793762857643,\"updatedAt\":1793762857643,\"rawText\":\"把 7 天没访问过的 GitHub issue 建议归档\",\"type\":\"archive_candidate\",\"action\":\"suggest_archive\",\"id\":\"rule_1\"},{\"domain\":\"docs.internal.com\",\"urlPattern\":null,\"inactiveDays\":null,\"enabled\":true,\"confidence\":\"high\",\"createdAt\":1793762857643,\"updatedAt\":1793762857643,\"rawText\":\"docs.internal.com 的页面永远不要归档\",\"type\":\"never_archive\",\"action\":\"keep\",\"id\":\"rule_2\"}]}",
+        "{\"phase\":\"断网前缓存\",\"cache\":{\"cachedAt\":1793762857908,\"cleanup\":{\"cachedAt\":1793762857908,\"data\":{\"generatedAt\":1793762857905,\"suggestions\":[{\"action\":\"archive\",\"ageDays\":35,\"key\":\"archive:https://www.google.com/search?q=chrome+extension+manifest+v3\",\"lastVisitedAt\":1790662557638,\"reason\":\"超过 14 天未访问（已 35 天），且不在当前打开的 tab 中\",\"ruleId\":null,\"title\":\"chrome extension manifest v3 - Google Search\",\"url\":\"https://www.google.com/search?q=chrome+extension+manifest+v3\"},{\"action\":\"archive\",\"ageDays\":24,\"key\":\"archive:https://github.com/org/repo/issues/100\",\"lastVisitedAt\":1791662557638,\"reason\":\"超过 7 天未访问（已 24 天），且不在当前打开的 tab 中；命中规则「把 7 天没访问过的 GitHub issue 建议归档」\",\"ruleId\":\"rule_1\",\"title\":\"Old bug report from last sprint\",\"url\":\"https://github.com/org/repo/issues/100\"},{\"action\":\"merge\",\"keepUrl\":\"https://github.com/org/repo/issues/123\",\"key\":\"merge:github.com/org/repo/issues/123\",\"reason\":\"去掉 query 参数后 URL 相同，疑似重复页面\",\"title\":\"Fix login redirect bug\",\"titles\":[\"Fix login redirect bug\",\"Fix login redirect bug - Comments\"],\"urls\":[\"https://github.com/org/repo/issues/123\",\"https://github.com/org/repo/issues/123?tab=comments\"]},{\"action\":\"keep\",\"ageDays\":6,\"key\":\"keep:https://docs.internal.com/ai-agent-design\",\"reason\":\"被保护域名配置（docs.internal.com），不建议归档，虽已 6 天未访问\",\"ruleId\":\"rule_2\",\"title\":\"AI Agent Design Guidelines\",\"url\":\"https://docs.internal.com/ai-agent-design\"}],\"summary\":{\"archive\":2,\"keep\":1,\"merge\":1},\"thresholdDays\":14}},\"config\":{\"cachedAt\":1793762857773,\"data\":{\"apiVersion\":\"1\",\"baseSensitiveKeywords\":[\"password\",\"token\",\"bank\",\"secret\"],\"cleanupThresholdDays\":14,\"enablePrivacyFilter\":true,\"historyLookbackDays\":30,\"limits\":{\"maxBodyBytes\":1048576,\"maxItemsPerSync\":500,\"maxRuleTextLength\":500,\"maxUrlLength\":2048},\"maxHistoryItems\":100,\"minRecommendationScore\":0.3,\"privacySensitiveKeywords\":[\"password\",\"token\",\"bank\",\"secret\"],\"recencyHalfLifeDays\":7,\"weights\":{\"domain\":0.1,\"frequency\":0.3,\"open\":0.2,\"recency\":0.4}}},\"ranked\":{\"cachedAt\":1793762857771,\"data\":{\"domains\":[\"github.com\",\"react.dev\",\"developer.mozilla.org\",\"docs.internal.com\",\"google.com\"],\"generatedAt\":1793762857644,\"pages\":[{\"domain\":\"github.com\",\"firstSeenAt\":1793752557638,\"id\":\"page_2\",\"isActive\":false,\"isImportant\":false,\"isOpen\":true,\"lastVisitedAt\":1793752557638,\"normalizedUrl\":\"https://github.com/org/repo/issues/123\",\"reason\":\"最近 3 天内多次访问（8 次），当前仍处于打开状态，常用域名 github.com\",\"score\":1,\"scoreDetail\":{\"domain\":1,\"domainSource\":\"affinity\",\"frequency\":1,\"open\":1,\"recency\":0.99},\"sources\":[\"history\",\"open_tab\"],\"title\":\"Fix login redirect bug\",\"url\":\"https://github.com/org/repo/issues/123\",\"visitCount\":8},{\"domain\":\"github.com\",\"firstSeenAt\":1793762557638,\"id\":\"page_1\",\"isActive\":true,\"isImportant\":false,\"isOpen\":true,\"lastVisitedAt\":1793762857639,\"normalizedUrl\":\"https://github.com/org/repo/pull/456\",\"reason\":\"正在浏览，最近 3 天内多次访问（5 次），常用域名 github.com\",\"score\":0.94,\"scoreDetail\":{\"domain\":1,\"domainSource\":\"affinity\",\"frequency\":0.82,\"open\":1,\"recency\":1},\"sources\":[\"history\",\"active_tab\"],\"title\":\"Refactor auth middleware (#456)\",\"url\":\"https://github.com/org/repo/pull/456\",\"visitCount\":5},{\"domain\":\"developer.mozilla.org\",\"firstSeenAt\":1793732557638,\"id\":\"page_4\",\"isActive\":false,\"isImportant\":false,\"isOpen\":true,\"lastVisitedAt\":1793732557638,\"normalizedUrl\":\"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\",\"reason\":\"最近 3 天内多次访问（4 次），当前仍处于打开状态\",\"score\":0.83,\"scoreDetail\":{\"domain\":0.2,\"domainSource\":\"affinity\",\"frequency\":0.73,\"open\":1,\"recency\":0.97},\"sources\":[\"history\",\"open_tab\"],\"title\":\"Fetch API - Web APIs | MDN\",\"url\":\"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\",\"visitCount\":4},{\"domain\":\"react.dev\",\"firstSeenAt\":1793722557638,\"id\":\"page_9\",\"isActive\":false,\"isImportant\":false,\"isOpen\":false,\"lastVisitedAt\":1793722557638,\"normalizedUrl\":\"https://react.dev/reference/react/useState\",\"reason\":\"最近 3 天内多次访问（6 次）\",\"score\":0.69,\"scoreDetail\":{\"domain\":0.4,\"domainSource\":\"affinity\",\"frequency\":0.89,\"open\":0,\"recency\":0.95},\"sources\":[\"history\"],\"title\":\"useState – React\",\"url\":\"https://react.dev/reference/react/useState\",\"visitCount\":6},{\"domain\":\"github.com\",\"firstSeenAt\":1793750557638,\"id\":\"page_8\",\"isActive\":false,\"isImportant\":false,\"isOpen\":false,\"lastVisitedAt\":1793750557638,\"normalizedUrl\":\"https://github.com/org/repo/issues/123?tab=comments\",\"reason\":\"最近 3 天内多次访问（3 次），常用域名 github.com\",\"score\":0.68,\"scoreDetail\":{\"domain\":1,\"domainSource\":\"affinity\",\"frequency\":0.63,\"open\":0,\"recency\":0.99},\"sources\":[\"history\"],\"title\":\"Fix login redirect bug - Comments\",\"url\":\"https://github.com/org/repo/issues/123?tab=comments\",\"visitCount\":3},{\"domain\":\"github.com\",\"firstSeenAt\":1793742557638,\"id\":\"page_3\",\"isActive\":false,\"isImportant\":false,\"isOpen\":false,\"lastVisitedAt\":1793742557638,\"normalizedUrl\":\"https://github.com/org/repo/actions\",\"reason\":\"最近 3 天内多次访问（3 次），常用域名 github.com\",\"score\":0.68,\"scoreDetail\":{\"domain\":1,\"domainSource\":\"affinity\",\"frequency\":0.63,\"open\":0,\"recency\":0.98},\"sources\":[\"history\"],\"title\":\"Actions · org/repo\",\"url\":\"https://github.com/org/repo/actions\",\"visitCount\":3},{\"domain\":\"docs.internal.com\",\"firstSeenAt\":1793162557638,\"id\":\"page_5\",\"isActive\":false,\"isImportant\":false,\"isOpen\":true,\"lastVisitedAt\":1793162557638,\"normalizedUrl\":\"https://docs.internal.com/ai-agent-design\",\"reason\":\"6 天前访问，当前仍处于打开状态，属于受保护域名\",\"score\":0.65,\"scoreDetail\":{\"domain\":1,\"domainSource\":\"protected\",\"frequency\":0.5,\"open\":1,\"recency\":0.5},\"sources\":[\"history\",\"open_tab\"],\"title\":\"AI Agent Design Guidelines\",\"url\":\"https://docs.internal.com/ai-agent-design\",\"visitCount\":2},{\"domain\":\"react.dev\",\"firstSeenAt\":1793717557638,\"id\":\"page_10\",\"isActive\":false,\"isImportant\":false,\"isOpen\":false,\"lastVisitedAt\":1793717557638,\"normalizedUrl\":\"https://react.dev/learn\",\"reason\":\"今天访问过\",\"score\":0.57,\"scoreDetail\":{\"domain\":0.4,\"domainSource\":\"affinity\",\"frequency\":0.5,\"open\":0,\"recency\":0.95},\"sources\":[\"history\"],\"title\":\"Quick Start – React\",\"url\":\"https://react.dev/learn\",\"visitCount\":2},{\"domain\":\"github.com\",\"firstSeenAt\":1791662557638,\"id\":\"page_6\",\"isActive\":false,\"isImportant\":false,\"isOpen\":false,\"lastVisitedAt\":1791662557638,\"normalizedUrl\":\"https://github.com/org/repo/issues/100\",\"reason\":\"已 24 天未访问，常用域名 github.com\",\"score\":0.23,\"scoreDetail\":{\"domain\":1,\"domainSource\":\"affinity\",\"frequency\":0.32,\"open\":0,\"recency\":0.09},\"sources\":[\"history\"],\"title\":\"Old bug report from last sprint\",\"url\":\"https://github.com/org/repo/issues/100\",\"visitCount\":1},{\"domain\":\"google.com\",\"firstSeenAt\":1790662557638,\"id\":\"page_7\",\"isActive\":false,\"isImportant\":false,\"isOpen\":false,\"lastVisitedAt\":1790662557638,\"normalizedUrl\":\"https://www.google.com/search?q=chrome+extension+manifest+v3\",\"reason\":\"已 35 天未访问\",\"score\":0.11,\"scoreDetail\":{\"domain\":0.05,\"domainSource\":\"affinity\",\"frequency\":0.32,\"open\":0,\"recency\":0.03},\"sources\":[\"history\"],\"title\":\"chrome extension manifest v3 - Google Search\",\"url\":\"https://www.google.com/search?q=chrome+extension+manifest+v3\",\"visitCount\":1}],\"total\":10}},\"recommendations\":{\"__none__\":{\"cachedAt\":1793762857776,\"data\":{\"cached\":false,\"generatedAt\":1793762857774,\"recommendations\":[{\"contextUrl\":null,\"createdAt\":1793762857774,\"id\":\"rec_2\",\"reason\":\"近期综合评分较高的页面，可作为备选\",\"score\":0.58,\"strategy\":\"global_top\",\"title\":\"Fix login redirect bug\",\"type\":\"next_visit\",\"url\":\"https://github.com/org/repo/issues/123\"},{\"contextUrl\":null,\"createdAt\":1793762857774,\"id\":\"rec_1\",\"reason\":\"近期综合评分较高的页面，可作为备选\",\"score\":0.56,\"strategy\":\"global_top\",\"title\":\"Refactor auth middleware (#456)\",\"type\":\"next_visit\",\"url\":\"https://github.com/org/repo/pull/456\"},{\"contextUrl\":null,\"createdAt\":1793762857774,\"id\":\"rec_4\",\"reason\":\"近期综合评分较高的页面，可作为备选\",\"score\":0.51,\"strategy\":\"global_top\",\"title\":\"Fetch API - Web APIs | MDN\",\"type\":\"next_visit\",\"url\":\"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\"},{\"contextUrl\":null,\"createdAt\":1793762857774,\"id\":\"rec_9\",\"reason\":\"近期综合评分较高的页面，可作为备选\",\"score\":0.46,\"strategy\":\"global_top\",\"title\":\"useState – React\",\"type\":\"next_visit\",\"url\":\"https://react.dev/reference/react/useState\"},{\"contextUrl\":null,\"createdAt\":1793762857774,\"id\":\"rec_3\",\"reason\":\"近期综合评分较高的页面，可作为备选\",\"score\":0.45,\"strategy\":\"global_top\",\"title\":\"Actions · org/repo\",\"type\":\"next_visit\",\"url\":\"https://github.com/org/repo/actions\"}]}}},\"rules\":{\"cachedAt\":1793762857906,\"data\":{\"rules\":[{\"action\":\"suggest_archive\",\"confidence\":\"high\",\"createdAt\":1793762857643,\"domain\":\"github.com\",\"enabled\":true,\"id\":\"rule_1\",\"inactiveDays\":7,\"rawText\":\"把 7 天没访问过的 GitHub issue 建议归档\",\"type\":\"archive_candidate\",\"updatedAt\":1793762857643,\"urlPattern\":\"/issues/\"},{\"action\":\"keep\",\"confidence\":\"high\",\"createdAt\":1793762857643,\"domain\":\"docs.internal.com\",\"enabled\":true,\"id\":\"rule_2\",\"inactiveDays\":null,\"rawText\":\"docs.internal.com 的页面永远不要归档\",\"type\":\"never_archive\",\"updatedAt\":1793762857643,\"urlPattern\":null}],\"total\":2}}}}",
+        "{\"phase\":\"离线归档失败后\",\"storage\":{},\"networkError\":{\"errorText\":\"net::ERR_UNSAFE_PORT\"}}",
+        "{\"phase\":\"恢复归档后\",\"storage\":{\"lastCleanupAction\":{\"at\":1793762858336,\"kind\":\"archive\",\"urls\":[\"https://github.com/org/repo/issues/100\"]}}}"
+      ]
+    }
+  ]
+}

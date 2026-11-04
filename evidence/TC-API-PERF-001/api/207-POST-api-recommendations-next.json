@@ -1,0 +1,92 @@
+{
+  "reqId": "TC-API-PERF-001-207",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/recommendations/next",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-PERF-001-207"
+  },
+  "requestBody": {
+    "currentPage": {
+      "url": "https://github.com/org/repo0/pull/777",
+      "title": "PR 777"
+    },
+    "openTabs": [],
+    "recentHistory": []
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-PERF-001-207",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "1615",
+    "date": "Wed, 04 Nov 2026 03:26:23 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "recommendations": [
+      {
+        "id": "rec_601",
+        "type": "next_visit",
+        "url": "https://github.com/org/repo0/issues/600",
+        "title": "Synthetic page 600",
+        "score": 0.78,
+        "reason": "你正在查看 PR，同仓库的 Issue 可能与本次改动相关",
+        "strategy": "same_repo",
+        "contextUrl": "https://github.com/org/repo0/pull/777",
+        "createdAt": 1793762783158
+      },
+      {
+        "id": "rec_2401",
+        "type": "next_visit",
+        "url": "https://github.com/org/repo0/issues/2400",
+        "title": "Synthetic page 2400",
+        "score": 0.78,
+        "reason": "你正在查看 PR，同仓库的 Issue 可能与本次改动相关",
+        "strategy": "same_repo",
+        "contextUrl": "https://github.com/org/repo0/pull/777",
+        "createdAt": 1793762783158
+      },
+      {
+        "id": "rec_4201",
+        "type": "next_visit",
+        "url": "https://github.com/org/repo0/issues/4200",
+        "title": "Synthetic page 4200",
+        "score": 0.78,
+        "reason": "你正在查看 PR，同仓库的 Issue 可能与本次改动相关",
+        "strategy": "same_repo",
+        "contextUrl": "https://github.com/org/repo0/pull/777",
+        "createdAt": 1793762783158
+      },
+      {
+        "id": "rec_6001",
+        "type": "next_visit",
+        "url": "https://github.com/org/repo0/issues/6000",
+        "title": "Synthetic page 6000",
+        "score": 0.78,
+        "reason": "你正在查看 PR，同仓库的 Issue 可能与本次改动相关",
+        "strategy": "same_repo",
+        "contextUrl": "https://github.com/org/repo0/pull/777",
+        "createdAt": 1793762783158
+      },
+      {
+        "id": "rec_7801",
+        "type": "next_visit",
+        "url": "https://github.com/org/repo0/issues/7800",
+        "title": "Synthetic page 7800",
+        "score": 0.78,
+        "reason": "你正在查看 PR，同仓库的 Issue 可能与本次改动相关",
+        "strategy": "same_repo",
+        "contextUrl": "https://github.com/org/repo0/pull/777",
+        "createdAt": 1793762783158
+      }
+    ],
+    "cached": true,
+    "generatedAt": 1793762783158
+  },
+  "ms": 1.6,
+  "mutated": null
+}

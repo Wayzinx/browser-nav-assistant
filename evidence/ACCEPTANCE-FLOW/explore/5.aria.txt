@@ -1,0 +1,83 @@
+- banner:
+  - heading "导航助手" [level=1]
+  - button "后端已连接"
+- region "当前页面":
+  - heading "当前页面" [level=2]
+  - paragraph: github.com/org/repo/pull/456
+  - paragraph: https://github.com/org/repo/pull/456
+  - button "标记为重要": ☆
+  - button "添加到分析"
+- region "浏览器上下文同步":
+  - button "同步浏览器上下文"
+  - status:
+    - paragraph: 同步成功
+    - paragraph: 上传 9 条 · 过滤 0 条
+    - time: 07:28 · 刚刚
+  - button "全量同步"
+  - paragraph: 当前模式：全量
+- tablist "导航助手功能":
+  - tab "首页"
+  - tab "上下文"
+  - tab "排序" [selected]
+  - tab "整理 3"
+  - tab "规则"
+  - tab "诊断"
+- main:
+  - tabpanel "排序":
+    - heading "历史排序" [level=2]
+    - paragraph: score = 0.4 × 时效 + 0.3 × 频次 + 0.2 × 打开 + 0.1 × 域名
+    - button "打开中"
+    - text: 域名筛选
+    - combobox "域名筛选":
+      - option "全部域名" [selected]
+      - option "github.com"
+      - option "google.com"
+      - option "react.dev"
+      - option "developer.mozilla.org"
+      - option "docs.internal.com"
+    - paragraph: 共 11 条
+    - list:
+      - listitem:
+        - text: github.com/org/repo/pull/456 0.94 https://github.com/org/repo/pull/456
+        - paragraph: 正在浏览，最近 3 天内多次访问（5 次），常用域名 github.com
+        - button "展开明细"
+      - listitem:
+        - text: developer.mozilla.org/en-US/docs/Web/API/Fetch_API 0.84 https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+        - paragraph: 最近 3 天内多次访问（4 次），当前仍处于打开状态
+        - button "展开明细"
+      - listitem:
+        - text: Fix login redirect bug 0.80 https://github.com/org/repo/issues/123
+        - paragraph: 最近 3 天内多次访问（8 次），常用域名 github.com
+        - button "展开明细"
+      - listitem:
+        - text: docs.internal.com/ai-agent-design 0.76 https://docs.internal.com/ai-agent-design
+        - paragraph: 今天访问过，当前仍处于打开状态
+        - button "展开明细"
+      - listitem:
+        - text: www.google.com/search 0.70 https://www.google.com/search?q=chrome+extension
+        - paragraph: 今天访问过，当前仍处于打开状态
+        - button "展开明细"
+      - listitem:
+        - text: useState – React 0.69 https://react.dev/reference/react/useState
+        - paragraph: 最近 3 天内多次访问（6 次）
+        - button "展开明细"
+      - listitem:
+        - text: Fix login redirect bug - Comments 0.68 https://github.com/org/repo/issues/123?tab=comments
+        - paragraph: 最近 3 天内多次访问（3 次），常用域名 github.com
+        - button "展开明细"
+      - listitem:
+        - text: Actions · org/repo 0.68 https://github.com/org/repo/actions
+        - paragraph: 最近 3 天内多次访问（3 次），常用域名 github.com
+        - button "展开明细"
+      - listitem:
+        - text: Quick Start – React 0.57 https://react.dev/learn
+        - paragraph: 今天访问过
+        - button "展开明细"
+      - listitem:
+        - text: Old bug report from last sprint 0.23 https://github.com/org/repo/issues/100
+        - paragraph: 已 24 天未访问，常用域名 github.com
+        - button "展开明细"
+      - listitem:
+        - text: chrome extension manifest v3 - Google Search 0.12 https://www.google.com/search?q=chrome+extension+manifest+v3
+        - paragraph: 已 35 天未访问
+        - button "展开明细"

@@ -1,0 +1,51 @@
+{
+  "reqId": "TC-API-CLEAN-013-03",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/rules",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-CLEAN-013-03"
+  },
+  "requestBody": {
+    "rules": [
+      {
+        "rawText": "internal.com 的页面永远不要归档",
+        "type": "never_archive",
+        "domain": "internal.com",
+        "action": "keep"
+      }
+    ]
+  },
+  "status": 201,
+  "responseHeaders": {
+    "x-request-id": "TC-API-CLEAN-013-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "282",
+    "date": "Wed, 04 Nov 2026 03:25:44 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "rules": [
+      {
+        "domain": "internal.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762744377,
+        "updatedAt": 1793762744377,
+        "rawText": "internal.com 的页面永远不要归档",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_1"
+      }
+    ],
+    "ruleCount": 1
+  },
+  "ms": 1.3,
+  "mutated": null
+}

@@ -1,0 +1,59 @@
+{
+  "caseId": "TC-UI-RULE-025",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:52.669Z",
+  "tests": [
+    {
+      "testId": "8bb32183e6c348e02e42-80a7426214fa301f319d",
+      "title": "TC-UI-RULE-025 离线切换失败不改后端，恢复后开关仍开启",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RULE-025.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1092,
+      "startedAt": "2026-11-04T03:29:51.577Z",
+      "endedAt": "2026-11-04T03:29:52.669Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [
+        "evidence/TC-UI-RULE-025/screenshots/01-在线开关开启.png",
+        "evidence/TC-UI-RULE-025/screenshots/02-离线切换失败.png",
+        "evidence/TC-UI-RULE-025/screenshots/03-恢复后仍开启.png"
+      ],
+      "serverLogLines": 31,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1197,
+          "after": 1198
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 1,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "启停连接失败：net::ERR_UNSAFE_PORT"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "reqId": "TC-UI-CACHE-001-manual-sync-sw-9",
+  "observed": true,
+  "setup": false,
+  "method": "POST",
+  "url": "http://127.0.0.1:4300/api/recommendations/next",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762829758_15"
+  },
+  "requestBody": "{\"currentPage\":{\"url\":\"https://example.com/docs\",\"title\":\"Docs current\"},\"openTabs\":[{\"url\":\"https://example.com/docs\",\"title\":\"Docs current\"}],\"recentHistory\":[{\"url\":\"https://example.com/cache-one-history\",\"title\":\"https://example.com/cache-one-history\",\"lastVisitTime\":1793762829117.265}]}",
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "ext_1793762829758_15",
+    "access-control-expose-headers": "x-request-id",
+    "connection": "keep-alive",
+    "access-control-allow-origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "content-length": "1512",
+    "keep-alive": "timeout=5",
+    "date": "Wed, 04 Nov 2026 03:27:09 GMT",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin"
+  },
+  "responseBody": {
+    "recommendations": [
+      {
+        "id": "rec_11",
+        "type": "next_visit",
+        "url": "https://example.com/cache-one-history",
+        "title": "https://example.com/cache-one-history",
+        "score": 0.68,
+        "reason": "你正在看 example.com 文档，这是同站点访问 1 次的高频页面",
+        "strategy": "same_doc_site",
+        "contextUrl": "https://example.com/docs",
+        "createdAt": 1793762829759
+      },
+      {
+        "id": "rec_2",
+        "type": "next_visit",
+        "url": "https://github.com/org/repo/issues/123",
+        "title": "Fix login redirect bug",
+        "score": 0.5,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": "https://example.com/docs",
+        "createdAt": 1793762829759
+      },
+      {
+        "id": "rec_1",
+        "type": "next_visit",
+        "url": "https://github.com/org/repo/pull/456",
+        "title": "Refactor auth middleware (#456)",
+        "score": 0.48,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": "https://example.com/docs",
+        "createdAt": 1793762829759
+      },
+      {
+        "id": "rec_9",
+        "type": "next_visit",
+        "url": "https://react.dev/reference/react/useState",
+        "title": "useState – React",
+        "score": 0.46,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": "https://example.com/docs",
+        "createdAt": 1793762829759
+      },
+      {
+        "id": "rec_3",
+        "type": "next_visit",
+        "url": "https://github.com/org/repo/actions",
+        "title": "Actions · org/repo",
+        "score": 0.45,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": "https://example.com/docs",
+        "createdAt": 1793762829759
+      }
+    ],
+    "cached": false,
+    "generatedAt": 1793762829759
+  },
+  "transport": "finished",
+  "ms": 2
+}

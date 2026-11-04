@@ -1,0 +1,61 @@
+{
+  "caseId": "TC-UI-CLEAN-005",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:29.749Z",
+  "tests": [
+    {
+      "testId": "b1d76e9da92186a44688-1395e093b8c09de8a968",
+      "title": "TC-UI-CLEAN-005 点击忽略后重开popup：保存后端key与忽略时间，仅过滤本地展示",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CLEAN-005.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1726,
+      "startedAt": "2026-11-04T03:27:28.023Z",
+      "endedAt": "2026-11-04T03:27:29.749Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 29,
+      "screenshots": [
+        "evidence/TC-UI-CLEAN-005/screenshots/01-忽略前.png",
+        "evidence/TC-UI-CLEAN-005/screenshots/02-忽略后.png",
+        "evidence/TC-UI-CLEAN-005/screenshots/03-重开整理页.png",
+        "evidence/TC-UI-CLEAN-005/screenshots/04-重开首页摘要.png"
+      ],
+      "serverLogLines": 32,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 994,
+          "after": 997
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "{\"googleKey\":\"archive:https://www.google.com/search?q=chrome+extension+manifest+v3\",\"tBefore\":1793762848899,\"tAfter\":1793762849004,\"storage\":{\"ignoredSuggestions\":{\"archive:https://www.google.com/search?q=chrome+extension+manifest+v3\":1793762848922}}}",
+        "{\"ignoredSuggestions\":{\"archive:https://www.google.com/search?q=chrome+extension+manifest+v3\":1793762848922},\"mutationRequests\":[]}"
+      ]
+    }
+  ]
+}

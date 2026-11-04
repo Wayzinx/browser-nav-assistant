@@ -1,0 +1,1156 @@
+{
+  "codePoints": [
+    {
+      "id": "C-FE-CORE-01",
+      "side": "FE",
+      "module": "CORE",
+      "name": "manifest.json（MV3 权限、SW、popup、CSP）",
+      "description": "Manifest V3：permissions = tabs/history/storage/activeTab/contextMenus；host_permissions = http://localhost/*、http://127.0.0.1/*；background.service_worker=background/service-worker.js 且 type=module；action.default_popup=popup/popup.html；不放宽 CSP；不声明 icons / action.default_icon（MV3 非必需，避免图标文件缺失导致「Could not load icon」加载失败）。",
+      "files": [
+        "extension/manifest.json",
+        "extension/background/service-worker.js"
+      ],
+      "symbols": [],
+      "features": [
+        "F-CTX-01",
+        "F-CTX-02",
+        "F-MENU-01"
+      ]
+    },
+    {
+      "id": "C-FE-CORE-02",
+      "side": "FE",
+      "module": "CORE",
+      "name": "Service Worker 入口与消息路由注册表",
+      "description": "service-worker.js 顶层同步注册 runtime.onMessage / contextMenus.onClicked / runtime.onInstalled；handlers/index.js 合并各模块 handlers 文件导出的 { TYPE: fn }；统一信封 {ok,data}|{ok:false,error}，未知 type 返回 UNKNOWN_MESSAGE，异常不外抛。",
+      "files": [
+        "extension/background/service-worker.js",
+        "extension/background/handlers/index.js"
+      ],
+      "symbols": [
+        "handlers",
+        "dispatchMessage"
+      ],
+      "features": [
+        "F-CTX-02",
+        "F-SYNC-01"
+      ]
+    },
+    {
+      "id": "C-FE-CORE-03",
+      "side": "FE",
+      "module": "CORE",
+      "name": "api-client（唯一后端出口）",
+      "description": "callApi(method,path,body,{timeoutMs,retry})：base URL 读 storage.apiBaseUrl（默认 http://127.0.0.1:3000，FE-API-02）；AbortSignal.timeout（health 3s / 轻量 1.5s / sync 8s / 其他 5s）；GET 失败重试 1 次、POST 不重试；x-request-id=ext_<ts>_<seq>；成功判定为 2xx（res.ok，POST /api/rules 为 201），返回 {ok:true,status,data}；非 2xx 解析 {error:{code,message,details}} 并原样透传 code/message/details（含 404 NOT_FOUND、400 VALIDATION_FAILED）；响应体不是 JSON 映射为 INVALID_RESPONSE；fetch TypeError → BACKEND_UNREACHABLE，超时 → TIMEOUT；每次结果更新 storage.connection：网络类错误（BACKEND_UNREACHABLE / TIMEOUT）时写 status=offline，且若 recoverPending 不为 true 则置 recoverPending=true（粘性标记）；成功时只写 status=online，不清除 recoverPending（仅 C-FE-CACHE-03 自动同步成功后清除）。",
+      "files": [
+        "extension/background/services/api-client.js"
+      ],
+      "symbols": [
+        "callApi",
+        "getApiBase",
+        "nextRequestId"
+      ],
+      "features": [
+        "F-SYNC-01",
+        "F-DIAG-01",
+        "F-DIAG-02",
+        "F-CACHE-02"
+      ],
+      "interfaces": [
+        "GET /api/health",
+        "POST /api/sync",
+        "GET /api/config"
+      ]
+    },
+    {
+      "id": "C-FE-CORE-04",
+      "side": "FE",
+      "module": "CORE",
+      "name": "共享常量：消息 type、storage key、默认值",
+      "description": "shared/messages.js（MSG 常量，与 ui-contract.messages 一致）、shared/storage-keys.js（SK 常量，与 ui-contract.storageKeys 一致）、shared/constants.js（DEFAULT_API_BASE、超时、默认隐私关键词、EXPECTED_API_MAJOR=1、历史 30 天 / 100 条、DEFAULTS.RANKED_LIMIT=50（GET_RANKED 默认 limit，也是 cache.ranked 的唯一写入口径））。",
+      "files": [
+        "extension/shared/messages.js",
+        "extension/shared/storage-keys.js",
+        "extension/shared/constants.js"
+      ],
+      "symbols": [
+        "MSG",
+        "SK",
+        "DEFAULTS"
+      ],
+      "features": [
+        "F-CTX-02",
+        "F-PRIV-02",
+        "F-DIAG-02"
+      ]
+    },
+    {
+      "id": "C-FE-CORE-05",
+      "side": "FE",
+      "module": "CORE",
+      "name": "storage 封装、URL 工具与 logger",
+      "description": "background/services/storage.js：get/set/patch/remove 包装 chrome.storage.local（只允许 SK 中的 key）；shared/url.js：isHttpUrl / isSystemUrl / isOwnExtensionUrl / maskUrl / hostOf；shared/logger.js：console + globalThis.__navLogs 环形缓冲（200 条），URL 打码只留 host。",
+      "files": [
+        "extension/background/services/storage.js",
+        "extension/shared/url.js",
+        "extension/shared/logger.js"
+      ],
+      "symbols": [
+        "storageGet",
+        "storageSet",
+        "storagePatch",
+        "isSystemUrl",
+        "isOwnExtensionUrl",
+        "maskUrl",
+        "log"
+      ],
+      "features": [
+        "F-CTX-07",
+        "F-SYNC-06",
+        "F-CACHE-01"
+      ]
+    },
+    {
+      "id": "C-FE-CORE-06",
+      "side": "FE",
+      "module": "CORE",
+      "name": "popup 外壳（页签、面板、插槽、视图注册表）",
+      "description": "popup.html 只含结构与 data-testid：顶栏、静态 section current-page-card（内含 data-slot=current-page 与为 MENU 预留的 data-slot=current-page-actions）、同步区、6 个页签按钮与面板（含 tab-cleanup-count、tab-diag-alert 占位）、各区块 data-slot 容器，并预先 <link> 全部 popup/views/<view>.css；slot 清单、嵌套与顺序以 docs/04 §11.2 ① 为准（slot 名 = 视图文件名，离线横幅 3 个 slot 例外）。popup.css 只放设计令牌、布局、顶栏、页签与通用组件。popup.js bootstrap：建冻结的 ctx = { send, bus, toast, switchTab, setTabBadge, getState } → 按 views/index.js 的 VIEWS（[{ slot, mount }]，顺序同 §11.2 ①）逐个 mount(slotEl, ctx)，单个视图抛错只记日志、不影响其他视图；switchTab 切换后 bus.emit('nav:tab', { tab, focus })；setTabBadge(tab, value) 只改 tab-cleanup-count / tab-diag-alert；getState() 返回 { currentPage, connection, activeTab } 只读快照（currentPage 取自 current-page:changed，connection 取自 storage:connection）。",
+      "files": [
+        "extension/popup/popup.html",
+        "extension/popup/popup.css",
+        "extension/popup/popup.js",
+        "extension/popup/views/index.js"
+      ],
+      "symbols": [
+        "bootstrap",
+        "mountViews",
+        "switchTab",
+        "setTabBadge",
+        "VIEWS"
+      ],
+      "features": [
+        "F-CTX-02"
+      ]
+    },
+    {
+      "id": "C-FE-CORE-07",
+      "side": "FE",
+      "module": "CORE",
+      "name": "popup 通信与渲染工具（send 超时、事件总线、el）",
+      "description": "popup/lib/messaging.js：send(type,payload,{timeoutMs=10000}) 生成 requestId，超时返回 {ok:false,error:{code:TIMEOUT}}；popup/lib/bus.js：createBus() → { on(event, fn) → off, emit(event, payload) }（同步派发，单个订阅者抛错不影响其他订阅者），onStorageChange 把 chrome.storage.onChanged 中 syncState / cache / connection / lastDiagnostics / importantUrls 转发为 storage:<key> { newValue, oldValue }；事件名与载荷冻结于 docs/04 §11.2 ③（current-page:changed、rule:parse、nav:tab、sync:requested、storage:<key>）；popup/lib/dom.js：el(tag,attrs,...children) 只用 textContent，formatTime/formatScore。",
+      "files": [
+        "extension/popup/lib/messaging.js",
+        "extension/popup/lib/bus.js",
+        "extension/popup/lib/dom.js"
+      ],
+      "symbols": [
+        "send",
+        "createBus",
+        "onStorageChange",
+        "el",
+        "formatTime"
+      ],
+      "features": [
+        "F-CTX-02",
+        "F-SYNC-06"
+      ]
+    },
+    {
+      "id": "C-FE-CTX-01",
+      "side": "FE",
+      "module": "CTX",
+      "name": "当前页面判定算法（排除插件自身页面）",
+      "description": "resolveCurrentPage()：① tabs.query({active:true,lastFocusedWindow:true})，若不是本插件页面直接用（http(s) 为普通页，否则系统页）；② 否则在 tabs.query({lastFocusedWindow:true}) 中去掉 chrome-extension://<runtime.id>/ 与无痕标签页，取 http(s) 中 lastAccessed 最大者（缺失时按 tab.id 最大）；③ 没有 http(s) 时取剩余标签页中 lastAccessed 最大者并标记 isSystem=true；④ 全空返回 {isSystem:true,url:null}。",
+      "files": [
+        "extension/background/services/current-page.js"
+      ],
+      "symbols": [
+        "resolveCurrentPage",
+        "pickByLastAccessed"
+      ],
+      "features": [
+        "F-CTX-03",
+        "F-CTX-04",
+        "F-CTX-07"
+      ]
+    },
+    {
+      "id": "C-FE-CTX-02",
+      "side": "FE",
+      "module": "CTX",
+      "name": "标签页采集（当前窗口展示 / 所有普通窗口同步）",
+      "description": "listWindowTabs()：tabs.query({lastFocusedWindow:true})（以 tab 打开 popup 时同样是用户所在窗口），去掉本插件页和 incognito；listAllNormalTabs()：tabs.query({windowType:'normal'})，去掉 incognito，最多 200 个（D-21）。",
+      "files": [
+        "extension/background/services/collector.js"
+      ],
+      "symbols": [
+        "listWindowTabs",
+        "listAllNormalTabs"
+      ],
+      "features": [
+        "F-CTX-05",
+        "F-SYNC-01"
+      ]
+    },
+    {
+      "id": "C-FE-CTX-03",
+      "side": "FE",
+      "module": "CTX",
+      "name": "历史读取（显式 startTime / maxResults）",
+      "description": "readHistory({startTime,maxResults})：chrome.history.search({text:'',startTime,maxResults})，默认 startTime=now−30 天、maxResults=config.maxHistoryItems（默认 100），按 lastVisitTime 倒序；返回实际查询参数供展示和日志（event=history.query）。",
+      "files": [
+        "extension/background/services/collector.js"
+      ],
+      "symbols": [
+        "readHistory"
+      ],
+      "features": [
+        "F-CTX-06",
+        "F-INCR-01"
+      ]
+    },
+    {
+      "id": "C-FE-CTX-04",
+      "side": "FE",
+      "module": "CTX",
+      "name": "GET_CONTEXT 消息处理",
+      "description": "handlers/context.js：组合 currentPage、当前窗口 tabs、最近历史，并对每条记录（含 currentPage）调用 privacy.classifyUrl 附加 badge（system / sensitive:<keyword>）与 privacy 配置来源；只依赖浏览器 API 与本地缓存，后端不可用时照常返回。",
+      "files": [
+        "extension/background/handlers/context.js"
+      ],
+      "symbols": [
+        "handlers.GET_CONTEXT"
+      ],
+      "features": [
+        "F-CTX-03",
+        "F-CTX-05",
+        "F-CTX-06",
+        "F-CTX-07",
+        "F-PRIV-01"
+      ]
+    },
+    {
+      "id": "C-FE-CTX-05",
+      "side": "FE",
+      "module": "CTX",
+      "name": "当前页面卡片视图",
+      "description": "views/current-page.js：在外壳静态 section current-page-card 内的 data-slot=current-page 中渲染 current-page-title / current-page-url；isSystem 时卡片黄色并显示 current-page-system-badge「系统页 · 不采集」；GET_CONTEXT 返回后 bus.emit('current-page:changed', { url, title, isSystem, uploadable })。",
+      "files": [
+        "extension/popup/views/current-page.js",
+        "extension/popup/views/current-page.css"
+      ],
+      "symbols": [
+        "mount",
+        "renderCurrentPage"
+      ],
+      "features": [
+        "F-CTX-03",
+        "F-CTX-04",
+        "F-CTX-07"
+      ]
+    },
+    {
+      "id": "C-FE-CTX-06",
+      "side": "FE",
+      "module": "CTX",
+      "name": "上下文页签视图（标签页列表、历史列表、标注）",
+      "description": "views/context.js：当前窗口标签页与最近历史两张列表（标题 + URL），系统页标注「系统页 · 跳过」，隐私命中标注「含 <kw> · 不上传」并灰色删除线，展示历史查询范围与敏感关键词说明；加载 / 空 / 错误状态。",
+      "files": [
+        "extension/popup/views/context.js",
+        "extension/popup/views/context.css"
+      ],
+      "symbols": [
+        "mount",
+        "renderTabList",
+        "renderHistoryList"
+      ],
+      "features": [
+        "F-CTX-05",
+        "F-CTX-06",
+        "F-CTX-07",
+        "F-PRIV-01",
+        "F-PRIV-02",
+        "F-PRIV-04"
+      ]
+    },
+    {
+      "id": "C-FE-SYNC-01",
+      "side": "FE",
+      "module": "SYNC",
+      "name": "同步按钮与状态行视图",
+      "description": "views/sync.js：点击「同步浏览器上下文」时在发送前**同步**置 sync-button disabled 并 bus.emit('sync:requested', { mode:'auto' })（同时收到 INCR 发出的 sync:requested 也同步置灰），再发送 SYNC_NOW；响应返回或 storage:syncState 显示非 syncing 时恢复可点；status=syncing 时按钮 disabled 并转圈；监听 storage:syncState 渲染「同步成功 · 上传 N 条 · 过滤 M 条」/「同步失败：原因」+「诊断」入口 / 上次同步时间。",
+      "files": [
+        "extension/popup/views/sync.js",
+        "extension/popup/views/sync.css"
+      ],
+      "symbols": [
+        "mount",
+        "renderSyncState"
+      ],
+      "features": [
+        "F-SYNC-01",
+        "F-SYNC-06",
+        "F-PRIV-01"
+      ]
+    },
+    {
+      "id": "C-FE-SYNC-02",
+      "side": "FE",
+      "module": "SYNC",
+      "name": "SYNC_NOW / GET_SYNC_STATE 消息处理",
+      "description": "handlers/sync.js：SYNC_NOW 先取 joined = isSyncInFlight()，再 await runSync({ mode, trigger })（单飞：已有同步在进行时拿到同一个 Promise，不发第二次 POST），返回 { ...data, alreadyRunning: joined }；不再用 storage 中的 syncState.status 判断是否在同步（读后写非原子）。GET_SYNC_STATE 读取状态，仅当 status=syncing 且本 SW 内 isSyncInFlight()=false 且超过 30 秒时判为 SYNC_INTERRUPTED（SW 被回收后的恢复）。",
+      "files": [
+        "extension/background/handlers/sync.js"
+      ],
+      "symbols": [
+        "handlers.SYNC_NOW",
+        "handlers.GET_SYNC_STATE"
+      ],
+      "features": [
+        "F-SYNC-01",
+        "F-SYNC-06"
+      ]
+    },
+    {
+      "id": "C-FE-SYNC-03",
+      "side": "FE",
+      "module": "SYNC",
+      "name": "同步编排（采集 → 过滤 → 上报 → 刷新缓存）",
+      "description": "services/sync.js runSync({ mode?, trigger }) → Promise<{ ok:true, data } | { ok:false, error }>（data={ syncState, result, fullReason }）：**模块级 inFlight Promise 单飞**——inFlight 非空时直接返回同一个 Promise；否则在第一个 await 之前同步赋值 inFlight，finally 中清空；SYNC_NOW 与 CACHE 的 maybeAutoResync 都只经 runSync 发 POST /api/sync，快速双击或点击与自动恢复同时发生也只发 1 次（F-SYNC-01 AC3）。isSyncInFlight() → boolean。流程：markSyncing → getPrivacyConfig → health → resolveHistoryWindow → 采集 → filterForUpload(snapshot, privacy) → POST /api/sync（8 秒）→ 成功后 Promise.allSettled 调用 refreshRanked() / refreshRecommendations() / refreshCleanup() / refreshRules()（各模块导出、内部走 withCache 网络路径写缓存）与 getPrivacyConfig()（刷新 cache.config）→ success；失败写 error 且不清缓存；SYNC 不自行构造这些接口的请求。storage 中 status=syncing 只用于展示与 SW 回收后的 30 秒中断检测，不参与防并发。在 SW 中执行，关闭 popup 不中断。",
+      "files": [
+        "extension/background/services/sync.js"
+      ],
+      "symbols": [
+        "runSync",
+        "isSyncInFlight"
+      ],
+      "features": [
+        "F-SYNC-01",
+        "F-SYNC-06"
+      ],
+      "interfaces": [
+        "POST /api/sync"
+      ]
+    },
+    {
+      "id": "C-FE-SYNC-04",
+      "side": "FE",
+      "module": "SYNC",
+      "name": "同步状态机持久化与中断检测",
+      "description": "services/sync-state.js：syncState={status,startedAt,lastSyncAt,lastSuccessAt,lastError,cursor,stats,trigger} 写 chrome.storage.local；loadSyncState() 发现 syncing 且 now−startedAt>30s 时改为 error（code=SYNC_INTERRUPTED，message 含「中断」）。",
+      "files": [
+        "extension/background/services/sync-state.js"
+      ],
+      "symbols": [
+        "loadSyncState",
+        "markSyncing",
+        "markSuccess",
+        "markError"
+      ],
+      "features": [
+        "F-SYNC-06"
+      ]
+    },
+    {
+      "id": "C-FE-SYNC-05",
+      "side": "FE",
+      "module": "SYNC",
+      "name": "同步请求体构造",
+      "description": "services/sync-payload.js buildSyncPayload()：activeTab / openTabs[{url,title,lastAccessed}] / history[{url,title,lastVisitTime,visitCount}] / mode / cursor / clientVersion；activeTab 在系统页、无痕页、敏感词命中或 url 为空时一律显式传 null（保留该 key）；上行条目只含 {url,title[,lastAccessed]}，不带 isSystem / tabId / badge 等内部字段；title 为空用 URL；mode 只取 full | incremental，incremental 时才带 cursor。",
+      "files": [
+        "extension/background/services/sync-payload.js"
+      ],
+      "symbols": [
+        "buildSyncPayload"
+      ],
+      "features": [
+        "F-SYNC-01"
+      ]
+    },
+    {
+      "id": "C-FE-PRIV-01",
+      "side": "FE",
+      "module": "PRIV",
+      "name": "敏感 URL 过滤与标注",
+      "description": "services/privacy.js：classifyUrl(url, keywords) → { uploadable, reason: 'system'|'sensitive'|'incognito'|null, keyword? }（完整 URL 转小写做子串匹配；keywords 为空数组即 enablePrivacyFilter=false 时只判系统页 / 无痕）；filterForUpload(snapshot, privacy) → { payload, filteredCount, skippedSystem }（snapshot={active,tabs,history}，privacy 为 getPrivacyConfig() 的返回值；payload 同结构、只含可上传条目，active 不可上传时为 null；只计数，不保存 URL）；privacyLabel(classification) 生成「含 <kw> · 不上传」/「系统页 · 跳过」标注。tokenizer 误伤为已知局限。",
+      "files": [
+        "extension/background/services/privacy.js"
+      ],
+      "symbols": [
+        "classifyUrl",
+        "filterForUpload",
+        "privacyLabel"
+      ],
+      "features": [
+        "F-PRIV-01"
+      ]
+    },
+    {
+      "id": "C-FE-PRIV-02",
+      "side": "FE",
+      "module": "PRIV",
+      "name": "敏感关键词来源与兜底",
+      "description": "services/privacy-config.js getPrivacyConfig() → Promise<{ enabled, keywords, source:'server'|'cache'|'default' }>：GET /api/config 成功则写 cache.config；失败用 cache.config；再失败用内置 password/token/bank/secret。enabled=false（enablePrivacyFilter=false）时调用方以空关键词调用 classifyUrl，仍跳过系统页与无痕页。调用方：SYNC、REC、MENU、CTX（handlers/context.js）、DIAG（checkPrivacy 读 enabled / source）。",
+      "files": [
+        "extension/background/services/privacy-config.js"
+      ],
+      "symbols": [
+        "getPrivacyConfig"
+      ],
+      "features": [
+        "F-PRIV-02"
+      ],
+      "interfaces": [
+        "GET /api/config"
+      ]
+    },
+    {
+      "id": "C-FE-PRIV-03",
+      "side": "FE",
+      "module": "PRIV",
+      "name": "无痕标签页与系统页不上传",
+      "description": "privacy.js isUploadableTab(tab) → boolean：tab.incognito===true 或非 http(s) 一律返回 false（只看 tab 本身，不涉及关键词），既不展示在上下文列表中（incognito），也不进入请求体。",
+      "files": [
+        "extension/background/services/privacy.js"
+      ],
+      "symbols": [
+        "isUploadableTab"
+      ],
+      "features": [
+        "F-PRIV-04",
+        "F-SYNC-01"
+      ]
+    },
+    {
+      "id": "C-FE-INCR-01",
+      "side": "FE",
+      "module": "INCR",
+      "name": "增量游标与历史窗口计算",
+      "description": "services/cursor.js resolveHistoryWindow({syncState,mode,now,lookbackDays,maxResults,health,apiBaseUrl}) → { mode, startTime, maxResults, cursor?, fullReason? }：首次或 mode=full 时 {mode:'full',startTime:now−30d,maxResults}；有游标时先 isCursorValid 判定，满足任一条件改为 full 并给出 fullReason：cursorBase.apiBaseUrl ≠ 当前 apiBaseUrl（api_base_changed）；health.persistence==='memory' 且 health.startedAt > cursor（server_restarted）；health.lastSyncAt 为 null 或 health.pageCount===0（server_empty）（health 请求失败时不判定，沿用增量）；否则 {mode:'incremental',cursor,startTime:cursor−5min,maxResults}；maxResults 取 config.maxHistoryItems（默认 100）；成功后 cursor=本次同步开始时间、cursorBase={apiBaseUrl,serverStartedAt:health.startedAt}；resetCursor() → Promise<void> 清空 cursor 与 cursorBase（SET_API_BASE_URL 成功后由 DIAG 调用）。",
+      "files": [
+        "extension/background/services/cursor.js"
+      ],
+      "symbols": [
+        "resolveHistoryWindow",
+        "isCursorValid",
+        "resetCursor"
+      ],
+      "features": [
+        "F-INCR-01"
+      ],
+      "interfaces": [
+        "GET /api/health"
+      ]
+    },
+    {
+      "id": "C-FE-INCR-02",
+      "side": "FE",
+      "module": "INCR",
+      "name": "「全量同步」入口视图",
+      "description": "views/sync-mode.js：在同步按钮旁渲染「全量同步」按钮，点击时同步置 disabled 并 bus.emit('sync:requested', { mode:'full' }) 后发送 SYNC_NOW {mode:'full'}；收到 sync:requested 或 syncState.status=syncing 时同样置灰；显示当前模式（增量 / 全量）。",
+      "files": [
+        "extension/popup/views/sync-mode.js",
+        "extension/popup/views/sync-mode.css"
+      ],
+      "symbols": [
+        "mount"
+      ],
+      "features": [
+        "F-INCR-01"
+      ]
+    },
+    {
+      "id": "C-FE-RANK-01",
+      "side": "FE",
+      "module": "RANK",
+      "name": "GET_RANKED 消息处理",
+      "description": "handlers/ranked.js：GET /api/pages/ranked?limit&openOnly&domain（筛选只走后端，插件端不做二次过滤）；domains 直接取后端响应的 domains（不受本次 domain/openOnly/limit 影响）。**缓存口径**：只有无筛选（openOnly 为假且 domain 为空）且 limit 为默认值 DEFAULTS.RANKED_LIMIT（50）的请求经 cache.withCache('ranked', …) 读写 cache.ranked（首页 Top 5 与离线展示的唯一来源），返回 {pages,total,domains,fromCache,offline,cachedAt}；带筛选或非默认 limit 的请求不读不写缓存，直接 callApi，后端不可达（BACKEND_UNREACHABLE / TIMEOUT）或 source='cache' 时抛 NO_CACHE「筛选需要在线」。导出 refreshRanked() → Promise<Result>：以默认参数（limit=50、无筛选）走 withCache('ranked', …, {source:'network'}) 写缓存，供 SYNC 同步成功后调用。",
+      "files": [
+        "extension/background/handlers/ranked.js"
+      ],
+      "symbols": [
+        "handlers.GET_RANKED",
+        "refreshRanked"
+      ],
+      "features": [
+        "F-RANK-05"
+      ],
+      "interfaces": [
+        "GET /api/pages/ranked"
+      ]
+    },
+    {
+      "id": "C-FE-RANK-02",
+      "side": "FE",
+      "module": "RANK",
+      "name": "首页历史排序 Top 5 视图",
+      "description": "views/ranked-home.js：先渲染缓存再刷新；每条显示标题、两位小数分数、理由；空状态引导「同步浏览器上下文」；加载 / 错误状态。",
+      "files": [
+        "extension/popup/views/ranked-home.js",
+        "extension/popup/views/ranked-home.css"
+      ],
+      "symbols": [
+        "mount",
+        "renderRankedHome"
+      ],
+      "features": [
+        "F-RANK-05"
+      ]
+    },
+    {
+      "id": "C-FE-RANK-03",
+      "side": "FE",
+      "module": "RANK",
+      "name": "排序页签（完整列表、筛选、展开明细）",
+      "description": "views/ranked.js：完整列表（顺序与后端一致）、「打开中」筛选（openOnly）、域名下拉筛选（选项取 GET_RANKED 返回的 domains，选中后选项不收缩）、展开显示 recency/frequency/open/domain 四项得分，公式常驻。筛选请求返回 NO_CACHE 时显示 ranked-filter-offline-hint「筛选需要在线」并保留筛选控件；清空筛选回到默认列表（可用缓存）。",
+      "files": [
+        "extension/popup/views/ranked.js",
+        "extension/popup/views/ranked.css"
+      ],
+      "symbols": [
+        "mount",
+        "renderRankedList",
+        "renderScoreDetail"
+      ],
+      "features": [
+        "F-RANK-05"
+      ]
+    },
+    {
+      "id": "C-FE-REC-01",
+      "side": "FE",
+      "module": "REC",
+      "name": "GET_RECOMMENDATIONS 消息处理",
+      "description": "handlers/recommend.js：currentPage 用 resolveCurrentPage，凡系统页、无痕页、敏感词命中或 url 为空一律显式传 currentPage:null（保留该 key，否则后端 400），否则只传 {url,title}；openTabs 用 listAllNormalTabs()（所有普通窗口、去掉无痕与本插件页，最多 200 条，与同步口径一致）；recentHistory 取最近 20 条；三者都先经隐私过滤再 POST /api/recommendations/next。缓存 key = 非敏感 currentPage 的 normalized URL（去 hash），currentPage 为 null 时统一用 '__none__'，不把原始敏感 URL 写入 storage；返回 contextUrl=实际发送的 currentPage?.url ?? null。；导出 refreshRecommendations() → Promise<Result>：与 GET_RECOMMENDATIONS 网络路径共用同一请求构造与缓存 key 计算（withCache('recommendations', …, {source:'network', key})），供 SYNC 同步成功后调用，保证首页读到同步后写入的推荐缓存。",
+      "files": [
+        "extension/background/handlers/recommend.js"
+      ],
+      "symbols": [
+        "handlers.GET_RECOMMENDATIONS",
+        "refreshRecommendations"
+      ],
+      "features": [
+        "F-REC-08",
+        "F-PRIV-01"
+      ],
+      "interfaces": [
+        "POST /api/recommendations/next"
+      ]
+    },
+    {
+      "id": "C-FE-REC-02",
+      "side": "FE",
+      "module": "REC",
+      "name": "首页下一步推荐 Top 3 视图",
+      "description": "views/recommend.js：最多 3 条，显示标题、分数、理由；点击发送 OPEN_URL；空 / 加载 / 错误状态。",
+      "files": [
+        "extension/popup/views/recommend.js",
+        "extension/popup/views/recommend.css"
+      ],
+      "symbols": [
+        "mount",
+        "renderRecommendations"
+      ],
+      "features": [
+        "F-REC-08"
+      ]
+    },
+    {
+      "id": "C-FE-REC-03",
+      "side": "FE",
+      "module": "REC",
+      "name": "OPEN_URL 消息处理（新标签页打开）",
+      "description": "handlers/open-url.js：校验 http(s) 后 chrome.tabs.create({url,active:true})。",
+      "files": [
+        "extension/background/handlers/open-url.js"
+      ],
+      "symbols": [
+        "handlers.OPEN_URL"
+      ],
+      "features": [
+        "F-REC-08"
+      ]
+    },
+    {
+      "id": "C-FE-CLEAN-01",
+      "side": "FE",
+      "module": "CLEAN",
+      "name": "GET_CLEANUP 消息处理（含忽略过滤）",
+      "description": "handlers/cleanup.js：GET /api/pages/cleanup-suggestions，经缓存；以后端返回的 suggestion.key 为唯一标识（前端不自造 key），剔除 ignoredSuggestions 中 7 天内忽略的 key 并重算 summary；返回 pendingCount 供页签计数。；导出 refreshCleanup() → Promise<Result>：走 withCache('cleanup', …, {source:'network'}) 写缓存，供 SYNC 同步成功后调用。",
+      "files": [
+        "extension/background/handlers/cleanup.js",
+        "extension/shared/cleanup-result.js"
+      ],
+      "symbols": [
+        "handlers.GET_CLEANUP",
+        "filterIgnored",
+        "refreshCleanup",
+        "projectCleanupResult"
+      ],
+      "features": [
+        "F-CLEAN-07",
+        "F-CLEAN-08"
+      ],
+      "interfaces": [
+        "GET /api/pages/cleanup-suggestions"
+      ]
+    },
+    {
+      "id": "C-FE-CLEAN-02",
+      "side": "FE",
+      "module": "CLEAN",
+      "name": "整理执行消息处理（归档 / 撤销 / 合并 / 忽略）",
+      "description": "handlers/cleanup-actions.js：CLEANUP_ARCHIVE → POST /api/pages/archive（data: archived=affected、notFound、undoToken）、CLEANUP_UNARCHIVE → POST /api/pages/unarchive（unarchived=affected、notFound）、CLEANUP_MERGE → POST /api/pages/merge（archived=merged、keepUrl、undoToken 为 urls 去掉 keepUrl）、CLEANUP_IGNORE 写 ignoredSuggestions[suggestion.key]=now；记录 lastCleanupAction 供撤销；成功后使排序 / 推荐 / 整理缓存失效；后端 404 NOT_FOUND（页面已不存在，建议过期）时返回 error.code=NOT_FOUND、message「建议已失效，已刷新列表」，并使 cleanup 缓存失效以便视图重新拉取。",
+      "files": [
+        "extension/background/handlers/cleanup-actions.js"
+      ],
+      "symbols": [
+        "handlers.CLEANUP_ARCHIVE",
+        "handlers.CLEANUP_UNARCHIVE",
+        "handlers.CLEANUP_MERGE",
+        "handlers.CLEANUP_IGNORE"
+      ],
+      "features": [
+        "F-CLEAN-08"
+      ],
+      "interfaces": [
+        "POST /api/pages/archive",
+        "POST /api/pages/unarchive",
+        "POST /api/pages/merge"
+      ]
+    },
+    {
+      "id": "C-FE-CLEAN-03",
+      "side": "FE",
+      "module": "CLEAN",
+      "name": "首页整理摘要视图",
+      "description": "views/cleanup-home.js：「归档 N」「重复 N」「保留 N」三个计数，点击进入整理页签；空 / 加载 / 错误状态。",
+      "files": [
+        "extension/popup/views/cleanup-home.js",
+        "extension/popup/views/cleanup-home.css",
+        "extension/popup/lib/cleanup-cache.js"
+      ],
+      "symbols": [
+        "mount",
+        "renderCleanupSummary",
+        "observeCleanupCache"
+      ],
+      "features": [
+        "F-CLEAN-07"
+      ]
+    },
+    {
+      "id": "C-FE-CLEAN-04",
+      "side": "FE",
+      "module": "CLEAN",
+      "name": "整理页签分组视图与页签待处理数",
+      "description": "views/cleanup.js：归档 / 重复 / 保留三组；命中规则的条目显示「规则」标签与规则原文（按 ruleId 在规则缓存中查 rawText，后端 reason 中也引用原文）；ageDays；setTabBadge('cleanup', pendingCount)。",
+      "files": [
+        "extension/popup/views/cleanup.js",
+        "extension/popup/views/cleanup.css",
+        "extension/popup/lib/cleanup-cache.js"
+      ],
+      "symbols": [
+        "mount",
+        "renderCleanupGroups",
+        "observeCleanupCache"
+      ],
+      "features": [
+        "F-CLEAN-07"
+      ]
+    },
+    {
+      "id": "C-FE-CLEAN-05",
+      "side": "FE",
+      "module": "CLEAN",
+      "name": "整理操作按钮与撤销视图",
+      "description": "views/cleanup-actions.js：renderItemActions(item) 生成归档 / 合并 / 忽略按钮；执行后显示「撤销」按钮（归档、合并可撤销）；「全部归档」；失败显示错误提示。",
+      "files": [
+        "extension/popup/views/cleanup-actions.js"
+      ],
+      "symbols": [
+        "renderItemActions",
+        "renderUndoBar"
+      ],
+      "features": [
+        "F-CLEAN-08"
+      ]
+    },
+    {
+      "id": "C-FE-RULE-01",
+      "side": "FE",
+      "module": "RULE",
+      "name": "规则消息处理（解析 / 保存 / 列表 / 删除 / 启停）",
+      "description": "handlers/rules.js：PARSE_RULE → POST /api/rules/parse（不写库，rules/unparsed/warnings 原样透传）；SAVE_RULES → POST /api/rules {rules}（201 成功，返回 rules、ruleCount）；LIST_RULES → GET /api/rules（写 cache.rules）；DELETE_RULE → DELETE /api/rules/:id（响应 {deleted,ruleCount} 映射为 {id:deleted,deleted:true,ruleCount}）；TOGGLE_RULE → PATCH /api/rules/:id {enabled}（响应体即规则对象，映射为 {rule}）；404 NOT_FOUND 原样透传；写操作成功后刷新 cache.rules 并使排序 / 推荐 / 整理缓存失效。；导出 refreshRules() → Promise<Result>：GET /api/rules 走 withCache('rules', …, {source:'network'}) 写 cache.rules，供 SYNC 同步成功后调用。",
+      "files": [
+        "extension/background/handlers/rules.js"
+      ],
+      "symbols": [
+        "handlers.PARSE_RULE",
+        "handlers.SAVE_RULES",
+        "handlers.LIST_RULES",
+        "handlers.DELETE_RULE",
+        "handlers.TOGGLE_RULE",
+        "refreshRules"
+      ],
+      "features": [
+        "F-RULE-01",
+        "F-RULE-06",
+        "F-RULE-07",
+        "F-RULE-08",
+        "F-RULE-09"
+      ],
+      "interfaces": [
+        "POST /api/rules/parse",
+        "POST /api/rules",
+        "GET /api/rules",
+        "DELETE /api/rules/:id",
+        "PATCH /api/rules/:id"
+      ]
+    },
+    {
+      "id": "C-FE-RULE-02",
+      "side": "FE",
+      "module": "RULE",
+      "name": "规则输入与解析预览视图",
+      "description": "views/rule-parse.js：输入框 +「解析」；结果卡片显示类型、结构化字段（域名 · 路径 · 天数）、原文、置信度、查看 JSON；unparsed 每项渲染 text、reason 与 examples[0..n] 例句列表，warnings 为 string[] 直接逐条渲染（如「冲突」「永不归档」提示），二者放在 rule-unparsed 黄色提示框；后端离线时「解析」disabled 并提示后端未连接。",
+      "files": [
+        "extension/popup/views/rule-parse.js",
+        "extension/popup/views/rule-parse.css"
+      ],
+      "symbols": [
+        "mount",
+        "renderPreview",
+        "renderUnparsed"
+      ],
+      "features": [
+        "F-RULE-01"
+      ]
+    },
+    {
+      "id": "C-FE-RULE-03",
+      "side": "FE",
+      "module": "RULE",
+      "name": "勾选与确认保存",
+      "description": "rule-parse.js：卡片默认勾选，「确认保存 N 条」随勾选数变化，N=0 时禁用；发送 SAVE_RULES，成功后清空预览、触发列表刷新。",
+      "files": [
+        "extension/popup/views/rule-parse.js"
+      ],
+      "symbols": [
+        "renderSaveBar",
+        "onSave"
+      ],
+      "features": [
+        "F-RULE-06"
+      ]
+    },
+    {
+      "id": "C-FE-RULE-04",
+      "side": "FE",
+      "module": "RULE",
+      "name": "已保存规则列表（启停、删除）",
+      "description": "views/rule-list.js：类型标签、摘要、原文、启停开关（TOGGLE_RULE）、删除按钮 + 行内二次确认（DELETE_RULE）；规则数；空 / 加载 / 错误状态。",
+      "files": [
+        "extension/popup/views/rule-list.js",
+        "extension/popup/views/rule-list.css"
+      ],
+      "symbols": [
+        "mount",
+        "renderRuleList"
+      ],
+      "features": [
+        "F-RULE-07",
+        "F-RULE-08",
+        "F-RULE-09"
+      ]
+    },
+    {
+      "id": "C-FE-RULE-05",
+      "side": "FE",
+      "module": "RULE",
+      "name": "首页规则快捷输入",
+      "description": "views/rule-home.js：首页输入框 +「解析」，点击后切换到规则页签并把文本交给 rule-parse 解析（bus 事件 rule:parse）；离线时禁用。",
+      "files": [
+        "extension/popup/views/rule-home.js",
+        "extension/popup/views/rule-home.css"
+      ],
+      "symbols": [
+        "mount"
+      ],
+      "features": [
+        "F-RULE-01"
+      ]
+    },
+    {
+      "id": "C-FE-DIAG-01",
+      "side": "FE",
+      "module": "DIAG",
+      "name": "后端连通检查（health，区分 4 类错误）",
+      "description": "services/diag-checks-backend.js checkBackend({timeoutMs})：GET /api/health，记录 latencyMs；错误分类 refused（连接被拒绝）/ timeout（超时）/ http（非 200）/ not_json（返回的不是 JSON）；hint 4 条，第 1 条「运行 ./scripts/start.sh 启动后端」。CHECK_CONNECTION 消息（1.5 秒）复用它。",
+      "files": [
+        "extension/background/services/diag-checks-backend.js"
+      ],
+      "symbols": [
+        "checkBackend"
+      ],
+      "features": [
+        "F-DIAG-01"
+      ],
+      "interfaces": [
+        "GET /api/health"
+      ]
+    },
+    {
+      "id": "C-FE-DIAG-02",
+      "side": "FE",
+      "module": "DIAG",
+      "name": "顶栏连接状态与诊断页签红点",
+      "description": "views/connection.js：打开 popup 发送 CHECK_CONNECTION，显示「后端已连接 / 后端未连接 / 检测中」，点击进入诊断页签；未连接或诊断有 fail 时 setTabBadge('diag',{alert:true})。",
+      "files": [
+        "extension/popup/views/connection.js",
+        "extension/popup/views/connection.css"
+      ],
+      "symbols": [
+        "mount",
+        "renderConnection"
+      ],
+      "features": [
+        "F-DIAG-01"
+      ]
+    },
+    {
+      "id": "C-FE-DIAG-03",
+      "side": "FE",
+      "module": "DIAG",
+      "name": "API Base URL 展示、校验与保存",
+      "description": "handlers/api-base.js：GET_API_BASE_URL / SET_API_BASE_URL（new URL 解析、协议 http/https、去掉末尾 /，格式错误返回 INVALID_URL 且不写入；permissions.contains({origins}) 未授权时返回 warning；地址实际变化并写入成功后调用 cursor.resetCursor()，下次同步自动全量）；views/diag-api-base.js 输入框 + 保存 +「地址格式错误」提示。",
+      "files": [
+        "extension/background/handlers/api-base.js",
+        "extension/popup/views/diag-api-base.js",
+        "extension/popup/views/diag-api-base.css"
+      ],
+      "symbols": [
+        "handlers.GET_API_BASE_URL",
+        "handlers.SET_API_BASE_URL",
+        "validateApiBaseUrl",
+        "mount"
+      ],
+      "features": [
+        "F-DIAG-02"
+      ]
+    },
+    {
+      "id": "C-FE-DIAG-04",
+      "side": "FE",
+      "module": "DIAG",
+      "name": "权限检查（tabs / history / activeTab）",
+      "description": "services/diag-checks-env.js：permissions.contains + 实际调用探测（tabs.query 的 url 可读；history.search({text:'',startTime:now−1d,maxResults:1})）；hint 含「检查 manifest 的 permissions」「在 chrome://extensions 中重新加载」。",
+      "files": [
+        "extension/background/services/diag-checks-env.js"
+      ],
+      "symbols": [
+        "checkTabs",
+        "checkHistory",
+        "checkActiveTab"
+      ],
+      "features": [
+        "F-DIAG-03",
+        "F-DIAG-04",
+        "F-DIAG-08"
+      ]
+    },
+    {
+      "id": "C-FE-DIAG-05",
+      "side": "FE",
+      "module": "DIAG",
+      "name": "storage 可用性检查",
+      "description": "diag-checks-env.js checkStorage()：写 → 读 → 删 __diag__，比对一致并读 getBytesInUse；finally 中保证删除探测 key。",
+      "files": [
+        "extension/background/services/diag-checks-env.js"
+      ],
+      "symbols": [
+        "checkStorage"
+      ],
+      "features": [
+        "F-DIAG-05"
+      ]
+    },
+    {
+      "id": "C-FE-DIAG-06",
+      "side": "FE",
+      "module": "DIAG",
+      "name": "最近一次同步检查",
+      "description": "diag-checks-backend.js checkLastSync(health)：从未同步 warn「从未同步」+ 同步入口；最近失败 fail + 原因 + 建议先处理「后端服务连接」；本地有成功同步记录但 health.pageCount===0、health.lastSyncAt 为 null，或 persistence==='memory' 且 health.startedAt > lastSuccessAt 时 warn「后端数据少于本地同步记录，请全量同步」（action=fullSync）；成功但 >24h warn「超过 24 小时未同步」；否则 ok（时间、上传条数）。",
+      "files": [
+        "extension/background/services/diag-checks-backend.js"
+      ],
+      "symbols": [
+        "checkLastSync"
+      ],
+      "features": [
+        "F-DIAG-06"
+      ]
+    },
+    {
+      "id": "C-FE-DIAG-07",
+      "side": "FE",
+      "module": "DIAG",
+      "name": "当前规则数量检查与自动重拉",
+      "description": "diag-checks-backend.js checkRuleCount(health)：cache.rules 条数 vs health.ruleCount；不一致 warn「规则数不一致」并自动 GET /api/rules 刷新缓存，value 显示重新拉取后的条数。",
+      "files": [
+        "extension/background/services/diag-checks-backend.js"
+      ],
+      "symbols": [
+        "checkRuleCount"
+      ],
+      "features": [
+        "F-DIAG-07"
+      ],
+      "interfaces": [
+        "GET /api/rules"
+      ]
+    },
+    {
+      "id": "C-FE-DIAG-08",
+      "side": "FE",
+      "module": "DIAG",
+      "name": "附加检查（隐私过滤、无痕模式、版本兼容）",
+      "description": "diag-checks-backend.js checkPrivacy(config) / checkVersion(health)：enablePrivacyFilter=false 为 warn；health.version 主版本 ≠ EXPECTED_API_MAJOR 为 fail（提示升级插件或后端）；diag-checks-env.js checkIncognito()：extension.isAllowedIncognitoAccess，status=info 只作提示。",
+      "files": [
+        "extension/background/services/diag-checks-backend.js",
+        "extension/background/services/diag-checks-env.js"
+      ],
+      "symbols": [
+        "checkPrivacy",
+        "checkVersion",
+        "checkIncognito"
+      ],
+      "features": [
+        "F-DIAG-08"
+      ]
+    },
+    {
+      "id": "C-FE-DIAG-09",
+      "side": "FE",
+      "module": "DIAG",
+      "name": "诊断运行器与 RUN_DIAGNOSTICS / CHECK_CONNECTION 处理",
+      "description": "services/diagnostics.js runDiagnostics()：按固定顺序执行 11 项，每项包在 safeCheck 里（单项异常 → fail，不影响其他项）；结果写 lastDiagnostics；handlers/diagnostics.js 注册 RUN_DIAGNOSTICS、CHECK_CONNECTION、GET_DIAG_REPORT。",
+      "files": [
+        "extension/background/services/diagnostics.js",
+        "extension/background/handlers/diagnostics.js"
+      ],
+      "symbols": [
+        "runDiagnostics",
+        "safeCheck",
+        "handlers.RUN_DIAGNOSTICS",
+        "handlers.CHECK_CONNECTION",
+        "handlers.GET_DIAG_REPORT"
+      ],
+      "features": [
+        "F-DIAG-01",
+        "F-DIAG-03",
+        "F-DIAG-04",
+        "F-DIAG-05",
+        "F-DIAG-06",
+        "F-DIAG-07",
+        "F-DIAG-08",
+        "F-DIAG-11"
+      ]
+    },
+    {
+      "id": "C-FE-DIAG-10",
+      "side": "FE",
+      "module": "DIAG",
+      "name": "诊断报告（不含浏览 URL）",
+      "description": "services/diag-report.js buildReport()：{generatedAt, extensionVersion, apiBaseUrl, checks[{id,status,detail}], config(去掉关键词外的 URL 类字段), syncSummary(只含次数和时间)}；输出前对所有字符串做 URL 剔除（只允许 apiBaseUrl 一个 URL）。",
+      "files": [
+        "extension/background/services/diag-report.js"
+      ],
+      "symbols": [
+        "buildReport",
+        "scrubUrls"
+      ],
+      "features": [
+        "F-DIAG-11"
+      ]
+    },
+    {
+      "id": "C-FE-DIAG-11",
+      "side": "FE",
+      "module": "DIAG",
+      "name": "诊断页签视图（检查项、重新检测、复制报告）",
+      "description": "views/diagnostics.js：汇总、检测时间、11 个检查项（名称、状态、detail、hint 步骤列表、可选动作按钮如「去同步」）、「重新检测」、「复制诊断报告」（navigator.clipboard.writeText，同时在 diag-report-output 中显示 JSON）。",
+      "files": [
+        "extension/popup/views/diagnostics.js",
+        "extension/popup/views/diagnostics.css"
+      ],
+      "symbols": [
+        "mount",
+        "renderChecks",
+        "renderCheckItem"
+      ],
+      "features": [
+        "F-DIAG-01",
+        "F-DIAG-03",
+        "F-DIAG-04",
+        "F-DIAG-05",
+        "F-DIAG-06",
+        "F-DIAG-07",
+        "F-DIAG-08",
+        "F-DIAG-11"
+      ]
+    },
+    {
+      "id": "C-FE-DIAG-12",
+      "side": "FE",
+      "module": "DIAG",
+      "name": "首页诊断入口",
+      "description": "views/diag-home.js：首页「启动诊断 · N 项检查全部正常 / M 项异常 ›」，读 lastDiagnostics，点击进入诊断页签。",
+      "files": [
+        "extension/popup/views/diag-home.js",
+        "extension/popup/views/diag-home.css"
+      ],
+      "symbols": [
+        "mount"
+      ],
+      "features": [
+        "F-DIAG-11"
+      ]
+    },
+    {
+      "id": "C-FE-CACHE-01",
+      "side": "FE",
+      "module": "CACHE",
+      "name": "本地缓存（{data,cachedAt}）与离线回退",
+      "description": "services/cache.js：readCache(name[,key]) / writeCache(name,data[,key]) / invalidate(names[])；withCache(name, fetcher, { source, key? }) → Promise<Result>：source='cache' 时只读缓存（无缓存返回 NO_CACHE）；source='network'（默认）时后端成功写缓存返回 fromCache=false；网络错误（BACKEND_UNREACHABLE / TIMEOUT）有缓存时返回 {…cached, fromCache:true, offline:true, cachedAt}，无缓存时返回错误；后端业务错误（4xx）不回退缓存；缓存 ranked / recommendations[key] / cleanup / rules / config。",
+      "files": [
+        "extension/background/services/cache.js"
+      ],
+      "symbols": [
+        "readCache",
+        "writeCache",
+        "invalidate",
+        "withCache"
+      ],
+      "features": [
+        "F-CACHE-01",
+        "F-CACHE-02"
+      ]
+    },
+    {
+      "id": "C-FE-CACHE-02",
+      "side": "FE",
+      "module": "CACHE",
+      "name": "离线提示条视图",
+      "description": "views/offline-banner.js：同一 mount 挂到 3 个 slot（offline-banner-home / offline-banner-ranked / offline-banner-cleanup，testId 与 slot 名相同），按 slotEl.dataset.slot 决定 testId；红色提示条「以下为 HH:mm 同步时缓存的结果」，数据源为 storage:connection + cache.cachedAt；恢复在线后消失；popup 打开时发送 RECOVER_IF_NEEDED。",
+      "files": [
+        "extension/popup/views/offline-banner.js",
+        "extension/popup/views/offline-banner.css"
+      ],
+      "symbols": [
+        "mount",
+        "renderBanner"
+      ],
+      "features": [
+        "F-CACHE-02"
+      ]
+    },
+    {
+      "id": "C-FE-CACHE-03",
+      "side": "FE",
+      "module": "CACHE",
+      "name": "后端恢复后自动重新同步 1 次",
+      "description": "services/recovery.js + handlers/recovery.js：RECOVER_IF_NEEDED（popup 打开时发送）——maybeAutoResync() 在 storage.connection.recoverPending===true（api-client 在转为 offline 时置位的粘性标记，后续成功请求不清除）或 syncState.lastError.code ∈ {BACKEND_UNREACHABLE,TIMEOUT}，且本次 GET /api/health 成功时，调用 runSync({trigger:'auto'}) 一次（runSync 自身单飞：若用户点击的同步正在进行则复用同一个 Promise，不另发 POST；recovery 另有模块级 in-flight Promise，合并并发的 RECOVER_IF_NEEDED 的 health 探测）；同步成功后由 recovery 写 recoverPending=false（唯一清除点），失败保留标记待下次打开重试；返回 {resynced, reason}。不依赖瞬时的 connection.status，避免与 CHECK_CONNECTION / cache-first 网络刷新竞态。",
+      "files": [
+        "extension/background/services/recovery.js",
+        "extension/background/handlers/recovery.js"
+      ],
+      "symbols": [
+        "maybeAutoResync",
+        "handlers.RECOVER_IF_NEEDED"
+      ],
+      "features": [
+        "F-CACHE-02"
+      ]
+    },
+    {
+      "id": "C-FE-CACHE-04",
+      "side": "FE",
+      "module": "CACHE",
+      "name": "缓存优先渲染（stale-while-revalidate）",
+      "description": "popup/lib/cache-first.js loadCacheFirst(ctx,type,payload,render)：先发 {source:'cache'} 立即渲染，再发 {source:'network'} 刷新；网络结果 offline=true 时保留缓存视图。供排序 / 推荐 / 整理视图复用。",
+      "files": [
+        "extension/popup/lib/cache-first.js"
+      ],
+      "symbols": [
+        "loadCacheFirst",
+        "createRefreshQueue",
+        "createSnapshotGate"
+      ],
+      "features": [
+        "F-CACHE-01"
+      ]
+    },
+    {
+      "id": "C-FE-MENU-01",
+      "side": "FE",
+      "module": "MENU",
+      "name": "右键菜单注册与点击处理",
+      "description": "services/context-menu.js：registerContextMenus() 在 onInstalled 时 contextMenus.removeAll 后 create nav-add「添加到分析」、nav-important「标记为重要」（documentUrlPatterns http/https）；onMenuClick(info, tab)：nav-add 转 addToAnalysis(url, title)，nav-important 转 markImportant；addToAnalysis(url, title) → Promise<{ accepted, reason, created?, pageCount? }>（右键菜单与当前页面卡片「添加到分析」按钮经 ADD_TO_ANALYSIS 共用同一函数）：先经隐私过滤（系统页 / 无痕 / 敏感词命中时不发请求，返回 accepted:false），通过后 POST /api/pages/manual {url,title}，响应 {accepted,rejected,created,pageCount}；accepted=false（rejected=1，后端判定敏感）或本地过滤时提示「含敏感词未上传」；成功使排序 / 整理缓存失效；结果（只含 kind / accepted / reason / at，不含 URL）写 lastMenuAction，popup 打开时 toast。",
+      "files": [
+        "extension/background/services/context-menu.js"
+      ],
+      "symbols": [
+        "registerContextMenus",
+        "onMenuClick",
+        "addToAnalysis"
+      ],
+      "features": [
+        "F-MENU-01"
+      ],
+      "interfaces": [
+        "POST /api/pages/manual"
+      ]
+    },
+    {
+      "id": "C-FE-MENU-02",
+      "side": "FE",
+      "module": "MENU",
+      "name": "MARK_IMPORTANT 消息处理与 importantUrls",
+      "description": "handlers/important.js markImportant({url,title,important})：先经隐私过滤，系统页 / 无痕 / 敏感词命中时不发请求、不写 importantUrls，返回 {accepted:false,reason:'sensitive'|'system'}；否则 POST /api/pages/important {url,title,important}，后端返回 accepted:false 时回滚本地状态（不写 importantUrls）并返回 accepted:false；accepted:true 时才写 / 删 importantUrls 并使排序 / 整理缓存失效。importantUrls 中只有可上传 URL。；同文件注册 handlers.ADD_TO_ANALYSIS({url,title})：直接调用 context-menu.js 的 addToAnalysis(url, title)（与右键菜单同一路径），返回 {accepted, reason, created, pageCount}。",
+      "files": [
+        "extension/background/handlers/important.js"
+      ],
+      "symbols": [
+        "handlers.MARK_IMPORTANT",
+        "markImportant",
+        "handlers.ADD_TO_ANALYSIS"
+      ],
+      "features": [
+        "F-MENU-01"
+      ],
+      "interfaces": [
+        "POST /api/pages/important",
+        "POST /api/pages/manual"
+      ]
+    },
+    {
+      "id": "C-FE-MENU-03",
+      "side": "FE",
+      "module": "MENU",
+      "name": "当前页面卡片 ☆ 标记重要按钮",
+      "description": "views/important-star.js：在 current-page-card 内为 MENU 预留的 data-slot=current-page-actions 中渲染（当前页信息取自 bus 事件 current-page:changed，不跨 slot 查询 DOM） ☆ 与「添加到分析」按钮（current-page-add）。☆：系统页不显示；敏感页（GET_CONTEXT 的 currentPage.badge.kind='sensitive'）☆ 置灰（disabled、aria-disabled=true）并提示「敏感页面不采集」；读 importantUrls 渲染 ☆/★，点击发送 MARK_IMPORTANT，只有 data.accepted=true 才切换 ★，accepted=false 时回滚并 toast「敏感页面不采集」。「添加到分析」：系统页不显示；点击发送 ADD_TO_ANALYSIS {url,title}（与右键菜单同一 addToAnalysis 路径，不做任何测试环境特判），accepted=true toast「已添加到分析」，accepted=false toast「含敏感词未上传」。打开时读取 lastMenuAction 并 toast 最近一次右键操作结果。",
+      "files": [
+        "extension/popup/views/important-star.js",
+        "extension/popup/views/important-star.css"
+      ],
+      "symbols": [
+        "mount"
+      ],
+      "features": [
+        "F-MENU-01"
+      ]
+    }
+  ]
+}

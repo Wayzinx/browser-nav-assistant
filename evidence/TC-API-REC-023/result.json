@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-API-REC-023",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:04.321Z",
+  "tests": [
+    {
+      "testId": "b36cd4bbd7e2cd7702c1-581ae13caff6b590b5b4",
+      "title": "TC-API-REC-023 规则停用后即使最近三页满足触发也不输出规则推荐",
+      "project": "api",
+      "file": "tests/api/TC-API-REC-023.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 24,
+      "startedAt": "2026-11-04T03:27:04.297Z",
+      "endedAt": "2026-11-04T03:27:04.321Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 6,
+      "screenshots": [],
+      "serverLogLines": 9,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 719,
+          "after": 721
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 1
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "{\"T\":1793762824307,\"N\":1793762824307}",
+        "{\"ruleId\":\"rule_1\"}"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "reqId": "TC-API-PERF-004-09",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/recommendations/next",
+  "params": {
+    "now": 1793762815440
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-PERF-004-09"
+  },
+  "requestBody": {
+    "currentPage": {
+      "url": "https://github.com/org/repo/pull/456",
+      "title": "Refactor auth middleware (#456)"
+    },
+    "openTabs": [
+      {
+        "url": "https://github.com/org/repo/issues/123",
+        "title": "Fix login redirect bug"
+      },
+      {
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+        "title": "Fetch API - Web APIs | MDN"
+      },
+      {
+        "url": "https://docs.internal.com/ai-agent-design",
+        "title": "AI Agent Design Guidelines"
+      }
+    ],
+    "recentHistory": [
+      {
+        "url": "https://github.com/org/repo/pull/456",
+        "title": "Refactor auth middleware (#456)",
+        "lastVisitTime": 1793762515440,
+        "visitCount": 5
+      },
+      {
+        "url": "https://github.com/org/repo/issues/123",
+        "title": "Fix login redirect bug",
+        "lastVisitTime": 1793752515440,
+        "visitCount": 8
+      },
+      {
+        "url": "https://github.com/org/repo/actions",
+        "title": "Actions · org/repo",
+        "lastVisitTime": 1793742515440,
+        "visitCount": 3
+      },
+      {
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+        "title": "Fetch API - Web APIs | MDN",
+        "lastVisitTime": 1793732515440,
+        "visitCount": 4
+      },
+      {
+        "url": "https://docs.internal.com/ai-agent-design",
+        "title": "AI Agent Design Guidelines",
+        "lastVisitTime": 1793162515440,
+        "visitCount": 2
+      },
+      {
+        "url": "https://github.com/org/repo/issues/100",
+        "title": "Old bug report from last sprint",
+        "lastVisitTime": 1791662515440,
+        "visitCount": 1
+      },
+      {
+        "url": "https://www.google.com/search?q=chrome+extension+manifest+v3",
+        "title": "chrome extension manifest v3 - Google Search",
+        "lastVisitTime": 1790662515440,
+        "visitCount": 1
+      },
+      {
+        "url": "https://github.com/org/repo/issues/123?tab=comments",
+        "title": "Fix login redirect bug - Comments",
+        "lastVisitTime": 1793750515440,
+        "visitCount": 3
+      },
+      {
+        "url": "https://react.dev/reference/react/useState",
+        "title": "useState – React",
+        "lastVisitTime": 1793722515440,
+        "visitCount": 6
+      },
+      {
+        "url": "https://react.dev/learn",
+        "title": "Quick Start – React",
+        "lastVisitTime": 1793717515440,
+        "visitCount": 2
+      }
+    ]
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-PERF-004-09",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "967",
+    "date": "Wed, 04 Nov 2026 03:26:55 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "recommendations": [
+      {
+        "id": "rec_3",
+        "type": "next_visit",
+        "url": "https://github.com/org/repo/actions",
+        "title": "Actions · org/repo",
+        "score": 0.87,
+        "reason": "你正在查看 PR，同仓库 CI 页面最近访问频率较高，可能需要检查构建状态",
+        "strategy": "same_repo",
+        "contextUrl": "https://github.com/org/repo/pull/456",
+        "createdAt": 1793762815440
+      },
+      {
+        "id": "rec_9",
+        "type": "next_visit",
+        "url": "https://react.dev/reference/react/useState",
+        "title": "useState – React",
+        "score": 0.46,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": "https://github.com/org/repo/pull/456",
+        "createdAt": 1793762815440
+      },
+      {
+        "id": "rec_10",
+        "type": "next_visit",
+        "url": "https://react.dev/learn",
+        "title": "Quick Start – React",
+        "score": 0.41,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": "https://github.com/org/repo/pull/456",
+        "createdAt": 1793762815440
+      }
+    ],
+    "cached": false,
+    "generatedAt": 1793762815440
+  },
+  "ms": 1.3,
+  "mutated": null
+}

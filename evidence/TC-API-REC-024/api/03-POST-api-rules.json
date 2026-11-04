@@ -1,0 +1,70 @@
+{
+  "reqId": "TC-API-REC-024-03",
+  "setup": true,
+  "method": "POST",
+  "url": "/api/rules",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-REC-024-03"
+  },
+  "requestBody": {
+    "rules": [
+      {
+        "rawText": "如果我连续看了 3 个 React 文档，推荐相关 MDN 页面",
+        "type": "recommend_related",
+        "trigger": {
+          "domain": "react.dev",
+          "minCount": 3,
+          "label": "React"
+        },
+        "target": {
+          "domain": "developer.mozilla.org",
+          "label": "MDN"
+        },
+        "action": "recommend",
+        "enabled": true,
+        "confidence": "high"
+      }
+    ]
+  },
+  "status": 201,
+  "responseHeaders": {
+    "x-request-id": "TC-API-REC-024-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "427",
+    "date": "Wed, 04 Nov 2026 03:27:04 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "rules": [
+      {
+        "domain": null,
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762824340,
+        "updatedAt": 1793762824340,
+        "rawText": "如果我连续看了 3 个 React 文档，推荐相关 MDN 页面",
+        "type": "recommend_related",
+        "trigger": {
+          "domain": "react.dev",
+          "minCount": 3,
+          "label": "React"
+        },
+        "target": {
+          "domain": "developer.mozilla.org",
+          "label": "MDN"
+        },
+        "action": "recommend",
+        "id": "rule_1"
+      }
+    ],
+    "ruleCount": 1
+  },
+  "ms": 0.8,
+  "mutated": null
+}

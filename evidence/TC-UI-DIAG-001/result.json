@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-UI-DIAG-001",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:05.761Z",
+  "tests": [
+    {
+      "testId": "62dbdc44d26e33b34a43-eacb840dc0503f435bad",
+      "title": "TC-UI-DIAG-001 后端可用时打开诊断页签：「后端服务连接」通过并显示 version=1.0.0 与本次耗时（毫秒）",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-DIAG-001.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 910,
+      "startedAt": "2026-11-04T03:28:04.851Z",
+      "endedAt": "2026-11-04T03:28:05.761Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-DIAG-001/screenshots/01-S1-顶栏后端已连接.png",
+        "evidence/TC-UI-DIAG-001/screenshots/02-S2-诊断页签.png"
+      ],
+      "serverLogLines": 12,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1053,
+          "after": 1053
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 2,
+      "notes": []
+    }
+  ]
+}

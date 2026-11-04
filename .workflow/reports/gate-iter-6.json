@@ -1,0 +1,139 @@
+{
+  "stage": "gate",
+  "pass": true,
+  "module": null,
+  "errors": [],
+  "warnings": [
+    "[用例设计检查] F-MENU-01 的 exception 已有用例覆盖，waiver 已过时，可以删除"
+  ],
+  "stats": {
+    "merged": {
+      "fragments": 27,
+      "api": 227,
+      "ui": 143
+    },
+    "prd": {
+      "features": 75,
+      "inScope": 70,
+      "modules": [
+        "CACHE",
+        "CLEAN",
+        "CTX",
+        "DEMO",
+        "DIAG",
+        "INCR",
+        "MENU",
+        "PERF",
+        "PERSIST",
+        "PRIV",
+        "RANK",
+        "REC",
+        "RULE",
+        "SYNC"
+      ]
+    },
+    "apiEndpoints": 18,
+    "uiTestIds": 172,
+    "design": {
+      "codePoints": 118,
+      "be": 60,
+      "fe": 58,
+      "coreFiles": 36
+    },
+    "cases": {
+      "total": 370,
+      "byType": {
+        "API": 219,
+        "E2E": 8,
+        "UI": 143
+      },
+      "uiModules": [
+        "CACHE",
+        "CLEAN",
+        "CTX",
+        "DIAG",
+        "INCR",
+        "MENU",
+        "PRIV",
+        "RANK",
+        "REC",
+        "RULE",
+        "SYNC"
+      ]
+    },
+    "skillChecks": {
+      "cases": {
+        "script": ".agents/skills/nav-test-case-design/scripts/check-cases.mjs",
+        "pass": true,
+        "errors": 0,
+        "warnings": 1
+      },
+      "spec": {
+        "script": "specs/tools/check-spec.mjs",
+        "pass": true,
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "code": {
+      "annotated": 118,
+      "codePoints": 118,
+      "jsFiles": 131
+    },
+    "tamper": {
+      "changed": [],
+      "added": [],
+      "removed": []
+    },
+    "run": {
+      "total": 389,
+      "passed": 389,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "evidenceIncomplete": 0
+    },
+    "matrix": {
+      "reqMandatory": 96,
+      "reqCovered": 96,
+      "file": "docs/trace/matrix.md",
+      "inScope": 70,
+      "covered": 70
+    }
+  },
+  "digest": "4f48aac733c3ed4e439dff374dc30944b376e385e6048cb05880b020140c721a",
+  "tampered": false,
+  "run": {
+    "runId": "gate-2026-11-02T22-32-48-604Z",
+    "total": 389,
+    "passed": 389,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "casesTotal": 370,
+    "casesPassed": 370,
+    "globalErrors": [],
+    "failures": [],
+    "missingCases": [],
+    "evidenceIncomplete": []
+  },
+  "modules": [
+    "CACHE",
+    "CLEAN",
+    "CTX",
+    "DEMO",
+    "DIAG",
+    "INCR",
+    "MENU",
+    "PERF",
+    "PERSIST",
+    "PRIV",
+    "RANK",
+    "REC",
+    "RULE",
+    "SYNC"
+  ],
+  "sharedModules": [
+    "CORE"
+  ]
+}

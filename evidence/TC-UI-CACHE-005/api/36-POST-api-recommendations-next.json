@@ -1,0 +1,94 @@
+{
+  "source": "service-worker",
+  "phase": "recovery-first",
+  "observationSequence": 33,
+  "reqId": "ext_1793762838139_33",
+  "method": "POST",
+  "url": "http://127.0.0.1:4300/api/recommendations/next",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762838139_33"
+  },
+  "requestBody": "{\"currentPage\":{\"url\":\"https://example.com/docs\",\"title\":\"Docs recovery current page\"},\"openTabs\":[{\"url\":\"https://example.com/docs\",\"title\":\"Docs recovery current page\"}],\"recentHistory\":[{\"url\":\"https://example.com/docs\",\"title\":\"https://example.com/docs\",\"lastVisitTime\":1793762837465.947}]}",
+  "status": 200,
+  "responseHeaders": {
+    "connection": "keep-alive",
+    "date": "Wed, 04 Nov 2026 03:27:18 GMT",
+    "keep-alive": "timeout=5",
+    "access-control-allow-origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "access-control-expose-headers": "x-request-id",
+    "content-length": "1492",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin",
+    "x-request-id": "ext_1793762838139_33"
+  },
+  "responseBody": {
+    "recommendations": [
+      {
+        "id": "rec_2",
+        "type": "next_visit",
+        "url": "https://github.com/org/repo/issues/123",
+        "title": "Fix login redirect bug",
+        "score": 0.5,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": "https://example.com/docs",
+        "createdAt": 1793762837698
+      },
+      {
+        "id": "rec_1",
+        "type": "next_visit",
+        "url": "https://github.com/org/repo/pull/456",
+        "title": "Refactor auth middleware (#456)",
+        "score": 0.48,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": "https://example.com/docs",
+        "createdAt": 1793762837698
+      },
+      {
+        "id": "rec_9",
+        "type": "next_visit",
+        "url": "https://react.dev/reference/react/useState",
+        "title": "useState – React",
+        "score": 0.46,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": "https://example.com/docs",
+        "createdAt": 1793762837698
+      },
+      {
+        "id": "rec_3",
+        "type": "next_visit",
+        "url": "https://github.com/org/repo/actions",
+        "title": "Actions · org/repo",
+        "score": 0.45,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": "https://example.com/docs",
+        "createdAt": 1793762837698
+      },
+      {
+        "id": "rec_4",
+        "type": "next_visit",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+        "title": "Fetch API - Web APIs | MDN",
+        "score": 0.43,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": "https://example.com/docs",
+        "createdAt": 1793762837698
+      }
+    ],
+    "cached": true,
+    "generatedAt": 1793762837698
+  },
+  "responseText": "{\"recommendations\":[{\"id\":\"rec_2\",\"type\":\"next_visit\",\"url\":\"https://github.com/org/repo/issues/123\",\"title\":\"Fix login redirect bug\",\"score\":0.5,\"reason\":\"近期综合评分较高的页面，可作为备选\",\"strategy\":\"global_top\",\"contextUrl\":\"https://example.com/docs\",\"createdAt\":1793762837698},{\"id\":\"rec_1\",\"type\":\"next_visit\",\"url\":\"https://github.com/org/repo/pull/456\",\"title\":\"Refactor auth middleware (#456)\",\"score\":0.48,\"reason\":\"近期综合评分较高的页面，可作为备选\",\"strategy\":\"global_top\",\"contextUrl\":\"https://example.com/docs\",\"createdAt\":1793762837698},{\"id\":\"rec_9\",\"type\":\"next_visit\",\"url\":\"https://react.dev/reference/react/useState\",\"title\":\"useState – React\",\"score\":0.46,\"reason\":\"近期综合评分较高的页面，可作为备选\",\"strategy\":\"global_top\",\"contextUrl\":\"https://example.com/docs\",\"createdAt\":1793762837698},{\"id\":\"rec_3\",\"type\":\"next_visit\",\"url\":\"https://github.com/org/repo/actions\",\"title\":\"Actions · org/repo\",\"score\":0.45,\"reason\":\"近期综合评分较高的页面，可作为备选\",\"strategy\":\"global_top\",\"contextUrl\":\"https://example.com/docs\",\"createdAt\":1793762837698},{\"id\":\"rec_4\",\"type\":\"next_visit\",\"url\":\"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\",\"title\":\"Fetch API - Web APIs | MDN\",\"score\":0.43,\"reason\":\"近期综合评分较高的页面，可作为备选\",\"strategy\":\"global_top\",\"contextUrl\":\"https://example.com/docs\",\"createdAt\":1793762837698}],\"cached\":true,\"generatedAt\":1793762837698}",
+  "parseError": null,
+  "ms": 4,
+  "setup": false
+}

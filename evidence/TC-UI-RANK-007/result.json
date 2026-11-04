@@ -1,0 +1,57 @@
+{
+  "caseId": "TC-UI-RANK-007",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:19.310Z",
+  "tests": [
+    {
+      "testId": "848766265591f3cb4de0-fce92947d93d79dc9852",
+      "title": "TC-UI-RANK-007 排序页签离线时点「打开中」筛选：显示「筛选需要在线」提示且控件保留，取消筛选回到 10 条缓存列表",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RANK-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1076,
+      "startedAt": "2026-11-04T03:29:18.234Z",
+      "endedAt": "2026-11-04T03:29:19.310Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 2,
+      "screenshots": [
+        "evidence/TC-UI-RANK-007/screenshots/01-在线默认列表已缓存.png",
+        "evidence/TC-UI-RANK-007/screenshots/02-离线筛选需要在线提示.png",
+        "evidence/TC-UI-RANK-007/screenshots/03-取消筛选回到缓存列表.png"
+      ],
+      "serverLogLines": 12,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1155,
+          "after": 1156
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

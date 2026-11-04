@@ -1,0 +1,60 @@
+{
+  "caseId": "TC-UI-MENU-003",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:46.525Z",
+  "tests": [
+    {
+      "testId": "f7a348b97cbfd1b3c3b7-9eb1050ce3b7e1f40b53",
+      "title": "TC-UI-MENU-003 含 token 的页面点击添加在本地拒绝且不上传不泄漏 URL",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-MENU-003.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1552,
+      "startedAt": "2026-11-04T03:28:44.973Z",
+      "endedAt": "2026-11-04T03:28:46.525Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [
+        "evidence/TC-UI-MENU-003/screenshots/01-敏感页popup.png",
+        "evidence/TC-UI-MENU-003/screenshots/02-敏感提示.png",
+        "evidence/TC-UI-MENU-003/screenshots/03-reload后.png"
+      ],
+      "serverLogLines": 20,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1111,
+          "after": 1111
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "点击前 storage 基线：{\"apiBaseUrl\":\"http://127.0.0.1:4300\",\"cache\":{\"cachedAt\":1793762925662,\"cleanup\":{\"cachedAt\":1793762925657,\"data\":{\"generatedAt\":1793762925654,\"suggestions\":[],\"summary\":{\"archive\":0,\"keep\":0,\"merge\":0},\"thresholdDays\":14}},\"config\":{\"cachedAt\":1793762925658,\"data\":{\"apiVersion\":\"1\",\"baseSensitiveKeywords\":[\"password\",\"token\",\"bank\",\"secret\"],\"cleanupThresholdDays\":14,\"enablePrivacyFilter\":true,\"historyLookbackDays\":30,\"limits\":{\"maxBodyBytes\":1048576,\"maxItemsPerSync\":500,\"maxRuleTextLength\":500,\"maxUrlLength\":2048},\"maxHistoryItems\":100,\"minRecommendationScore\":0.3,\"privacySensitiveKeywords\":[\"password\",\"token\",\"bank\",\"secret\"],\"recencyHalfLifeDays\":7,\"weights\":{\"domain\":0.1,\"frequency\":0.3,\"open\":0.2,\"recency\":0.4}}},\"ranked\":{\"cachedAt\":1793762925656,\"data\":{\"domains\":[],\"generatedAt\":1793762925359,\"pages\":[],\"total\":0}},\"recommendations\":{\"__none__\":{\"cachedAt\":1793762925662,\"data\":{\"cached\":false,\"generatedAt\":1793762925660,\"recommendations\":[]}}}},\"connection\":{\"lastCheckedAt\":1793762925661,\"lastErrorCode\":null,\"recoverPending\":false,\"since\":1793762925648,\"status\":\"online\"},\"importantUrls\":[]}",
+        "sensitive-add 观察到的写请求：[]"
+      ]
+    }
+  ]
+}

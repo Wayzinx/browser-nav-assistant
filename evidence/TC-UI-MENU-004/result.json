@@ -1,0 +1,59 @@
+{
+  "caseId": "TC-UI-MENU-004",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:48.028Z",
+  "tests": [
+    {
+      "testId": "888695a540acf0ea6f9d-9cf4c77dee629dfeb5f5",
+      "title": "TC-UI-MENU-004 普通页面点击星标后 domain 分为 1.00 且重要状态持久读回",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-MENU-004.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1469,
+      "startedAt": "2026-11-04T03:28:46.559Z",
+      "endedAt": "2026-11-04T03:28:48.028Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [
+        "evidence/TC-UI-MENU-004/screenshots/01-星标前.png",
+        "evidence/TC-UI-MENU-004/screenshots/02-星标后.png",
+        "evidence/TC-UI-MENU-004/screenshots/03-reload后.png"
+      ],
+      "serverLogLines": 24,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1112,
+          "after": 1113
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "star 观察到的写请求：[{\"sequence\":1,\"phase\":\"star\",\"method\":\"POST\",\"url\":\"http://127.0.0.1:4300/api/pages/important\",\"origin\":\"http://127.0.0.1:4300\",\"path\":\"/api/pages/important\",\"fromServiceWorker\":true,\"startedAt\":1793762927615,\"transport\":\"finished\",\"status\":200,\"failure\":null,\"endedAt\":1793762927617,\"persisted\":true}]"
+      ]
+    }
+  ]
+}

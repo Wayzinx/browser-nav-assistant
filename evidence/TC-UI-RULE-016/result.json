@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-UI-RULE-016",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:43.401Z",
+  "tests": [
+    {
+      "testId": "f3c3a2a40a56caae798d-bb2f9aed0e6eec26ff37",
+      "title": "TC-UI-RULE-016 离线无缓存显示列表错误而非空状态",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RULE-016.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 830,
+      "startedAt": "2026-11-04T03:29:42.571Z",
+      "endedAt": "2026-11-04T03:29:43.401Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-RULE-016/screenshots/01-无缓存离线首页.png",
+        "evidence/TC-UI-RULE-016/screenshots/02-离线列表错误.png"
+      ],
+      "serverLogLines": 3,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1186,
+          "after": 1186
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

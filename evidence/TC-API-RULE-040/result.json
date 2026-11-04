@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RULE-040",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:05.700Z",
+  "tests": [
+    {
+      "testId": "5601c57567819c8e31f6-e475af992c0a1118417c",
+      "title": "TC-API-RULE-040 规则id路径使用不支持的POST方法返回405且不删除规则",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-040.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 39,
+      "startedAt": "2026-11-04T03:27:05.661Z",
+      "endedAt": "2026-11-04T03:27:05.700Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 9,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 821,
+          "after": 822
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 1,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

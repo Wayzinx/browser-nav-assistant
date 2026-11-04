@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RULE-008",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:04.722Z",
+  "tests": [
+    {
+      "testId": "e581d774cee5a0386e2e-5f3c51185a437c5f57e8",
+      "title": "TC-API-RULE-008 别归档识别github.com并保持never_archive",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-008.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 9,
+      "startedAt": "2026-11-04T03:27:04.713Z",
+      "endedAt": "2026-11-04T03:27:04.722Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 3,
+      "screenshots": [],
+      "serverLogLines": 5,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 752,
+          "after": 753
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

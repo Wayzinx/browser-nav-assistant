@@ -1,0 +1,63 @@
+{
+  "reqId": "TC-E2E-FLOW-008-04",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/rules",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-E2E-FLOW-008-04"
+  },
+  "requestBody": {
+    "rules": [
+      {
+        "id": "rule_1",
+        "rawText": "不要上传包含 cookie 的 URL",
+        "type": "privacy_filter",
+        "domain": null,
+        "urlPattern": null,
+        "inactiveDays": null,
+        "action": "exclude_upload",
+        "enabled": true,
+        "confidence": "high",
+        "notes": [],
+        "keywords": [
+          "cookie"
+        ]
+      }
+    ]
+  },
+  "status": 201,
+  "responseHeaders": {
+    "x-request-id": "TC-E2E-FLOW-008-04",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "298",
+    "date": "Wed, 04 Nov 2026 03:27:07 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "rules": [
+      {
+        "domain": null,
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762827717,
+        "updatedAt": 1793762827717,
+        "rawText": "不要上传包含 cookie 的 URL",
+        "type": "privacy_filter",
+        "keywords": [
+          "cookie"
+        ],
+        "action": "exclude_upload",
+        "id": "rule_1"
+      }
+    ],
+    "ruleCount": 1
+  },
+  "ms": 0.7,
+  "mutated": null
+}

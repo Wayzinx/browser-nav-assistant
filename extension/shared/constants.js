@@ -1,0 +1,22 @@
+// @code C-FE-CORE-04
+// 后端默认端口来自 api-contract.defaultPort，插件无需构建即可加载。
+export const DEFAULT_API_BASE = 'http://127.0.0.1:3000';
+export const EXPECTED_API_MAJOR = 1;
+export const DAY_MS = 24 * 60 * 60 * 1000;
+
+export const DEFAULTS = Object.freeze({
+  RANKED_LIMIT: 50,
+  HISTORY_LOOKBACK_DAYS: 30,
+  MAX_HISTORY_ITEMS: 100,
+  MAX_OPEN_TABS: 200,
+  PRIVACY_SENSITIVE_KEYWORDS: Object.freeze(['password', 'token', 'bank', 'secret']),
+  API_TIMEOUT_MS: 5000,
+  HEALTH_TIMEOUT_MS: 3000,
+  CONNECTION_TIMEOUT_MS: 1500,
+  SYNC_TIMEOUT_MS: 8000,
+  MESSAGE_TIMEOUT_MS: 10000,
+  SYNC_MESSAGE_TIMEOUT_MS: 15000,
+  SYNC_INTERRUPTED_MS: 30000,
+  INCREMENTAL_OVERLAP_MS: 5 * 60 * 1000,
+  IGNORED_SUGGESTION_TTL_MS: 7 * DAY_MS,
+});

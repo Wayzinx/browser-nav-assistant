@@ -1,0 +1,22 @@
+{
+  "caseId": "TC-UI-REC-002",
+  "verdict": "pass",
+  "observed": "本轮复测：点击首条推荐后 tabs 新增恰 1 个 id，url=https://github.com/org/repo/actions 且 active=true，原标签保留。 上轮：点击首条推荐 Actions · org/repo 后，tabs 集合新增恰 1 个 tabId（新 id），url=https://github.com/org/repo/actions 且 active=true；原 PR 标签与 popup 标签仍在、URL 不变。E1–E6 满足。spec 无需修改。",
+  "steps": [
+    "PORT=4180 启动后端并 reset，按用例经 POST /api/sync 导入数据",
+    "headless chromium 加载 extension/，清空 history 与 cache/connection/syncState，外站离线化",
+    "chrome.history.addUrl 造历史并依次打开用例页面，最后一页置前",
+    "注册网络观察后以 tab 打开 popup 首页，等待 3s，截图并输出 ariaSnapshot，记录推荐请求/响应",
+    "REC-002 额外点击首个 rec-item 并对比点击前后 chrome.tabs.query",
+    "本轮（r4，续跑）：停止探索后端后 TEST_PORT=4182 npx playwright test tests/ui/TC-UI-CTX-0*.spec.mjs tests/ui/TC-UI-REC-00*.spec.mjs → 29 passed，脚本无需修改",
+    "本轮（r5，续跑）：确认 extension/、server/ 自 r4 以来无改动；4182 后端重跑探索脚本（ctx-r4-001-003-4182.mjs、ctx-r3-4182.mjs、rec-r4-4182.mjs），截图与 aria 快照与 r4 一致；停止探索后端后 TEST_PORT=4182 npx playwright test tests/ui/TC-UI-CTX-0*.spec.mjs tests/ui/TC-UI-REC-00*.spec.mjs → 29 passed，脚本无需修改",
+    "本轮（r6，续跑）：确认 extension/、server/ 自 r5 以来无改动（popup.css 仍与 dev-FE-CTX 第 6 轮修复前快照一致）；4182 后端重跑探索脚本（r6-ctx-r4-001-003-4182.mjs、r6-ctx-r3-4182.mjs、r6-rec-r4-4182.mjs），去掉时间戳后输出与 r4/r5 一致，截图复核无异常；停止探索后端后 TEST_PORT=4182 npx playwright test tests/ui/TC-UI-CTX-0*.spec.mjs tests/ui/TC-UI-REC-00*.spec.mjs --output=<独立目录> → 29 passed（首次用共享 test-results 时 CTX-015 N=101、REC-002 因并行变异检查清理 trace 目录报 ENOENT/EINVAL，属基础设施冲突，隔离输出目录后通过），脚本无需修改"
+  ],
+  "screenshots": [
+    "evidence/TC-UI-REC-002/explore/1.png",
+    "evidence/TC-UI-REC-002/explore/2.png",
+    "evidence/TC-UI-REC-002/explore/3.png"
+  ],
+  "spec": "tests/ui/TC-UI-REC-002.spec.mjs",
+  "solidified": true
+}

@@ -1,0 +1,50 @@
+{
+  "caseId": "TC-UI-CLEAN-011",
+  "verdict": "pass",
+  "observed": "在线时缓存 cleanup summary={2,1,1}、cachedAt 写入；切到 127.0.0.1:9 后整理页仍按缓存显示 2/1/1，offline-banner-cleanup「以下为 HH:mm 同步时缓存的结果」与 cachedAt 本地时间一致；离线点归档请求失败（ERR_UNSAFE_PORT），cleanup-action-error 含「无法连接后端 http://127.0.0.1:9」，后端数据不变，无 lastCleanupAction、无撤销按钮；恢复地址后在同一 popup 再点归档，200 affected=1，ranked total=9、cleanup/recommendations 均不含 issues/100，UI 移除该项并显示撤销按钮。",
+  "steps": [
+    "启动 4181 测试后端，POST /api/__test__/reset；channel=chromium 加载 extension/，apiBaseUrl=http://127.0.0.1:4181",
+    "通过真实接口准备数据（样例 /api/sync、规则 /api/rules 等），以 tab 打开 popup，按用例步骤实际点击 getByTestId 元素",
+    "每个关键步骤截图并记录 aria 快照，回读真实后端接口与 chrome.storage.local",
+    "截图 1：在线整理",
+    "截图 2：离线缓存整理页",
+    "截图 3：离线归档失败",
+    "截图 4：恢复后归档",
+    "TEST_PORT=4181 npx playwright test tests/ui/TC-UI-CLEAN-011.spec.mjs 通过（21 条一并运行 21 passed）",
+    "复测（2026-11-03 07:07，产品代码自上轮未变）：4181 后端重跑 clean-4181.mjs，截图/aria/后端回读与上轮结论一致；TEST_PORT=4181 21 条 spec 中 20 passed，RANK-009 首轮因并发 trace ENOENT（非断言失败）单独重跑通过",
+    "复测（2026-11-03 07:27，续跑；产品代码与脚本自上轮 07:09 未变）：4181 后端重跑 clean/rank-4181.mjs，截图、aria 与后端回读和上轮结论一致；关闭探索后端后 TEST_PORT=4181 21 条 spec 21 passed"
+  ],
+  "screenshots": [
+    "evidence/TC-UI-CLEAN-011/explore/1.png",
+    "evidence/TC-UI-CLEAN-011/explore/2.png",
+    "evidence/TC-UI-CLEAN-011/explore/3.png",
+    "evidence/TC-UI-CLEAN-011/explore/4.png"
+  ],
+  "spec": "tests/ui/TC-UI-CLEAN-011.spec.mjs",
+  "solidified": true,
+  "exploreScript": "tests/explore/tmp/clean-4181.mjs",
+  "ariaSnapshots": [
+    {
+      "n": 1,
+      "label": "在线整理",
+      "aria": "- banner:\n  - heading \"导航助手\" [level=1]\n  - button \"后端已连接\"\n- region \"当前页面\":\n  - heading \"当前页面\" [level=2]\n  - paragraph: about:blank\n  - paragraph: about:blank\n  - text: 系统页 · 不采集\n- region \"浏览器上下文同步\":\n  - button \"同步浏览器上下文\"\n  - status:\n    - paragraph: 尚未同步\n  - button \"全量同步\"\n  - paragraph: 当前模式：全量\n- tablist \"导航助手功能\":\n  - tab \"首页\"\n  - tab \"上下文\"\n  - tab \"排序\"\n  - tab \"整理 3\" [selected]\n  - tab \"规则\"\n  - tab \"诊断\"\n- main:\n  - tabpanel \"整理 3\":\n    - heading \"整理建议\" [level=2]\n    - heading \"归档 2\" [level=3]\n    - article:\n      - text: chrome extension manifest v3 - Google Search\n      - paragraph: https://www.google.com/search?q=chrome+extension+manifest+v3\n      - paragraph: 超过 14 天未访问（已 35 天），且不在当前打开的 tab 中\n      - paragraph: 已 35 天未访问\n      - button \"归档\"\n      - button \"忽略\"\n    - article:\n      - text: Old bug report from last sprint\n      - paragraph: https://github.com/org/repo/issues/100\n      - paragraph: 超过 7 天未访问（已 24 天），且不在当前打开的 tab 中；命中规则「把 7 天没访问过的 GitHub issue 建议归档」\n      - paragraph: 已 24 天未访问\n      - paragraph: 规则把 7 天没访问过的 GitHub issue 建议归档\n      - button \"归档\"\n      - button \"忽略\"\n    - heading \"重复 1\" [level=3]\n    - article:\n      - text: Fix login redirect bug\n      - paragraph: https://github.com/org/repo/issues/123 https://github.com/org/repo/issues/123?tab=comments\n      - paragraph: 去掉 query 参数后 URL 相同，疑似重复页面\n      - button \"合并\"\n      - button \"忽略\"\n    - heading \"保留 1\" [level=3]\n    - article:\n      - text: AI Agent Design Guidelines\n      - paragraph: https://docs.internal.com/ai-agent-design\n      - paragraph: 被保护域名配置（docs.internal.com），不建议归档，虽已 6 天未访问\n      - paragraph: 已 6 天未访问\n      - paragraph: 规则docs.internal.com 的页面永远不要归档\n      - button \"忽略\"\n    - button \"全部归档\""
+    },
+    {
+      "n": 2,
+      "label": "离线缓存整理页",
+      "aria": "- banner:\n  - heading \"导航助手\" [level=1]\n  - button \"后端未连接\"\n- region \"当前页面\":\n  - heading \"当前页面\" [level=2]\n  - paragraph: about:blank\n  - paragraph: about:blank\n  - text: 系统页 · 不采集\n- region \"浏览器上下文同步\":\n  - button \"同步浏览器上下文\"\n  - status:\n    - paragraph: 尚未同步\n  - button \"全量同步\"\n  - paragraph: 当前模式：全量\n- tablist \"导航助手功能\":\n  - tab \"首页\"\n  - tab \"上下文\"\n  - tab \"排序\"\n  - tab \"整理 3\" [selected]\n  - tab \"规则\"\n  - tab \"诊断 诊断有待处理项\": 诊断\n- main:\n  - tabpanel \"整理 3\":\n    - status: 以下为 07:07 同步时缓存的结果\n    - heading \"整理建议\" [level=2]\n    - heading \"归档 2\" [level=3]\n    - article:\n      - text: chrome extension manifest v3 - Google Search\n      - paragraph: https://www.google.com/search?q=chrome+extension+manifest+v3\n      - paragraph: 超过 14 天未访问（已 35 天），且不在当前打开的 tab 中\n      - paragraph: 已 35 天未访问\n      - button \"归档\"\n      - button \"忽略\"\n    - article:\n      - text: Old bug report from last sprint\n      - paragraph: https://github.com/org/repo/issues/100\n      - paragraph: 超过 7 天未访问（已 24 天），且不在当前打开的 tab 中；命中规则「把 7 天没访问过的 GitHub issue 建议归档」\n      - paragraph: 已 24 天未访问\n      - paragraph: 规则把 7 天没访问过的 GitHub issue 建议归档\n      - button \"归档\"\n      - button \"忽略\"\n    - heading \"重复 1\" [level=3]\n    - article:\n      - text: Fix login redirect bug\n      - paragraph: https://github.com/org/repo/issues/123 https://github.com/org/repo/issues/123?tab=comments\n      - paragraph: 去掉 query 参数后 URL 相同，疑似重复页面\n      - button \"合并\"\n      - button \"忽略\"\n    - heading \"保留 1\" [level=3]\n    - article:\n      - text: AI Agent Design Guidelines\n      - paragraph: https://docs.internal.com/ai-agent-design\n      - paragraph: 被保护域名配置（docs.internal.com），不建议归档，虽已 6 天未访问\n      - paragraph: 已 6 天未访问\n      - paragraph: 规则docs.internal.com 的页面永远不要归档\n      - button \"忽略\"\n    - button \"全部归档\""
+    },
+    {
+      "n": 3,
+      "label": "离线归档失败",
+      "aria": "- banner:\n  - heading \"导航助手\" [level=1]\n  - button \"后端未连接\"\n- region \"当前页面\":\n  - heading \"当前页面\" [level=2]\n  - paragraph: about:blank\n  - paragraph: about:blank\n  - text: 系统页 · 不采集\n- region \"浏览器上下文同步\":\n  - button \"同步浏览器上下文\"\n  - status:\n    - paragraph: 尚未同步\n  - button \"全量同步\"\n  - paragraph: 当前模式：全量\n- tablist \"导航助手功能\":\n  - tab \"首页\"\n  - tab \"上下文\"\n  - tab \"排序\"\n  - tab \"整理 3\" [selected]\n  - tab \"规则\"\n  - tab \"诊断 诊断有待处理项\": 诊断\n- main:\n  - tabpanel \"整理 3\":\n    - status: 以下为 07:07 同步时缓存的结果\n    - heading \"整理建议\" [level=2]\n    - heading \"归档 2\" [level=3]\n    - article:\n      - text: chrome extension manifest v3 - Google Search\n      - paragraph: https://www.google.com/search?q=chrome+extension+manifest+v3\n      - paragraph: 超过 14 天未访问（已 35 天），且不在当前打开的 tab 中\n      - paragraph: 已 35 天未访问\n      - button \"归档\"\n      - button \"忽略\"\n    - article:\n      - text: Old bug report from last sprint\n      - paragraph: https://github.com/org/repo/issues/100\n      - paragraph: 超过 7 天未访问（已 24 天），且不在当前打开的 tab 中；命中规则「把 7 天没访问过的 GitHub issue 建议归档」\n      - paragraph: 已 24 天未访问\n      - paragraph: 规则把 7 天没访问过的 GitHub issue 建议归档\n      - button \"归档\"\n      - button \"忽略\"\n    - heading \"重复 1\" [level=3]\n    - article:\n      - text: Fix login redirect bug\n      - paragraph: https://github.com/org/repo/issues/123 https://github.com/org/repo/issues/123?tab=comments\n      - paragraph: 去掉 query 参数后 URL 相同，疑似重复页面\n      - button \"合并\"\n      - button \"忽略\"\n    - heading \"保留 1\" [level=3]\n    - article:\n      - text: AI Agent Design Guidelines\n      - paragraph: https://docs.internal.com/ai-agent-design\n      - paragraph: 被保护域名配置（docs.internal.com），不建议归档，虽已 6 天未访问\n      - paragraph: 已 6 天未访问\n      - paragraph: 规则docs.internal.com 的页面永远不要归档\n      - button \"忽略\"\n    - button \"全部归档\"\n    - alert: 无法连接后端 http://127.0.0.1:9，请检查后端服务和 API 地址"
+    },
+    {
+      "n": 4,
+      "label": "恢复后归档",
+      "aria": "- banner:\n  - heading \"导航助手\" [level=1]\n  - button \"后端已连接\"\n- region \"当前页面\":\n  - heading \"当前页面\" [level=2]\n  - paragraph: about:blank\n  - paragraph: about:blank\n  - text: 系统页 · 不采集\n- region \"浏览器上下文同步\":\n  - button \"同步浏览器上下文\"\n  - status:\n    - paragraph: 尚未同步\n  - button \"全量同步\"\n  - paragraph: 当前模式：全量\n- tablist \"导航助手功能\":\n  - tab \"首页\"\n  - tab \"上下文\"\n  - tab \"排序\"\n  - tab \"整理 2\" [selected]\n  - tab \"规则\"\n  - tab \"诊断\"\n- main:\n  - tabpanel \"整理 2\":\n    - heading \"整理建议\" [level=2]\n    - heading \"归档 1\" [level=3]\n    - article:\n      - text: chrome extension manifest v3 - Google Search\n      - paragraph: https://www.google.com/search?q=chrome+extension+manifest+v3\n      - paragraph: 超过 14 天未访问（已 35 天），且不在当前打开的 tab 中\n      - paragraph: 已 35 天未访问\n      - button \"归档\"\n      - button \"忽略\"\n    - heading \"重复 1\" [level=3]\n    - article:\n      - text: Fix login redirect bug\n      - paragraph: https://github.com/org/repo/issues/123 https://github.com/org/repo/issues/123?tab=comments\n      - paragraph: 去掉 query 参数后 URL 相同，疑似重复页面\n      - button \"合并\"\n      - button \"忽略\"\n    - heading \"保留 1\" [level=3]\n    - article:\n      - text: AI Agent Design Guidelines\n      - paragraph: https://docs.internal.com/ai-agent-design\n      - paragraph: 被保护域名配置（docs.internal.com），不建议归档，虽已 6 天未访问\n      - paragraph: 已 6 天未访问\n      - paragraph: 规则docs.internal.com 的页面永远不要归档\n      - button \"忽略\"\n    - button \"全部归档\"\n    - text: 已归档页面\n    - button \"撤销\""
+    }
+  ],
+  "exploredAt": "2026-11-02T22:46:10.085Z",
+  "reverifiedAt": "2026-11-03T07:10:00+08:00"
+}

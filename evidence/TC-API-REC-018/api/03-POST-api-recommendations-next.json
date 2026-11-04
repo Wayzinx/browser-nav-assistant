@@ -1,0 +1,60 @@
+{
+  "reqId": "TC-API-REC-018-03",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/recommendations/next",
+  "params": {
+    "now": 1793762824177
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-REC-018-03"
+  },
+  "requestBody": {
+    "currentPage": {
+      "url": "https://other.example.net/c"
+    },
+    "openTabs": [],
+    "recentHistory": []
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-REC-018-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "576",
+    "date": "Wed, 04 Nov 2026 03:27:04 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "recommendations": [
+      {
+        "id": "rec_1",
+        "type": "next_visit",
+        "url": "https://news.example.org/a",
+        "title": "News A",
+        "score": 0.48,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": "https://other.example.net/c",
+        "createdAt": 1793762824177
+      },
+      {
+        "id": "rec_2",
+        "type": "next_visit",
+        "url": "https://news.example.org/b",
+        "title": "News B",
+        "score": 0.41,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": "https://other.example.net/c",
+        "createdAt": 1793762824177
+      }
+    ],
+    "cached": false,
+    "generatedAt": 1793762824177
+  },
+  "ms": 0.8,
+  "mutated": null
+}

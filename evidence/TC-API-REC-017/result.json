@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-API-REC-017",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:04.164Z",
+  "tests": [
+    {
+      "testId": "b8296e7c655eedded653-a5e0efcebff27543a451",
+      "title": "TC-API-REC-017 非内置文档域名的 guide 路径仍触发文档策略",
+      "project": "api",
+      "file": "tests/api/TC-API-REC-017.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 13,
+      "startedAt": "2026-11-04T03:27:04.151Z",
+      "endedAt": "2026-11-04T03:27:04.164Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 3,
+      "screenshots": [],
+      "serverLogLines": 6,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 707,
+          "after": 709
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 2
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "{\"T\":1793762824157,\"N\":1793762824157}"
+      ]
+    }
+  ]
+}

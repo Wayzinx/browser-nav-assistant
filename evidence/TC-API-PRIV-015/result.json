@@ -1,0 +1,57 @@
+{
+  "caseId": "TC-API-PRIV-015",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:03.077Z",
+  "tests": [
+    {
+      "testId": "12dae02ce7adedfbc156-dfb8965a76a799b2cfe3",
+      "title": "TC-API-PRIV-015 配置阈值合法边界通过，越界拒绝且保留最后合法配置",
+      "project": "api",
+      "file": "tests/api/TC-API-PRIV-015.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 31,
+      "startedAt": "2026-11-04T03:27:03.046Z",
+      "endedAt": "2026-11-04T03:27:03.077Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 9,
+      "screenshots": [],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 620,
+          "after": 621
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [
+          "cleanupThresholdDays",
+          "maxHistoryItems",
+          "historyLookbackDays"
+        ],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

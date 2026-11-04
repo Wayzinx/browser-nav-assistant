@@ -1,0 +1,13 @@
+{
+  "reqId": "TC-UI-MENU-002-add-observed-1",
+  "observed": true,
+  "setup": false,
+  "method": "POST",
+  "url": "http://127.0.0.1:4300/api/pages/manual",
+  "requestBody": "{\"url\":\"https://example.com/note\",\"title\":\"Note\"}",
+  "status": 200,
+  "responseBody": "{\"accepted\":true,\"rejected\":0,\"created\":true,\"pageCount\":1}",
+  "transport": "finished",
+  "fromServiceWorker": true,
+  "ms": 3
+}

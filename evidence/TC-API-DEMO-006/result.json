@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-API-DEMO-006",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:46.451Z",
+  "tests": [
+    {
+      "testId": "1e18576c3f84d585688e-1e163192cc52a38008dc",
+      "title": "TC-API-DEMO-006 时间平移保持相对间隔：issues/100 与 Google 页相差 1000000000 ms 且落在导入时刻窗口内",
+      "project": "api",
+      "file": "tests/api/TC-API-DEMO-006.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 122,
+      "startedAt": "2026-11-04T03:25:46.329Z",
+      "endedAt": "2026-11-04T03:25:46.451Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 3,
+      "screenshots": [],
+      "serverLogLines": 8,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 74,
+          "after": 76
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "t0=1793762746342 import-sample pid=53016 API_BASE=http://127.0.0.1:4300",
+        "t1=1793762746444 import-sample 退出 {\"code\":0,\"signal\":null}"
+      ]
+    }
+  ]
+}

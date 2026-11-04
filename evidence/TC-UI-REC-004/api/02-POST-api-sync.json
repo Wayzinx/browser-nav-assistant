@@ -1,0 +1,73 @@
+{
+  "reqId": "TC-UI-REC-004-02",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/sync",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-UI-REC-004-02"
+  },
+  "requestBody": {
+    "activeTab": null,
+    "openTabs": [],
+    "history": [
+      {
+        "url": "https://news.example.org/a1",
+        "title": "候选1",
+        "visitCount": 10,
+        "lastVisitTime": 1793762665729
+      },
+      {
+        "url": "https://news.example.org/a2",
+        "title": "候选2",
+        "visitCount": 8,
+        "lastVisitTime": 1793762665729
+      },
+      {
+        "url": "https://news.example.org/a3",
+        "title": "候选3",
+        "visitCount": 6,
+        "lastVisitTime": 1793762665729
+      },
+      {
+        "url": "https://news.example.org/a4",
+        "title": "候选4",
+        "visitCount": 4,
+        "lastVisitTime": 1793762665729
+      },
+      {
+        "url": "https://news.example.org/a5",
+        "title": "候选5",
+        "visitCount": 2,
+        "lastVisitTime": 1793762665729
+      }
+    ]
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-UI-REC-004-02",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "163",
+    "date": "Wed, 04 Nov 2026 03:29:25 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "ok": true,
+    "syncedAt": 1793762965730,
+    "received": 5,
+    "created": 5,
+    "updated": 0,
+    "rejected": 0,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 0
+    },
+    "pageCount": 5,
+    "mode": "full"
+  },
+  "ms": 1.6,
+  "mutated": null
+}

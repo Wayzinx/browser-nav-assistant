@@ -1,0 +1,16 @@
+{"method":"POST","path":"/api/__test__/reset","status":200,"ms":0.12,"reqId":"TC-E2E-FLOW-004-01","ts":"2026-11-04T03:27:07.525Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/__test__/state","status":200,"ms":0.11,"reqId":"TC-E2E-FLOW-004-state","ts":"2026-11-04T03:27:07.527Z","level":"info","msg":"access"}
+{"reqId":"TC-E2E-FLOW-004-02","ok":true,"syncedAt":1793762827528,"received":14,"created":10,"updated":4,"rejected":0,"rejectedByReason":{"invalid_url":0,"privacy":0},"pageCount":10,"mode":"full","rejectedDomains":{},"durationMs":0.3381669999944279,"ts":"2026-11-04T03:27:07.529Z","level":"info","msg":"sync done"}
+{"method":"POST","path":"/api/sync","status":200,"ms":0.73,"reqId":"TC-E2E-FLOW-004-02","ts":"2026-11-04T03:27:07.529Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/pages/ranked","status":200,"ms":0.15,"reqId":"TC-E2E-FLOW-004-03","ts":"2026-11-04T03:27:07.531Z","level":"info","msg":"access"}
+{"reqId":"TC-E2E-FLOW-004-04","ok":true,"syncedAt":1793762827534,"received":14,"created":0,"updated":14,"rejected":0,"rejectedByReason":{"invalid_url":0,"privacy":0},"pageCount":10,"mode":"full","rejectedDomains":{},"durationMs":0.2576249999983702,"ts":"2026-11-04T03:27:07.534Z","level":"info","msg":"sync done"}
+{"method":"POST","path":"/api/sync","status":200,"ms":0.61,"reqId":"TC-E2E-FLOW-004-04","ts":"2026-11-04T03:27:07.535Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/pages/ranked","status":200,"ms":0.14,"reqId":"TC-E2E-FLOW-004-05","ts":"2026-11-04T03:27:07.537Z","level":"info","msg":"access"}
+{"method":"POST","path":"/api/recommendations/next","status":200,"ms":0.28,"reqId":"TC-E2E-FLOW-004-06","ts":"2026-11-04T03:27:07.544Z","level":"info","msg":"access"}
+{"reqId":"TC-E2E-FLOW-004-07","ok":true,"syncedAt":1793762827546,"received":13,"created":1,"updated":12,"rejected":0,"rejectedByReason":{"invalid_url":0,"privacy":0},"pageCount":11,"mode":"full","rejectedDomains":{},"durationMs":0.27695800000219606,"ts":"2026-11-04T03:27:07.547Z","level":"info","msg":"sync done"}
+{"method":"POST","path":"/api/sync","status":200,"ms":0.73,"reqId":"TC-E2E-FLOW-004-07","ts":"2026-11-04T03:27:07.547Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/pages/ranked","status":200,"ms":0.21,"reqId":"TC-E2E-FLOW-004-08","ts":"2026-11-04T03:27:07.549Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/pages/cleanup-suggestions","status":200,"ms":0.17,"reqId":"TC-E2E-FLOW-004-09","ts":"2026-11-04T03:27:07.552Z","level":"info","msg":"access"}
+{"method":"POST","path":"/api/recommendations/next","status":200,"ms":0.3,"reqId":"TC-E2E-FLOW-004-10","ts":"2026-11-04T03:27:07.555Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/health","status":200,"ms":0.1,"reqId":"TC-E2E-FLOW-004-11","ts":"2026-11-04T03:27:07.558Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/__test__/state","status":200,"ms":0.24,"reqId":"TC-E2E-FLOW-004-state","ts":"2026-11-04T03:27:07.559Z","level":"info","msg":"access"}

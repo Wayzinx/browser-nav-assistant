@@ -1,0 +1,34 @@
+{
+  "reqId": "TC-API-CLEAN-023-03",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/pages/archive",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-CLEAN-023-03"
+  },
+  "requestBody": {
+    "urls": [
+      "https://github.com/org/repo/issues/100"
+    ]
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-CLEAN-023-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "64",
+    "date": "Wed, 04 Nov 2026 03:25:44 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "ok": true,
+    "affected": 1,
+    "archivedAt": 1793762744825,
+    "notFound": 0
+  },
+  "ms": 2.5,
+  "mutated": null
+}

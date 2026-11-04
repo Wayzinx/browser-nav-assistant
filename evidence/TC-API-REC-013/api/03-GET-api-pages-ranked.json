@@ -1,0 +1,110 @@
+{
+  "reqId": "TC-API-REC-013-03",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/ranked",
+  "params": {
+    "now": 1793762824064
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-REC-013-03"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-REC-013-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "1531",
+    "date": "Wed, 04 Nov 2026 03:27:04 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "pages": [
+      {
+        "id": "page_1",
+        "url": "https://boundary.example.org/anchor",
+        "normalizedUrl": "https://boundary.example.org/anchor",
+        "title": "Anchor",
+        "domain": "boundary.example.org",
+        "visitCount": 1023,
+        "lastVisitedAt": 1793762524064,
+        "firstSeenAt": 1793762524064,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.8,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "最近 3 天内多次访问（1023 次），常用域名 boundary.example.org"
+      },
+      {
+        "id": "page_2",
+        "url": "https://boundary.example.org/keep",
+        "normalizedUrl": "https://boundary.example.org/keep",
+        "title": "Keep",
+        "domain": "boundary.example.org",
+        "visitCount": 1,
+        "lastVisitedAt": 1792985224064,
+        "firstSeenAt": 1792985224064,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.29,
+        "scoreDetail": {
+          "recency": 0.41,
+          "frequency": 0.1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "9 天前访问，常用域名 boundary.example.org"
+      },
+      {
+        "id": "page_3",
+        "url": "https://boundary.example.org/drop",
+        "normalizedUrl": "https://boundary.example.org/drop",
+        "title": "Drop",
+        "domain": "boundary.example.org",
+        "visitCount": 1,
+        "lastVisitedAt": 1792898824064,
+        "firstSeenAt": 1792898824064,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.28,
+        "scoreDetail": {
+          "recency": 0.37,
+          "frequency": 0.1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "10 天前访问，常用域名 boundary.example.org"
+      }
+    ],
+    "total": 3,
+    "domains": [
+      "boundary.example.org"
+    ],
+    "generatedAt": 1793762824064
+  },
+  "ms": 0.9,
+  "mutated": null
+}

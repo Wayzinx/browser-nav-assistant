@@ -1,0 +1,91 @@
+{
+  "dataVersion": 931,
+  "versions": {
+    "data": 931,
+    "rule": 401,
+    "config": 348
+  },
+  "counts": {
+    "pages": 2,
+    "rules": 0,
+    "openPages": 0,
+    "archivedPages": 0,
+    "syncLogs": 1
+  },
+  "pagesTruncated": false,
+  "pagesHash": "47440a0e73c5f3d0112cd78c12796af7a31ae6dbe00b01f714d3b9ff79e90b05",
+  "pages": [
+    {
+      "id": "page_1",
+      "url": "https://Example.com/a/?b=2&utm_source=mail&a=1#c1",
+      "normalizedUrl": "https://example.com/a?a=1&b=2",
+      "domain": "example.com",
+      "title": "https://Example.com/a/?b=2&utm_source=mail&a=1#c1",
+      "visitCount": 1,
+      "lastVisitedAt": 1793762226752,
+      "firstSeenAt": 1793762226752,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    },
+    {
+      "id": "page_2",
+      "url": "https://example.com/a?b=3&a=1",
+      "normalizedUrl": "https://example.com/a?a=1&b=3",
+      "domain": "example.com",
+      "title": "https://example.com/a?b=3&a=1",
+      "visitCount": 1,
+      "lastVisitedAt": 1793762226752,
+      "firstSeenAt": 1793762226752,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    }
+  ],
+  "rules": [],
+  "config": {
+    "cleanupThresholdDays": 14,
+    "maxHistoryItems": 100,
+    "historyLookbackDays": 30,
+    "enablePrivacyFilter": true,
+    "privacySensitiveKeywords": [
+      "password",
+      "token",
+      "bank",
+      "secret"
+    ]
+  },
+  "sequences": {
+    "page": 2,
+    "rule": 0,
+    "sync": 1
+  },
+  "lastSync": {
+    "id": "sync_1",
+    "syncedAt": 1793762826753,
+    "mode": "full",
+    "received": 3,
+    "created": 2,
+    "updated": 1,
+    "rejected": 0,
+    "durationMs": 0.15462500001012813,
+    "ok": true,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 0
+    }
+  },
+  "persist": null
+}

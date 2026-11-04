@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-UI-RULE-020",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:47.451Z",
+  "tests": [
+    {
+      "testId": "0c0aa3d098679852f378-50f015cd20c1df3596a2",
+      "title": "TC-UI-RULE-020 删除最后一条需要确认，确认后进入空状态",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RULE-020.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1142,
+      "startedAt": "2026-11-04T03:29:46.309Z",
+      "endedAt": "2026-11-04T03:29:47.451Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 6,
+      "screenshots": [
+        "evidence/TC-UI-RULE-020/screenshots/01-最后一条.png",
+        "evidence/TC-UI-RULE-020/screenshots/02-未确认删除.png",
+        "evidence/TC-UI-RULE-020/screenshots/03-未确认重开仍在.png",
+        "evidence/TC-UI-RULE-020/screenshots/04-确认后空列表.png"
+      ],
+      "serverLogLines": 28,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1191,
+          "after": 1191
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

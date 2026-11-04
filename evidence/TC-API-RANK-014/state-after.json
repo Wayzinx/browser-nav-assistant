@@ -1,0 +1,91 @@
+{
+  "dataVersion": 653,
+  "versions": {
+    "data": 653,
+    "rule": 162,
+    "config": 151
+  },
+  "counts": {
+    "pages": 2,
+    "rules": 0,
+    "openPages": 0,
+    "archivedPages": 0,
+    "syncLogs": 1
+  },
+  "pagesTruncated": false,
+  "pagesHash": "65726bda1308ca2d19cb0f49fa9304eede5f87a3e497bc92e5f1d8f7d047ea27",
+  "pages": [
+    {
+      "id": "page_1",
+      "url": "https://a.example/new",
+      "normalizedUrl": "https://a.example/new",
+      "domain": "a.example",
+      "title": "new",
+      "visitCount": 10,
+      "lastVisitedAt": 1793762763506,
+      "firstSeenAt": 1793762763506,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    },
+    {
+      "id": "page_2",
+      "url": "https://b.example/old",
+      "normalizedUrl": "https://b.example/old",
+      "domain": "b.example",
+      "title": "old",
+      "visitCount": 1,
+      "lastVisitedAt": 1789442823506,
+      "firstSeenAt": 1789442823506,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    }
+  ],
+  "rules": [],
+  "config": {
+    "cleanupThresholdDays": 14,
+    "maxHistoryItems": 100,
+    "historyLookbackDays": 30,
+    "enablePrivacyFilter": true,
+    "privacySensitiveKeywords": [
+      "password",
+      "token",
+      "bank",
+      "secret"
+    ]
+  },
+  "sequences": {
+    "page": 2,
+    "rule": 0,
+    "sync": 1
+  },
+  "lastSync": {
+    "id": "sync_1",
+    "syncedAt": 1793762823507,
+    "mode": "full",
+    "received": 2,
+    "created": 2,
+    "updated": 0,
+    "rejected": 0,
+    "durationMs": 0.06029200000921264,
+    "ok": true,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 0
+    }
+  },
+  "persist": null
+}

@@ -1,0 +1,93 @@
+{
+  "reqId": "TC-API-REC-015-03",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/recommendations/next",
+  "params": {
+    "now": 1793762824111
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-REC-015-03"
+  },
+  "requestBody": {
+    "currentPage": {
+      "url": "https://github.com/limit/repo/pull/999"
+    },
+    "openTabs": [],
+    "recentHistory": []
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-REC-015-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "1709",
+    "date": "Wed, 04 Nov 2026 03:27:04 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "recommendations": [
+      {
+        "id": "rec_1",
+        "type": "next_visit",
+        "url": "https://github.com/limit/repo/actions/runs/0",
+        "title": "Run 0",
+        "score": 0.92,
+        "reason": "你正在查看 PR，同仓库 CI 页面最近访问频率较高，可能需要检查构建状态",
+        "strategy": "same_repo",
+        "contextUrl": "https://github.com/limit/repo/pull/999",
+        "createdAt": 1793762824111
+      },
+      {
+        "id": "rec_2",
+        "type": "next_visit",
+        "url": "https://github.com/limit/repo/actions/runs/1",
+        "title": "Run 1",
+        "score": 0.92,
+        "reason": "你正在查看 PR，同仓库 CI 页面最近访问频率较高，可能需要检查构建状态",
+        "strategy": "same_repo",
+        "contextUrl": "https://github.com/limit/repo/pull/999",
+        "createdAt": 1793762824111
+      },
+      {
+        "id": "rec_3",
+        "type": "next_visit",
+        "url": "https://github.com/limit/repo/actions/runs/2",
+        "title": "Run 2",
+        "score": 0.92,
+        "reason": "你正在查看 PR，同仓库 CI 页面最近访问频率较高，可能需要检查构建状态",
+        "strategy": "same_repo",
+        "contextUrl": "https://github.com/limit/repo/pull/999",
+        "createdAt": 1793762824111
+      },
+      {
+        "id": "rec_4",
+        "type": "next_visit",
+        "url": "https://github.com/limit/repo/actions/runs/3",
+        "title": "Run 3",
+        "score": 0.92,
+        "reason": "你正在查看 PR，同仓库 CI 页面最近访问频率较高，可能需要检查构建状态",
+        "strategy": "same_repo",
+        "contextUrl": "https://github.com/limit/repo/pull/999",
+        "createdAt": 1793762824111
+      },
+      {
+        "id": "rec_5",
+        "type": "next_visit",
+        "url": "https://github.com/limit/repo/actions/runs/4",
+        "title": "Run 4",
+        "score": 0.92,
+        "reason": "你正在查看 PR，同仓库 CI 页面最近访问频率较高，可能需要检查构建状态",
+        "strategy": "same_repo",
+        "contextUrl": "https://github.com/limit/repo/pull/999",
+        "createdAt": 1793762824111
+      }
+    ],
+    "cached": false,
+    "generatedAt": 1793762824111
+  },
+  "ms": 0.7,
+  "mutated": null
+}

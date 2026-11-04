@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-PRIV-003",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:02.737Z",
+  "tests": [
+    {
+      "testId": "3a29460e640eead6ac08-cd2049e20d501fcffe1a",
+      "title": "TC-API-PRIV-003 三种来源均过滤敏感 URL，大写 TOKEN 也被拒收",
+      "project": "api",
+      "file": "tests/api/TC-API-PRIV-003.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 15,
+      "startedAt": "2026-11-04T03:27:02.722Z",
+      "endedAt": "2026-11-04T03:27:02.737Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 8,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 586,
+          "after": 588
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

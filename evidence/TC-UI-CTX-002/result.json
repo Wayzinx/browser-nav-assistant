@@ -1,0 +1,64 @@
+{
+  "caseId": "TC-UI-CTX-002",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:42.340Z",
+  "tests": [
+    {
+      "testId": "a6de5e5a2f5d0f666281-3b4135b61c524689202e",
+      "title": "TC-UI-CTX-002 加载真实扩展后 SW 注册且无未捕获错误，popup 显示标题与六页签",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CTX-002.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1590,
+      "startedAt": "2026-11-04T03:27:40.750Z",
+      "endedAt": "2026-11-04T03:27:42.340Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-CTX-002/screenshots/01-S2-popup外壳.png",
+        "evidence/TC-UI-CTX-002/screenshots/02-S3-页签-首页.png",
+        "evidence/TC-UI-CTX-002/screenshots/03-S3-页签-上下文.png",
+        "evidence/TC-UI-CTX-002/screenshots/04-S3-页签-排序.png",
+        "evidence/TC-UI-CTX-002/screenshots/05-S3-页签-整理.png",
+        "evidence/TC-UI-CTX-002/screenshots/06-S3-页签-规则.png",
+        "evidence/TC-UI-CTX-002/screenshots/07-S3-页签-诊断.png"
+      ],
+      "serverLogLines": 16,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1031,
+          "after": 1031
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "{\"initialWorkerUrl\":\"chrome-extension://apogdiijbmmelomlehodilcejcmocaki/background/service-worker.js\",\"expectedUrl\":\"chrome-extension://apogdiijbmmelomlehodilcejcmocaki/background/service-worker.js\"}",
+        "{\"popupPageErrors\":[],\"swExceptions\":[]}"
+      ]
+    }
+  ]
+}

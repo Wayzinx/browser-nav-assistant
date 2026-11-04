@@ -1,0 +1,34 @@
+{
+  "reqId": "TC-UI-CACHE-002-04",
+  "setup": true,
+  "method": "POST",
+  "url": "/api/pages/archive",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-UI-CACHE-002-04"
+  },
+  "requestBody": {
+    "urls": [
+      "https://www.google.com/search?q=chrome+extension+manifest+v3"
+    ]
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-UI-CACHE-002-04",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "64",
+    "date": "Wed, 04 Nov 2026 03:27:11 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "ok": true,
+    "affected": 1,
+    "archivedAt": 1793762831255,
+    "notFound": 0
+  },
+  "ms": 1.2,
+  "mutated": null
+}

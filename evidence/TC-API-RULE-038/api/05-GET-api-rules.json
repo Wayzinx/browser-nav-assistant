@@ -1,0 +1,42 @@
+{
+  "reqId": "TC-API-RULE-038-05",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/rules",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-RULE-038-05"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RULE-038-05",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "253",
+    "date": "Wed, 04 Nov 2026 03:27:05 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "rules": [
+      {
+        "domain": "docs.internal.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825594,
+        "updatedAt": 1793762825594,
+        "rawText": "保护docs",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_1"
+      }
+    ],
+    "total": 1
+  },
+  "ms": 0.7,
+  "mutated": null
+}

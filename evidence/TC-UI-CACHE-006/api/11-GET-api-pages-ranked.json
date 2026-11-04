@@ -1,0 +1,33 @@
+{
+  "reqId": "ext_1793762840259_10",
+  "method": "GET",
+  "url": "http://127.0.0.1:4300/api/pages/ranked?limit=50",
+  "setup": false,
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762840259_10"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "ext_1793762840259_10",
+    "access-control-expose-headers": "x-request-id",
+    "connection": "keep-alive",
+    "content-length": "63",
+    "keep-alive": "timeout=5",
+    "date": "Wed, 04 Nov 2026 03:27:20 GMT",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin"
+  },
+  "responseBody": {
+    "pages": [],
+    "total": 0,
+    "domains": [],
+    "generatedAt": 1793762840258
+  },
+  "failure": null,
+  "ms": 4
+}

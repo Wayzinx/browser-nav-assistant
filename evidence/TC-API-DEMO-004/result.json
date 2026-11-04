@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-API-DEMO-004",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:46.182Z",
+  "tests": [
+    {
+      "testId": "b8f9cdc6ea8cb676ada8-e365d8b9767507fc037a",
+      "title": "TC-API-DEMO-004 执行样例导入脚本后 health.pageCount=10 且样例文件与 resource.json 一致",
+      "project": "api",
+      "file": "tests/api/TC-API-DEMO-004.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 121,
+      "startedAt": "2026-11-04T03:25:46.061Z",
+      "endedAt": "2026-11-04T03:25:46.182Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 3,
+      "screenshots": [],
+      "serverLogLines": 8,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 68,
+          "after": 70
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "import-sample pid=52995 API_BASE=http://127.0.0.1:4300",
+        "import-sample 退出 {\"code\":0,\"signal\":null}"
+      ]
+    }
+  ]
+}

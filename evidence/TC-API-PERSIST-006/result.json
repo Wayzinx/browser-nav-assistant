@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-API-PERSIST-006",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:02.669Z",
+  "tests": [
+    {
+      "testId": "390099c28ac826734b08-8ebb439ccb03d6a3a1c9",
+      "title": "TC-API-PERSIST-006 未配置快照时内存数据不跨进程保留",
+      "project": "api",
+      "file": "tests/api/TC-API-PERSIST-006.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 2194,
+      "startedAt": "2026-11-04T03:27:00.475Z",
+      "endedAt": "2026-11-04T03:27:02.669Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 2,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 579,
+          "after": 579
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "启动独立后端 pid=58838 port=62306 snapshot=false",
+        "独立后端退出 {\"pid\":58838,\"requestedSignal\":\"SIGTERM\",\"code\":0,\"signal\":null}",
+        "启动独立后端 pid=59020 port=62315 snapshot=false",
+        "独立后端退出 {\"pid\":59020,\"requestedSignal\":\"SIGTERM\",\"code\":0,\"signal\":null}"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-UI-CTX-012",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:53.311Z",
+  "tests": [
+    {
+      "testId": "a8f2f194b28e5dc3500a-ad92ac0938fae26302aa",
+      "title": "TC-UI-CTX-012 后端不可达时当前窗口四条标签仍完整显示",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CTX-012.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1175,
+      "startedAt": "2026-11-04T03:27:52.136Z",
+      "endedAt": "2026-11-04T03:27:53.311Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-CTX-012/screenshots/01-S1-离线四个标签.png",
+        "evidence/TC-UI-CTX-012/screenshots/02-S2-离线四条上下文.png"
+      ],
+      "serverLogLines": 3,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1041,
+          "after": 1041
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "{\"popupPageErrors\":[],\"swExceptions\":[]}"
+      ]
+    }
+  ]
+}

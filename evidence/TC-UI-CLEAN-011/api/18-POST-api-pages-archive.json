@@ -1,0 +1,35 @@
+{
+  "source": "extension",
+  "method": "POST",
+  "url": "http://127.0.0.1:4300/api/pages/archive",
+  "reqId": "ext_1793762858333_24",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762858333_24"
+  },
+  "requestBody": "{\"urls\":[\"https://github.com/org/repo/issues/100\"]}",
+  "status": 200,
+  "responseHeaders": {
+    "connection": "keep-alive",
+    "date": "Wed, 04 Nov 2026 03:27:38 GMT",
+    "keep-alive": "timeout=5",
+    "access-control-allow-origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "access-control-expose-headers": "x-request-id",
+    "content-length": "64",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin",
+    "x-request-id": "ext_1793762858333_24"
+  },
+  "responseBody": {
+    "ok": true,
+    "affected": 1,
+    "archivedAt": 1793762858335,
+    "notFound": 0
+  },
+  "ms": 1.633,
+  "setup": false
+}

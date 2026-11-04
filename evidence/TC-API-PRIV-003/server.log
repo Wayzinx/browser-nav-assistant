@@ -1,0 +1,8 @@
+{"method":"POST","path":"/api/__test__/reset","status":200,"ms":0.1,"reqId":"TC-API-PRIV-003-01","ts":"2026-11-04T03:27:02.727Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/__test__/state","status":200,"ms":0.06,"reqId":"TC-API-PRIV-003-state","ts":"2026-11-04T03:27:02.728Z","level":"info","msg":"access"}
+{"method":"POST","path":"/api/__test__/reset","status":200,"ms":0.08,"reqId":"TC-API-PRIV-003-02","ts":"2026-11-04T03:27:02.729Z","level":"info","msg":"access"}
+{"reqId":"TC-API-PRIV-003-03","ok":true,"syncedAt":1793762822730,"received":5,"created":1,"updated":0,"rejected":4,"rejectedByReason":{"invalid_url":0,"privacy":4},"pageCount":1,"mode":"full","rejectedDomains":{"example.com":2,"bank.example.com":1,"accounts.example.com":1},"durationMs":0.0669999999954598,"ts":"2026-11-04T03:27:02.730Z","level":"info","msg":"sync done"}
+{"method":"POST","path":"/api/sync","status":200,"ms":0.44,"reqId":"TC-API-PRIV-003-03","ts":"2026-11-04T03:27:02.730Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/pages/ranked","status":200,"ms":0.07,"reqId":"TC-API-PRIV-003-04","ts":"2026-11-04T03:27:02.732Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/health","status":200,"ms":0.07,"reqId":"TC-API-PRIV-003-05","ts":"2026-11-04T03:27:02.733Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/__test__/state","status":200,"ms":0.1,"reqId":"TC-API-PRIV-003-state","ts":"2026-11-04T03:27:02.735Z","level":"info","msg":"access"}

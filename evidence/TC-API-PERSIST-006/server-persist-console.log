@@ -1,0 +1,10 @@
+{"port":62306,"host":"127.0.0.1","persistence":"memory","enableTestApi":false,"ts":"2026-11-04T03:27:00.540Z","level":"info","msg":"服务已启动"}
+{"method":"GET","path":"/api/health","status":200,"ms":1.04,"reqId":"TC-API-PERSIST-006-01","ts":"2026-11-04T03:27:00.567Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/health","status":200,"ms":0.28,"reqId":"TC-API-PERSIST-006-02","ts":"2026-11-04T03:27:00.569Z","level":"info","msg":"access"}
+{"reqId":"TC-API-PERSIST-006-03","ok":true,"syncedAt":1793762820571,"received":14,"created":10,"updated":4,"rejected":0,"rejectedByReason":{"invalid_url":0,"privacy":0},"pageCount":10,"mode":"full","rejectedDomains":{},"durationMs":1.5081249999999926,"ts":"2026-11-04T03:27:00.573Z","level":"info","msg":"sync done"}
+{"method":"POST","path":"/api/sync","status":200,"ms":2.6,"reqId":"TC-API-PERSIST-006-03","ts":"2026-11-04T03:27:00.573Z","level":"info","msg":"access"}
+{"signal":"SIGTERM","ts":"2026-11-04T03:27:02.576Z","level":"info","msg":"服务正在退出"}
+{"port":62315,"host":"127.0.0.1","persistence":"memory","enableTestApi":false,"ts":"2026-11-04T03:27:02.627Z","level":"info","msg":"服务已启动"}
+{"method":"GET","path":"/api/health","status":200,"ms":1.02,"reqId":"TC-API-PERSIST-006-04","ts":"2026-11-04T03:27:02.662Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/health","status":200,"ms":0.23,"reqId":"TC-API-PERSIST-006-05","ts":"2026-11-04T03:27:02.663Z","level":"info","msg":"access"}
+{"signal":"SIGTERM","ts":"2026-11-04T03:27:02.664Z","level":"info","msg":"服务正在退出"}

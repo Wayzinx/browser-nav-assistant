@@ -1,0 +1,219 @@
+{
+  "summary": {
+    "dataVersion": {
+      "before": 688,
+      "after": 690
+    },
+    "pages": {
+      "added": 0,
+      "removed": 0,
+      "changed": 10
+    },
+    "rules": {
+      "added": 1,
+      "removed": 0,
+      "changed": 0
+    },
+    "counts": {
+      "pages": 0,
+      "rules": 1,
+      "openPages": 0,
+      "archivedPages": 0,
+      "syncLogs": 0
+    },
+    "configChanged": [],
+    "persistChanged": false
+  },
+  "counts": {
+    "pages": {
+      "before": 10,
+      "after": 10,
+      "delta": 0
+    },
+    "rules": {
+      "before": 0,
+      "after": 1,
+      "delta": 1
+    },
+    "openPages": {
+      "before": 4,
+      "after": 4,
+      "delta": 0
+    },
+    "archivedPages": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "syncLogs": {
+      "before": 1,
+      "after": 1,
+      "delta": 0
+    }
+  },
+  "pages": {
+    "added": [],
+    "removed": [],
+    "changed": [
+      {
+        "key": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+        "fields": {
+          "lastVisitedAt": {
+            "before": 1793732523897,
+            "after": 1793732523921
+          },
+          "firstSeenAt": {
+            "before": 1793732523897,
+            "after": 1793732523921
+          }
+        }
+      },
+      {
+        "key": "https://docs.internal.com/ai-agent-design",
+        "fields": {
+          "lastVisitedAt": {
+            "before": 1793162523897,
+            "after": 1793162523921
+          },
+          "firstSeenAt": {
+            "before": 1793162523897,
+            "after": 1793162523921
+          }
+        }
+      },
+      {
+        "key": "https://github.com/org/repo/actions",
+        "fields": {
+          "lastVisitedAt": {
+            "before": 1793742523897,
+            "after": 1793742523921
+          },
+          "firstSeenAt": {
+            "before": 1793742523897,
+            "after": 1793742523921
+          }
+        }
+      },
+      {
+        "key": "https://github.com/org/repo/issues/100",
+        "fields": {
+          "lastVisitedAt": {
+            "before": 1791662523897,
+            "after": 1791662523921
+          },
+          "firstSeenAt": {
+            "before": 1791662523897,
+            "after": 1791662523921
+          }
+        }
+      },
+      {
+        "key": "https://github.com/org/repo/issues/123",
+        "fields": {
+          "lastVisitedAt": {
+            "before": 1793752523897,
+            "after": 1793752523921
+          },
+          "firstSeenAt": {
+            "before": 1793752523897,
+            "after": 1793752523921
+          }
+        }
+      },
+      {
+        "key": "https://github.com/org/repo/issues/123?tab=comments",
+        "fields": {
+          "lastVisitedAt": {
+            "before": 1793750523897,
+            "after": 1793750523921
+          },
+          "firstSeenAt": {
+            "before": 1793750523897,
+            "after": 1793750523921
+          }
+        }
+      },
+      {
+        "key": "https://github.com/org/repo/pull/456",
+        "fields": {
+          "lastVisitedAt": {
+            "before": 1793762823898,
+            "after": 1793762823922
+          },
+          "firstSeenAt": {
+            "before": 1793762523897,
+            "after": 1793762523921
+          }
+        }
+      },
+      {
+        "key": "https://react.dev/learn",
+        "fields": {
+          "lastVisitedAt": {
+            "before": 1793717523897,
+            "after": 1793717523921
+          },
+          "firstSeenAt": {
+            "before": 1793717523897,
+            "after": 1793717523921
+          }
+        }
+      },
+      {
+        "key": "https://react.dev/reference/react/useState",
+        "fields": {
+          "lastVisitedAt": {
+            "before": 1793722523897,
+            "after": 1793722523921
+          },
+          "firstSeenAt": {
+            "before": 1793722523897,
+            "after": 1793722523921
+          }
+        }
+      },
+      {
+        "key": "https://www.google.com/search?q=chrome+extension+manifest+v3",
+        "fields": {
+          "lastVisitedAt": {
+            "before": 1790662523897,
+            "after": 1790662523921
+          },
+          "firstSeenAt": {
+            "before": 1790662523897,
+            "after": 1790662523921
+          }
+        }
+      }
+    ]
+  },
+  "rules": {
+    "added": [
+      {
+        "domain": null,
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762823925,
+        "updatedAt": 1793762823925,
+        "rawText": "如果我连续看了 3 个 React 文档，推荐相关 MDN 页面",
+        "type": "recommend_related",
+        "trigger": {
+          "domain": "react.dev",
+          "minCount": 3,
+          "label": "React"
+        },
+        "target": {
+          "domain": "developer.mozilla.org",
+          "label": "MDN"
+        },
+        "action": "recommend",
+        "id": "rule_1"
+      }
+    ],
+    "removed": [],
+    "changed": []
+  },
+  "config": {}
+}

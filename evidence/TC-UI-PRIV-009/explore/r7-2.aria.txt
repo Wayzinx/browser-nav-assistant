@@ -1,0 +1,49 @@
+- banner:
+  - heading "导航助手" [level=1]
+  - button "后端已连接"
+- region "当前页面":
+  - heading "当前页面" [level=2]
+  - paragraph: 合成页
+  - paragraph: https://example.com/login?TOKEN=abc
+  - button "标记为重要" [disabled]: ☆
+  - button "添加到分析"
+- region "浏览器上下文同步":
+  - button "同步浏览器上下文"
+  - status:
+    - paragraph: 同步成功
+    - paragraph: 上传 0 条 · 过滤 3 条
+    - time: 07:28 · 刚刚
+  - button "全量同步"
+  - paragraph: 当前模式：全量
+- tablist "导航助手功能":
+  - tab "首页" [selected]
+  - tab "上下文"
+  - tab "排序"
+  - tab "整理"
+  - tab "规则"
+  - tab "诊断"
+- main:
+  - tabpanel "首页":
+    - heading "下一步推荐" [level=2]
+    - list:
+      - listitem:
+        - button "Guide 1 0.50 近期综合评分较高的页面，可作为备选"
+      - listitem:
+        - button "Guide 2 0.50 近期综合评分较高的页面，可作为备选"
+    - heading "历史排序 Top 5" [level=2]
+    - list:
+      - listitem:
+        - text: Guide 1 0.80 https://example.com/guide/a
+        - paragraph: 最近 3 天内多次访问（10 次），常用域名 example.com
+      - listitem:
+        - text: Guide 2 0.80 https://example.com/guide/b
+        - paragraph: 最近 3 天内多次访问（10 次），常用域名 example.com
+    - heading "整理建议" [level=2]
+    - paragraph: 还没有整理建议，点击上方「同步浏览器上下文」开始
+    - button "查看整理建议": 归档 0 重复 0 保留 0
+    - heading "用一句话配置规则" [level=2]
+    - text: 规则内容
+    - textbox "规则内容":
+      - /placeholder: 输入一句话配置规则
+    - button "解析"
+    - button "启动诊断 · 尚未检测 ›"

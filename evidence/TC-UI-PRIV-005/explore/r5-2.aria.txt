@@ -1,0 +1,42 @@
+- banner:
+  - heading "导航助手" [level=1]
+  - button "后端已连接"
+- region "当前页面":
+  - heading "当前页面" [level=2]
+  - paragraph: 合成页
+  - paragraph: https://example.com/docs
+  - button "标记为重要": ☆
+  - button "添加到分析"
+- region "浏览器上下文同步":
+  - button "同步浏览器上下文"
+  - status:
+    - paragraph: 同步成功
+    - paragraph: 上传 2 条 · 过滤 1 条
+    - time: 06:40 · 刚刚
+  - button "全量同步"
+  - paragraph: 当前模式：全量
+- tablist "导航助手功能":
+  - tab "首页"
+  - tab "上下文" [selected]
+  - tab "排序"
+  - tab "整理"
+  - tab "规则"
+  - tab "诊断"
+- main:
+  - tabpanel "上下文":
+    - heading "浏览器上下文" [level=2]
+    - paragraph: 敏感关键词：password、token、bank、secret、cookie · 来源：后端
+    - heading "当前窗口标签页" [level=2]
+    - list:
+      - listitem:
+        - paragraph: 合成页
+        - paragraph: https://example.com/?cookie=1
+        - text: 含 cookie · 不上传
+      - listitem:
+        - paragraph: 合成页
+        - paragraph: https://example.com/docs
+    - heading "最近浏览历史" [level=2]
+    - text: "0"
+    - paragraph: 自 2026/10/4 06:40:54 起 · 最多 100 条
+    - list
+    - paragraph: 还没有数据，点击上方「同步浏览器上下文」开始

@@ -1,0 +1,16 @@
+{
+  "caseId": "TC-UI-MENU-009",
+  "verdict": "pass",
+  "observed": "apiBaseUrl 指向 127.0.0.1:9 后点击星标：发往 /api/pages/important 的请求失败 net::ERR_UNSAFE_PORT；aria-pressed=false，importantUrls=[]，无乐观写入；正常后端 pageCount=0。 本轮（2026-11-03 r7）重新探索：产品代码与 spec 自 r6 后均无变更，tests/explore/tmp/menu-explore-r7.mjs 结果与截图、aria 快照复核一致；spec 未改动，TEST_PORT=4185 npx playwright test 10/10 通过。",
+  "steps": [
+    "后台启动 PORT=4185 HOST=127.0.0.1 ENABLE_TEST_API=1 后端",
+    "node tests/explore/tmp/menu-explore-r7.mjs（reset → 加载真实 extension/ → 打开目标页与 popup → 操作 → 截图 + aria 快照 → 读 storage/ranked/health）",
+    "阅读截图与 aria 快照逐条核对 [En]",
+    "关闭探索后端；TEST_PORT=4185 npx playwright test tests/ui/TC-UI-MENU-009.spec.mjs → passed"
+  ],
+  "screenshots": [
+    "evidence/TC-UI-MENU-009/explore/1.png"
+  ],
+  "spec": "tests/ui/TC-UI-MENU-009.spec.mjs",
+  "solidified": true
+}

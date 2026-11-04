@@ -1,0 +1,131 @@
+{
+  "summary": {
+    "dataVersion": {
+      "before": 33,
+      "after": 34
+    },
+    "pages": {
+      "added": 2,
+      "removed": 0,
+      "changed": 0
+    },
+    "rules": {
+      "added": 2,
+      "removed": 0,
+      "changed": 0
+    },
+    "counts": {
+      "pages": 2,
+      "rules": 2,
+      "openPages": 0,
+      "archivedPages": 0,
+      "syncLogs": 1
+    },
+    "configChanged": [],
+    "persistChanged": false
+  },
+  "counts": {
+    "pages": {
+      "before": 0,
+      "after": 2,
+      "delta": 2
+    },
+    "rules": {
+      "before": 0,
+      "after": 2,
+      "delta": 2
+    },
+    "openPages": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "archivedPages": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "syncLogs": {
+      "before": 0,
+      "after": 1,
+      "delta": 1
+    }
+  },
+  "pages": {
+    "added": [
+      {
+        "id": "page_1",
+        "url": "https://github.com/org/repo/issues/88",
+        "normalizedUrl": "https://github.com/org/repo/issues/88",
+        "domain": "github.com",
+        "title": "https://github.com/org/repo/issues/88",
+        "visitCount": 1,
+        "lastVisitedAt": 1793071544555,
+        "firstSeenAt": 1793071544555,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isArchived": false,
+        "archivedAt": null,
+        "mergedInto": null,
+        "isImportant": false
+      },
+      {
+        "id": "page_2",
+        "url": "https://github.com/org/repo/issues/89",
+        "normalizedUrl": "https://github.com/org/repo/issues/89",
+        "domain": "github.com",
+        "title": "https://github.com/org/repo/issues/89",
+        "visitCount": 1,
+        "lastVisitedAt": 1793075144555,
+        "firstSeenAt": 1793075144555,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isArchived": false,
+        "archivedAt": null,
+        "mergedInto": null,
+        "isImportant": false
+      }
+    ],
+    "removed": [],
+    "changed": []
+  },
+  "rules": {
+    "added": [
+      {
+        "domain": "github.com",
+        "urlPattern": "/issues/",
+        "inactiveDays": 7,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762744558,
+        "updatedAt": 1793762744558,
+        "rawText": "把 7 天没访问过的 GitHub issue 建议归档",
+        "type": "archive_candidate",
+        "action": "suggest_archive",
+        "id": "rule_1"
+      },
+      {
+        "domain": "github.com",
+        "urlPattern": "/issues/",
+        "inactiveDays": 10,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762744559,
+        "updatedAt": 1793762744559,
+        "rawText": "把 10 天没访问过的 GitHub issue 建议归档",
+        "type": "archive_candidate",
+        "action": "suggest_archive",
+        "id": "rule_2"
+      }
+    ],
+    "removed": [],
+    "changed": []
+  },
+  "config": {}
+}

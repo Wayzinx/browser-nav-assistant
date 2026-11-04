@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RANK-010",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:03.415Z",
+  "tests": [
+    {
+      "testId": "c9f06b34d9db721de759-01de4739b0dc0abef539",
+      "title": "TC-API-RANK-010 domain 过滤匹配子域但不匹配后缀相同的域名",
+      "project": "api",
+      "file": "tests/api/TC-API-RANK-010.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 18,
+      "startedAt": "2026-11-04T03:27:03.397Z",
+      "endedAt": "2026-11-04T03:27:03.415Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 8,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 644,
+          "after": 645
+        },
+        "pages": {
+          "added": 3,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 3,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

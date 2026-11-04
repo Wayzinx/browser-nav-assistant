@@ -1,0 +1,61 @@
+{
+  "caseId": "TC-UI-INCR-004",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:38.158Z",
+  "tests": [
+    {
+      "testId": "dfd0e2a3086481f9988b-a27463f17b4b17704e01",
+      "title": "TC-UI-INCR-004 以真实历史时间夹住增量窗口：5分钟前后1分钟分别纳入和排除同一记录",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-INCR-004.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1389,
+      "startedAt": "2026-11-04T03:28:36.769Z",
+      "endedAt": "2026-11-04T03:28:38.158Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 6,
+      "screenshots": [
+        "evidence/TC-UI-INCR-004/screenshots/01-打开popup.png",
+        "evidence/TC-UI-INCR-004/screenshots/02-分支A同步成功.png",
+        "evidence/TC-UI-INCR-004/screenshots/03-分支B同步成功.png"
+      ],
+      "serverLogLines": 33,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1094,
+          "after": 1097
+        },
+        "pages": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 2,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 3
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "H=1793762917412.849 base={\"apiBaseUrl\":\"http://127.0.0.1:4300\",\"serverStartedAt\":1793762741762}",
+        "分支A history.query=[{\"ts\":1793762917722,\"startTime\":1793762857412.849,\"maxResults\":100}]",
+        "分支B history.query=[{\"ts\":1793762917861,\"startTime\":1793762977412.849,\"maxResults\":100}]"
+      ]
+    }
+  ]
+}

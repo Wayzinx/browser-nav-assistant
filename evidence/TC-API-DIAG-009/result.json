@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-API-DIAG-009",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:48.331Z",
+  "tests": [
+    {
+      "testId": "4591ee74607f814bbef4-35f94dc83c6a25203130",
+      "title": "TC-API-DIAG-009 导入样例后连续 5 次 GET /api/health，每次耗时 < 1500 毫秒且 version=1.0.0",
+      "project": "api",
+      "file": "tests/api/TC-API-DIAG-009.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 35,
+      "startedAt": "2026-11-04T03:25:48.296Z",
+      "endedAt": "2026-11-04T03:25:48.331Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {
+        "health.maxMs": {
+          "value": 2,
+          "unit": "ms"
+        }
+      },
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 96,
+          "after": 97
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

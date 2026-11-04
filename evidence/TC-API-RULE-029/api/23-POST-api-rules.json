@@ -1,0 +1,42 @@
+{
+  "reqId": "TC-API-RULE-029-23",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/rules",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-RULE-029-23"
+  },
+  "requestBody": {
+    "rules": [
+      {
+        "rawText": "缺加权域名",
+        "type": "boost_domain"
+      }
+    ]
+  },
+  "status": 400,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RULE-029-23",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "128",
+    "date": "Wed, 04 Nov 2026 03:27:05 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "error": {
+      "code": "VALIDATION_FAILED",
+      "message": "请求字段类型或取值不合法",
+      "details": {
+        "fields": [
+          "rules[0].domain"
+        ]
+      }
+    }
+  },
+  "ms": 0.9,
+  "mutated": null
+}

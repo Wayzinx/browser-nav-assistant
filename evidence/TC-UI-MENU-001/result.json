@@ -1,0 +1,59 @@
+{
+  "caseId": "TC-UI-MENU-001",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:43.696Z",
+  "tests": [
+    {
+      "testId": "43d0c936a17f98665017-04b9c18367bc070cc7e6",
+      "title": "TC-UI-MENU-001 插件安装后两个右键菜单 ID 均已注册（AC1 代理检查）",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-MENU-001.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 933,
+      "startedAt": "2026-11-04T03:28:42.763Z",
+      "endedAt": "2026-11-04T03:28:43.696Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 3,
+      "screenshots": [
+        "evidence/TC-UI-MENU-001/screenshots/01-打开popup.png"
+      ],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1108,
+          "after": 1108
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 2,
+      "notes": [
+        "contextMenus.update 回调结果：[{\"id\":\"nav-add\",\"lastError\":null},{\"id\":\"nav-important\",\"lastError\":null}]；未打开原生菜单，未触发点击",
+        "对照 ID nav-unregistered-control 的 lastError：Cannot find menu item with id nav-unregistered-control",
+        "AC1 自动化代理：仅证明菜单 ID 已注册；原生菜单文字、外观与实际点击未验证"
+      ]
+    }
+  ]
+}

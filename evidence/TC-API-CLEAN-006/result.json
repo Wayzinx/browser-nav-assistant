@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-CLEAN-006",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:44.104Z",
+  "tests": [
+    {
+      "testId": "169c065211f9b0c2181a-4f503975c816e1c0bbff",
+      "title": "TC-API-CLEAN-006 旧页面打开时不归档而关闭后归档",
+      "project": "api",
+      "file": "tests/api/TC-API-CLEAN-006.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 30,
+      "startedAt": "2026-11-04T03:25:44.074Z",
+      "endedAt": "2026-11-04T03:25:44.104Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 9,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 10,
+          "after": 12
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 2
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

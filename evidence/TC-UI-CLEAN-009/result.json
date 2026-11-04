@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-UI-CLEAN-009",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:35.833Z",
+  "tests": [
+    {
+      "testId": "a93ac4a5bd63096cbc3e-cbcc101e85ce31f9dc64",
+      "title": "TC-UI-CLEAN-009 渲染后的合并建议在后端reset后失效：404后刷新并保留空库",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CLEAN-009.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1223,
+      "startedAt": "2026-11-04T03:27:34.610Z",
+      "endedAt": "2026-11-04T03:27:35.833Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 20,
+      "screenshots": [
+        "evidence/TC-UI-CLEAN-009/screenshots/01-旧重复组.png",
+        "evidence/TC-UI-CLEAN-009/screenshots/02-合并失效错误.png"
+      ],
+      "serverLogLines": 23,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1011,
+          "after": 1015
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 3,
+      "notes": [
+        "{\"phase\":\"失效合并后\",\"storage\":{}}"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{"reason":"INVALID_JSON","ts":"2026-11-04T03:27:00.104Z","level":"warn","msg":"snapshot_load_failed"}
+{"reason":"INVALID_JSON","ts":"2026-11-04T03:27:00.106Z","level":"warn","msg":"未加载快照，以空数据启动"}
+{"port":62289,"host":"127.0.0.1","persistence":"snapshot","enableTestApi":false,"ts":"2026-11-04T03:27:00.109Z","level":"info","msg":"服务已启动"}
+{"method":"GET","path":"/api/health","status":200,"ms":1.19,"reqId":"TC-API-PERSIST-004-01","ts":"2026-11-04T03:27:00.131Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/health","status":200,"ms":0.27,"reqId":"TC-API-PERSIST-004-02","ts":"2026-11-04T03:27:00.133Z","level":"info","msg":"access"}
+{"reqId":"TC-API-PERSIST-004-03","ok":true,"syncedAt":1793762820135,"received":1,"created":1,"updated":0,"rejected":0,"rejectedByReason":{"invalid_url":0,"privacy":0},"pageCount":1,"mode":"full","rejectedDomains":{},"durationMs":0.5841250000000002,"ts":"2026-11-04T03:27:00.136Z","level":"info","msg":"sync done"}
+{"method":"POST","path":"/api/sync","status":200,"ms":1.84,"reqId":"TC-API-PERSIST-004-03","ts":"2026-11-04T03:27:00.136Z","level":"info","msg":"access"}
+{"method":"GET","path":"/api/health","status":200,"ms":0.15,"reqId":"TC-API-PERSIST-004-04","ts":"2026-11-04T03:27:00.138Z","level":"info","msg":"access"}
+{"signal":"SIGTERM","ts":"2026-11-04T03:27:00.140Z","level":"info","msg":"服务正在退出"}

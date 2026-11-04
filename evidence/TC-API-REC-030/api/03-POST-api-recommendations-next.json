@@ -1,0 +1,1576 @@
+{
+  "reqId": "TC-API-REC-030-03",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/recommendations/next",
+  "params": {
+    "now": 1793762824492
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-REC-030-03"
+  },
+  "requestBody": {
+    "currentPage": {
+      "url": "https://github.com/org/repo/pull/456",
+      "title": "Refactor auth middleware (#456)"
+    },
+    "openTabs": [
+      {
+        "url": "https://github.com/org/repo/issues/123",
+        "title": "Fix login redirect bug"
+      },
+      {
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+        "title": "Fetch API - Web APIs | MDN"
+      },
+      {
+        "url": "https://docs.internal.com/ai-agent-design",
+        "title": "AI Agent Design Guidelines"
+      },
+      {
+        "url": "https://pad.example.org/tab/0"
+      },
+      {
+        "url": "https://pad.example.org/tab/1"
+      },
+      {
+        "url": "https://pad.example.org/tab/2"
+      },
+      {
+        "url": "https://pad.example.org/tab/3"
+      },
+      {
+        "url": "https://pad.example.org/tab/4"
+      },
+      {
+        "url": "https://pad.example.org/tab/5"
+      },
+      {
+        "url": "https://pad.example.org/tab/6"
+      },
+      {
+        "url": "https://pad.example.org/tab/7"
+      },
+      {
+        "url": "https://pad.example.org/tab/8"
+      },
+      {
+        "url": "https://pad.example.org/tab/9"
+      },
+      {
+        "url": "https://pad.example.org/tab/10"
+      },
+      {
+        "url": "https://pad.example.org/tab/11"
+      },
+      {
+        "url": "https://pad.example.org/tab/12"
+      },
+      {
+        "url": "https://pad.example.org/tab/13"
+      },
+      {
+        "url": "https://pad.example.org/tab/14"
+      },
+      {
+        "url": "https://pad.example.org/tab/15"
+      },
+      {
+        "url": "https://pad.example.org/tab/16"
+      },
+      {
+        "url": "https://pad.example.org/tab/17"
+      },
+      {
+        "url": "https://pad.example.org/tab/18"
+      },
+      {
+        "url": "https://pad.example.org/tab/19"
+      },
+      {
+        "url": "https://pad.example.org/tab/20"
+      },
+      {
+        "url": "https://pad.example.org/tab/21"
+      },
+      {
+        "url": "https://pad.example.org/tab/22"
+      },
+      {
+        "url": "https://pad.example.org/tab/23"
+      },
+      {
+        "url": "https://pad.example.org/tab/24"
+      },
+      {
+        "url": "https://pad.example.org/tab/25"
+      },
+      {
+        "url": "https://pad.example.org/tab/26"
+      },
+      {
+        "url": "https://pad.example.org/tab/27"
+      },
+      {
+        "url": "https://pad.example.org/tab/28"
+      },
+      {
+        "url": "https://pad.example.org/tab/29"
+      },
+      {
+        "url": "https://pad.example.org/tab/30"
+      },
+      {
+        "url": "https://pad.example.org/tab/31"
+      },
+      {
+        "url": "https://pad.example.org/tab/32"
+      },
+      {
+        "url": "https://pad.example.org/tab/33"
+      },
+      {
+        "url": "https://pad.example.org/tab/34"
+      },
+      {
+        "url": "https://pad.example.org/tab/35"
+      },
+      {
+        "url": "https://pad.example.org/tab/36"
+      },
+      {
+        "url": "https://pad.example.org/tab/37"
+      },
+      {
+        "url": "https://pad.example.org/tab/38"
+      },
+      {
+        "url": "https://pad.example.org/tab/39"
+      },
+      {
+        "url": "https://pad.example.org/tab/40"
+      },
+      {
+        "url": "https://pad.example.org/tab/41"
+      },
+      {
+        "url": "https://pad.example.org/tab/42"
+      },
+      {
+        "url": "https://pad.example.org/tab/43"
+      },
+      {
+        "url": "https://pad.example.org/tab/44"
+      },
+      {
+        "url": "https://pad.example.org/tab/45"
+      },
+      {
+        "url": "https://pad.example.org/tab/46"
+      },
+      {
+        "url": "https://pad.example.org/tab/47"
+      },
+      {
+        "url": "https://pad.example.org/tab/48"
+      },
+      {
+        "url": "https://pad.example.org/tab/49"
+      },
+      {
+        "url": "https://pad.example.org/tab/50"
+      },
+      {
+        "url": "https://pad.example.org/tab/51"
+      },
+      {
+        "url": "https://pad.example.org/tab/52"
+      },
+      {
+        "url": "https://pad.example.org/tab/53"
+      },
+      {
+        "url": "https://pad.example.org/tab/54"
+      },
+      {
+        "url": "https://pad.example.org/tab/55"
+      },
+      {
+        "url": "https://pad.example.org/tab/56"
+      },
+      {
+        "url": "https://pad.example.org/tab/57"
+      },
+      {
+        "url": "https://pad.example.org/tab/58"
+      },
+      {
+        "url": "https://pad.example.org/tab/59"
+      },
+      {
+        "url": "https://pad.example.org/tab/60"
+      },
+      {
+        "url": "https://pad.example.org/tab/61"
+      },
+      {
+        "url": "https://pad.example.org/tab/62"
+      },
+      {
+        "url": "https://pad.example.org/tab/63"
+      },
+      {
+        "url": "https://pad.example.org/tab/64"
+      },
+      {
+        "url": "https://pad.example.org/tab/65"
+      },
+      {
+        "url": "https://pad.example.org/tab/66"
+      },
+      {
+        "url": "https://pad.example.org/tab/67"
+      },
+      {
+        "url": "https://pad.example.org/tab/68"
+      },
+      {
+        "url": "https://pad.example.org/tab/69"
+      },
+      {
+        "url": "https://pad.example.org/tab/70"
+      },
+      {
+        "url": "https://pad.example.org/tab/71"
+      },
+      {
+        "url": "https://pad.example.org/tab/72"
+      },
+      {
+        "url": "https://pad.example.org/tab/73"
+      },
+      {
+        "url": "https://pad.example.org/tab/74"
+      },
+      {
+        "url": "https://pad.example.org/tab/75"
+      },
+      {
+        "url": "https://pad.example.org/tab/76"
+      },
+      {
+        "url": "https://pad.example.org/tab/77"
+      },
+      {
+        "url": "https://pad.example.org/tab/78"
+      },
+      {
+        "url": "https://pad.example.org/tab/79"
+      },
+      {
+        "url": "https://pad.example.org/tab/80"
+      },
+      {
+        "url": "https://pad.example.org/tab/81"
+      },
+      {
+        "url": "https://pad.example.org/tab/82"
+      },
+      {
+        "url": "https://pad.example.org/tab/83"
+      },
+      {
+        "url": "https://pad.example.org/tab/84"
+      },
+      {
+        "url": "https://pad.example.org/tab/85"
+      },
+      {
+        "url": "https://pad.example.org/tab/86"
+      },
+      {
+        "url": "https://pad.example.org/tab/87"
+      },
+      {
+        "url": "https://pad.example.org/tab/88"
+      },
+      {
+        "url": "https://pad.example.org/tab/89"
+      },
+      {
+        "url": "https://pad.example.org/tab/90"
+      },
+      {
+        "url": "https://pad.example.org/tab/91"
+      },
+      {
+        "url": "https://pad.example.org/tab/92"
+      },
+      {
+        "url": "https://pad.example.org/tab/93"
+      },
+      {
+        "url": "https://pad.example.org/tab/94"
+      },
+      {
+        "url": "https://pad.example.org/tab/95"
+      },
+      {
+        "url": "https://pad.example.org/tab/96"
+      },
+      {
+        "url": "https://pad.example.org/tab/97"
+      },
+      {
+        "url": "https://pad.example.org/tab/98"
+      },
+      {
+        "url": "https://pad.example.org/tab/99"
+      },
+      {
+        "url": "https://pad.example.org/tab/100"
+      },
+      {
+        "url": "https://pad.example.org/tab/101"
+      },
+      {
+        "url": "https://pad.example.org/tab/102"
+      },
+      {
+        "url": "https://pad.example.org/tab/103"
+      },
+      {
+        "url": "https://pad.example.org/tab/104"
+      },
+      {
+        "url": "https://pad.example.org/tab/105"
+      },
+      {
+        "url": "https://pad.example.org/tab/106"
+      },
+      {
+        "url": "https://pad.example.org/tab/107"
+      },
+      {
+        "url": "https://pad.example.org/tab/108"
+      },
+      {
+        "url": "https://pad.example.org/tab/109"
+      },
+      {
+        "url": "https://pad.example.org/tab/110"
+      },
+      {
+        "url": "https://pad.example.org/tab/111"
+      },
+      {
+        "url": "https://pad.example.org/tab/112"
+      },
+      {
+        "url": "https://pad.example.org/tab/113"
+      },
+      {
+        "url": "https://pad.example.org/tab/114"
+      },
+      {
+        "url": "https://pad.example.org/tab/115"
+      },
+      {
+        "url": "https://pad.example.org/tab/116"
+      },
+      {
+        "url": "https://pad.example.org/tab/117"
+      },
+      {
+        "url": "https://pad.example.org/tab/118"
+      },
+      {
+        "url": "https://pad.example.org/tab/119"
+      },
+      {
+        "url": "https://pad.example.org/tab/120"
+      },
+      {
+        "url": "https://pad.example.org/tab/121"
+      },
+      {
+        "url": "https://pad.example.org/tab/122"
+      },
+      {
+        "url": "https://pad.example.org/tab/123"
+      },
+      {
+        "url": "https://pad.example.org/tab/124"
+      },
+      {
+        "url": "https://pad.example.org/tab/125"
+      },
+      {
+        "url": "https://pad.example.org/tab/126"
+      },
+      {
+        "url": "https://pad.example.org/tab/127"
+      },
+      {
+        "url": "https://pad.example.org/tab/128"
+      },
+      {
+        "url": "https://pad.example.org/tab/129"
+      },
+      {
+        "url": "https://pad.example.org/tab/130"
+      },
+      {
+        "url": "https://pad.example.org/tab/131"
+      },
+      {
+        "url": "https://pad.example.org/tab/132"
+      },
+      {
+        "url": "https://pad.example.org/tab/133"
+      },
+      {
+        "url": "https://pad.example.org/tab/134"
+      },
+      {
+        "url": "https://pad.example.org/tab/135"
+      },
+      {
+        "url": "https://pad.example.org/tab/136"
+      },
+      {
+        "url": "https://pad.example.org/tab/137"
+      },
+      {
+        "url": "https://pad.example.org/tab/138"
+      },
+      {
+        "url": "https://pad.example.org/tab/139"
+      },
+      {
+        "url": "https://pad.example.org/tab/140"
+      },
+      {
+        "url": "https://pad.example.org/tab/141"
+      },
+      {
+        "url": "https://pad.example.org/tab/142"
+      },
+      {
+        "url": "https://pad.example.org/tab/143"
+      },
+      {
+        "url": "https://pad.example.org/tab/144"
+      },
+      {
+        "url": "https://pad.example.org/tab/145"
+      },
+      {
+        "url": "https://pad.example.org/tab/146"
+      },
+      {
+        "url": "https://pad.example.org/tab/147"
+      },
+      {
+        "url": "https://pad.example.org/tab/148"
+      },
+      {
+        "url": "https://pad.example.org/tab/149"
+      },
+      {
+        "url": "https://pad.example.org/tab/150"
+      },
+      {
+        "url": "https://pad.example.org/tab/151"
+      },
+      {
+        "url": "https://pad.example.org/tab/152"
+      },
+      {
+        "url": "https://pad.example.org/tab/153"
+      },
+      {
+        "url": "https://pad.example.org/tab/154"
+      },
+      {
+        "url": "https://pad.example.org/tab/155"
+      },
+      {
+        "url": "https://pad.example.org/tab/156"
+      },
+      {
+        "url": "https://pad.example.org/tab/157"
+      },
+      {
+        "url": "https://pad.example.org/tab/158"
+      },
+      {
+        "url": "https://pad.example.org/tab/159"
+      },
+      {
+        "url": "https://pad.example.org/tab/160"
+      },
+      {
+        "url": "https://pad.example.org/tab/161"
+      },
+      {
+        "url": "https://pad.example.org/tab/162"
+      },
+      {
+        "url": "https://pad.example.org/tab/163"
+      },
+      {
+        "url": "https://pad.example.org/tab/164"
+      },
+      {
+        "url": "https://pad.example.org/tab/165"
+      },
+      {
+        "url": "https://pad.example.org/tab/166"
+      },
+      {
+        "url": "https://pad.example.org/tab/167"
+      },
+      {
+        "url": "https://pad.example.org/tab/168"
+      },
+      {
+        "url": "https://pad.example.org/tab/169"
+      },
+      {
+        "url": "https://pad.example.org/tab/170"
+      },
+      {
+        "url": "https://pad.example.org/tab/171"
+      },
+      {
+        "url": "https://pad.example.org/tab/172"
+      },
+      {
+        "url": "https://pad.example.org/tab/173"
+      },
+      {
+        "url": "https://pad.example.org/tab/174"
+      },
+      {
+        "url": "https://pad.example.org/tab/175"
+      },
+      {
+        "url": "https://pad.example.org/tab/176"
+      },
+      {
+        "url": "https://pad.example.org/tab/177"
+      },
+      {
+        "url": "https://pad.example.org/tab/178"
+      },
+      {
+        "url": "https://pad.example.org/tab/179"
+      },
+      {
+        "url": "https://pad.example.org/tab/180"
+      },
+      {
+        "url": "https://pad.example.org/tab/181"
+      },
+      {
+        "url": "https://pad.example.org/tab/182"
+      },
+      {
+        "url": "https://pad.example.org/tab/183"
+      },
+      {
+        "url": "https://pad.example.org/tab/184"
+      },
+      {
+        "url": "https://pad.example.org/tab/185"
+      },
+      {
+        "url": "https://pad.example.org/tab/186"
+      },
+      {
+        "url": "https://pad.example.org/tab/187"
+      },
+      {
+        "url": "https://pad.example.org/tab/188"
+      },
+      {
+        "url": "https://pad.example.org/tab/189"
+      },
+      {
+        "url": "https://pad.example.org/tab/190"
+      },
+      {
+        "url": "https://pad.example.org/tab/191"
+      },
+      {
+        "url": "https://pad.example.org/tab/192"
+      },
+      {
+        "url": "https://pad.example.org/tab/193"
+      },
+      {
+        "url": "https://pad.example.org/tab/194"
+      },
+      {
+        "url": "https://pad.example.org/tab/195"
+      },
+      {
+        "url": "https://pad.example.org/tab/196"
+      },
+      {
+        "url": "https://pad.example.org/tab/197"
+      },
+      {
+        "url": "https://pad.example.org/tab/198"
+      },
+      {
+        "url": "https://pad.example.org/tab/199"
+      },
+      {
+        "url": "https://pad.example.org/tab/200"
+      },
+      {
+        "url": "https://pad.example.org/tab/201"
+      },
+      {
+        "url": "https://pad.example.org/tab/202"
+      },
+      {
+        "url": "https://pad.example.org/tab/203"
+      },
+      {
+        "url": "https://pad.example.org/tab/204"
+      },
+      {
+        "url": "https://pad.example.org/tab/205"
+      },
+      {
+        "url": "https://pad.example.org/tab/206"
+      },
+      {
+        "url": "https://pad.example.org/tab/207"
+      },
+      {
+        "url": "https://pad.example.org/tab/208"
+      },
+      {
+        "url": "https://pad.example.org/tab/209"
+      },
+      {
+        "url": "https://pad.example.org/tab/210"
+      },
+      {
+        "url": "https://pad.example.org/tab/211"
+      },
+      {
+        "url": "https://pad.example.org/tab/212"
+      },
+      {
+        "url": "https://pad.example.org/tab/213"
+      },
+      {
+        "url": "https://pad.example.org/tab/214"
+      },
+      {
+        "url": "https://pad.example.org/tab/215"
+      },
+      {
+        "url": "https://pad.example.org/tab/216"
+      },
+      {
+        "url": "https://pad.example.org/tab/217"
+      },
+      {
+        "url": "https://pad.example.org/tab/218"
+      },
+      {
+        "url": "https://pad.example.org/tab/219"
+      },
+      {
+        "url": "https://pad.example.org/tab/220"
+      },
+      {
+        "url": "https://pad.example.org/tab/221"
+      },
+      {
+        "url": "https://pad.example.org/tab/222"
+      },
+      {
+        "url": "https://pad.example.org/tab/223"
+      },
+      {
+        "url": "https://pad.example.org/tab/224"
+      },
+      {
+        "url": "https://pad.example.org/tab/225"
+      },
+      {
+        "url": "https://pad.example.org/tab/226"
+      },
+      {
+        "url": "https://pad.example.org/tab/227"
+      },
+      {
+        "url": "https://pad.example.org/tab/228"
+      },
+      {
+        "url": "https://pad.example.org/tab/229"
+      },
+      {
+        "url": "https://pad.example.org/tab/230"
+      },
+      {
+        "url": "https://pad.example.org/tab/231"
+      },
+      {
+        "url": "https://pad.example.org/tab/232"
+      },
+      {
+        "url": "https://pad.example.org/tab/233"
+      },
+      {
+        "url": "https://pad.example.org/tab/234"
+      },
+      {
+        "url": "https://pad.example.org/tab/235"
+      },
+      {
+        "url": "https://pad.example.org/tab/236"
+      },
+      {
+        "url": "https://pad.example.org/tab/237"
+      },
+      {
+        "url": "https://pad.example.org/tab/238"
+      },
+      {
+        "url": "https://pad.example.org/tab/239"
+      },
+      {
+        "url": "https://pad.example.org/tab/240"
+      },
+      {
+        "url": "https://pad.example.org/tab/241"
+      },
+      {
+        "url": "https://pad.example.org/tab/242"
+      },
+      {
+        "url": "https://pad.example.org/tab/243"
+      },
+      {
+        "url": "https://pad.example.org/tab/244"
+      },
+      {
+        "url": "https://pad.example.org/tab/245"
+      },
+      {
+        "url": "https://pad.example.org/tab/246"
+      },
+      {
+        "url": "https://pad.example.org/tab/247"
+      },
+      {
+        "url": "https://pad.example.org/tab/248"
+      },
+      {
+        "url": "https://pad.example.org/tab/249"
+      },
+      {
+        "url": "https://pad.example.org/tab/250"
+      },
+      {
+        "url": "https://pad.example.org/tab/251"
+      },
+      {
+        "url": "https://pad.example.org/tab/252"
+      },
+      {
+        "url": "https://pad.example.org/tab/253"
+      },
+      {
+        "url": "https://pad.example.org/tab/254"
+      },
+      {
+        "url": "https://pad.example.org/tab/255"
+      },
+      {
+        "url": "https://pad.example.org/tab/256"
+      },
+      {
+        "url": "https://pad.example.org/tab/257"
+      },
+      {
+        "url": "https://pad.example.org/tab/258"
+      },
+      {
+        "url": "https://pad.example.org/tab/259"
+      },
+      {
+        "url": "https://pad.example.org/tab/260"
+      },
+      {
+        "url": "https://pad.example.org/tab/261"
+      },
+      {
+        "url": "https://pad.example.org/tab/262"
+      },
+      {
+        "url": "https://pad.example.org/tab/263"
+      },
+      {
+        "url": "https://pad.example.org/tab/264"
+      },
+      {
+        "url": "https://pad.example.org/tab/265"
+      },
+      {
+        "url": "https://pad.example.org/tab/266"
+      },
+      {
+        "url": "https://pad.example.org/tab/267"
+      },
+      {
+        "url": "https://pad.example.org/tab/268"
+      },
+      {
+        "url": "https://pad.example.org/tab/269"
+      },
+      {
+        "url": "https://pad.example.org/tab/270"
+      },
+      {
+        "url": "https://pad.example.org/tab/271"
+      },
+      {
+        "url": "https://pad.example.org/tab/272"
+      },
+      {
+        "url": "https://pad.example.org/tab/273"
+      },
+      {
+        "url": "https://pad.example.org/tab/274"
+      },
+      {
+        "url": "https://pad.example.org/tab/275"
+      },
+      {
+        "url": "https://pad.example.org/tab/276"
+      },
+      {
+        "url": "https://pad.example.org/tab/277"
+      },
+      {
+        "url": "https://pad.example.org/tab/278"
+      },
+      {
+        "url": "https://pad.example.org/tab/279"
+      },
+      {
+        "url": "https://pad.example.org/tab/280"
+      },
+      {
+        "url": "https://pad.example.org/tab/281"
+      },
+      {
+        "url": "https://pad.example.org/tab/282"
+      },
+      {
+        "url": "https://pad.example.org/tab/283"
+      },
+      {
+        "url": "https://pad.example.org/tab/284"
+      },
+      {
+        "url": "https://pad.example.org/tab/285"
+      },
+      {
+        "url": "https://pad.example.org/tab/286"
+      },
+      {
+        "url": "https://pad.example.org/tab/287"
+      },
+      {
+        "url": "https://pad.example.org/tab/288"
+      },
+      {
+        "url": "https://pad.example.org/tab/289"
+      },
+      {
+        "url": "https://pad.example.org/tab/290"
+      },
+      {
+        "url": "https://pad.example.org/tab/291"
+      },
+      {
+        "url": "https://pad.example.org/tab/292"
+      },
+      {
+        "url": "https://pad.example.org/tab/293"
+      },
+      {
+        "url": "https://pad.example.org/tab/294"
+      },
+      {
+        "url": "https://pad.example.org/tab/295"
+      },
+      {
+        "url": "https://pad.example.org/tab/296"
+      },
+      {
+        "url": "https://pad.example.org/tab/297"
+      },
+      {
+        "url": "https://pad.example.org/tab/298"
+      },
+      {
+        "url": "https://pad.example.org/tab/299"
+      },
+      {
+        "url": "https://pad.example.org/tab/300"
+      },
+      {
+        "url": "https://pad.example.org/tab/301"
+      },
+      {
+        "url": "https://pad.example.org/tab/302"
+      },
+      {
+        "url": "https://pad.example.org/tab/303"
+      },
+      {
+        "url": "https://pad.example.org/tab/304"
+      },
+      {
+        "url": "https://pad.example.org/tab/305"
+      },
+      {
+        "url": "https://pad.example.org/tab/306"
+      },
+      {
+        "url": "https://pad.example.org/tab/307"
+      },
+      {
+        "url": "https://pad.example.org/tab/308"
+      },
+      {
+        "url": "https://pad.example.org/tab/309"
+      },
+      {
+        "url": "https://pad.example.org/tab/310"
+      },
+      {
+        "url": "https://pad.example.org/tab/311"
+      },
+      {
+        "url": "https://pad.example.org/tab/312"
+      },
+      {
+        "url": "https://pad.example.org/tab/313"
+      },
+      {
+        "url": "https://pad.example.org/tab/314"
+      },
+      {
+        "url": "https://pad.example.org/tab/315"
+      },
+      {
+        "url": "https://pad.example.org/tab/316"
+      },
+      {
+        "url": "https://pad.example.org/tab/317"
+      },
+      {
+        "url": "https://pad.example.org/tab/318"
+      },
+      {
+        "url": "https://pad.example.org/tab/319"
+      },
+      {
+        "url": "https://pad.example.org/tab/320"
+      },
+      {
+        "url": "https://pad.example.org/tab/321"
+      },
+      {
+        "url": "https://pad.example.org/tab/322"
+      },
+      {
+        "url": "https://pad.example.org/tab/323"
+      },
+      {
+        "url": "https://pad.example.org/tab/324"
+      },
+      {
+        "url": "https://pad.example.org/tab/325"
+      },
+      {
+        "url": "https://pad.example.org/tab/326"
+      },
+      {
+        "url": "https://pad.example.org/tab/327"
+      },
+      {
+        "url": "https://pad.example.org/tab/328"
+      },
+      {
+        "url": "https://pad.example.org/tab/329"
+      },
+      {
+        "url": "https://pad.example.org/tab/330"
+      },
+      {
+        "url": "https://pad.example.org/tab/331"
+      },
+      {
+        "url": "https://pad.example.org/tab/332"
+      },
+      {
+        "url": "https://pad.example.org/tab/333"
+      },
+      {
+        "url": "https://pad.example.org/tab/334"
+      },
+      {
+        "url": "https://pad.example.org/tab/335"
+      },
+      {
+        "url": "https://pad.example.org/tab/336"
+      },
+      {
+        "url": "https://pad.example.org/tab/337"
+      },
+      {
+        "url": "https://pad.example.org/tab/338"
+      },
+      {
+        "url": "https://pad.example.org/tab/339"
+      },
+      {
+        "url": "https://pad.example.org/tab/340"
+      },
+      {
+        "url": "https://pad.example.org/tab/341"
+      },
+      {
+        "url": "https://pad.example.org/tab/342"
+      },
+      {
+        "url": "https://pad.example.org/tab/343"
+      },
+      {
+        "url": "https://pad.example.org/tab/344"
+      },
+      {
+        "url": "https://pad.example.org/tab/345"
+      },
+      {
+        "url": "https://pad.example.org/tab/346"
+      },
+      {
+        "url": "https://pad.example.org/tab/347"
+      },
+      {
+        "url": "https://pad.example.org/tab/348"
+      },
+      {
+        "url": "https://pad.example.org/tab/349"
+      },
+      {
+        "url": "https://pad.example.org/tab/350"
+      },
+      {
+        "url": "https://pad.example.org/tab/351"
+      },
+      {
+        "url": "https://pad.example.org/tab/352"
+      },
+      {
+        "url": "https://pad.example.org/tab/353"
+      },
+      {
+        "url": "https://pad.example.org/tab/354"
+      },
+      {
+        "url": "https://pad.example.org/tab/355"
+      },
+      {
+        "url": "https://pad.example.org/tab/356"
+      },
+      {
+        "url": "https://pad.example.org/tab/357"
+      },
+      {
+        "url": "https://pad.example.org/tab/358"
+      },
+      {
+        "url": "https://pad.example.org/tab/359"
+      },
+      {
+        "url": "https://pad.example.org/tab/360"
+      },
+      {
+        "url": "https://pad.example.org/tab/361"
+      },
+      {
+        "url": "https://pad.example.org/tab/362"
+      },
+      {
+        "url": "https://pad.example.org/tab/363"
+      },
+      {
+        "url": "https://pad.example.org/tab/364"
+      },
+      {
+        "url": "https://pad.example.org/tab/365"
+      },
+      {
+        "url": "https://pad.example.org/tab/366"
+      },
+      {
+        "url": "https://pad.example.org/tab/367"
+      },
+      {
+        "url": "https://pad.example.org/tab/368"
+      },
+      {
+        "url": "https://pad.example.org/tab/369"
+      },
+      {
+        "url": "https://pad.example.org/tab/370"
+      },
+      {
+        "url": "https://pad.example.org/tab/371"
+      },
+      {
+        "url": "https://pad.example.org/tab/372"
+      },
+      {
+        "url": "https://pad.example.org/tab/373"
+      },
+      {
+        "url": "https://pad.example.org/tab/374"
+      },
+      {
+        "url": "https://pad.example.org/tab/375"
+      },
+      {
+        "url": "https://pad.example.org/tab/376"
+      },
+      {
+        "url": "https://pad.example.org/tab/377"
+      },
+      {
+        "url": "https://pad.example.org/tab/378"
+      },
+      {
+        "url": "https://pad.example.org/tab/379"
+      },
+      {
+        "url": "https://pad.example.org/tab/380"
+      },
+      {
+        "url": "https://pad.example.org/tab/381"
+      },
+      {
+        "url": "https://pad.example.org/tab/382"
+      },
+      {
+        "url": "https://pad.example.org/tab/383"
+      },
+      {
+        "url": "https://pad.example.org/tab/384"
+      },
+      {
+        "url": "https://pad.example.org/tab/385"
+      },
+      {
+        "url": "https://pad.example.org/tab/386"
+      },
+      {
+        "url": "https://pad.example.org/tab/387"
+      },
+      {
+        "url": "https://pad.example.org/tab/388"
+      },
+      {
+        "url": "https://pad.example.org/tab/389"
+      },
+      {
+        "url": "https://pad.example.org/tab/390"
+      },
+      {
+        "url": "https://pad.example.org/tab/391"
+      },
+      {
+        "url": "https://pad.example.org/tab/392"
+      },
+      {
+        "url": "https://pad.example.org/tab/393"
+      },
+      {
+        "url": "https://pad.example.org/tab/394"
+      },
+      {
+        "url": "https://pad.example.org/tab/395"
+      },
+      {
+        "url": "https://pad.example.org/tab/396"
+      },
+      {
+        "url": "https://pad.example.org/tab/397"
+      },
+      {
+        "url": "https://pad.example.org/tab/398"
+      },
+      {
+        "url": "https://pad.example.org/tab/399"
+      },
+      {
+        "url": "https://pad.example.org/tab/400"
+      },
+      {
+        "url": "https://pad.example.org/tab/401"
+      },
+      {
+        "url": "https://pad.example.org/tab/402"
+      },
+      {
+        "url": "https://pad.example.org/tab/403"
+      },
+      {
+        "url": "https://pad.example.org/tab/404"
+      },
+      {
+        "url": "https://pad.example.org/tab/405"
+      },
+      {
+        "url": "https://pad.example.org/tab/406"
+      },
+      {
+        "url": "https://pad.example.org/tab/407"
+      },
+      {
+        "url": "https://pad.example.org/tab/408"
+      },
+      {
+        "url": "https://pad.example.org/tab/409"
+      },
+      {
+        "url": "https://pad.example.org/tab/410"
+      },
+      {
+        "url": "https://pad.example.org/tab/411"
+      },
+      {
+        "url": "https://pad.example.org/tab/412"
+      },
+      {
+        "url": "https://pad.example.org/tab/413"
+      },
+      {
+        "url": "https://pad.example.org/tab/414"
+      },
+      {
+        "url": "https://pad.example.org/tab/415"
+      },
+      {
+        "url": "https://pad.example.org/tab/416"
+      },
+      {
+        "url": "https://pad.example.org/tab/417"
+      },
+      {
+        "url": "https://pad.example.org/tab/418"
+      },
+      {
+        "url": "https://pad.example.org/tab/419"
+      },
+      {
+        "url": "https://pad.example.org/tab/420"
+      },
+      {
+        "url": "https://pad.example.org/tab/421"
+      },
+      {
+        "url": "https://pad.example.org/tab/422"
+      },
+      {
+        "url": "https://pad.example.org/tab/423"
+      },
+      {
+        "url": "https://pad.example.org/tab/424"
+      },
+      {
+        "url": "https://pad.example.org/tab/425"
+      },
+      {
+        "url": "https://pad.example.org/tab/426"
+      },
+      {
+        "url": "https://pad.example.org/tab/427"
+      },
+      {
+        "url": "https://pad.example.org/tab/428"
+      },
+      {
+        "url": "https://pad.example.org/tab/429"
+      },
+      {
+        "url": "https://pad.example.org/tab/430"
+      },
+      {
+        "url": "https://pad.example.org/tab/431"
+      },
+      {
+        "url": "https://pad.example.org/tab/432"
+      },
+      {
+        "url": "https://pad.example.org/tab/433"
+      },
+      {
+        "url": "https://pad.example.org/tab/434"
+      },
+      {
+        "url": "https://pad.example.org/tab/435"
+      },
+      {
+        "url": "https://pad.example.org/tab/436"
+      },
+      {
+        "url": "https://pad.example.org/tab/437"
+      },
+      {
+        "url": "https://pad.example.org/tab/438"
+      },
+      {
+        "url": "https://pad.example.org/tab/439"
+      },
+      {
+        "url": "https://pad.example.org/tab/440"
+      },
+      {
+        "url": "https://pad.example.org/tab/441"
+      },
+      {
+        "url": "https://pad.example.org/tab/442"
+      },
+      {
+        "url": "https://pad.example.org/tab/443"
+      },
+      {
+        "url": "https://pad.example.org/tab/444"
+      },
+      {
+        "url": "https://pad.example.org/tab/445"
+      },
+      {
+        "url": "https://pad.example.org/tab/446"
+      },
+      {
+        "url": "https://pad.example.org/tab/447"
+      },
+      {
+        "url": "https://pad.example.org/tab/448"
+      },
+      {
+        "url": "https://pad.example.org/tab/449"
+      },
+      {
+        "url": "https://pad.example.org/tab/450"
+      },
+      {
+        "url": "https://pad.example.org/tab/451"
+      },
+      {
+        "url": "https://pad.example.org/tab/452"
+      },
+      {
+        "url": "https://pad.example.org/tab/453"
+      },
+      {
+        "url": "https://pad.example.org/tab/454"
+      },
+      {
+        "url": "https://pad.example.org/tab/455"
+      },
+      {
+        "url": "https://pad.example.org/tab/456"
+      },
+      {
+        "url": "https://pad.example.org/tab/457"
+      },
+      {
+        "url": "https://pad.example.org/tab/458"
+      },
+      {
+        "url": "https://pad.example.org/tab/459"
+      },
+      {
+        "url": "https://pad.example.org/tab/460"
+      },
+      {
+        "url": "https://pad.example.org/tab/461"
+      },
+      {
+        "url": "https://pad.example.org/tab/462"
+      },
+      {
+        "url": "https://pad.example.org/tab/463"
+      },
+      {
+        "url": "https://pad.example.org/tab/464"
+      },
+      {
+        "url": "https://pad.example.org/tab/465"
+      },
+      {
+        "url": "https://pad.example.org/tab/466"
+      },
+      {
+        "url": "https://pad.example.org/tab/467"
+      },
+      {
+        "url": "https://pad.example.org/tab/468"
+      },
+      {
+        "url": "https://pad.example.org/tab/469"
+      },
+      {
+        "url": "https://pad.example.org/tab/470"
+      },
+      {
+        "url": "https://pad.example.org/tab/471"
+      },
+      {
+        "url": "https://pad.example.org/tab/472"
+      },
+      {
+        "url": "https://pad.example.org/tab/473"
+      },
+      {
+        "url": "https://pad.example.org/tab/474"
+      },
+      {
+        "url": "https://pad.example.org/tab/475"
+      },
+      {
+        "url": "https://pad.example.org/tab/476"
+      },
+      {
+        "url": "https://pad.example.org/tab/477"
+      },
+      {
+        "url": "https://pad.example.org/tab/478"
+      },
+      {
+        "url": "https://pad.example.org/tab/479"
+      },
+      {
+        "url": "https://pad.example.org/tab/480"
+      },
+      {
+        "url": "https://pad.example.org/tab/481"
+      },
+      {
+        "url": "https://pad.example.org/tab/482"
+      },
+      {
+        "url": "https://pad.example.org/tab/483"
+      },
+      {
+        "url": "https://pad.example.org/tab/484"
+      },
+      {
+        "url": "https://pad.example.org/tab/485"
+      },
+      {
+        "url": "https://pad.example.org/tab/486"
+      },
+      {
+        "url": "https://pad.example.org/tab/487"
+      },
+      {
+        "url": "https://pad.example.org/tab/488"
+      },
+      {
+        "url": "https://pad.example.org/tab/489"
+      },
+      {
+        "url": "https://pad.example.org/tab/490"
+      },
+      {
+        "url": "https://pad.example.org/tab/491"
+      },
+      {
+        "url": "https://pad.example.org/tab/492"
+      },
+      {
+        "url": "https://pad.example.org/tab/493"
+      },
+      {
+        "url": "https://pad.example.org/tab/494"
+      },
+      {
+        "url": "https://pad.example.org/tab/495"
+      },
+      {
+        "url": "https://pad.example.org/tab/496"
+      }
+    ],
+    "recentHistory": []
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-REC-030-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "967",
+    "date": "Wed, 04 Nov 2026 03:27:04 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "recommendations": [
+      {
+        "id": "rec_3",
+        "type": "next_visit",
+        "url": "https://github.com/org/repo/actions",
+        "title": "Actions · org/repo",
+        "score": 0.87,
+        "reason": "你正在查看 PR，同仓库 CI 页面最近访问频率较高，可能需要检查构建状态",
+        "strategy": "same_repo",
+        "contextUrl": "https://github.com/org/repo/pull/456",
+        "createdAt": 1793762824492
+      },
+      {
+        "id": "rec_9",
+        "type": "next_visit",
+        "url": "https://react.dev/reference/react/useState",
+        "title": "useState – React",
+        "score": 0.46,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": "https://github.com/org/repo/pull/456",
+        "createdAt": 1793762824492
+      },
+      {
+        "id": "rec_10",
+        "type": "next_visit",
+        "url": "https://react.dev/learn",
+        "title": "Quick Start – React",
+        "score": 0.41,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": "https://github.com/org/repo/pull/456",
+        "createdAt": 1793762824492
+      }
+    ],
+    "cached": false,
+    "generatedAt": 1793762824492
+  },
+  "ms": 2.6,
+  "mutated": null
+}

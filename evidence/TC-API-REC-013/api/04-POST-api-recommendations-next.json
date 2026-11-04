@@ -1,0 +1,53 @@
+{
+  "reqId": "TC-API-REC-013-04",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/recommendations/next",
+  "params": {
+    "now": 1793762824064
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-REC-013-04"
+  },
+  "requestBody": {
+    "currentPage": {
+      "url": "https://unknown.example.net/x"
+    },
+    "openTabs": [
+      {
+        "url": "https://boundary.example.org/anchor"
+      }
+    ],
+    "recentHistory": []
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-REC-013-04",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "326",
+    "date": "Wed, 04 Nov 2026 03:27:04 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "recommendations": [
+      {
+        "id": "rec_2",
+        "type": "next_visit",
+        "url": "https://boundary.example.org/keep",
+        "title": "Keep",
+        "score": 0.3,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": "https://unknown.example.net/x",
+        "createdAt": 1793762824064
+      }
+    ],
+    "cached": false,
+    "generatedAt": 1793762824064
+  },
+  "ms": 0.8,
+  "mutated": null
+}

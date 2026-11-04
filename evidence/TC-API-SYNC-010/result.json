@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-SYNC-010",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:06.102Z",
+  "tests": [
+    {
+      "testId": "e6e4a0853058178ad915-c328b3cfdfc544d01443",
+      "title": "TC-API-SYNC-010 新历史的空标题回退为原始 URL",
+      "project": "api",
+      "file": "tests/api/TC-API-SYNC-010.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 23,
+      "startedAt": "2026-11-04T03:27:06.079Z",
+      "endedAt": "2026-11-04T03:27:06.102Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 8,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 863,
+          "after": 865
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

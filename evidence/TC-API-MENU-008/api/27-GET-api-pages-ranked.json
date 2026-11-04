@@ -1,0 +1,294 @@
+{
+  "reqId": "TC-API-MENU-008-06",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/ranked",
+  "params": {
+    "limit": 500,
+    "now": 1793762749265
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-MENU-008-06"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-MENU-008-06",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "5276",
+    "date": "Wed, 04 Nov 2026 03:25:49 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "pages": [
+      {
+        "id": "page_2",
+        "url": "https://github.com/org/repo/issues/123",
+        "normalizedUrl": "https://github.com/org/repo/issues/123",
+        "title": "Fix login redirect bug",
+        "domain": "github.com",
+        "visitCount": 8,
+        "lastVisitedAt": 1793752449264,
+        "firstSeenAt": 1793752449264,
+        "sources": [
+          "history",
+          "open_tab"
+        ],
+        "isOpen": true,
+        "isActive": false,
+        "isImportant": false,
+        "score": 1,
+        "scoreDetail": {
+          "recency": 0.99,
+          "frequency": 1,
+          "open": 1,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "最近 3 天内多次访问（8 次），当前仍处于打开状态，常用域名 github.com"
+      },
+      {
+        "id": "page_1",
+        "url": "https://github.com/org/repo/pull/456",
+        "normalizedUrl": "https://github.com/org/repo/pull/456",
+        "title": "Refactor auth middleware (#456)",
+        "domain": "github.com",
+        "visitCount": 5,
+        "lastVisitedAt": 1793762749265,
+        "firstSeenAt": 1793762449264,
+        "sources": [
+          "history",
+          "active_tab"
+        ],
+        "isOpen": true,
+        "isActive": true,
+        "isImportant": false,
+        "score": 0.94,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 0.82,
+          "open": 1,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "正在浏览，最近 3 天内多次访问（5 次），常用域名 github.com"
+      },
+      {
+        "id": "page_4",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+        "normalizedUrl": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+        "title": "Fetch API - Web APIs | MDN",
+        "domain": "developer.mozilla.org",
+        "visitCount": 4,
+        "lastVisitedAt": 1793732449264,
+        "firstSeenAt": 1793732449264,
+        "sources": [
+          "history",
+          "open_tab"
+        ],
+        "isOpen": true,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.83,
+        "scoreDetail": {
+          "recency": 0.97,
+          "frequency": 0.73,
+          "open": 1,
+          "domain": 0.2,
+          "domainSource": "affinity"
+        },
+        "reason": "最近 3 天内多次访问（4 次），当前仍处于打开状态"
+      },
+      {
+        "id": "page_9",
+        "url": "https://react.dev/reference/react/useState",
+        "normalizedUrl": "https://react.dev/reference/react/useState",
+        "title": "useState – React",
+        "domain": "react.dev",
+        "visitCount": 6,
+        "lastVisitedAt": 1793722449264,
+        "firstSeenAt": 1793722449264,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.69,
+        "scoreDetail": {
+          "recency": 0.95,
+          "frequency": 0.89,
+          "open": 0,
+          "domain": 0.4,
+          "domainSource": "affinity"
+        },
+        "reason": "最近 3 天内多次访问（6 次）"
+      },
+      {
+        "id": "page_8",
+        "url": "https://github.com/org/repo/issues/123?tab=comments",
+        "normalizedUrl": "https://github.com/org/repo/issues/123?tab=comments",
+        "title": "Fix login redirect bug - Comments",
+        "domain": "github.com",
+        "visitCount": 3,
+        "lastVisitedAt": 1793750449264,
+        "firstSeenAt": 1793750449264,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.68,
+        "scoreDetail": {
+          "recency": 0.99,
+          "frequency": 0.63,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "最近 3 天内多次访问（3 次），常用域名 github.com"
+      },
+      {
+        "id": "page_3",
+        "url": "https://github.com/org/repo/actions",
+        "normalizedUrl": "https://github.com/org/repo/actions",
+        "title": "Actions · org/repo",
+        "domain": "github.com",
+        "visitCount": 3,
+        "lastVisitedAt": 1793742449264,
+        "firstSeenAt": 1793742449264,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.68,
+        "scoreDetail": {
+          "recency": 0.98,
+          "frequency": 0.63,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "最近 3 天内多次访问（3 次），常用域名 github.com"
+      },
+      {
+        "id": "page_10",
+        "url": "https://react.dev/learn",
+        "normalizedUrl": "https://react.dev/learn",
+        "title": "Quick Start – React",
+        "domain": "react.dev",
+        "visitCount": 2,
+        "lastVisitedAt": 1793717449264,
+        "firstSeenAt": 1793717449264,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.57,
+        "scoreDetail": {
+          "recency": 0.95,
+          "frequency": 0.5,
+          "open": 0,
+          "domain": 0.4,
+          "domainSource": "affinity"
+        },
+        "reason": "今天访问过"
+      },
+      {
+        "id": "page_5",
+        "url": "https://docs.internal.com/ai-agent-design",
+        "normalizedUrl": "https://docs.internal.com/ai-agent-design",
+        "title": "AI Agent Design Guidelines",
+        "domain": "docs.internal.com",
+        "visitCount": 2,
+        "lastVisitedAt": 1793162449264,
+        "firstSeenAt": 1793162449264,
+        "sources": [
+          "history",
+          "open_tab"
+        ],
+        "isOpen": true,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.56,
+        "scoreDetail": {
+          "recency": 0.5,
+          "frequency": 0.5,
+          "open": 1,
+          "domain": 0.1,
+          "domainSource": "affinity"
+        },
+        "reason": "6 天前访问，当前仍处于打开状态"
+      },
+      {
+        "id": "page_6",
+        "url": "https://github.com/org/repo/issues/100",
+        "normalizedUrl": "https://github.com/org/repo/issues/100",
+        "title": "Old bug report from last sprint",
+        "domain": "github.com",
+        "visitCount": 1,
+        "lastVisitedAt": 1791662449264,
+        "firstSeenAt": 1791662449264,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.23,
+        "scoreDetail": {
+          "recency": 0.09,
+          "frequency": 0.32,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "已 24 天未访问，常用域名 github.com"
+      },
+      {
+        "id": "page_7",
+        "url": "https://www.google.com/search?q=chrome+extension+manifest+v3",
+        "normalizedUrl": "https://www.google.com/search?q=chrome+extension+manifest+v3",
+        "title": "chrome extension manifest v3 - Google Search",
+        "domain": "google.com",
+        "visitCount": 1,
+        "lastVisitedAt": 1790662449264,
+        "firstSeenAt": 1790662449264,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.11,
+        "scoreDetail": {
+          "recency": 0.03,
+          "frequency": 0.32,
+          "open": 0,
+          "domain": 0.05,
+          "domainSource": "affinity"
+        },
+        "reason": "已 35 天未访问"
+      }
+    ],
+    "total": 10,
+    "domains": [
+      "github.com",
+      "react.dev",
+      "developer.mozilla.org",
+      "docs.internal.com",
+      "google.com"
+    ],
+    "generatedAt": 1793762749265
+  },
+  "ms": 1.1,
+  "mutated": null
+}

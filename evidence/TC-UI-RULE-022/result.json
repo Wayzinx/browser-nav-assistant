@@ -1,0 +1,62 @@
+{
+  "caseId": "TC-UI-RULE-022",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:49.524Z",
+  "tests": [
+    {
+      "testId": "55f6e6321925ed500d05-7e192d52fe8c4043fb91",
+      "title": "TC-UI-RULE-022 停用保护规则移除保留建议，启用后恢复",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RULE-022.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1086,
+      "startedAt": "2026-11-04T03:29:48.438Z",
+      "endedAt": "2026-11-04T03:29:49.524Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 8,
+      "screenshots": [
+        "evidence/TC-UI-RULE-022/screenshots/01-保护规则已开启.png",
+        "evidence/TC-UI-RULE-022/screenshots/02-保护规则已停用.png",
+        "evidence/TC-UI-RULE-022/screenshots/03-停用后整理结果.png",
+        "evidence/TC-UI-RULE-022/screenshots/04-保护规则重新启用.png",
+        "evidence/TC-UI-RULE-022/screenshots/05-启用后保留项恢复.png"
+      ],
+      "serverLogLines": 35,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1193,
+          "after": 1194
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 1,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "停用响应：{\"domain\":\"docs.internal.com\",\"urlPattern\":null,\"inactiveDays\":null,\"enabled\":false,\"confidence\":\"high\",\"createdAt\":1793762988877,\"updatedAt\":1793762989120,\"rawText\":\"docs.internal.com 的页面永远不要归档\",\"type\":\"never_archive\",\"action\":\"keep\",\"id\":\"rule_1\"}",
+        "启用响应：{\"domain\":\"docs.internal.com\",\"urlPattern\":null,\"inactiveDays\":null,\"enabled\":true,\"confidence\":\"high\",\"createdAt\":1793762988877,\"updatedAt\":1793762989284,\"rawText\":\"docs.internal.com 的页面永远不要归档\",\"type\":\"never_archive\",\"action\":\"keep\",\"id\":\"rule_1\"}"
+      ]
+    }
+  ]
+}

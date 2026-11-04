@@ -1,0 +1,57 @@
+{
+  "caseId": "TC-UI-RANK-004",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:16.264Z",
+  "tests": [
+    {
+      "testId": "9af56416b9ba6495631b-8cfae02c939478c1abca",
+      "title": "TC-UI-RANK-004 排序页签域名下拉选 react.dev：只显示 useState 与 learn 2 条，下拉仍保留全部 5 个域名选项",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RANK-004.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 856,
+      "startedAt": "2026-11-04T03:29:15.408Z",
+      "endedAt": "2026-11-04T03:29:16.264Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 2,
+      "screenshots": [
+        "evidence/TC-UI-RANK-004/screenshots/01-域名下拉全部选项.png",
+        "evidence/TC-UI-RANK-004/screenshots/02-域名筛选react-dev结果2条.png",
+        "evidence/TC-UI-RANK-004/screenshots/03-清空域名筛选恢复10条.png"
+      ],
+      "serverLogLines": 14,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1151,
+          "after": 1152
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

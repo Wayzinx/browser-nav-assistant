@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-CLEAN-013",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:44.393Z",
+  "tests": [
+    {
+      "testId": "731221355b19577d0497-93c69777b93b31b4cb11",
+      "title": "TC-API-CLEAN-013 保护子域但不保护仅字符串后缀相同的域名",
+      "project": "api",
+      "file": "tests/api/TC-API-CLEAN-013.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 33,
+      "startedAt": "2026-11-04T03:25:44.360Z",
+      "endedAt": "2026-11-04T03:25:44.393Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 25,
+          "after": 26
+        },
+        "pages": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 2,
+          "rules": 1,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

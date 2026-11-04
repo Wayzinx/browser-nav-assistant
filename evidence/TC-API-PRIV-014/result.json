@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-PRIV-014",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:03.037Z",
+  "tests": [
+    {
+      "testId": "32fed5a4a0176698b35c-a8a5dfaea169fb209129",
+      "title": "TC-API-PRIV-014 配置请求的非法 JSON 和错误 Content-Type 不修改配置",
+      "project": "api",
+      "file": "tests/api/TC-API-PRIV-014.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 23,
+      "startedAt": "2026-11-04T03:27:03.014Z",
+      "endedAt": "2026-11-04T03:27:03.037Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 618,
+          "after": 619
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

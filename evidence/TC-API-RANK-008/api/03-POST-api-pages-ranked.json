@@ -1,0 +1,31 @@
+{
+  "reqId": "TC-API-RANK-008-03",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/pages/ranked",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-RANK-008-03"
+  },
+  "requestBody": {},
+  "status": 405,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RANK-008-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "allow": "GET",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "85",
+    "date": "Wed, 04 Nov 2026 03:27:03 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "error": {
+      "code": "METHOD_NOT_ALLOWED",
+      "message": "此接口不支持该请求方法"
+    }
+  },
+  "ms": 0.9,
+  "mutated": null
+}

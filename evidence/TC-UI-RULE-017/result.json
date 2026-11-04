@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-UI-RULE-017",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:44.392Z",
+  "tests": [
+    {
+      "testId": "fec7541b33a121bd28d8-76ee255828a982f0d981",
+      "title": "TC-UI-RULE-017 离线仍展示先前加载的规则缓存",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RULE-017.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 969,
+      "startedAt": "2026-11-04T03:29:43.423Z",
+      "endedAt": "2026-11-04T03:29:44.392Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 3,
+      "screenshots": [
+        "evidence/TC-UI-RULE-017/screenshots/01-在线缓存两条.png",
+        "evidence/TC-UI-RULE-017/screenshots/02-离线显示真实缓存.png"
+      ],
+      "serverLogLines": 12,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1187,
+          "after": 1187
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 2,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

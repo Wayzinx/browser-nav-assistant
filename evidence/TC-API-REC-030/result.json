@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-API-REC-030",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:04.512Z",
+  "tests": [
+    {
+      "testId": "b2f145883750107fb5f8-2b29f410337b4b611f3b",
+      "title": "TC-API-REC-030 openTabs 和 recentHistory 各自在500条被接受而501条被拒绝",
+      "project": "api",
+      "file": "tests/api/TC-API-REC-030.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 29,
+      "startedAt": "2026-11-04T03:27:04.483Z",
+      "endedAt": "2026-11-04T03:27:04.512Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 733,
+          "after": 735
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "{\"T\":1793762824491,\"N\":1793762824492}"
+      ]
+    }
+  ]
+}

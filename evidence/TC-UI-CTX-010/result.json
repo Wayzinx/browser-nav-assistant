@@ -1,0 +1,59 @@
+{
+  "caseId": "TC-UI-CTX-010",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:50.920Z",
+  "tests": [
+    {
+      "testId": "11733458d128ffbab014-aab985fb5ea3e88c4dec",
+      "title": "TC-UI-CTX-010 当前窗口四个外部页面在上下文列表逐条显示标题和完整 URL",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CTX-010.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1208,
+      "startedAt": "2026-11-04T03:27:49.712Z",
+      "endedAt": "2026-11-04T03:27:50.920Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-CTX-010/screenshots/01-S1-四个外部页面.png",
+        "evidence/TC-UI-CTX-010/screenshots/02-S2-四条标签上下文.png"
+      ],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1039,
+          "after": 1039
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "{\"tabs\":[{\"active\":false,\"audible\":false,\"autoDiscardable\":true,\"discarded\":false,\"frozen\":false,\"groupId\":-1,\"height\":673,\"highlighted\":false,\"id\":423879198,\"incognito\":false,\"index\":0,\"lastAccessed\":1793762870057.413,\"mutedInfo\":{\"muted\":false},\"pinned\":false,\"selected\":false,\"splitViewId\":-1,\"status\":\"complete\",\"title\":\"about:blank\",\"url\":\"about:blank\",\"width\":500,\"windowId\":423879197},{\"active\":false,\"audible\":false,\"autoDiscardable\":true,\"discarded\":false,\"frozen\":false,\"groupId\":-1,\"height\":673,\"highlighted\":false,\"id\":423879199,\"incognito\":false,\"index\":1,\"lastAccessed\":1793762870246.785,\"mutedInfo\":{\"muted\":false},\"openerTabId\":423879198,\"pinned\":false,\"selected\":false,\"splitViewId\":-1,\"status\":\"complete\",\"title\":\"PR 456\",\"url\":\"https://github.com/org/repo/pull/456\",\"width\":500,\"windowId\":423879197},{\"active\":false,\"audible\":false,\"autoDiscardable\":true,\"discarded\":false,\"frozen\":false,\"groupId\":-1,\"height\":673,\"highlighted\":false,\"id\":423879200,\"incognito\":false,\"index\":2,\"lastAccessed\":1793762870296.87,\"mutedInfo\":{\"muted\":false},\"openerTabId\":423879199,\"pinned\":false,\"selected\":false,\"splitViewId\":-1,\"status\":\"complete\",\"title\":\"Issue 123\",\"url\":\"https://github.com/org/repo/issues/123\",\"width\":500,\"windowId\":423879197},{\"active\":false,\"audible\":false,\"autoDiscardable\":true,\"discarded\":false,\"frozen\":false,\"groupId\":-1,\"height\":673,\"highlighted\":false,\"id\":423879201,\"incognito\":false,\"index\":3,\"lastAccessed\":1793762870346.859,\"mutedInfo\":{\"muted\":false},\"openerTabId\":423879200,\"pinned\":false,\"selected\":false,\"splitViewId\":-1,\"status\":\"complete\",\"title\":\"Fetch API\",\"url\":\"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\",\"width\":500,\"windowId\":423879197},{\"active\":true,\"audible\":false,\"autoDiscardable\":true,\"discarded\":false,\"frozen\":false,\"groupId\":-1,\"height\":673,\"highlighted\":true,\"id\":423879202,\"incognito\":false,\"index\":4,\"lastAccessed\":1793762870399.029,\"mutedInfo\":{\"muted\":false},\"openerTabId\":423879201,\"pinned\":false,\"selected\":true,\"splitViewId\":-1,\"status\":\"complete\",\"title\":\"AI Agent Design\",\"url\":\"https://docs.internal.com/ai-agent-design\",\"width\":500,\"windowId\":423879197}]}",
+        "{\"popupPageErrors\":[],\"swExceptions\":[]}"
+      ]
+    }
+  ]
+}

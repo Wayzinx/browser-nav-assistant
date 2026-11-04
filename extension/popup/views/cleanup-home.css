@@ -1,0 +1,17 @@
+/* @code C-FE-CLEAN-03 */
+[data-slot="cleanup-home"] .cleanup-summary {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 12px;
+  color: var(--color-brand);
+  background: var(--color-bg);
+  text-align: left;
+}
+
+[data-slot="cleanup-home"] .cleanup-summary span {
+  white-space: nowrap;
+  font-weight: 600;
+}

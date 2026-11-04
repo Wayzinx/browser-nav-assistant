@@ -1,0 +1,60 @@
+{
+  "caseId": "TC-UI-REC-005",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:27.614Z",
+  "tests": [
+    {
+      "testId": "211eae9749ab0c06112d-903f8580d89ee6d81e5f",
+      "title": "TC-UI-REC-005 十条候选均已打开时非空后端也显示空推荐",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-REC-005.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1406,
+      "startedAt": "2026-11-04T03:29:26.208Z",
+      "endedAt": "2026-11-04T03:29:27.614Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [
+        "evidence/TC-UI-REC-005/screenshots/01-全部候选已打开的空推荐.png"
+      ],
+      "serverLogLines": 13,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1168,
+          "after": 1169
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "打开 popup 前的恢复状态：{}",
+        "十个打开 URL：[\"https://github.com/org/repo/issues/123\",\"https://github.com/org/repo/actions\",\"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\",\"https://docs.internal.com/ai-agent-design\",\"https://github.com/org/repo/issues/100\",\"https://www.google.com/search?q=chrome+extension+manifest+v3\",\"https://github.com/org/repo/issues/123?tab=comments\",\"https://react.dev/reference/react/useState\",\"https://react.dev/learn\",\"https://github.com/org/repo/pull/456\"]",
+        "非空后端与空推荐对照：{\"before\":10,\"after\":10,\"recommendations\":[]}",
+        "SW 网络观察汇总：{\"requests\":[{\"url\":\"http://127.0.0.1:4300/api/recommendations/next\",\"method\":\"POST\",\"body\":{\"currentPage\":{\"url\":\"https://github.com/org/repo/pull/456\",\"title\":\"Refactor auth middleware (#456)\"},\"openTabs\":[{\"url\":\"https://github.com/org/repo/issues/123\",\"title\":\"Fix login redirect bug\"},{\"url\":\"https://github.com/org/repo/actions\",\"title\":\"Actions · org/repo\"},{\"url\":\"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\",\"title\":\"Fetch API - Web APIs | MDN\"},{\"url\":\"https://docs.internal.com/ai-agent-design\",\"title\":\"AI Agent Design Guidelines\"},{\"url\":\"https://github.com/org/repo/issues/100\",\"title\":\"Old bug report from last sprint\"},{\"url\":\"https://www.google.com/search?q=chrome+extension+manifest+v3\",\"title\":\"chrome extension manifest v3 - Google Search\"},{\"url\":\"https://github.com/org/repo/issues/123?tab=comments\",\"title\":\"Fix login redirect bug - Comments\"},{\"url\":\"https://react.dev/reference/react/useState\",\"title\":\"useState – React\"},{\"url\":\"https://react.dev/learn\",\"title\":\"Quick Start – React\"},{\"url\":\"https://github.com/org/repo/pull/456\",\"title\":\"Refactor auth middleware (#456)\"}],\"recentHistory\":[{\"url\":\"https://github.com/org/repo/pull/456\",\"title\":\"Refactor auth middleware (#456)\",\"lastVisitTime\":1793762967166.385},{\"url\":\"https://react.dev/learn\",\"title\":\"Quick Start – React\",\"lastVisitTime\":1793762967105.568},{\"url\":\"https://react.dev/reference/react/useState\",\"title\":\"useState – React\",\"lastVisitTime\":1793762967043.509},{\"url\":\"https://github.com/org/repo/issues/123?tab=comments\",\"title\":\"Fix login redirect bug - Comments\",\"lastVisitTime\":1793762966989.837},{\"url\":\"https://www.google.com/search?q=chrome+extension+manifest+v3\",\"title\":\"chrome extension manifest v3 - Google Search\",\"lastVisitTime\":1793762966944.296},{\"url\":\"https://github.com/org/repo/issues/100\",\"title\":\"Old bug report from last sprint\",\"lastVisitTime\":1793762966901.556},{\"url\":\"https://docs.internal.com/ai-agent-design\",\"title\":\"AI Agent Design Guidelines\",\"lastVisitTime\":1793762966853.135},{\"url\":\"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\",\"title\":\"Fetch API - Web APIs | MDN\",\"lastVisitTime\":1793762966812.655},{\"url\":\"https://github.com/org/repo/actions\",\"title\":\"Actions · org/repo\",\"lastVisitTime\":1793762966770.866},{\"url\":\"https://github.com/org/repo/issues/123\",\"title\":\"Fix login redirect bug\",\"lastVisitTime\":1793762966731.52}]},\"startedAt\":1793762967297,\"sequence\":1}],\"responses\":[{\"url\":\"http://127.0.0.1:4300/api/recommendations/next\",\"status\":200}],\"failures\":[],\"syncRequests\":[]}"
+      ]
+    }
+  ]
+}

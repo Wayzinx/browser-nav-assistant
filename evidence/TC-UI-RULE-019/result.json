@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-UI-RULE-019",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:46.285Z",
+  "tests": [
+    {
+      "testId": "07cf87fe03326c20cc58-a4b168cfa6216be53a62",
+      "title": "TC-UI-RULE-019 DELETE_RULE 不存在的 ID 返回 NOT_FOUND 且不删已有规则",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RULE-019.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 804,
+      "startedAt": "2026-11-04T03:29:45.481Z",
+      "endedAt": "2026-11-04T03:29:46.285Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [
+        "evidence/TC-UI-RULE-019/screenshots/01-删除消息前.png",
+        "evidence/TC-UI-RULE-019/screenshots/02-错误删除未改列表.png"
+      ],
+      "serverLogLines": 14,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1190,
+          "after": 1190
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 1,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

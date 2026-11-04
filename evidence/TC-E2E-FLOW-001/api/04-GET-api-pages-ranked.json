@@ -1,0 +1,118 @@
+{
+  "reqId": "TC-E2E-FLOW-001-04",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/ranked",
+  "params": {
+    "limit": 3,
+    "now": 1793762827350
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-E2E-FLOW-001-04"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-E2E-FLOW-001-04",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "1792",
+    "date": "Wed, 04 Nov 2026 03:27:07 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "pages": [
+      {
+        "id": "page_2",
+        "url": "https://github.com/org/repo/issues/123",
+        "normalizedUrl": "https://github.com/org/repo/issues/123",
+        "title": "Fix login redirect bug",
+        "domain": "github.com",
+        "visitCount": 8,
+        "lastVisitedAt": 1793752527350,
+        "firstSeenAt": 1793752527350,
+        "sources": [
+          "history",
+          "open_tab"
+        ],
+        "isOpen": true,
+        "isActive": false,
+        "isImportant": false,
+        "score": 1,
+        "scoreDetail": {
+          "recency": 0.99,
+          "frequency": 1,
+          "open": 1,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "最近 3 天内多次访问（8 次），当前仍处于打开状态，常用域名 github.com"
+      },
+      {
+        "id": "page_1",
+        "url": "https://github.com/org/repo/pull/456",
+        "normalizedUrl": "https://github.com/org/repo/pull/456",
+        "title": "Refactor auth middleware (#456)",
+        "domain": "github.com",
+        "visitCount": 5,
+        "lastVisitedAt": 1793762827351,
+        "firstSeenAt": 1793762527350,
+        "sources": [
+          "history",
+          "active_tab"
+        ],
+        "isOpen": true,
+        "isActive": true,
+        "isImportant": false,
+        "score": 0.94,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 0.82,
+          "open": 1,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "正在浏览，最近 3 天内多次访问（5 次），常用域名 github.com"
+      },
+      {
+        "id": "page_4",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+        "normalizedUrl": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+        "title": "Fetch API - Web APIs | MDN",
+        "domain": "developer.mozilla.org",
+        "visitCount": 4,
+        "lastVisitedAt": 1793732527350,
+        "firstSeenAt": 1793732527350,
+        "sources": [
+          "history",
+          "open_tab"
+        ],
+        "isOpen": true,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.83,
+        "scoreDetail": {
+          "recency": 0.97,
+          "frequency": 0.73,
+          "open": 1,
+          "domain": 0.2,
+          "domainSource": "affinity"
+        },
+        "reason": "最近 3 天内多次访问（4 次），当前仍处于打开状态"
+      }
+    ],
+    "total": 10,
+    "domains": [
+      "github.com",
+      "react.dev",
+      "developer.mozilla.org",
+      "docs.internal.com",
+      "google.com"
+    ],
+    "generatedAt": 1793762827350
+  },
+  "ms": 1.5,
+  "mutated": null
+}

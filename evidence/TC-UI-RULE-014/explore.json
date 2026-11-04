@@ -1,0 +1,17 @@
+{
+  "caseId": "TC-UI-RULE-014",
+  "verdict": "pass",
+  "observed": "接口保存 2 条后 GET /api/rules total=2 且字段齐全；规则页 rules-count「2」，2 项 data-rule-id 与后端一致；建议归档项 raw/summary 含 github.com，永不归档项 raw/summary 含 docs.internal.com；两项开关 role=switch 且 checked，删除按钮可见可用。E1–E5 满足。",
+  "steps": [
+    "PORT=4183 启动后端（ENABLE_TEST_API=1），每条前 POST /api/__test__/reset",
+    "headless chromium（channel=chromium）加载 extension/（DIAG-010/012 为删权限临时副本），apiBaseUrl 指向 http://127.0.0.1:4183，只 route 外部站点",
+    "S3 列表 2 条（截图 evidence/TC-UI-RULE-014/explore/1.png）",
+    "探索脚本：tests/explore/tmp/x4183-rule.mjs；观测数据与 aria 快照：tests/explore/tmp/x4183-rule.out.json",
+    "TEST_PORT=4183 npx playwright test tests/ui/TC-UI-RULE-014.spec.mjs 通过（2026-11-03 07:27 续跑：产品代码与 UI-DIAG/RULE 用例分片未变；探索脚本 52/52 ok，观测与 aria 快照除数字/时间外与上轮完全一致；TEST_PORT=4183 隔离 --output 批量 52 passed）"
+  ],
+  "screenshots": [
+    "evidence/TC-UI-RULE-014/explore/1.png"
+  ],
+  "spec": "tests/ui/TC-UI-RULE-014.spec.mjs",
+  "solidified": true
+}

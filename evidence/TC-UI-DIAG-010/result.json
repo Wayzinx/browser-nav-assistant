@@ -1,0 +1,57 @@
+{
+  "caseId": "TC-UI-DIAG-010",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:14.744Z",
+  "tests": [
+    {
+      "testId": "be0bd0dbdb73b9d9b39c-abebb929943154d65582",
+      "title": "TC-UI-DIAG-010 加载删掉 tabs 权限的扩展副本时「tabs 权限」失败，并给出两条排查建议",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-DIAG-010.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1039,
+      "startedAt": "2026-11-04T03:28:13.705Z",
+      "endedAt": "2026-11-04T03:28:14.744Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-DIAG-010/screenshots/01-S1-缺失-tabs-权限的诊断.png"
+      ],
+      "serverLogLines": 12,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1065,
+          "after": 1065
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 2,
+      "notes": [
+        "本用例加载删掉 tabs 权限的扩展副本：/var/folders/v1/n6z6msv922g3jqc1ylnmb2qm0000gn/T/nav-ext-no-tabs-ebFWle"
+      ]
+    }
+  ]
+}

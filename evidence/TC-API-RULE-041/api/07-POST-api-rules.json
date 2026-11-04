@@ -1,0 +1,183 @@
+{
+  "reqId": "TC-API-RULE-041-07",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/rules",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-RULE-041-07"
+  },
+  "requestBody": {
+    "rules": [
+      {
+        "id": "rule_1",
+        "rawText": "把 7 天没访问过的 GitHub issue 建议归档",
+        "type": "archive_candidate",
+        "domain": "github.com",
+        "urlPattern": "/issues/",
+        "inactiveDays": 7,
+        "action": "suggest_archive",
+        "enabled": true,
+        "confidence": "high",
+        "notes": []
+      },
+      {
+        "id": "rule_2",
+        "rawText": "docs.internal.com 的页面永远不要归档",
+        "type": "never_archive",
+        "domain": "docs.internal.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "action": "keep",
+        "enabled": true,
+        "confidence": "high",
+        "notes": []
+      },
+      {
+        "id": "rule_1",
+        "rawText": "不要上传包含 password、token 的 URL",
+        "type": "privacy_filter",
+        "domain": null,
+        "urlPattern": null,
+        "inactiveDays": null,
+        "action": "exclude_upload",
+        "enabled": true,
+        "confidence": "high",
+        "notes": [],
+        "keywords": [
+          "password",
+          "token"
+        ]
+      },
+      {
+        "id": "rule_1",
+        "rawText": "如果我连续看了 3 个 React 文档，推荐相关 MDN 页面",
+        "type": "recommend_related",
+        "domain": null,
+        "urlPattern": null,
+        "inactiveDays": null,
+        "action": "recommend",
+        "enabled": true,
+        "confidence": "high",
+        "notes": [],
+        "trigger": {
+          "domain": "react.dev",
+          "minCount": 3,
+          "label": "React"
+        },
+        "target": {
+          "domain": "developer.mozilla.org",
+          "label": "MDN"
+        }
+      },
+      {
+        "id": "rule_1",
+        "rawText": "飞书文档优先显示",
+        "type": "boost_domain",
+        "domain": "feishu.cn",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "action": "boost",
+        "enabled": true,
+        "confidence": "high",
+        "notes": []
+      }
+    ]
+  },
+  "status": 201,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RULE-041-07",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "1508",
+    "date": "Wed, 04 Nov 2026 03:27:05 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "rules": [
+      {
+        "domain": "github.com",
+        "urlPattern": "/issues/",
+        "inactiveDays": 7,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825721,
+        "updatedAt": 1793762825721,
+        "rawText": "把 7 天没访问过的 GitHub issue 建议归档",
+        "type": "archive_candidate",
+        "action": "suggest_archive",
+        "id": "rule_1"
+      },
+      {
+        "domain": "docs.internal.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825721,
+        "updatedAt": 1793762825721,
+        "rawText": "docs.internal.com 的页面永远不要归档",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_2"
+      },
+      {
+        "domain": null,
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825721,
+        "updatedAt": 1793762825721,
+        "rawText": "不要上传包含 password、token 的 URL",
+        "type": "privacy_filter",
+        "keywords": [
+          "password",
+          "token"
+        ],
+        "action": "exclude_upload",
+        "id": "rule_3"
+      },
+      {
+        "domain": null,
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825721,
+        "updatedAt": 1793762825721,
+        "rawText": "如果我连续看了 3 个 React 文档，推荐相关 MDN 页面",
+        "type": "recommend_related",
+        "trigger": {
+          "domain": "react.dev",
+          "minCount": 3,
+          "label": "React"
+        },
+        "target": {
+          "domain": "developer.mozilla.org",
+          "label": "MDN"
+        },
+        "action": "recommend",
+        "id": "rule_4"
+      },
+      {
+        "domain": "feishu.cn",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825721,
+        "updatedAt": 1793762825721,
+        "rawText": "飞书文档优先显示",
+        "type": "boost_domain",
+        "action": "boost",
+        "id": "rule_5"
+      }
+    ],
+    "ruleCount": 5
+  },
+  "ms": 0.8,
+  "mutated": null
+}

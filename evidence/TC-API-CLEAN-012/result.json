@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-CLEAN-012",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:44.349Z",
+  "tests": [
+    {
+      "testId": "0a8f905b57d5236f9b02-244ea1b630a6388d732b",
+      "title": "TC-API-CLEAN-012 保护规则覆盖未打开的 30 天旧页面",
+      "project": "api",
+      "file": "tests/api/TC-API-CLEAN-012.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 30,
+      "startedAt": "2026-11-04T03:25:44.319Z",
+      "endedAt": "2026-11-04T03:25:44.349Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 23,
+          "after": 24
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 1,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

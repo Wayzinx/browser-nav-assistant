@@ -1,0 +1,57 @@
+{
+  "caseId": "TC-API-REC-031",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:04.545Z",
+  "tests": [
+    {
+      "testId": "a71d970ece528b52a427-d2f06c0bc7eac9469c0a",
+      "title": "TC-API-REC-031 JSON 正文恰好1MiB被接受而多1字节返回413",
+      "project": "api",
+      "file": "tests/api/TC-API-REC-031.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 25,
+      "startedAt": "2026-11-04T03:27:04.520Z",
+      "endedAt": "2026-11-04T03:27:04.545Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 8,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 735,
+          "after": 737
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "{\"T\":1793762824528,\"N\":1793762824529}",
+        "{\"step\":\"S3\",\"bodyBytes\":1048576}",
+        "{\"step\":\"S4\",\"bodyBytes\":1048577}"
+      ]
+    }
+  ]
+}

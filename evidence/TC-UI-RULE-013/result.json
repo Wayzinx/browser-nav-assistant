@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-UI-RULE-013",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:40.821Z",
+  "tests": [
+    {
+      "testId": "d1c085d6e2d3d2da31e0-9c6acee5dfa07965ec23",
+      "title": "TC-UI-RULE-013 中途断网保存失败保留预览且不写库",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RULE-013.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 955,
+      "startedAt": "2026-11-04T03:29:39.866Z",
+      "endedAt": "2026-11-04T03:29:40.821Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 2,
+      "screenshots": [
+        "evidence/TC-UI-RULE-013/screenshots/01-在线预览.png",
+        "evidence/TC-UI-RULE-013/screenshots/02-保存失败保留预览.png"
+      ],
+      "serverLogLines": 12,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1183,
+          "after": 1183
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "保存连接失败：net::ERR_UNSAFE_PORT"
+      ]
+    }
+  ]
+}

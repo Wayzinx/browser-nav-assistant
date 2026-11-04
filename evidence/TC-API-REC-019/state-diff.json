@@ -1,0 +1,107 @@
+{
+  "summary": {
+    "dataVersion": {
+      "before": 711,
+      "after": 713
+    },
+    "pages": {
+      "added": 0,
+      "removed": 1,
+      "changed": 1
+    },
+    "rules": {
+      "added": 0,
+      "removed": 0,
+      "changed": 0
+    },
+    "counts": {
+      "pages": -1,
+      "rules": 0,
+      "openPages": 0,
+      "archivedPages": 0,
+      "syncLogs": 0
+    },
+    "configChanged": [],
+    "persistChanged": false
+  },
+  "counts": {
+    "pages": {
+      "before": 2,
+      "after": 1,
+      "delta": -1
+    },
+    "rules": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "openPages": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "archivedPages": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "syncLogs": {
+      "before": 1,
+      "after": 1,
+      "delta": 0
+    }
+  },
+  "pages": {
+    "added": [],
+    "removed": [
+      {
+        "id": "page_2",
+        "url": "https://news.example.org/b",
+        "normalizedUrl": "https://news.example.org/b",
+        "domain": "news.example.org",
+        "title": "News B",
+        "visitCount": 1,
+        "lastVisitedAt": 1793676424177,
+        "firstSeenAt": 1793676424177,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isArchived": false,
+        "archivedAt": null,
+        "mergedInto": null,
+        "isImportant": false
+      }
+    ],
+    "changed": [
+      {
+        "key": "https://news.example.org/a",
+        "fields": {
+          "title": {
+            "before": "News A",
+            "after": "Only"
+          },
+          "visitCount": {
+            "before": 5,
+            "after": 1
+          },
+          "lastVisitedAt": {
+            "before": 1793676424177,
+            "after": 1793676424200
+          },
+          "firstSeenAt": {
+            "before": 1793676424177,
+            "after": 1793676424200
+          }
+        }
+      }
+    ]
+  },
+  "rules": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  "config": {}
+}

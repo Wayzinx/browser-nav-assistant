@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-UI-DIAG-024",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:28.075Z",
+  "tests": [
+    {
+      "testId": "2e813bda82942cfb9b94-db767bd44beb53b0bb7f",
+      "title": "TC-UI-DIAG-024 health.version 主版本为 2 时「版本兼容」失败，并提示升级插件或后端",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-DIAG-024.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 882,
+      "startedAt": "2026-11-04T03:28:27.193Z",
+      "endedAt": "2026-11-04T03:28:28.075Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 2,
+      "screenshots": [
+        "evidence/TC-UI-DIAG-024/screenshots/01-S3-版本不兼容诊断.png"
+      ],
+      "serverLogLines": 3,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1081,
+          "after": 1081
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 2,
+      "notes": []
+    }
+  ]
+}

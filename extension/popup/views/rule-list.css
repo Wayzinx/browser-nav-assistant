@@ -1,0 +1,29 @@
+/* @code C-FE-RULE-04 */
+[data-slot="rule-list"] [data-testid="rules-item"] {
+  padding: 10px;
+  border: 1px solid var(--border, #d9dee8);
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+}
+
+[data-slot="rule-list"] .rule-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 8px 4px 0;
+}
+
+[data-slot="rule-list"] [data-testid="rules-item-delete-confirm"] {
+  margin-left: 6px;
+}
+
+[data-slot="rule-list"] .rule-cache-hint {
+  color: #715000;
+  background: #fff4ce;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+[data-slot="rule-list"] .rule-cache-hint[hidden] {
+  display: none;
+}

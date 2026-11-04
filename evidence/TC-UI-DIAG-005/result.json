@@ -1,0 +1,57 @@
+{
+  "caseId": "TC-UI-DIAG-005",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:09.780Z",
+  "tests": [
+    {
+      "testId": "c1081f563a4976550da7-52eb367520b2824af269",
+      "title": "TC-UI-DIAG-005 把地址保存为 http://127.0.0.1:4100 后重新打开：地址持久化，真实后端请求全部使用新地址",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-DIAG-005.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1142,
+      "startedAt": "2026-11-04T03:28:08.638Z",
+      "endedAt": "2026-11-04T03:28:09.780Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-DIAG-005/screenshots/01-S1-旧地址后端失败.png",
+        "evidence/TC-UI-DIAG-005/screenshots/02-S2-保存新地址.png",
+        "evidence/TC-UI-DIAG-005/screenshots/03-S3-新地址重检.png"
+      ],
+      "serverLogLines": 25,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1058,
+          "after": 1059
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 2,
+      "notes": []
+    }
+  ]
+}

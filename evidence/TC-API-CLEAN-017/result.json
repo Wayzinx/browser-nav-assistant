@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-CLEAN-017",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:44.571Z",
+  "tests": [
+    {
+      "testId": "0987755133eaf8c5514e-03b782cf14cf9ff66031",
+      "title": "TC-API-CLEAN-017 多条归档规则取最小阈值并按整天数判定",
+      "project": "api",
+      "file": "tests/api/TC-API-CLEAN-017.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 26,
+      "startedAt": "2026-11-04T03:25:44.545Z",
+      "endedAt": "2026-11-04T03:25:44.571Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 33,
+          "after": 34
+        },
+        "pages": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 2,
+          "rules": 2,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

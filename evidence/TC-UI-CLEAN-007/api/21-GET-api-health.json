@@ -1,0 +1,38 @@
+{
+  "source": "extension",
+  "method": "GET",
+  "url": "http://127.0.0.1:4300/api/health",
+  "reqId": "ext_1793762852741_15",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762852741_15"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "connection": "keep-alive",
+    "date": "Wed, 04 Nov 2026 03:27:32 GMT",
+    "keep-alive": "timeout=5",
+    "access-control-expose-headers": "x-request-id",
+    "content-length": "172",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin",
+    "x-request-id": "ext_1793762852741_15"
+  },
+  "responseBody": {
+    "status": "ok",
+    "version": "1.0.0",
+    "uptime": 110,
+    "pageCount": 10,
+    "ruleCount": 0,
+    "enabledRuleCount": 0,
+    "lastSyncAt": 1793762852134,
+    "persistence": "memory",
+    "startedAt": 1793762741762
+  },
+  "ms": 11.05,
+  "setup": false
+}

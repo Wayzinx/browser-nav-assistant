@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RULE-028",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:05.264Z",
+  "tests": [
+    {
+      "testId": "116a3567bf98405dee39-12eb973e8eea50a1a2e4",
+      "title": "TC-API-RULE-028 rules缺失或不是数组返回400且保留已有规则",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-028.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 26,
+      "startedAt": "2026-11-04T03:27:05.238Z",
+      "endedAt": "2026-11-04T03:27:05.264Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 10,
+      "screenshots": [],
+      "serverLogLines": 12,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 794,
+          "after": 795
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 1,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

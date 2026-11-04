@@ -1,0 +1,51 @@
+/* @code C-FE-RULE-02 */
+[data-slot="rule-parse"] .field {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+[data-slot="rule-parse"] textarea {
+  box-sizing: border-box;
+  width: 100%;
+  resize: vertical;
+}
+
+[data-slot="rule-parse"] [data-testid="rule-card"] {
+  padding: 10px;
+  border: 1px solid var(--border, #d9dee8);
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+}
+
+[data-slot="rule-parse"] .rule-selection {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+[data-slot="rule-parse"] .rule-notice {
+  padding: 8px 10px;
+  margin: 8px 0;
+  color: #715000;
+  background: #fff4ce;
+  border: 1px solid #e9cc73;
+  border-radius: 6px;
+  overflow-wrap: anywhere;
+}
+
+[data-slot="rule-parse"] .rule-notice[hidden] {
+  display: none;
+}
+
+[data-slot="rule-parse"] pre {
+  max-height: 240px;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+[data-slot="rule-parse"] .rule-save-bar {
+  margin-top: 10px;
+}

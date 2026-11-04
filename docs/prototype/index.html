@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>导航助手交互原型</title>
+  <meta name="description" content="浏览器导航助手（Chrome MV3 插件 + 后端）的弹窗交互原型：同步、历史排序、下一步推荐、整理建议、自然语言规则与启动诊断。">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="doc-header">
+    <div class="doc-title"><span class="logo" id="doc-logo"></span>浏览器导航助手 · 交互原型 <span class="ver">v0.1 · 2026-11-02</span></div>
+    <nav class="doc-nav">
+      <a href="#flow">① 主流程</a>
+      <a href="#screens">② 页面与状态</a>
+      <a href="#ia">③ 信息架构与数据流</a>
+      <a href="../02-PRD.md">PRD 文档</a>
+    </nav>
+    <div class="doc-tools">
+      <label class="toggle"><input type="checkbox" id="anno-toggle" checked>显示标注</label>
+      <div class="seg" id="theme-seg" role="group" aria-label="主题">
+        <button data-theme-set="auto" aria-pressed="true">自动</button>
+        <button data-theme-set="light" aria-pressed="false">浅色</button>
+        <button data-theme-set="dark" aria-pressed="false">深色</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="doc-main annotate" id="doc-main">
+    <!-- ① 主流程 -->
+    <section class="doc-section" id="flow">
+      <h2>① 主流程（可交互）</h2>
+      <p class="lead">模拟在 Chrome 中打开 GitHub PR 后点击插件图标。弹窗内所有按钮均可操作；数据由 <code>engine.js</code> 按 PRD 中的评分、推荐、整理和规则解析算法实时计算，样例数据来自题目提供的 <code>resource.json</code>（时间已平移到“现在”）。</p>
+      <div class="stage">
+        <div class="browser-wrap">
+          <div class="browser" id="browser">
+            <div class="b-tabs" id="b-tabs"></div>
+            <div class="b-toolbar">
+              <span id="ic-back"></span><span id="ic-fwd"></span><span id="ic-reload"></span>
+              <div class="b-omni" id="b-omni"></div>
+              <div class="b-ext"><button class="b-ext-btn on" title="浏览器导航助手" id="ext-btn"></button><button class="b-ext-btn" id="ext-puzzle" title="扩展程序"></button></div>
+            </div>
+            <div class="b-viewport">
+              <div id="b-page"></div>
+              <div class="b-popup" id="main-popup"></div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="panel">
+          <h3>演示控制</h3>
+          <div class="ctrl"><span class="ctrl-label">当前页面场景</span>
+            <div class="seg" id="scenario-seg">
+              <button data-scenario="pr" aria-pressed="true">GitHub PR</button>
+              <button data-scenario="react" aria-pressed="false">React 文档</button>
+              <button data-scenario="system" aria-pressed="false">chrome:// 系统页</button>
+            </div>
+          </div>
+          <div class="ctrl"><span class="ctrl-label">后端服务</span>
+            <div class="seg" id="backend-seg">
+              <button data-backend="online" aria-pressed="true">在线</button>
+              <button data-backend="offline" aria-pressed="false">离线</button>
+            </div>
+            <button class="btn-ghost" id="reset-btn">重置原型</button>
+          </div>
+
+          <h3>标注说明</h3>
+          <ol class="notes">
+            <li><span class="n">1</span><span><b>连接状态</b>：常驻顶栏，实时反映 <code>/api/health</code>，点击直达诊断。</span></li>
+            <li><span class="n">2</span><span><b>当前页面</b>：active tab 的标题与 URL；☆ 标记重要。系统页显示“不采集”。</span></li>
+            <li><span class="n">3</span><span><b>同步</b>：读取 tabs + history → 本地隐私过滤 → <code>POST /api/sync</code>；展示时间、上传数、过滤数。</span></li>
+            <li><span class="n">4</span><span><b>标签导航</b>：首页 / 上下文 / 排序 / 整理 / 规则 / 诊断；整理显示待处理数，诊断异常显示红点。</span></li>
+            <li><span class="n">5</span><span><b>下一步推荐</b>：Top 3，每条带分数与推荐理由。</span></li>
+            <li><span class="n">6</span><span><b>历史排序概览</b>：Top 5 + 四维评分构成条。</span></li>
+            <li><span class="n">7</span><span><b>整理建议摘要</b>：归档 / 重复 / 保留计数。</span></li>
+            <li><span class="n">8</span><span><b>自然语言规则</b>：输入后解析，跳到规则页确认保存。</span></li>
+            <li><span class="n">9</span><span><b>诊断入口</b>：汇总检查结果。</span></li>
+          </ol>
+
+          <h3>验收演示路径</h3>
+          <ol class="script">
+            <li>点「诊断」：后端连接、tabs、history 权限均为绿色</li>
+            <li>回首页点「同步浏览器上下文」→ 同步成功</li>
+            <li>看推荐（Actions 页面 + 理由）与排序 Top 5</li>
+            <li>「排序」页点开一行看评分明细</li>
+            <li>在规则框点示例 → 解析 → 确认保存</li>
+            <li>「整理」页：Issue 规则命中、docs.internal 被保留</li>
+            <li>右侧切到「离线」，观察降级与诊断排查提示</li>
+          </ol>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ② 画面一览 -->
+    <section class="doc-section" id="screens">
+      <h2>② 页面与状态一览</h2>
+      <p class="lead">每个画面都是独立的可交互实例，覆盖正常、空、加载、异常和降级状态。编号与 PRD 第 5.3 节“画面清单”对应。</p>
+      <div class="frames" id="frames"></div>
+    </section>
+
+    <!-- ③ 信息架构 -->
+    <section class="doc-section" id="ia">
+      <h2>③ 信息架构与数据流</h2>
+      <p class="lead">Popup 只负责展示和交互，所有浏览器 API 调用与后端通信都经过 Background Service Worker；后端负责存储、评分、推荐、整理和规则解析。</p>
+      <div class="ia-grid">
+        <div class="ia-card">
+          <h3>插件信息架构</h3>
+          <ul class="tree">
+            <li><b>Popup 弹窗（400 × 600）</b>
+              <ul>
+                <li>顶栏：品牌 · 后端连接状态（→ 诊断）</li>
+                <li>当前页面卡片：标题 / URL / 标记重要</li>
+                <li>同步条：同步按钮 · 时间 / 上传数 / 过滤数</li>
+                <li>首页：推荐 Top 3 · 排序 Top 5 · 整理摘要 · 规则输入 · 诊断入口</li>
+                <li>上下文：当前窗口标签页 · 最近历史（隐私标记）</li>
+                <li>排序：公式图例 · 筛选 · 列表 · 评分明细</li>
+                <li>整理：建议归档 · 疑似重复 · 建议保留 · 批量 / 撤销</li>
+                <li>规则：输入 · 解析预览（确认 / JSON）· 已保存（启停 / 删除）</li>
+                <li>诊断：总览 · 10 项检查 · API Base URL · 版本 · 复制报告</li>
+              </ul>
+            </li>
+            <li><b>右键菜单</b>（<code>contextMenus</code>）
+              <ul><li>添加到分析 · 标记为重要</li></ul>
+            </li>
+            <li><b>Content Script</b>（可选）
+              <ul><li>在 GitHub / 文档页高亮推荐关键词与 issue 编号；chrome:// 页面跳过</li></ul>
+            </li>
+          </ul>
+        </div>
+        <div class="ia-card flow">
+          <h3>模块与通信</h3>
+          <svg viewBox="0 0 812 420" role="img" aria-label="插件与后端的模块和通信关系">
+            <defs>
+              <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" class="arrow-head"/>
+              </marker>
+            </defs>
+            <rect class="box" x="10" y="30" width="160" height="96" rx="10"/>
+            <text class="t" x="24" y="56">Popup 弹窗</text>
+            <text class="s" x="24" y="78">展示 · 交互 · 规则输入</text>
+            <text class="s" x="24" y="96">离线时读本地缓存</text>
+            <text class="s" x="24" y="114">不直接调后端</text>
+
+            <rect class="box" x="10" y="160" width="160" height="64" rx="10"/>
+            <text class="t" x="24" y="186">右键菜单</text>
+            <text class="s" x="24" y="206">添加到分析 / 标记重要</text>
+
+            <rect class="box" x="10" y="258" width="160" height="64" rx="10"/>
+            <text class="t" x="24" y="284">Content Script</text>
+            <text class="s" x="24" y="304">（可选）关键词高亮</text>
+
+            <rect class="box-accent" x="250" y="30" width="220" height="292" rx="12"/>
+            <text class="t" x="266" y="56">Background Service Worker</text>
+            <text class="s" x="266" y="84">· 消息路由 runtime.onMessage</text>
+            <text class="s" x="266" y="108">· 采集 tabs.query / history.search</text>
+            <text class="s" x="266" y="132">· 上传前隐私过滤</text>
+            <text class="s" x="266" y="156">· 同步状态 · 增量游标</text>
+            <text class="s" x="266" y="180">· 本地缓存 storage.local</text>
+            <text class="s" x="266" y="204">· API Client（超时 / 重试）</text>
+            <text class="s" x="266" y="228">· 诊断自检</text>
+            <text class="s" x="266" y="252">· 右键菜单注册</text>
+            <text class="m" x="266" y="300">无常驻内存，状态落 storage</text>
+
+            <rect class="box" x="250" y="352" width="220" height="56" rx="10"/>
+            <text class="t" x="266" y="376">Chrome APIs</text>
+            <text class="s" x="266" y="396">tabs · history · storage · contextMenus</text>
+
+            <rect class="box-ok" x="560" y="30" width="244" height="230" rx="12"/>
+            <text class="t" x="574" y="56">后端服务 :3000</text>
+            <text class="m" x="574" y="82">POST /api/sync</text>
+            <text class="m" x="574" y="104">GET  /api/pages/ranked</text>
+            <text class="m" x="574" y="126">POST /api/recommendations/next</text>
+            <text class="m" x="574" y="148">GET /api/pages/cleanup-suggestions</text>
+            <text class="m" x="574" y="170">POST /api/rules/parse</text>
+            <text class="m" x="574" y="192">GET|POST|DELETE /api/rules</text>
+            <text class="m" x="574" y="214">GET  /api/health</text>
+            <text class="m" x="574" y="236">GET  /api/config</text>
+
+            <rect class="box" x="560" y="290" width="244" height="118" rx="10"/>
+            <text class="t" x="574" y="314">存储层 Repository</text>
+            <text class="s" x="574" y="338">内存索引 byUrl / byDomain</text>
+            <text class="s" x="574" y="358">byRepo / byDupKey</text>
+            <text class="s" x="574" y="380">JSON 快照持久化</text>
+            <text class="s" x="574" y="400">可替换为 SQLite</text>
+
+            <path class="arrow" d="M170 78 H250" marker-end="url(#ah)" marker-start="url(#ah)"/>
+            <text class="m" x="176" y="70">sendMessage</text>
+            <path class="arrow" d="M170 192 H250" marker-end="url(#ah)"/>
+            <text class="m" x="182" y="184">onClicked</text>
+            <path class="arrow" d="M170 290 H250" marker-end="url(#ah)" marker-start="url(#ah)"/>
+            <text class="m" x="186" y="282">message</text>
+            <path class="arrow" d="M470 110 H560" marker-end="url(#ah)" marker-start="url(#ah)"/>
+            <text class="m" x="476" y="102">fetch /api/*</text>
+            <text class="s" x="478" y="128">JSON</text>
+            <path class="arrow" d="M360 322 V352" marker-end="url(#ah)" marker-start="url(#ah)"/>
+            <path class="arrow" d="M682 260 V290" marker-end="url(#ah)" marker-start="url(#ah)"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="engine.js"></script>
+  <script src="popup.js"></script>
+  <script>
+    (function () {
+      'use strict';
+      const { Popup, contextMenuFrame, icon, esc, shortUrl, fav } = window.NavPrototype;
+
+      // ---------- 主题
+      const themeBtns = document.querySelectorAll('[data-theme-set]');
+      function setTheme(t) {
+        if (t === 'auto') document.documentElement.removeAttribute('data-theme');
+        else document.documentElement.setAttribute('data-theme', t);
+        themeBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.themeSet === t)));
+        try { localStorage.setItem('nav-proto-theme', t); } catch (e) { /* 无痕或禁用存储时忽略 */ }
+      }
+      themeBtns.forEach((b) => b.addEventListener('click', () => setTheme(b.dataset.themeSet)));
+      try { const t = localStorage.getItem('nav-proto-theme'); if (t) setTheme(t); } catch (e) { /* ignore */ }
+
+      // ---------- 静态图标
+      document.getElementById('doc-logo').innerHTML = icon('compass', 14, 2.2);
+      document.getElementById('ic-back').innerHTML = icon('back', 16);
+      document.getElementById('ic-fwd').innerHTML = icon('fwd', 16);
+      document.getElementById('ic-reload').innerHTML = icon('reload', 15);
+      document.getElementById('ext-btn').innerHTML = icon('compass', 16);
+      document.getElementById('ext-puzzle').innerHTML = icon('puzzle', 15);
+
+      // ---------- 标注
+      const main = document.getElementById('doc-main');
+      document.getElementById('anno-toggle').addEventListener('change', (e) => main.classList.toggle('annotate', e.target.checked));
+
+      // ---------- 模拟浏览器外框（随场景变化）
+      const PAGES = {
+        pr: '<div class="mock"><div class="crumb">org / repo · Pull requests</div><h4>Refactor auth middleware <span style="color:var(--text-3);font-weight:400">#456</span></h4>' +
+            '<div><span class="pill">Open</span><span style="font-size:13px">dev 想把 3 个提交从 <code>refactor/auth</code> 合并到 <code>main</code></span></div>' +
+            '<div class="bar" style="width:94%;margin-top:22px"></div><div class="bar" style="width:72%"></div><div class="bar" style="width:86%"></div>' +
+            '<div class="box"><b style="color:var(--text)">Checks</b> · 2 个检查进行中 · <span style="color:var(--warn)">CI pending</span><div class="bar" style="width:55%"></div></div>' +
+            '<div class="box">关联 Issue：<span style="color:var(--accent-text)">#123 Fix login redirect bug</span><div class="bar" style="width:66%"></div><div class="bar" style="width:40%"></div></div></div>',
+        react: '<div class="mock"><div class="crumb">react.dev › Reference › Hooks</div><h4>useEffect</h4>' +
+            '<p style="margin:0 0 10px">useEffect 是一个 React Hook，用于把组件与外部系统同步。</p><div class="box"><code>useEffect(setup, dependencies?)</code></div>' +
+            '<div class="bar" style="width:90%;margin-top:20px"></div><div class="bar" style="width:78%"></div><div class="bar" style="width:84%"></div><div class="bar" style="width:52%"></div></div>',
+        system: '<div class="mock"><div class="crumb">chrome://extensions</div><h4>扩展程序</h4>' +
+            '<p style="margin:0 0 10px">开发者模式 <span class="chip ok">已开启</span> · 加载已解压的扩展程序 · 打包扩展程序</p>' +
+            '<div class="box"><b style="color:var(--text)">浏览器导航助手</b> 0.1.0<br><span style="font-size:12px">ID: kbjmhkeolpnfjkmcgdbpogcaepnhgdkc · Service Worker（已激活）</span><div class="bar" style="width:46%"></div></div></div>',
+      };
+
+      function paintBrowser(state, data) {
+        const tabs = [data.raw.activeTab].concat(data.raw.openTabs);
+        document.getElementById('b-tabs').innerHTML = '<div class="b-lights"><i></i><i></i><i></i></div>' +
+          tabs.map((t, i) => '<div class="b-tab ' + (i === 0 ? 'on' : '') + '" style="flex:0 1 190px;min-width:0">' + fav(t.url, 'sm') + '<span class="t">' + esc(t.title) + '</span><span class="x">' + icon('x', 11) + '</span></div>').join('');
+        const u = data.raw.activeTab.url;
+        const m = /^https?:/.test(u) ? (u.match(/^(\w+:\/\/)([^/]+)(.*)$/) || ['', '', u, '']) : ['', '', u.replace(/\/$/, ''), ''];
+        document.getElementById('b-omni').innerHTML = icon(state.scenario === 'system' ? 'puzzle' : 'lock', 12) +
+          '<span><span class="host">' + esc(m[2].replace(/^www\./, '')) + '</span><span class="path">' + esc(m[3]) + '</span></span>';
+        document.getElementById('b-page').innerHTML = PAGES[state.scenario];
+      }
+
+      // ---------- 主流程弹窗
+      const mainPopup = new Popup(document.getElementById('main-popup'), { synced: false });
+      mainPopup.onChange = paintBrowser;
+      mainPopup.render();
+
+      function bindSeg(id, attr, apply) {
+        const btns = document.querySelectorAll('#' + id + ' button');
+        btns.forEach((b) => b.addEventListener('click', () => {
+          btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+          apply(b.getAttribute(attr));
+        }));
+      }
+      bindSeg('scenario-seg', 'data-scenario', (v) => mainPopup.set({ scenario: v }));
+      bindSeg('backend-seg', 'data-backend', (v) => mainPopup.set({ backend: v }));
+      document.getElementById('reset-btn').addEventListener('click', () => {
+        document.querySelectorAll('#scenario-seg button, #backend-seg button').forEach((b, i) => b.setAttribute('aria-pressed', String(b.dataset.scenario === 'pr' || b.dataset.backend === 'online')));
+        mainPopup.reset();
+      });
+
+      // ---------- 画面一览
+      const FRAMES = [
+        { id: 'S1', title: '首页 · 首次打开（未同步）', desc: '空状态引导用户点击同步；规则输入和诊断入口仍可用。', preset: { synced: false } },
+        { id: 'S2', title: '首页 · 已同步', desc: '推荐 Top 3（含理由）、排序 Top 5、整理摘要、规则输入、诊断入口一屏可达。', preset: { rules: ['issue', 'internal'] } },
+        { id: 'S3', title: '上下文 · 标签页与历史', desc: '展示 tabs.query 与 history.search 原始结果；敏感 URL 与系统页标记为“不上传”。', preset: { tab: 'context' } },
+        { id: 'S4', title: '历史排序 · 评分明细', desc: '公式与图例常驻；展开任一行可看四个维度的取值、权重和贡献。', preset: { tab: 'ranked', expandFirst: true, rules: ['issue', 'internal'] } },
+        { id: 'S5', title: '整理建议 · 规则生效', desc: '7 天 Issue 规则让 #87 进入归档；docs.internal.com 被保护规则保留；#123 两个 URL 判为重复。', preset: { tab: 'cleanup', rules: ['issue', 'internal'] } },
+        { id: 'S6', title: '规则 · 解析预览（待确认）', desc: '一句话拆成 2 条结构化规则 + 1 段无法识别的内容；勾选后确认保存，可查看 JSON。', preset: { tab: 'rules', ruleText: '把 7 天没访问过的 GitHub issue 建议归档，但 docs.internal.com 的页面永远不要归档；帮我整理一下', parse: true } },
+        { id: 'S7', title: '规则 · 已保存列表', desc: '五类规则的统一展示：类型徽标、结构化摘要、原文、启停开关和删除。', preset: { tab: 'rules', rules: ['issue', 'internal', 'react', 'privacy'] } },
+        { id: 'S8', title: '诊断 · 全部正常', desc: '10 项检查 + 可编辑 API Base URL + 版本信息，可一键复制诊断报告。', preset: { tab: 'diag', rules: ['issue', 'internal'] } },
+        { id: 'S9', title: '诊断 · 后端不可达', desc: '失败项给出可执行的排查步骤；同步与规则数降级为警告 / 失败。', preset: { tab: 'diag', backend: 'offline', rules: ['issue', 'internal'] } },
+        { id: 'S10', title: '离线降级 · 展示缓存', desc: '后端不可用时读 storage.local 缓存，顶部提示缓存时间，规则解析不可用。', preset: { backend: 'offline', rules: ['issue', 'internal'] } },
+        { id: 'S11', title: '规则触发推荐 · React → MDN', desc: '连续浏览 3 个 react.dev 页面后，按用户规则把 MDN 页面排到推荐第一。', preset: { scenario: 'react', rules: ['react', 'internal'] } },
+        { id: 'S12', title: '系统页降级 · chrome://', desc: '当前页不可采集：卡片提示“不采集”，推荐退化为全局高分页面。', preset: { scenario: 'system' } },
+        { id: 'S13', title: '右键菜单', desc: '任意网页右键 → 浏览器导航助手 → 添加到分析 / 标记为重要。', ctx: true },
+      ];
+      const wrap = document.getElementById('frames');
+      FRAMES.forEach((f) => {
+        const fig = document.createElement('figure');
+        fig.className = 'frame';
+        fig.id = 'frame-' + f.id;
+        const host = document.createElement('div');
+        host.className = 'popup-host';
+        fig.appendChild(host);
+        const cap = document.createElement('figcaption');
+        cap.innerHTML = '<b><span class="id">' + f.id + '</span>' + esc(f.title) + '</b>' + esc(f.desc);
+        fig.appendChild(cap);
+        wrap.appendChild(fig);
+        if (f.ctx) host.innerHTML = contextMenuFrame();
+        else new Popup(host, f.preset);
+      });
+    })();
+  </script>
+</body>
+</html>

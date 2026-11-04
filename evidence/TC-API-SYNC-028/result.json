@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-SYNC-028",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:06.760Z",
+  "tests": [
+    {
+      "testId": "42afb85338a9c3002a62-cc8bfe7578059a069383",
+      "title": "TC-API-SYNC-028 query 换序和跟踪参数归一化但保留业务值差异",
+      "project": "api",
+      "file": "tests/api/TC-API-SYNC-028.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 15,
+      "startedAt": "2026-11-04T03:27:06.745Z",
+      "endedAt": "2026-11-04T03:27:06.760Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 8,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 929,
+          "after": 931
+        },
+        "pages": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 2,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

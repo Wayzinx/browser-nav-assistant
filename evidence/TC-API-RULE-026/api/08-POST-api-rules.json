@@ -1,0 +1,392 @@
+{
+  "reqId": "TC-API-RULE-026-08",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/rules",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-RULE-026-08"
+  },
+  "requestBody": {
+    "rules": [
+      {
+        "rawText": "保护边界0",
+        "type": "never_archive",
+        "domain": "edge0.example.com"
+      },
+      {
+        "rawText": "保护边界1",
+        "type": "never_archive",
+        "domain": "edge1.example.com"
+      },
+      {
+        "rawText": "保护边界2",
+        "type": "never_archive",
+        "domain": "edge2.example.com"
+      },
+      {
+        "rawText": "保护边界3",
+        "type": "never_archive",
+        "domain": "edge3.example.com"
+      },
+      {
+        "rawText": "保护边界4",
+        "type": "never_archive",
+        "domain": "edge4.example.com"
+      },
+      {
+        "rawText": "保护边界5",
+        "type": "never_archive",
+        "domain": "edge5.example.com"
+      },
+      {
+        "rawText": "保护边界6",
+        "type": "never_archive",
+        "domain": "edge6.example.com"
+      },
+      {
+        "rawText": "保护边界7",
+        "type": "never_archive",
+        "domain": "edge7.example.com"
+      },
+      {
+        "rawText": "保护边界8",
+        "type": "never_archive",
+        "domain": "edge8.example.com"
+      },
+      {
+        "rawText": "保护边界9",
+        "type": "never_archive",
+        "domain": "edge9.example.com"
+      },
+      {
+        "rawText": "保护边界10",
+        "type": "never_archive",
+        "domain": "edge10.example.com"
+      },
+      {
+        "rawText": "保护边界11",
+        "type": "never_archive",
+        "domain": "edge11.example.com"
+      },
+      {
+        "rawText": "保护边界12",
+        "type": "never_archive",
+        "domain": "edge12.example.com"
+      },
+      {
+        "rawText": "保护边界13",
+        "type": "never_archive",
+        "domain": "edge13.example.com"
+      },
+      {
+        "rawText": "保护边界14",
+        "type": "never_archive",
+        "domain": "edge14.example.com"
+      },
+      {
+        "rawText": "保护边界15",
+        "type": "never_archive",
+        "domain": "edge15.example.com"
+      },
+      {
+        "rawText": "保护边界16",
+        "type": "never_archive",
+        "domain": "edge16.example.com"
+      },
+      {
+        "rawText": "保护边界17",
+        "type": "never_archive",
+        "domain": "edge17.example.com"
+      },
+      {
+        "rawText": "保护边界18",
+        "type": "never_archive",
+        "domain": "edge18.example.com"
+      },
+      {
+        "rawText": "保护边界19",
+        "type": "never_archive",
+        "domain": "edge19.example.com"
+      }
+    ]
+  },
+  "status": 201,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RULE-026-08",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "4757",
+    "date": "Wed, 04 Nov 2026 03:27:05 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "rules": [
+      {
+        "domain": "edge0.example.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825189,
+        "updatedAt": 1793762825189,
+        "rawText": "保护边界0",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_1"
+      },
+      {
+        "domain": "edge1.example.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825189,
+        "updatedAt": 1793762825189,
+        "rawText": "保护边界1",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_2"
+      },
+      {
+        "domain": "edge2.example.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825189,
+        "updatedAt": 1793762825189,
+        "rawText": "保护边界2",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_3"
+      },
+      {
+        "domain": "edge3.example.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825189,
+        "updatedAt": 1793762825189,
+        "rawText": "保护边界3",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_4"
+      },
+      {
+        "domain": "edge4.example.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825189,
+        "updatedAt": 1793762825189,
+        "rawText": "保护边界4",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_5"
+      },
+      {
+        "domain": "edge5.example.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825189,
+        "updatedAt": 1793762825189,
+        "rawText": "保护边界5",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_6"
+      },
+      {
+        "domain": "edge6.example.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825189,
+        "updatedAt": 1793762825189,
+        "rawText": "保护边界6",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_7"
+      },
+      {
+        "domain": "edge7.example.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825189,
+        "updatedAt": 1793762825189,
+        "rawText": "保护边界7",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_8"
+      },
+      {
+        "domain": "edge8.example.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825189,
+        "updatedAt": 1793762825189,
+        "rawText": "保护边界8",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_9"
+      },
+      {
+        "domain": "edge9.example.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825189,
+        "updatedAt": 1793762825189,
+        "rawText": "保护边界9",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_10"
+      },
+      {
+        "domain": "edge10.example.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825189,
+        "updatedAt": 1793762825189,
+        "rawText": "保护边界10",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_11"
+      },
+      {
+        "domain": "edge11.example.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825189,
+        "updatedAt": 1793762825189,
+        "rawText": "保护边界11",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_12"
+      },
+      {
+        "domain": "edge12.example.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825189,
+        "updatedAt": 1793762825189,
+        "rawText": "保护边界12",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_13"
+      },
+      {
+        "domain": "edge13.example.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825189,
+        "updatedAt": 1793762825189,
+        "rawText": "保护边界13",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_14"
+      },
+      {
+        "domain": "edge14.example.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825189,
+        "updatedAt": 1793762825189,
+        "rawText": "保护边界14",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_15"
+      },
+      {
+        "domain": "edge15.example.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825189,
+        "updatedAt": 1793762825189,
+        "rawText": "保护边界15",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_16"
+      },
+      {
+        "domain": "edge16.example.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825189,
+        "updatedAt": 1793762825189,
+        "rawText": "保护边界16",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_17"
+      },
+      {
+        "domain": "edge17.example.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825189,
+        "updatedAt": 1793762825189,
+        "rawText": "保护边界17",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_18"
+      },
+      {
+        "domain": "edge18.example.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825189,
+        "updatedAt": 1793762825189,
+        "rawText": "保护边界18",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_19"
+      },
+      {
+        "domain": "edge19.example.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762825189,
+        "updatedAt": 1793762825189,
+        "rawText": "保护边界19",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_20"
+      }
+    ],
+    "ruleCount": 20
+  },
+  "ms": 1,
+  "mutated": null
+}

@@ -1,0 +1,62 @@
+{
+  "reqId": "TC-UI-PRIV-005-sw-8",
+  "observed": true,
+  "setup": false,
+  "method": "GET",
+  "url": "http://127.0.0.1:4300/api/config",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762943474_8"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "ext_1793762943474_8",
+    "access-control-expose-headers": "x-request-id",
+    "connection": "keep-alive",
+    "content-length": "480",
+    "keep-alive": "timeout=5",
+    "date": "Wed, 04 Nov 2026 03:29:03 GMT",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin"
+  },
+  "responseBody": {
+    "cleanupThresholdDays": 14,
+    "maxHistoryItems": 100,
+    "enablePrivacyFilter": true,
+    "privacySensitiveKeywords": [
+      "password",
+      "token",
+      "bank",
+      "secret",
+      "cookie"
+    ],
+    "baseSensitiveKeywords": [
+      "password",
+      "token",
+      "bank",
+      "secret",
+      "cookie"
+    ],
+    "historyLookbackDays": 30,
+    "recencyHalfLifeDays": 7,
+    "weights": {
+      "recency": 0.4,
+      "frequency": 0.3,
+      "open": 0.2,
+      "domain": 0.1
+    },
+    "minRecommendationScore": 0.3,
+    "apiVersion": "1",
+    "limits": {
+      "maxItemsPerSync": 500,
+      "maxUrlLength": 2048,
+      "maxRuleTextLength": 500,
+      "maxBodyBytes": 1048576
+    }
+  },
+  "ms": 3
+}

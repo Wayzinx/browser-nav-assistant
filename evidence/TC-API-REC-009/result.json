@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-API-REC-009",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:03.964Z",
+  "tests": [
+    {
+      "testId": "37235e3d41d011cbb605-4a9e39ae54dbf5e0488d",
+      "title": "TC-API-REC-009 空库固定 PR 当前页时返回空数组而非错误",
+      "project": "api",
+      "file": "tests/api/TC-API-REC-009.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 22,
+      "startedAt": "2026-11-04T03:27:03.942Z",
+      "endedAt": "2026-11-04T03:27:03.964Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 690,
+          "after": 692
+        },
+        "pages": {
+          "added": 0,
+          "removed": 10,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 1,
+          "changed": 0
+        },
+        "counts": {
+          "pages": -10,
+          "rules": -1,
+          "openPages": -4,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "{\"N\":1793762823952}"
+      ]
+    }
+  ]
+}

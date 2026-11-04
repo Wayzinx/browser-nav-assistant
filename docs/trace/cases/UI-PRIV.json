@@ -1,0 +1,446 @@
+{
+  "cases": [
+    {
+      "id": "TC-UI-PRIV-001",
+      "type": "UI",
+      "module": "PRIV",
+      "title": "默认敏感词命中两标签：上传前剔除且上下文逐条标注",
+      "priority": "P0",
+      "category": "positive",
+      "technique": "scenario",
+      "features": [
+        "F-PRIV-01"
+      ],
+      "acceptanceRefs": [
+        "F-PRIV-01#AC1",
+        "F-PRIV-01#AC3"
+      ],
+      "codePoints": [
+        "C-FE-PRIV-01",
+        "C-FE-CTX-04",
+        "C-FE-CTX-06",
+        "C-FE-SYNC-01"
+      ],
+      "preconditions": [
+        "每条独立使用全新的持久化 Chromium profile，通过 channel=chromium 加载真实 extension/；先 POST /api/__test__/reset 并清空 chrome.storage.local 与 chrome.history，设置 apiBaseUrl 为本例真实测试后端；不引用或依赖其他用例。",
+        "popup 以 chrome-extension://<extId>/popup/popup.html 的 tab 打开；产品元素只用 getByTestId 定位。所有 http(s) 外站导航先 route 离线 fulfill；不 route、mock 或改写后端 /api、localhost、127.0.0.1 的请求/响应。",
+        "BrowserContext request/response 事件被动观察真实 service worker 请求并按 origin、method、path 归集；不拦截请求。首次打开 popup 的后台请求与点击同步/恢复区间分别计数，等待响应和 storage 写入完成。",
+        "前置步骤只保留本例声明的普通标签页，关闭其他业务页；设置 connection.status=online、recoverPending=false 并清除旧 syncState，避免初始化自动恢复污染手动同步计数；每条结束关闭 popup、标签页与持久化 context。",
+        "后端使用默认 privacySensitiveKeywords=[password,token,bank,secret] 且 enablePrivacyFilter=true；本例开始后端 pageCount=0。"
+      ],
+      "steps": [
+        "S1：离线打开两个敏感标签 accounts/reset-password 与 bank/account 以及普通对照页 https://example.com/docs，激活普通页；完成导航后 chrome.history.deleteAll()，不再导航外站。",
+        "S2：读取真实 tabs/history 和 GET_CONTEXT，确认当前普通页为 docs、敏感 URL 仅各出现在 openTabs 一次、历史为空；打开 popup，点击 tab-context，读取两条 context-tab-item 下的 URL 与 badge。",
+        "S3：开始独立记录真实 POST /api/sync，点击 sync-button，等 sync-status 的 data-status=success；读取 filtered/uploaded 数字与实际请求体。",
+        "S4：通过真实 GET /api/pages/ranked 与 GET /api/health 核对持久化结果。"
+      ],
+      "expected": [
+        "E1：accounts URL 对应 context-tab-badge 文本恰为「含 password · 不上传」；虽然该 URL 也含 token，默认关键词顺序优先命中 password。",
+        "E2：bank URL 对应 context-tab-badge 文本恰为「含 bank · 不上传」。",
+        "E3：点击区间 POST /api/sync 恰好 1 次，其 activeTab.url=普通 docs URL、openTabs 仅含该普通 URL、history=[]，序列化请求体不含两个敏感 URL。",
+        "E4：sync-filtered-count 文本为「2」，sync-uploaded-count 文本为「2」（普通页在 activeTab/openTabs 各计一次）。",
+        "E5：sync-status 的 data-status=success 且文本包含「同步成功」。",
+        "E6：同步响应 status=200、received=2、rejected=0、pageCount=1。",
+        "E7：ranked.pages 的URL集合恰为普通 docs URL。",
+        "E8：health.pageCount=1。"
+      ],
+      "testData": "accounts=https://accounts.example.com/reset-password?token=8f2a91c；bank=https://bank.example.com/account/overview；ordinary=https://example.com/docs。先完成导航再清历史，并让普通页保持最近激活，保证敏感项恰好2条而不是active/history重复计数。",
+      "evidence": [
+        "执行时保存 evidence/<CaseID>/result.json、api/ 请求与真实响应、server.log、extension.log、关键步骤 screenshots/ 与 flow.gif；这是后续执行留痕要求，本次只交付用例设计。",
+        "隐私用例的真实出站请求以缺失敏感 URL 的正反对照为核心证据；若发现泄漏，证据文件中的 URL/token 值必须脱敏，保留字段路径、命中词和泄漏条数，截图只使用合成测试数据。"
+      ]
+    },
+    {
+      "id": "TC-UI-PRIV-002",
+      "type": "UI",
+      "module": "PRIV",
+      "title": "关键词大小写边界：大写 TOKEN 与小写 token 均在上传前被过滤",
+      "priority": "P1",
+      "category": "boundary",
+      "technique": "boundary",
+      "features": [
+        "F-PRIV-01"
+      ],
+      "acceptanceRefs": [
+        "F-PRIV-01#AC2"
+      ],
+      "codePoints": [
+        "C-FE-PRIV-01",
+        "C-FE-SYNC-01"
+      ],
+      "preconditions": [
+        "每条独立使用全新的持久化 Chromium profile，通过 channel=chromium 加载真实 extension/；先 POST /api/__test__/reset 并清空 chrome.storage.local 与 chrome.history，设置 apiBaseUrl 为本例真实测试后端；不引用或依赖其他用例。",
+        "popup 以 chrome-extension://<extId>/popup/popup.html 的 tab 打开；产品元素只用 getByTestId 定位。所有 http(s) 外站导航先 route 离线 fulfill；不 route、mock 或改写后端 /api、localhost、127.0.0.1 的请求/响应。",
+        "BrowserContext request/response 事件被动观察真实 service worker 请求并按 origin、method、path 归集；不拦截请求。首次打开 popup 的后台请求与点击同步/恢复区间分别计数，等待响应和 storage 写入完成。",
+        "前置步骤只保留本例声明的普通标签页，关闭其他业务页；设置 connection.status=online、recoverPending=false 并清除旧 syncState，避免初始化自动恢复污染手动同步计数；每条结束关闭 popup、标签页与持久化 context。"
+      ],
+      "steps": [
+        "S1：同一用例内分别使用两个独立重置子场景 U/L：仅打开普通 docs 对照页与一个敏感标签；U 的 URL 为 https://example.com/login?TOKEN=abc，L 为 https://example.com/login?token=abc。每次导航后清历史、激活普通页并重开 popup。",
+        "S2：每个子场景各点击 sync-button 一次并等成功，捕获本次真实 POST /api/sync、数字与 ranked 响应；子场景间重置后端、storage、history 和标签页。"
+      ],
+      "expected": [
+        "E1：U 子场景请求体不含 https://example.com/login?TOKEN=abc，L 子场景请求体不含 https://example.com/login?token=abc，二者 openTabs 均只有普通 docs URL。",
+        "E2：两个子场景的 sync-filtered-count 均为「1」，后端响应 rejected=0、pageCount=1，ranked.pages 均只有普通 docs URL。"
+      ],
+      "testData": "U/L 仅改变 TOKEN 字母大小写；不是修改默认关键词或mock分类器。ordinary=https://example.com/docs；active/history固定如步骤。",
+      "evidence": [
+        "执行时保存 evidence/<CaseID>/result.json、api/ 请求与真实响应、server.log、extension.log、关键步骤 screenshots/ 与 flow.gif；这是后续执行留痕要求，本次只交付用例设计。",
+        "隐私用例的真实出站请求以缺失敏感 URL 的正反对照为核心证据；若发现泄漏，证据文件中的 URL/token 值必须脱敏，保留字段路径、命中词和泄漏条数，截图只使用合成测试数据。"
+      ]
+    },
+    {
+      "id": "TC-UI-PRIV-003",
+      "type": "UI",
+      "module": "PRIV",
+      "title": "普通 URL 反对照：不含敏感词时不误过滤且同 URL 按来源上传",
+      "priority": "P1",
+      "category": "negative",
+      "technique": "equivalence",
+      "features": [
+        "F-PRIV-01"
+      ],
+      "acceptanceRefs": [
+        "F-PRIV-01#AC1"
+      ],
+      "codePoints": [
+        "C-FE-PRIV-01",
+        "C-FE-SYNC-01"
+      ],
+      "preconditions": [
+        "每条独立使用全新的持久化 Chromium profile，通过 channel=chromium 加载真实 extension/；先 POST /api/__test__/reset 并清空 chrome.storage.local 与 chrome.history，设置 apiBaseUrl 为本例真实测试后端；不引用或依赖其他用例。",
+        "popup 以 chrome-extension://<extId>/popup/popup.html 的 tab 打开；产品元素只用 getByTestId 定位。所有 http(s) 外站导航先 route 离线 fulfill；不 route、mock 或改写后端 /api、localhost、127.0.0.1 的请求/响应。",
+        "BrowserContext request/response 事件被动观察真实 service worker 请求并按 origin、method、path 归集；不拦截请求。首次打开 popup 的后台请求与点击同步/恢复区间分别计数，等待响应和 storage 写入完成。",
+        "前置步骤只保留本例声明的普通标签页，关闭其他业务页；设置 connection.status=online、recoverPending=false 并清除旧 syncState，避免初始化自动恢复污染手动同步计数；每条结束关闭 popup、标签页与持久化 context。"
+      ],
+      "steps": [
+        "S1：只打开并激活 https://example.com/docs?topic=guide，完成离线路由导航后清历史，再用 chrome.history.addUrl 为该 URL 新增1条真实历史；不伪造 visitCount 或旧时间。",
+        "S2：打开 popup 并点击 sync-button，等成功；读取真实 POST 请求体、响应、数字以及 GET /api/health。"
+      ],
+      "expected": [
+        "E1：请求 activeTab.url、openTabs[0].url、history[0].url 均等于普通 URL；openTabs.length=1 且 history.length=1。",
+        "E2：sync-filtered-count 文本为「0」，sync-uploaded-count 文本为「3」。",
+        "E3：真实同步响应 status=200、received=3、created=1、updated=2、rejected=0。",
+        "E4：health.pageCount=1，普通URL已入库且跨来源按URL去重。"
+      ],
+      "testData": "url=https://example.com/docs?topic=guide；反对照验证F-PRIV-01上传前过滤的非敏感等价类；浏览器的实际visitCount只核对存在，不写死。",
+      "evidence": [
+        "执行时保存 evidence/<CaseID>/result.json、api/ 请求与真实响应、server.log、extension.log、关键步骤 screenshots/ 与 flow.gif；这是后续执行留痕要求，本次只交付用例设计。",
+        "隐私用例的真实出站请求以缺失敏感 URL 的正反对照为核心证据；若发现泄漏，证据文件中的 URL/token 值必须脱敏，保留字段路径、命中词和泄漏条数，截图只使用合成测试数据。"
+      ]
+    },
+    {
+      "id": "TC-UI-PRIV-004",
+      "type": "UI",
+      "module": "PRIV",
+      "title": "后端不可达且无配置缓存：内置关键词仍标注并过滤敏感项",
+      "priority": "P1",
+      "category": "exception",
+      "technique": "error-guessing",
+      "features": [
+        "F-PRIV-01",
+        "F-PRIV-02"
+      ],
+      "acceptanceRefs": [
+        "F-PRIV-01#AC3",
+        "F-PRIV-02#AC2"
+      ],
+      "codePoints": [
+        "C-FE-CORE-04",
+        "C-FE-CTX-04",
+        "C-FE-CTX-06",
+        "C-FE-PRIV-01",
+        "C-FE-PRIV-02"
+      ],
+      "preconditions": [
+        "每条独立使用全新的持久化 Chromium profile，通过 channel=chromium 加载真实 extension/；先 POST /api/__test__/reset 并清空 chrome.storage.local 与 chrome.history，设置 apiBaseUrl 为本例真实测试后端；不引用或依赖其他用例。",
+        "popup 以 chrome-extension://<extId>/popup/popup.html 的 tab 打开；产品元素只用 getByTestId 定位。所有 http(s) 外站导航先 route 离线 fulfill；不 route、mock 或改写后端 /api、localhost、127.0.0.1 的请求/响应。",
+        "BrowserContext request/response 事件被动观察真实 service worker 请求并按 origin、method、path 归集；不拦截请求。首次打开 popup 的后台请求与点击同步/恢复区间分别计数，等待响应和 storage 写入完成。",
+        "前置步骤只保留本例声明的普通标签页，关闭其他业务页；设置 connection.status=online、recoverPending=false 并清除旧 syncState，避免初始化自动恢复污染手动同步计数；每条结束关闭 popup、标签页与持久化 context。",
+        "apiBaseUrl=http://127.0.0.1:9，确认该端口无服务；cache.config 与整个 cache 均不存在。"
+      ],
+      "steps": [
+        "S1：离线打开 accounts/reset-password、bank/account、https://example.com/?secret=1 与普通 docs 共4页；清历史并激活普通 docs。",
+        "S2：打开 popup，点击 tab-context，等关键词来源和每条 badge 渲染；被动记录此时真实 GET_CONTEXT 的 privacy。",
+        "S3：点击 sync-button，记录指向端口9的真实 POST尝试，等 sync-status=data-status:error；读取 syncState.lastError，确认上下文列表仍可读。"
+      ],
+      "expected": [
+        "E1：GET_CONTEXT privacy.source=\"default\"、enabled=true、keywords=[\"password\",\"token\",\"bank\",\"secret\"]；context-privacy-keywords 包含这4词及「内置默认」。",
+        "E2：secret URL 对应 context-tab-badge 恰为「含 secret · 不上传」；accounts 和 bank 的 badge 分别为「含 password · 不上传」「含 bank · 不上传」。",
+        "E3：端口9的同步请求尝试体不含3个敏感 URL，activeTab/openTabs 仅保留普通 docs URL、history=[]。",
+        "E4：sync-status 的 data-status=\"error\"、syncState.lastError.code=\"BACKEND_UNREACHABLE\"。",
+        "E5：失败后 context-tab-url 仍显示上述4页（敏感项只标注、不隐藏）。"
+      ],
+      "testData": "端口9仅模拟真实连接拒绝，不route后端；accounts/bank同AC原文，secret=https://example.com/?secret=1。配置默认兜底无需后端连接。",
+      "evidence": [
+        "执行时保存 evidence/<CaseID>/result.json、api/ 请求与真实响应、server.log、extension.log、关键步骤 screenshots/ 与 flow.gif；这是后续执行留痕要求，本次只交付用例设计。",
+        "隐私用例的真实出站请求以缺失敏感 URL 的正反对照为核心证据；若发现泄漏，证据文件中的 URL/token 值必须脱敏，保留字段路径、命中词和泄漏条数，截图只使用合成测试数据。"
+      ]
+    },
+    {
+      "id": "TC-UI-PRIV-005",
+      "type": "UI",
+      "module": "PRIV",
+      "title": "服务端新增 cookie 关键词：请求过滤、上下文标注与配置缓存一致",
+      "priority": "P0",
+      "category": "positive",
+      "technique": "scenario",
+      "features": [
+        "F-PRIV-02"
+      ],
+      "acceptanceRefs": [
+        "F-PRIV-02#AC1"
+      ],
+      "codePoints": [
+        "C-FE-CORE-04",
+        "C-FE-CTX-06",
+        "C-FE-PRIV-02"
+      ],
+      "preconditions": [
+        "每条独立使用全新的持久化 Chromium profile，通过 channel=chromium 加载真实 extension/；先 POST /api/__test__/reset 并清空 chrome.storage.local 与 chrome.history，设置 apiBaseUrl 为本例真实测试后端；不引用或依赖其他用例。",
+        "popup 以 chrome-extension://<extId>/popup/popup.html 的 tab 打开；产品元素只用 getByTestId 定位。所有 http(s) 外站导航先 route 离线 fulfill；不 route、mock 或改写后端 /api、localhost、127.0.0.1 的请求/响应。",
+        "BrowserContext request/response 事件被动观察真实 service worker 请求并按 origin、method、path 归集；不拦截请求。首次打开 popup 的后台请求与点击同步/恢复区间分别计数，等待响应和 storage 写入完成。",
+        "前置步骤只保留本例声明的普通标签页，关闭其他业务页；设置 connection.status=online、recoverPending=false 并清除旧 syncState，避免初始化自动恢复污染手动同步计数；每条结束关闭 popup、标签页与持久化 context。"
+      ],
+      "steps": [
+        "S1：通过真实 PUT /api/config 设置 privacySensitiveKeywords=[password,token,bank,secret,cookie]，GET /api/config 核对200及有效列表。",
+        "S2：离线打开 cookie URL https://example.com/?cookie=1 和普通 docs，清历史并激活普通页；打开 popup 的 tab-context，读取 privacy 来源。",
+        "S3：点击 sync-button，等成功并捕获真实 POST 请求、后端 ranked、chrome.storage.local.cache.config。"
+      ],
+      "expected": [
+        "E1：context-privacy-keywords 包含「cookie」及「后端」，GET_CONTEXT 的 privacy.source=\"server\"。",
+        "E2：cookie URL 对应的 context-tab-badge 恰为「含 cookie · 不上传」。",
+        "E3：真实 POST /api/sync 不含 cookie URL，activeTab/openTabs 只有普通 docs URL；sync-filtered-count 文本为「1」。",
+        "E4：cache.config.data.privacySensitiveKeywords 包含 \"cookie\"，cache.config.cachedAt 是本例时间范围内的正整数。",
+        "E5：ranked.pages 不含 cookie URL。",
+        "E6：health.pageCount=1。"
+      ],
+      "testData": "新增cookie通过真实配置接口完成，不mock GET /api/config。普通URL=https://example.com/docs。",
+      "evidence": [
+        "执行时保存 evidence/<CaseID>/result.json、api/ 请求与真实响应、server.log、extension.log、关键步骤 screenshots/ 与 flow.gif；这是后续执行留痕要求，本次只交付用例设计。",
+        "隐私用例的真实出站请求以缺失敏感 URL 的正反对照为核心证据；若发现泄漏，证据文件中的 URL/token 值必须脱敏，保留字段路径、命中词和泄漏条数，截图只使用合成测试数据。"
+      ]
+    },
+    {
+      "id": "TC-UI-PRIV-006",
+      "type": "UI",
+      "module": "PRIV",
+      "title": "已有 cookie 配置缓存后断网：仍用缓存关键词且失败不覆盖缓存",
+      "priority": "P1",
+      "category": "exception",
+      "technique": "state-transition",
+      "features": [
+        "F-PRIV-02"
+      ],
+      "acceptanceRefs": [
+        "F-PRIV-02#AC3"
+      ],
+      "codePoints": [
+        "C-FE-PRIV-02",
+        "C-FE-CTX-06"
+      ],
+      "preconditions": [
+        "每条独立使用全新的持久化 Chromium profile，通过 channel=chromium 加载真实 extension/；先 POST /api/__test__/reset 并清空 chrome.storage.local 与 chrome.history，设置 apiBaseUrl 为本例真实测试后端；不引用或依赖其他用例。",
+        "popup 以 chrome-extension://<extId>/popup/popup.html 的 tab 打开；产品元素只用 getByTestId 定位。所有 http(s) 外站导航先 route 离线 fulfill；不 route、mock 或改写后端 /api、localhost、127.0.0.1 的请求/响应。",
+        "BrowserContext request/response 事件被动观察真实 service worker 请求并按 origin、method、path 归集；不拦截请求。首次打开 popup 的后台请求与点击同步/恢复区间分别计数，等待响应和 storage 写入完成。",
+        "前置步骤只保留本例声明的普通标签页，关闭其他业务页；设置 connection.status=online、recoverPending=false 并清除旧 syncState，避免初始化自动恢复污染手动同步计数；每条结束关闭 popup、标签页与持久化 context。"
+      ],
+      "steps": [
+        "S1：真实 PUT /api/config 增加 cookie；普通 docs 与 cookie URL 离线打开后清历史，激活普通页；在线打开 popup 的 tab-context，等 GET_CONTEXT privacy.source=server，读取真实写入的 cache.config 为 C。",
+        "S2：关闭 popup，直接将 storage.apiBaseUrl 改为 http://127.0.0.1:9，保留 C；重开 popup、点击 tab-context，等待请求失败后的来源与标注。",
+        "S3：读取 GET_CONTEXT privacy 和 storage.cache.config；点击 sync-button，观察真实端口9请求体及失败结果。"
+      ],
+      "expected": [
+        "E1：GET_CONTEXT privacy.source=\"cache\" 且 keywords 含 \"cookie\"；context-privacy-keywords 包含「cookie」「本地缓存」。",
+        "E2：cookie URL 对应 context-tab-badge 文本恰为「含 cookie · 不上传」。",
+        "E3：端口9真实同步尝试的请求体不含 cookie URL。",
+        "E4：sync-status data-status=\"error\"，syncState.lastError.code=\"BACKEND_UNREACHABLE\"。",
+        "E5：失败后 cache.config 与步骤1保存的 C 深度相等（data 和 cachedAt 均不改变）。"
+      ],
+      "testData": "cookie=https://example.com/?cookie=1；缓存必须来自本例真实在线读取，不能依赖其他用例或手写假配置。",
+      "evidence": [
+        "执行时保存 evidence/<CaseID>/result.json、api/ 请求与真实响应、server.log、extension.log、关键步骤 screenshots/ 与 flow.gif；这是后续执行留痕要求，本次只交付用例设计。",
+        "隐私用例的真实出站请求以缺失敏感 URL 的正反对照为核心证据；若发现泄漏，证据文件中的 URL/token 值必须脱敏，保留字段路径、命中词和泄漏条数，截图只使用合成测试数据。"
+      ]
+    },
+    {
+      "id": "TC-UI-PRIV-007",
+      "type": "UI",
+      "module": "PRIV",
+      "title": "真实无痕窗口存在时：普通窗口同步及上下文均排除私密标签",
+      "priority": "P0",
+      "category": "positive",
+      "technique": "scenario",
+      "features": [
+        "F-PRIV-04"
+      ],
+      "acceptanceRefs": [
+        "F-PRIV-04#AC1",
+        "F-PRIV-04#AC2"
+      ],
+      "codePoints": [
+        "C-FE-PRIV-03",
+        "C-FE-CTX-06"
+      ],
+      "preconditions": [
+        "每条独立使用全新的持久化 Chromium profile，通过 channel=chromium 加载真实 extension/；先 POST /api/__test__/reset 并清空 chrome.storage.local 与 chrome.history，设置 apiBaseUrl 为本例真实测试后端；不引用或依赖其他用例。",
+        "popup 以 chrome-extension://<extId>/popup/popup.html 的 tab 打开；产品元素只用 getByTestId 定位。所有 http(s) 外站导航先 route 离线 fulfill；不 route、mock 或改写后端 /api、localhost、127.0.0.1 的请求/响应。",
+        "BrowserContext request/response 事件被动观察真实 service worker 请求并按 origin、method、path 归集；不拦截请求。首次打开 popup 的后台请求与点击同步/恢复区间分别计数，等待响应和 storage 写入完成。",
+        "前置步骤只保留本例声明的普通标签页，关闭其他业务页；设置 connection.status=online、recoverPending=false 并清除旧 syncState，避免初始化自动恢复污染手动同步计数；每条结束关闭 popup、标签页与持久化 context。",
+        "本例独立准备持久化 Chromium 测试 profile：加载真实插件，在 chrome://extensions 对该 extension 开启“允许在无痕模式下运行”，关闭并重启同一临时 profile；SW 的 chrome.extension.isAllowedIncognitoAccess() 必须实测为 true。Chrome 内部设置仅作环境准备，产品断言仍仅使用 ui-contract testId。",
+        "由 SW 调用 chrome.windows.create({incognito:true,url:\"about:blank\"}) 创建真实无痕窗口，记录 windowId/tabId；为此无痕 target 安装仅外站的离线路由后再 tabs.update 导航，核验 chrome.tabs.query 返回目标 tab.incognito===true、url 等于本例 private URL。不得用 browser.newContext()、伪造 tabs.query 返回值或单改 incognito 字段替代。",
+        "现有通用夹具不保证提供无痕授权及 target 路由能力，脚本化时需在该用例前置中补齐；授权、真实 incognito tab 或外站离线路由任一未就绪，执行结论必须为 BLOCKED，不能 skip 后计 PASS。finally 用 chrome.windows.remove(windowId) 关闭本例真实无痕窗口并关闭临时 profile。"
+      ],
+      "steps": [
+        "S1：真实无痕窗口中离线打开 https://example.com/private，普通窗口只开并激活 https://example.com/docs；清普通历史并确认私密URL未落入普通history。",
+        "S2：核验真实 incognito tab 仍存在且incognito=true；将普通窗口置焦点，在其中以tab打开popup，点击tab-context读取context-tab-url集合。",
+        "S3：点击sync-button，等成功，检查真实 POST /api/sync 以及 GET /api/pages/ranked；finally关闭真实无痕窗口。"
+      ],
+      "expected": [
+        "E1：普通窗口 context-tab-url 集合只有 https://example.com/docs，不包含 https://example.com/private。",
+        "E2：真实 POST 请求中 activeTab.url=普通 docs、openTabs 只有普通 docs、history=[]；序列化请求体不含 private URL。",
+        "E3：同步响应 status=200、rejected=0、pageCount=1。",
+        "E4：ranked.pages 的URL集合恰为普通 docs URL。"
+      ],
+      "testData": "private URL 不包含 password/token/bank/secret，必须靠 incognito 分支被排除。权限和真实无痕tab的观测是执行前置证据，不mock Chrome API；不约束filtered数字，因为collector可能先排除无痕。",
+      "evidence": [
+        "执行时保存 evidence/<CaseID>/result.json、api/ 请求与真实响应、server.log、extension.log、关键步骤 screenshots/ 与 flow.gif；这是后续执行留痕要求，本次只交付用例设计。",
+        "隐私用例的真实出站请求以缺失敏感 URL 的正反对照为核心证据；若发现泄漏，证据文件中的 URL/token 值必须脱敏，保留字段路径、命中词和泄漏条数，截图只使用合成测试数据。"
+      ]
+    },
+    {
+      "id": "TC-UI-PRIV-008",
+      "type": "UI",
+      "module": "PRIV",
+      "title": "真实无痕窗口且后端不可达：上下文仍只含普通标签且出站尝试无泄漏",
+      "priority": "P1",
+      "category": "exception",
+      "technique": "error-guessing",
+      "features": [
+        "F-PRIV-04"
+      ],
+      "acceptanceRefs": [
+        "F-PRIV-04#AC1",
+        "F-PRIV-04#AC2"
+      ],
+      "codePoints": [
+        "C-FE-PRIV-03",
+        "C-FE-CTX-06"
+      ],
+      "preconditions": [
+        "每条独立使用全新的持久化 Chromium profile，通过 channel=chromium 加载真实 extension/；先 POST /api/__test__/reset 并清空 chrome.storage.local 与 chrome.history，设置 apiBaseUrl 为本例真实测试后端；不引用或依赖其他用例。",
+        "popup 以 chrome-extension://<extId>/popup/popup.html 的 tab 打开；产品元素只用 getByTestId 定位。所有 http(s) 外站导航先 route 离线 fulfill；不 route、mock 或改写后端 /api、localhost、127.0.0.1 的请求/响应。",
+        "BrowserContext request/response 事件被动观察真实 service worker 请求并按 origin、method、path 归集；不拦截请求。首次打开 popup 的后台请求与点击同步/恢复区间分别计数，等待响应和 storage 写入完成。",
+        "前置步骤只保留本例声明的普通标签页，关闭其他业务页；设置 connection.status=online、recoverPending=false 并清除旧 syncState，避免初始化自动恢复污染手动同步计数；每条结束关闭 popup、标签页与持久化 context。",
+        "本例独立准备持久化 Chromium 测试 profile：加载真实插件，在 chrome://extensions 对该 extension 开启“允许在无痕模式下运行”，关闭并重启同一临时 profile；SW 的 chrome.extension.isAllowedIncognitoAccess() 必须实测为 true。Chrome 内部设置仅作环境准备，产品断言仍仅使用 ui-contract testId。",
+        "由 SW 调用 chrome.windows.create({incognito:true,url:\"about:blank\"}) 创建真实无痕窗口，记录 windowId/tabId；为此无痕 target 安装仅外站的离线路由后再 tabs.update 导航，核验 chrome.tabs.query 返回目标 tab.incognito===true、url 等于本例 private URL。不得用 browser.newContext()、伪造 tabs.query 返回值或单改 incognito 字段替代。",
+        "现有通用夹具不保证提供无痕授权及 target 路由能力，脚本化时需在该用例前置中补齐；授权、真实 incognito tab 或外站离线路由任一未就绪，执行结论必须为 BLOCKED，不能 skip 后计 PASS。finally 用 chrome.windows.remove(windowId) 关闭本例真实无痕窗口并关闭临时 profile。",
+        "apiBaseUrl=http://127.0.0.1:9，cache不存在；真实无痕权限已核验为true。"
+      ],
+      "steps": [
+        "S1：无痕窗口离线打开 https://example.com/private，普通窗口离线打开并激活 docs；清普通历史、确认history无private，将普通窗口置焦点。",
+        "S2：在普通窗口打开popup、点击tab-context；保持无痕tab真实存在，读取普通上下文。",
+        "S3：点击sync-button，捕获端口9真实POST尝试，等同步失败；再次读取上下文并finally关闭真实无痕窗口。"
+      ],
+      "expected": [
+        "E1：失败前后 context-tab-url 集合均只有普通 docs URL，private URL出现次数=0。",
+        "E2：端口9真实POST尝试体中private URL出现次数=0；activeTab/openTabs只含普通docs且history=[]。",
+        "E3：sync-status data-status=\"error\"，syncState.lastError.code=\"BACKEND_UNREACHABLE\"。",
+        "E4：失败后 chrome.storage.local 所有字段中private URL出现次数=0。"
+      ],
+      "testData": "private=https://example.com/private；普通=https://example.com/docs。网络错误不得让无痕过滤回退为采集全部标签。",
+      "evidence": [
+        "执行时保存 evidence/<CaseID>/result.json、api/ 请求与真实响应、server.log、extension.log、关键步骤 screenshots/ 与 flow.gif；这是后续执行留痕要求，本次只交付用例设计。",
+        "隐私用例的真实出站请求以缺失敏感 URL 的正反对照为核心证据；若发现泄漏，证据文件中的 URL/token 值必须脱敏，保留字段路径、命中词和泄漏条数，截图只使用合成测试数据。"
+      ]
+    },
+    {
+      "id": "TC-UI-PRIV-009",
+      "type": "UI",
+      "module": "PRIV",
+      "title": "敏感当前页同时进入历史：同步过滤且推荐发送 null、缓存键不泄漏",
+      "priority": "P0",
+      "category": "security",
+      "technique": "decision-table",
+      "features": [
+        "F-PRIV-01"
+      ],
+      "acceptanceRefs": [
+        "F-PRIV-01#AC2"
+      ],
+      "codePoints": [
+        "C-FE-PRIV-01",
+        "C-FE-CTX-04",
+        "C-FE-REC-01"
+      ],
+      "preconditions": [
+        "每条独立使用全新的持久化 Chromium profile，通过 channel=chromium 加载真实 extension/；先 POST /api/__test__/reset 并清空 chrome.storage.local 与 chrome.history，设置 apiBaseUrl 为本例真实测试后端；不引用或依赖其他用例。",
+        "popup 以 chrome-extension://<extId>/popup/popup.html 的 tab 打开；产品元素只用 getByTestId 定位。所有 http(s) 外站导航先 route 离线 fulfill；不 route、mock 或改写后端 /api、localhost、127.0.0.1 的请求/响应。",
+        "BrowserContext request/response 事件被动观察真实 service worker 请求并按 origin、method、path 归集；不拦截请求。首次打开 popup 的后台请求与点击同步/恢复区间分别计数，等待响应和 storage 写入完成。",
+        "前置步骤只保留本例声明的普通标签页，关闭其他业务页；设置 connection.status=online、recoverPending=false 并清除旧 syncState，避免初始化自动恢复污染手动同步计数；每条结束关闭 popup、标签页与持久化 context。",
+        "通过真实 POST /api/sync 导入两个普通非打开候选页，lastVisitTime取本例当前时间、visitCount=10；它们不含敏感词。"
+      ],
+      "steps": [
+        "S1：仅离线打开并激活 https://example.com/login?TOKEN=abc，导航后清历史再history.addUrl新增该敏感URL；打开popup首页，记录真实POST /api/recommendations/next。",
+        "S2：点击sync-button等待成功，同时记录其请求以及同步刷新触发的推荐请求；读取sync-filtered-count。",
+        "S3：读取chrome.storage.local.cache.recommendations与全部local storage；通过真实ranked核对不含敏感URL。"
+      ],
+      "expected": [
+        "E1：本例所有真实推荐请求均具有currentPage键且currentPage===null；openTabs=[]、recentHistory=[]，序列化请求体中敏感URL出现次数=0。",
+        "E2：同步请求activeTab键存在且值为null、openTabs=[]、history=[]；sync-filtered-count文本为「3」（active/tab/history各1个），响应rejected=0。",
+        "E3：推荐缓存存在cache.recommendations.__none__={data,cachedAt}，cachedAt为正整数；推荐缓存的键集合不包含敏感URL及其去hash形式。",
+        "E4：chrome.storage.local 整体序列化内容中敏感URL出现次数=0。",
+        "E5：ranked.pages 中敏感URL出现次数=0。"
+      ],
+      "testData": "sensitive=https://example.com/login?TOKEN=abc；候选=https://example.org/guide-a 和 https://example.org/guide-b。候选仅由真实API导入，最近历史只包含敏感项。该例覆盖共享REC代码点并直接检查上行，不能用后端兜底拒收替代前端过滤。",
+      "evidence": [
+        "执行时保存 evidence/<CaseID>/result.json、api/ 请求与真实响应、server.log、extension.log、关键步骤 screenshots/ 与 flow.gif；这是后续执行留痕要求，本次只交付用例设计。",
+        "隐私用例的真实出站请求以缺失敏感 URL 的正反对照为核心证据；若发现泄漏，证据文件中的 URL/token 值必须脱敏，保留字段路径、命中词和泄漏条数，截图只使用合成测试数据。"
+      ]
+    },
+    {
+      "id": "TC-UI-PRIV-010",
+      "type": "UI",
+      "module": "PRIV",
+      "title": "关闭关键词过滤的配置边界：真实无痕 URL 仍不会上传",
+      "priority": "P1",
+      "category": "boundary",
+      "technique": "decision-table",
+      "features": [
+        "F-PRIV-04"
+      ],
+      "acceptanceRefs": [
+        "F-PRIV-04#AC1",
+        "F-PRIV-04#AC2"
+      ],
+      "codePoints": [
+        "C-FE-PRIV-03",
+        "C-FE-CTX-06"
+      ],
+      "preconditions": [
+        "每条独立使用全新的持久化 Chromium profile，通过 channel=chromium 加载真实 extension/；先 POST /api/__test__/reset 并清空 chrome.storage.local 与 chrome.history，设置 apiBaseUrl 为本例真实测试后端；不引用或依赖其他用例。",
+        "popup 以 chrome-extension://<extId>/popup/popup.html 的 tab 打开；产品元素只用 getByTestId 定位。所有 http(s) 外站导航先 route 离线 fulfill；不 route、mock 或改写后端 /api、localhost、127.0.0.1 的请求/响应。",
+        "BrowserContext request/response 事件被动观察真实 service worker 请求并按 origin、method、path 归集；不拦截请求。首次打开 popup 的后台请求与点击同步/恢复区间分别计数，等待响应和 storage 写入完成。",
+        "前置步骤只保留本例声明的普通标签页，关闭其他业务页；设置 connection.status=online、recoverPending=false 并清除旧 syncState，避免初始化自动恢复污染手动同步计数；每条结束关闭 popup、标签页与持久化 context。",
+        "本例独立准备持久化 Chromium 测试 profile：加载真实插件，在 chrome://extensions 对该 extension 开启“允许在无痕模式下运行”，关闭并重启同一临时 profile；SW 的 chrome.extension.isAllowedIncognitoAccess() 必须实测为 true。Chrome 内部设置仅作环境准备，产品断言仍仅使用 ui-contract testId。",
+        "由 SW 调用 chrome.windows.create({incognito:true,url:\"about:blank\"}) 创建真实无痕窗口，记录 windowId/tabId；为此无痕 target 安装仅外站的离线路由后再 tabs.update 导航，核验 chrome.tabs.query 返回目标 tab.incognito===true、url 等于本例 private URL。不得用 browser.newContext()、伪造 tabs.query 返回值或单改 incognito 字段替代。",
+        "现有通用夹具不保证提供无痕授权及 target 路由能力，脚本化时需在该用例前置中补齐；授权、真实 incognito tab 或外站离线路由任一未就绪，执行结论必须为 BLOCKED，不能 skip 后计 PASS。finally 用 chrome.windows.remove(windowId) 关闭本例真实无痕窗口并关闭临时 profile。"
+      ],
+      "steps": [
+        "S1：通过真实PUT /api/config 设置 enablePrivacyFilter=false，再GET /api/config核对；普通窗口打开并激活 docs，无痕窗口离线打开private，清普通历史并核验private不在history。",
+        "S2：普通窗口popup打开tab-context，确认真实GET_CONTEXT privacy.enabled=false，再点击sync-button等待成功，观察真实请求与ranked。"
+      ],
+      "expected": [
+        "E1：GET_CONTEXT privacy.enabled=false时，context-tab-url集合仍只有普通docs，private URL出现次数=0。",
+        "E2：真实POST /api/sync不含private URL，activeTab/openTabs仅普通docs且history=[]。",
+        "E3：同步响应status=200、rejected=0、pageCount=1。",
+        "E4：ranked.pages不含private URL，说明禁用关键词过滤并未禁用无痕过滤。"
+      ],
+      "testData": "普通=https://example.com/docs；private=https://example.com/private；enablePrivacyFilter的true/false为配置判定表两侧，true覆盖由本模块普通无痕用例承担，但本例数据全部独立构造。",
+      "evidence": [
+        "执行时保存 evidence/<CaseID>/result.json、api/ 请求与真实响应、server.log、extension.log、关键步骤 screenshots/ 与 flow.gif；这是后续执行留痕要求，本次只交付用例设计。",
+        "隐私用例的真实出站请求以缺失敏感 URL 的正反对照为核心证据；若发现泄漏，证据文件中的 URL/token 值必须脱敏，保留字段路径、命中词和泄漏条数，截图只使用合成测试数据。"
+      ]
+    }
+  ],
+  "waivers": []
+}

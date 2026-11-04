@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>导航助手</title>
+    <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="views/connection.css">
+    <link rel="stylesheet" href="views/current-page.css">
+    <link rel="stylesheet" href="views/important-star.css">
+    <link rel="stylesheet" href="views/sync.css">
+    <link rel="stylesheet" href="views/sync-mode.css">
+    <link rel="stylesheet" href="views/offline-banner.css">
+    <link rel="stylesheet" href="views/recommend.css">
+    <link rel="stylesheet" href="views/ranked-home.css">
+    <link rel="stylesheet" href="views/cleanup-home.css">
+    <link rel="stylesheet" href="views/rule-home.css">
+    <link rel="stylesheet" href="views/diag-home.css">
+    <link rel="stylesheet" href="views/context.css">
+    <link rel="stylesheet" href="views/ranked.css">
+    <link rel="stylesheet" href="views/cleanup.css">
+    <link rel="stylesheet" href="views/rule-parse.css">
+    <link rel="stylesheet" href="views/rule-list.css">
+    <link rel="stylesheet" href="views/diag-api-base.css">
+    <link rel="stylesheet" href="views/diagnostics.css">
+    <script type="module" src="popup.js"></script>
+  </head>
+  <body>
+    <!-- @code C-FE-CORE-06 -->
+    <div class="app">
+      <header class="app-header">
+        <div class="brand"><span class="brand-mark" aria-hidden="true">◎</span><h1 data-testid="app-title">导航助手</h1></div>
+        <div data-slot="connection"></div>
+      </header>
+      <section class="current-page-card" data-testid="current-page-card" aria-labelledby="current-page-heading">
+        <h2 id="current-page-heading" class="eyebrow">当前页面</h2>
+        <div data-slot="current-page"></div>
+        <div data-slot="current-page-actions"></div>
+      </section>
+      <section class="sync-area" aria-label="浏览器上下文同步">
+        <div data-slot="sync"></div>
+        <div data-slot="sync-mode"></div>
+      </section>
+      <nav class="tabs" role="tablist" aria-label="导航助手功能">
+        <button type="button" id="tab-home" role="tab" aria-controls="panel-home" aria-selected="true" data-testid="tab-home">首页</button>
+        <button type="button" id="tab-context" role="tab" aria-controls="panel-context" aria-selected="false" tabindex="-1" data-testid="tab-context">上下文</button>
+        <button type="button" id="tab-ranked" role="tab" aria-controls="panel-ranked" aria-selected="false" tabindex="-1" data-testid="tab-ranked">排序</button>
+        <button type="button" id="tab-cleanup" role="tab" aria-controls="panel-cleanup" aria-selected="false" tabindex="-1" data-testid="tab-cleanup">整理<span class="badge" data-testid="tab-cleanup-count" hidden></span></button>
+        <button type="button" id="tab-rules" role="tab" aria-controls="panel-rules" aria-selected="false" tabindex="-1" data-testid="tab-rules">规则</button>
+        <button type="button" id="tab-diag" role="tab" aria-controls="panel-diag" aria-selected="false" tabindex="-1" data-testid="tab-diag">诊断<span class="alert-dot" aria-label="诊断有待处理项" data-testid="tab-diag-alert" hidden></span></button>
+      </nav>
+      <main class="panels">
+        <section id="panel-home" role="tabpanel" aria-labelledby="tab-home" data-testid="panel-home">
+          <div data-slot="offline-banner-home"></div>
+          <div data-slot="recommend"></div>
+          <div data-slot="ranked-home"></div>
+          <div data-slot="cleanup-home"></div>
+          <div data-slot="rule-home"></div>
+          <div data-slot="diag-home"></div>
+        </section>
+        <section id="panel-context" role="tabpanel" aria-labelledby="tab-context" data-testid="panel-context" hidden>
+          <div data-slot="context"></div>
+        </section>
+        <section id="panel-ranked" role="tabpanel" aria-labelledby="tab-ranked" data-testid="panel-ranked" hidden>
+          <div data-slot="offline-banner-ranked"></div>
+          <div data-slot="ranked"></div>
+        </section>
+        <section id="panel-cleanup" role="tabpanel" aria-labelledby="tab-cleanup" data-testid="panel-cleanup" hidden>
+          <div data-slot="offline-banner-cleanup"></div>
+          <div data-slot="cleanup"></div>
+        </section>
+        <section id="panel-rules" role="tabpanel" aria-labelledby="tab-rules" data-testid="panel-rules" hidden>
+          <div data-slot="rule-parse"></div>
+          <div data-slot="rule-list"></div>
+        </section>
+        <section id="panel-diag" role="tabpanel" aria-labelledby="tab-diag" data-testid="panel-diag" hidden>
+          <div data-slot="diag-api-base"></div>
+          <div data-slot="diagnostics"></div>
+        </section>
+      </main>
+      <div class="toast" role="status" aria-live="polite" aria-atomic="true" data-testid="toast" hidden></div>
+    </div>
+  </body>
+</html>

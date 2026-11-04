@@ -1,0 +1,188 @@
+{
+  "caseId": "TC-API-MENU-006",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:48.837Z",
+  "tests": [
+    {
+      "testId": "7e8d3ba1aa8ac3262f8f-5e3315003d2178d521db",
+      "title": "TC-API-MENU-006 /api/pages/manual 拒收敏感 URL https://example.com/reset?token=1",
+      "project": "api",
+      "file": "tests/api/TC-API-MENU-006.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 39,
+      "startedAt": "2026-11-04T03:25:48.722Z",
+      "endedAt": "2026-11-04T03:25:48.761Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 8,
+      "screenshots": [],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 122,
+          "after": 124
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    },
+    {
+      "testId": "7e8d3ba1aa8ac3262f8f-b6a957cdbd04c53d34a8",
+      "title": "TC-API-MENU-006 /api/pages/manual 拒收敏感 URL https://BANK.example.com/account",
+      "project": "api",
+      "file": "tests/api/TC-API-MENU-006.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 22,
+      "startedAt": "2026-11-04T03:25:48.766Z",
+      "endedAt": "2026-11-04T03:25:48.788Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 8,
+      "screenshots": [],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 124,
+          "after": 126
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    },
+    {
+      "testId": "7e8d3ba1aa8ac3262f8f-bffa537ceab3cebda4eb",
+      "title": "TC-API-MENU-006 /api/pages/important 拒收敏感 URL https://example.com/reset?token=1",
+      "project": "api",
+      "file": "tests/api/TC-API-MENU-006.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 20,
+      "startedAt": "2026-11-04T03:25:48.792Z",
+      "endedAt": "2026-11-04T03:25:48.812Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 8,
+      "screenshots": [],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 126,
+          "after": 128
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    },
+    {
+      "testId": "7e8d3ba1aa8ac3262f8f-104078d240f7685adf8f",
+      "title": "TC-API-MENU-006 /api/pages/important 拒收敏感 URL https://BANK.example.com/account",
+      "project": "api",
+      "file": "tests/api/TC-API-MENU-006.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 21,
+      "startedAt": "2026-11-04T03:25:48.816Z",
+      "endedAt": "2026-11-04T03:25:48.837Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 8,
+      "screenshots": [],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 128,
+          "after": 130
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "caseId": "TC-UI-INCR-001",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:34.290Z",
+  "tests": [
+    {
+      "testId": "ede80a545050df2a42b4-508e5abece459eb2ebfc",
+      "title": "TC-UI-INCR-001 同一非空后端连续同步：保留5分钟重叠历史并上传两个普通窗口的全部标签",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-INCR-001.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 2237,
+      "startedAt": "2026-11-04T03:28:32.053Z",
+      "endedAt": "2026-11-04T03:28:34.290Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [
+        "evidence/TC-UI-INCR-001/screenshots/01-打开popup.png",
+        "evidence/TC-UI-INCR-001/screenshots/02-第一批同步成功.png",
+        "evidence/TC-UI-INCR-001/screenshots/03-第二批增量同步成功.png"
+      ],
+      "serverLogLines": 31,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1086,
+          "after": 1088
+        },
+        "pages": {
+          "added": 3,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 3,
+          "rules": 0,
+          "openPages": 3,
+          "archivedPages": 0,
+          "syncLogs": 2
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "第一批 syncState={\"cursor\":1793762912863,\"cursorBase\":{\"apiBaseUrl\":\"http://127.0.0.1:4300\",\"serverStartedAt\":1793762741762},\"fullReason\":null,\"lastError\":null,\"lastSuccessAt\":1793762912863,\"lastSyncAt\":1793762912871,\"mode\":\"full\",\"startedAt\":1793762912863,\"stats\":{\"created\":2,\"filtered\":0,\"received\":5,\"rejected\":0,\"updated\":3,\"uploaded\":5},\"status\":\"success\",\"trigger\":\"user\"} health={\"status\":\"ok\",\"version\":\"1.0.0\",\"uptime\":171,\"pageCount\":2,\"ruleCount\":0,\"enabledRuleCount\":0,\"lastSyncAt\":1793762912871,\"persistence\":\"memory\",\"startedAt\":1793762741762}",
+        "第二批 history.query=[{\"ts\":1793762913983,\"startTime\":1793762612863,\"maxResults\":100}] syncState={\"cursor\":1793762913975,\"cursorBase\":{\"apiBaseUrl\":\"http://127.0.0.1:4300\",\"serverStartedAt\":1793762741762},\"fullReason\":null,\"lastError\":null,\"lastSuccessAt\":1793762913975,\"lastSyncAt\":1793762913985,\"mode\":\"incremental\",\"startedAt\":1793762913975,\"stats\":{\"created\":1,\"filtered\":0,\"received\":7,\"rejected\":0,\"updated\":6,\"uploaded\":7},\"status\":\"success\",\"trigger\":\"user\"}"
+      ]
+    }
+  ]
+}

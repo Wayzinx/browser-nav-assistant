@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-SYNC-025",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:06.624Z",
+  "tests": [
+    {
+      "testId": "d5713cadb74f9f1a3efd-5033a04449e6b1c9518e",
+      "title": "TC-API-SYNC-025 请求体恰为 1 MB 接收、多一字节整批拒绝",
+      "project": "api",
+      "file": "tests/api/TC-API-SYNC-025.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 34,
+      "startedAt": "2026-11-04T03:27:06.590Z",
+      "endedAt": "2026-11-04T03:27:06.624Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 8,
+      "screenshots": [],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 913,
+          "after": 915
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

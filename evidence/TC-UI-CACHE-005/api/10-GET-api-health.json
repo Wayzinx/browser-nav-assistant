@@ -1,0 +1,42 @@
+{
+  "source": "service-worker",
+  "phase": "manual-setup-sync",
+  "observationSequence": 8,
+  "reqId": "ext_1793762837678_8",
+  "method": "GET",
+  "url": "http://127.0.0.1:4300/api/health",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762837678_8"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "connection": "keep-alive",
+    "date": "Wed, 04 Nov 2026 03:27:17 GMT",
+    "keep-alive": "timeout=5",
+    "access-control-expose-headers": "x-request-id",
+    "content-length": "171",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin",
+    "x-request-id": "ext_1793762837678_8"
+  },
+  "responseBody": {
+    "status": "ok",
+    "version": "1.0.0",
+    "uptime": 95,
+    "pageCount": 10,
+    "ruleCount": 0,
+    "enabledRuleCount": 0,
+    "lastSyncAt": 1793762837378,
+    "persistence": "memory",
+    "startedAt": 1793762741762
+  },
+  "responseText": "{\"status\":\"ok\",\"version\":\"1.0.0\",\"uptime\":95,\"pageCount\":10,\"ruleCount\":0,\"enabledRuleCount\":0,\"lastSyncAt\":1793762837378,\"persistence\":\"memory\",\"startedAt\":1793762741762}",
+  "parseError": null,
+  "ms": 4,
+  "setup": true
+}

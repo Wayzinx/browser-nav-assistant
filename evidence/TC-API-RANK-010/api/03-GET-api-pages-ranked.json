@@ -1,0 +1,89 @@
+{
+  "reqId": "TC-API-RANK-010-03",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/ranked",
+  "params": {
+    "domain": "react.dev",
+    "limit": 500,
+    "now": 1793762823404
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-RANK-010-03"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RANK-010-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "988",
+    "date": "Wed, 04 Nov 2026 03:27:03 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "pages": [
+      {
+        "id": "page_1",
+        "url": "https://react.dev/a",
+        "normalizedUrl": "https://react.dev/a",
+        "title": "https://react.dev/a",
+        "domain": "react.dev",
+        "visitCount": 1,
+        "lastVisitedAt": 1793759223404,
+        "firstSeenAt": 1793759223404,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.8,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "今天访问过，常用域名 react.dev"
+      },
+      {
+        "id": "page_2",
+        "url": "https://sub.react.dev/b",
+        "normalizedUrl": "https://sub.react.dev/b",
+        "title": "https://sub.react.dev/b",
+        "domain": "sub.react.dev",
+        "visitCount": 1,
+        "lastVisitedAt": 1793759223404,
+        "firstSeenAt": 1793759223404,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.8,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "今天访问过，常用域名 sub.react.dev"
+      }
+    ],
+    "total": 2,
+    "domains": [
+      "notreact.dev",
+      "react.dev",
+      "sub.react.dev"
+    ],
+    "generatedAt": 1793762823404
+  },
+  "ms": 0.7,
+  "mutated": null
+}

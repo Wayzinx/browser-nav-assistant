@@ -1,0 +1,4 @@
+[data-slot="connection"] [data-testid="connection-status"] { font-size: 12px; white-space: nowrap; }
+[data-slot="connection"] [data-state="online"] { color: #067647; background: #ecfdf3; border-color: #abefc6; }
+[data-slot="connection"] [data-state="offline"] { color: #b42318; background: #fef3f2; border-color: #fecdca; }
+[data-slot="connection"] [data-state="checking"] { color: #475467; }

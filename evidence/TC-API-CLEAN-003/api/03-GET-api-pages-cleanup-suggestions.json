@@ -1,0 +1,37 @@
+{
+  "reqId": "TC-API-CLEAN-003-03",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/cleanup-suggestions",
+  "params": {
+    "now": "abc"
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-CLEAN-003-03"
+  },
+  "requestBody": null,
+  "status": 400,
+  "responseHeaders": {
+    "x-request-id": "TC-API-CLEAN-003-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "119",
+    "date": "Wed, 04 Nov 2026 03:25:43 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "error": {
+      "code": "VALIDATION_FAILED",
+      "message": "?now= 必须是正整数毫秒时间戳",
+      "details": {
+        "fields": [
+          "now"
+        ]
+      }
+    }
+  },
+  "ms": 1.3,
+  "mutated": null
+}

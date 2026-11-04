@@ -1,0 +1,60 @@
+{
+  "caseId": "TC-UI-SYNC-003",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:56.119Z",
+  "tests": [
+    {
+      "testId": "f3f576ed9fb630456f48-651edfb8012b95c68006",
+      "title": "TC-UI-SYNC-003 同一页面任务内快速再点同步：立即禁用且只发送一次POST",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-SYNC-003.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1032,
+      "startedAt": "2026-11-04T03:29:55.087Z",
+      "endedAt": "2026-11-04T03:29:56.119Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 3,
+      "screenshots": [
+        "evidence/TC-UI-SYNC-003/screenshots/01-首次打开-同步前.png",
+        "evidence/TC-UI-SYNC-003/screenshots/02-同一任务双击之后.png",
+        "evidence/TC-UI-SYNC-003/screenshots/03-单次同步完成且两个按钮恢复.png"
+      ],
+      "serverLogLines": 20,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1203,
+          "after": 1204
+        },
+        "pages": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 2,
+          "rules": 0,
+          "openPages": 2,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "{\"clickedAt\":1793762995832,\"intermediate\":{\"syncDisabled\":true,\"fullDisabled\":true},\"nativeClicksInSameTask\":2}",
+        "{\"storage\":{\"cache\":{\"cachedAt\":1793762995859,\"cleanup\":{\"cachedAt\":1793762995857,\"data\":{\"generatedAt\":1793762995848,\"suggestions\":[],\"summary\":{\"archive\":0,\"keep\":0,\"merge\":0},\"thresholdDays\":14}},\"config\":{\"cachedAt\":1793762995856,\"data\":{\"apiVersion\":\"1\",\"baseSensitiveKeywords\":[\"password\",\"token\",\"bank\",\"secret\"],\"cleanupThresholdDays\":14,\"enablePrivacyFilter\":true,\"historyLookbackDays\":30,\"limits\":{\"maxBodyBytes\":1048576,\"maxItemsPerSync\":500,\"maxRuleTextLength\":500,\"maxUrlLength\":2048},\"maxHistoryItems\":100,\"minRecommendationScore\":0.3,\"privacySensitiveKeywords\":[\"password\",\"token\",\"bank\",\"secret\"],\"recencyHalfLifeDays\":7,\"weights\":{\"domain\":0.1,\"frequency\":0.3,\"open\":0.2,\"recency\":0.4}}},\"ranked\":{\"cachedAt\":1793762995854,\"data\":{\"domains\":[\"developer.mozilla.org\",\"github.com\"],\"generatedAt\":1793762995842,\"pages\":[{\"domain\":\"developer.mozilla.org\",\"firstSeenAt\":1793762995641.481,\"id\":\"page_1\",\"isActive\":true,\"isImportant\":false,\"isOpen\":true,\"lastVisitedAt\":1793762995842,\"normalizedUrl\":\"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\",\"reason\":\"正在浏览，今天访问过，常用域名 developer.mozilla.org\",\"score\":1,\"scoreDetail\":{\"domain\":1,\"domainSource\":\"affinity\",\"frequency\":1,\"open\":1,\"recency\":1},\"sources\":[\"history\",\"open_tab\",\"active_tab\"],\"title\":\"Fetch API - Web APIs | MDN\",\"url\":\"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\",\"visitCount\":2},{\"domain\":\"github.com\",\"firstSeenAt\":1793762995595.883,\"id\":\"page_2\",\"isActive\":false,\"isImportant\":false,\"isOpen\":true,\"lastVisitedAt\":1793762995672.163,\"normalizedUrl\":\"https://github.com/org/repo/pull/456\",\"reason\":\"今天访问过，当前仍处于打开状态，常用域名 github.com\",\"score\":1,\"scoreDetail\":{\"domain\":1,\"domainSource\":\"affinity\",\"frequency\":1,\"open\":1,\"recency\":1},\"sources\":[\"history\",\"open_tab\"],\"title\":\"Refactor auth middleware (#456)\",\"url\":\"https://github.com/org/repo/pull/456\",\"visitCount\":2}],\"total\":2}},\"recommendations\":{\"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\":{\"cachedAt\":1793762995859,\"data\":{\"cached\":false,\"generatedAt\":1793762995857,\"recommendations\":[]}}},\"rules\":{\"cachedAt\":1793762995855,\"data\":{\"rules\":[],\"total\":0}}},\"syncState\":{\"cursor\":1793762995835,\"cursorBase\":{\"apiBaseUrl\":\"http://127.0.0.1:4300\",\"serverStartedAt\":1793762741762},\"fullReason\":null,\"lastError\":null,\"lastSuccessAt\":1793762995835,\"lastSyncAt\":1793762995842,\"mode\":\"full\",\"startedAt\":1793762995835,\"stats\":{\"created\":2,\"filtered\":0,\"received\":5,\"rejected\":0,\"updated\":3,\"uploaded\":5},\"status\":\"success\",\"trigger\":\"user\"}},\"posts\":1}"
+      ]
+    }
+  ]
+}

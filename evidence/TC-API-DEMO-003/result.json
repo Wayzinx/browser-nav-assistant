@@ -1,0 +1,57 @@
+{
+  "caseId": "TC-API-DEMO-003",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:46.047Z",
+  "tests": [
+    {
+      "testId": "d9ffc900e89be5b7b498-bfaad8314dc3f2b50a81",
+      "title": "TC-API-DEMO-003 端口已被占用时 start.sh 以退出码 1 结束并提示换 PORT",
+      "project": "api",
+      "file": "tests/api/TC-API-DEMO-003.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 155,
+      "startedAt": "2026-11-04T03:25:45.892Z",
+      "endedAt": "2026-11-04T03:25:46.047Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 2,
+      "screenshots": [],
+      "serverLogLines": 4,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 67,
+          "after": 67
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "原服务占用 127.0.0.1:4300，startedAt=1793762741762",
+        "start.sh pid=52969 PORT=4300（被原服务占用）",
+        "start.sh 退出 {\"code\":1,\"signal\":null}"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-CLEAN-014",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:44.432Z",
+  "tests": [
+    {
+      "testId": "0a3c9f229f0d491e6e31-947a31fd0a80bdee7b10",
+      "title": "TC-API-CLEAN-014 禁用的保护规则不阻止默认归档",
+      "project": "api",
+      "file": "tests/api/TC-API-CLEAN-014.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 29,
+      "startedAt": "2026-11-04T03:25:44.403Z",
+      "endedAt": "2026-11-04T03:25:44.432Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 27,
+          "after": 28
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 1,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

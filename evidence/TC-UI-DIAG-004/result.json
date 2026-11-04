@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-UI-DIAG-004",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:08.619Z",
+  "tests": [
+    {
+      "testId": "4121f57b8e98cea912cd-ce909de40a022aed370d",
+      "title": "TC-UI-DIAG-004 存储中没有 apiBaseUrl 时诊断页显示默认地址 http://127.0.0.1:3000",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-DIAG-004.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 903,
+      "startedAt": "2026-11-04T03:28:07.716Z",
+      "endedAt": "2026-11-04T03:28:08.619Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-DIAG-004/screenshots/01-S1-默认地址诊断.png"
+      ],
+      "serverLogLines": 3,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1057,
+          "after": 1057
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 2,
+      "notes": []
+    }
+  ]
+}

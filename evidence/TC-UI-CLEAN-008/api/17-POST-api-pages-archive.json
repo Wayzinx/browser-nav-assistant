@@ -1,0 +1,35 @@
+{
+  "source": "extension",
+  "method": "POST",
+  "url": "http://127.0.0.1:4300/api/pages/archive",
+  "reqId": "ext_1793762854261_9",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762854261_9"
+  },
+  "requestBody": "{\"urls\":[\"https://github.com/org/repo/issues/100\"]}",
+  "status": 404,
+  "responseHeaders": {
+    "connection": "keep-alive",
+    "date": "Wed, 04 Nov 2026 03:27:34 GMT",
+    "keep-alive": "timeout=5",
+    "access-control-allow-origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "access-control-expose-headers": "x-request-id",
+    "content-length": "58",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin",
+    "x-request-id": "ext_1793762854261_9"
+  },
+  "responseBody": {
+    "error": {
+      "code": "NOT_FOUND",
+      "message": "页面不存在"
+    }
+  },
+  "ms": 1.4,
+  "setup": false
+}

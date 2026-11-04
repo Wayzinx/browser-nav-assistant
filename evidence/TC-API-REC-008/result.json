@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-API-REC-008",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:03.934Z",
+  "tests": [
+    {
+      "testId": "b8fbefd0299e59f7d297-47871b9e68c23a47bdfc",
+      "title": "TC-API-REC-008 保存规则后乱序输入的最近三个不同 React 页面触发 MDN 推荐",
+      "project": "api",
+      "file": "tests/api/TC-API-REC-008.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 21,
+      "startedAt": "2026-11-04T03:27:03.913Z",
+      "endedAt": "2026-11-04T03:27:03.934Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 7,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 688,
+          "after": 690
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 1,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "{\"T\":1793762823921,\"N\":1793762823922}",
+        "{\"ruleId\":\"rule_1\"}"
+      ]
+    }
+  ]
+}

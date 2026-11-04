@@ -1,0 +1,19 @@
+{
+  "caseId": "TC-UI-DIAG-001",
+  "verdict": "pass",
+  "observed": "首页 connection-status data-state=online「后端已连接」；进入诊断后 panel-diag 可见、diag-loading 隐藏，diag-checked-at data-ts 与 Date.now 相差 <1s；diag-check-backend=ok，名称「后端服务连接」，value「version=1.0.0，3 ms」，detail「…耗时 3 ms」；diag-summary「通过 8 · 警告 2 · 失败 0 · 提示 1」与 lastDiagnostics.summary {ok:8,warn:2,fail:0} 一致。E1–E5 满足。",
+  "steps": [
+    "PORT=4183 启动后端（ENABLE_TEST_API=1），每条前 POST /api/__test__/reset",
+    "headless chromium（channel=chromium）加载 extension/（DIAG-010/012 为删权限临时副本），apiBaseUrl 指向 http://127.0.0.1:4183，只 route 外部站点",
+    "S1 首页（截图 evidence/TC-UI-DIAG-001/explore/1.png）",
+    "S3 诊断页（截图 evidence/TC-UI-DIAG-001/explore/2.png）",
+    "探索脚本：tests/explore/tmp/x4183-diag.mjs；观测数据与 aria 快照：tests/explore/tmp/x4183-diag.out.json",
+    "TEST_PORT=4183 npx playwright test tests/ui/TC-UI-DIAG-001.spec.mjs 通过（2026-11-03 07:27 续跑：产品代码与 UI-DIAG/RULE 用例分片未变；探索脚本 52/52 ok，观测与 aria 快照除数字/时间外与上轮完全一致；TEST_PORT=4183 隔离 --output 批量 52 passed）"
+  ],
+  "screenshots": [
+    "evidence/TC-UI-DIAG-001/explore/1.png",
+    "evidence/TC-UI-DIAG-001/explore/2.png"
+  ],
+  "spec": "tests/ui/TC-UI-DIAG-001.spec.mjs",
+  "solidified": true
+}

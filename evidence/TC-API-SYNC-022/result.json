@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-SYNC-022",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:06.500Z",
+  "tests": [
+    {
+      "testId": "c85510447ae06b035d56-8f281a4d3e5abae3196a",
+      "title": "TC-API-SYNC-022 单条 javascript URL 拒收但合法 HTTPS 历史入库",
+      "project": "api",
+      "file": "tests/api/TC-API-SYNC-022.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 21,
+      "startedAt": "2026-11-04T03:27:06.479Z",
+      "endedAt": "2026-11-04T03:27:06.500Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 8,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 904,
+          "after": 906
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-UI-RANK-005",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:17.163Z",
+  "tests": [
+    {
+      "testId": "e596546a1a4654ec8bd0-55ede2472a56400ef70e",
+      "title": "TC-UI-RANK-005 后端数据为空时首页与排序页签都显示空状态，文案包含「同步浏览器上下文」且没有排序项",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RANK-005.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 868,
+      "startedAt": "2026-11-04T03:29:16.295Z",
+      "endedAt": "2026-11-04T03:29:17.163Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 2,
+      "screenshots": [
+        "evidence/TC-UI-RANK-005/screenshots/01-首页排序空状态.png",
+        "evidence/TC-UI-RANK-005/screenshots/02-排序页签空状态.png"
+      ],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1153,
+          "after": 1153
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

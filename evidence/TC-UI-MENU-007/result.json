@@ -1,0 +1,60 @@
+{
+  "caseId": "TC-UI-MENU-007",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:52.866Z",
+  "tests": [
+    {
+      "testId": "0f7d27993ac10d602845-bdd09ff8be00c2999f85",
+      "title": "TC-UI-MENU-007 同一页面连续两次添加只保留一个 manual 页面",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-MENU-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1343,
+      "startedAt": "2026-11-04T03:28:51.523Z",
+      "endedAt": "2026-11-04T03:28:52.866Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 8,
+      "screenshots": [
+        "evidence/TC-UI-MENU-007/screenshots/01-点击前.png",
+        "evidence/TC-UI-MENU-007/screenshots/02-第一次添加.png",
+        "evidence/TC-UI-MENU-007/screenshots/03-reload后.png"
+      ],
+      "serverLogLines": 28,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1116,
+          "after": 1118
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 2,
+      "notes": [
+        "add-twice 观察到的写请求：[{\"sequence\":1,\"phase\":\"add-twice\",\"method\":\"POST\",\"url\":\"http://127.0.0.1:4300/api/pages/manual\",\"origin\":\"http://127.0.0.1:4300\",\"path\":\"/api/pages/manual\",\"fromServiceWorker\":true,\"startedAt\":1793762932316,\"transport\":\"finished\",\"status\":200,\"failure\":null,\"endedAt\":1793762932318,\"persisted\":true}]",
+        "add-twice 观察到的写请求：[{\"sequence\":1,\"phase\":\"add-twice\",\"method\":\"POST\",\"url\":\"http://127.0.0.1:4300/api/pages/manual\",\"origin\":\"http://127.0.0.1:4300\",\"path\":\"/api/pages/manual\",\"fromServiceWorker\":true,\"startedAt\":1793762932316,\"transport\":\"finished\",\"status\":200,\"failure\":null,\"endedAt\":1793762932318,\"persisted\":true},{\"sequence\":2,\"phase\":\"add-twice\",\"method\":\"POST\",\"url\":\"http://127.0.0.1:4300/api/pages/manual\",\"origin\":\"http://127.0.0.1:4300\",\"path\":\"/api/pages/manual\",\"fromServiceWorker\":true,\"startedAt\":1793762932463,\"transport\":\"finished\",\"status\":200,\"failure\":null,\"endedAt\":1793762932465,\"persisted\":true}]"
+      ]
+    }
+  ]
+}

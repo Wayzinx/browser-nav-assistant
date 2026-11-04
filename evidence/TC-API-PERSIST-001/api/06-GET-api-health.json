@@ -1,0 +1,35 @@
+{
+  "reqId": "TC-API-PERSIST-001-06",
+  "setup": false,
+  "method": "GET",
+  "url": "http://127.0.0.1:62262/api/health",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-PERSIST-001-06"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-PERSIST-001-06",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "172",
+    "date": "Wed, 04 Nov 2026 03:26:57 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "status": "ok",
+    "version": "1.0.0",
+    "uptime": 0,
+    "pageCount": 10,
+    "ruleCount": 2,
+    "enabledRuleCount": 2,
+    "lastSyncAt": 1793762815576,
+    "persistence": "snapshot",
+    "startedAt": 1793762817638
+  },
+  "ms": 0.8,
+  "mutated": null
+}

@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-SYNC-019",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:06.389Z",
+  "tests": [
+    {
+      "testId": "183cb261547e6c1d59cc-debd7bd25032e087f06b",
+      "title": "TC-API-SYNC-019 history 恰好 500 条全部入库并完整回读",
+      "project": "api",
+      "file": "tests/api/TC-API-SYNC-019.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 28,
+      "startedAt": "2026-11-04T03:27:06.361Z",
+      "endedAt": "2026-11-04T03:27:06.389Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 8,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 896,
+          "after": 898
+        },
+        "pages": {
+          "added": 500,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 500,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

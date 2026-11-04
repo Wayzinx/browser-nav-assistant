@@ -1,0 +1,30 @@
+{
+  "caseId": "TC-UI-SYNC-006",
+  "verdict": "pass",
+  "observed": "第7轮复测（extension/、server/、tests/ui 本例脚本自第6轮后均未改动）：原生 click 后立即关闭 popup，3 秒后重开：storage.syncState.status=success，health.pageCount=2，新 popup 显示「同步成功 上传 5 条 · 过滤 0 条」，POST 总数=1。[En] 全部满足；关闭探索后端后 TEST_PORT=4184 下 16 条批量运行本例通过，脚本无需修改。 ‖ 前一轮：第6轮复测（产品代码自第5轮后未改动，extension/ 最后修改 23:20）：点同步后立即关 popup，后台 syncState=success、health.pageCount=2；重开显示「同步成功 上传 5 条 · 过滤 0 条」，POST=1。[En] 全部满足；TEST_PORT=4184 下 16 条批量运行 TC-UI-SYNC-006 通过，脚本无需修改。（注：第7轮开始时发现前轮登记的截图 r6-1.png 已不存在，截图列表只保留现存文件）",
+  "steps": [
+    "第7轮：127.0.0.1:4184 启动真实后端（ENABLE_TEST_API=1，LOG_FILE=evidence/_runtime/explore-4184.log），headless Chromium(channel=chromium) 加载 extension/，只离线化外站",
+    "第7轮：node tests/explore/tmp/sync-r7-4184.mjs SYNC（输出 tests/explore/tmp/sync-r7-4184.out.json），截图 + ariaSnapshot + 请求体/storage/health 比对 [En]",
+    "第7轮：Read 截图核对 UI 状态",
+    "第7轮：关闭探索后端后 TEST_PORT=4184 npx playwright test（INCR-001..007、SYNC-001..009 共 16 条），本例通过",
+    "第6轮：127.0.0.1:4184 启动真实后端（ENABLE_TEST_API=1，LOG_FILE=evidence/_runtime/explore-4184.log），headless Chromium(channel=chromium) 加载 extension/，只离线化外站",
+    "第6轮：node tests/explore/tmp/sync-r6-4184.mjs SYNC（输出 tests/explore/tmp/sync-r6-4184.out.json），截图 + ariaSnapshot + 请求体/storage/health 比对 [En]",
+    "第6轮：Read 截图核对 UI 状态",
+    "第6轮：关闭探索后端后 TEST_PORT=4184 npx playwright test（INCR-001..007、SYNC-001..009 共 16 条）16 passed",
+    "第5轮：127.0.0.1:4184 启动真实后端（ENABLE_TEST_API=1，LOG_FILE=evidence/_runtime/explore-4184.log），headless Chromium(channel=chromium) 加载 extension/，apiBaseUrl 指向 4184，只离线化外站",
+    "第5轮：node tests/explore/tmp/sync-r5-4184.mjs SYNC-006，输出 tests/explore/tmp/sync-r5-4184.out.json（含 ariaSnapshot）",
+    "第5轮：Read 截图核对 UI 状态，结合请求体、storage 和后端 health/ranked 逐条比对 [En]",
+    "第5轮：关闭探索后端后执行 TEST_PORT=4184 npx playwright test tests/ui/TC-UI-SYNC-006.spec.mjs（16 条批量）通过；脚本无需修改",
+    "第5轮：TC-UI-DIAG-010/012 与 INCR-001、SYNC-001 同批运行 4/4 通过，确认 EXT_DIR 泄漏已消除",
+    "后端 4181（ENABLE_TEST_API=1）reset，headless chromium 加载 extension/，apiBaseUrl=http://127.0.0.1:4181，外部站点离线化",
+    "运行 tests/explore/tmp/cache-sync-r3-4181.mjs 中对应场景，关键步骤截图并记录 ariaSnapshot（tests/explore/tmp/cache-sync-r3.out.json）",
+    "停止探索后端后执行 TEST_PORT=4181 npx playwright test tests/ui/TC-UI-SYNC-006.spec.mjs：通过"
+  ],
+  "screenshots": [
+    "evidence/TC-UI-SYNC-006/explore/r7-1.png",
+    "evidence/TC-UI-SYNC-006/explore/r5-1.png",
+    "evidence/TC-UI-SYNC-006/explore/r3-1.png"
+  ],
+  "spec": "tests/ui/TC-UI-SYNC-006.spec.mjs",
+  "solidified": true
+}

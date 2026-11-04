@@ -1,0 +1,50 @@
+- banner:
+  - heading "导航助手" [level=1]
+  - button "后端已连接"
+- region "当前页面":
+  - heading "当前页面" [level=2]
+  - paragraph: github.com/org/repo/pull/456
+  - paragraph: https://github.com/org/repo/pull/456
+  - button "标记为重要": ☆
+  - button "添加到分析"
+- region "浏览器上下文同步":
+  - button "同步浏览器上下文"
+  - status:
+    - paragraph: 同步成功
+    - paragraph: 上传 9 条 · 过滤 0 条
+    - time: 07:28 · 刚刚
+  - button "全量同步"
+  - paragraph: 当前模式：全量
+- tablist "导航助手功能":
+  - tab "首页"
+  - tab "上下文"
+  - tab "排序"
+  - tab "整理 3"
+  - tab "规则" [selected]
+  - tab "诊断"
+- main:
+  - tabpanel "规则":
+    - heading "解析规则" [level=2]
+    - text: 规则内容（最多 500 字）
+    - textbox "规则内容（最多 500 字）":
+      - /placeholder: 输入一句话配置规则
+      - text: 把 7 天没访问过的 GitHub issue 建议归档，但 docs.internal.com 的页面永远不要归档
+    - button "解析"
+    - button "确认保存 0 条" [disabled]
+    - status: 已保存 2 条规则
+    - heading "已保存规则 · 2" [level=2]
+    - list:
+      - listitem:
+        - text: 建议归档
+        - paragraph: github.com · /issues/ · 7 天
+        - paragraph: 把 7 天没访问过的 GitHub issue 建议归档
+        - switch "启用规则" [checked]
+        - text: 启用规则
+        - button "删除"
+      - listitem:
+        - text: 永不归档
+        - paragraph: docs.internal.com
+        - paragraph: docs.internal.com 的页面永远不要归档
+        - switch "启用规则" [checked]
+        - text: 启用规则
+        - button "删除"

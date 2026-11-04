@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-UI-DIAG-018",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:22.427Z",
+  "tests": [
+    {
+      "testId": "9c4ae240032d674841db-54a94bf3965e380e6ea9",
+      "title": "TC-UI-DIAG-018 最近一次成功同步在 25 小时前（24 小时 + 1 小时）时警告「超过 24 小时未同步」",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-DIAG-018.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 988,
+      "startedAt": "2026-11-04T03:28:21.439Z",
+      "endedAt": "2026-11-04T03:28:22.427Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 6,
+      "screenshots": [
+        "evidence/TC-UI-DIAG-018/screenshots/01-S3-超过-24-小时未同步.png"
+      ],
+      "serverLogLines": 21,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1074,
+          "after": 1074
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-DIAG-005",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:48.208Z",
+  "tests": [
+    {
+      "testId": "e8783833398caed3a439-3bb2e4614bf3b050fdc0",
+      "title": "TC-API-DIAG-005 uptime 以整秒计：与 startedAt 推算的秒数相差不超过 1，间隔 1.2 秒后至少增加 1",
+      "project": "api",
+      "file": "tests/api/TC-API-DIAG-005.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1218,
+      "startedAt": "2026-11-04T03:25:46.990Z",
+      "endedAt": "2026-11-04T03:25:48.208Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 3,
+      "screenshots": [],
+      "serverLogLines": 5,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 92,
+          "after": 92
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

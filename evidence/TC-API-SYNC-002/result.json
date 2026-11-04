@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-API-SYNC-002",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:05.863Z",
+  "tests": [
+    {
+      "testId": "12b7044218a0224e6776-105dbac1a0379498765a",
+      "title": "TC-API-SYNC-002 系统页已跳过的上下文只保存普通页面",
+      "project": "api",
+      "file": "tests/api/TC-API-SYNC-002.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 13,
+      "startedAt": "2026-11-04T03:27:05.850Z",
+      "endedAt": "2026-11-04T03:27:05.863Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 8,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 836,
+          "after": 838
+        },
+        "pages": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 2,
+          "rules": 0,
+          "openPages": 2,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "实际请求体：{\"activeTab\":null,\"openTabs\":[{\"url\":\"https://github.com/org/repo/pull/456\"},{\"url\":\"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API\"}],\"history\":[]}"
+      ]
+    }
+  ]
+}

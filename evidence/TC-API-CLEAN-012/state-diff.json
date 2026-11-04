@@ -1,0 +1,99 @@
+{
+  "summary": {
+    "dataVersion": {
+      "before": 23,
+      "after": 24
+    },
+    "pages": {
+      "added": 1,
+      "removed": 0,
+      "changed": 0
+    },
+    "rules": {
+      "added": 1,
+      "removed": 0,
+      "changed": 0
+    },
+    "counts": {
+      "pages": 1,
+      "rules": 1,
+      "openPages": 0,
+      "archivedPages": 0,
+      "syncLogs": 1
+    },
+    "configChanged": [],
+    "persistChanged": false
+  },
+  "counts": {
+    "pages": {
+      "before": 0,
+      "after": 1,
+      "delta": 1
+    },
+    "rules": {
+      "before": 0,
+      "after": 1,
+      "delta": 1
+    },
+    "openPages": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "archivedPages": {
+      "before": 0,
+      "after": 0,
+      "delta": 0
+    },
+    "syncLogs": {
+      "before": 0,
+      "after": 1,
+      "delta": 1
+    }
+  },
+  "pages": {
+    "added": [
+      {
+        "id": "page_1",
+        "url": "https://docs.internal.com/old",
+        "normalizedUrl": "https://docs.internal.com/old",
+        "domain": "docs.internal.com",
+        "title": "old doc",
+        "visitCount": 1,
+        "lastVisitedAt": 1791170744332,
+        "firstSeenAt": 1791170744332,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isArchived": false,
+        "archivedAt": null,
+        "mergedInto": null,
+        "isImportant": false
+      }
+    ],
+    "removed": [],
+    "changed": []
+  },
+  "rules": {
+    "added": [
+      {
+        "domain": "docs.internal.com",
+        "urlPattern": null,
+        "inactiveDays": null,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762744337,
+        "updatedAt": 1793762744337,
+        "rawText": "docs.internal.com 的页面永远不要归档",
+        "type": "never_archive",
+        "action": "keep",
+        "id": "rule_1"
+      }
+    ],
+    "removed": [],
+    "changed": []
+  },
+  "config": {}
+}

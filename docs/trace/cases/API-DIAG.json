@@ -1,0 +1,435 @@
+{
+  "cases": [
+    {
+      "id": "TC-API-DIAG-001",
+      "type": "API",
+      "module": "DIAG",
+      "title": "后端数据为空时 GET /api/health 返回 200、version=1.0.0、页面数和规则数为 0",
+      "priority": "P0",
+      "category": "positive",
+      "technique": "equivalence",
+      "features": ["F-DIAG-09", "F-DIAG-01"],
+      "acceptanceRefs": ["F-DIAG-09#AC1", "F-DIAG-01#AC1"],
+      "codePoints": ["C-BE-DIAG-01", "C-BE-CORE-15", "C-BE-CORE-14"],
+      "preconditions": ["后端以 ENABLE_TEST_API=1 启动，未配置 SNAPSHOT_FILE", "测试夹具已调用 POST /api/__test__/reset"],
+      "testData": "不导入任何数据；未配置 SNAPSHOT_FILE，因此 persistence 期望为 memory",
+      "steps": [
+        "S1：POST /api/__test__/reset",
+        "S2：GET /api/health"
+      ],
+      "expected": [
+        "E1：S1 返回 200，body.ok=true",
+        "E2：S2 返回 200，响应头 content-type 包含 application/json",
+        "E3：S2 的 body.status=\"ok\"，body.version=\"1.0.0\"",
+        "E4：S2 的 body.uptime 为整数且 uptime ≥ 0",
+        "E5：S2 的 body.pageCount=0、body.ruleCount=0、body.enabledRuleCount=0",
+        "E6：S2 的 body.lastSyncAt=null，body.persistence=\"memory\"，body.startedAt 为数字且 ≤ 请求发出时的 Date.now()"
+      ],
+      "evidence": ["api: S2 响应"]
+    },
+    {
+      "id": "TC-API-DIAG-002",
+      "type": "API",
+      "module": "DIAG",
+      "title": "导入 resource.json 样例并保存 2 条规则后：pageCount=10、ruleCount=2、lastSyncAt 等于导入的 syncedAt",
+      "priority": "P0",
+      "category": "positive",
+      "technique": "scenario",
+      "features": ["F-DIAG-09"],
+      "acceptanceRefs": ["F-DIAG-09#AC2"],
+      "codePoints": ["C-BE-DIAG-01", "C-BE-CORE-12"],
+      "preconditions": ["后端已 reset"],
+      "testData": "resource.json 按 D-01 平移（最新一条 lastVisitTime = 导入时刻 − 5 分钟）后经 POST /api/sync 导入：activeTab 1 + openTabs 3 + history 10 = 14 条，去重后 10 个页面（PRD 第 13 章 / F-SYNC-02#AC1）。规则取契约示例：① {rawText:\"把 7 天没访问过的 GitHub issue 建议归档\", type:\"archive_candidate\", domain:\"github.com\", urlPattern:\"/issues/\", inactiveDays:7, action:\"suggest_archive\"}；② {rawText:\"docs.internal.com 的页面永远不要归档\", type:\"never_archive\", domain:\"docs.internal.com\", action:\"keep\"}",
+      "steps": [
+        "S1：POST /api/sync，请求体为平移后的 resource.json，记录响应中的 syncedAt",
+        "S2：POST /api/rules，请求体 { rules: [规则①, 规则②] }",
+        "S3：GET /api/health"
+      ],
+      "expected": [
+        "E1：S1 返回 200，body.created=10、body.pageCount=10，body.syncedAt 为数字",
+        "E2：S2 返回 201，body.ruleCount=2，body.rules 共 2 条且 id 非空、互不相同",
+        "E3：S3 返回 200，body.pageCount=10、body.ruleCount=2、body.enabledRuleCount=2",
+        "E4：S3 的 body.lastSyncAt 等于 S1 响应中的 syncedAt（严格相等）",
+        "E5：S3 的 body.status=\"ok\"，body.version=\"1.0.0\""
+      ],
+      "evidence": ["api: S1 响应（syncedAt）", "api: S3 响应"]
+    },
+    {
+      "id": "TC-API-DIAG-003",
+      "type": "API",
+      "module": "DIAG",
+      "title": "lastSyncAt 跟随最近一次同步更新，reset 后 pageCount 归 0、lastSyncAt 回到 null",
+      "priority": "P1",
+      "category": "state",
+      "technique": "state-transition",
+      "features": ["F-DIAG-09"],
+      "acceptanceRefs": ["F-DIAG-09#AC1", "F-DIAG-09#AC2"],
+      "codePoints": ["C-BE-DIAG-01", "C-BE-CORE-12", "C-BE-CORE-14"],
+      "preconditions": ["后端已 reset"],
+      "testData": "第 1 次同步：平移后的 resource.json（10 个页面）；第 2 次同步：只有 1 条 history { url: https://example.com/diag-a, title: \"diag-a\", lastVisitTime: now − 1 小时, visitCount: 1 }，与样例不重复，因此页面数变为 11",
+      "steps": [
+        "S1：GET /api/health，记录 lastSyncAt",
+        "S2：POST /api/sync 导入平移后的 resource.json，记录 syncedAt 为 T1",
+        "S3：GET /api/health",
+        "S4：POST /api/sync，history 只含 https://example.com/diag-a，记录 syncedAt 为 T2",
+        "S5：GET /api/health",
+        "S6：POST /api/__test__/reset",
+        "S7：GET /api/health"
+      ],
+      "expected": [
+        "E1：S1 的 body.lastSyncAt=null，body.pageCount=0",
+        "E2：S3 的 body.lastSyncAt=T1，body.pageCount=10",
+        "E3：S4 返回 200，body.created=1，且 T2 ≥ T1",
+        "E4：S5 的 body.lastSyncAt=T2，body.pageCount=11",
+        "E5：S6 返回 200，body.ok=true",
+        "E6：S7 的 body.pageCount=0、body.ruleCount=0、body.lastSyncAt=null，body.status=\"ok\""
+      ],
+      "evidence": ["api: S3、S5、S7 响应"]
+    },
+    {
+      "id": "TC-API-DIAG-004",
+      "type": "API",
+      "module": "DIAG",
+      "title": "停用 1 条规则后 ruleCount 仍为 2、enabledRuleCount=1；删除该规则后 ruleCount=1",
+      "priority": "P1",
+      "category": "state",
+      "technique": "state-transition",
+      "features": ["F-DIAG-09"],
+      "acceptanceRefs": ["F-DIAG-09#AC2"],
+      "codePoints": ["C-BE-DIAG-01", "C-BE-CORE-12"],
+      "preconditions": ["后端已 reset"],
+      "testData": "规则同契约示例：① archive_candidate（github.com、/issues/、7 天）；② never_archive（docs.internal.com）。规则 id 由后端生成，用 S1 返回值，不写死",
+      "steps": [
+        "S1：POST /api/rules 保存规则①②，记录 never_archive 那条的 id 为 R2",
+        "S2：GET /api/health",
+        "S3：PATCH /api/rules/<R2>，请求体 { enabled: false }",
+        "S4：GET /api/health",
+        "S5：DELETE /api/rules/<R2>",
+        "S6：GET /api/health"
+      ],
+      "expected": [
+        "E1：S1 返回 201，body.ruleCount=2",
+        "E2：S2 的 body.ruleCount=2、body.enabledRuleCount=2",
+        "E3：S3 返回 200，body.id=R2、body.enabled=false",
+        "E4：S4 的 body.ruleCount=2、body.enabledRuleCount=1",
+        "E5：S5 返回 200，body.deleted=R2、body.ruleCount=1",
+        "E6：S6 的 body.ruleCount=1、body.enabledRuleCount=1"
+      ],
+      "evidence": ["api: S2、S4、S6 响应"]
+    },
+    {
+      "id": "TC-API-DIAG-005",
+      "type": "API",
+      "module": "DIAG",
+      "title": "uptime 以整秒计：与 startedAt 推算的秒数相差不超过 1，间隔 1.2 秒后至少增加 1",
+      "priority": "P1",
+      "category": "boundary",
+      "technique": "boundary",
+      "features": ["F-DIAG-09"],
+      "acceptanceRefs": ["F-DIAG-09#AC1"],
+      "codePoints": ["C-BE-DIAG-01", "C-BE-CORE-15"],
+      "preconditions": ["后端已 reset"],
+      "testData": "契约：uptime 为 integer（秒），startedAt 为毫秒时间戳。秒级取整存在 ±1 秒误差，因此用「差值 ≤ 1」而不是严格相等；第二次请求前等待 1200 ms（> 1 秒）以跨过一个整秒边界",
+      "steps": [
+        "S1：GET /api/health，记录 uptime 为 U1、startedAt 为 ST，以及收到响应时的本地 Date.now() 为 N1",
+        "S2：等待 1200 毫秒",
+        "S3：GET /api/health，记录 uptime 为 U2"
+      ],
+      "expected": [
+        "E1：U1 为整数（Number.isInteger(U1)=true）且 U1 ≥ 0",
+        "E2：|U1 − floor((N1 − ST) / 1000)| ≤ 1",
+        "E3：U2 为整数且 U2 ≥ U1 + 1",
+        "E4：S3 的 body.startedAt=ST（进程未重启，reset 不改变启动时间）"
+      ],
+      "evidence": ["api: S1、S3 响应"]
+    },
+    {
+      "id": "TC-API-DIAG-006",
+      "type": "API",
+      "module": "DIAG",
+      "title": "POST / DELETE /api/health 返回 405 METHOD_NOT_ALLOWED，Allow 头含 GET，且不影响数据",
+      "priority": "P1",
+      "category": "negative",
+      "technique": "error-guessing",
+      "features": ["F-DIAG-09"],
+      "acceptanceRefs": ["F-DIAG-09#AC1"],
+      "codePoints": ["C-BE-DIAG-01", "C-BE-CORE-03"],
+      "preconditions": ["后端已 reset"],
+      "testData": "错误格式按契约 common.errorFormat：{ error: { code, message } }；405 时响应带 Allow 头（docs/03 §1.3）",
+      "steps": [
+        "S1：POST /api/health，Content-Type: application/json，请求体 {}",
+        "S2：DELETE /api/health",
+        "S3：GET /api/health"
+      ],
+      "expected": [
+        "E1：S1 返回 405，body.error.code=\"METHOD_NOT_ALLOWED\"，body.error.message 为非空字符串",
+        "E2：S1 响应头 allow 包含 GET",
+        "E3：S2 返回 405，body.error.code=\"METHOD_NOT_ALLOWED\"",
+        "E4：S3 返回 200，body.status=\"ok\"、body.pageCount=0、body.ruleCount=0（错误请求没有副作用）"
+      ],
+      "evidence": ["api: S1、S2 响应头与响应体"]
+    },
+    {
+      "id": "TC-API-DIAG-007",
+      "type": "API",
+      "module": "DIAG",
+      "title": "health 的 CORS 与请求 ID：chrome-extension 来源被放行并回传 x-request-id，其他来源不返回 Allow-Origin",
+      "priority": "P1",
+      "category": "security",
+      "technique": "equivalence",
+      "features": ["F-DIAG-01", "F-DIAG-09"],
+      "acceptanceRefs": ["F-DIAG-01#AC1", "F-DIAG-09#AC1"],
+      "codePoints": ["C-BE-CORE-03", "C-BE-DIAG-01"],
+      "preconditions": ["后端已 reset"],
+      "testData": "契约 common.cors：允许 chrome-extension://*、http://localhost:*、http://127.0.0.1:*；OPTIONS 预检 204。有效来源取 chrome-extension://abcdefghijklmnopabcdefghijklmnop，无效来源取 https://evil.example.com；请求 ID 取 diag-007-req",
+      "steps": [
+        "S1：GET /api/health，请求头 Origin: chrome-extension://abcdefghijklmnopabcdefghijklmnop、x-request-id: diag-007-req",
+        "S2：OPTIONS /api/health，请求头 Origin: chrome-extension://abcdefghijklmnopabcdefghijklmnop、Access-Control-Request-Method: GET",
+        "S3：GET /api/health，请求头 Origin: https://evil.example.com"
+      ],
+      "expected": [
+        "E1：S1 返回 200，响应头 access-control-allow-origin=chrome-extension://abcdefghijklmnopabcdefghijklmnop",
+        "E2：S1 响应头 x-request-id=\"diag-007-req\"，body.version=\"1.0.0\"",
+        "E3：S2 返回 204，响应头 access-control-allow-methods 包含 GET",
+        "E4：S3 响应头中没有 access-control-allow-origin（值为 undefined）"
+      ],
+      "evidence": ["api: S1、S2、S3 响应头"]
+    },
+    {
+      "id": "TC-API-DIAG-008",
+      "type": "API",
+      "module": "DIAG",
+      "title": "地址指向没有服务的端口时请求被拒绝（ECONNREFUSED）；改回测试后端地址后 health 立即恢复 200",
+      "priority": "P1",
+      "category": "exception",
+      "technique": "error-guessing",
+      "features": ["F-DIAG-01", "F-DIAG-09"],
+      "acceptanceRefs": ["F-DIAG-01#AC2", "F-DIAG-01#AC3", "F-DIAG-09#AC1"],
+      "codePoints": ["C-BE-DIAG-01"],
+      "preconditions": ["后端已 reset，测试后端监听 TEST_PORT"],
+      "testData": "不可达地址按 CONVENTIONS §5 / 技能约束用 http://127.0.0.1:9（无服务端口），不 route、不 mock 后端；可用地址为 webServer 启动的 http://127.0.0.1:<TEST_PORT>。前端将 ECONNREFUSED 归类为「连接被拒绝」（kind=refused），本用例验证其后端侧前提",
+      "steps": [
+        "S1：用 request 直接 GET http://127.0.0.1:9/api/health，timeout 1500 毫秒，捕获异常",
+        "S2：GET http://127.0.0.1:<TEST_PORT>/api/health"
+      ],
+      "expected": [
+        "E1：S1 抛出异常（没有 HTTP 状态码），异常 message 包含 ECONNREFUSED",
+        "E2：S2 返回 200，body.status=\"ok\"、body.version=\"1.0.0\"",
+        "E3：S2 的 body.pageCount=0、body.ruleCount=0"
+      ],
+      "evidence": ["api: S1 异常信息", "api: S2 响应"]
+    },
+    {
+      "id": "TC-API-DIAG-009",
+      "type": "API",
+      "module": "DIAG",
+      "title": "导入样例后连续 5 次 GET /api/health，每次耗时 < 1500 毫秒且 version=1.0.0",
+      "priority": "P2",
+      "category": "performance",
+      "technique": "boundary",
+      "features": ["F-DIAG-01"],
+      "acceptanceRefs": ["F-DIAG-01#AC1"],
+      "codePoints": ["C-BE-DIAG-01"],
+      "preconditions": ["后端已 reset"],
+      "testData": "1500 毫秒取自 ui-contract 消息 CHECK_CONNECTION 的 timeoutMs 默认值：health 超过该值会被插件判为超时。耗时用本地 Date.now() 在请求前后相减计算",
+      "steps": [
+        "S1：POST /api/sync 导入平移后的 resource.json",
+        "S2：连续 5 次 GET /api/health，分别记录每次耗时（毫秒）"
+      ],
+      "expected": [
+        "E1：S1 返回 200，body.pageCount=10",
+        "E2：S2 的 5 次响应状态都是 200，每次 body.version=\"1.0.0\"、body.pageCount=10",
+        "E3：S2 的 5 次耗时都 < 1500 毫秒"
+      ],
+      "evidence": ["api: S2 每次耗时"]
+    },
+    {
+      "id": "TC-API-DIAG-010",
+      "type": "API",
+      "module": "DIAG",
+      "title": "默认配置下 GET /api/config 返回 cleanupThresholdDays=14、maxHistoryItems=100、隐私过滤开启和 4 个默认关键词",
+      "priority": "P0",
+      "category": "positive",
+      "technique": "equivalence",
+      "features": ["F-DIAG-10"],
+      "acceptanceRefs": ["F-DIAG-10#AC1"],
+      "codePoints": ["C-BE-DIAG-02", "C-BE-CORE-02"],
+      "preconditions": ["后端以默认配置启动并已 reset（没有 PUT /api/config 覆盖，没有 privacy_filter 规则）"],
+      "testData": "默认值来自 resource.json 的 config：cleanupThresholdDays=14、maxHistoryItems=100、enablePrivacyFilter=true、privacySensitiveKeywords=[password, token, bank, secret]",
+      "steps": [
+        "S1：GET /api/config"
+      ],
+      "expected": [
+        "E1：S1 返回 200，响应头 content-type 包含 application/json",
+        "E2：body.cleanupThresholdDays=14，body.maxHistoryItems=100",
+        "E3：body.enablePrivacyFilter=true",
+        "E4：body.privacySensitiveKeywords 等于 [\"password\",\"token\",\"bank\",\"secret\"]（顺序与内容一致）",
+        "E5：body.baseSensitiveKeywords 等于 [\"password\",\"token\",\"bank\",\"secret\"]"
+      ],
+      "evidence": ["api: S1 响应"]
+    },
+    {
+      "id": "TC-API-DIAG-011",
+      "type": "API",
+      "module": "DIAG",
+      "title": "GET /api/config 扩展字段：historyLookbackDays=30、半衰期 7、四项权重、推荐下限 0.3、apiVersion=\"1\" 和 4 项 limits",
+      "priority": "P0",
+      "category": "positive",
+      "technique": "equivalence",
+      "features": ["F-DIAG-10"],
+      "acceptanceRefs": ["F-DIAG-10#AC2"],
+      "codePoints": ["C-BE-DIAG-02", "C-BE-CORE-02"],
+      "preconditions": ["后端以默认配置启动并已 reset"],
+      "testData": "权重与半衰期来自 PRD F-RANK-02（score = 0.4×recency + 0.3×frequency + 0.2×open + 0.1×domain，半衰期 7 天）；limits 只输出契约列出的 4 个字段，maxArrayItems 不对外（docs/03 §1.4）",
+      "steps": [
+        "S1：GET /api/config"
+      ],
+      "expected": [
+        "E1：S1 返回 200，body.historyLookbackDays=30，body.recencyHalfLifeDays=7",
+        "E2：body.weights 深度等于 { recency: 0.4, frequency: 0.3, open: 0.2, domain: 0.1 }",
+        "E3：body.minRecommendationScore=0.3",
+        "E4：body.apiVersion=\"1\"（字符串）",
+        "E5：body.limits 深度等于 { maxItemsPerSync: 500, maxUrlLength: 2048, maxRuleTextLength: 500, maxBodyBytes: 1048576 }，不含 maxArrayItems"
+      ],
+      "evidence": ["api: S1 响应"]
+    },
+    {
+      "id": "TC-API-DIAG-012",
+      "type": "API",
+      "module": "DIAG",
+      "title": "POST / DELETE /api/config 返回 405，Allow 头含 GET 和 PUT，配置保持默认值",
+      "priority": "P1",
+      "category": "negative",
+      "technique": "error-guessing",
+      "features": ["F-DIAG-10"],
+      "acceptanceRefs": ["F-DIAG-10#AC1"],
+      "codePoints": ["C-BE-DIAG-02", "C-BE-CORE-02"],
+      "preconditions": ["后端以默认配置启动并已 reset"],
+      "testData": "/api/config 只支持 GET 与 PUT（契约）；POST 请求体故意携带 { cleanupThresholdDays: 3 }，用于检查没有被写入",
+      "steps": [
+        "S1：POST /api/config，Content-Type: application/json，请求体 { \"cleanupThresholdDays\": 3 }",
+        "S2：DELETE /api/config",
+        "S3：GET /api/config"
+      ],
+      "expected": [
+        "E1：S1 返回 405，body.error.code=\"METHOD_NOT_ALLOWED\"，body.error.message 为非空字符串",
+        "E2：S1 响应头 allow 同时包含 GET 和 PUT",
+        "E3：S2 返回 405，body.error.code=\"METHOD_NOT_ALLOWED\"",
+        "E4：S3 返回 200，body.cleanupThresholdDays=14（S1 未写入 3）"
+      ],
+      "evidence": ["api: S1、S2 响应头与响应体", "api: S3 响应"]
+    },
+    {
+      "id": "TC-API-DIAG-013",
+      "type": "API",
+      "module": "DIAG",
+      "title": "阈值取边界值 1 / 365 时 GET /api/config 如实返回，0 / 366 被拒绝且配置保持上一次的有效值",
+      "priority": "P1",
+      "category": "boundary",
+      "technique": "boundary",
+      "features": ["F-DIAG-10"],
+      "acceptanceRefs": ["F-DIAG-10#AC1", "F-DIAG-10#AC2"],
+      "codePoints": ["C-BE-DIAG-02", "C-BE-CORE-02"],
+      "preconditions": ["后端以默认配置启动并已 reset"],
+      "testData": "契约 PUT /api/config：cleanupThresholdDays 为 1–365 的整数；maxHistoryItems 为 1–500。本用例关注 GET /api/config（getPublicConfig）对覆盖值的回显，以及只读字段 weights 不受影响",
+      "steps": [
+        "S1：PUT /api/config，请求体 { \"cleanupThresholdDays\": 1 }",
+        "S2：GET /api/config",
+        "S3：PUT /api/config，请求体 { \"cleanupThresholdDays\": 365, \"maxHistoryItems\": 500 }",
+        "S4：GET /api/config",
+        "S5：PUT /api/config，请求体 { \"cleanupThresholdDays\": 0 }",
+        "S6：PUT /api/config，请求体 { \"cleanupThresholdDays\": 366 }",
+        "S7：GET /api/config"
+      ],
+      "expected": [
+        "E1：S1 返回 200；S2 的 body.cleanupThresholdDays=1，body.maxHistoryItems=100",
+        "E2：S4 的 body.cleanupThresholdDays=365，body.maxHistoryItems=500",
+        "E3：S5 和 S6 都返回 400，body.error.code=\"VALIDATION_FAILED\"，body.error.details.fields 包含 \"cleanupThresholdDays\"",
+        "E4：S7 的 body.cleanupThresholdDays=365、body.maxHistoryItems=500（失败的写入没有改变配置）",
+        "E5：S7 的 body.weights 仍为 { recency: 0.4, frequency: 0.3, open: 0.2, domain: 0.1 }，body.recencyHalfLifeDays=7"
+      ],
+      "evidence": ["api: S2、S4、S7 响应", "api: S5、S6 错误响应"]
+    },
+    {
+      "id": "TC-API-DIAG-014",
+      "type": "API",
+      "module": "DIAG",
+      "title": "PUT /api/config 请求体非法 JSON 或 Content-Type 错误时返回 400 / 415，GET /api/config 仍为默认值",
+      "priority": "P1",
+      "category": "exception",
+      "technique": "error-guessing",
+      "features": ["F-DIAG-10"],
+      "acceptanceRefs": ["F-DIAG-10#AC1"],
+      "codePoints": ["C-BE-DIAG-02", "C-BE-CORE-02"],
+      "preconditions": ["后端以默认配置启动并已 reset"],
+      "testData": "错误码按契约 PUT /api/config.errors：非法 JSON → 400 INVALID_JSON；有请求体但 Content-Type 非 application/json → 415 UNSUPPORTED_MEDIA_TYPE",
+      "steps": [
+        "S1：PUT /api/config，Content-Type: application/json，原始请求体为字符串 {\"enablePrivacyFilter\": fal",
+        "S2：PUT /api/config，Content-Type: text/plain，请求体为字符串 enablePrivacyFilter=false",
+        "S3：GET /api/config"
+      ],
+      "expected": [
+        "E1：S1 返回 400，body.error.code=\"INVALID_JSON\"，body.error.message 为非空字符串",
+        "E2：S2 返回 415，body.error.code=\"UNSUPPORTED_MEDIA_TYPE\"",
+        "E3：S3 返回 200，body.enablePrivacyFilter=true，body.privacySensitiveKeywords 等于 [\"password\",\"token\",\"bank\",\"secret\"]，body.cleanupThresholdDays=14"
+      ],
+      "evidence": ["api: S1、S2 错误响应", "api: S3 响应"]
+    },
+    {
+      "id": "TC-API-DIAG-015",
+      "type": "API",
+      "module": "DIAG",
+      "title": "保存 privacy_filter 规则后 privacySensitiveKeywords 合并 cookie、baseSensitiveKeywords 不变；删除规则后恢复 4 个默认词",
+      "priority": "P1",
+      "category": "state",
+      "technique": "state-transition",
+      "features": ["F-DIAG-10"],
+      "acceptanceRefs": ["F-DIAG-10#AC1"],
+      "codePoints": ["C-BE-DIAG-02", "C-BE-CORE-02"],
+      "preconditions": ["后端以默认配置启动并已 reset"],
+      "testData": "规则 { rawText: \"不要上传包含 cookie 的 URL\", type: \"privacy_filter\", action: \"exclude_upload\", keywords: [\"cookie\"] }（PRD 规则类型表；F-DIAG-10 描述「privacySensitiveKeywords 已合并 privacy_filter 规则中的关键词」）。规则 id 用 S1 返回值",
+      "steps": [
+        "S1：POST /api/rules 保存上述 privacy_filter 规则，记录返回的 id 为 R",
+        "S2：GET /api/config",
+        "S3：DELETE /api/rules/<R>",
+        "S4：GET /api/config"
+      ],
+      "expected": [
+        "E1：S1 返回 201，body.rules[0].type=\"privacy_filter\"，body.ruleCount=1",
+        "E2：S2 的 body.privacySensitiveKeywords 包含 \"cookie\"、\"password\"、\"token\"、\"bank\"、\"secret\"，共 5 项",
+        "E3：S2 的 body.baseSensitiveKeywords 仍等于 [\"password\",\"token\",\"bank\",\"secret\"]",
+        "E4：S3 返回 200，body.deleted=R",
+        "E5：S4 的 body.privacySensitiveKeywords 等于 [\"password\",\"token\",\"bank\",\"secret\"]，不包含 \"cookie\""
+      ],
+      "evidence": ["api: S2、S4 响应"]
+    },
+    {
+      "id": "TC-API-DIAG-016",
+      "type": "API",
+      "module": "DIAG",
+      "title": "关闭隐私过滤后 GET /api/config 返回 enablePrivacyFilter=false，reset 后恢复全部默认配置",
+      "priority": "P1",
+      "category": "state",
+      "technique": "state-transition",
+      "features": ["F-DIAG-10"],
+      "acceptanceRefs": ["F-DIAG-10#AC1"],
+      "codePoints": ["C-BE-DIAG-02", "C-BE-CORE-02"],
+      "preconditions": ["后端以默认配置启动并已 reset"],
+      "testData": "enablePrivacyFilter=false 是插件诊断「隐私过滤」显示警告的后端前提（F-DIAG-08#AC2 的数据来源）；reset 契约要求「恢复默认配置」",
+      "steps": [
+        "S1：PUT /api/config，请求体 { \"enablePrivacyFilter\": false, \"cleanupThresholdDays\": 30 }",
+        "S2：GET /api/config",
+        "S3：POST /api/__test__/reset",
+        "S4：GET /api/config"
+      ],
+      "expected": [
+        "E1：S1 返回 200，body.enablePrivacyFilter=false",
+        "E2：S2 的 body.enablePrivacyFilter=false、body.cleanupThresholdDays=30，body.privacySensitiveKeywords 仍为 [\"password\",\"token\",\"bank\",\"secret\"]",
+        "E3：S3 返回 200，body.ok=true",
+        "E4：S4 的 body.enablePrivacyFilter=true、body.cleanupThresholdDays=14、body.maxHistoryItems=100"
+      ],
+      "evidence": ["api: S2、S4 响应"]
+    }
+  ],
+  "waivers": []
+}

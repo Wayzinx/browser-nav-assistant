@@ -1,0 +1,87 @@
+{
+  "dataVersion": 40,
+  "versions": {
+    "data": 40,
+    "rule": 31,
+    "config": 20
+  },
+  "counts": {
+    "pages": 1,
+    "rules": 1,
+    "openPages": 1,
+    "archivedPages": 0,
+    "syncLogs": 1
+  },
+  "pagesTruncated": false,
+  "pagesHash": "3c027257e75e5e2660e7ffd0a75257dd6c287a8e58a808ee28d51a57ef54e7b6",
+  "pages": [
+    {
+      "id": "page_1",
+      "url": "https://github.com/org/repo/issues/90",
+      "normalizedUrl": "https://github.com/org/repo/issues/90",
+      "domain": "github.com",
+      "title": "Issue 90",
+      "visitCount": 1,
+      "lastVisitedAt": 1792034744665,
+      "firstSeenAt": 1792034744665,
+      "sources": [
+        "history",
+        "open_tab"
+      ],
+      "isOpen": true,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    }
+  ],
+  "rules": [
+    {
+      "domain": "github.com",
+      "urlPattern": "/issues/",
+      "inactiveDays": 7,
+      "enabled": true,
+      "confidence": "high",
+      "createdAt": 1793762744670,
+      "updatedAt": 1793762744670,
+      "rawText": "把 7 天没访问过的 GitHub issue 建议归档",
+      "type": "archive_candidate",
+      "action": "suggest_archive",
+      "id": "rule_1"
+    }
+  ],
+  "config": {
+    "cleanupThresholdDays": 14,
+    "maxHistoryItems": 100,
+    "historyLookbackDays": 30,
+    "enablePrivacyFilter": true,
+    "privacySensitiveKeywords": [
+      "password",
+      "token",
+      "bank",
+      "secret"
+    ]
+  },
+  "sequences": {
+    "page": 1,
+    "rule": 1,
+    "sync": 1
+  },
+  "lastSync": {
+    "id": "sync_1",
+    "syncedAt": 1793762744667,
+    "mode": "full",
+    "received": 2,
+    "created": 1,
+    "updated": 1,
+    "rejected": 0,
+    "durationMs": 0.17124999999987267,
+    "ok": true,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 0
+    }
+  },
+  "persist": null
+}

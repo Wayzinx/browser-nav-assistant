@@ -1,0 +1,59 @@
+{
+  "caseId": "TC-UI-INCR-006",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:41.016Z",
+  "tests": [
+    {
+      "testId": "097661f2628182f3d82f-5e8a86e6b448e5ca7e9d",
+      "title": "TC-UI-INCR-006 游标绑定地址与当前地址不匹配：拒用旧游标并自动改为全量",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-INCR-006.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1279,
+      "startedAt": "2026-11-04T03:28:39.737Z",
+      "endedAt": "2026-11-04T03:28:41.016Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [
+        "evidence/TC-UI-INCR-006/screenshots/01-打开popup.png",
+        "evidence/TC-UI-INCR-006/screenshots/02-失效绑定自动全量成功.png"
+      ],
+      "serverLogLines": 31,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1101,
+          "after": 1103
+        },
+        "pages": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 2,
+          "rules": 0,
+          "openPages": 2,
+          "archivedPages": 0,
+          "syncLogs": 2
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "改写后 syncState={\"cursor\":1793762920590,\"cursorBase\":{\"apiBaseUrl\":\"http://127.0.0.1:4197\",\"serverStartedAt\":1793762741762},\"fullReason\":null,\"lastError\":null,\"lastSuccessAt\":1793762920590,\"lastSyncAt\":1793762920598,\"mode\":\"full\",\"startedAt\":1793762920590,\"stats\":{\"created\":2,\"filtered\":0,\"received\":5,\"rejected\":0,\"updated\":3,\"uploaded\":5},\"status\":\"success\",\"trigger\":\"user\"}",
+        "t0=1793762920699 t1=1793762920728 history.query=[{\"ts\":1793762920727,\"startTime\":1791170920722,\"maxResults\":100}] syncState={\"cursor\":1793762920722,\"cursorBase\":{\"apiBaseUrl\":\"http://127.0.0.1:4300\",\"serverStartedAt\":1793762741762},\"fullReason\":\"api_base_changed\",\"lastError\":null,\"lastSuccessAt\":1793762920722,\"lastSyncAt\":1793762920728,\"mode\":\"full\",\"startedAt\":1793762920722,\"stats\":{\"created\":0,\"filtered\":0,\"received\":5,\"rejected\":0,\"updated\":5,\"uploaded\":5},\"status\":\"success\",\"trigger\":\"user\"}"
+      ]
+    }
+  ]
+}

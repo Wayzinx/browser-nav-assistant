@@ -1,0 +1,188 @@
+{
+  "caseId": "TC-API-MENU-008",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:49.284Z",
+  "tests": [
+    {
+      "testId": "9e689bd0c46f04ce3d5a-135ad84147fda9384b4e",
+      "title": "TC-API-MENU-008 /api/pages/manual URL 长度边界 2048 字符",
+      "project": "api",
+      "file": "tests/api/TC-API-MENU-008.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 31,
+      "startedAt": "2026-11-04T03:25:49.164Z",
+      "endedAt": "2026-11-04T03:25:49.195Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 150,
+          "after": 153
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    },
+    {
+      "testId": "9e689bd0c46f04ce3d5a-393a28b022900f262e12",
+      "title": "TC-API-MENU-008 /api/pages/manual URL 长度边界 2049 字符",
+      "project": "api",
+      "file": "tests/api/TC-API-MENU-008.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 22,
+      "startedAt": "2026-11-04T03:25:49.200Z",
+      "endedAt": "2026-11-04T03:25:49.222Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 153,
+          "after": 155
+        },
+        "pages": {
+          "added": 0,
+          "removed": 1,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": -1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    },
+    {
+      "testId": "9e689bd0c46f04ce3d5a-ec3a4eb2673683fcc194",
+      "title": "TC-API-MENU-008 /api/pages/important URL 长度边界 2048 字符",
+      "project": "api",
+      "file": "tests/api/TC-API-MENU-008.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 27,
+      "startedAt": "2026-11-04T03:25:49.228Z",
+      "endedAt": "2026-11-04T03:25:49.255Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 155,
+          "after": 158
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    },
+    {
+      "testId": "9e689bd0c46f04ce3d5a-3dcc92473b747feaa836",
+      "title": "TC-API-MENU-008 /api/pages/important URL 长度边界 2049 字符",
+      "project": "api",
+      "file": "tests/api/TC-API-MENU-008.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 24,
+      "startedAt": "2026-11-04T03:25:49.260Z",
+      "endedAt": "2026-11-04T03:25:49.284Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 158,
+          "after": 160
+        },
+        "pages": {
+          "added": 0,
+          "removed": 1,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": -1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

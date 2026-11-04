@@ -1,0 +1,426 @@
+[
+  {
+    "seed": {
+      "ok": true,
+      "syncedAt": 1793662127664,
+      "received": 14,
+      "created": 10,
+      "updated": 4,
+      "rejected": 0,
+      "rejectedByReason": {
+        "invalid_url": 0,
+        "privacy": 0
+      },
+      "pageCount": 10,
+      "mode": "full"
+    }
+  },
+  {
+    "step3-diag": {
+      "diag-check-backend": {
+        "status": "ok",
+        "text": "后端服务连接通过后端服务连接正常；耗时 3 msversion=1.0.0，3 ms"
+      },
+      "diag-check-tabs": {
+        "status": "ok",
+        "text": "tabs 权限通过tabs 权限已授权，标签页 URL 可读"
+      },
+      "diag-check-history": {
+        "status": "ok",
+        "text": "history 权限通过history 权限已授权，历史查询可用"
+      },
+      "diag-check-storage": {
+        "status": "ok",
+        "text": "storage 可用通过storage 写入、读取和删除正常，已使用 8777 字节8777"
+      },
+      "diag-check-api-base-url": {
+        "status": "ok",
+        "text": "API Base URL通过地址格式有效，已获访问授权http://127.0.0.1:4180"
+      },
+      "diag-check-version": {
+        "status": "ok",
+        "text": "版本兼容通过后端版本 1.0.0，主版本兼容1.0.0"
+      },
+      "summary": "通过 8 · 警告 2 · 失败 0 · 提示 1"
+    }
+  },
+  {
+    "n": 1,
+    "label": "第3步 诊断页（后端连接）",
+    "file": "evidence/ACCEPTANCE-FLOW/explore/1.png"
+  },
+  {
+    "n": 2,
+    "label": "第3步 诊断页（tabs/history 权限）",
+    "file": "evidence/ACCEPTANCE-FLOW/explore/2.png"
+  },
+  {
+    "step4-context-tabs": [
+      "about:blank",
+      "https://github.com/org/repo/pull/456",
+      "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+      "https://www.google.com/search?q=chrome+extension",
+      "https://docs.internal.com/ai-agent-design"
+    ]
+  },
+  {
+    "n": 3,
+    "label": "第4步 上下文页签（打开的测试页面）",
+    "file": "evidence/ACCEPTANCE-FLOW/explore/3.png"
+  },
+  {
+    "step5-sync": {
+      "status": "success",
+      "text": "同步成功上传 9 条 · 过滤 0 条07:28 · 刚刚",
+      "health": {
+        "status": "ok",
+        "version": "1.0.0",
+        "uptime": 164,
+        "pageCount": 11,
+        "ruleCount": 0,
+        "enabledRuleCount": 0,
+        "lastSyncAt": 1793662130305,
+        "persistence": "memory",
+        "startedAt": 1793661967400
+      }
+    }
+  },
+  {
+    "n": 4,
+    "label": "第5步 同步成功",
+    "file": "evidence/ACCEPTANCE-FLOW/explore/4.png"
+  },
+  {
+    "step6-ranked": [
+      {
+        "title": "github.com/org/repo/pull/456",
+        "url": "https://github.com/org/repo/pull/456",
+        "score": "0.94",
+        "reason": "正在浏览，最近 3 天内多次访问（5 次），常用域名 github.com"
+      },
+      {
+        "title": "developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+        "score": "0.84",
+        "reason": "最近 3 天内多次访问（4 次），当前仍处于打开状态"
+      },
+      {
+        "title": "Fix login redirect bug",
+        "url": "https://github.com/org/repo/issues/123",
+        "score": "0.80",
+        "reason": "最近 3 天内多次访问（8 次），常用域名 github.com"
+      },
+      {
+        "title": "docs.internal.com/ai-agent-design",
+        "url": "https://docs.internal.com/ai-agent-design",
+        "score": "0.76",
+        "reason": "今天访问过，当前仍处于打开状态"
+      },
+      {
+        "title": "www.google.com/search",
+        "url": "https://www.google.com/search?q=chrome+extension",
+        "score": "0.70",
+        "reason": "今天访问过，当前仍处于打开状态"
+      },
+      {
+        "title": "useState – React",
+        "url": "https://react.dev/reference/react/useState",
+        "score": "0.69",
+        "reason": "最近 3 天内多次访问（6 次）"
+      },
+      {
+        "title": "Fix login redirect bug - Comments",
+        "url": "https://github.com/org/repo/issues/123?tab=comments",
+        "score": "0.68",
+        "reason": "最近 3 天内多次访问（3 次），常用域名 github.com"
+      },
+      {
+        "title": "Actions · org/repo",
+        "url": "https://github.com/org/repo/actions",
+        "score": "0.68",
+        "reason": "最近 3 天内多次访问（3 次），常用域名 github.com"
+      },
+      {
+        "title": "Quick Start – React",
+        "url": "https://react.dev/learn",
+        "score": "0.57",
+        "reason": "今天访问过"
+      },
+      {
+        "title": "Old bug report from last sprint",
+        "url": "https://github.com/org/repo/issues/100",
+        "score": "0.23",
+        "reason": "已 24 天未访问，常用域名 github.com"
+      },
+      {
+        "title": "chrome extension manifest v3 - Google Search",
+        "url": "https://www.google.com/search?q=chrome+extension+manifest+v3",
+        "score": "0.12",
+        "reason": "已 35 天未访问"
+      }
+    ]
+  },
+  {
+    "n": 5,
+    "label": "第6步 历史排序（分数与理由）",
+    "file": "evidence/ACCEPTANCE-FLOW/explore/5.png"
+  },
+  {
+    "step6-detail": "时效1.00频次0.82打开1.00域名1.00"
+  },
+  {
+    "n": 6,
+    "label": "第6步 评分明细展开",
+    "file": "evidence/ACCEPTANCE-FLOW/explore/6.png"
+  },
+  {
+    "step7-recs": [
+      {
+        "title": "Actions · org/repo",
+        "score": "0.87",
+        "reason": "你正在查看 PR，同仓库 CI 页面最近访问频率较高，可能需要检查构建状态"
+      },
+      {
+        "title": "Fix login redirect bug",
+        "score": "0.80",
+        "reason": "你正在查看 PR，同仓库的 Issue 可能与本次改动相关"
+      },
+      {
+        "title": "useState – React",
+        "score": "0.46",
+        "reason": "近期综合评分较高的页面，可作为备选"
+      }
+    ]
+  },
+  {
+    "n": 7,
+    "label": "第7步 下一步推荐",
+    "file": "evidence/ACCEPTANCE-FLOW/explore/7.png"
+  },
+  {
+    "step8-cards": {
+      "cards": [
+        {
+          "type": "archive_candidate",
+          "label": "建议归档",
+          "fields": "github.com · /issues/ · 7 天",
+          "conf": "高",
+          "checked": true
+        },
+        {
+          "type": "never_archive",
+          "label": "永不归档",
+          "fields": "docs.internal.com",
+          "conf": "高",
+          "checked": true
+        }
+      ],
+      "unparsed": "",
+      "saveLabel": "确认保存 2 条"
+    }
+  },
+  {
+    "n": 8,
+    "label": "第8步 规则解析结果（待确认）",
+    "file": "evidence/ACCEPTANCE-FLOW/explore/8.png"
+  },
+  {
+    "step8-json": "{\n  \"id\": \"rule_1\",\n  \"rawText\": \"把 7 天没访问过的 GitHub issue 建议归档\",\n  \"type\": \"archive_candidate\",\n  \"domain\": \"github.com\",\n  \"urlPattern\": \"/issues/\",\n  \"inactiveDays\": 7,\n  \"action\": \"suggest_archive\",\n  \"enabled\": true,\n  \"confidence\": \"high\",\n  \"notes\": []\n}"
+  },
+  {
+    "step8-saved": {
+      "result": "已保存 2 条规则",
+      "count": "2",
+      "items": [
+        "github.com · /issues/ · 7 天",
+        "docs.internal.com"
+      ],
+      "server": {
+        "rules": [
+          {
+            "domain": "github.com",
+            "urlPattern": "/issues/",
+            "inactiveDays": 7,
+            "enabled": true,
+            "confidence": "high",
+            "createdAt": 1793662132881,
+            "updatedAt": 1793662132881,
+            "rawText": "把 7 天没访问过的 GitHub issue 建议归档",
+            "type": "archive_candidate",
+            "action": "suggest_archive",
+            "id": "rule_1"
+          },
+          {
+            "domain": "docs.internal.com",
+            "urlPattern": null,
+            "inactiveDays": null,
+            "enabled": true,
+            "confidence": "high",
+            "createdAt": 1793662132881,
+            "updatedAt": 1793662132881,
+            "rawText": "docs.internal.com 的页面永远不要归档",
+            "type": "never_archive",
+            "action": "keep",
+            "id": "rule_2"
+          }
+        ],
+        "total": 2
+      }
+    }
+  },
+  {
+    "n": 9,
+    "label": "第8步 确认保存后的规则列表",
+    "file": "evidence/ACCEPTANCE-FLOW/explore/9.png"
+  },
+  {
+    "step9-cleanup": [
+      {
+        "action": "archive",
+        "urls": [
+          "https://www.google.com/search?q=chrome+extension+manifest+v3"
+        ],
+        "reason": "超过 14 天未访问（已 35 天），且不在当前打开的 tab 中",
+        "ruleTag": false
+      },
+      {
+        "action": "archive",
+        "urls": [
+          "https://github.com/org/repo/issues/100"
+        ],
+        "reason": "超过 7 天未访问（已 24 天），且不在当前打开的 tab 中；命中规则「把 7 天没访问过的 GitHub issue 建议归档」",
+        "ruleTag": true,
+        "ruleText": "把 7 天没访问过的 GitHub issue 建议归档"
+      },
+      {
+        "action": "merge",
+        "urls": [
+          "https://github.com/org/repo/issues/123\nhttps://github.com/org/repo/issues/123?tab=comments"
+        ],
+        "reason": "去掉 query 参数后 URL 相同，疑似重复页面",
+        "ruleTag": false
+      },
+      {
+        "action": "keep",
+        "urls": [
+          "https://docs.internal.com/ai-agent-design"
+        ],
+        "reason": "被保护域名配置（docs.internal.com），不建议归档",
+        "ruleTag": true,
+        "ruleText": "docs.internal.com 的页面永远不要归档"
+      }
+    ]
+  },
+  {
+    "step9-api": {
+      "summary": {
+        "archive": 2,
+        "merge": 1,
+        "keep": 1
+      },
+      "suggestions": [
+        {
+          "key": "archive:https://www.google.com/search?q=chrome+extension+manifest+v3",
+          "action": "archive",
+          "url": "https://www.google.com/search?q=chrome+extension+manifest+v3",
+          "title": "chrome extension manifest v3 - Google Search",
+          "reason": "超过 14 天未访问（已 35 天），且不在当前打开的 tab 中",
+          "ageDays": 35,
+          "ruleId": null,
+          "lastVisitedAt": 1790561827662
+        },
+        {
+          "key": "archive:https://github.com/org/repo/issues/100",
+          "action": "archive",
+          "url": "https://github.com/org/repo/issues/100",
+          "title": "Old bug report from last sprint",
+          "reason": "超过 7 天未访问（已 24 天），且不在当前打开的 tab 中；命中规则「把 7 天没访问过的 GitHub issue 建议归档」",
+          "ageDays": 24,
+          "ruleId": "rule_1",
+          "lastVisitedAt": 1791561827662
+        },
+        {
+          "key": "merge:github.com/org/repo/issues/123",
+          "action": "merge",
+          "urls": [
+            "https://github.com/org/repo/issues/123",
+            "https://github.com/org/repo/issues/123?tab=comments"
+          ],
+          "titles": [
+            "Fix login redirect bug",
+            "Fix login redirect bug - Comments"
+          ],
+          "keepUrl": "https://github.com/org/repo/issues/123",
+          "title": "Fix login redirect bug",
+          "reason": "去掉 query 参数后 URL 相同，疑似重复页面"
+        },
+        {
+          "key": "keep:https://docs.internal.com/ai-agent-design",
+          "action": "keep",
+          "url": "https://docs.internal.com/ai-agent-design",
+          "title": "docs.internal.com/ai-agent-design",
+          "reason": "被保护域名配置（docs.internal.com），不建议归档",
+          "ageDays": 0,
+          "ruleId": "rule_2"
+        }
+      ],
+      "thresholdDays": 14,
+      "generatedAt": 1793662134589
+    }
+  },
+  {
+    "n": 10,
+    "label": "第9步 整理建议（顶部）",
+    "file": "evidence/ACCEPTANCE-FLOW/explore/10.png"
+  },
+  {
+    "n": 11,
+    "label": "第9步 整理建议（列表底部）",
+    "file": "evidence/ACCEPTANCE-FLOW/explore/11.png"
+  },
+  {
+    "hover-sync-button": {
+      "color": "rgb(255, 255, 255)",
+      "background": "rgb(245, 247, 249)"
+    }
+  },
+  {
+    "n": 12,
+    "label": "附加：鼠标悬停在「同步浏览器上下文」主按钮上",
+    "file": "evidence/ACCEPTANCE-FLOW/explore/12.png"
+  },
+  {
+    "apiRequests": [
+      "GET /api/config",
+      "GET /api/health",
+      "GET /api/pages/ranked?limit=50",
+      "GET /api/pages/cleanup-suggestions",
+      "GET /api/config",
+      "POST /api/recommendations/next",
+      "GET /api/health",
+      "GET /api/rules",
+      "GET /api/config",
+      "GET /api/config",
+      "GET /api/config",
+      "GET /api/health",
+      "POST /api/sync",
+      "GET /api/pages/ranked?limit=50",
+      "GET /api/config",
+      "GET /api/pages/cleanup-suggestions",
+      "GET /api/rules",
+      "GET /api/config",
+      "POST /api/recommendations/next",
+      "GET /api/pages/ranked?limit=50",
+      "GET /api/rules",
+      "POST /api/rules/parse",
+      "POST /api/rules",
+      "GET /api/rules",
+      "GET /api/pages/ranked?limit=50",
+      "GET /api/pages/cleanup-suggestions",
+      "GET /api/config",
+      "POST /api/recommendations/next",
+      "GET /api/rules",
+      "GET /api/pages/cleanup-suggestions"
+    ]
+  }
+]

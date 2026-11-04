@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-UI-RULE-007",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:35.213Z",
+  "tests": [
+    {
+      "testId": "91933a06b97195853ea0-db8055eb57bfc22faf36",
+      "title": "TC-UI-RULE-007 中途断网解析显示错误且结束加载",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RULE-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 816,
+      "startedAt": "2026-11-04T03:29:34.397Z",
+      "endedAt": "2026-11-04T03:29:35.213Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-RULE-007/screenshots/01-在线规则页.png",
+        "evidence/TC-UI-RULE-007/screenshots/02-解析失败.png"
+      ],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1177,
+          "after": 1177
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

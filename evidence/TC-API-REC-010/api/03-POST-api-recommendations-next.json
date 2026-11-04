@@ -1,0 +1,49 @@
+{
+  "reqId": "TC-API-REC-010-03",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/recommendations/next",
+  "params": {
+    "now": 1793762823982
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-REC-010-03"
+  },
+  "requestBody": {
+    "currentPage": {
+      "url": "https://example.com/q"
+    },
+    "openTabs": [],
+    "recentHistory": []
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-REC-010-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "325",
+    "date": "Wed, 04 Nov 2026 03:27:03 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "recommendations": [
+      {
+        "id": "rec_1",
+        "type": "next_visit",
+        "url": "https://example.com/p?id=1&tab=x",
+        "title": "Higher",
+        "score": 0.66,
+        "reason": "与当前页面同域名，历史评分较高（0.76）",
+        "strategy": "same_domain",
+        "contextUrl": "https://example.com/q",
+        "createdAt": 1793762823982
+      }
+    ],
+    "cached": false,
+    "generatedAt": 1793762823982
+  },
+  "ms": 1.1,
+  "mutated": null
+}

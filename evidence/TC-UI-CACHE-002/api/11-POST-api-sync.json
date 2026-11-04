@@ -1,0 +1,44 @@
+{
+  "reqId": "TC-UI-CACHE-002-prepare-A-sw-3",
+  "observed": true,
+  "setup": false,
+  "method": "POST",
+  "url": "http://127.0.0.1:4300/api/sync",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762831170_9"
+  },
+  "requestBody": "{\"activeTab\":{\"url\":\"https://example.com/docs\",\"title\":\"Docs current\"},\"openTabs\":[{\"url\":\"https://example.com/docs\",\"title\":\"Docs current\",\"lastAccessed\":1793762830518.086}],\"history\":[{\"url\":\"https://example.com/cache-one-history\",\"title\":\"https://example.com/cache-one-history\",\"lastVisitTime\":1793762830555.663,\"visitCount\":1}],\"mode\":\"full\",\"clientVersion\":\"1.0.0\"}",
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "ext_1793762831170_9",
+    "access-control-expose-headers": "x-request-id",
+    "connection": "keep-alive",
+    "access-control-allow-origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "content-length": "164",
+    "keep-alive": "timeout=5",
+    "date": "Wed, 04 Nov 2026 03:27:11 GMT",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin"
+  },
+  "responseBody": {
+    "ok": true,
+    "syncedAt": 1793762831171,
+    "received": 3,
+    "created": 2,
+    "updated": 1,
+    "rejected": 0,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 0
+    },
+    "pageCount": 12,
+    "mode": "full"
+  },
+  "transport": "finished",
+  "ms": 2
+}

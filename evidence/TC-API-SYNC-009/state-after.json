@@ -1,0 +1,110 @@
+{
+  "dataVersion": 862,
+  "versions": {
+    "data": 862,
+    "rule": 355,
+    "config": 302
+  },
+  "counts": {
+    "pages": 3,
+    "rules": 0,
+    "openPages": 0,
+    "archivedPages": 0,
+    "syncLogs": 1
+  },
+  "pagesTruncated": false,
+  "pagesHash": "57382d339f4d44d0d7be245873437e4127286ef54d824994151b2e84b5826221",
+  "pages": [
+    {
+      "id": "page_2",
+      "url": "https://example.com/count-missing",
+      "normalizedUrl": "https://example.com/count-missing",
+      "domain": "example.com",
+      "title": "https://example.com/count-missing",
+      "visitCount": 1,
+      "lastVisitedAt": 1793762226057,
+      "firstSeenAt": 1793762226057,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    },
+    {
+      "id": "page_3",
+      "url": "https://example.com/count-one",
+      "normalizedUrl": "https://example.com/count-one",
+      "domain": "example.com",
+      "title": "https://example.com/count-one",
+      "visitCount": 1,
+      "lastVisitedAt": 1793762226057,
+      "firstSeenAt": 1793762226057,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    },
+    {
+      "id": "page_1",
+      "url": "https://example.com/count-zero",
+      "normalizedUrl": "https://example.com/count-zero",
+      "domain": "example.com",
+      "title": "https://example.com/count-zero",
+      "visitCount": 1,
+      "lastVisitedAt": 1793762226057,
+      "firstSeenAt": 1793762226057,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    }
+  ],
+  "rules": [],
+  "config": {
+    "cleanupThresholdDays": 14,
+    "maxHistoryItems": 100,
+    "historyLookbackDays": 30,
+    "enablePrivacyFilter": true,
+    "privacySensitiveKeywords": [
+      "password",
+      "token",
+      "bank",
+      "secret"
+    ]
+  },
+  "sequences": {
+    "page": 3,
+    "rule": 0,
+    "sync": 1
+  },
+  "lastSync": {
+    "id": "sync_1",
+    "syncedAt": 1793762826059,
+    "mode": "full",
+    "received": 3,
+    "created": 3,
+    "updated": 0,
+    "rejected": 0,
+    "durationMs": 0.08504200000606943,
+    "ok": true,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 0
+    }
+  },
+  "persist": null
+}

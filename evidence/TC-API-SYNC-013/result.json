@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-SYNC-013",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:06.191Z",
+  "tests": [
+    {
+      "testId": "911fda19f01f83ce4365-36476f19864013cc28c4",
+      "title": "TC-API-SYNC-013 最新快照自动关闭旧文档并保留活动页",
+      "project": "api",
+      "file": "tests/api/TC-API-SYNC-013.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 19,
+      "startedAt": "2026-11-04T03:27:06.172Z",
+      "endedAt": "2026-11-04T03:27:06.191Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 875,
+          "after": 878
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 3,
+          "archivedPages": 0,
+          "syncLogs": 2
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

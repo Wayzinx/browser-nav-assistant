@@ -1,0 +1,43 @@
+{
+  "reqId": "TC-UI-SYNC-004-SW-01",
+  "setup": false,
+  "method": "POST",
+  "url": "http://127.0.0.1:9/api/sync",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762997063_13"
+  },
+  "requestBody": {
+    "activeTab": {
+      "url": "https://github.com/org/repo/pull/456",
+      "title": "Refactor auth middleware (#456)"
+    },
+    "openTabs": [
+      {
+        "url": "https://github.com/org/repo/pull/456",
+        "title": "Refactor auth middleware (#456)",
+        "lastAccessed": 1793762996678.306
+      }
+    ],
+    "history": [
+      {
+        "url": "https://github.com/org/repo/pull/456",
+        "title": "Refactor auth middleware (#456)",
+        "lastVisitTime": 1793762996706.997,
+        "visitCount": 2
+      }
+    ],
+    "mode": "full",
+    "clientVersion": "1.0.0"
+  },
+  "status": null,
+  "responseHeaders": null,
+  "responseBody": null,
+  "startedAt": 169288.924833,
+  "failure": "net::ERR_UNSAFE_PORT",
+  "ms": 0.4
+}

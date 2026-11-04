@@ -1,0 +1,37 @@
+{
+  "source": "extension",
+  "method": "GET",
+  "url": "http://127.0.0.1:4300/api/pages/cleanup-suggestions",
+  "reqId": "ext_1793762855548_10",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762855548_10"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "connection": "keep-alive",
+    "date": "Wed, 04 Nov 2026 03:27:35 GMT",
+    "keep-alive": "timeout=5",
+    "access-control-expose-headers": "x-request-id",
+    "content-length": "108",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin",
+    "x-request-id": "ext_1793762855548_10"
+  },
+  "responseBody": {
+    "summary": {
+      "archive": 0,
+      "merge": 0,
+      "keep": 0
+    },
+    "suggestions": [],
+    "thresholdDays": 14,
+    "generatedAt": 1793762855549
+  },
+  "ms": 1.66,
+  "setup": false
+}

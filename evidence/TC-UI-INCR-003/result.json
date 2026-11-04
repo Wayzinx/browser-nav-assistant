@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-UI-INCR-003",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:36.744Z",
+  "tests": [
+    {
+      "testId": "18505018281e771ad14a-437664ca91a20190e96f",
+      "title": "TC-UI-INCR-003 首次全量有101条浏览器历史：只上传最新100条并省略cursor",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-INCR-003.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1180,
+      "startedAt": "2026-11-04T03:28:35.564Z",
+      "endedAt": "2026-11-04T03:28:36.744Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 3,
+      "screenshots": [
+        "evidence/TC-UI-INCR-003/screenshots/01-打开popup.png",
+        "evidence/TC-UI-INCR-003/screenshots/02-首次全量同步成功.png"
+      ],
+      "serverLogLines": 20,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1092,
+          "after": 1093
+        },
+        "pages": {
+          "added": 100,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 100,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "t0=1793762916434 t1=1793762916474 history.query=[{\"ts\":1793762916471,\"startTime\":1791170916464,\"maxResults\":100}] syncState={\"cursor\":1793762916464,\"cursorBase\":{\"apiBaseUrl\":\"http://127.0.0.1:4300\",\"serverStartedAt\":1793762741762},\"fullReason\":null,\"lastError\":null,\"lastSuccessAt\":1793762916464,\"lastSyncAt\":1793762916474,\"mode\":\"full\",\"startedAt\":1793762916464,\"stats\":{\"created\":100,\"filtered\":0,\"received\":100,\"rejected\":0,\"updated\":0,\"uploaded\":100},\"status\":\"success\",\"trigger\":\"user\"}"
+      ]
+    }
+  ]
+}

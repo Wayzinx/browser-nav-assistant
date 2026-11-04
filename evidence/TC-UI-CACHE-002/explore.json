@@ -1,0 +1,27 @@
+{
+  "caseId": "TC-UI-CACHE-002",
+  "verdict": "pass",
+  "observed": "已有缓存 A 后通过真实 /api/sync 写入 https://example.org/fresh（Fresh B），重开 popup：排序页出现 Fresh B（0.80）与 fresh URL，观察区间 popup 未发 POST /api/sync。本地刷新很快，30ms 截图已是刷新后数据；A 先于 B′ 的顺序由 spec 内 MutationObserver 序号断言验证（通过）。 第 7 轮复核（端口 4180，产品代码自第 6 轮后无改动）：重跑 tests/explore/tmp/cache-r7-4180.mjs，截图（r7-*.png）与 aria 快照结论与前几轮一致。停掉探索后端后 TEST_PORT=4180 npx playwright test 本模块 17 个 UI 脚本：首次 15 passed / 2 failed（CACHE-004、CACHE-007），失败原因都是 browserContext.close 时 trace 文件 ENOENT，没有任何 [En] 断言失败；原因是其他 agent 同时运行 playwright，共用的 test-results/ 被清空。加 --output=test-results-explore-4180 隔离输出目录后重跑，17 passed（32.6s），脚本未修改。",
+  "steps": [
+    "后端 PORT=4180 HOST=127.0.0.1 ENABLE_TEST_API=1 LOG_FILE=evidence/_runtime/explore-4180.log 启动；每个场景先 POST /api/__test__/reset",
+    "headless chromium（channel=chromium）加载 extension/，apiBaseUrl=http://127.0.0.1:4180（离线场景改为 http://127.0.0.1:9），只 route 外部站点",
+    "运行 tests/explore/tmp/cache-r5-4180.mjs CACHE，逐步操作 popup，截图 + ariaSnapshot（汇总 tests/explore/tmp/cache-r5-4180.out.json）",
+    "用 Read 查看截图，结合 aria 快照和请求体逐条核对 [En]",
+    "停止探索后端后执行 TEST_PORT=4180 npx playwright test tests/ui/TC-UI-CACHE-002.spec.mjs：通过（脚本未修改）",
+    "第 6 轮：后端 PORT=4180 启动，运行 tests/explore/tmp/cache-r6-4180.mjs CACHE（截图 3 张，见 r6-*.png），用 Read 查看截图核对 [En]；之后 TEST_PORT=4180 npx playwright test tests/ui/TC-UI-CACHE-002.spec.mjs 通过",
+    "第 7 轮：后端 PORT=4180 启动，运行 tests/explore/tmp/cache-r7-4180.mjs（截图 3 张，见 r7-*.png），用 Read 查看截图核对 [En]；之后 TEST_PORT=4180 npx playwright test tests/ui/TC-UI-CACHE-002.spec.mjs --output=test-results-explore-4180 通过"
+  ],
+  "screenshots": [
+    "evidence/TC-UI-CACHE-002/explore/r5-1.png",
+    "evidence/TC-UI-CACHE-002/explore/r5-2.png",
+    "evidence/TC-UI-CACHE-002/explore/r5-3.png",
+    "evidence/TC-UI-CACHE-002/explore/r6-1.png",
+    "evidence/TC-UI-CACHE-002/explore/r6-2.png",
+    "evidence/TC-UI-CACHE-002/explore/r6-3.png",
+    "evidence/TC-UI-CACHE-002/explore/r7-1.png",
+    "evidence/TC-UI-CACHE-002/explore/r7-2.png",
+    "evidence/TC-UI-CACHE-002/explore/r7-3.png"
+  ],
+  "spec": "tests/ui/TC-UI-CACHE-002.spec.mjs",
+  "solidified": true
+}

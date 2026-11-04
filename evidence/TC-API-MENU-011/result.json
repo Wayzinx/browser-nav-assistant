@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-MENU-011",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:49.485Z",
+  "tests": [
+    {
+      "testId": "64724216d90a07e9e4b5-895711430901df005306",
+      "title": "TC-API-MENU-011 重复标记 true 保持页面 ID 且不新增重复记录",
+      "project": "api",
+      "file": "tests/api/TC-API-MENU-011.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 32,
+      "startedAt": "2026-11-04T03:25:49.453Z",
+      "endedAt": "2026-11-04T03:25:49.485Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 168,
+          "after": 172
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "caseId": "TC-API-PERSIST-002",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:26:59.901Z",
+  "tests": [
+    {
+      "testId": "aeed2f3866a55d34efed-619f2edf2b70b0ed5de2",
+      "title": "TC-API-PERSIST-002 完整快照旁的半截 tmp 被清理且不影响恢复",
+      "project": "api",
+      "file": "tests/api/TC-API-PERSIST-002.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 2202,
+      "startedAt": "2026-11-04T03:26:57.699Z",
+      "endedAt": "2026-11-04T03:26:59.901Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [],
+      "serverLogLines": 2,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 579,
+          "after": 579
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "启动独立后端 pid=58613 port=62269 snapshot=true",
+        "独立后端退出 {\"pid\":58613,\"requestedSignal\":\"SIGTERM\",\"code\":0,\"signal\":null}",
+        "启动独立后端 pid=58769 port=62276 snapshot=true",
+        "重启后的快照目录：[\"snapshot.json\"]",
+        "独立后端退出 {\"pid\":58769,\"requestedSignal\":\"SIGTERM\",\"code\":0,\"signal\":null}"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "reqId": "TC-API-SYNC-017-03",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/sync",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-SYNC-017-03",
+    "content-type": "application/json"
+  },
+  "requestBody": "{bad",
+  "status": 400,
+  "responseHeaders": {
+    "x-request-id": "TC-API-SYNC-017-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "72",
+    "date": "Wed, 04 Nov 2026 03:27:06 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "error": {
+      "code": "INVALID_JSON",
+      "message": "请求体不是合法 JSON"
+    }
+  },
+  "ms": 0.8,
+  "mutated": null
+}

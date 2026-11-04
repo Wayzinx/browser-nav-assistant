@@ -1,0 +1,57 @@
+{
+  "caseId": "TC-UI-MENU-005",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:49.434Z",
+  "tests": [
+    {
+      "testId": "be27a2b68348b105373f-a52b1ce486f327217aed",
+      "title": "TC-UI-MENU-005 仅有系统页时当前页添加与星标入口均不显示",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-MENU-005.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1372,
+      "startedAt": "2026-11-04T03:28:48.062Z",
+      "endedAt": "2026-11-04T03:28:49.434Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 4,
+      "screenshots": [
+        "evidence/TC-UI-MENU-005/screenshots/01-系统页卡片.png"
+      ],
+      "serverLogLines": 12,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1114,
+          "after": 1114
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "system-popup 观察到的写请求：[]"
+      ]
+    }
+  ]
+}

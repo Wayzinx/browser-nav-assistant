@@ -1,0 +1,18 @@
+{
+  "caseId": "TC-UI-MENU-003",
+  "verdict": "pass",
+  "observed": "敏感页 https://example.com/reset?token=1 点击添加：toast「含敏感词未上传」；manual 请求数=0；ranked 空、pageCount=0；lastMenuAction={kind:add,accepted:false,reason:sensitive,at}；storage 序列化不含 token=1，importantUrls=[]；reload 后 toast 不变。 本轮（2026-11-03 r7）重新探索：产品代码与 spec 自 r6 后均无变更，tests/explore/tmp/menu-explore-r7.mjs 结果与截图、aria 快照复核一致；spec 未改动，TEST_PORT=4185 npx playwright test 10/10 通过。",
+  "steps": [
+    "后台启动 PORT=4185 HOST=127.0.0.1 ENABLE_TEST_API=1 后端",
+    "node tests/explore/tmp/menu-explore-r7.mjs（reset → 加载真实 extension/ → 打开目标页与 popup → 操作 → 截图 + aria 快照 → 读 storage/ranked/health）",
+    "阅读截图与 aria 快照逐条核对 [En]",
+    "关闭探索后端；TEST_PORT=4185 npx playwright test tests/ui/TC-UI-MENU-003.spec.mjs → passed"
+  ],
+  "screenshots": [
+    "evidence/TC-UI-MENU-003/explore/1.png",
+    "evidence/TC-UI-MENU-003/explore/2.png",
+    "evidence/TC-UI-MENU-003/explore/3.png"
+  ],
+  "spec": "tests/ui/TC-UI-MENU-003.spec.mjs",
+  "solidified": true
+}

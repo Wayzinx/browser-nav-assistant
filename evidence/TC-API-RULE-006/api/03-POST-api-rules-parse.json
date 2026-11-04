@@ -1,0 +1,46 @@
+{
+  "reqId": "TC-API-RULE-006-03",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/rules/parse",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-RULE-006-03"
+  },
+  "requestBody": {
+    "text": "GitHub 的页面建议归档"
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RULE-006-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "295",
+    "date": "Wed, 04 Nov 2026 03:27:04 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "rules": [
+      {
+        "id": "rule_1",
+        "rawText": "GitHub 的页面建议归档",
+        "type": "archive_candidate",
+        "domain": "github.com",
+        "urlPattern": null,
+        "inactiveDays": 14,
+        "action": "suggest_archive",
+        "enabled": true,
+        "confidence": "medium",
+        "notes": [
+          "未指定天数，使用默认 14 天"
+        ]
+      }
+    ],
+    "unparsed": [],
+    "warnings": []
+  },
+  "ms": 0.8,
+  "mutated": null
+}

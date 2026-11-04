@@ -1,0 +1,59 @@
+{
+  "caseId": "TC-UI-SYNC-006",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:30:02.685Z",
+  "tests": [
+    {
+      "testId": "975b20ee443e63ed136f-8d978684608cd402bebc",
+      "title": "TC-UI-SYNC-006 点击后立即关闭popup：3秒后重开显示后台完成的成功状态",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-SYNC-006.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 4048,
+      "startedAt": "2026-11-04T03:29:58.637Z",
+      "endedAt": "2026-11-04T03:30:02.685Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 3,
+      "screenshots": [
+        "evidence/TC-UI-SYNC-006/screenshots/01-首次打开-同步前.png",
+        "evidence/TC-UI-SYNC-006/screenshots/02-关闭3秒后重开-后台已完成.png"
+      ],
+      "serverLogLines": 26,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1209,
+          "after": 1210
+        },
+        "pages": {
+          "added": 2,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 2,
+          "rules": 0,
+          "openPages": 2,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "{\"clickedAt\":171623.1085,\"clickReturnedAt\":171632.838208,\"closedAt\":171641.620042,\"clickToCloseMs\":18.511541999992914,\"clickReturnToCloseMs\":8.781833999993978,\"completionWasNotAwaited\":true}",
+        "{\"closedAt\":171641.620042,\"sampledAt\":174643.178083,\"reopenRequestedAt\":174643.522583,\"reopenAfterMs\":3001.9025410000177,\"schedulingDriftMs\":1.5580410000111442,\"stateAtDeadline\":{\"cursor\":1793762999408,\"cursorBase\":{\"apiBaseUrl\":\"http://127.0.0.1:4300\",\"serverStartedAt\":1793762741762},\"fullReason\":null,\"lastError\":null,\"lastSuccessAt\":1793762999408,\"lastSyncAt\":1793762999430,\"mode\":\"full\",\"startedAt\":1793762999408,\"stats\":{\"created\":2,\"filtered\":0,\"received\":5,\"rejected\":0,\"updated\":3,\"uploaded\":5},\"status\":\"success\",\"trigger\":\"user\"},\"pageCountAtDeadline\":2}"
+      ]
+    }
+  ]
+}

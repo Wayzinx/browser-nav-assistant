@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-SYNC-007",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:06.000Z",
+  "tests": [
+    {
+      "testId": "7852dda28e6177aa7274-b82cce4290dc9ac765a4",
+      "title": "TC-API-SYNC-007 重放同一份平移样例保持合并幂等",
+      "project": "api",
+      "file": "tests/api/TC-API-SYNC-007.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 32,
+      "startedAt": "2026-11-04T03:27:05.968Z",
+      "endedAt": "2026-11-04T03:27:06.000Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 851,
+          "after": 854
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 2
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "caseId": "TC-UI-PRIV-006",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:05.158Z",
+  "tests": [
+    {
+      "testId": "ccb86876f4720fa5d95a-315c1ec7768e84dfeede",
+      "title": "TC-UI-PRIV-006 已有 cookie 配置缓存后断网：仍用缓存关键词且失败不覆盖缓存",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-PRIV-006.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1341,
+      "startedAt": "2026-11-04T03:29:03.817Z",
+      "endedAt": "2026-11-04T03:29:05.158Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 30,
+      "screenshots": [
+        "evidence/TC-UI-PRIV-006/screenshots/01-在线取得真实cookie配置缓存.png",
+        "evidence/TC-UI-PRIV-006/screenshots/02-断网后读取缓存与cookie标注.png",
+        "evidence/TC-UI-PRIV-006/screenshots/03-同步失败且配置缓存未覆盖.png"
+      ],
+      "serverLogLines": 12,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1136,
+          "after": 1136
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [
+          "privacySensitiveKeywords"
+        ],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "GET_CONTEXT {\"privacy\":{\"enabled\":true,\"keywords\":[\"password\",\"token\",\"bank\",\"secret\",\"cookie\"],\"source\":\"server\"},\"tabs\":2,\"history\":0}",
+        "保存在线配置缓存 C：{\"cachedAt\":1793762944606,\"data\":{\"apiVersion\":\"1\",\"baseSensitiveKeywords\":[\"password\",\"token\",\"bank\",\"secret\",\"cookie\"],\"cleanupThresholdDays\":14,\"enablePrivacyFilter\":true,\"historyLookbackDays\":30,\"limits\":{\"maxBodyBytes\":1048576,\"maxItemsPerSync\":500,\"maxRuleTextLength\":500,\"maxUrlLength\":2048},\"maxHistoryItems\":100,\"minRecommendationScore\":0.3,\"privacySensitiveKeywords\":[\"password\",\"token\",\"bank\",\"secret\",\"cookie\"],\"recencyHalfLifeDays\":7,\"weights\":{\"domain\":0.1,\"frequency\":0.3,\"open\":0.2,\"recency\":0.4}}}",
+        "GET_CONTEXT {\"privacy\":{\"enabled\":true,\"keywords\":[\"password\",\"token\",\"bank\",\"secret\",\"cookie\"],\"source\":\"cache\"},\"tabs\":2,\"history\":0}",
+        "GET_CONTEXT {\"privacy\":{\"enabled\":true,\"keywords\":[\"password\",\"token\",\"bank\",\"secret\",\"cookie\"],\"source\":\"cache\"},\"tabs\":2,\"history\":0}"
+      ]
+    }
+  ]
+}

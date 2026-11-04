@@ -1,0 +1,106 @@
+{
+  "reqId": "TC-API-REC-023-05",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/recommendations/next",
+  "params": {
+    "now": 1793762824307
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-REC-023-05"
+  },
+  "requestBody": {
+    "currentPage": {
+      "url": "https://react.dev/learn"
+    },
+    "openTabs": [],
+    "recentHistory": [
+      {
+        "url": "https://react.dev/reference/react/useEffect",
+        "lastVisitTime": 1793762821307
+      },
+      {
+        "url": "https://react.dev/learn",
+        "lastVisitTime": 1793762823307
+      },
+      {
+        "url": "https://react.dev/reference/react/useState",
+        "lastVisitTime": 1793762822307
+      }
+    ]
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-REC-023-05",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "1515",
+    "date": "Wed, 04 Nov 2026 03:27:04 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "recommendations": [
+      {
+        "id": "rec_9",
+        "type": "next_visit",
+        "url": "https://react.dev/reference/react/useState",
+        "title": "useState – React",
+        "score": 0.76,
+        "reason": "你正在看 react.dev 文档，这是同站点访问 6 次的高频页面",
+        "strategy": "same_doc_site",
+        "contextUrl": "https://react.dev/learn",
+        "createdAt": 1793762824307
+      },
+      {
+        "id": "rec_2",
+        "type": "next_visit",
+        "url": "https://github.com/org/repo/issues/123",
+        "title": "Fix login redirect bug",
+        "score": 0.58,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": "https://react.dev/learn",
+        "createdAt": 1793762824307
+      },
+      {
+        "id": "rec_1",
+        "type": "next_visit",
+        "url": "https://github.com/org/repo/pull/456",
+        "title": "Refactor auth middleware (#456)",
+        "score": 0.56,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": "https://react.dev/learn",
+        "createdAt": 1793762824307
+      },
+      {
+        "id": "rec_4",
+        "type": "next_visit",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+        "title": "Fetch API - Web APIs | MDN",
+        "score": 0.51,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": "https://react.dev/learn",
+        "createdAt": 1793762824307
+      },
+      {
+        "id": "rec_3",
+        "type": "next_visit",
+        "url": "https://github.com/org/repo/actions",
+        "title": "Actions · org/repo",
+        "score": 0.45,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": "https://react.dev/learn",
+        "createdAt": 1793762824307
+      }
+    ],
+    "cached": false,
+    "generatedAt": 1793762824307
+  },
+  "ms": 1,
+  "mutated": null
+}

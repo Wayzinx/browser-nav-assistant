@@ -1,0 +1,36 @@
+{
+  "reqId": "TC-API-SYNC-027-08",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/sync",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-SYNC-027-08",
+    "content-type": "application/json"
+  },
+  "requestBody": "[]",
+  "status": 400,
+  "responseHeaders": {
+    "x-request-id": "TC-API-SYNC-027-08",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "117",
+    "date": "Wed, 04 Nov 2026 03:27:06 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "error": {
+      "code": "VALIDATION_FAILED",
+      "message": "请求字段类型或取值不合法",
+      "details": {
+        "fields": [
+          "body"
+        ]
+      }
+    }
+  },
+  "ms": 0.8,
+  "mutated": null
+}

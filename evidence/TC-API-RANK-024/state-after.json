@@ -1,0 +1,181 @@
+{
+  "dataVersion": 674,
+  "versions": {
+    "data": 674,
+    "rule": 177,
+    "config": 161
+  },
+  "counts": {
+    "pages": 6,
+    "rules": 1,
+    "openPages": 0,
+    "archivedPages": 0,
+    "syncLogs": 1
+  },
+  "pagesTruncated": false,
+  "pagesHash": "631319ebe60d6556a962ac73b8101c57b660ba16d2431df4f7c761160456bffd",
+  "pages": [
+    {
+      "id": "page_4",
+      "url": "https://example.com/p1",
+      "normalizedUrl": "https://example.com/p1",
+      "domain": "example.com",
+      "title": "https://example.com/p1",
+      "visitCount": 1,
+      "lastVisitedAt": 1793759223752,
+      "firstSeenAt": 1793759223752,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    },
+    {
+      "id": "page_5",
+      "url": "https://example.com/p2",
+      "normalizedUrl": "https://example.com/p2",
+      "domain": "example.com",
+      "title": "https://example.com/p2",
+      "visitCount": 1,
+      "lastVisitedAt": 1793759223752,
+      "firstSeenAt": 1793759223752,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    },
+    {
+      "id": "page_6",
+      "url": "https://example.com/p3",
+      "normalizedUrl": "https://example.com/p3",
+      "domain": "example.com",
+      "title": "https://example.com/p3",
+      "visitCount": 1,
+      "lastVisitedAt": 1793759223752,
+      "firstSeenAt": 1793759223752,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    },
+    {
+      "id": "page_3",
+      "url": "https://notreact.dev/c",
+      "normalizedUrl": "https://notreact.dev/c",
+      "domain": "notreact.dev",
+      "title": "https://notreact.dev/c",
+      "visitCount": 1,
+      "lastVisitedAt": 1793759223752,
+      "firstSeenAt": 1793759223752,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    },
+    {
+      "id": "page_1",
+      "url": "https://react.dev/a",
+      "normalizedUrl": "https://react.dev/a",
+      "domain": "react.dev",
+      "title": "https://react.dev/a",
+      "visitCount": 1,
+      "lastVisitedAt": 1793759223752,
+      "firstSeenAt": 1793759223752,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    },
+    {
+      "id": "page_2",
+      "url": "https://sub.react.dev/b",
+      "normalizedUrl": "https://sub.react.dev/b",
+      "domain": "sub.react.dev",
+      "title": "https://sub.react.dev/b",
+      "visitCount": 1,
+      "lastVisitedAt": 1793759223752,
+      "firstSeenAt": 1793759223752,
+      "sources": [
+        "history"
+      ],
+      "isOpen": false,
+      "isActive": false,
+      "isArchived": false,
+      "archivedAt": null,
+      "mergedInto": null,
+      "isImportant": false
+    }
+  ],
+  "rules": [
+    {
+      "domain": "react.dev",
+      "urlPattern": null,
+      "inactiveDays": null,
+      "enabled": true,
+      "confidence": "high",
+      "createdAt": 1793762823757,
+      "updatedAt": 1793762823757,
+      "rawText": "react.dev 优先显示",
+      "type": "boost_domain",
+      "action": "boost",
+      "id": "rule_1"
+    }
+  ],
+  "config": {
+    "cleanupThresholdDays": 14,
+    "maxHistoryItems": 100,
+    "historyLookbackDays": 30,
+    "enablePrivacyFilter": true,
+    "privacySensitiveKeywords": [
+      "password",
+      "token",
+      "bank",
+      "secret"
+    ]
+  },
+  "sequences": {
+    "page": 6,
+    "rule": 1,
+    "sync": 1
+  },
+  "lastSync": {
+    "id": "sync_1",
+    "syncedAt": 1793762823753,
+    "mode": "full",
+    "received": 6,
+    "created": 6,
+    "updated": 0,
+    "rejected": 0,
+    "durationMs": 0.08204199999454431,
+    "ok": true,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 0
+    }
+  },
+  "persist": null
+}

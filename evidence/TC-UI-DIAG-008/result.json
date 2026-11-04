@@ -1,0 +1,57 @@
+{
+  "caseId": "TC-UI-DIAG-008",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:12.744Z",
+  "tests": [
+    {
+      "testId": "2aa0f29086e763846f9a-709582a10ec263d7c3cc",
+      "title": "TC-UI-DIAG-008 保存未授权的本机 HTTPS 地址显示授权警告，改回 4100 后地址与真实请求恢复",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-DIAG-008.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1167,
+      "startedAt": "2026-11-04T03:28:11.577Z",
+      "endedAt": "2026-11-04T03:28:12.744Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-DIAG-008/screenshots/01-S1-保存未授权地址.png",
+        "evidence/TC-UI-DIAG-008/screenshots/02-S2-未授权警告.png",
+        "evidence/TC-UI-DIAG-008/screenshots/03-S3-改回测试后端.png"
+      ],
+      "serverLogLines": 34,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1062,
+          "after": 1063
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

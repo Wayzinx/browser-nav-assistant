@@ -1,0 +1,61 @@
+{
+  "reqId": "TC-UI-PRIV-009-sw-15",
+  "observed": true,
+  "setup": false,
+  "method": "POST",
+  "url": "http://127.0.0.1:4300/api/recommendations/next",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762950443_15"
+  },
+  "requestBody": {
+    "currentPage": null,
+    "openTabs": [],
+    "recentHistory": []
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "ext_1793762950443_15",
+    "access-control-expose-headers": "x-request-id",
+    "connection": "keep-alive",
+    "access-control-allow-origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "content-length": "528",
+    "keep-alive": "timeout=5",
+    "date": "Wed, 04 Nov 2026 03:29:10 GMT",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin"
+  },
+  "responseBody": {
+    "recommendations": [
+      {
+        "id": "rec_1",
+        "type": "next_visit",
+        "url": "https://example.org/guide-a",
+        "title": "Guide 1",
+        "score": 0.5,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": null,
+        "createdAt": 1793762950445
+      },
+      {
+        "id": "rec_2",
+        "type": "next_visit",
+        "url": "https://example.org/guide-b",
+        "title": "Guide 2",
+        "score": 0.5,
+        "reason": "近期综合评分较高的页面，可作为备选",
+        "strategy": "global_top",
+        "contextUrl": null,
+        "createdAt": 1793762950445
+      }
+    ],
+    "cached": false,
+    "generatedAt": 1793762950445
+  },
+  "ms": 3
+}

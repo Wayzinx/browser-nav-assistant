@@ -1,0 +1,77 @@
+{
+  "reqId": "TC-UI-INCR-005-sw-sync-3",
+  "setup": false,
+  "observed": true,
+  "method": "POST",
+  "url": "http://127.0.0.1:4300/api/sync",
+  "requestHeaders": {
+    "accept": "*/*",
+    "accept-language": "en-US",
+    "origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/json",
+    "x-request-id": "ext_1793762919429_29"
+  },
+  "requestBody": {
+    "activeTab": {
+      "url": "https://example.com/retry",
+      "title": "Retry example"
+    },
+    "openTabs": [
+      {
+        "url": "https://github.com/org/repo/pull/456",
+        "title": "Refactor auth middleware (#456)",
+        "lastAccessed": 1793762918763.651
+      },
+      {
+        "url": "https://example.com/retry",
+        "title": "Retry example",
+        "lastAccessed": 1793762919134.997
+      }
+    ],
+    "history": [
+      {
+        "url": "https://example.com/retry",
+        "title": "Retry example",
+        "lastVisitTime": 1793762919160.373,
+        "visitCount": 2
+      },
+      {
+        "url": "https://github.com/org/repo/pull/456",
+        "title": "Refactor auth middleware (#456)",
+        "lastVisitTime": 1793762918791.263,
+        "visitCount": 2
+      }
+    ],
+    "mode": "incremental",
+    "cursor": 1793762918957,
+    "clientVersion": "1.0.0"
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "ext_1793762919429_29",
+    "access-control-expose-headers": "x-request-id",
+    "connection": "keep-alive",
+    "access-control-allow-origin": "chrome-extension://apogdiijbmmelomlehodilcejcmocaki",
+    "content-length": "170",
+    "keep-alive": "timeout=5",
+    "date": "Wed, 04 Nov 2026 03:28:39 GMT",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Origin"
+  },
+  "responseBody": {
+    "ok": true,
+    "syncedAt": 1793762919430,
+    "received": 5,
+    "created": 1,
+    "updated": 4,
+    "rejected": 0,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 0
+    },
+    "pageCount": 2,
+    "mode": "incremental"
+  },
+  "ms": 4
+}

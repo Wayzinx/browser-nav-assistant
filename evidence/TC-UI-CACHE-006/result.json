@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-UI-CACHE-006",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:21.185Z",
+  "tests": [
+    {
+      "testId": "f3803d39ca5ce4992a2a-c67dc4102de72b3dcb94",
+      "title": "TC-UI-CACHE-006 空集合与无缓存边界：已缓存的空结果离线显示空态及缓存时间",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CACHE-006.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1801,
+      "startedAt": "2026-11-04T03:27:19.384Z",
+      "endedAt": "2026-11-04T03:27:21.185Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 32,
+      "screenshots": [
+        "evidence/TC-UI-CACHE-006/screenshots/01-online-empty-cache-A.png",
+        "evidence/TC-UI-CACHE-006/screenshots/02-offline-empty-home.png",
+        "evidence/TC-UI-CACHE-006/screenshots/03-offline-empty-ranked.png",
+        "evidence/TC-UI-CACHE-006/screenshots/04-offline-empty-cleanup-cache-preserved.png"
+      ],
+      "serverLogLines": 19,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 970,
+          "after": 971
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

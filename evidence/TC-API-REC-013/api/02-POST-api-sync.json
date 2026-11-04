@@ -1,0 +1,61 @@
+{
+  "reqId": "TC-API-REC-013-02",
+  "setup": true,
+  "method": "POST",
+  "url": "/api/sync",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-REC-013-02"
+  },
+  "requestBody": {
+    "activeTab": null,
+    "openTabs": [],
+    "history": [
+      {
+        "url": "https://boundary.example.org/anchor",
+        "title": "Anchor",
+        "lastVisitTime": 1793762524064,
+        "visitCount": 1023
+      },
+      {
+        "url": "https://boundary.example.org/keep",
+        "title": "Keep",
+        "lastVisitTime": 1792985224064,
+        "visitCount": 1
+      },
+      {
+        "url": "https://boundary.example.org/drop",
+        "title": "Drop",
+        "lastVisitTime": 1792898824064,
+        "visitCount": 1
+      }
+    ]
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-REC-013-02",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "163",
+    "date": "Wed, 04 Nov 2026 03:27:04 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "ok": true,
+    "syncedAt": 1793762824065,
+    "received": 3,
+    "created": 3,
+    "updated": 0,
+    "rejected": 0,
+    "rejectedByReason": {
+      "invalid_url": 0,
+      "privacy": 0
+    },
+    "pageCount": 3,
+    "mode": "full"
+  },
+  "ms": 1.3,
+  "mutated": null
+}

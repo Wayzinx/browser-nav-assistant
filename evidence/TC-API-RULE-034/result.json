@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RULE-034",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:05.465Z",
+  "tests": [
+    {
+      "testId": "8dc25ef4bcc0fd8b743c-2d085bcdb4052dc4e09f",
+      "title": "TC-API-RULE-034 删除不存在id返回404统一错误并保留已有规则",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-034.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 21,
+      "startedAt": "2026-11-04T03:27:05.444Z",
+      "endedAt": "2026-11-04T03:27:05.465Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 9,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 806,
+          "after": 807
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 1,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

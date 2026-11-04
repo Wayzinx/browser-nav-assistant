@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RULE-026",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:05.202Z",
+  "tests": [
+    {
+      "testId": "85cad211de535a51fca9-72c906f3a84e29758dea",
+      "title": "TC-API-RULE-026 保存数组最小1条与最大20条均接受且id唯一",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-026.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 34,
+      "startedAt": "2026-11-04T03:27:05.168Z",
+      "endedAt": "2026-11-04T03:27:05.202Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 10,
+      "screenshots": [],
+      "serverLogLines": 12,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 788,
+          "after": 791
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 20,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 20,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

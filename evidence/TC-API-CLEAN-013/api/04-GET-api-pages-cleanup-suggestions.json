@@ -1,0 +1,56 @@
+{
+  "reqId": "TC-API-CLEAN-013-04",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/cleanup-suggestions",
+  "params": {
+    "now": 1793762744373
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-CLEAN-013-04"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-CLEAN-013-04",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "652",
+    "date": "Wed, 04 Nov 2026 03:25:44 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "summary": {
+      "archive": 1,
+      "merge": 0,
+      "keep": 1
+    },
+    "suggestions": [
+      {
+        "key": "archive:https://notinternal.com/old",
+        "action": "archive",
+        "url": "https://notinternal.com/old",
+        "title": "https://notinternal.com/old",
+        "reason": "超过 14 天未访问（已 30 天），且不在当前打开的 tab 中",
+        "ageDays": 30,
+        "ruleId": null,
+        "lastVisitedAt": 1791170744373
+      },
+      {
+        "key": "keep:https://docs.internal.com/old",
+        "action": "keep",
+        "url": "https://docs.internal.com/old",
+        "title": "https://docs.internal.com/old",
+        "reason": "被保护域名配置（internal.com），不建议归档，虽已 30 天未访问",
+        "ageDays": 30,
+        "ruleId": "rule_1"
+      }
+    ],
+    "thresholdDays": 14,
+    "generatedAt": 1793762744373
+  },
+  "ms": 4.4,
+  "mutated": null
+}

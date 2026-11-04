@@ -1,0 +1,35 @@
+{
+  "reqId": "TC-UI-INCR-006-03",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/health",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-UI-INCR-006-03"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-UI-INCR-006-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "171",
+    "date": "Wed, 04 Nov 2026 03:28:40 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "status": "ok",
+    "version": "1.0.0",
+    "uptime": 179,
+    "pageCount": 2,
+    "ruleCount": 0,
+    "enabledRuleCount": 0,
+    "lastSyncAt": 1793762920728,
+    "persistence": "memory",
+    "startedAt": 1793762741762
+  },
+  "ms": 0.9,
+  "mutated": null
+}

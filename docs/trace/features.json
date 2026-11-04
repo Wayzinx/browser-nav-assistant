@@ -1,0 +1,1498 @@
+{
+  "features": [
+    {
+      "id": "F-CTX-01",
+      "module": "CTX",
+      "name": "manifest 合法并声明必需权限",
+      "kind": "system",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-005、REQ-012、REQ-013、REQ-036、REQ-099、REQ-110、REQ-114；PROBLEM.md 总体约束、必做功能 1",
+      "description": "extension/manifest.json 使用 Manifest V3：permissions 至少包含 tabs、history、storage、activeTab（右键菜单另加 contextMenus，见 D-15）；host_permissions 覆盖本地后端（D-11）；background 为 ES module 类型的 service worker；action.default_popup 指向 popup 页面；不加载远程代码。交付文档 README 需说明每项权限的用途。",
+      "acceptance": [
+        "AC1：Given extension/manifest.json When 解析该文件 Then manifest_version 为 3，permissions 包含 tabs、history、storage、activeTab 四项",
+        "AC2：Given extension/manifest.json When 检查 host_permissions Then 包含 http://localhost/* 和 http://127.0.0.1/*",
+        "AC3：Given extension/manifest.json When 检查 background 和 action 字段 Then background.service_worker 指向的文件存在且 type 为 module，action.default_popup 指向的 popup 页面文件存在"
+      ]
+    },
+    {
+      "id": "F-CTX-02",
+      "module": "CTX",
+      "name": "开发者模式加载插件无报错",
+      "kind": "system",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-005、REQ-012、REQ-013、REQ-014、REQ-037、REQ-099、REQ-108、REQ-109；PROBLEM.md 必做功能 1、验收要求第 2 步",
+      "description": "在 chrome://extensions 开发者模式下「加载已解压的扩展程序」选择 extension/ 目录即可运行，没有构建步骤；popup 与 service worker 遵守 MV3 CSP（无内联脚本、无远程代码）。",
+      "acceptance": [
+        "AC1：Given 用 Chromium 以 --load-extension 加载 extension/ 目录 When 插件启动 Then service worker 注册成功，service worker 控制台没有未捕获的错误",
+        "AC2：Given 插件已加载 When 打开 popup 页面 Then 顶栏显示「导航助手」，并显示首页、上下文、排序、整理、规则、诊断 6 个页签，页面控制台没有未捕获的错误"
+      ]
+    },
+    {
+      "id": "F-CTX-03",
+      "module": "CTX",
+      "name": "popup 展示当前页面的标题和 URL",
+      "kind": "display",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-014、REQ-015、REQ-022、REQ-038、REQ-039、REQ-101、REQ-115；PROBLEM.md 必做功能 1、系统架构说明（Popup 页面）",
+      "description": "popup 打开时由 service worker 读取当前页面（判定规则见 D-25），在当前页面卡片中展示标题和 URL；只依赖浏览器 API，后端不可用时也能展示。",
+      "acceptance": [
+        "AC1：Given 当前窗口的活动标签页为 https://github.com/org/repo/pull/456，标题为「Refactor auth middleware (#456)」 When 打开 popup Then 当前页面卡片显示该标题和 URL",
+        "AC2：Given 后端未启动 When 打开 popup Then 当前页面卡片仍显示活动标签页的标题和 URL"
+      ]
+    },
+    {
+      "id": "F-CTX-04",
+      "module": "CTX",
+      "name": "当前页面判定排除插件自身页面",
+      "kind": "system",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "推断：popup 以标签页方式打开时，活动标签页就是插件自身页面（D-25）；REQ-015、REQ-039；PROBLEM.md 提示（系统页面需要降级）",
+      "description": "活动标签页是插件自身页面（chrome-extension://）时，取最后聚焦窗口中 lastAccessed 最大的 http(s) 标签页作为当前页面；没有可用页面时按系统页处理。",
+      "acceptance": [
+        "AC1：Given 依次打开 https://github.com/org/repo/pull/456 和 https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API，再以标签页方式打开插件的 popup 页面 When popup 加载完成 Then 当前页面卡片显示 https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API，而不是以 chrome-extension:// 开头的地址",
+        "AC2：Given 当前窗口中除插件页面外没有 http(s) 标签页 When popup 加载完成 Then 当前页面卡片显示「系统页 · 不采集」"
+      ]
+    },
+    {
+      "id": "F-CTX-05",
+      "module": "CTX",
+      "name": "展示当前窗口的标签页列表",
+      "kind": "display",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-023、REQ-038、REQ-040、REQ-101、REQ-116；PROBLEM.md 必做功能 1",
+      "description": "上下文页签的「当前窗口标签页」列表展示 chrome.tabs.query({ currentWindow: true }) 的结果（标题 + URL），跳过无痕标签页；同步时的标签页范围见 D-21。",
+      "acceptance": [
+        "AC1：Given 当前窗口打开了 https://github.com/org/repo/pull/456、https://github.com/org/repo/issues/123、https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API、https://docs.internal.com/ai-agent-design 4 个页面 When 打开 popup 的上下文页签 Then「当前窗口标签页」列表包含这 4 条记录，每条显示标题和 URL",
+        "AC2：Given 另一个窗口打开了 https://example.com/other When 打开当前窗口 popup 的上下文页签 Then「当前窗口标签页」列表中没有 https://example.com/other"
+      ]
+    },
+    {
+      "id": "F-CTX-06",
+      "module": "CTX",
+      "name": "展示最近浏览历史（最多 100 条）",
+      "kind": "display",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-023、REQ-038、REQ-041、REQ-101、REQ-116；PROBLEM.md 必做功能 1、提示（chrome.history.search）",
+      "description": "service worker 调用 chrome.history.search，显式传入 startTime = now − 30 天、maxResults = maxHistoryItems（默认 100），在上下文页签的「最近浏览历史」列表中按 lastVisitTime 倒序展示（D-19）。",
+      "acceptance": [
+        "AC1：Given 浏览器历史中有 3 条刚访问过的 http(s) 页面 When 打开 popup 的上下文页签 Then「最近浏览历史」列表显示这 3 条，按访问时间从新到旧排列",
+        "AC2：Given 浏览器历史中有 120 条 30 天内的记录 When 打开上下文页签 Then「最近浏览历史」列表显示 100 条",
+        "AC3：Given 打开上下文页签 When service worker 读取历史 Then 调用 chrome.history.search 时传入的 startTime 为当前时间减 30 天（误差 1 分钟以内），maxResults 为 100"
+      ]
+    },
+    {
+      "id": "F-CTX-07",
+      "module": "CTX",
+      "name": "系统页面降级展示",
+      "kind": "display",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-117；PROBLEM.md 提示（当前页面为 chrome:// 等系统页面时需要做降级处理）",
+      "description": "chrome://、edge://、about:、file://、chrome-extension:// 页面视为系统页：当前页面卡片显示「系统页 · 不采集」，上下文页签中标注「系统页 · 跳过」，这些页面不上传；推荐退化为全局高分页面（F-REC-06）。",
+      "acceptance": [
+        "AC1：Given 活动标签页为 chrome://version/ When 打开 popup Then 当前页面卡片显示「系统页 · 不采集」，popup 页面没有未捕获的错误",
+        "AC2：Given 当前窗口打开了 chrome://version/ 和 https://react.dev/learn When 打开上下文页签 Then chrome://version/ 一行标注「系统页 · 跳过」，https://react.dev/learn 一行没有该标注"
+      ]
+    },
+    {
+      "id": "F-SYNC-01",
+      "module": "SYNC",
+      "name": "点击「同步浏览器上下文」上报数据",
+      "kind": "action",
+      "layers": [
+        "FE",
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-012、REQ-016、REQ-022、REQ-024、REQ-042、REQ-043、REQ-048、REQ-102、REQ-110、REQ-115；PROBLEM.md 必做功能 2",
+      "description": "popup 发送同步消息，service worker 读取当前页、所有普通窗口的标签页（D-21）和最近历史，过滤系统页面、无痕标签页和敏感 URL 后调用 POST /api/sync；后端完成入库并返回统计。同步期间按钮禁用。",
+      "acceptance": [
+        "AC1：Given 后端已启动且数据为空，当前窗口打开 https://github.com/org/repo/pull/456 和 https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API When 点击「同步浏览器上下文」 Then 后端收到 1 次 POST /api/sync，请求体包含 activeTab、openTabs、history 三个字段，之后 GET /api/pages/ranked 中包含这 2 个 URL",
+        "AC2：Given 当前窗口还打开了 chrome://version/ When 点击同步 Then POST /api/sync 的请求体中没有任何以 chrome:// 开头的 URL",
+        "AC3：Given 一次同步正在进行 When 再次点击同步按钮 Then 按钮处于禁用状态，后端只收到 1 次 POST /api/sync"
+      ]
+    },
+    {
+      "id": "F-SYNC-02",
+      "module": "SYNC",
+      "name": "后端按 normalizedUrl 去重入库",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-027、REQ-033、REQ-044、REQ-107、REQ-110；PROBLEM.md 必做功能 2（按 URL 去重）、核心数据模型（Page）",
+      "description": "后端以 normalizedUrl 为存储主键（D-03）：小写 host、去掉 hash、去掉跟踪参数、query 参数排序、去掉末尾的 /，保留业务 query。",
+      "acceptance": [
+        "AC1：Given 后端数据为空 When POST /api/sync 提交 resource.json（activeTab 1 条、openTabs 3 条、history 10 条） Then 响应 200，received=14、created=10、updated=4、pageCount=10",
+        "AC2：Given 后端数据为空 When 同步 https://GitHub.com/org/repo/issues/123/?utm_source=mail#c1 和 https://github.com/org/repo/issues/123 两条历史 Then pageCount=1，该页面的 normalizedUrl 为 https://github.com/org/repo/issues/123",
+        "AC3：Given 后端数据为空 When 同步 https://github.com/org/repo/issues/123 和 https://github.com/org/repo/issues/123?tab=comments 两条历史 Then pageCount=2（是否重复由整理建议判断）"
+      ]
+    },
+    {
+      "id": "F-SYNC-03",
+      "module": "SYNC",
+      "name": "visitCount、lastVisitedAt、firstSeenAt 与标题的合并口径",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-027、REQ-033、REQ-045；PROBLEM.md 必做功能 2（更新 visitCount / lastVisitedAt）",
+      "description": "visitCount 取 max(已有值, history.visitCount)，最小为 1（D-02）；lastVisitedAt 取 max(已有值, history.lastVisitTime, tab.lastAccessed)，活动标签页记为本次同步时间；firstSeenAt 取最小值；title 用非空的新值覆盖，为空时用 URL。",
+      "acceptance": [
+        "AC1：Given 已同步一次 resource.json When 再次同步同一份数据 Then pageCount 仍为 10，https://github.com/org/repo/issues/123 的 visitCount 仍为 8",
+        "AC2：Given 已按 D-01 导入 resource.json 样例 When GET /api/pages/ranked Then issues/123 的 lastVisitedAt 等于导入请求 history 中它的 lastVisitTime，pull/456 的 lastVisitedAt 等于导入响应中的 syncedAt",
+        "AC3：Given 后端数据为空 When 同步一条 title 为空字符串的历史 https://example.com/a Then GET /api/pages/ranked 中该页面的 title 为 https://example.com/a"
+      ]
+    },
+    {
+      "id": "F-SYNC-04",
+      "module": "SYNC",
+      "name": "区分并合并页面来源 sources",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-033、REQ-046；PROBLEM.md 必做功能 2（区分 source：active_tab / open_tab / history）",
+      "description": "sources 为 active_tab、open_tab、history（右键「添加到分析」为 manual）的并集，多次同步累积、不丢失；GET /api/pages/ranked 返回 sources 字段（D-16）。",
+      "acceptance": [
+        "AC1：Given 后端数据为空 When POST /api/sync 提交 resource.json Then GET /api/pages/ranked 中 pull/456 的 sources 包含 active_tab 和 history，issues/123 的 sources 包含 open_tab 和 history，https://react.dev/learn 的 sources 只有 history",
+        "AC2：Given 已同步 resource.json When 再同步一次，openTabs 只包含 https://react.dev/learn Then https://react.dev/learn 的 sources 变为 history 和 open_tab"
+      ]
+    },
+    {
+      "id": "F-SYNC-05",
+      "module": "SYNC",
+      "name": "isOpen 按最近一次同步快照刷新",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "推断：PROBLEM.md 必做功能 5「不是当前打开的 tab」依赖准确的打开状态（D-04）；REQ-033、REQ-062",
+      "description": "每次同步后，本次出现在 activeTab 或 openTabs 中的页面 isOpen=true，其余页面 isOpen=false；activeTab 对应的页面 isActive=true。",
+      "acceptance": [
+        "AC1：Given 已同步 resource.json（docs.internal.com/ai-agent-design 在 openTabs 中） When 再次同步，openTabs 只包含 issues/123 和 Fetch_API Then GET /api/pages/ranked 中 https://docs.internal.com/ai-agent-design 的 isOpen=false，issues/123 的 isOpen=true",
+        "AC2：Given 同 AC1 When 第二次同步的 activeTab 为 null Then pull/456 的 isOpen=false"
+      ]
+    },
+    {
+      "id": "F-SYNC-06",
+      "module": "SYNC",
+      "name": "同步状态展示、持久化与中断恢复",
+      "kind": "display",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-016、REQ-025、REQ-047、REQ-102；PROBLEM.md 必做功能 2（插件展示同步成功状态）、系统架构说明（管理同步状态）",
+      "description": "同步状态机 idle → syncing → success | error 保存在 chrome.storage.local（D-26）；popup 监听存储变化实时更新；同步在 service worker 中执行，关闭 popup 不会中断；syncing 超过 30 秒视为中断失败；失败时保留已有数据。",
+      "acceptance": [
+        "AC1：Given 后端已启动 When 点击同步并完成 Then 同步状态行显示「同步成功」，以及本次上传条数和过滤条数",
+        "AC2：Given API base URL 指向一个没有服务的端口 When 点击同步 Then 同步状态行显示「同步失败」和失败原因，并提供「诊断」入口，已展示的排序、推荐、整理数据没有被清空",
+        "AC3：Given 同步成功后关闭 popup When 重新打开 popup Then 同步状态行仍显示「同步成功」和上次同步时间",
+        "AC4：Given 点击同步后立即关闭 popup When 3 秒后重新打开 popup Then 同步状态行显示「同步成功」，GET /api/health 的 pageCount 大于 0",
+        "AC5：Given chrome.storage.local 中的同步状态为 syncing，且开始时间在 31 秒前 When 打开 popup Then 同步状态行显示「同步失败」，原因包含「中断」"
+      ]
+    },
+    {
+      "id": "F-SYNC-07",
+      "module": "SYNC",
+      "name": "/api/sync 入参校验与错误返回",
+      "kind": "api",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P1",
+      "inScope": true,
+      "source": "REQ-048；PROBLEM.md 必做功能 2（接口定义）；D-16",
+      "description": "结构错误返回 400；单条记录的 URL 不是 http(s)、无法解析、超过 2048 个字符或含敏感关键词时计入 rejected，不影响其他记录；单次最多 500 条，请求体最大 1 MB。",
+      "acceptance": [
+        "AC1：Given 后端数据为空 When POST /api/sync 的请求体不是合法 JSON Then 响应 400，body 为 { error: { code: \"INVALID_JSON\", message: 非空字符串 } }，GET /api/health 的 pageCount 仍为 0",
+        "AC2：Given 后端已启动 When POST /api/sync 的 openTabs 是字符串而不是数组 Then 响应 400，error.code 为 VALIDATION_FAILED",
+        "AC3：Given 后端已启动 When 一次提交 501 条 history Then 响应 413，error.code 为 PAYLOAD_TOO_LARGE",
+        "AC4：Given 后端数据为空 When history 中有一条 url 为 javascript:alert(1) 的记录和一条 https://example.com/ok Then 响应 200，rejected=1、created=1"
+      ]
+    },
+    {
+      "id": "F-RANK-01",
+      "module": "RANK",
+      "name": "GET /api/pages/ranked 返回按评分降序的页面",
+      "kind": "api",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-028、REQ-049、REQ-050；PROBLEM.md 必做功能 3",
+      "description": "返回 { pages, total }，每项在题目字段的基础上增加 isOpen、sources、scoreDetail（D-16）；支持 limit（默认 20）、domain、openOnly 查询参数，以及 ?now= 时间覆盖（D-01）。",
+      "acceptance": [
+        "AC1：Given 已按 D-01 导入 resource.json 样例 When GET /api/pages/ranked Then 响应 200，total=10，pages 共 10 条且按 score 从高到低排列，每条包含 url、title、domain、visitCount、lastVisitedAt、score、reason、isOpen、sources、scoreDetail",
+        "AC2：Given 同 AC1 When GET /api/pages/ranked?limit=3 Then pages 依次为 https://github.com/org/repo/issues/123、https://github.com/org/repo/pull/456、https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+        "AC3：Given 同 AC1 When GET /api/pages/ranked?openOnly=true Then pages 共 4 条，且每条 isOpen=true",
+        "AC4：Given 同 AC1 When GET /api/pages/ranked?domain=react.dev Then pages 只包含 https://react.dev/reference/react/useState 和 https://react.dev/learn",
+        "AC5：Given 后端数据为空 When GET /api/pages/ranked Then 响应 200，pages 为空数组，total=0"
+      ]
+    },
+    {
+      "id": "F-RANK-02",
+      "module": "RANK",
+      "name": "评分公式与各分量口径",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-009、REQ-028、REQ-051、REQ-052、REQ-053、REQ-107、REQ-111；PROBLEM.md 必做功能 3（评分策略需能解释）、交付物（评分策略说明）",
+      "description": "score = 0.4 × recency + 0.3 × frequency + 0.2 × isOpen + 0.1 × domainBoost，取值 0–1、保留 2 位小数；recency = 0.5^(未访问天数 / 7)；frequency = ln(1 + visitCount) / ln(1 + 最大 visitCount)；domainBoost 默认为该域名访问量 / 访问量最大的域名（D-05）；权重和半衰期来自配置。交付文档 README 需包含评分策略说明。",
+      "acceptance": [
+        "AC1：Given 已按 D-01 导入 resource.json 样例且没有规则 When 导入后立即 GET /api/pages/ranked Then issues/123 的 score=1.00、pull/456=0.94、Fetch_API=0.83、useState=0.69、react.dev/learn=0.57、docs.internal.com/ai-agent-design=0.56、issues/100=0.23、Google 搜索页=0.11",
+        "AC2：Given 同 AC1 When 查看 https://github.com/org/repo/issues/100 的 scoreDetail Then recency=0.09、frequency=0.32、open=0、domain=1.00",
+        "AC3：Given 同 AC1 When 查看每一个页面 Then score 在 0 到 1 之间，并且与 0.4×recency + 0.3×frequency + 0.2×open + 0.1×domain 的差不超过 0.01"
+      ]
+    },
+    {
+      "id": "F-RANK-03",
+      "module": "RANK",
+      "name": "排序理由生成",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-051、REQ-103；PROBLEM.md 必做功能 3（返回 reason，排序理由可见）",
+      "description": "按第 6.3 节的条件顺序最多取 3 句，用「，」连接（D-23）。",
+      "acceptance": [
+        "AC1：Given 已按 D-01 导入 resource.json 样例且没有规则 When GET /api/pages/ranked Then issues/123 的 reason 为「最近 3 天内多次访问（8 次），当前仍处于打开状态，常用域名 github.com」，pull/456 的 reason 以「正在浏览」开头",
+        "AC2：Given 同 AC1 When 查看 issues/100 和 Google 搜索页 Then reason 分别包含「已 24 天未访问」和「已 35 天未访问」",
+        "AC3：Given 同 AC1 When 查看全部 10 个页面 Then 每条 reason 非空，且按「，」分隔后不超过 3 句"
+      ]
+    },
+    {
+      "id": "F-RANK-04",
+      "module": "RANK",
+      "name": "规则与「标记为重要」影响排序",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-073；PROBLEM.md 必做功能 6（整理建议和排序接口需要读取规则执行）；D-05",
+      "description": "命中 never_archive、boost_domain 规则或被标记为重要的页面，domainBoost 取 1，并在 reason 中说明；archive_candidate 不降权。保存、删除、启停规则后立即生效。",
+      "acceptance": [
+        "AC1：Given 已按 D-01 导入 resource.json 样例 When 保存 never_archive 规则（domain=docs.internal.com）后 GET /api/pages/ranked Then https://docs.internal.com/ai-agent-design 的 scoreDetail.domain 从 0.10 变为 1.00，score 从 0.56 变为 0.65，名次从第 8 升到第 7，reason 包含「属于受保护域名」",
+        "AC2：Given 同 AC1 When 删除该规则后再次请求 Then 该页面 score 恢复为 0.56、排第 8，reason 不包含「属于受保护域名」",
+        "AC3：Given 已按 D-01 导入 resource.json 样例 When 保存 boost_domain 规则（domain=react.dev）后 GET /api/pages/ranked Then react.dev 两个页面的 scoreDetail.domain=1.00，reason 包含「命中优先域名规则」"
+      ]
+    },
+    {
+      "id": "F-RANK-05",
+      "module": "RANK",
+      "name": "popup 展示历史排序（首页 Top 5 与排序页明细）",
+      "kind": "display",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-018、REQ-103；PROBLEM.md 系统架构说明（历史排序概览）、验收要求第 6 步",
+      "description": "首页「历史排序」区块展示 Top 5；排序页签展示完整列表，可按「打开中」或域名筛选，展开任意一行可以看到四项得分。",
+      "acceptance": [
+        "AC1：Given 已按 D-01 导入 resource.json 样例 When 打开 popup 首页 Then「历史排序」区块展示 5 条，按分数从高到低排列，每条显示标题、两位小数的分数和非空理由",
+        "AC2：Given 同 AC1 When 打开排序页签并展开第 1 条 Then 显示该页面的时效、频次、打开、域名四项得分",
+        "AC3：Given 同 AC1 When 在排序页签选择「打开中」筛选 Then 列表只显示 4 条",
+        "AC4：Given 后端数据为空 When 打开 popup 首页 Then「历史排序」区块显示空状态，文案包含「同步浏览器上下文」"
+      ]
+    },
+    {
+      "id": "F-REC-01",
+      "module": "REC",
+      "name": "POST /api/recommendations/next 返回推荐列表",
+      "kind": "api",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-008、REQ-009、REQ-029、REQ-035、REQ-054、REQ-055；PROBLEM.md 必做功能 4",
+      "description": "请求体为 { currentPage, openTabs, recentHistory }（recentHistory 最多 20 条，currentPage 为 null 表示当前是系统页）；返回 { recommendations, cached }，每条包含 id、type=next_visit、url、title、score、reason、strategy、createdAt，最多 5 条（D-22）。",
+      "acceptance": [
+        "AC1：Given 已按 D-01 导入 resource.json 样例 When POST /api/recommendations/next，currentPage 为样例的 activeTab，openTabs 和 recentHistory 取样例数据 Then 响应 200，recommendations 有 1–5 条，按 score 从高到低排列，每条 type=next_visit，并包含 url、title、score、reason、strategy",
+        "AC2：Given 后端已启动 When 请求体缺少 currentPage 字段，或 openTabs 不是数组 Then 响应 400，error.code 为 VALIDATION_FAILED",
+        "AC3：Given 后端数据为空 When 以 https://github.com/org/repo/pull/456 为 currentPage 请求推荐 Then 响应 200，recommendations 为空数组"
+      ]
+    },
+    {
+      "id": "F-REC-02",
+      "module": "REC",
+      "name": "GitHub 页面推荐同仓库页面",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-056、REQ-057；PROBLEM.md 必做功能 4（当前是 GitHub PR，推荐同 repo 的 issue / actions）",
+      "description": "当前页为 github.com/{owner}/{repo}/… 时召回同仓库页面：PR→Actions 的上下文相关度 rel=1.0，PR→Issue 0.8，Issue→PR 0.9，其他 0.7（D-22）。",
+      "acceptance": [
+        "AC1：Given 已按 D-01 导入 resource.json 样例 When 以 https://github.com/org/repo/pull/456 为 currentPage、样例 openTabs 请求推荐 Then 第 1 条为 https://github.com/org/repo/actions，strategy=same_repo，score=0.87，reason 包含「PR」和「CI」",
+        "AC2：Given 同 AC1 的数据 When 以 https://github.com/org/repo/issues/123 为 currentPage、openTabs 为空数组请求推荐 Then 第 1 条为 https://github.com/org/repo/pull/456，strategy=same_repo"
+      ]
+    },
+    {
+      "id": "F-REC-03",
+      "module": "REC",
+      "name": "文档页推荐同站点高频页面",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-056、REQ-058；PROBLEM.md 必做功能 4（当前是文档页，推荐同域名高频访问页面）；D-17",
+      "description": "当前页属于文档站（D-17 的域名列表，或路径包含 /docs、/reference、/learn、/guide）时，召回同域名页面，rel=0.8。",
+      "acceptance": [
+        "AC1：Given 已按 D-01 导入 resource.json 样例 When 以 https://react.dev/learn 为 currentPage、openTabs 为空数组请求推荐 Then 第 1 条为 https://react.dev/reference/react/useState，strategy=same_doc_site，reason 包含「react.dev」",
+        "AC2：Given 同 AC1 的数据 When 以 https://developer.mozilla.org/en-US/docs/Web/JavaScript 为 currentPage、openTabs 为空数组请求推荐 Then 第 1 条为 https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API，strategy=same_doc_site"
+      ]
+    },
+    {
+      "id": "F-REC-04",
+      "module": "REC",
+      "name": "同域名推荐高分页面",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-056、REQ-059；PROBLEM.md 必做功能 4（当前页面域名与历史某些页面相同，推荐同域名高分页面）",
+      "description": "当前页既不是 GitHub 仓库页也不是文档站，但库中有同域名页面时，召回同域名的高分页面，rel=0.6。",
+      "acceptance": [
+        "AC1：Given 已同步 https://news.example.org/a（1 天前访问，visitCount=5）和 https://news.example.org/b（1 天前访问，visitCount=1） When 以 https://news.example.org/c 为 currentPage、openTabs 为空数组请求推荐 Then 第 1 条为 https://news.example.org/a，第 2 条为 https://news.example.org/b，strategy 都是 same_domain，reason 包含「同域名」"
+      ]
+    },
+    {
+      "id": "F-REC-05",
+      "module": "REC",
+      "name": "推荐排除当前页、已打开页、重复页和待归档页",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-060；PROBLEM.md 必做功能 4（排除当前已打开页面或重复 URL）；D-22",
+      "description": "按判重 key 排除当前页和全部已打开页面；排除已归档和正在被建议归档的页面；排除 final < 0.3 的结果；同一判重 key 只保留分数最高的一条。",
+      "acceptance": [
+        "AC1：Given 已按 D-01 导入 resource.json 样例 When 以 https://github.com/org/repo/pull/456 为 currentPage、样例 openTabs 请求推荐 Then 结果中不包含 pull/456、issues/123、Fetch_API、docs.internal.com/ai-agent-design，也不包含 https://github.com/org/repo/issues/123?tab=comments",
+        "AC2：Given 同 AC1 When 查看结果 Then 不包含被建议归档的 https://github.com/org/repo/issues/100 和 Google 搜索页，且每条 score ≥ 0.3",
+        "AC3：Given 已同步 https://example.com/p?id=1&tab=x（visitCount=5）和 https://example.com/p?id=1&tab=y（visitCount=2） When 以 https://example.com/q 为 currentPage 请求推荐 Then 这两个 URL 中只出现 https://example.com/p?id=1&tab=x"
+      ]
+    },
+    {
+      "id": "F-REC-06",
+      "module": "REC",
+      "name": "兜底推荐全局高分页面",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-056、REQ-104；PROBLEM.md 验收要求第 7 步（至少 1 条，有 reason）",
+      "description": "以上策略都没有命中，或当前是系统页（currentPage 为 null）时，召回全局高分页面，rel=0.3，保证有数据时至少返回 1 条。",
+      "acceptance": [
+        "AC1：Given 已按 D-01 导入 resource.json 样例 When currentPage 为 null、openTabs 为样例 openTabs 时请求推荐 Then 至少返回 1 条，strategy 都是 global_top，reason 为「近期综合评分较高的页面，可作为备选」",
+        "AC2：Given 同 AC1 的数据 When 以 https://unknown.example.net/x 为 currentPage 请求推荐 Then 至少返回 1 条 strategy=global_top 的推荐"
+      ]
+    },
+    {
+      "id": "F-REC-07",
+      "module": "REC",
+      "name": "关联推荐规则触发（recommend_related）",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P1",
+      "inScope": true,
+      "source": "REQ-002；PROBLEM.md 背景（如果我连续看了 3 个 React 文档，推荐相关 MDN 页面）；D-10",
+      "description": "已保存 recommend_related 规则时，从 recentHistory 最近一条往前数，连续 ≥ minCount 个不同页面属于触发域名，就召回目标域名的页面，rel=0.95，strategy=rule。",
+      "acceptance": [
+        "AC1：Given 已按 D-01 导入 resource.json 样例，并保存「如果我连续看了 3 个 React 文档，推荐相关 MDN 页面」 When recentHistory 最近 3 条为 3 个不同的 react.dev 页面时请求推荐 Then 第 1 条为 https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API，strategy=rule，reason 包含「连续浏览 3 个 React 页面」",
+        "AC2：Given 同一规则 When recentHistory 最近 3 条中只有 2 条是 react.dev 页面 Then 结果中没有 strategy=rule 的推荐"
+      ]
+    },
+    {
+      "id": "F-REC-08",
+      "module": "REC",
+      "name": "popup 展示下一步推荐 Top 3",
+      "kind": "display",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-017、REQ-104；PROBLEM.md 系统架构说明（推荐的下一步访问页面）、验收要求第 7 步",
+      "description": "首页「下一步推荐」区块展示前 3 条，每条显示标题、分数和理由；点击后在新标签页打开。",
+      "acceptance": [
+        "AC1：Given 已按 D-01 导入 resource.json 样例，当前窗口打开样例中的 4 个页面且活动页为 https://github.com/org/repo/pull/456 When 打开 popup 首页 Then「下一步推荐」区块展示 1–3 条，第 1 条标题为「Actions · org/repo」，每条显示分数和非空理由",
+        "AC2：Given 首页推荐区有推荐 When 点击第 1 条 Then 浏览器新开一个标签页，打开 https://github.com/org/repo/actions",
+        "AC3：Given 后端数据为空 When 打开 popup 首页 Then「下一步推荐」区块显示空状态，文案包含「同步浏览器上下文」"
+      ]
+    },
+    {
+      "id": "F-CLEAN-01",
+      "module": "CLEAN",
+      "name": "GET /api/pages/cleanup-suggestions 返回整理建议",
+      "kind": "api",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-061；PROBLEM.md 必做功能 5",
+      "description": "返回 { summary: { archive, merge, keep }, suggestions }：archive 项含 url、title、reason、ageDays、ruleId；merge 项含 urls、keepUrl、reason；keep 项含 url、title、reason、ruleId；支持 ?now= 时间覆盖（D-01）。",
+      "acceptance": [
+        "AC1：Given 已按 D-01 导入 resource.json 样例且没有规则 When GET /api/pages/cleanup-suggestions Then 响应 200，summary 为 { archive: 2, merge: 1, keep: 0 }，archive 项都包含 url、title、reason、ageDays，merge 项包含 urls、keepUrl、reason",
+        "AC2：Given 后端数据为空 When 请求整理建议 Then 响应 200，suggestions 为空数组，summary 的三项都为 0"
+      ]
+    },
+    {
+      "id": "F-CLEAN-02",
+      "module": "CLEAN",
+      "name": "旧页面归档判定（默认阈值）",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-030、REQ-062；PROBLEM.md 必做功能 5（超过 X 天未访问，且不是当前打开的 tab，建议归档）；D-20",
+      "description": "未访问整天数（向下取整）大于 cleanupThresholdDays（默认 14），并且当前没有打开的页面，建议归档；reason 写明阈值和实际天数。",
+      "acceptance": [
+        "AC1：Given 已按 D-01 导入 resource.json 样例且没有规则 When 请求整理建议 Then archive 恰好包含 Google 搜索页（ageDays=35）和 issues/100（ageDays=24），reason 分别为「超过 14 天未访问（已 35 天），且不在当前打开的 tab 中」和「超过 14 天未访问（已 24 天），且不在当前打开的 tab 中」",
+        "AC2：Given 同步一条 20 天前访问、当前仍打开的页面 https://example.com/open When 请求整理建议 Then 该页面不在 archive 中",
+        "AC3：Given 同步一条未打开的页面 https://example.com/old，以 ?now= 固定时间使其未访问 14 天 23 小时 When 请求整理建议 Then 该页面不在 archive 中；把 now 推后到未访问恰好 15 天时，该页面出现在 archive 中，ageDays=15"
+      ]
+    },
+    {
+      "id": "F-CLEAN-03",
+      "module": "CLEAN",
+      "name": "重复页面识别（判重 key）",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-030、REQ-063；PROBLEM.md 必做功能 5（URL 去掉 query/hash 后相同，认为可能重复）；D-07",
+      "description": "按判重 key（host + path + 有语义的 query：q、query、wd、keyword、search、v、id）分组，组内 ≥ 2 个页面输出 1 条 merge，keepUrl 为组内最短的 URL。",
+      "acceptance": [
+        "AC1：Given 已按 D-01 导入 resource.json 样例 When 请求整理建议 Then 只有 1 条 merge，urls 为 https://github.com/org/repo/issues/123 和 https://github.com/org/repo/issues/123?tab=comments，keepUrl 为 https://github.com/org/repo/issues/123，reason 为「去掉 query 参数后 URL 相同，疑似重复页面」",
+        "AC2：Given 同步 https://example.com/doc、https://example.com/doc?tab=a、https://example.com/doc?tab=b When 请求整理建议 Then 输出 1 条 merge，urls 包含这 3 个 URL，keepUrl 为 https://example.com/doc",
+        "AC3：Given 同步 https://www.google.com/search?q=a 和 https://www.google.com/search?q=b When 请求整理建议 Then 没有同时包含这两个 URL 的 merge"
+      ]
+    },
+    {
+      "id": "F-CLEAN-04",
+      "module": "CLEAN",
+      "name": "never_archive 保护（keep 建议）",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-003、REQ-064、REQ-073；PROBLEM.md 必做功能 5（被 never_archive 规则保护的域名不归档）；D-06",
+      "description": "命中 never_archive 规则（页面域名等于规则域名或以「.规则域名」结尾，可选 urlPattern）的页面输出 keep，不出现在 archive 中。",
+      "acceptance": [
+        "AC1：Given 已按 D-01 导入 resource.json 样例并保存 never_archive 规则（domain=docs.internal.com） When 请求整理建议 Then 有 1 条 keep，url 为 https://docs.internal.com/ai-agent-design，reason 包含「被保护域名配置（docs.internal.com）」，该 URL 不在 archive 中",
+        "AC2：Given 同一规则，并同步一条 30 天前访问、未打开的 https://docs.internal.com/old When 请求整理建议 Then 该页面出现在 keep 中，不在 archive 中",
+        "AC3：Given 保存 never_archive 规则（domain=internal.com），并同步一条 30 天前访问、未打开的 https://docs.internal.com/old When 请求整理建议 Then 该页面出现在 keep 中"
+      ]
+    },
+    {
+      "id": "F-CLEAN-05",
+      "module": "CLEAN",
+      "name": "archive_candidate 规则覆盖默认阈值",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-001、REQ-073、REQ-106；PROBLEM.md 必做功能 5、必做功能 6（把 7 天没访问过的 GitHub issue 建议归档）",
+      "description": "命中 archive_candidate 规则（domain + urlPattern）的页面使用规则的 inactiveDays 作为阈值；多条命中时取最小天数；reason 引用规则原文，ruleId 为规则 id。",
+      "acceptance": [
+        "AC1：Given 已按 D-01 导入 resource.json 样例并保存「把 7 天没访问过的 GitHub issue 建议归档」 When 请求整理建议 Then issues/100 的 reason 为「超过 7 天未访问（已 24 天），且不在当前打开的 tab 中；命中规则「把 7 天没访问过的 GitHub issue 建议归档」」，ruleId 等于保存接口返回的规则 id",
+        "AC2：Given 同一规则，并同步一条 10 天前访问、未打开的 https://github.com/org/repo/issues/87 When 请求整理建议 Then issues/87 出现在 archive 中，ageDays=10（没有该规则时不会出现）",
+        "AC3：Given 同时保存 inactiveDays 为 7 和 10 的两条 GitHub issue 归档规则，并同步一条 8 天前访问、未打开的 https://github.com/org/repo/issues/88 When 请求整理建议 Then issues/88 出现在 archive 中，reason 中的阈值为 7 天"
+      ]
+    },
+    {
+      "id": "F-CLEAN-06",
+      "module": "CLEAN",
+      "name": "整理判定优先级",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-062、REQ-064；PROBLEM.md 必做功能 5；D-24",
+      "description": "单个页面按 never_archive > 标记为重要 > 当前打开 > archive_candidate > 默认阈值 的顺序判定，命中即停止。",
+      "acceptance": [
+        "AC1：Given 已按 D-01 导入 resource.json 样例，同时保存「7 天没访问的 GitHub issue 建议归档」和「github.com 永远不要归档」 When 请求整理建议 Then https://github.com/org/repo/issues/100 出现在 keep 中，不在 archive 中",
+        "AC2：Given 保存「7 天没访问的 GitHub issue 建议归档」，并同步一条 20 天前访问、当前仍打开的 https://github.com/org/repo/issues/90 When 请求整理建议 Then issues/90 既不在 archive 中，也不在 keep 中",
+        "AC3：Given 30 天前访问的 https://example.com/important 已被标记为重要 When 请求整理建议 Then 该页面出现在 keep 中，reason 为「你已标记为重要，不建议归档」"
+      ]
+    },
+    {
+      "id": "F-CLEAN-07",
+      "module": "CLEAN",
+      "name": "popup 展示整理建议（首页摘要与整理页分组）",
+      "kind": "display",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-019、REQ-106；PROBLEM.md 系统架构说明（整理建议摘要）、验收要求第 9 步",
+      "description": "首页「整理建议」区块显示归档、重复、保留三类的数量；整理页签分三组展示，命中规则的建议带「规则」标签并显示规则原文；页签标题显示待处理数。",
+      "acceptance": [
+        "AC1：Given 已按 D-01 导入 resource.json 样例并保存题目示例的两条规则 When 打开 popup 首页 Then「整理建议」区块显示「归档 2」「重复 1」「保留 1」",
+        "AC2：Given 同 AC1 When 打开整理页签 Then 分为归档、重复、保留三组，issues/100 一行带「规则」标签，并显示「把 7 天没访问过的 GitHub issue 建议归档」",
+        "AC3：Given 后端数据为空 When 打开整理页签 Then 显示空状态，文案包含「同步浏览器上下文」"
+      ]
+    },
+    {
+      "id": "F-CLEAN-08",
+      "module": "CLEAN",
+      "name": "执行整理建议（归档 / 合并 / 忽略 / 撤销）",
+      "kind": "action",
+      "layers": [
+        "FE",
+        "BE"
+      ],
+      "priority": "P1",
+      "inScope": true,
+      "source": "REQ-033；产品决策 D-15（PRD 第 6.5 节）；PROBLEM.md 核心数据模型（isArchived）",
+      "description": "整理页签中每条建议可以「归档 / 合并 / 忽略」，执行后可以撤销：归档调用 POST /api/pages/archive（isArchived=true，从排序、推荐、整理中移除），撤销调用 POST /api/pages/unarchive；合并调用 POST /api/pages/merge（组内除 keepUrl 外的页面归档）；忽略只保存在插件本地，7 天内不再出现。",
+      "acceptance": [
+        "AC1：Given 整理页签中有 issues/100 的归档建议 When 点击「归档」 Then POST /api/pages/archive 返回 200，issues/100 从归档建议、GET /api/pages/ranked 和推荐结果中消失",
+        "AC2：Given 刚归档了 issues/100 When 点击「撤销」 Then POST /api/pages/unarchive 返回 200，GET /api/pages/ranked 中重新出现 issues/100",
+        "AC3：Given 整理页签中有 issues/123 的重复建议 When 点击「合并」 Then POST /api/pages/merge 返回 200，GET /api/pages/ranked 中保留 https://github.com/org/repo/issues/123，不再出现 https://github.com/org/repo/issues/123?tab=comments",
+        "AC4：Given 整理页签中有 Google 搜索页的归档建议 When 点击「忽略」并重新打开 popup Then 该建议不再显示，chrome.storage.local 中记录了忽略时间"
+      ]
+    },
+    {
+      "id": "F-RULE-01",
+      "module": "RULE",
+      "name": "输入自然语言并解析预览",
+      "kind": "action",
+      "layers": [
+        "FE",
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-020、REQ-065、REQ-067、REQ-069、REQ-105；PROBLEM.md 必做功能 6（插件提供规则输入框，插件需展示解析结果）",
+      "description": "在规则页签（以及首页的规则输入框）输入一句话后点击「解析」，调用 POST /api/rules/parse，以卡片展示每条规则的类型、结构化字段、原文和置信度；无法识别的部分用黄色提示框展示原因和例句；解析不写库。",
+      "acceptance": [
+        "AC1：Given 后端已启动 When 在规则页签输入「把 7 天没访问过的 GitHub issue 建议归档，但 docs.internal.com 的页面永远不要归档」并点击「解析」 Then 展示 2 张规则卡片：「建议归档」（github.com · /issues/ · 7 天）和「永不归档」（docs.internal.com），每张都显示原文和置信度",
+        "AC2：Given 解析完成但还没有确认 When GET /api/rules Then 规则数量与解析前相同",
+        "AC3：Given 在规则页签输入「帮我整理一下」 When 点击「解析」 Then 显示黄色提示框，内容包含「没有识别到动作」，没有规则卡片",
+        "AC4：Given 后端不可达 When 打开规则页签 Then「解析」按钮不可用，并提示后端未连接"
+      ]
+    },
+    {
+      "id": "F-RULE-02",
+      "module": "RULE",
+      "name": "规则要素抽取（天数、域名、页面类型、动作）",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-001、REQ-008、REQ-031、REQ-034、REQ-066、REQ-067、REQ-068、REQ-105、REQ-107、REQ-112、REQ-118；PROBLEM.md 必做功能 6（识别 N 天没访问、域名、动作词）、交付物（规则解析说明）",
+      "description": "天数支持阿拉伯数字和中文数字，单位为天 / 日 / 周 / 星期 / 个月（周按 7 天、月按 30 天）；域名支持显式域名和别名表（GitHub、MDN、React、Google、飞书、语雀等）；页面类型映射为 urlPattern（issue→/issues/、PR→/pull/、actions / CI→/actions、搜索结果→/search）；没有写天数时使用默认 14 天，并标记 confidence=medium。交付文档 README 需包含规则解析说明。",
+      "acceptance": [
+        "AC1：Given 无 When POST /api/rules/parse 提交「把 7 天没访问过的 GitHub issue 建议归档，但 docs.internal.com 的页面永远不要归档」 Then 返回 2 条规则：第 1 条 type=archive_candidate、domain=github.com、urlPattern=/issues/、inactiveDays=7、action=suggest_archive，rawText 为「把 7 天没访问过的 GitHub issue 建议归档」；第 2 条 type=never_archive、domain=docs.internal.com、action=keep，rawText 为「docs.internal.com 的页面永远不要归档」",
+        "AC2：Given 无 When 解析「七天没访问的 GitHub issue 建议归档」 Then inactiveDays=7",
+        "AC3：Given 无 When 解析「两周没看的搜索结果页建议归档」 Then type=archive_candidate、urlPattern=/search、inactiveDays=14",
+        "AC4：Given 无 When 解析「1 个月没访问的 GitHub issue 建议归档」 Then inactiveDays=30",
+        "AC5：Given 无 When 解析「GitHub 的页面建议归档」 Then inactiveDays=14、confidence=medium，并带有「未指定天数，使用默认 14 天」的提示"
+      ]
+    },
+    {
+      "id": "F-RULE-03",
+      "module": "RULE",
+      "name": "否定识别（永远不要归档）",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-003、REQ-068；PROBLEM.md 必做功能 6（docs.internal.com 的页面永远不要归档）、提示（规则解析的边界情况）",
+      "description": "先识别否定再识别动作：「永远 / 始终 + 不要 / 别 / 不 / 禁止 + 归档 / 清理 / 关闭」、保留、保护、白名单都解析为 never_archive，避免把「永远不要归档」误解析为归档。",
+      "acceptance": [
+        "AC1：Given 无 When 解析「docs.internal.com 的页面永远不要归档」 Then 返回 1 条 type=never_archive、action=keep 的规则，没有 archive_candidate",
+        "AC2：Given 无 When 解析「别归档 github.com 的页面」 Then 返回 1 条 type=never_archive、domain=github.com 的规则"
+      ]
+    },
+    {
+      "id": "F-RULE-04",
+      "module": "RULE",
+      "name": "多子句拆分",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-068；PROBLEM.md 必做功能 6（一句话解析为多条规则）",
+      "description": "按「；」「。」、换行、「但」「另外」「同时」以及逗号拆分子句，「如果…，…」这类条件句不拆；每个子句的原文作为 rawText（D-09）。",
+      "acceptance": [
+        "AC1：Given 无 When 解析「7 天没访问的 issue 归档；github.com 永远不要归档」 Then 返回 2 条规则，rawText 分别为「7 天没访问的 issue 归档」和「github.com 永远不要归档」",
+        "AC2：Given 无 When 解析「如果我连续看了 3 个 React 文档，推荐相关 MDN 页面」 Then 只返回 1 条规则"
+      ]
+    },
+    {
+      "id": "F-RULE-05",
+      "module": "RULE",
+      "name": "无法识别、使用默认值与冲突的告知",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-067、REQ-112、REQ-120、REQ-123；PROBLEM.md 提示（不能处理的怎么告知用户）",
+      "description": "无法识别的子句放入 unparsed，附原因和可以照写的例句；规则之间有冲突时在 warnings 中说明执行时 never_archive 优先；text 为空或超过 500 个字符返回 400（D-16）。",
+      "acceptance": [
+        "AC1：Given 无 When 解析「帮我整理一下」 Then rules 为空数组，unparsed 有 1 条，reason 为「没有识别到动作（归档 / 不要归档 / 推荐 / 不上传 / 优先）」，并附至少 1 条例句",
+        "AC2：Given 无 When 解析「别关闭 docs 页面」 Then rules 为空数组，unparsed 中的 reason 包含「没找到作用的域名或页面类型」",
+        "AC3：Given 无 When 解析「7 天没访问的 GitHub issue 建议归档；github.com 永远不要归档」 Then 返回 2 条规则，warnings 有 1 条，内容包含「冲突」和「永不归档」",
+        "AC4：Given 后端已启动 When POST /api/rules/parse 的 text 为空字符串，或长度为 501 个字符 Then 响应 400，error.code 为 VALIDATION_FAILED"
+      ]
+    },
+    {
+      "id": "F-RULE-06",
+      "module": "RULE",
+      "name": "确认保存规则",
+      "kind": "action",
+      "layers": [
+        "FE",
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-034、REQ-069、REQ-070、REQ-105；PROBLEM.md 必做功能 6（用户确认后调用 POST /api/rules）",
+      "description": "解析结果默认全部勾选，用户可以取消勾选；点击「确认保存 N 条」后调用 POST /api/rules（请求体 { rules }），后端重新校验并分配 id（D-08），返回 201；保存后规则立即生效（规则版本号加 1，相关缓存失效）。",
+      "acceptance": [
+        "AC1：Given 已解析题目示例句并勾选 2 条 When 点击「确认保存 2 条」 Then POST /api/rules 返回 201，返回的 2 条规则都有后端分配的 id 且 enabled=true，规则列表显示 2 条",
+        "AC2：Given 解析出 2 条规则后取消勾选第 2 条 When 点击「确认保存 1 条」 Then GET /api/rules 只返回 archive_candidate 那 1 条",
+        "AC3：Given 后端已启动 When POST /api/rules 提交一条 type=unknown_type 的规则 Then 响应 400，error.code 为 VALIDATION_FAILED，GET /api/rules 的数量不变"
+      ]
+    },
+    {
+      "id": "F-RULE-07",
+      "module": "RULE",
+      "name": "查看规则列表",
+      "kind": "display",
+      "layers": [
+        "FE",
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-071；PROBLEM.md 必做功能 6（可查看已有规则列表）",
+      "description": "GET /api/rules 返回 { rules }；规则页签的已保存列表展示类型标签、摘要、原文、启停开关和删除按钮。",
+      "acceptance": [
+        "AC1：Given 已保存 2 条规则 When GET /api/rules Then 响应 200，rules 共 2 条，每条包含 id、rawText、type、action、enabled",
+        "AC2：Given 已保存 2 条规则 When 打开规则页签的已保存列表 Then 显示 2 条，每条都有类型标签、原文、启停开关和删除按钮"
+      ]
+    },
+    {
+      "id": "F-RULE-08",
+      "module": "RULE",
+      "name": "删除规则",
+      "kind": "action",
+      "layers": [
+        "FE",
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-072；PROBLEM.md 必做功能 6（可删除规则）",
+      "description": "在列表中点击删除并确认后调用 DELETE /api/rules/:id；删除后排序、整理、推荐立即恢复。",
+      "acceptance": [
+        "AC1：Given 已保存题目示例的 2 条规则 When 在列表中删除 never_archive 那条 Then DELETE /api/rules/:id 返回 200，列表剩 1 条，GET /api/health 的 ruleCount=1",
+        "AC2：Given 后端已启动 When DELETE /api/rules/rule_not_exist Then 响应 404，error.code 为 NOT_FOUND",
+        "AC3：Given 已按 D-01 导入 resource.json 样例，保存题目示例的 2 条规则后又删除了 never_archive 那条 When 请求整理建议 Then 没有 https://docs.internal.com/ai-agent-design 的 keep 建议"
+      ]
+    },
+    {
+      "id": "F-RULE-09",
+      "module": "RULE",
+      "name": "启用 / 停用规则",
+      "kind": "action",
+      "layers": [
+        "FE",
+        "BE"
+      ],
+      "priority": "P1",
+      "inScope": true,
+      "source": "REQ-034；产品决策 D-15（PRD 第 6.6 节）",
+      "description": "列表中的开关调用 PATCH /api/rules/:id 修改 enabled；停用的规则不参与排序、整理和推荐。",
+      "acceptance": [
+        "AC1：Given 已按 D-01 导入 resource.json 样例并保存 never_archive 规则（domain=docs.internal.com） When 在列表中关闭它的开关 Then PATCH /api/rules/:id 返回 enabled=false，整理建议中没有 https://docs.internal.com/ai-agent-design 的 keep",
+        "AC2：Given 该规则已停用 When 重新打开开关 Then 整理建议中重新出现该页面的 keep"
+      ]
+    },
+    {
+      "id": "F-RULE-10",
+      "module": "RULE",
+      "name": "扩展规则类型解析（隐私、关联推荐、排序加权）",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P1",
+      "inScope": true,
+      "source": "REQ-002、REQ-004；PROBLEM.md 背景（4 句自然语言配置示例）；D-10",
+      "description": "解析 privacy_filter（action=exclude_upload，keywords）、recommend_related（action=recommend，trigger / target）、boost_domain（action=boost，domain）三类规则；生效方式见 F-PRIV-05、F-REC-07、F-RANK-04。",
+      "acceptance": [
+        "AC1：Given 无 When 解析「不要上传包含 password、token 的 URL」 Then 返回 1 条 type=privacy_filter、action=exclude_upload 的规则，keywords 为 [\"password\",\"token\"]",
+        "AC2：Given 无 When 解析「如果我连续看了 3 个 React 文档，推荐相关 MDN 页面」 Then 返回 1 条 type=recommend_related 的规则，trigger.domain=react.dev、trigger.minCount=3、target.domain=developer.mozilla.org",
+        "AC3：Given 无 When 解析「飞书文档优先显示」 Then 返回 1 条 type=boost_domain、domain=feishu.cn、action=boost 的规则"
+      ]
+    },
+    {
+      "id": "F-DIAG-01",
+      "module": "DIAG",
+      "name": "诊断：后端服务连接",
+      "kind": "display",
+      "layers": [
+        "FE",
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-021、REQ-024、REQ-074、REQ-075、REQ-100；PROBLEM.md 必做功能 7（后端服务是否可连接，调用 /api/health 检查）",
+      "description": "service worker 请求「API Base URL + /api/health」（3 秒超时），记录耗时，并区分连接被拒绝、超时、非 200、返回的不是 JSON 四类错误；popup 打开时做 1.5 秒超时的轻量检查，结果显示在顶栏。",
+      "acceptance": [
+        "AC1：Given 后端已启动且 API base URL 指向它 When 打开诊断页签 Then「后端服务连接」显示通过，并显示 version=1.0.0 和本次耗时（毫秒）",
+        "AC2：Given API base URL 指向没有服务的端口 When 打开诊断页签 Then「后端服务连接」显示失败，错误类型为「连接被拒绝」，并给出 4 条排查步骤，第 1 条包含「./scripts/start.sh」",
+        "AC3：Given API base URL 指向没有服务的端口 When 打开 popup Then 顶栏显示「后端未连接」，诊断页签上出现红点；改回可用的地址后重新打开 popup，顶栏显示「后端已连接」"
+      ]
+    },
+    {
+      "id": "F-DIAG-02",
+      "module": "DIAG",
+      "name": "诊断：API Base URL 展示与修改",
+      "kind": "action",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-079；PROBLEM.md 必做功能 7（API base URL 配置是否正确，展示当前配置的后端地址）；D-11",
+      "description": "诊断页展示当前的 API Base URL（默认 http://127.0.0.1:3000，保存在 chrome.storage.local 的 apiBaseUrl 中），可以修改：保存前校验 URL 格式，并用 chrome.permissions.contains 检查该地址是否已授权。",
+      "acceptance": [
+        "AC1：Given 插件首次安装，存储中没有 apiBaseUrl When 打开诊断页签 Then「API Base URL」显示 http://127.0.0.1:3000",
+        "AC2：Given 在诊断页把地址改为 http://127.0.0.1:4100 并保存 When 重新打开 popup Then 显示 http://127.0.0.1:4100，chrome.storage.local 中的 apiBaseUrl 为该值，之后的后端请求都发往该地址",
+        "AC3：Given 输入 not-a-url 并保存 When 校验完成 Then 提示「地址格式错误」，chrome.storage.local 中的 apiBaseUrl 保持原值"
+      ]
+    },
+    {
+      "id": "F-DIAG-03",
+      "module": "DIAG",
+      "name": "诊断：tabs 权限",
+      "kind": "display",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-076、REQ-100；PROBLEM.md 必做功能 7（tabs 权限是否已授权）",
+      "description": "用 chrome.permissions.contains({ permissions: ['tabs'] }) 检查，再调用 tabs.query 确认返回的 url 可读。",
+      "acceptance": [
+        "AC1：Given manifest 声明了 tabs 权限，当前窗口打开 https://react.dev/learn When 打开诊断页签 Then「tabs 权限」显示通过",
+        "AC2：Given「tabs 权限」检查失败 When 查看该项 Then 显示排查建议，包含「检查 manifest 的 permissions」和「在 chrome://extensions 中重新加载」"
+      ]
+    },
+    {
+      "id": "F-DIAG-04",
+      "module": "DIAG",
+      "name": "诊断：history 权限",
+      "kind": "display",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-077、REQ-100；PROBLEM.md 必做功能 7（history 权限是否已授权）",
+      "description": "用 chrome.permissions.contains({ permissions: ['history'] }) 检查，再调用 history.search({ text: '', maxResults: 1 }) 确认可用。",
+      "acceptance": [
+        "AC1：Given manifest 声明了 history 权限 When 打开诊断页签 Then「history 权限」显示通过",
+        "AC2：Given「history 权限」检查失败 When 查看该项 Then 显示排查建议，包含「检查 manifest 的 permissions」"
+      ]
+    },
+    {
+      "id": "F-DIAG-05",
+      "module": "DIAG",
+      "name": "诊断：storage 可用性",
+      "kind": "display",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-078；PROBLEM.md 必做功能 7（storage 权限是否可用）",
+      "description": "写入、读取、删除探测键 __diag__，并读取 getBytesInUse。",
+      "acceptance": [
+        "AC1：Given 插件已加载 When 打开诊断页签 Then「storage 可用」显示通过，并显示已使用的字节数",
+        "AC2：Given 诊断完成 When 读取 chrome.storage.local Then 没有残留的 __diag__ 键"
+      ]
+    },
+    {
+      "id": "F-DIAG-06",
+      "module": "DIAG",
+      "name": "诊断：最近一次同步",
+      "kind": "display",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-080；PROBLEM.md 必做功能 7（最近一次同步是否成功）",
+      "description": "读取同步状态：从未同步为警告；最近一次失败为错误；最近一次成功但已超过 24 小时为警告；24 小时内成功为通过（D-27）。",
+      "acceptance": [
+        "AC1：Given 从未同步 When 打开诊断页签 Then「最近一次同步」显示警告「从未同步」，并提供同步入口",
+        "AC2：Given 10 分钟前同步成功 When 打开诊断页签 Then 显示通过，以及最近同步时间和上传条数",
+        "AC3：Given 最近一次同步失败 When 打开诊断页签 Then 显示失败和失败原因，建议先处理「后端服务连接」",
+        "AC4：Given 最近一次成功同步在 25 小时前 When 打开诊断页签 Then 显示警告「超过 24 小时未同步」"
+      ]
+    },
+    {
+      "id": "F-DIAG-07",
+      "module": "DIAG",
+      "name": "诊断：当前规则数量",
+      "kind": "display",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-081；PROBLEM.md 必做功能 7（当前规则数量：已保存的规则条数）",
+      "description": "对比插件缓存的规则数和 GET /api/health 的 ruleCount：一致为通过；不一致为警告，并自动重新拉取规则。",
+      "acceptance": [
+        "AC1：Given 后端已保存 2 条规则，插件缓存的规则也是 2 条 When 打开诊断页签 Then「当前规则数量」显示 2，状态为通过",
+        "AC2：Given 插件缓存的规则为 1 条、health.ruleCount 为 2 When 打开诊断页签 Then 先显示警告「规则数不一致」，自动重新拉取后显示 2"
+      ]
+    },
+    {
+      "id": "F-DIAG-08",
+      "module": "DIAG",
+      "name": "诊断：附加检查项（activeTab、隐私过滤、无痕模式、版本兼容）",
+      "kind": "display",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-124；产品决策 D-27（PRD 第 9 章）；PROBLEM.md 提示（隐身模式下 history API 有什么变化）",
+      "description": "activeTab 权限（chrome.permissions.contains）；隐私过滤（config.enablePrivacyFilter 与关键词数量，关闭时为警告）；无痕模式（chrome.extension.isAllowedIncognitoAccess，只作提示）；版本兼容（health.version 的主版本号与插件期望一致，P1 细节）。",
+      "acceptance": [
+        "AC1：Given 插件已加载、后端已启动且使用默认配置 When 打开诊断页签 Then 显示「activeTab 权限」「隐私过滤」「无痕模式」三项，前两项为通过，「无痕模式」为提示，并说明无痕窗口的数据不会被采集",
+        "AC2：Given GET /api/config 返回 enablePrivacyFilter=false When 打开诊断页签 Then「隐私过滤」显示警告",
+        "AC3：Given GET /api/health 返回的 version 主版本号为 2，插件期望为 1 When 打开诊断页签 Then「版本兼容」显示失败，并提示升级插件或后端"
+      ]
+    },
+    {
+      "id": "F-DIAG-09",
+      "module": "DIAG",
+      "name": "GET /api/health 返回健康信息",
+      "kind": "api",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-032、REQ-082；PROBLEM.md 必做功能 7（后端需要提供 GET /api/health）",
+      "description": "返回 { status, version, uptime（秒）, pageCount, ruleCount, lastSyncAt }。",
+      "acceptance": [
+        "AC1：Given 后端刚启动且数据为空 When GET /api/health Then 响应 200，status=\"ok\"、version=\"1.0.0\"，uptime 为非负整数，pageCount=0，ruleCount=0",
+        "AC2：Given 已按 D-01 导入 resource.json 样例并保存 2 条规则 When GET /api/health Then pageCount=10、ruleCount=2，lastSyncAt 等于导入响应中的 syncedAt"
+      ]
+    },
+    {
+      "id": "F-DIAG-10",
+      "module": "DIAG",
+      "name": "GET /api/config 返回配置",
+      "kind": "api",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-032、REQ-083；PROBLEM.md 必做功能 7（后端需要提供 GET /api/config）",
+      "description": "返回 cleanupThresholdDays、maxHistoryItems、enablePrivacyFilter、privacySensitiveKeywords，并增加 historyLookbackDays、recencyHalfLifeDays、weights、minRecommendationScore；privacySensitiveKeywords 已合并 privacy_filter 规则中的关键词。",
+      "acceptance": [
+        "AC1：Given 后端以默认配置启动 When GET /api/config Then 响应 200，cleanupThresholdDays=14、maxHistoryItems=100、enablePrivacyFilter=true、privacySensitiveKeywords 为 [\"password\",\"token\",\"bank\",\"secret\"]",
+        "AC2：Given 同 AC1 When 查看扩展字段 Then historyLookbackDays=30、recencyHalfLifeDays=7、weights 为 { recency: 0.4, frequency: 0.3, open: 0.2, domain: 0.1 }、minRecommendationScore=0.3"
+      ]
+    },
+    {
+      "id": "F-DIAG-11",
+      "module": "DIAG",
+      "name": "排查建议、重新检测与诊断报告",
+      "kind": "display",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-021、REQ-074、REQ-107、REQ-113；PROBLEM.md 交付物（诊断说明：诊断项含义和排查方法）",
+      "description": "每个失败或警告项都说明发生了什么，并给出可以直接执行的排查步骤；支持「重新检测」；「复制诊断报告」（P1 细节）把检查结果、版本和配置以 JSON 复制到剪贴板，不包含浏览记录中的 URL。交付文档 README 需包含诊断说明。",
+      "acceptance": [
+        "AC1：Given 任一检查项失败 When 查看该项 Then 显示失败原因和至少 1 条可以直接执行的排查步骤，而不只显示错误码",
+        "AC2：Given 诊断页签已完成检测 When 点击「重新检测」 Then 全部检查项重新执行，检测时间更新",
+        "AC3：Given 已同步 resource.json 样例 When 点击「复制诊断报告」 Then 剪贴板中是 JSON，包含检查结果、插件版本和配置，不包含 github.com/org/repo 等浏览记录中的 URL"
+      ]
+    },
+    {
+      "id": "F-PRIV-01",
+      "module": "PRIV",
+      "name": "插件端上传前过滤敏感 URL",
+      "kind": "system",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-010、REQ-084、REQ-085；PROBLEM.md 总体约束（隐私敏感页面不应上传到后端）、进阶要求（隐私过滤）",
+      "description": "service worker 在调用 POST /api/sync 之前过滤：完整 URL 转小写后包含任一敏感关键词就不上传；被过滤的记录只在上下文页签本地标注，同步状态只展示过滤条数。已知局限：子串匹配会误伤 tokenizer 这类单词（D-18）。",
+      "acceptance": [
+        "AC1：Given 当前窗口打开 https://accounts.example.com/reset-password?token=8f2a91c 和 https://bank.example.com/account/overview When 点击同步 Then POST /api/sync 的请求体不包含这 2 个 URL，同步状态显示过滤 2 条，GET /api/pages/ranked 中也没有它们",
+        "AC2：Given 当前窗口打开 https://example.com/login?TOKEN=abc When 点击同步 Then 该 URL 不出现在请求体中（匹配不区分大小写）",
+        "AC3：Given 同 AC1 When 打开上下文页签 Then 这 2 条记录分别标注「含 password · 不上传」和「含 bank · 不上传」"
+      ]
+    },
+    {
+      "id": "F-PRIV-02",
+      "module": "PRIV",
+      "name": "敏感关键词来源与兜底",
+      "kind": "system",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-086；PROBLEM.md 必做功能 7（GET /api/config 的 privacySensitiveKeywords）、进阶要求（可配置敏感关键词列表）；D-18",
+      "description": "关键词取自 GET /api/config 并缓存到本地；拿不到时用本地缓存，再拿不到时用内置默认的 password、token、bank、secret。",
+      "acceptance": [
+        "AC1：Given GET /api/config 返回的 privacySensitiveKeywords 包含 cookie，当前窗口打开 https://example.com/?cookie=1 When 点击同步 Then 该 URL 不出现在 POST /api/sync 的请求体中",
+        "AC2：Given 后端不可达且本地没有缓存的配置，当前窗口打开 https://example.com/?secret=1 When 打开上下文页签 Then 该记录标注「含 secret · 不上传」",
+        "AC3：Given 本地缓存的配置中关键词包含 cookie，后端不可达，当前窗口打开 https://example.com/?cookie=1 When 打开上下文页签 Then 该记录标注「含 cookie · 不上传」"
+      ]
+    },
+    {
+      "id": "F-PRIV-03",
+      "module": "PRIV",
+      "name": "后端兜底拒收敏感 URL",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-010；PROBLEM.md 总体约束（隐私敏感页面不应上传到后端）",
+      "description": "POST /api/sync 收到含敏感关键词的记录时不入库，计入 rejected；后端日志只记录域名和数量，不记录完整 URL。",
+      "acceptance": [
+        "AC1：Given 后端数据为空 When 直接 POST /api/sync 提交一条 https://example.com/reset?token=abc 的历史 Then 响应 200，rejected=1，GET /api/pages/ranked 中没有该 URL",
+        "AC2：Given 同 AC1 When 查看该请求期间的后端日志 Then 日志中不出现「reset?token=abc」"
+      ]
+    },
+    {
+      "id": "F-PRIV-04",
+      "module": "PRIV",
+      "name": "无痕窗口的标签页不上传",
+      "kind": "system",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-120、REQ-124；PROBLEM.md 提示（隐身模式下 history API 会有什么变化）；产品决策（PRD 第 10.3 节）",
+      "description": "tabs.query 返回的 incognito=true 的标签页一律跳过，不展示也不上传；chrome.history 本身不记录无痕浏览。",
+      "acceptance": [
+        "AC1：Given 插件被允许在无痕模式下运行，无痕窗口打开 https://example.com/private When 点击同步 Then POST /api/sync 的请求体中不包含 https://example.com/private",
+        "AC2：Given 同 AC1 When 打开普通窗口的上下文页签 Then「当前窗口标签页」列表中没有 https://example.com/private"
+      ]
+    },
+    {
+      "id": "F-PRIV-05",
+      "module": "PRIV",
+      "name": "敏感关键词可配置",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P1",
+      "inScope": true,
+      "source": "REQ-004、REQ-086；PROBLEM.md 进阶要求（可配置敏感关键词列表）、背景（不要上传包含 password、token 的 URL）；D-10",
+      "description": "privacy_filter 规则中的关键词合并进 GET /api/config 返回的 privacySensitiveKeywords；PUT /api/config 可以修改关键词列表和阈值。",
+      "acceptance": [
+        "AC1：Given 已保存规则「不要上传包含 cookie 的 URL」 When GET /api/config Then privacySensitiveKeywords 包含 cookie，以及 password、token、bank、secret",
+        "AC2：Given 同 AC1 When POST /api/sync 提交一条 https://example.com/?cookie=1 的历史 Then rejected=1，该 URL 不入库",
+        "AC3：Given 后端已启动 When PUT /api/config 把 privacySensitiveKeywords 改为 [\"password\",\"token\",\"bank\",\"secret\",\"session\"] Then 之后 GET /api/config 返回的列表包含 session"
+      ]
+    },
+    {
+      "id": "F-CACHE-01",
+      "module": "CACHE",
+      "name": "本地缓存结果并优先展示缓存",
+      "kind": "system",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P1",
+      "inScope": true,
+      "source": "REQ-025、REQ-088；PROBLEM.md 进阶要求（本地持久化：缓存推荐结果和历史排序）、系统架构说明（管理本地缓存）",
+      "description": "同步成功和每次拉取之后，把 ranked、recommendations（以当前页 URL 为 key）、cleanup、rules、config 写入 chrome.storage.local，并记录 cachedAt；popup 打开时先渲染缓存，再后台刷新。",
+      "acceptance": [
+        "AC1：Given 同步成功 When 读取 chrome.storage.local Then 缓存中有 ranked、recommendations、cleanup、rules、config 和 cachedAt",
+        "AC2：Given 本地已有缓存且后端可用 When 打开 popup Then 首屏先展示缓存的排序、推荐、整理数据，后台刷新完成后展示最新数据"
+      ]
+    },
+    {
+      "id": "F-CACHE-02",
+      "module": "CACHE",
+      "name": "后端不可用时展示缓存并自动恢复",
+      "kind": "display",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P1",
+      "inScope": true,
+      "source": "REQ-089、REQ-120、REQ-122；PROBLEM.md 进阶要求（离线状态下可以查看上次缓存的结果）、提示（后端不可用时插件应该怎么降级）",
+      "description": "离线时首页、排序页、整理页顶部显示红色提示条和缓存时间，规则解析不可用；上下文页签照常工作；后端恢复后自动重新同步 1 次（D-26）。",
+      "acceptance": [
+        "AC1：Given 已同步成功并有缓存，之后把 API base URL 指向没有服务的端口 When 打开 popup Then 首页、排序页、整理页顶部显示红色提示条「以下为 HH:mm 同步时缓存的结果」，展示的数据与缓存一致",
+        "AC2：Given 同 AC1 When 把 API base URL 改回可用的后端并重新打开 popup Then 自动重新同步 1 次，提示条消失",
+        "AC3：Given 后端不可达且没有任何缓存 When 打开 popup 首页 Then 各区块显示后端未连接的提示和「诊断」入口，上下文页签照常显示标签页和历史"
+      ]
+    },
+    {
+      "id": "F-INCR-01",
+      "module": "INCR",
+      "name": "增量同步历史",
+      "kind": "system",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P1",
+      "inScope": true,
+      "source": "REQ-090、REQ-091；PROBLEM.md 进阶要求（增量同步：记录上次同步游标）",
+      "description": "保存 cursor = 上次成功同步时间；下次调用 history.search 时 startTime = cursor − 5 分钟；打开的标签页每次全量上传；首次同步或用户选择「全量同步」时忽略游标。",
+      "acceptance": [
+        "AC1：Given 上次成功同步的时间为 T When 再次点击同步 Then POST /api/sync 的 mode 为 incremental、cursor 为 T，history 中只有 T − 5 分钟之后访问的记录",
+        "AC2：Given 第一次同步，或选择了「全量同步」 When 同步 Then mode 为 full，history 包含最近 30 天内的记录（最多 100 条）",
+        "AC3：Given 增量同步 When 查看请求体 Then openTabs 仍包含当前全部打开的普通标签页"
+      ]
+    },
+    {
+      "id": "F-PERF-01",
+      "module": "PERF",
+      "name": "推荐与排序接口响应时间",
+      "kind": "nfr",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P1",
+      "inScope": true,
+      "source": "REQ-097、REQ-119、REQ-120、REQ-121；PROBLEM.md 提示（10 万条时推荐接口保持 100ms 内返回，不要每次全量扫描）、进阶要求（快速响应优化：预计算页面评分）",
+      "description": "同步时预计算频次、打开、域名三项得分，并维护 byDomain、byRepo、byDupKey、openSet 索引；推荐召回每一路最多取 50 条、总候选不超过 200 条，不扫全表。",
+      "acceptance": [
+        "AC1：Given 已导入 100000 个页面 When 以某个 GitHub PR 为 currentPage 连续调用 POST /api/recommendations/next 20 次 Then p95 耗时小于 100ms",
+        "AC2：Given 已导入 100000 个页面 When 连续调用 GET /api/pages/ranked?limit=20 共 20 次 Then p95 耗时小于 50ms"
+      ]
+    },
+    {
+      "id": "F-PERF-02",
+      "module": "PERF",
+      "name": "推荐结果缓存与失效",
+      "kind": "nfr",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P1",
+      "inScope": true,
+      "source": "REQ-096；PROBLEM.md 进阶要求（快速响应优化：对推荐结果进行缓存）",
+      "description": "推荐结果按（当前页 normalizedUrl、打开页集合的 hash、数据版本、规则版本）缓存 60 秒；同步或规则变化时失效；响应带 cached 字段。",
+      "acceptance": [
+        "AC1：Given 已按 D-01 导入 resource.json 样例 When 用相同的请求体连续请求 2 次推荐 Then 第 2 次响应 cached=true，recommendations 与第 1 次相同",
+        "AC2：Given 第 1 次请求之后执行了 POST /api/sync 或保存了规则 When 再次用相同的请求体请求 Then cached=false"
+      ]
+    },
+    {
+      "id": "F-MENU-01",
+      "module": "MENU",
+      "name": "右键菜单：添加到分析、标记为重要",
+      "kind": "action",
+      "layers": [
+        "FE",
+        "BE"
+      ],
+      "priority": "P1",
+      "inScope": true,
+      "source": "REQ-087；PROBLEM.md 进阶要求（支持右键菜单）；D-15",
+      "description": "注册 contextMenus：「添加到分析」立即上传当前页面（source=manual，同样经过隐私过滤）；「标记为重要」写入本地 importantUrls 并调用 POST /api/pages/important，排序时 domainBoost 取 1，整理时始终为 keep。",
+      "acceptance": [
+        "AC1：Given 插件已加载 When 在任意 http(s) 页面上打开右键菜单 Then 出现「添加到分析」和「标记为重要」两项",
+        "AC2：Given 在 https://example.com/note 上点击「添加到分析」 When 完成 Then GET /api/pages/ranked 中出现该页面，sources 包含 manual；在 https://example.com/reset?token=1 上点击时不上传",
+        "AC3：Given 在 https://docs.internal.com/ai-agent-design 上点击「标记为重要」 When 请求排序 Then 该页面 scoreDetail.domain=1.00，reason 包含「已被你标记为重要」"
+      ]
+    },
+    {
+      "id": "F-PERSIST-01",
+      "module": "PERSIST",
+      "name": "后端 JSON 快照持久化",
+      "kind": "system",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P1",
+      "inScope": true,
+      "source": "REQ-007、REQ-094、REQ-095；PROBLEM.md 进阶要求（后端持久化：重启后数据不丢失）、总体约束（需要能解释真实持久化方案）",
+      "description": "Repository 默认使用内存索引 + JSON 快照：启动时加载，写入防抖 1 秒，先写临时文件再 rename；没有配置快照文件时只用内存。生产方案为 SQLite（F-PERSIST-02，只在方案中解释）。",
+      "acceptance": [
+        "AC1：Given 配置了快照文件，已按 D-01 导入 resource.json 样例并保存 2 条规则 When 等待 2 秒后重启后端进程 Then GET /api/health 的 pageCount=10、ruleCount=2",
+        "AC2：Given 快照目录中只残留一个写了一半的临时文件 When 启动后端 Then 后端加载上一份完整的快照，GET /api/health 返回 status=\"ok\""
+      ]
+    },
+    {
+      "id": "F-PERSIST-02",
+      "module": "PERSIST",
+      "name": "SQLite 持久化实现",
+      "kind": "system",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P2",
+      "inScope": false,
+      "source": "REQ-007、REQ-094；PROBLEM.md 总体约束（需要能解释真实持久化方案）；D-15",
+      "description": "本期只在技术方案中给出 SQLite 表结构与索引（第 7.7 节），不实现。",
+      "acceptance": [
+        "AC1：Given 配置使用 SQLite 存储 When 重启后端 Then GET /api/health 的 pageCount 与重启前一致"
+      ]
+    },
+    {
+      "id": "F-DEMO-01",
+      "module": "DEMO",
+      "name": "一条命令启动后端",
+      "kind": "system",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-006、REQ-011、REQ-098、REQ-108、REQ-109；PROBLEM.md 验收要求第 1 步、交付物（启动说明）",
+      "description": "scripts/start.sh 用 exec node server/src/index.js 启动后端，默认端口 3000，可以用 PORT 覆盖；启动后打印 /api/health 的返回。交付文档 README 需包含启动说明。",
+      "acceptance": [
+        "AC1：Given 已安装 Node.js When 在项目根目录执行 ./scripts/start.sh Then 后端在 3000 端口启动，终端打印 /api/health 的返回，其中 status 为 ok",
+        "AC2：Given 设置环境变量 PORT=4120 When 执行 ./scripts/start.sh Then GET http://127.0.0.1:4120/api/health 返回 200"
+      ]
+    },
+    {
+      "id": "F-DEMO-02",
+      "module": "DEMO",
+      "name": "样例数据导入（时间平移）",
+      "kind": "system",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P0",
+      "inScope": true,
+      "source": "REQ-011、REQ-106；PROBLEM.md 验收要求第 9 步（整理建议与规则配置一致，需要旧页面）、建议目录结构（resources/sample-history.json）；D-01、D-12",
+      "description": "resource.json 复制为 resources/sample-history.json；导入脚本把时间戳整体平移到「最新一条 = 导入时刻 − 5 分钟」，再通过真实的 POST /api/sync 导入。",
+      "acceptance": [
+        "AC1：Given 后端已启动且数据为空 When 执行样例导入脚本 Then 脚本通过 POST /api/sync 导入 resources/sample-history.json，之后 GET /api/health 的 pageCount=10",
+        "AC2：Given 导入完成 When GET /api/pages/cleanup-suggestions Then archive 中包含 issues/100（ageDays=24）和 Google 搜索页（ageDays=35）"
+      ]
+    },
+    {
+      "id": "F-CLEAN-09",
+      "module": "CLEAN",
+      "name": "重复打开的标签页建议关闭",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P2",
+      "inScope": false,
+      "source": "REQ-030；产品决策 D-15（PRD 第 10.7 节边界情况）",
+      "description": "同一 normalizedUrl 打开了多个标签页时，整理页提示「重复打开」，并建议关闭多余的标签页。本期不做。",
+      "acceptance": [
+        "AC1：Given 同一 URL 打开了 2 个标签页 When 请求整理建议 Then 出现 1 条「重复打开」的提示"
+      ]
+    },
+    {
+      "id": "F-PRIV-06",
+      "module": "PRIV",
+      "name": "清空我的数据",
+      "kind": "action",
+      "layers": [
+        "FE",
+        "BE"
+      ],
+      "priority": "P2",
+      "inScope": false,
+      "source": "REQ-010；产品决策 D-15（PRD 第 10.3 节）",
+      "description": "提供接口和按钮，清空后端中的页面、规则和同步日志。本期不做。",
+      "acceptance": [
+        "AC1：Given 已同步数据 When 点击「清空我的数据」并确认 Then GET /api/health 的 pageCount=0、ruleCount=0"
+      ]
+    },
+    {
+      "id": "F-HL-01",
+      "module": "HL",
+      "name": "页面高亮推荐关键词与 Issue 编号",
+      "kind": "system",
+      "layers": [
+        "FE"
+      ],
+      "priority": "P2",
+      "inScope": false,
+      "source": "REQ-026、REQ-092；PROBLEM.md 进阶要求（页面高亮）；D-15",
+      "description": "Content Script 在 GitHub 页面中高亮推荐结果里出现的 Issue 编号（#123）和关键词；页面不可注入时静默跳过。本期不做。",
+      "acceptance": [
+        "AC1：Given 打开 https://github.com/org/repo/pull/456，推荐结果包含 issues/123 When 页面加载完成 Then 页面中的「#123」被高亮"
+      ]
+    },
+    {
+      "id": "F-SIM-01",
+      "module": "SIM",
+      "name": "标题相似度召回与聚合",
+      "kind": "rule",
+      "layers": [
+        "BE"
+      ],
+      "priority": "P2",
+      "inScope": false,
+      "source": "REQ-093；PROBLEM.md 进阶要求（向量相似度 mock）；D-15",
+      "description": "对标题分词（英文按单词、中文按 2 字片段），Jaccard 相似度 ≥ 0.3 作为推荐召回的一路（rel=0.5），也用于相关页面聚合。本期不做。",
+      "acceptance": [
+        "AC1：Given 库中有标题为「Fix login redirect bug」的页面 When 当前页标题为「login redirect regression」 Then 推荐结果中出现该页面，strategy=title_similar"
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "id": "D-01",
+      "question": "Q1 时间基准：样例是 2024 年 3 月的数据，现在是 2026 年",
+      "decision": "后端始终用服务器当前时间计算；样例导入脚本把 resource.json 的时间戳整体平移到「最新一条 = 导入时刻 − 5 分钟」；读接口（ranked、recommendations、cleanup-suggestions）支持可选的 ?now=<毫秒> 覆盖当前时间，用于复现和测试；客户端传来的时间戳超过「现在 + 5 分钟」时按「现在」处理",
+      "reason": "直接用当前时间会让所有样例页面都超过 965 天未访问，排序和整理失去区分度；平移保留了页面之间的相对天数；?now= 让「恰好 N 天」这类边界可以稳定复现；采用 PRD 与 engine.js buildDemoPayload 的 −5 分钟口径"
+    },
+    {
+      "id": "D-02",
+      "question": "Q2 visitCount 的语义",
+      "decision": "取 max(已有值, history.visitCount)，最小为 1，重复同步不累加",
+      "reason": "Chrome 的 visitCount 本身就是累计值，累加会让重复同步的次数翻倍"
+    },
+    {
+      "id": "D-03",
+      "question": "Q3 存储去重主键",
+      "decision": "以 normalizedUrl 为主键：小写 host、去掉 hash、去掉跟踪参数（utm_*、ref、ref_src、spm、from、fbclid、gclid、_ga）、query 参数排序、去掉末尾的 /；保留业务 query",
+      "reason": "跟踪参数和 hash 不改变页面内容，应该合并；保留业务 query 后 issues/123 与 issues/123?tab=comments 仍是两条记录，整理功能才能给出 merge 建议（PROBLEM.md 示例）"
+    },
+    {
+      "id": "D-04",
+      "question": "Q4 isOpen 是否按每次同步的快照刷新",
+      "decision": "是：本次出现在 activeTab / openTabs 中为 true，其余为 false；另外记录 isActive",
+      "reason": "否则已关闭的页面会一直被当作打开中，「不是当前打开的 tab 才归档」的判断会出错"
+    },
+    {
+      "id": "D-05",
+      "question": "Q5 评分公式、domainBoost 定义，以及规则如何影响排序",
+      "decision": "score = 0.4·recency + 0.3·frequency + 0.2·isOpen + 0.1·domainBoost，保留 2 位小数，同分按 lastVisitedAt 倒序；recency = 0.5^(未访问天数 / 7)；frequency = ln(1 + visitCount) / ln(1 + 最大 visitCount)；domainBoost = 该域名访问量 / 访问量最大的域名，被标记为重要、命中 never_archive 或 boost_domain 规则时取 1；archive_candidate 不降权",
+      "reason": "每一项都能单独解释；对数归一化避免高频首页压过其他页面；域名分权重最低，让规则和「标记为重要」能影响排序但不会主导；归档候选已经体现在整理建议里，不再重复惩罚排序"
+    },
+    {
+      "id": "D-06",
+      "question": "Q6 keep 建议的展示范围",
+      "decision": "所有命中 never_archive 规则的页面都输出 keep（包括当前打开中的页面）；被标记为重要的页面同样输出 keep",
+      "reason": "样例中 docs.internal 只有 6.9 天未访问且处于打开状态，只展示「本来会被归档」的页面会让 keep 为空，无法证明规则生效"
+    },
+    {
+      "id": "D-07",
+      "question": "Q7 搜索页去掉 query 后会被误判为重复",
+      "decision": "判重 key = host（去掉 www.）+ path（去掉末尾 /）+ 有语义的 query（q、query、wd、keyword、search、v、id）；其他 query 和 hash 不参与判重；组内 ≥ 2 个页面输出 merge，keepUrl 取最短的 URL",
+      "reason": "不同搜索词或视频不是同一个页面；PROBLEM.md「去掉 query/hash 后相同，认为可能重复」对非语义参数仍然成立（示例中的 ?tab=comments 照常合并），与原文不冲突"
+    },
+    {
+      "id": "D-08",
+      "question": "Q8 parse 返回的 rule id",
+      "decision": "parse 返回预览 id（rule_1、rule_2…，与 PROBLEM.md 示例一致），不写库；POST /api/rules 重新校验并分配正式 id",
+      "reason": "解析阶段规则还没有保存，不能占用正式 id；保留示例格式便于对照"
+    },
+    {
+      "id": "D-09",
+      "question": "Q9 rawText 存整句还是子句",
+      "decision": "存拆分后的子句原文",
+      "reason": "每条规则都能追溯到自己的原文，整理建议的理由可以直接引用"
+    },
+    {
+      "id": "D-10",
+      "question": "Q10 是否支持背景中的另外两类规则",
+      "decision": "支持 5 类规则：archive_candidate、never_archive（P0）；privacy_filter、recommend_related、boost_domain（P1）",
+      "reason": "PROBLEM.md 背景的 4 句示例都能被解析和执行，演示更完整；三类扩展规则都复用同一套解析器和执行入口，增量成本低"
+    },
+    {
+      "id": "D-11",
+      "question": "Q11 是否允许在插件中修改 API base URL",
+      "decision": "允许，在诊断页修改；默认 http://127.0.0.1:3000（与前端规范 FE-API-02 MUST 一致，评审修订）；保存在 chrome.storage.local 的顶层 key apiBaseUrl（与测试夹具和前端规范 FE-TEST-02 一致）；host_permissions 使用不带端口的 http://localhost/* 和 http://127.0.0.1/*；其他主机通过 optional_host_permissions 动态申请（P1）",
+      "reason": "端口冲突或后端换端口时可以自助修复；不带端口的匹配模式让测试端口和自定义端口都能访问；统一存储 key 避免插件与测试各写一套"
+    },
+    {
+      "id": "D-12",
+      "question": "Q12 验收第 9 步需要旧页面，是否提供示例数据导入",
+      "decision": "提供导入脚本：resource.json 复制为 resources/sample-history.json，按 D-01 平移时间后通过真实的 POST /api/sync 导入，不新增专用接口",
+      "reason": "现场刚打开的页面都不满 7 / 14 天，没有旧页面就无法演示整理建议与规则一致"
+    },
+    {
+      "id": "D-13",
+      "question": "Q13 后端技术栈",
+      "decision": "Node.js（ESM），原生 http 模块，零运行时依赖",
+      "reason": "与插件同为 JavaScript，启动简单，便于讲解；与工作流约定（CONVENTIONS §5）一致"
+    },
+    {
+      "id": "D-14",
+      "question": "Q14 工程根目录",
+      "decision": "直接使用当前目录 浏览器导航助手/，PROBLEM.md 和 resource.json 保持不动",
+      "reason": "工作流的全部产物路径都相对当前目录"
+    },
+    {
+      "id": "D-15",
+      "question": "Q15 进阶项范围，以及是否实现「执行归档」",
+      "decision": "按 PRD 第 3 章：P0 为隐私过滤（含配置下发的关键词）；P1 纳入本期：整理执行（归档 / 合并 / 忽略 / 撤销）、扩展规则类型与启停、本地缓存与离线降级、增量同步、JSON 快照持久化、快速响应（索引召回、预计算、结果缓存）、右键菜单、PUT /api/config；P2 不做：页面高亮、标题相似度、SQLite 实现（只在方案中解释）、清空我的数据、重复打开标签页的关闭建议",
+      "reason": "产品方在 PRD 中把这些能力定为 P1，它们直接支撑追问点（降级、性能、持久化）和体验闭环；P2 项与验收流程无关"
+    },
+    {
+      "id": "D-16",
+      "question": "Q16 /api/sync 的返回格式与统一错误格式",
+      "decision": "/api/sync 返回 { ok, syncedAt, received, created, updated, rejected, pageCount }；错误统一为 { error: { code, message } }，code 沿用后端规范（specs/backend.spec.md BE-API-03）的错误码表：INVALID_JSON（400，请求体不是合法 JSON）、VALIDATION_FAILED（400，字段缺失、类型或取值错误）、UNSUPPORTED_MEDIA_TYPE（415）、NOT_FOUND（404）、METHOD_NOT_ALLOWED（405）、PAYLOAD_TOO_LARGE（413）、INTERNAL（500）；请求结构错误返回 400；单条记录的 URL 不是 http(s)、无法解析、超过 2048 个字符或含敏感关键词时计入 rejected，不影响其他记录；单次最多 500 条、请求体最大 1 MB；rules/parse 的 text 长度为 1–500 个字符；ranked 在题目字段的基础上增加 isOpen、sources、scoreDetail 和 total",
+      "reason": "统计字段让插件可以直接展示「上传 N 条 · 过滤 M 条」；单条坏数据不应该让整批同步失败；字段只增不减，与 PROBLEM.md 示例兼容；错误码与后端规范保持一致（产品初稿使用单一的 INVALID_ARGUMENT，细分后排查更直接）"
+    },
+    {
+      "id": "D-17",
+      "question": "Q17「文档页」的判定口径",
+      "decision": "域名属于 developer.mozilla.org、react.dev、docs.internal.com、vuejs.org、nodejs.org，或者路径包含 /docs、/reference、/learn、/guide",
+      "reason": "覆盖样例中的文档站，规则简单、可以解释"
+    },
+    {
+      "id": "D-18",
+      "question": "Q18 隐私关键词的匹配范围",
+      "decision": "只匹配 URL，转小写后做包含判断；关键词 = GET /api/config 的 privacySensitiveKeywords（已合并 privacy_filter 规则），拿不到时用本地缓存，再拿不到时用内置默认 password、token、bank、secret（宁可多拦）；已知误伤（tokenizer）在文档中说明",
+      "reason": "PROBLEM.md 原文只要求检查 URL；离线时也不能放过敏感 URL"
+    },
+    {
+      "id": "D-19",
+      "question": "上下文读取的历史范围与条数",
+      "decision": "最近 30 天（historyLookbackDays=30）、最多 maxHistoryItems=100 条，按 lastVisitTime 倒序；chrome.history.search 必须显式传入 startTime",
+      "reason": "history.search 不传 startTime 时只返回最近 24 小时；100 条与 GET /api/config 的 maxHistoryItems 一致"
+    },
+    {
+      "id": "D-20",
+      "question": "阈值边界：「超过 N 天」是否包含恰好 N 天",
+      "decision": "未访问天数按整天向下取整，整天数 > N 才建议归档：阈值 14 天时，未访问满 15 天才归档，14 天 23 小时不归档；reason 和 ageDays 展示整天数",
+      "reason": "与 reason 中「已 24 天」的整天表述一致，边界明确，可以用 ?now= 稳定复现"
+    },
+    {
+      "id": "D-21",
+      "question": "同步时是否上传所有窗口的标签页（PRD 待定问题 Q1）",
+      "decision": "popup 只展示当前窗口；同步上传所有普通（非无痕）窗口的标签页",
+      "reason": "只上传当前窗口的话，其他窗口中打开的页面会被误判为未打开而被建议归档"
+    },
+    {
+      "id": "D-22",
+      "question": "推荐的召回、排序与过滤口径",
+      "decision": "两阶段：召回（rule 0.95；same_repo：PR→Actions 1.0、PR→Issue 0.8、Issue→PR 0.9、其他 0.7；same_doc_site 0.8；same_domain 0.6；global_top 0.3）→ final = 0.6·rel + 0.4·score；排除当前页和已打开页（按判重 key）、已归档和正在被建议归档的页面、final < 0.3 的结果；同一判重 key 只保留最高分；返回 Top 5，popup 展示 Top 3",
+      "reason": "「下一步」首先要与当前任务相关，页面质量用于在相关页面之间排序；召回只查索引，不扫全量数据"
+    },
+    {
+      "id": "D-23",
+      "question": "排序理由的生成规则",
+      "decision": "按第 6.3 节的条件顺序最多取 3 句，用「，」连接；整理理由先说事实再给建议，并引用规则原文",
+      "reason": "理由短而具体，数字可以复算；规则带来的结果能追溯到规则本身"
+    },
+    {
+      "id": "D-24",
+      "question": "整理判定的优先级与规则冲突",
+      "decision": "never_archive > 标记为重要 > 当前打开 > archive_candidate > 默认阈值，命中即停止；多条 archive_candidate 同时命中时取 inactiveDays 最小的一条；解析时检测冲突并给出 warning",
+      "reason": "保护类规则优先，避免误归档；取最严格的归档规则，用户更容易理解"
+    },
+    {
+      "id": "D-25",
+      "question": "「当前页面」的判定（popup 以标签页方式打开时）",
+      "decision": "当前页 = 当前窗口的活动标签页；活动标签页是插件自身页面时，取最后聚焦窗口中 lastAccessed 最大的 http(s) 标签页；都没有时按系统页处理",
+      "reason": "popup 以标签页方式打开（自动化测试、从诊断页新开）时，活动标签页就是插件页面本身"
+    },
+    {
+      "id": "D-26",
+      "question": "同步状态、超时与重试",
+      "decision": "同步状态机 idle → syncing → success | error，保存在 chrome.storage.local；syncing 超过 30 秒视为中断失败；超时：health 3 秒（popup 顶栏的轻量检查 1.5 秒）、sync 8 秒、其他接口 5 秒；GET 失败重试 1 次，POST 不自动重试；后端恢复后自动重新同步 1 次",
+      "reason": "MV3 的 service worker 随时可能被回收，状态必须持久化；POST 自动重试可能重复写入"
+    },
+    {
+      "id": "D-27",
+      "question": "诊断项的范围",
+      "decision": "在 PROBLEM.md 要求的 7 项之外，增加 activeTab 权限、隐私过滤、无痕模式、版本兼容 4 项；最近一次同步超过 24 小时为警告",
+      "reason": "覆盖面试追问中的隐身模式问题，也能发现前后端版本不一致"
+    }
+  ]
+}

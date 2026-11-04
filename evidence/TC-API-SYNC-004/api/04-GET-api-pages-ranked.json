@@ -1,0 +1,61 @@
+{
+  "reqId": "TC-API-SYNC-004-04",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/ranked",
+  "params": {
+    "limit": 500,
+    "now": 1793762825900
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-SYNC-004-04"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-SYNC-004-04",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "605",
+    "date": "Wed, 04 Nov 2026 03:27:05 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "pages": [
+      {
+        "id": "page_1",
+        "url": "https://GitHub.com/org/repo/issues/123/?utm_source=mail#c1",
+        "normalizedUrl": "https://github.com/org/repo/issues/123",
+        "title": "https://GitHub.com/org/repo/issues/123/?utm_source=mail#c1",
+        "domain": "github.com",
+        "visitCount": 1,
+        "lastVisitedAt": 1793762525900,
+        "firstSeenAt": 1793762525900,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.8,
+        "scoreDetail": {
+          "recency": 1,
+          "frequency": 1,
+          "open": 0,
+          "domain": 1,
+          "domainSource": "affinity"
+        },
+        "reason": "今天访问过，常用域名 github.com"
+      }
+    ],
+    "total": 1,
+    "domains": [
+      "github.com"
+    ],
+    "generatedAt": 1793762825900
+  },
+  "ms": 0.7,
+  "mutated": null
+}

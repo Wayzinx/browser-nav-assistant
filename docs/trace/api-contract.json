@@ -1,0 +1,1396 @@
+{
+  "$comment": "后端是契约 owner。字段沿用 PROBLEM.md 的 camelCase，只增不减（BE-NAME-02）。文档：docs/03-技术方案-后端.md 第 5 章。",
+  "version": "1.1.0",
+  "defaultPort": 3000,
+  "defaultHost": "127.0.0.1",
+  "common": {
+    "contentType": "application/json; charset=utf-8；时间戳统一为毫秒 number",
+    "requestId": "请求头 x-request-id 原样回传（缺省时生成 req_<随机>），并写入该请求的全部日志",
+    "cors": "允许来源 chrome-extension://*、http://localhost:*、http://127.0.0.1:*；OPTIONS 预检 204，Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS；Access-Control-Allow-Headers: content-type, x-request-id；Access-Control-Expose-Headers: x-request-id；其他来源不返回 Access-Control-Allow-Origin",
+    "nowOverride": "GET /api/pages/ranked、POST /api/recommendations/next、GET /api/pages/cleanup-suggestions 支持 ?now=<毫秒>（D-01）",
+    "errorFormat": {
+      "error": {
+        "code": "UPPER_SNAKE",
+        "message": "给人看的中文说明",
+        "details": "可选，例如 { fields: [\"openTabs\"] }"
+      }
+    },
+    "errorCodes": [
+      {
+        "code": "INVALID_JSON",
+        "status": 400,
+        "when": "请求体不是合法 JSON"
+      },
+      {
+        "code": "VALIDATION_FAILED",
+        "status": 400,
+        "when": "字段缺失、类型或取值错误；details.fields 列出字段"
+      },
+      {
+        "code": "UNSUPPORTED_MEDIA_TYPE",
+        "status": 415,
+        "when": "有请求体但 Content-Type 不是 application/json"
+      },
+      {
+        "code": "NOT_FOUND",
+        "status": 404,
+        "when": "路由不存在或资源不存在"
+      },
+      {
+        "code": "METHOD_NOT_ALLOWED",
+        "status": 405,
+        "when": "路径存在但方法不支持（带 Allow 头）"
+      },
+      {
+        "code": "PAYLOAD_TOO_LARGE",
+        "status": 413,
+        "when": "请求体超过 1 MB，或数组超过 500 条"
+      },
+      {
+        "code": "INTERNAL",
+        "status": 500,
+        "when": "未预期异常；details 只含 reqId"
+      }
+    ],
+    "limits": {
+      "maxBodyBytes": 1048576,
+      "maxItemsPerArray": 500,
+      "maxUrlLength": 2048,
+      "maxTitleLength": 500,
+      "ruleTextLength": "1–500",
+      "maxRulesPerSave": 20,
+      "recentHistoryUsed": 20
+    },
+    "env": {
+      "PORT": "默认 3000",
+      "HOST": "默认 127.0.0.1",
+      "ENABLE_TEST_API": "=1 时注册 POST /api/__test__/reset",
+      "LOG_FILE": "设置后同步追加 JSON 日志（自动创建目录）",
+      "LOG_LEVEL": "debug | info | warn | error，默认 info",
+      "SNAPSHOT_FILE": "设置后启用 JSON 快照持久化"
+    }
+  },
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/api/sync",
+      "codePoints": [
+        "C-BE-SYNC-01",
+        "C-BE-SYNC-02",
+        "C-BE-SYNC-03",
+        "C-BE-SYNC-04",
+        "C-BE-SYNC-05",
+        "C-BE-PRIV-01",
+        "C-BE-PRIV-02",
+        "C-BE-CORE-05",
+        "C-BE-CORE-09",
+        "C-BE-CORE-10"
+      ],
+      "features": [
+        "F-SYNC-01",
+        "F-SYNC-02",
+        "F-SYNC-03",
+        "F-SYNC-04",
+        "F-SYNC-05",
+        "F-SYNC-07",
+        "F-PRIV-03",
+        "F-PRIV-05",
+        "F-DEMO-02"
+      ],
+      "description": "上报浏览器上下文：按 normalizedUrl 去重合并入库；isOpen / isActive 按本次快照刷新；单条坏记录计入 rejected，不影响其他记录。",
+      "request": {
+        "activeTab": "object | null，可缺省：{ url: string, title?: string, lastAccessed?: number(ms) }；当前系统页时传 null",
+        "openTabs": "array，可缺省（视为 []），最多 500 条：{ url, title?, lastAccessed?: number(ms) }（所有普通窗口的标签页，D-21）",
+        "history": "array，可缺省（视为 []），最多 500 条：{ url, title?, lastVisitTime: number(ms), visitCount?: number }",
+        "clientVersion": "string，可选，插件版本，写入 SyncLog",
+        "mode": "\"full\" | \"incremental\"，可选，默认 full；只写入 SyncLog，不改变合并语义",
+        "cursor": "number(ms)，可选，增量同步游标，只写入 SyncLog"
+      },
+      "requestExample": {
+        "activeTab": {
+          "url": "https://github.com/org/repo/pull/456",
+          "title": "Refactor auth middleware (#456)"
+        },
+        "openTabs": [
+          {
+            "url": "https://github.com/org/repo/issues/123",
+            "title": "Fix login redirect bug"
+          }
+        ],
+        "history": [
+          {
+            "url": "https://github.com/org/repo/issues/123",
+            "title": "Fix login redirect bug",
+            "lastVisitTime": 1710090000000,
+            "visitCount": 8
+          }
+        ]
+      },
+      "response": {
+        "ok": "boolean，恒为 true",
+        "syncedAt": "number(ms)，服务器处理时间；activeTab 页面的 lastVisitedAt 等于它",
+        "received": "number，activeTab(0/1) + openTabs + history 的条数（含被拒收的）",
+        "created": "number，新建的页面数",
+        "updated": "number，命中已有页面（含本请求内重复 URL）的条数",
+        "rejected": "number，被拒收的条数（URL 不合法 / 非 http(s) / 超过 2048 字符 / 命中敏感关键词）",
+        "rejectedByReason": "{ invalid_url: number, privacy: number }（新增字段，只有计数，不回显 URL）",
+        "pageCount": "number，同步后后端页面总数（含已归档）",
+        "mode": "\"full\" | \"incremental\""
+      },
+      "responseExample": {
+        "ok": true,
+        "syncedAt": 1710100300000,
+        "received": 14,
+        "created": 10,
+        "updated": 4,
+        "rejected": 0,
+        "rejectedByReason": {
+          "invalid_url": 0,
+          "privacy": 0
+        },
+        "pageCount": 10,
+        "mode": "full"
+      },
+      "errors": [
+        {
+          "status": 400,
+          "when": "请求体不是合法 JSON",
+          "body": {
+            "error": {
+              "code": "INVALID_JSON",
+              "message": "请求体不是合法 JSON"
+            }
+          }
+        },
+        {
+          "status": 415,
+          "when": "有请求体但 Content-Type 不是 application/json",
+          "body": {
+            "error": {
+              "code": "UNSUPPORTED_MEDIA_TYPE",
+              "message": "Content-Type 必须是 application/json"
+            }
+          }
+        },
+        {
+          "status": 413,
+          "when": "请求体超过 1 MB",
+          "body": {
+            "error": {
+              "code": "PAYLOAD_TOO_LARGE",
+              "message": "请求体超过 1 MB 上限"
+            }
+          }
+        },
+        {
+          "status": 400,
+          "when": "请求体不是对象，或 activeTab 不是对象 / null，或 openTabs / history 不是数组，或 mode 取值非法",
+          "body": {
+            "error": {
+              "code": "VALIDATION_FAILED",
+              "message": "请求体不是对象，或 activeTab 不是对象 / null，或 openTabs / history 不是数组，或 mode 取值非法",
+              "details": {
+                "fields": [
+                  "openTabs"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "status": 413,
+          "when": "openTabs 或 history 超过 500 条",
+          "body": {
+            "error": {
+              "code": "PAYLOAD_TOO_LARGE",
+              "message": "history 最多 500 条"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/pages/ranked",
+      "codePoints": [
+        "C-BE-RANK-01",
+        "C-BE-RANK-02",
+        "C-BE-RANK-03",
+        "C-BE-RANK-04",
+        "C-BE-RANK-05",
+        "C-BE-CORE-07",
+        "C-BE-CORE-13"
+      ],
+      "features": [
+        "F-RANK-01",
+        "F-RANK-02",
+        "F-RANK-03",
+        "F-RANK-04",
+        "F-MENU-01",
+        "F-PERF-01",
+        "F-CLEAN-08",
+        "F-SYNC-03",
+        "F-SYNC-04",
+        "F-SYNC-05"
+      ],
+      "description": "按评分降序返回未归档页面。同分按 lastVisitedAt 倒序。",
+      "request": {
+        "query.limit": "integer 1–500，默认 20",
+        "query.domain": "string，可选；只返回 domain 等于该值或为其子域的页面",
+        "query.openOnly": "\"true\" | \"false\"，可选，默认 false",
+        "query.now": "integer(ms)，可选；覆盖「当前时间」（D-01），用于复现与边界测试"
+      },
+      "response": {
+        "pages": "array：{ id, url, normalizedUrl, title, domain, visitCount, lastVisitedAt, firstSeenAt, sources: string[], isOpen, isActive, isImportant, score: number(0–1, 2 位小数), scoreDetail: { recency, frequency, open, domain, domainSource: \"affinity\"|\"important\"|\"protected\"|\"boost\" }, reason: string }",
+        "total": "number，过滤（domain / openOnly）后、limit 截断前的数量",
+        "domains": "string[]（v1.1.0 新增）：全部未归档页面的去重域名，按页面数降序、同数按字母序，最多 50 个；不受本次 domain / openOnly / limit 过滤影响，供插件域名筛选下拉使用",
+        "generatedAt": "number(ms)，实际计算 score / reason 所用的 now（= 排序快照 builtAt；默认快照最多比请求时刻落后 1 小时，超过即同步重建；带 ?now= 时等于该值）"
+      },
+      "responseExample": {
+        "pages": [
+          {
+            "id": "page_2",
+            "url": "https://github.com/org/repo/issues/123",
+            "normalizedUrl": "https://github.com/org/repo/issues/123",
+            "title": "Fix login redirect bug",
+            "domain": "github.com",
+            "visitCount": 8,
+            "lastVisitedAt": 1710090000000,
+            "firstSeenAt": 1710090000000,
+            "sources": [
+              "history",
+              "open_tab"
+            ],
+            "isOpen": true,
+            "isActive": false,
+            "isImportant": false,
+            "score": 1,
+            "scoreDetail": {
+              "recency": 0.99,
+              "frequency": 1,
+              "open": 1,
+              "domain": 1,
+              "domainSource": "affinity"
+            },
+            "reason": "最近 3 天内多次访问（8 次），当前仍处于打开状态，常用域名 github.com"
+          }
+        ],
+        "total": 10,
+        "domains": [
+          "github.com",
+          "developer.mozilla.org"
+        ],
+        "generatedAt": 1710100300000
+      },
+      "errors": [
+        {
+          "status": 400,
+          "when": "limit 不是 1–500 的整数，或 openOnly 不是 true/false",
+          "body": {
+            "error": {
+              "code": "VALIDATION_FAILED",
+              "message": "limit 不是 1–500 的整数，或 openOnly 不是 true/false",
+              "details": {
+                "fields": [
+                  "limit"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "status": 400,
+          "when": "?now= 不是正整数毫秒时间戳",
+          "body": {
+            "error": {
+              "code": "VALIDATION_FAILED",
+              "message": "?now= 不是正整数毫秒时间戳",
+              "details": {
+                "fields": [
+                  "now"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/recommendations/next",
+      "codePoints": [
+        "C-BE-REC-01",
+        "C-BE-REC-02",
+        "C-BE-REC-03",
+        "C-BE-REC-04",
+        "C-BE-REC-05",
+        "C-BE-REC-06",
+        "C-BE-REC-07",
+        "C-BE-PERF-01",
+        "C-BE-PERF-02",
+        "C-BE-CLEAN-01"
+      ],
+      "features": [
+        "F-REC-01",
+        "F-REC-02",
+        "F-REC-03",
+        "F-REC-04",
+        "F-REC-05",
+        "F-REC-06",
+        "F-REC-07",
+        "F-PERF-01",
+        "F-PERF-02"
+      ],
+      "description": "根据当前页、打开的标签页和最近历史推荐下一步访问，最多 5 条，final ≥ 0.3。",
+      "request": {
+        "currentPage": "object | null，必填字段：{ url, title? }；系统页传 null",
+        "openTabs": "array，可缺省（视为 []），最多 500 条：{ url: string, title?: string }",
+        "recentHistory": "array，可缺省，最多 500 条：{ url, title?, lastVisitTime: number(ms) }；后端按 lastVisitTime 倒序只取前 20 条",
+        "query.now": "integer(ms)，可选，时间覆盖"
+      },
+      "response": {
+        "recommendations": "array（0–5 条，按 score 降序）：{ id: \"rec_…\", type: \"next_visit\", url, title, score: number(final, 2 位小数), reason, strategy: \"rule\"|\"same_repo\"|\"same_doc_site\"|\"same_domain\"|\"global_top\", contextUrl: string|null, createdAt: number(ms) }",
+        "cached": "boolean，是否命中推荐缓存",
+        "generatedAt": "number(ms)"
+      },
+      "responseExample": {
+        "recommendations": [
+          {
+            "id": "rec_3",
+            "type": "next_visit",
+            "url": "https://github.com/org/repo/actions",
+            "title": "Actions · org/repo",
+            "score": 0.87,
+            "reason": "你正在查看 PR，同仓库 CI 页面最近访问频率较高，可能需要检查构建状态",
+            "strategy": "same_repo",
+            "contextUrl": "https://github.com/org/repo/pull/456",
+            "createdAt": 1710100300000
+          }
+        ],
+        "cached": false,
+        "generatedAt": 1710100300000
+      },
+      "errors": [
+        {
+          "status": 400,
+          "when": "请求体不是合法 JSON",
+          "body": {
+            "error": {
+              "code": "INVALID_JSON",
+              "message": "请求体不是合法 JSON"
+            }
+          }
+        },
+        {
+          "status": 415,
+          "when": "有请求体但 Content-Type 不是 application/json",
+          "body": {
+            "error": {
+              "code": "UNSUPPORTED_MEDIA_TYPE",
+              "message": "Content-Type 必须是 application/json"
+            }
+          }
+        },
+        {
+          "status": 413,
+          "when": "请求体超过 1 MB",
+          "body": {
+            "error": {
+              "code": "PAYLOAD_TOO_LARGE",
+              "message": "请求体超过 1 MB 上限"
+            }
+          }
+        },
+        {
+          "status": 400,
+          "when": "缺少 currentPage 字段、currentPage 不是对象或 null、openTabs / recentHistory 不是数组",
+          "body": {
+            "error": {
+              "code": "VALIDATION_FAILED",
+              "message": "缺少 currentPage 字段、currentPage 不是对象或 null、openTabs / recentHistory 不是数组",
+              "details": {
+                "fields": [
+                  "currentPage"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "status": 413,
+          "when": "openTabs 或 recentHistory 超过 500 条",
+          "body": {
+            "error": {
+              "code": "PAYLOAD_TOO_LARGE",
+              "message": "openTabs 最多 500 条"
+            }
+          }
+        },
+        {
+          "status": 400,
+          "when": "?now= 不是正整数毫秒时间戳",
+          "body": {
+            "error": {
+              "code": "VALIDATION_FAILED",
+              "message": "?now= 不是正整数毫秒时间戳",
+              "details": {
+                "fields": [
+                  "now"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/pages/cleanup-suggestions",
+      "codePoints": [
+        "C-BE-CLEAN-01",
+        "C-BE-CLEAN-02",
+        "C-BE-CLEAN-03",
+        "C-BE-CLEAN-04",
+        "C-BE-CORE-07",
+        "C-BE-CORE-13"
+      ],
+      "features": [
+        "F-CLEAN-01",
+        "F-CLEAN-02",
+        "F-CLEAN-03",
+        "F-CLEAN-04",
+        "F-CLEAN-05",
+        "F-CLEAN-06",
+        "F-DEMO-02",
+        "F-MENU-01"
+      ],
+      "description": "旧页面归档、重复页面合并与受保护页面保留建议；顺序 archive（ageDays 降序）→ merge → keep。",
+      "request": {
+        "query.now": "integer(ms)，可选，时间覆盖（D-01、D-20 边界复现）"
+      },
+      "response": {
+        "summary": "{ archive: number, merge: number, keep: number }",
+        "suggestions": "array：archive → { key, action: \"archive\", url, title, reason, ageDays, lastVisitedAt, ruleId: string|null }；merge → { key, action: \"merge\", urls: string[], titles: string[], keepUrl, title, reason }；keep → { key, action: \"keep\", url, title, reason, ageDays, ruleId: string|null }",
+        "thresholdDays": "number，当前默认阈值 cleanupThresholdDays",
+        "generatedAt": "number(ms)"
+      },
+      "responseExample": {
+        "summary": {
+          "archive": 2,
+          "merge": 1,
+          "keep": 0
+        },
+        "suggestions": [
+          {
+            "key": "archive:https://www.google.com/search?q=chrome+extension+manifest+v3",
+            "action": "archive",
+            "url": "https://www.google.com/search?q=chrome+extension+manifest+v3",
+            "title": "chrome extension manifest v3 - Google Search",
+            "ageDays": 35,
+            "lastVisitedAt": 1707000000000,
+            "ruleId": null,
+            "reason": "超过 14 天未访问（已 35 天），且不在当前打开的 tab 中"
+          },
+          {
+            "key": "merge:github.com/org/repo/issues/123",
+            "action": "merge",
+            "urls": [
+              "https://github.com/org/repo/issues/123",
+              "https://github.com/org/repo/issues/123?tab=comments"
+            ],
+            "titles": [
+              "Fix login redirect bug",
+              "Fix login redirect bug - Comments"
+            ],
+            "keepUrl": "https://github.com/org/repo/issues/123",
+            "title": "Fix login redirect bug",
+            "reason": "去掉 query 参数后 URL 相同，疑似重复页面"
+          }
+        ],
+        "thresholdDays": 14,
+        "generatedAt": 1710100300000
+      },
+      "errors": [
+        {
+          "status": 400,
+          "when": "?now= 不是正整数毫秒时间戳",
+          "body": {
+            "error": {
+              "code": "VALIDATION_FAILED",
+              "message": "?now= 不是正整数毫秒时间戳",
+              "details": {
+                "fields": [
+                  "now"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/rules/parse",
+      "codePoints": [
+        "C-BE-RULE-01",
+        "C-BE-RULE-02",
+        "C-BE-RULE-03",
+        "C-BE-RULE-04",
+        "C-BE-RULE-06",
+        "C-BE-RULE-07"
+      ],
+      "features": [
+        "F-RULE-01",
+        "F-RULE-02",
+        "F-RULE-03",
+        "F-RULE-04",
+        "F-RULE-05",
+        "F-RULE-10"
+      ],
+      "description": "自然语言 → 结构化规则预览，不写库（D-08）。",
+      "request": {
+        "text": "string，trim 后 1–500 个字符"
+      },
+      "response": {
+        "rules": "array：{ id: \"rule_1\"…(预览 id), rawText(子句原文), type, domain: string|null, urlPattern: string|null, inactiveDays: number|null, keywords?: string[], trigger?: { domain, minCount, label }, target?: { domain, label }, action, enabled: true, confidence: \"high\"|\"medium\", notes: string[] }",
+        "unparsed": "array：{ text, reason, examples: string[]（≥1 条可照着写的例句） }",
+        "warnings": "string[]，冲突等提示"
+      },
+      "requestExample": {
+        "text": "把 7 天没访问过的 GitHub issue 建议归档，但 docs.internal.com 的页面永远不要归档"
+      },
+      "responseExample": {
+        "rules": [
+          {
+            "id": "rule_1",
+            "rawText": "把 7 天没访问过的 GitHub issue 建议归档",
+            "type": "archive_candidate",
+            "domain": "github.com",
+            "urlPattern": "/issues/",
+            "inactiveDays": 7,
+            "action": "suggest_archive",
+            "enabled": true,
+            "confidence": "high",
+            "notes": []
+          },
+          {
+            "id": "rule_2",
+            "rawText": "docs.internal.com 的页面永远不要归档",
+            "type": "never_archive",
+            "domain": "docs.internal.com",
+            "urlPattern": null,
+            "inactiveDays": null,
+            "action": "keep",
+            "enabled": true,
+            "confidence": "high",
+            "notes": []
+          }
+        ],
+        "unparsed": [],
+        "warnings": []
+      },
+      "errors": [
+        {
+          "status": 400,
+          "when": "请求体不是合法 JSON",
+          "body": {
+            "error": {
+              "code": "INVALID_JSON",
+              "message": "请求体不是合法 JSON"
+            }
+          }
+        },
+        {
+          "status": 415,
+          "when": "有请求体但 Content-Type 不是 application/json",
+          "body": {
+            "error": {
+              "code": "UNSUPPORTED_MEDIA_TYPE",
+              "message": "Content-Type 必须是 application/json"
+            }
+          }
+        },
+        {
+          "status": 413,
+          "when": "请求体超过 1 MB",
+          "body": {
+            "error": {
+              "code": "PAYLOAD_TOO_LARGE",
+              "message": "请求体超过 1 MB 上限"
+            }
+          }
+        },
+        {
+          "status": 400,
+          "when": "text 缺失、不是字符串、为空（含纯空白）或超过 500 个字符",
+          "body": {
+            "error": {
+              "code": "VALIDATION_FAILED",
+              "message": "text 缺失、不是字符串、为空（含纯空白）或超过 500 个字符",
+              "details": {
+                "fields": [
+                  "text"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/rules",
+      "codePoints": [
+        "C-BE-RULE-05",
+        "C-BE-RULE-06",
+        "C-BE-RULE-08",
+        "C-BE-CORE-11"
+      ],
+      "features": [
+        "F-RULE-06",
+        "F-RULE-04",
+        "F-CLEAN-04",
+        "F-CLEAN-05",
+        "F-RANK-04",
+        "F-REC-07",
+        "F-PRIV-05"
+      ],
+      "description": "保存用户勾选的规则（可一次多条），后端重新校验并分配正式 id；全部通过才写入。",
+      "request": {
+        "rules": "array 1–20 条：{ rawText, type, domain?, urlPattern?, inactiveDays?, keywords?, trigger?, target?, action?, enabled? }；confidence?: \"high\"|\"medium\"（缺省 high）；传入的 id / notes 被忽略"
+      },
+      "response": {
+        "rules": "array，本次保存的规则（含正式 id、enabled、confidence、createdAt、updatedAt）",
+        "ruleCount": "number，保存后的规则总数"
+      },
+      "status": 201,
+      "responseExample": {
+        "rules": [
+          {
+            "id": "rule_1",
+            "rawText": "把 7 天没访问过的 GitHub issue 建议归档",
+            "type": "archive_candidate",
+            "domain": "github.com",
+            "urlPattern": "/issues/",
+            "inactiveDays": 7,
+            "action": "suggest_archive",
+            "enabled": true,
+            "confidence": "high",
+            "createdAt": 1710100300000,
+            "updatedAt": 1710100300000
+          }
+        ],
+        "ruleCount": 1
+      },
+      "errors": [
+        {
+          "status": 400,
+          "when": "请求体不是合法 JSON",
+          "body": {
+            "error": {
+              "code": "INVALID_JSON",
+              "message": "请求体不是合法 JSON"
+            }
+          }
+        },
+        {
+          "status": 415,
+          "when": "有请求体但 Content-Type 不是 application/json",
+          "body": {
+            "error": {
+              "code": "UNSUPPORTED_MEDIA_TYPE",
+              "message": "Content-Type 必须是 application/json"
+            }
+          }
+        },
+        {
+          "status": 413,
+          "when": "请求体超过 1 MB",
+          "body": {
+            "error": {
+              "code": "PAYLOAD_TOO_LARGE",
+              "message": "请求体超过 1 MB 上限"
+            }
+          }
+        },
+        {
+          "status": 400,
+          "when": "rules 不是 1–20 条的数组，或某条规则 type 非法 / 缺少该类型必填字段 / action 与 type 不匹配（details.fields 形如 rules[0].type）",
+          "body": {
+            "error": {
+              "code": "VALIDATION_FAILED",
+              "message": "rules 不是 1–20 条的数组，或某条规则 type 非法 / 缺少该类型必填字段 / action 与 type 不匹配（details.fields 形如 rules[0].type）",
+              "details": {
+                "fields": [
+                  "rules[0].type"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/rules",
+      "codePoints": [
+        "C-BE-RULE-06",
+        "C-BE-RULE-08",
+        "C-BE-CORE-11"
+      ],
+      "features": [
+        "F-RULE-07"
+      ],
+      "description": "规则列表，按创建顺序。",
+      "request": {},
+      "response": {
+        "rules": "array：{ id, rawText, type, domain, urlPattern, inactiveDays, keywords?, trigger?, target?, action, enabled, confidence, createdAt, updatedAt }",
+        "total": "number"
+      },
+      "errors": []
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/rules/:id",
+      "codePoints": [
+        "C-BE-RULE-06",
+        "C-BE-RULE-08",
+        "C-BE-CORE-11"
+      ],
+      "features": [
+        "F-RULE-08"
+      ],
+      "description": "删除规则，立即对排序、整理、推荐和隐私关键词生效。",
+      "request": {
+        "params.id": "string，正式规则 id"
+      },
+      "response": {
+        "deleted": "string，被删除的 id",
+        "ruleCount": "number，删除后的规则总数"
+      },
+      "errors": [
+        {
+          "status": 404,
+          "when": "规则 id 不存在",
+          "body": {
+            "error": {
+              "code": "NOT_FOUND",
+              "message": "规则 rule_not_exist 不存在"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/rules/:id",
+      "codePoints": [
+        "C-BE-RULE-06",
+        "C-BE-RULE-08"
+      ],
+      "features": [
+        "F-RULE-09"
+      ],
+      "description": "启用 / 停用规则。",
+      "request": {
+        "params.id": "string",
+        "enabled": "boolean，必填"
+      },
+      "response": {
+        "...rule": "更新后的规则对象（与 GET /api/rules 的单条结构相同，含 id、enabled、updatedAt）"
+      },
+      "errors": [
+        {
+          "status": 400,
+          "when": "请求体不是合法 JSON",
+          "body": {
+            "error": {
+              "code": "INVALID_JSON",
+              "message": "请求体不是合法 JSON"
+            }
+          }
+        },
+        {
+          "status": 415,
+          "when": "有请求体但 Content-Type 不是 application/json",
+          "body": {
+            "error": {
+              "code": "UNSUPPORTED_MEDIA_TYPE",
+              "message": "Content-Type 必须是 application/json"
+            }
+          }
+        },
+        {
+          "status": 400,
+          "when": "enabled 缺失或不是 boolean",
+          "body": {
+            "error": {
+              "code": "VALIDATION_FAILED",
+              "message": "enabled 缺失或不是 boolean",
+              "details": {
+                "fields": [
+                  "enabled"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "status": 404,
+          "when": "规则 id 不存在",
+          "body": {
+            "error": {
+              "code": "NOT_FOUND",
+              "message": "规则不存在"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/health",
+      "codePoints": [
+        "C-BE-DIAG-01",
+        "C-BE-CORE-15",
+        "C-BE-CORE-12"
+      ],
+      "features": [
+        "F-DIAG-09",
+        "F-DIAG-01",
+        "F-DEMO-01",
+        "F-PERSIST-01",
+        "F-RULE-08"
+      ],
+      "description": "健康检查（插件诊断项 1 与顶栏连接状态；也是 validate skeleton / playwright webServer 的就绪探针，骨架阶段即返回 200 完整字段）。",
+      "request": {},
+      "response": {
+        "status": "\"ok\"",
+        "version": "\"1.0.0\"",
+        "uptime": "integer，秒",
+        "pageCount": "number",
+        "ruleCount": "number",
+        "enabledRuleCount": "number",
+        "lastSyncAt": "number(ms) | null",
+        "persistence": "\"memory\" | \"snapshot\"",
+        "startedAt": "number(ms)"
+      },
+      "responseExample": {
+        "status": "ok",
+        "version": "1.0.0",
+        "uptime": 3600,
+        "pageCount": 128,
+        "ruleCount": 3,
+        "enabledRuleCount": 3,
+        "lastSyncAt": 1710100300000,
+        "persistence": "memory",
+        "startedAt": 1710096700000
+      },
+      "errors": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/config",
+      "codePoints": [
+        "C-BE-DIAG-02",
+        "C-BE-CORE-02",
+        "C-BE-PRIV-02"
+      ],
+      "features": [
+        "F-DIAG-10",
+        "F-PRIV-05"
+      ],
+      "description": "配置查询；privacySensitiveKeywords 已合并启用的 privacy_filter 规则。",
+      "request": {},
+      "response": {
+        "cleanupThresholdDays": "number，默认 14",
+        "maxHistoryItems": "number，默认 100",
+        "enablePrivacyFilter": "boolean，默认 true",
+        "privacySensitiveKeywords": "string[]，有效关键词（配置 ∪ 规则），默认 [\"password\",\"token\",\"bank\",\"secret\"]",
+        "baseSensitiveKeywords": "string[]，配置值（不含规则）",
+        "historyLookbackDays": "number，默认 30",
+        "recencyHalfLifeDays": "number，默认 7",
+        "weights": "{ recency: 0.4, frequency: 0.3, open: 0.2, domain: 0.1 }",
+        "minRecommendationScore": "number，默认 0.3",
+        "apiVersion": "\"1\"",
+        "limits": "{ maxItemsPerSync: 500, maxUrlLength: 2048, maxRuleTextLength: 500, maxBodyBytes: 1048576 }"
+      },
+      "responseExample": {
+        "cleanupThresholdDays": 14,
+        "maxHistoryItems": 100,
+        "enablePrivacyFilter": true,
+        "privacySensitiveKeywords": [
+          "password",
+          "token",
+          "bank",
+          "secret"
+        ],
+        "baseSensitiveKeywords": [
+          "password",
+          "token",
+          "bank",
+          "secret"
+        ],
+        "historyLookbackDays": 30,
+        "recencyHalfLifeDays": 7,
+        "weights": {
+          "recency": 0.4,
+          "frequency": 0.3,
+          "open": 0.2,
+          "domain": 0.1
+        },
+        "minRecommendationScore": 0.3,
+        "apiVersion": "1",
+        "limits": {
+          "maxItemsPerSync": 500,
+          "maxUrlLength": 2048,
+          "maxRuleTextLength": 500,
+          "maxBodyBytes": 1048576
+        }
+      },
+      "errors": []
+    },
+    {
+      "method": "PUT",
+      "path": "/api/config",
+      "codePoints": [
+        "C-BE-PRIV-03",
+        "C-BE-CORE-12"
+      ],
+      "features": [
+        "F-PRIV-05"
+      ],
+      "description": "修改可配置项（部分更新）；weights、recencyHalfLifeDays 等算法常量只读。",
+      "request": {
+        "cleanupThresholdDays": "integer 1–365，可选",
+        "maxHistoryItems": "integer 1–500，可选",
+        "historyLookbackDays": "integer 1–90，可选",
+        "enablePrivacyFilter": "boolean，可选",
+        "privacySensitiveKeywords": "string[] 0–50 项，每项 1–50 字符，可选（保存时转小写去重）"
+      },
+      "response": {
+        "...config": "与 GET /api/config 相同结构的完整配置"
+      },
+      "errors": [
+        {
+          "status": 400,
+          "when": "请求体不是合法 JSON",
+          "body": {
+            "error": {
+              "code": "INVALID_JSON",
+              "message": "请求体不是合法 JSON"
+            }
+          }
+        },
+        {
+          "status": 415,
+          "when": "有请求体但 Content-Type 不是 application/json",
+          "body": {
+            "error": {
+              "code": "UNSUPPORTED_MEDIA_TYPE",
+              "message": "Content-Type 必须是 application/json"
+            }
+          }
+        },
+        {
+          "status": 400,
+          "when": "没有任何可识别字段，或字段类型 / 取值越界",
+          "body": {
+            "error": {
+              "code": "VALIDATION_FAILED",
+              "message": "没有任何可识别字段，或字段类型 / 取值越界",
+              "details": {
+                "fields": [
+                  "cleanupThresholdDays"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/pages/archive",
+      "codePoints": [
+        "C-BE-CLEAN-05"
+      ],
+      "features": [
+        "F-CLEAN-08"
+      ],
+      "description": "执行归档：页面从排序、推荐、整理建议中移除（可撤销）。",
+      "request": {
+        "urls": "string[] 1–500，原始 URL 或 normalizedUrl 均可（后端统一归一化后查找）"
+      },
+      "response": {
+        "ok": "true",
+        "affected": "number，实际归档的页面数",
+        "archivedAt": "number(ms)",
+        "notFound": "number，未找到的 URL 数"
+      },
+      "errors": [
+        {
+          "status": 400,
+          "when": "请求体不是合法 JSON",
+          "body": {
+            "error": {
+              "code": "INVALID_JSON",
+              "message": "请求体不是合法 JSON"
+            }
+          }
+        },
+        {
+          "status": 415,
+          "when": "有请求体但 Content-Type 不是 application/json",
+          "body": {
+            "error": {
+              "code": "UNSUPPORTED_MEDIA_TYPE",
+              "message": "Content-Type 必须是 application/json"
+            }
+          }
+        },
+        {
+          "status": 400,
+          "when": "urls 不是 1–500 条字符串数组",
+          "body": {
+            "error": {
+              "code": "VALIDATION_FAILED",
+              "message": "urls 不是 1–500 条字符串数组",
+              "details": {
+                "fields": [
+                  "urls"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "status": 404,
+          "when": "urls 中没有任何一个页面存在",
+          "body": {
+            "error": {
+              "code": "NOT_FOUND",
+              "message": "页面不存在"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/pages/unarchive",
+      "codePoints": [
+        "C-BE-CLEAN-05"
+      ],
+      "features": [
+        "F-CLEAN-08"
+      ],
+      "description": "撤销归档（包括合并时被归档的页面）。",
+      "request": {
+        "urls": "string[] 1–500"
+      },
+      "response": {
+        "ok": "true",
+        "affected": "number",
+        "notFound": "number"
+      },
+      "errors": [
+        {
+          "status": 400,
+          "when": "请求体不是合法 JSON",
+          "body": {
+            "error": {
+              "code": "INVALID_JSON",
+              "message": "请求体不是合法 JSON"
+            }
+          }
+        },
+        {
+          "status": 415,
+          "when": "有请求体但 Content-Type 不是 application/json",
+          "body": {
+            "error": {
+              "code": "UNSUPPORTED_MEDIA_TYPE",
+              "message": "Content-Type 必须是 application/json"
+            }
+          }
+        },
+        {
+          "status": 400,
+          "when": "urls 不是 1–500 条字符串数组",
+          "body": {
+            "error": {
+              "code": "VALIDATION_FAILED",
+              "message": "urls 不是 1–500 条字符串数组",
+              "details": {
+                "fields": [
+                  "urls"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "status": 404,
+          "when": "urls 中没有任何一个页面存在",
+          "body": {
+            "error": {
+              "code": "NOT_FOUND",
+              "message": "页面不存在"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/pages/merge",
+      "codePoints": [
+        "C-BE-CLEAN-05"
+      ],
+      "features": [
+        "F-CLEAN-08"
+      ],
+      "description": "合并重复页面：统计并入 keepUrl 页面，其余页面归档并记录 mergedInto。",
+      "request": {
+        "urls": "string[] 2–50（组内全部 URL）",
+        "keepUrl": "string，必须属于 urls"
+      },
+      "response": {
+        "ok": "true",
+        "keepUrl": "string",
+        "merged": "number，被并入并归档的页面数"
+      },
+      "errors": [
+        {
+          "status": 400,
+          "when": "请求体不是合法 JSON",
+          "body": {
+            "error": {
+              "code": "INVALID_JSON",
+              "message": "请求体不是合法 JSON"
+            }
+          }
+        },
+        {
+          "status": 415,
+          "when": "有请求体但 Content-Type 不是 application/json",
+          "body": {
+            "error": {
+              "code": "UNSUPPORTED_MEDIA_TYPE",
+              "message": "Content-Type 必须是 application/json"
+            }
+          }
+        },
+        {
+          "status": 400,
+          "when": "urls 少于 2 条或 keepUrl 不在 urls 中",
+          "body": {
+            "error": {
+              "code": "VALIDATION_FAILED",
+              "message": "urls 少于 2 条或 keepUrl 不在 urls 中",
+              "details": {
+                "fields": [
+                  "keepUrl"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "status": 404,
+          "when": "keepUrl 对应页面不存在",
+          "body": {
+            "error": {
+              "code": "NOT_FOUND",
+              "message": "页面不存在"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/pages/important",
+      "codePoints": [
+        "C-BE-MENU-02"
+      ],
+      "features": [
+        "F-MENU-01"
+      ],
+      "description": "标记 / 取消标记重要（右键菜单「标记为重要」与插件 ☆）。",
+      "request": {
+        "url": "string，http(s)",
+        "title": "string，可选",
+        "important": "boolean，可选，默认 true"
+      },
+      "response": {
+        "accepted": "boolean，命中敏感关键词时为 false",
+        "rejected": "0 | 1",
+        "url": "string",
+        "normalizedUrl": "string",
+        "isImportant": "boolean",
+        "created": "boolean，是否新建了页面"
+      },
+      "errors": [
+        {
+          "status": 400,
+          "when": "请求体不是合法 JSON",
+          "body": {
+            "error": {
+              "code": "INVALID_JSON",
+              "message": "请求体不是合法 JSON"
+            }
+          }
+        },
+        {
+          "status": 415,
+          "when": "有请求体但 Content-Type 不是 application/json",
+          "body": {
+            "error": {
+              "code": "UNSUPPORTED_MEDIA_TYPE",
+              "message": "Content-Type 必须是 application/json"
+            }
+          }
+        },
+        {
+          "status": 400,
+          "when": "url 缺失、不是 http(s) 或超过 2048 字符",
+          "body": {
+            "error": {
+              "code": "VALIDATION_FAILED",
+              "message": "url 缺失、不是 http(s) 或超过 2048 字符",
+              "details": {
+                "fields": [
+                  "url"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/pages/manual",
+      "codePoints": [
+        "C-BE-MENU-01"
+      ],
+      "features": [
+        "F-MENU-01"
+      ],
+      "description": "右键「添加到分析」：单条加入页面库，sources 含 manual；不影响打开状态快照。",
+      "request": {
+        "url": "string，http(s)",
+        "title": "string，可选"
+      },
+      "response": {
+        "accepted": "boolean",
+        "rejected": "0 | 1",
+        "created": "boolean",
+        "pageCount": "number"
+      },
+      "errors": [
+        {
+          "status": 400,
+          "when": "请求体不是合法 JSON",
+          "body": {
+            "error": {
+              "code": "INVALID_JSON",
+              "message": "请求体不是合法 JSON"
+            }
+          }
+        },
+        {
+          "status": 415,
+          "when": "有请求体但 Content-Type 不是 application/json",
+          "body": {
+            "error": {
+              "code": "UNSUPPORTED_MEDIA_TYPE",
+              "message": "Content-Type 必须是 application/json"
+            }
+          }
+        },
+        {
+          "status": 400,
+          "when": "url 缺失、不是 http(s) 或超过 2048 字符",
+          "body": {
+            "error": {
+              "code": "VALIDATION_FAILED",
+              "message": "url 缺失、不是 http(s) 或超过 2048 字符",
+              "details": {
+                "fields": [
+                  "url"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/__test__/reset",
+      "codePoints": [
+        "C-BE-CORE-14"
+      ],
+      "features": [
+        "F-DIAG-09"
+      ],
+      "description": "仅 ENABLE_TEST_API=1 时存在：清空全部数据与缓存（页面、规则、同步日志、排序快照、推荐缓存、有效关键词表、id 序号），恢复默认配置；内部版本号各加 1 而不归零，保证用例之间缓存不串（测试夹具在每个用例前调用）。",
+      "request": {},
+      "response": {
+        "ok": "true"
+      },
+      "errors": [
+        {
+          "status": 404,
+          "when": "未设置 ENABLE_TEST_API=1",
+          "body": {
+            "error": {
+              "code": "NOT_FOUND",
+              "message": "接口不存在"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/__test__/state",
+      "codePoints": [
+        "C-BE-CORE-14"
+      ],
+      "features": [
+        "F-DIAG-09"
+      ],
+      "description": "仅 ENABLE_TEST_API=1 时存在，严格只读（BE-RUN-07）：返回后端状态快照，供测试夹具在每个用例前后生成状态差异证据。不写入数据、不改变版本号、不触发缓存重建；命中隐私关键词的 URL 只保留 host。",
+      "request": {},
+      "response": {
+        "dataVersion": "number，数据版本号",
+        "versions": "{ data, rule, config }",
+        "counts": "{ pages, rules, openPages, archivedPages, syncLogs }",
+        "pagesTruncated": "boolean，页面超过 2000 条时为 true，此时 pages 为空数组",
+        "pagesHash": "string，页面关键字段的 sha256",
+        "pages": "Page[]（id、url、normalizedUrl、domain、title、visitCount、lastVisitedAt、firstSeenAt、sources、isOpen、isActive、isArchived、archivedAt、mergedInto、isImportant），按 normalizedUrl 排序",
+        "rules": "Rule[]",
+        "config": "当前配置（与 GET /api/config 的可配置项一致）",
+        "sequences": "{ page, rule, sync }",
+        "lastSync": "最近一次同步日志或 null（只有计数，不含 URL）",
+        "persist": "{ enabled, file, exists, size, sha256 } 或 null（未启用持久化）"
+      },
+      "errors": [
+        {
+          "status": 404,
+          "when": "未设置 ENABLE_TEST_API=1",
+          "body": {
+            "error": {
+              "code": "NOT_FOUND",
+              "message": "接口不存在"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

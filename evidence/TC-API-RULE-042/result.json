@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-API-RULE-042",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:05.757Z",
+  "tests": [
+    {
+      "testId": "02ea451c381eba8a856e-304227156e4d0bc32dda",
+      "title": "TC-API-RULE-042 后端不可达时六种规则请求真实连接拒绝且健康实例不变",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-042.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 21,
+      "startedAt": "2026-11-04T03:27:05.736Z",
+      "endedAt": "2026-11-04T03:27:05.757Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 13,
+      "screenshots": [],
+      "serverLogLines": 9,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 825,
+          "after": 826
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 1,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "{\"phase\":\"port-preflight\",\"attempt\":0,\"port\":62436,\"connected\":false,\"error\":{\"name\":\"Error\",\"message\":\"connect ECONNREFUSED 127.0.0.1:62436\",\"code\":\"ECONNREFUSED\",\"address\":\"127.0.0.1\",\"port\":62436}}"
+      ]
+    }
+  ]
+}

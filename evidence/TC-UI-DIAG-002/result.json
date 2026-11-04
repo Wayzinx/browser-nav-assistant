@@ -1,0 +1,55 @@
+{
+  "caseId": "TC-UI-DIAG-002",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:06.647Z",
+  "tests": [
+    {
+      "testId": "c939170429c067216bb9-1d71024fae57eaa99398",
+      "title": "TC-UI-DIAG-002 后端不可达时「后端服务连接」失败，显示「连接被拒绝」并给出 4 条排查步骤（第 1 条含 ./scripts/start.sh）",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-DIAG-002.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 861,
+      "startedAt": "2026-11-04T03:28:05.786Z",
+      "endedAt": "2026-11-04T03:28:06.647Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-DIAG-002/screenshots/01-S2-后端不可达诊断.png"
+      ],
+      "serverLogLines": 3,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1054,
+          "after": 1054
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 2,
+      "notes": []
+    }
+  ]
+}

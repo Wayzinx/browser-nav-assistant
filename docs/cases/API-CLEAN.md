@@ -1,0 +1,494 @@
+# 接口用例：CLEAN
+
+执行约定：每条用例前测试夹具自动调用 `POST /api/__test__/reset` 隔离状态；数据一律通过真实的 `POST /api/sync` / `POST /api/rules` / `POST /api/pages/important` 构造；样例按 D-01 平移（最新一条 = T − 5 分钟），整理建议一律带 `?now=T` 固定时间。后端生成的 id 一律取响应值，不写死。
+
+## CLEAN 旧页面与重复页面整理（后端接口）
+
+### TC-API-CLEAN-001 导入 resource.json 样例且无规则：整理建议 summary 为 archive 2 / merge 1 / keep 0，字段完整、按 archive→merge 排序
+- 优先级：P0 ｜ 类别：positive ｜ 技术：equivalence
+- 关联 Feature：F-CLEAN-01（AC1）、F-CLEAN-02（AC1）、F-CLEAN-03（AC1） ｜ 关联 Code：C-BE-CLEAN-04、C-BE-CLEAN-03、C-BE-CLEAN-01、C-BE-CLEAN-02、C-BE-CORE-07
+- 前置条件：后端以 ENABLE_TEST_API=1 启动，测试夹具已调用 POST /api/__test__/reset；没有任何规则
+- 测试数据：样例：tests/fixtures/sample.mjs 的 samplePayload({ now: T })，T 为用例开始时取的 Date.now()（D-01：最新一条 = T − 5 分钟），经 POST /api/sync 导入：received=14、created=10、pageCount=10（PRD 13.2）；平移后距 T 的未访问时长（PRD 13.2）：Google 搜索页 35.88 天 → ageDays=35；issues/100 24.31 天 → ageDays=24；docs.internal.com/ai-agent-design 6.95 天（且打开中）→ 不归档；判重：issues/123 与 issues/123?tab=comments 去掉无语义 query 后相同（PRD 13.5）
+- 步骤：
+  - S1：POST /api/sync 导入平移后的样例
+  - S2：GET /api/pages/cleanup-suggestions?now=T
+- 预期：
+  - E1：S1 返回 200，body.created=10、body.pageCount=10
+  - E2：S2 返回 200，body.summary 深等于 { archive: 2, merge: 1, keep: 0 }，body.suggestions.length=3
+  - E3：S2 的 suggestions 中 action 依次为 ["archive","archive","merge"]（archive 按 ageDays 降序：35 在 24 之前）
+  - E4：每个 archive 项都含 key（以 "archive:" 开头）、url、title、reason、ageDays（整数）、lastVisitedAt（数字）字段，ruleId=null
+  - E5：merge 项含 key（以 "merge:" 开头）、urls（长度 2 的数组）、titles（长度 2 的数组）、keepUrl、reason 字段
+  - E6：S2 的 body.thresholdDays=14，body.generatedAt=T
+- 证据：evidence/TC-API-CLEAN-001/（api: S2 响应（cleanup-suggestions 全文））
+
+### TC-API-CLEAN-002 后端数据为空：整理建议返回 200，suggestions=[]，summary 三项均为 0
+- 优先级：P1 ｜ 类别：boundary ｜ 技术：boundary
+- 关联 Feature：F-CLEAN-01（AC2） ｜ 关联 Code：C-BE-CLEAN-04、C-BE-CLEAN-03
+- 前置条件：后端已 reset，不导入任何数据
+- 测试数据：空库（页面 0、规则 0），不带 ?now=
+- 步骤：
+  - S1：GET /api/health
+  - S2：GET /api/pages/cleanup-suggestions
+- 预期：
+  - E1：S1 返回 200，body.pageCount=0、body.ruleCount=0
+  - E2：S2 返回 200，body.suggestions 深等于 []
+  - E3：S2 的 body.summary 深等于 { archive: 0, merge: 0, keep: 0 }，body.thresholdDays=14
+- 证据：evidence/TC-API-CLEAN-002/（api: S2 响应）
+
+### TC-API-CLEAN-003 ?now= 不是正整数毫秒（abc / 0 / -5 / 1.5）：返回 400 VALIDATION_FAILED，且不影响数据
+- 优先级：P1 ｜ 类别：negative ｜ 技术：equivalence
+- 关联 Feature：F-CLEAN-01（AC1） ｜ 关联 Code：C-BE-CLEAN-04
+- 前置条件：后端已 reset
+- 测试数据：样例：tests/fixtures/sample.mjs 的 samplePayload({ now: T })，T 为用例开始时取的 Date.now()（D-01：最新一条 = T − 5 分钟），经 POST /api/sync 导入：received=14、created=10、pageCount=10（PRD 13.2）；非法 now 取 4 个等价类代表：非数字 abc、0、负数 -5、小数 1.5（契约：?now= 必须是正整数毫秒时间戳）
+- 步骤：
+  - S1：POST /api/sync 导入平移后的样例
+  - S2：依次请求 GET /api/pages/cleanup-suggestions?now=abc、?now=0、?now=-5、?now=1.5
+  - S3：GET /api/pages/cleanup-suggestions?now=T
+  - S4：GET /api/health
+- 预期：
+  - E1：S2 的 4 次请求都返回 400，body.error.code="VALIDATION_FAILED"，body.error.message 为非空字符串
+  - E2：S2 的 4 次响应 body.error.details.fields 都包含 "now"
+  - E3：S3 返回 200，body.summary 深等于 { archive: 2, merge: 1, keep: 0 }（非法请求没有副作用）
+  - E4：S4 的 body.pageCount=10
+- 证据：evidence/TC-API-CLEAN-003/（api: S2 的 4 个错误响应）
+
+### TC-API-CLEAN-004 用不支持的方法 POST 整理建议接口：返回 405 METHOD_NOT_ALLOWED 且带 Allow 头，随后 GET 仍正常返回
+- 优先级：P2 ｜ 类别：exception ｜ 技术：error-guessing
+- 关联 Feature：F-CLEAN-01（AC1） ｜ 关联 Code：C-BE-CLEAN-04
+- 前置条件：后端已 reset
+- 测试数据：样例：tests/fixtures/sample.mjs 的 samplePayload({ now: T })，T 为用例开始时取的 Date.now()（D-01：最新一条 = T − 5 分钟），经 POST /api/sync 导入：received=14、created=10、pageCount=10（PRD 13.2）；契约 common.errorCodes：路径存在但方法不支持 → 405 METHOD_NOT_ALLOWED（带 Allow 头）
+- 步骤：
+  - S1：POST /api/sync 导入平移后的样例
+  - S2：POST /api/pages/cleanup-suggestions，Content-Type: application/json，请求体 {}
+  - S3：GET /api/pages/cleanup-suggestions?now=T
+- 预期：
+  - E1：S2 返回 405，body.error.code="METHOD_NOT_ALLOWED"，body.error.message 为非空字符串
+  - E2：S2 的响应头 allow 包含 "GET"
+  - E3：S3 返回 200，body.summary 深等于 { archive: 2, merge: 1, keep: 0 }
+- 证据：evidence/TC-API-CLEAN-004/（api: S2 响应（含响应头））
+
+### TC-API-CLEAN-005 默认阈值 14 天：样例中只有 Google 搜索页（35 天）和 issues/100（24 天）被建议归档，理由写明阈值与天数
+- 优先级：P0 ｜ 类别：positive ｜ 技术：equivalence
+- 关联 Feature：F-CLEAN-02（AC1） ｜ 关联 Code：C-BE-CLEAN-01、C-BE-CLEAN-03、C-BE-CORE-07
+- 前置条件：后端已 reset；没有任何规则
+- 测试数据：样例：tests/fixtures/sample.mjs 的 samplePayload({ now: T })，T 为用例开始时取的 Date.now()（D-01：最新一条 = T − 5 分钟），经 POST /api/sync 导入：received=14、created=10、pageCount=10（PRD 13.2）；平移后距 T 的未访问时长（PRD 13.2）：Google 搜索页 35.88 天 → ageDays=35；issues/100 24.31 天 → ageDays=24；docs.internal.com/ai-agent-design 6.95 天（且打开中）→ 不归档；lastVisitedAt 期望值用 shiftedTime(url, T) 计算
+- 步骤：
+  - S1：POST /api/sync 导入平移后的样例
+  - S2：GET /api/pages/cleanup-suggestions?now=T，取 action="archive" 的项
+- 预期：
+  - E1：archive 项的 url 集合恰好为 { "https://www.google.com/search?q=chrome+extension+manifest+v3", "https://github.com/org/repo/issues/100" }（共 2 项）
+  - E2：Google 搜索页项 ageDays=35，reason="超过 14 天未访问（已 35 天），且不在当前打开的 tab 中"，lastVisitedAt=shiftedTime(Google, T)
+  - E3：issues/100 项 ageDays=24，reason="超过 14 天未访问（已 24 天），且不在当前打开的 tab 中"，lastVisitedAt=shiftedTime(issues/100, T)
+  - E4：两项的 ruleId 都为 null；"https://docs.internal.com/ai-agent-design"（6 天且打开中）不在 archive 中
+- 证据：evidence/TC-API-CLEAN-005/（api: S2 响应）
+
+### TC-API-CLEAN-006 20 天前访问但当前仍打开的页面不进 archive；关闭（下次同步不在 openTabs）后才进 archive，ageDays=20
+- 优先级：P1 ｜ 类别：negative ｜ 技术：decision-table
+- 关联 Feature：F-CLEAN-02（AC2） ｜ 关联 Code：C-BE-CLEAN-01、C-BE-CORE-07
+- 前置条件：后端已 reset；没有任何规则
+- 测试数据：T = 用例开始时 Date.now()；第 1 次同步：activeTab=null，openTabs=[{ url:"https://example.com/open", title:"open", lastAccessed: T − 20 天 }]，history=[{ url:"https://example.com/open", title:"open", lastVisitTime: T − 20 天, visitCount: 1 }]；第 2 次同步：openTabs=[]，history 同上（isOpen 按快照刷新为 false）
+- 步骤：
+  - S1：POST /api/sync（第 1 次，页面打开中）
+  - S2：GET /api/pages/cleanup-suggestions?now=T
+  - S3：POST /api/sync（第 2 次，openTabs=[]）
+  - S4：GET /api/pages/cleanup-suggestions?now=T
+- 预期：
+  - E1：S1 返回 200，body.created=1
+  - E2：S2 中没有 url="https://example.com/open" 的 archive 项，也没有该 url 的 keep 项；body.summary.archive=0
+  - E3：S4 中有 url="https://example.com/open" 的 archive 项，ageDays=20，reason="超过 14 天未访问（已 20 天），且不在当前打开的 tab 中"
+- 证据：evidence/TC-API-CLEAN-006/（api: S2、S4 响应）
+
+### TC-API-CLEAN-007 默认阈值边界：未访问 14 天 23 小时 / 15 天 − 1 毫秒不归档，恰好 15 天归档且 ageDays=15
+- 优先级：P1 ｜ 类别：boundary ｜ 技术：boundary
+- 关联 Feature：F-CLEAN-02（AC3） ｜ 关联 Code：C-BE-CLEAN-01、C-BE-CLEAN-03、C-BE-CORE-07
+- 前置条件：后端已 reset；没有任何规则
+- 测试数据：L = Date.now() − 20 天（取整毫秒）；history=[{ url:"https://example.com/old", title:"old", lastVisitTime: L, visitCount: 1 }]，openTabs=[]，activeTab=null。D-20：未访问天数向下取整，整天数 > 14 才归档；用 ?now= 固定时间（契约 nowOverride），三个时间点：N1 = L + 14 天 23 小时；N2 = L + 15 天 − 1 ms；N3 = L + 15 天
+- 步骤：
+  - S1：POST /api/sync 导入 example.com/old
+  - S2：GET /api/pages/cleanup-suggestions?now=N1
+  - S3：GET /api/pages/cleanup-suggestions?now=N2
+  - S4：GET /api/pages/cleanup-suggestions?now=N3
+- 预期：
+  - E1：S2 中没有 url="https://example.com/old" 的 archive 项，body.summary.archive=0
+  - E2：S3 中没有 url="https://example.com/old" 的 archive 项，body.summary.archive=0
+  - E3：S4 中有 url="https://example.com/old" 的 archive 项，ageDays=15，body.summary.archive=1
+  - E4：S4 该项 reason="超过 14 天未访问（已 15 天），且不在当前打开的 tab 中"，ruleId=null
+- 证据：evidence/TC-API-CLEAN-007/（api: S2、S3、S4 响应）
+
+### TC-API-CLEAN-008 样例中 issues/123 与 issues/123?tab=comments 判为重复：恰好 1 条 merge，keepUrl 为不带 query 的 URL
+- 优先级：P0 ｜ 类别：positive ｜ 技术：equivalence
+- 关联 Feature：F-CLEAN-03（AC1） ｜ 关联 Code：C-BE-CLEAN-02、C-BE-CORE-09
+- 前置条件：后端已 reset
+- 测试数据：样例：tests/fixtures/sample.mjs 的 samplePayload({ now: T })，T 为用例开始时取的 Date.now()（D-01：最新一条 = T − 5 分钟），经 POST /api/sync 导入：received=14、created=10、pageCount=10（PRD 13.2）；判重 key = host + path + 有语义的 query（q、query、wd、keyword、search、v、id），tab 不是语义参数；keepUrl 取组内最短 URL（PRD 6.5）
+- 步骤：
+  - S1：POST /api/sync 导入平移后的样例
+  - S2：GET /api/pages/cleanup-suggestions?now=T，取 action="merge" 的项
+- 预期：
+  - E1：merge 项恰好 1 条，body.summary.merge=1
+  - E2：该项 urls 排序后深等于 ["https://github.com/org/repo/issues/123", "https://github.com/org/repo/issues/123?tab=comments"]
+  - E3：该项 keepUrl="https://github.com/org/repo/issues/123"
+  - E4：该项 reason="去掉 query 参数后 URL 相同，疑似重复页面"
+  - E5：该项 titles 包含 "Fix login redirect bug" 和 "Fix login redirect bug - Comments"
+- 证据：evidence/TC-API-CLEAN-008/（api: S2 响应）
+
+### TC-API-CLEAN-009 同一页面 3 个 query 变体（doc、doc?tab=a、doc?tab=b）合并为 1 组 merge，urls 含 3 项，keepUrl 为最短 URL
+- 优先级：P1 ｜ 类别：boundary ｜ 技术：boundary
+- 关联 Feature：F-CLEAN-03（AC2） ｜ 关联 Code：C-BE-CLEAN-02、C-BE-CORE-09
+- 前置条件：后端已 reset
+- 测试数据：T = Date.now()；history 3 条（都在 1 小时内访问，避免触发归档）：{ url:"https://example.com/doc", lastVisitTime: T − 1 小时 }、{ url:"https://example.com/doc?tab=a", lastVisitTime: T − 2 小时 }、{ url:"https://example.com/doc?tab=b", lastVisitTime: T − 3 小时 }，visitCount 均为 1，openTabs=[]
+- 步骤：
+  - S1：POST /api/sync 导入 3 条 history
+  - S2：GET /api/pages/cleanup-suggestions?now=T
+- 预期：
+  - E1：S1 返回 200，body.created=3（3 个 normalizedUrl 不同，入库为 3 个页面）
+  - E2：S2 的 body.summary 深等于 { archive: 0, merge: 1, keep: 0 }
+  - E3：唯一的 merge 项 urls.length=3，排序后深等于 ["https://example.com/doc", "https://example.com/doc?tab=a", "https://example.com/doc?tab=b"]
+  - E4：该 merge 项 keepUrl="https://example.com/doc"，reason="去掉 query 参数后 URL 相同，疑似重复页面"
+- 证据：evidence/TC-API-CLEAN-009/（api: S2 响应）
+
+### TC-API-CLEAN-010 q 参数不同的两个 Google 搜索页不判为重复：没有同时包含二者的 merge
+- 优先级：P1 ｜ 类别：negative ｜ 技术：error-guessing
+- 关联 Feature：F-CLEAN-03（AC3） ｜ 关联 Code：C-BE-CLEAN-02、C-BE-CORE-09
+- 前置条件：后端已 reset
+- 测试数据：T = Date.now()；history 2 条：{ url:"https://www.google.com/search?q=a", lastVisitTime: T − 1 小时 }、{ url:"https://www.google.com/search?q=b", lastVisitTime: T − 2 小时 }，visitCount 均为 1；q 属于有语义的 query，参与判重 key（F-CLEAN-03 描述）
+- 步骤：
+  - S1：POST /api/sync 导入 2 条 history
+  - S2：GET /api/pages/cleanup-suggestions?now=T
+- 预期：
+  - E1：S1 返回 200，body.created=2
+  - E2：S2 中不存在 urls 同时包含 "https://www.google.com/search?q=a" 和 "https://www.google.com/search?q=b" 的 merge 项
+  - E3：S2 的 body.summary.merge=0，body.summary.archive=0
+- 证据：evidence/TC-API-CLEAN-010/（api: S2 响应）
+
+### TC-API-CLEAN-011 保存 never_archive（docs.internal.com）后：样例输出 1 条 keep，ruleId 为保存返回的 id，summary 为 2/1/1
+- 优先级：P0 ｜ 类别：positive ｜ 技术：equivalence
+- 关联 Feature：F-CLEAN-04（AC1） ｜ 关联 Code：C-BE-CLEAN-01、C-BE-CLEAN-03、C-BE-CORE-13
+- 前置条件：后端已 reset
+- 测试数据：样例：tests/fixtures/sample.mjs 的 samplePayload({ now: T })，T 为用例开始时取的 Date.now()（D-01：最新一条 = T − 5 分钟），经 POST /api/sync 导入：received=14、created=10、pageCount=10（PRD 13.2）；规则②（docs.internal 保护）：{ rawText:"docs.internal.com 的页面永远不要归档", type:"never_archive", domain:"docs.internal.com", action:"keep" }；PRD 13.5：keep 理由为「被保护域名配置（docs.internal.com），不建议归档，虽已 6 天未访问」；D-06：打开中的受保护页面也输出 keep
+- 步骤：
+  - S1：POST /api/sync 导入平移后的样例
+  - S2：POST /api/rules，请求体 { rules: [规则②] }，记录返回的 rules[0].id 为 ID2
+  - S3：GET /api/pages/cleanup-suggestions?now=T
+- 预期：
+  - E1：S2 返回 201，body.ruleCount=1，body.rules[0].id 为非空字符串
+  - E2：S3 的 body.summary 深等于 { archive: 2, merge: 1, keep: 1 }
+  - E3：唯一的 keep 项 url="https://docs.internal.com/ai-agent-design"，reason 包含「被保护域名配置（docs.internal.com）」，ruleId=ID2
+  - E4：archive 项中没有 url="https://docs.internal.com/ai-agent-design"
+- 证据：evidence/TC-API-CLEAN-011/（api: S2、S3 响应）
+
+### TC-API-CLEAN-012 never_archive 保护 30 天未访问且未打开的页面：docs.internal.com/old 出现在 keep，不出现在 archive
+- 优先级：P1 ｜ 类别：positive ｜ 技术：equivalence
+- 关联 Feature：F-CLEAN-04（AC2） ｜ 关联 Code：C-BE-CLEAN-01、C-BE-CLEAN-03
+- 前置条件：后端已 reset
+- 测试数据：T = Date.now()；规则②（docs.internal 保护）：{ rawText:"docs.internal.com 的页面永远不要归档", type:"never_archive", domain:"docs.internal.com", action:"keep" }；history=[{ url:"https://docs.internal.com/old", title:"old doc", lastVisitTime: T − 30 天, visitCount: 1 }]，openTabs=[]（若没有规则，30 > 14 会被归档）
+- 步骤：
+  - S1：POST /api/sync 导入 docs.internal.com/old
+  - S2：POST /api/rules 保存规则②，记录返回的 id 为 ID2
+  - S3：GET /api/pages/cleanup-suggestions?now=T
+- 预期：
+  - E1：S3 中有 url="https://docs.internal.com/old" 的 keep 项，ruleId=ID2，reason 包含「被保护域名配置（docs.internal.com）」
+  - E2：S3 的 archive 项中没有 url="https://docs.internal.com/old"
+  - E3：S3 的 body.summary 深等于 { archive: 0, merge: 0, keep: 1 }
+- 证据：evidence/TC-API-CLEAN-012/（api: S3 响应）
+
+### TC-API-CLEAN-013 域名匹配边界：规则 internal.com 保护子域 docs.internal.com，但不保护只是后缀相同的 notinternal.com
+- 优先级：P1 ｜ 类别：boundary ｜ 技术：boundary
+- 关联 Feature：F-CLEAN-04（AC3） ｜ 关联 Code：C-BE-CLEAN-01、C-BE-CORE-13
+- 前置条件：后端已 reset
+- 测试数据：T = Date.now()；规则④（internal.com 保护）：{ rawText:"internal.com 的页面永远不要归档", type:"never_archive", domain:"internal.com", action:"keep" }；history 2 条（都未打开、30 天前访问）：{ url:"https://docs.internal.com/old", lastVisitTime: T − 30 天 }、{ url:"https://notinternal.com/old", lastVisitTime: T − 30 天 }；匹配规则：页面域名等于规则域名或以「.规则域名」结尾（PRD 6.5）
+- 步骤：
+  - S1：POST /api/sync 导入 2 条 history
+  - S2：POST /api/rules 保存规则④
+  - S3：GET /api/pages/cleanup-suggestions?now=T
+- 预期：
+  - E1：S3 中有 url="https://docs.internal.com/old" 的 keep 项，且它不在 archive 中
+  - E2：S3 中有 url="https://notinternal.com/old" 的 archive 项，ageDays=30，且它不在 keep 中
+  - E3：S3 的 body.summary 深等于 { archive: 1, merge: 0, keep: 1 }
+- 证据：evidence/TC-API-CLEAN-013/（api: S3 响应）
+
+### TC-API-CLEAN-014 已禁用（enabled=false）的 never_archive 规则不生效：30 天未访问的受保护域名页面仍进入 archive
+- 优先级：P1 ｜ 类别：negative ｜ 技术：error-guessing
+- 关联 Feature：F-CLEAN-04（AC2） ｜ 关联 Code：C-BE-CLEAN-01、C-BE-CORE-13
+- 前置条件：后端已 reset
+- 测试数据：T = Date.now()；规则②但 enabled:false；history=[{ url:"https://docs.internal.com/old", lastVisitTime: T − 30 天, visitCount: 1 }]，openTabs=[]
+- 步骤：
+  - S1：POST /api/sync 导入 docs.internal.com/old
+  - S2：POST /api/rules，请求体 { rules: [{ ...规则②, enabled: false }] }
+  - S3：GET /api/pages/cleanup-suggestions?now=T
+- 预期：
+  - E1：S2 返回 201，body.rules[0].enabled=false
+  - E2：S3 的 keep 项中没有 url="https://docs.internal.com/old"，body.summary.keep=0
+  - E3：S3 中有 url="https://docs.internal.com/old" 的 archive 项，ageDays=30，ruleId=null
+- 证据：evidence/TC-API-CLEAN-014/（api: S2、S3 响应）
+
+### TC-API-CLEAN-015 保存「7 天 GitHub issue 归档」规则后：issues/100 理由改为 7 天并引用规则原文，ruleId 为保存返回的 id
+- 优先级：P0 ｜ 类别：positive ｜ 技术：equivalence
+- 关联 Feature：F-CLEAN-05（AC1） ｜ 关联 Code：C-BE-CLEAN-01、C-BE-CLEAN-03
+- 前置条件：后端已 reset
+- 测试数据：样例：tests/fixtures/sample.mjs 的 samplePayload({ now: T })，T 为用例开始时取的 Date.now()（D-01：最新一条 = T − 5 分钟），经 POST /api/sync 导入：received=14、created=10、pageCount=10（PRD 13.2）；规则①（7 天 issue 归档）：{ rawText:"把 7 天没访问过的 GitHub issue 建议归档", type:"archive_candidate", domain:"github.com", urlPattern:"/issues/", inactiveDays:7, action:"suggest_archive" }；PRD 13.5：issues/100 reason=「超过 7 天未访问（已 24 天），且不在当前打开的 tab 中；命中规则「把 7 天没访问过的 GitHub issue 建议归档」」；Google 搜索页不匹配规则，仍走默认阈值
+- 步骤：
+  - S1：POST /api/sync 导入平移后的样例
+  - S2：POST /api/rules 保存规则①，记录返回的 rules[0].id 为 ID1
+  - S3：GET /api/pages/cleanup-suggestions?now=T
+- 预期：
+  - E1：S3 中 url="https://github.com/org/repo/issues/100" 的 archive 项 reason="超过 7 天未访问（已 24 天），且不在当前打开的 tab 中；命中规则「把 7 天没访问过的 GitHub issue 建议归档」"
+  - E2：该项 ruleId=ID1，ageDays=24
+  - E3：url="https://www.google.com/search?q=chrome+extension+manifest+v3" 的 archive 项 reason="超过 14 天未访问（已 35 天），且不在当前打开的 tab 中"，ruleId=null
+  - E4：S3 的 body.summary 深等于 { archive: 2, merge: 1, keep: 0 }
+- 证据：evidence/TC-API-CLEAN-015/（api: S2、S3 响应）
+
+### TC-API-CLEAN-016 规则区分度：10 天前的 issues/87 无规则时不归档，保存 7 天规则后归档（ageDays=10），删除规则后又消失
+- 优先级：P0 ｜ 类别：positive ｜ 技术：state-transition
+- 关联 Feature：F-CLEAN-05（AC2） ｜ 关联 Code：C-BE-CLEAN-01、C-BE-CLEAN-03
+- 前置条件：后端已 reset
+- 测试数据：样例：tests/fixtures/sample.mjs 的 samplePayload({ now: T })，T 为用例开始时取的 Date.now()（D-01：最新一条 = T − 5 分钟），经 POST /api/sync 导入：received=14、created=10、pageCount=10（PRD 13.2），并在 transform 中向 history 追加 { url:"https://github.com/org/repo/issues/87", title:"Issue 87", lastVisitTime: 1709236000000（= 样例最新一条 − 10 天，平移后为 T − 5 分钟 − 10 天）, visitCount: 1 }，因此 created=11；规则①（7 天 issue 归档）：{ rawText:"把 7 天没访问过的 GitHub issue 建议归档", type:"archive_candidate", domain:"github.com", urlPattern:"/issues/", inactiveDays:7, action:"suggest_archive" }
+- 步骤：
+  - S1：POST /api/sync 导入追加了 issues/87 的样例
+  - S2：GET /api/pages/cleanup-suggestions?now=T
+  - S3：POST /api/rules 保存规则①，记录返回的 id 为 ID1
+  - S4：GET /api/pages/cleanup-suggestions?now=T
+  - S5：DELETE /api/rules/ID1
+  - S6：GET /api/pages/cleanup-suggestions?now=T
+- 预期：
+  - E1：S1 返回 200，body.created=11、body.pageCount=11
+  - E2：S2 的 archive 项中没有 url="https://github.com/org/repo/issues/87"（10 天 ≤ 默认阈值 14 天）
+  - E3：S4 中有 url="https://github.com/org/repo/issues/87" 的 archive 项，ageDays=10，ruleId=ID1，reason 以「超过 7 天未访问（已 10 天）」开头
+  - E4：S4 的 body.summary.archive=3
+  - E5：S6 的 archive 项中没有 issues/87，body.summary.archive=2
+- 证据：evidence/TC-API-CLEAN-016/（api: S2、S4、S6 响应）
+
+### TC-API-CLEAN-017 规则阈值边界：同时有 7 天和 10 天两条 issue 规则时取最小 7 天；未访问 8 天归档，7 天 23 小时不归档
+- 优先级：P1 ｜ 类别：boundary ｜ 技术：boundary
+- 关联 Feature：F-CLEAN-05（AC3） ｜ 关联 Code：C-BE-CLEAN-01、C-BE-CLEAN-03
+- 前置条件：后端已 reset
+- 测试数据：T = Date.now()；规则①（7 天 issue 归档）：{ rawText:"把 7 天没访问过的 GitHub issue 建议归档", type:"archive_candidate", domain:"github.com", urlPattern:"/issues/", inactiveDays:7, action:"suggest_archive" }；规则⑤（10 天 issue 归档）：{ rawText:"把 10 天没访问过的 GitHub issue 建议归档", type:"archive_candidate", domain:"github.com", urlPattern:"/issues/", inactiveDays:10, action:"suggest_archive" }；history 2 条（都未打开）：{ url:"https://github.com/org/repo/issues/88", lastVisitTime: T − 8 天 }、{ url:"https://github.com/org/repo/issues/89", lastVisitTime: T − 7 天 − 23 小时 }；D-20：整天数（向下取整）> 阈值才归档，7 天 23 小时取整为 7
+- 步骤：
+  - S1：POST /api/sync 导入 2 条 history
+  - S2：POST /api/rules，请求体 { rules: [规则①, 规则⑤] }，按 inactiveDays 记录返回的 id：ID7、ID10
+  - S3：GET /api/pages/cleanup-suggestions?now=T
+- 预期：
+  - E1：S3 中有 url="https://github.com/org/repo/issues/88" 的 archive 项，ageDays=8
+  - E2：该项 reason="超过 7 天未访问（已 8 天），且不在当前打开的 tab 中；命中规则「把 7 天没访问过的 GitHub issue 建议归档」"，ruleId=ID7（不等于 ID10）
+  - E3：S3 的 archive 项中没有 url="https://github.com/org/repo/issues/89"
+  - E4：S3 的 body.summary.archive=1
+- 证据：evidence/TC-API-CLEAN-017/（api: S2、S3 响应）
+
+### TC-API-CLEAN-018 archive_candidate 规则不匹配的页面不受影响：github.com 的 PR 与 gitlab.com 的 issue（10 天）都不归档
+- 优先级：P1 ｜ 类别：negative ｜ 技术：equivalence
+- 关联 Feature：F-CLEAN-05（AC2） ｜ 关联 Code：C-BE-CLEAN-01
+- 前置条件：后端已 reset
+- 测试数据：T = Date.now()；规则①（7 天 issue 归档）：{ rawText:"把 7 天没访问过的 GitHub issue 建议归档", type:"archive_candidate", domain:"github.com", urlPattern:"/issues/", inactiveDays:7, action:"suggest_archive" }；history 2 条（都未打开、10 天前访问）：{ url:"https://github.com/org/repo/pull/77" }（urlPattern "/issues/" 不匹配）、{ url:"https://gitlab.com/org/repo/issues/77" }（domain 不匹配）；10 天 ≤ 默认阈值 14 天
+- 步骤：
+  - S1：POST /api/sync 导入 2 条 history
+  - S2：POST /api/rules 保存规则①
+  - S3：GET /api/pages/cleanup-suggestions?now=T
+- 预期：
+  - E1：S3 的 archive 项中没有 url="https://github.com/org/repo/pull/77"
+  - E2：S3 的 archive 项中没有 url="https://gitlab.com/org/repo/issues/77"
+  - E3：S3 的 body.summary 深等于 { archive: 0, merge: 0, keep: 0 }
+- 证据：evidence/TC-API-CLEAN-018/（api: S3 响应）
+
+### TC-API-CLEAN-019 同时保存 7 天 issue 归档与 github.com 永不归档：issues/100 进入 keep 而不在 archive（never_archive 优先）
+- 优先级：P0 ｜ 类别：positive ｜ 技术：decision-table
+- 关联 Feature：F-CLEAN-06（AC1） ｜ 关联 Code：C-BE-CLEAN-01、C-BE-CLEAN-03
+- 前置条件：后端已 reset
+- 测试数据：样例：tests/fixtures/sample.mjs 的 samplePayload({ now: T })，T 为用例开始时取的 Date.now()（D-01：最新一条 = T − 5 分钟），经 POST /api/sync 导入：received=14、created=10、pageCount=10（PRD 13.2）；规则①（7 天 issue 归档）：{ rawText:"把 7 天没访问过的 GitHub issue 建议归档", type:"archive_candidate", domain:"github.com", urlPattern:"/issues/", inactiveDays:7, action:"suggest_archive" }；规则③（github 保护）：{ rawText:"github.com 永远不要归档", type:"never_archive", domain:"github.com", action:"keep" }；判定顺序（D-24）：never_archive > 标记为重要 > 当前打开 > archive_candidate > 默认阈值
+- 步骤：
+  - S1：POST /api/sync 导入平移后的样例
+  - S2：POST /api/rules，请求体 { rules: [规则①, 规则③] }，记录规则③的 id 为 ID3
+  - S3：GET /api/pages/cleanup-suggestions?now=T
+- 预期：
+  - E1：S3 中有 url="https://github.com/org/repo/issues/100" 的 keep 项，ruleId=ID3，reason 包含「被保护域名配置（github.com）」
+  - E2：S3 的 archive 项中没有 url="https://github.com/org/repo/issues/100"
+  - E3：url="https://www.google.com/search?q=chrome+extension+manifest+v3" 仍是 archive 项，ageDays=35
+- 证据：evidence/TC-API-CLEAN-019/（api: S3 响应）
+
+### TC-API-CLEAN-020 命中 7 天 issue 规则但当前仍打开的 issues/90（20 天）：既不在 archive 也不在 keep
+- 优先级：P1 ｜ 类别：negative ｜ 技术：decision-table
+- 关联 Feature：F-CLEAN-06（AC2） ｜ 关联 Code：C-BE-CLEAN-01
+- 前置条件：后端已 reset
+- 测试数据：T = Date.now()；规则①（7 天 issue 归档）：{ rawText:"把 7 天没访问过的 GitHub issue 建议归档", type:"archive_candidate", domain:"github.com", urlPattern:"/issues/", inactiveDays:7, action:"suggest_archive" }；同步：activeTab=null，openTabs=[{ url:"https://github.com/org/repo/issues/90", title:"Issue 90", lastAccessed: T − 20 天 }]，history=[{ url:"https://github.com/org/repo/issues/90", title:"Issue 90", lastVisitTime: T − 20 天, visitCount: 1 }]
+- 步骤：
+  - S1：POST /api/sync 导入打开中的 issues/90
+  - S2：POST /api/rules 保存规则①
+  - S3：GET /api/pages/cleanup-suggestions?now=T
+- 预期：
+  - E1：S3 的 archive 项中没有 url="https://github.com/org/repo/issues/90"
+  - E2：S3 的 keep 项中没有 url="https://github.com/org/repo/issues/90"
+  - E3：S3 的 body.summary 深等于 { archive: 0, merge: 0, keep: 0 }
+- 证据：evidence/TC-API-CLEAN-020/（api: S3 响应）
+
+### TC-API-CLEAN-021 30 天前访问的页面标记为重要后进入 keep（理由「你已标记为重要，不建议归档」），取消标记后回到 archive
+- 优先级：P0 ｜ 类别：positive ｜ 技术：state-transition
+- 关联 Feature：F-CLEAN-06（AC3） ｜ 关联 Code：C-BE-CLEAN-01、C-BE-CLEAN-03
+- 前置条件：后端已 reset
+- 测试数据：T = Date.now()；history=[{ url:"https://example.com/important", title:"important", lastVisitTime: T − 30 天, visitCount: 1 }]，openTabs=[]；标记接口 POST /api/pages/important（F-MENU-01，契约 { url, important? }）
+- 步骤：
+  - S1：POST /api/sync 导入 example.com/important
+  - S2：GET /api/pages/cleanup-suggestions?now=T
+  - S3：POST /api/pages/important，请求体 { url:"https://example.com/important", important: true }
+  - S4：GET /api/pages/cleanup-suggestions?now=T
+  - S5：POST /api/pages/important，请求体 { url:"https://example.com/important", important: false }
+  - S6：GET /api/pages/cleanup-suggestions?now=T
+- 预期：
+  - E1：S2 中有 url="https://example.com/important" 的 archive 项，ageDays=30
+  - E2：S3 返回 200，body.isImportant=true，body.created=false
+  - E3：S4 中有 url="https://example.com/important" 的 keep 项，reason="你已标记为重要，不建议归档"，ruleId=null
+  - E4：S4 的 archive 项中没有该 url，body.summary 深等于 { archive: 0, merge: 0, keep: 1 }
+  - E5：S6 中该 url 回到 archive（ageDays=30），keep 项中没有它
+- 证据：evidence/TC-API-CLEAN-021/（api: S2、S4、S6 响应）
+
+### TC-API-CLEAN-022 判定顺序相邻层交界：同时受保护且重要时理由取 never_archive；重要且打开中时仍输出重要 keep
+- 优先级：P1 ｜ 类别：boundary ｜ 技术：decision-table
+- 关联 Feature：F-CLEAN-06（AC1、AC3） ｜ 关联 Code：C-BE-CLEAN-01、C-BE-CLEAN-03
+- 前置条件：后端已 reset
+- 测试数据：T = Date.now()；规则②（docs.internal 保护）：{ rawText:"docs.internal.com 的页面永远不要归档", type:"never_archive", domain:"docs.internal.com", action:"keep" }；同步：activeTab=null，openTabs=[{ url:"https://example.com/open-important", lastAccessed: T − 1 小时 }]，history=[{ url:"https://docs.internal.com/both", lastVisitTime: T − 30 天 }, { url:"https://example.com/open-important", lastVisitTime: T − 1 小时 }]，visitCount 均为 1；两个页面都通过 POST /api/pages/important 标记为重要。判定顺序（D-24）：① never_archive ② 标记为重要 ③ 当前打开，命中即停止
+- 步骤：
+  - S1：POST /api/sync 导入 2 个页面
+  - S2：POST /api/rules 保存规则②，记录返回的 id 为 ID2
+  - S3：POST /api/pages/important 分别标记 https://docs.internal.com/both 和 https://example.com/open-important
+  - S4：GET /api/pages/cleanup-suggestions?now=T
+- 预期：
+  - E1：S4 中 url="https://docs.internal.com/both" 的 keep 项 ruleId=ID2，reason 包含「被保护域名配置（docs.internal.com）」，不包含「你已标记为重要」
+  - E2：S4 中 url="https://example.com/open-important" 的 keep 项 reason="你已标记为重要，不建议归档"，ruleId=null
+  - E3：S4 的 body.summary 深等于 { archive: 0, merge: 0, keep: 2 }
+- 证据：evidence/TC-API-CLEAN-022/（api: S4 响应）
+
+### TC-API-CLEAN-023 归档 issues/100：返回 affected=1，并从整理建议、ranked 和推荐结果中消失
+- 优先级：P1 ｜ 类别：positive ｜ 技术：scenario
+- 关联 Feature：F-CLEAN-08（AC1） ｜ 关联 Code：C-BE-CLEAN-05
+- 前置条件：后端已 reset
+- 测试数据：样例：tests/fixtures/sample.mjs 的 samplePayload({ now: T })，T 为用例开始时取的 Date.now()（D-01：最新一条 = T − 5 分钟），经 POST /api/sync 导入：received=14、created=10、pageCount=10（PRD 13.2）；推荐请求体：{ currentPage: 样例 activeTab, openTabs: 样例 openTabs, recentHistory: 平移后的样例 history }
+- 步骤：
+  - S1：POST /api/sync 导入平移后的样例
+  - S2：POST /api/pages/archive，请求体 { urls: ["https://github.com/org/repo/issues/100"] }
+  - S3：GET /api/pages/cleanup-suggestions?now=T
+  - S4：GET /api/pages/ranked?limit=500
+  - S5：POST /api/recommendations/next（请求体见测试数据）
+  - S6：GET /api/health
+- 预期：
+  - E1：S2 返回 200，body.ok=true、body.affected=1、body.notFound=0，body.archivedAt 为数字
+  - E2：S3 的 archive 项中没有 url="https://github.com/org/repo/issues/100"，body.summary.archive=1
+  - E3：S4 的 pages 中没有 url="https://github.com/org/repo/issues/100"，body.total=9
+  - E4：S5 返回 200，body.recommendations 中没有 url="https://github.com/org/repo/issues/100"
+  - E5：S6 的 body.pageCount=10（归档页面仍计入总数）
+- 证据：evidence/TC-API-CLEAN-023/（api: S2–S5 响应）
+
+### TC-API-CLEAN-024 撤销归档 issues/100：unarchive 返回 affected=1，ranked 与整理建议中重新出现
+- 优先级：P1 ｜ 类别：positive ｜ 技术：state-transition
+- 关联 Feature：F-CLEAN-08（AC2） ｜ 关联 Code：C-BE-CLEAN-05
+- 前置条件：后端已 reset
+- 测试数据：样例：tests/fixtures/sample.mjs 的 samplePayload({ now: T })，T 为用例开始时取的 Date.now()（D-01：最新一条 = T − 5 分钟），经 POST /api/sync 导入：received=14、created=10、pageCount=10（PRD 13.2）
+- 步骤：
+  - S1：POST /api/sync 导入平移后的样例
+  - S2：POST /api/pages/archive，请求体 { urls: ["https://github.com/org/repo/issues/100"] }
+  - S3：POST /api/pages/unarchive，请求体 { urls: ["https://github.com/org/repo/issues/100"] }
+  - S4：GET /api/pages/ranked?limit=500
+  - S5：GET /api/pages/cleanup-suggestions?now=T
+- 预期：
+  - E1：S2 返回 200，body.affected=1
+  - E2：S3 返回 200，body.ok=true、body.affected=1、body.notFound=0
+  - E3：S4 的 pages 中重新出现 url="https://github.com/org/repo/issues/100"，body.total=10
+  - E4：S5 中有 url="https://github.com/org/repo/issues/100" 的 archive 项，ageDays=24，body.summary.archive=2
+- 证据：evidence/TC-API-CLEAN-024/（api: S3–S5 响应）
+
+### TC-API-CLEAN-025 合并 issues/123 重复组：merged=1，ranked 只保留 issues/123，整理建议不再有 merge
+- 优先级：P1 ｜ 类别：positive ｜ 技术：scenario
+- 关联 Feature：F-CLEAN-08（AC3） ｜ 关联 Code：C-BE-CLEAN-05
+- 前置条件：后端已 reset
+- 测试数据：样例：tests/fixtures/sample.mjs 的 samplePayload({ now: T })，T 为用例开始时取的 Date.now()（D-01：最新一条 = T − 5 分钟），经 POST /api/sync 导入：received=14、created=10、pageCount=10（PRD 13.2）
+- 步骤：
+  - S1：POST /api/sync 导入平移后的样例
+  - S2：POST /api/pages/merge，请求体 { urls: ["https://github.com/org/repo/issues/123", "https://github.com/org/repo/issues/123?tab=comments"], keepUrl: "https://github.com/org/repo/issues/123" }
+  - S3：GET /api/pages/ranked?limit=500
+  - S4：GET /api/pages/cleanup-suggestions?now=T
+- 预期：
+  - E1：S2 返回 200，body.ok=true、body.keepUrl="https://github.com/org/repo/issues/123"、body.merged=1
+  - E2：S3 的 pages 中有 url="https://github.com/org/repo/issues/123"，没有 url="https://github.com/org/repo/issues/123?tab=comments"，body.total=9
+  - E3：S4 的 body.summary.merge=0，没有 action="merge" 的项
+- 证据：evidence/TC-API-CLEAN-025/（api: S2–S4 响应）
+
+### TC-API-CLEAN-026 归档 / 撤销归档的非法输入：urls 为空、不是数组返回 400，全部不存在返回 404，且数据不变
+- 优先级：P1 ｜ 类别：negative ｜ 技术：equivalence
+- 关联 Feature：F-CLEAN-08（AC1、AC2） ｜ 关联 Code：C-BE-CLEAN-05
+- 前置条件：后端已 reset
+- 测试数据：样例：tests/fixtures/sample.mjs 的 samplePayload({ now: T })，T 为用例开始时取的 Date.now()（D-01：最新一条 = T − 5 分钟），经 POST /api/sync 导入：received=14、created=10、pageCount=10（PRD 13.2）；不存在的 URL：https://example.com/not-exist
+- 步骤：
+  - S1：POST /api/sync 导入平移后的样例
+  - S2：POST /api/pages/archive，请求体 { urls: [] }
+  - S3：POST /api/pages/archive，请求体 { urls: "https://github.com/org/repo/issues/100" }
+  - S4：POST /api/pages/archive，请求体 { urls: ["https://example.com/not-exist"] }
+  - S5：POST /api/pages/unarchive，请求体 { urls: ["https://example.com/not-exist"] }
+  - S6：GET /api/pages/cleanup-suggestions?now=T；GET /api/pages/ranked?limit=500
+- 预期：
+  - E1：S2、S3 都返回 400，body.error.code="VALIDATION_FAILED"，body.error.details.fields 包含 "urls"，message 非空
+  - E2：S4、S5 都返回 404，body.error.code="NOT_FOUND"，message 非空
+  - E3：S6 的 cleanup body.summary 深等于 { archive: 2, merge: 1, keep: 0 }，ranked body.total=10（没有副作用）
+- 证据：evidence/TC-API-CLEAN-026/（api: S2–S5 错误响应）
+
+### TC-API-CLEAN-027 合并的非法输入：keepUrl 不在 urls 中、urls 少于 2 条返回 400，keepUrl 页面不存在返回 404，且不归档任何页面
+- 优先级：P1 ｜ 类别：negative ｜ 技术：equivalence
+- 关联 Feature：F-CLEAN-08（AC3） ｜ 关联 Code：C-BE-CLEAN-05
+- 前置条件：后端已 reset
+- 测试数据：样例：tests/fixtures/sample.mjs 的 samplePayload({ now: T })，T 为用例开始时取的 Date.now()（D-01：最新一条 = T − 5 分钟），经 POST /api/sync 导入：received=14、created=10、pageCount=10（PRD 13.2）
+- 步骤：
+  - S1：POST /api/sync 导入平移后的样例
+  - S2：POST /api/pages/merge，请求体 { urls: ["https://github.com/org/repo/issues/123", "https://github.com/org/repo/issues/123?tab=comments"], keepUrl: "https://github.com/org/repo/issues/999" }
+  - S3：POST /api/pages/merge，请求体 { urls: ["https://github.com/org/repo/issues/123"], keepUrl: "https://github.com/org/repo/issues/123" }
+  - S4：POST /api/pages/merge，请求体 { urls: ["https://example.com/x", "https://example.com/x?tab=1"], keepUrl: "https://example.com/x" }
+  - S5：GET /api/pages/ranked?limit=500
+- 预期：
+  - E1：S2、S3 都返回 400，body.error.code="VALIDATION_FAILED"，message 非空
+  - E2：S4 返回 404，body.error.code="NOT_FOUND"，message 非空
+  - E3：S5 的 pages 中仍同时包含 "https://github.com/org/repo/issues/123" 与 "https://github.com/org/repo/issues/123?tab=comments"，body.total=10
+- 证据：evidence/TC-API-CLEAN-027/（api: S2–S4 错误响应）
+
+### TC-API-CLEAN-028 归档部分存在的 URL 列表：affected=1、notFound=1，只归档存在的页面
+- 优先级：P2 ｜ 类别：boundary ｜ 技术：boundary
+- 关联 Feature：F-CLEAN-08（AC1） ｜ 关联 Code：C-BE-CLEAN-05
+- 前置条件：后端已 reset
+- 测试数据：样例：tests/fixtures/sample.mjs 的 samplePayload({ now: T })，T 为用例开始时取的 Date.now()（D-01：最新一条 = T − 5 分钟），经 POST /api/sync 导入：received=14、created=10、pageCount=10（PRD 13.2）；urls 取 2 条：1 条存在（https://www.google.com/search?q=chrome+extension+manifest+v3）、1 条不存在（https://example.com/not-exist）——契约 404 只在「没有任何一个页面存在」时返回
+- 步骤：
+  - S1：POST /api/sync 导入平移后的样例
+  - S2：POST /api/pages/archive，请求体 { urls: ["https://www.google.com/search?q=chrome+extension+manifest+v3", "https://example.com/not-exist"] }
+  - S3：GET /api/pages/cleanup-suggestions?now=T
+- 预期：
+  - E1：S2 返回 200，body.affected=1、body.notFound=1
+  - E2：S3 的 archive 项中没有 url="https://www.google.com/search?q=chrome+extension+manifest+v3"，只剩 url="https://github.com/org/repo/issues/100"，body.summary.archive=1
+- 证据：evidence/TC-API-CLEAN-028/（api: S2、S3 响应）
+
+### TC-API-CLEAN-029 归档请求体异常：Content-Type 为 text/plain 返回 415，请求体不是合法 JSON 返回 400 INVALID_JSON，且不归档
+- 优先级：P2 ｜ 类别：exception ｜ 技术：error-guessing
+- 关联 Feature：F-CLEAN-08（AC1） ｜ 关联 Code：C-BE-CLEAN-05
+- 前置条件：后端已 reset
+- 测试数据：样例：tests/fixtures/sample.mjs 的 samplePayload({ now: T })，T 为用例开始时取的 Date.now()（D-01：最新一条 = T − 5 分钟），经 POST /api/sync 导入：received=14、created=10、pageCount=10（PRD 13.2）；S2 请求体为字符串 {"urls":["https://github.com/org/repo/issues/100"]}，但 Content-Type: text/plain；S3 请求体为截断的 JSON 文本 {"urls":[
+- 步骤：
+  - S1：POST /api/sync 导入平移后的样例
+  - S2：POST /api/pages/archive，Content-Type: text/plain
+  - S3：POST /api/pages/archive，Content-Type: application/json，请求体为非法 JSON
+  - S4：GET /api/pages/cleanup-suggestions?now=T
+- 预期：
+  - E1：S2 返回 415，body.error.code="UNSUPPORTED_MEDIA_TYPE"，message 非空
+  - E2：S3 返回 400，body.error.code="INVALID_JSON"，message 非空
+  - E3：S4 中仍有 url="https://github.com/org/repo/issues/100" 的 archive 项，body.summary.archive=2
+- 证据：evidence/TC-API-CLEAN-029/（api: S2、S3 错误响应）
+
+## Feature → Case 覆盖表
+
+| Feature | AC | 覆盖用例 | 类别分布（正 / 反 / 边 / 异 / 其他） | waiver |
+|---|---|---|---|---|
+| F-CLEAN-01 | AC1、AC2 | TC-API-CLEAN-001、TC-API-CLEAN-002、TC-API-CLEAN-003、TC-API-CLEAN-004 | 1 / 1 / 1 / 1 / 0 | — |
+| F-CLEAN-02 | AC1、AC2、AC3 | TC-API-CLEAN-001、TC-API-CLEAN-005、TC-API-CLEAN-006、TC-API-CLEAN-007 | 2 / 1 / 1 / 0 / 0 | — |
+| F-CLEAN-03 | AC1、AC2、AC3 | TC-API-CLEAN-001、TC-API-CLEAN-008、TC-API-CLEAN-009、TC-API-CLEAN-010 | 2 / 1 / 1 / 0 / 0 | — |
+| F-CLEAN-04 | AC1、AC2、AC3 | TC-API-CLEAN-011、TC-API-CLEAN-012、TC-API-CLEAN-013、TC-API-CLEAN-014 | 2 / 1 / 1 / 0 / 0 | — |
+| F-CLEAN-05 | AC1、AC2、AC3 | TC-API-CLEAN-015、TC-API-CLEAN-016、TC-API-CLEAN-017、TC-API-CLEAN-018 | 2 / 1 / 1 / 0 / 0 | — |
+| F-CLEAN-06 | AC1、AC2、AC3 | TC-API-CLEAN-019、TC-API-CLEAN-020、TC-API-CLEAN-021、TC-API-CLEAN-022 | 2 / 1 / 1 / 0 / 0 | — |
+| F-CLEAN-08 | AC1、AC2、AC3 | TC-API-CLEAN-023、TC-API-CLEAN-024、TC-API-CLEAN-025、TC-API-CLEAN-026、TC-API-CLEAN-027、TC-API-CLEAN-028、TC-API-CLEAN-029 | 3 / 2 / 1 / 1 / 0 | — |
+
+## 类别分布统计
+
+| 模块 | positive | negative | boundary | exception | state | security | performance | compatibility | 合计 |
+|---|---|---|---|---|---|---|---|---|---|
+| CLEAN | 12 | 8 | 7 | 2 | 0 | 0 | 0 | 0 | 29 |
+
+（统计口径与 `check-cases.mjs --json` 的 stats 一致：按用例的主类别 category 计数。）

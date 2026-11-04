@@ -1,0 +1,60 @@
+{
+  "caseId": "TC-UI-CTX-016",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:59.616Z",
+  "tests": [
+    {
+      "testId": "5b954d303a1f1ccc6c03-1ff8d61513e54188c499",
+      "title": "TC-UI-CTX-016 清空真实浏览器历史后显示零条与空状态",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CTX-016.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1044,
+      "startedAt": "2026-11-04T03:27:58.572Z",
+      "endedAt": "2026-11-04T03:27:59.616Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-CTX-016/screenshots/01-S1-清空历史前置.png",
+        "evidence/TC-UI-CTX-016/screenshots/02-S2-真实空历史状态.png"
+      ],
+      "serverLogLines": 16,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1047,
+          "after": 1047
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "{\"historyBeforeClear\":[{\"id\":\"2\",\"lastVisitTime\":1793762879206.314,\"title\":\"\",\"typedCount\":1,\"url\":\"https://history.example/ctx/clear\",\"visitCount\":1},{\"id\":\"1\",\"lastVisitTime\":1793762879145.681,\"title\":\"导航助手\",\"typedCount\":1,\"url\":\"chrome-extension://apogdiijbmmelomlehodilcejcmocaki/popup/popup.html\",\"visitCount\":1}]}",
+        "{\"historyAfterClear\":[]}",
+        "{\"popupPageErrors\":[],\"swExceptions\":[]}"
+      ]
+    }
+  ]
+}

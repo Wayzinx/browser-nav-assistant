@@ -1,0 +1,50 @@
+{
+  "reqId": "TC-E2E-FLOW-007-11",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/recommendations/next",
+  "params": {
+    "now": 1793676427670
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-E2E-FLOW-007-11"
+  },
+  "requestBody": {
+    "currentPage": {
+      "url": "https://example.com/context",
+      "title": "Context"
+    },
+    "openTabs": [],
+    "recentHistory": []
+  },
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-E2E-FLOW-007-11",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "339",
+    "date": "Wed, 04 Nov 2026 03:27:07 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "recommendations": [
+      {
+        "id": "rec_1",
+        "type": "next_visit",
+        "url": "https://example.com/old",
+        "title": "https://example.com/old",
+        "score": 0.56,
+        "reason": "与当前页面同域名，历史评分较高（0.49）",
+        "strategy": "same_domain",
+        "contextUrl": "https://example.com/context",
+        "createdAt": 1793676427670
+      }
+    ],
+    "cached": false,
+    "generatedAt": 1793676427670
+  },
+  "ms": 1,
+  "mutated": null
+}

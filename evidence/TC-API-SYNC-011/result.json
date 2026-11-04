@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-SYNC-011",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:06.132Z",
+  "tests": [
+    {
+      "testId": "b982e816969734e6ab58-b75a9cadf5b426f5874e",
+      "title": "TC-API-SYNC-011 历史页成为 openTab 后累积来源",
+      "project": "api",
+      "file": "tests/api/TC-API-SYNC-011.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 23,
+      "startedAt": "2026-11-04T03:27:06.109Z",
+      "endedAt": "2026-11-04T03:27:06.132Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 866,
+          "after": 869
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 1,
+          "archivedPages": 0,
+          "syncLogs": 2
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

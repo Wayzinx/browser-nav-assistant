@@ -1,0 +1,58 @@
+{
+  "caseId": "TC-UI-CACHE-003",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:14.469Z",
+  "tests": [
+    {
+      "testId": "d1ea485cacbddef0c733-917b5c6c9c758ce6c9c5",
+      "title": "TC-UI-CACHE-003 已有缓存后连接拒绝：三个红色时间横幅与离线数据均等于缓存",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CACHE-003.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 2019,
+      "startedAt": "2026-11-04T03:27:12.450Z",
+      "endedAt": "2026-11-04T03:27:14.469Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 33,
+      "screenshots": [
+        "evidence/TC-UI-CACHE-003/screenshots/01-online-cache-A.png",
+        "evidence/TC-UI-CACHE-003/screenshots/02-offline-home-ready.png",
+        "evidence/TC-UI-CACHE-003/screenshots/03-offline-ranked-projection.png",
+        "evidence/TC-UI-CACHE-003/screenshots/04-offline-cleanup-projection.png"
+      ],
+      "serverLogLines": 21,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 962,
+          "after": 964
+        },
+        "pages": {
+          "added": 11,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 11,
+          "rules": 0,
+          "openPages": 1,
+          "archivedPages": 0,
+          "syncLogs": 2
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 3,
+      "notes": []
+    }
+  ]
+}

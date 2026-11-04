@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-PRIV-006",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:02.804Z",
+  "tests": [
+    {
+      "testId": "3df4aa6e4801d1ab779b-ae15f1db54120759347a",
+      "title": "TC-API-PRIV-006 关闭过滤后接收敏感 URL，重新开启后再次拒收",
+      "project": "api",
+      "file": "tests/api/TC-API-PRIV-006.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 19,
+      "startedAt": "2026-11-04T03:27:02.785Z",
+      "endedAt": "2026-11-04T03:27:02.804Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 595,
+          "after": 598
+        },
+        "pages": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 1,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 2
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

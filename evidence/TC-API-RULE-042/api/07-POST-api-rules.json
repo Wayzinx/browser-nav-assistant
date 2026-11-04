@@ -1,0 +1,32 @@
+{
+  "reqId": "TC-API-RULE-042-offline-2",
+  "setup": false,
+  "method": "POST",
+  "url": "http://127.0.0.1:62436/api/rules",
+  "requestHeaders": {
+    "x-request-id": "TC-API-RULE-042-offline-2",
+    "content-type": "application/json",
+    "content-length": 81
+  },
+  "requestBody": {
+    "rules": [
+      {
+        "rawText": "新保护",
+        "type": "never_archive",
+        "domain": "example.com"
+      }
+    ]
+  },
+  "responseHeaders": null,
+  "responseBody": null,
+  "status": null,
+  "responseReceived": false,
+  "transportError": {
+    "name": "Error",
+    "message": "connect ECONNREFUSED 127.0.0.1:62436",
+    "code": "ECONNREFUSED",
+    "address": "127.0.0.1",
+    "port": 62436
+  },
+  "ms": 0.30529200000455603
+}

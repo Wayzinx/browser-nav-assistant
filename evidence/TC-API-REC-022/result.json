@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-API-REC-022",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:04.289Z",
+  "tests": [
+    {
+      "testId": "9eb42d3395a62e13ae97-346d582feb569cb6b5cf",
+      "title": "TC-API-REC-022 非 React 记录中断连续访问且更旧 React 不能补足次数",
+      "project": "api",
+      "file": "tests/api/TC-API-REC-022.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 24,
+      "startedAt": "2026-11-04T03:27:04.265Z",
+      "endedAt": "2026-11-04T03:27:04.289Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [],
+      "serverLogLines": 8,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 717,
+          "after": 719
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 10
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 1
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": [
+        "{\"T\":1793762824273,\"N\":1793762824274}",
+        "{\"ruleId\":\"rule_1\"}"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "reqId": "TC-UI-MENU-009-03",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/ranked?limit=500",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-UI-MENU-009-03"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-UI-MENU-009-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "63",
+    "date": "Wed, 04 Nov 2026 03:28:55 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "pages": [],
+    "total": 0,
+    "domains": [],
+    "generatedAt": 1793762934675
+  },
+  "ms": 1.1,
+  "mutated": null
+}

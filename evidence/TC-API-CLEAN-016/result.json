@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-CLEAN-016",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:25:44.536Z",
+  "tests": [
+    {
+      "testId": "f15f354c1071d24a674c-4a89652f89787f243e1e",
+      "title": "TC-API-CLEAN-016 保存和删除规则改变 10 天 issue 的归档状态",
+      "project": "api",
+      "file": "tests/api/TC-API-CLEAN-016.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 47,
+      "startedAt": "2026-11-04T03:25:44.489Z",
+      "endedAt": "2026-11-04T03:25:44.536Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 31,
+          "after": 32
+        },
+        "pages": {
+          "added": 11,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 11,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "reqId": "TC-API-CLEAN-017-03",
+  "setup": false,
+  "method": "POST",
+  "url": "/api/rules",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-CLEAN-017-03"
+  },
+  "requestBody": {
+    "rules": [
+      {
+        "rawText": "把 7 天没访问过的 GitHub issue 建议归档",
+        "type": "archive_candidate",
+        "domain": "github.com",
+        "urlPattern": "/issues/",
+        "inactiveDays": 7,
+        "action": "suggest_archive"
+      },
+      {
+        "rawText": "把 10 天没访问过的 GitHub issue 建议归档",
+        "type": "archive_candidate",
+        "domain": "github.com",
+        "urlPattern": "/issues/",
+        "inactiveDays": 10,
+        "action": "suggest_archive"
+      }
+    ]
+  },
+  "status": 201,
+  "responseHeaders": {
+    "x-request-id": "TC-API-CLEAN-017-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "593",
+    "date": "Wed, 04 Nov 2026 03:25:44 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "rules": [
+      {
+        "domain": "github.com",
+        "urlPattern": "/issues/",
+        "inactiveDays": 7,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762744558,
+        "updatedAt": 1793762744558,
+        "rawText": "把 7 天没访问过的 GitHub issue 建议归档",
+        "type": "archive_candidate",
+        "action": "suggest_archive",
+        "id": "rule_1"
+      },
+      {
+        "domain": "github.com",
+        "urlPattern": "/issues/",
+        "inactiveDays": 10,
+        "enabled": true,
+        "confidence": "high",
+        "createdAt": 1793762744559,
+        "updatedAt": 1793762744559,
+        "rawText": "把 10 天没访问过的 GitHub issue 建议归档",
+        "type": "archive_candidate",
+        "action": "suggest_archive",
+        "id": "rule_2"
+      }
+    ],
+    "ruleCount": 2
+  },
+  "ms": 2,
+  "mutated": null
+}

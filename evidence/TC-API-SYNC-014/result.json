@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-SYNC-014",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:06.218Z",
+  "tests": [
+    {
+      "testId": "4a4c3baca5bb7a338fc5-53e3f5b5f368fbeb63c4",
+      "title": "TC-API-SYNC-014 activeTab=null 清除原活动页的打开和激活状态",
+      "project": "api",
+      "file": "tests/api/TC-API-SYNC-014.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 20,
+      "startedAt": "2026-11-04T03:27:06.198Z",
+      "endedAt": "2026-11-04T03:27:06.218Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 7,
+      "screenshots": [],
+      "serverLogLines": 11,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 879,
+          "after": 882
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 2,
+          "archivedPages": 0,
+          "syncLogs": 2
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}

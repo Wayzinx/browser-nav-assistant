@@ -1,0 +1,28 @@
+{
+  "reqId": "TC-API-DIAG-004-06",
+  "setup": false,
+  "method": "DELETE",
+  "url": "/api/rules/rule_2",
+  "params": null,
+  "requestHeaders": {
+    "x-request-id": "TC-API-DIAG-004-06"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-DIAG-004-06",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "34",
+    "date": "Wed, 04 Nov 2026 03:25:46 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "deleted": "rule_2",
+    "ruleCount": 1
+  },
+  "ms": 0.8,
+  "mutated": null
+}

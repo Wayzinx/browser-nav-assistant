@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-UI-DIAG-014",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:18.626Z",
+  "tests": [
+    {
+      "testId": "3e92e196f435e996cabe-3cf4c33863cd7d512618",
+      "title": "TC-UI-DIAG-014 诊断完成后 chrome.storage.local 中不残留 __diag__ 探测键",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-DIAG-014.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 942,
+      "startedAt": "2026-11-04T03:28:17.684Z",
+      "endedAt": "2026-11-04T03:28:18.626Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-DIAG-014/screenshots/01-S2-首轮检测后键名.png",
+        "evidence/TC-UI-DIAG-014/screenshots/02-S3-重检后键名.png"
+      ],
+      "serverLogLines": 14,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1069,
+          "after": 1069
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

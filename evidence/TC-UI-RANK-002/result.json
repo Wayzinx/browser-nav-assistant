@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-UI-RANK-002",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:14.478Z",
+  "tests": [
+    {
+      "testId": "f9ed135dfa6539b96c57-9104b95e8d1d19820f66",
+      "title": "TC-UI-RANK-002 排序页签展示完整 10 条且公式常驻，展开第 1 条显示时效 0.99、频次 1.00、打开 1.00、域名 1.00",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RANK-002.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 896,
+      "startedAt": "2026-11-04T03:29:13.582Z",
+      "endedAt": "2026-11-04T03:29:14.478Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 2,
+      "screenshots": [
+        "evidence/TC-UI-RANK-002/screenshots/01-排序页签完整列表.png",
+        "evidence/TC-UI-RANK-002/screenshots/02-第1条展开评分明细.png"
+      ],
+      "serverLogLines": 12,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1147,
+          "after": 1148
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 0,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

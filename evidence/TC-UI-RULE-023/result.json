@@ -1,0 +1,56 @@
+{
+  "caseId": "TC-UI-RULE-023",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:29:50.366Z",
+  "tests": [
+    {
+      "testId": "fb350815c04a925c5c5f-47cc833becce73b176b5",
+      "title": "TC-UI-RULE-023 TOGGLE_RULE 不存在的 ID 不改变已有启用状态",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-RULE-023.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 797,
+      "startedAt": "2026-11-04T03:29:49.569Z",
+      "endedAt": "2026-11-04T03:29:50.366Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 5,
+      "screenshots": [
+        "evidence/TC-UI-RULE-023/screenshots/01-切换消息前.png",
+        "evidence/TC-UI-RULE-023/screenshots/02-不存在规则切换完成.png"
+      ],
+      "serverLogLines": 14,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1195,
+          "after": 1195
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 1,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": []
+    }
+  ]
+}

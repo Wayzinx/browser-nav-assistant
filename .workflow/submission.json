@@ -1,0 +1,59 @@
+{
+  "$comment": "提交打包配置（.workflow/tools/pack-submission.mjs 读取）。路径相对项目根目录；glob 支持 * 与 **。",
+  "uploadRoot": "..",
+  "ignoreFile": "../../.gitignore",
+  "budget": {
+    "maxFiles": 200,
+    "maxFileBytes": 1048576,
+    "maxTotalBytes": 10485760,
+    "partBytes": 972800,
+    "reserveFiles": 4,
+    "reserveBytes": 262144
+  },
+  "raw": [
+    "extension/**",
+    "server/**",
+    "scripts/**",
+    "resources/**",
+    "docs/0*.md",
+    "README.md",
+    "AGENTS.md",
+    "PROBLEM.md",
+    "resource.json",
+    "package.json",
+    "package-lock.json",
+    "playwright.config.mjs"
+  ],
+  "bundles": [
+    { "name": "tests", "paths": ["tests"], "desc": "tests/{api,e2e,ui,fixtures,smoke}：一个 Case ID 对应一个 Playwright 脚本" },
+    { "name": "docs-trace", "paths": ["docs/trace", "docs/cases", "docs/quality"], "desc": "追溯产物（features / code-points / cases / 契约 / 看板 / 追溯矩阵）、用例分片、质量指标" },
+    { "name": "docs-prototype", "paths": ["docs/prototype"], "desc": "交互原型与截图" },
+    { "name": "workflow-skills-specs", "paths": [".workflow", ".agents", "specs", ".claude"], "desc": "编排脚本、CONVENTIONS、validators、门禁报告、测试锁；技能；代码规范" },
+    { "name": "evidence", "paths": ["evidence", "coverage/summary.json"], "desc": "evidence/<CaseID>/ 执行证据（result.json、api/、server.log、extension.log、state-*.json、截图、explore.json）、冒烟与人工验收证据、覆盖率汇总" }
+  ],
+  "exclude": [
+    "**/node_modules/**",
+    "**/.DS_Store",
+    "test-results/**",
+    "playwright-report/**",
+    "tests/explore/tmp/**",
+    "evidence/_runtime/**",
+    ".workflow/context/logs/**",
+    "coverage/.*/**",
+    "bundles/**"
+  ],
+  "neverUpload": [
+    { "path": "data/**", "reason": "后端运行时持久化数据，可能包含使用者真实的浏览记录（隐私），不提交" },
+    { "path": ".idea/**", "reason": "IDE 配置" },
+    { "path": "coverage/**", "reason": "覆盖率原始数据只提交 coverage/summary.json" }
+  ],
+  "evidence": {
+    "imageGlobs": ["evidence/**/*.png", "docs/prototype/**/*.png"],
+    "jpegQuality": 60,
+    "jpegScale": 0.5,
+    "keepGifFor": ["ACCEPTANCE-FLOW", "_smoke", "_manual"],
+    "neverTrimDirs": ["ACCEPTANCE-FLOW", "_smoke", "_manual"],
+    "slimHeaders": ["content-type", "x-request-id"],
+    "extensionLogKeep": { "head": 100, "tail": 100, "levels": ["error", "warning", "warn"] }
+  }
+}

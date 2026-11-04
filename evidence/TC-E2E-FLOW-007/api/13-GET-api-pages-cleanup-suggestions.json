@@ -1,0 +1,47 @@
+{
+  "reqId": "TC-E2E-FLOW-007-13",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/cleanup-suggestions",
+  "params": {
+    "now": 1793676427672
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-E2E-FLOW-007-13"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-E2E-FLOW-007-13",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "376",
+    "date": "Wed, 04 Nov 2026 03:27:07 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "summary": {
+      "archive": 1,
+      "merge": 0,
+      "keep": 0
+    },
+    "suggestions": [
+      {
+        "key": "archive:https://example.com/old",
+        "action": "archive",
+        "url": "https://example.com/old",
+        "title": "https://example.com/old",
+        "reason": "超过 14 天未访问（已 15 天），且不在当前打开的 tab 中",
+        "ageDays": 15,
+        "ruleId": null,
+        "lastVisitedAt": 1792380427671
+      }
+    ],
+    "thresholdDays": 14,
+    "generatedAt": 1793676427672
+  },
+  "ms": 0.6,
+  "mutated": null
+}

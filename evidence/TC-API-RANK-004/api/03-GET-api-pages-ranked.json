@@ -1,0 +1,90 @@
+{
+  "reqId": "TC-API-RANK-004-03",
+  "setup": false,
+  "method": "GET",
+  "url": "/api/pages/ranked",
+  "params": {
+    "domain": "react.dev",
+    "now": 1793762823225
+  },
+  "requestHeaders": {
+    "x-request-id": "TC-API-RANK-004-03"
+  },
+  "requestBody": null,
+  "status": 200,
+  "responseHeaders": {
+    "x-request-id": "TC-API-RANK-004-03",
+    "vary": "Origin",
+    "access-control-expose-headers": "x-request-id",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "1053",
+    "date": "Wed, 04 Nov 2026 03:27:03 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5"
+  },
+  "responseBody": {
+    "pages": [
+      {
+        "id": "page_9",
+        "url": "https://react.dev/reference/react/useState",
+        "normalizedUrl": "https://react.dev/reference/react/useState",
+        "title": "useState – React",
+        "domain": "react.dev",
+        "visitCount": 6,
+        "lastVisitedAt": 1793722523225,
+        "firstSeenAt": 1793722523225,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.69,
+        "scoreDetail": {
+          "recency": 0.95,
+          "frequency": 0.89,
+          "open": 0,
+          "domain": 0.4,
+          "domainSource": "affinity"
+        },
+        "reason": "最近 3 天内多次访问（6 次）"
+      },
+      {
+        "id": "page_10",
+        "url": "https://react.dev/learn",
+        "normalizedUrl": "https://react.dev/learn",
+        "title": "Quick Start – React",
+        "domain": "react.dev",
+        "visitCount": 2,
+        "lastVisitedAt": 1793717523225,
+        "firstSeenAt": 1793717523225,
+        "sources": [
+          "history"
+        ],
+        "isOpen": false,
+        "isActive": false,
+        "isImportant": false,
+        "score": 0.57,
+        "scoreDetail": {
+          "recency": 0.95,
+          "frequency": 0.5,
+          "open": 0,
+          "domain": 0.4,
+          "domainSource": "affinity"
+        },
+        "reason": "今天访问过"
+      }
+    ],
+    "total": 2,
+    "domains": [
+      "github.com",
+      "react.dev",
+      "developer.mozilla.org",
+      "docs.internal.com",
+      "google.com"
+    ],
+    "generatedAt": 1793762823225
+  },
+  "ms": 1,
+  "mutated": null
+}

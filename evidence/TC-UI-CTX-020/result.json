@@ -1,0 +1,59 @@
+{
+  "caseId": "TC-UI-CTX-020",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:28:03.602Z",
+  "tests": [
+    {
+      "testId": "ea211480bb541aa270aa-58d56d8ff6462d96fa40",
+      "title": "TC-UI-CTX-020 系统页与 React 普通页混合时只给系统页标注跳过",
+      "project": "ui",
+      "file": "tests/ui/TC-UI-CTX-020.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 1038,
+      "startedAt": "2026-11-04T03:28:02.564Z",
+      "endedAt": "2026-11-04T03:28:03.602Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 1,
+      "screenshots": [
+        "evidence/TC-UI-CTX-020/screenshots/01-S1-系统页.png",
+        "evidence/TC-UI-CTX-020/screenshots/02-S1-React普通页.png",
+        "evidence/TC-UI-CTX-020/screenshots/03-S2-系统与普通页不同标注.png"
+      ],
+      "serverLogLines": 10,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 1051,
+          "after": 1051
+        },
+        "pages": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 0,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 0,
+          "rules": 0,
+          "openPages": 0,
+          "archivedPages": 0,
+          "syncLogs": 0
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 1,
+      "notes": [
+        "{\"popupPageErrors\":[],\"swExceptions\":[]}"
+      ]
+    }
+  ]
+}

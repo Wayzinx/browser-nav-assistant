@@ -1,0 +1,53 @@
+{
+  "caseId": "TC-API-RULE-038",
+  "runId": "2026-11-04T03-25-41-632Z",
+  "status": "passed",
+  "updatedAt": "2026-11-04T03:27:05.615Z",
+  "tests": [
+    {
+      "testId": "4e0c3b2ceb807cf57d36-81f0b21e6f6f5b0556f1",
+      "title": "TC-API-RULE-038 PATCH缺少或非布尔enabled返回400且保护规则仍生效",
+      "project": "api",
+      "file": "tests/api/TC-API-RULE-038.spec.mjs",
+      "repeatEachIndex": 0,
+      "status": "passed",
+      "expectedStatus": "passed",
+      "durationMs": 33,
+      "startedAt": "2026-11-04T03:27:05.582Z",
+      "endedAt": "2026-11-04T03:27:05.615Z",
+      "failedExpect": [],
+      "errors": [],
+      "apiCalls": 12,
+      "screenshots": [],
+      "serverLogLines": 15,
+      "metrics": {},
+      "stateDiffSummary": {
+        "dataVersion": {
+          "before": 816,
+          "after": 818
+        },
+        "pages": {
+          "added": 10,
+          "removed": 0,
+          "changed": 0
+        },
+        "rules": {
+          "added": 1,
+          "removed": 0,
+          "changed": 0
+        },
+        "counts": {
+          "pages": 10,
+          "rules": 1,
+          "openPages": 4,
+          "archivedPages": 0,
+          "syncLogs": 1
+        },
+        "configChanged": [],
+        "persistChanged": false
+      },
+      "dedupedShots": 0,
+      "notes": []
+    }
+  ]
+}
