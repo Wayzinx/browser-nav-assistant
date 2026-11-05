@@ -18,7 +18,7 @@ export const meta = {
 // args：from / to（prd | design | cases | align | build | dev | final；旧名 tests = cases）、engines（'claude' 时全部由 Claude 完成）、
 //       testEngine（'worker' 时测试任务走 worker）、digest（续跑时传入测试锁摘要）、manualAccepted（人工验收完成后续跑时传 true）、
 //       redoPrd（PRD 已通过校验时仍强制重做）、maxStageRounds、maxDevIterations、stallLimit、devConcurrency、smokeBrowser（chromium | all）
-const ROOT = '.' // 项目根目录：请在仓库根目录启动 Workflow（也可改成本机绝对路径）
+const ROOT = '/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手'
 const V = 'node .workflow/validators/validate.mjs'
 const RUN = 'node .agents/skills/nav-case-to-script/scripts/run-cases.mjs'
 const A = args || {}
@@ -201,8 +201,8 @@ function engineSteps(kind, key) {
    会话 id 在日志里：grep -m1 'session id:' .workflow/context/logs/${key}.log。
    备选：traecli exec（模型 GPT-6.1-Sol；先用 traecli exec --help 确认参数）。`
   }
-  return `首选 worker（Claude Code CLI 无头模式）：
-   /bin/zsh -c 'cd "${ROOT}" && claude -p ${sid && eng === 'worker' ? `--resume ${sid} ` : ''}--output-format json "${prompt}"' > .workflow/context/logs/${key}.json 2> .workflow/context/logs/${key}.err
+  return `首选 worker 技能（claude-relay，见 ~/.agents/skills/worker/SKILL.md）：
+   /bin/zsh -c 'cd "${ROOT}" && claude-relay -p ${sid && eng === 'worker' ? `--resume ${sid} ` : ''}--output-format json "${prompt}"' > .workflow/context/logs/${key}.json 2> .workflow/context/logs/${key}.err
    stdout 是一个 JSON：result（最终答复）、session_id（续聊用）、is_error。`
 }
 
@@ -216,7 +216,7 @@ ${bullet(dod)}
     out = await agent(`${PRE}\n${brief}\n${tail}\n结构化输出：engine 填 "claude"，以及 summary、changedFiles、selfTest、testDisputes、blockedBy、openQuestions、boardItems（本次新建的看板记录 ID）。`, { label, phase: ph, schema: S_WORK })
   } else {
     out = await agent(`${PRE}
-你是「调度与验收者」。${kind === 'dev' || A.testEngine !== 'worker' ? '任务交给 codex（gpt-6.1-sol，max）执行' : '测试任务交给 worker（claude -p）执行'}；你负责派发和验收。除非所有外部引擎都不可用，否则不要亲自写代码、用例或脚本。
+你是「调度与验收者」。${kind === 'dev' || A.testEngine !== 'worker' ? '任务交给 codex（gpt-6.1-sol，max）执行' : '测试任务交给 worker 技能（claude-relay）执行'}；你负责派发和验收。除非所有外部引擎都不可用，否则不要亲自写代码、用例或脚本。
 任务键：${key}
 步骤：
 1. 把下面【任务简报】和【完成定义】【收尾】原样写入 .workflow/context/briefs/${key}.md（覆盖写；若是续聊，在文件开头加一节「本轮任务」），并把 PRE 中的【跨角色沟通】【禁止】两条规则一并写进简报。
@@ -750,6 +750,16 @@ if (want('build')) {
   for (const [, gate] of devGate) gate.resolve()
   const leadsOk = await leadP
   log(`流水线完成：${pipe.filter(Boolean).map((x) => `${gKey(x.g)}(脚本${x.scripts ? '✓' : '✗'})`).join('，')}；骨架 ${leadsOk ? '✓' : '✗'}`)
+
+  // 真实安装冒烟计划（随测试一起锁定）：真实 action popup + 首次安装 + 主流程，Playwright 的 tab 方式 UI 用例覆盖不到
+  await work({ kind: 'test', key: 'smoke-plan', label: '冒烟计划', phase: P5,
+    brief: `你是自动化工程师。按 .agents/skills/nav-case-to-script/references/real-popup-smoke.md 编写或更新 tests/smoke/smoke-plan.json（已经存在并且与当前的 ui-contract 和 PRD 验收流程一致时，不要改）。
+至少包含这些场景：S1 首次安装 · 后端未启动（popup 尺寸、关键区块可见、未连接提示与排查建议）；S2 首次安装 · 后端已启动 · 主流程（覆盖 PROBLEM.md 验收第 3–9 步：诊断 → 打开测试页 → 同步 → 排序 → 推荐 → 规则解析与保存 → 整理建议）；S3 在界面上修改 API 地址后连接成功。
+所有 testId 取自 docs/trace/ui-contract.json；popup 尺寸下限按 docs/04 与 FE-UI-07。计划里需要但 ui-contract 没有的元素，提看板给 FE，不要编造 testId。`,
+    dod: [
+      '计划中引用的每个 testId 都在 docs/trace/ui-contract.json 中登记（写一个 node 小脚本核对，贴出输出）',
+      'node .agents/skills/nav-case-to-script/scripts/smoke-install.mjs --scenarios=S1 --json 能跑起来；插件只有骨架时 S1 也应通过，没通过就写进 blockedBy，并给 DEV-FE 提看板（附 evidence/_smoke 截图路径）',
+    ] })
 
   // 全局屏障：合并后的全量校验 + 两路评审，问题按模块组并行返工；脚本阶段产生的看板项在锁定前处理掉
   const GLOBAL_REVIEWERS = [

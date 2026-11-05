@@ -1,0 +1,95 @@
+{
+  "description": "真实安装冒烟计划：全新 profile、storage 为空、真实 action popup（chrome.action.openPopup），后端以生产模式启动。由 .agents/skills/nav-case-to-script/scripts/smoke-install.mjs 执行；testId 全部取自 docs/trace/ui-contract.json。",
+  "popup": { "minWidth": 360, "minHeight": 400 },
+  "pages": [
+    { "url": "http://docs.smoke.test/guide", "title": "Smoke 指南 · 插件使用说明", "body": "冒烟测试用的本地桩页面（由冒烟代理返回，不访问外网）" },
+    { "url": "http://repo.smoke.test/org/app/pull/7", "title": "Refactor sync pipeline (#7)" },
+    { "url": "http://repo.smoke.test/org/app/issues/12", "title": "Sync button stays disabled (#12)" },
+    { "url": "http://wiki.smoke.test/design/popup", "title": "Popup 设计规范" }
+  ],
+  "scenarios": [
+    {
+      "id": "S1",
+      "name": "首次安装·后端未启动",
+      "required": true,
+      "backend": "down",
+      "startUrl": "http://docs.smoke.test/guide",
+      "steps": [
+        { "name": "点击工具栏图标打开真实 popup", "type": "openPopup" },
+        { "name": "popup 尺寸不塌缩", "type": "assertPopupSize" },
+        { "name": "首屏关键区块可见", "type": "assertVisible", "testIds": ["app-title", "connection-status", "current-page-card", "sync-button", "tab-home", "tab-diag"] },
+        { "name": "当前页面识别为打开的网页", "type": "waitText", "testId": "current-page-url", "includes": "docs.smoke.test" },
+        { "name": "顶栏提示后端未连接", "type": "waitAttr", "testId": "connection-status", "attr": "data-state", "equals": "offline", "timeoutMs": 12000 },
+        { "name": "推荐区显示后端未连接的提示而不是空白", "type": "waitVisible", "testId": "rec-error", "timeoutMs": 12000 },
+        { "name": "截图：首次打开（后端未启动）", "type": "screenshot" },
+        { "name": "进入诊断页签", "type": "click", "testId": "tab-diag" },
+        { "name": "诊断：后端连接项失败", "type": "waitAttr", "testId": "diag-check-backend", "attr": "data-status", "equals": "fail", "timeoutMs": 12000 },
+        { "name": "诊断：给出排查步骤", "type": "waitCount", "testId": "diag-item-hint-step", "min": 1 },
+        { "name": "诊断：显示默认 API 地址", "type": "waitText", "testId": "diag-api-base-url-current", "includes": "127.0.0.1:3000" },
+        { "name": "截图：诊断与排查建议", "type": "screenshot" }
+      ]
+    },
+    {
+      "id": "S2",
+      "name": "首次安装·后端已启动（默认地址）·主流程",
+      "required": true,
+      "backend": "default",
+      "startUrl": "http://docs.smoke.test/guide",
+      "steps": [
+        { "name": "浏览两个页面后关闭（只留历史）", "type": "visit", "urls": ["http://repo.smoke.test/org/app/issues/12", "http://wiki.smoke.test/design/popup"], "keepOpen": false },
+        { "name": "打开 PR 页面", "type": "visit", "urls": ["http://repo.smoke.test/org/app/pull/7"], "keepOpen": true },
+        { "name": "按 README 导入样例数据", "type": "importSample" },
+        { "name": "点击工具栏图标打开真实 popup", "type": "openPopup" },
+        { "name": "popup 尺寸不塌缩", "type": "assertPopupSize" },
+        { "name": "顶栏显示后端已连接", "type": "waitAttr", "testId": "connection-status", "attr": "data-state", "equals": "online", "timeoutMs": 12000 },
+        { "name": "截图：已连接", "type": "screenshot" },
+        { "name": "点击「同步浏览器上下文」", "type": "click", "testId": "sync-button" },
+        { "name": "同步成功", "type": "waitAttr", "testId": "sync-status", "attr": "data-status", "equals": "success", "timeoutMs": 20000 },
+        { "name": "同步状态文本", "type": "waitText", "testId": "sync-status", "includes": "同步成功" },
+        { "name": "后端收到浏览器数据", "type": "api", "path": "/api/health", "expect": { "status": 200, "checks": [{ "path": "pageCount", "gte": 12 }] } },
+        { "name": "截图：同步成功", "type": "screenshot" },
+        { "name": "首页历史排序至少 1 条", "type": "waitCount", "testId": "home-ranked-item", "min": 1, "timeoutMs": 12000 },
+        { "name": "首页推荐至少 1 条", "type": "waitCount", "testId": "rec-item", "min": 1, "timeoutMs": 12000 },
+        { "name": "推荐带理由", "type": "waitNonEmpty", "testId": "rec-item-reason" },
+        { "name": "截图：推荐与排序", "type": "screenshot" },
+        { "name": "进入规则页签", "type": "click", "testId": "tab-rules" },
+        { "name": "输入自然语言规则", "type": "fill", "testId": "rule-input", "value": "把 7 天没访问过的 GitHub issue 建议归档，但 docs.internal.com 的页面永远不要归档" },
+        { "name": "解析", "type": "click", "testId": "rule-parse-button" },
+        { "name": "解析出 2 张规则卡片", "type": "waitCount", "testId": "rule-card", "min": 2, "timeoutMs": 12000 },
+        { "name": "截图：解析预览", "type": "screenshot" },
+        { "name": "确认保存", "type": "click", "testId": "rule-save-button" },
+        { "name": "规则列表出现已保存的规则", "type": "waitCount", "testId": "rules-item", "min": 2, "timeoutMs": 12000 },
+        { "name": "后端规则已保存", "type": "api", "path": "/api/rules", "expect": { "status": 200, "checks": [{ "path": "rules", "gte": 2 }] } },
+        { "name": "截图：规则已保存", "type": "screenshot" },
+        { "name": "进入整理页签", "type": "click", "testId": "tab-cleanup" },
+        { "name": "整理建议可见", "type": "waitCount", "testId": "cleanup-item", "min": 2, "timeoutMs": 12000 },
+        { "name": "规则生效：docs.internal.com 被保留", "type": "waitText", "testId": "cleanup-group-keep", "includes": "docs.internal.com", "timeoutMs": 12000 },
+        { "name": "截图：整理建议", "type": "screenshot" },
+        { "name": "进入诊断页签", "type": "click", "testId": "tab-diag" },
+        { "name": "诊断：后端连接通过", "type": "waitAttr", "testId": "diag-check-backend", "attr": "data-status", "equals": "ok", "timeoutMs": 12000 },
+        { "name": "截图：诊断", "type": "screenshot" }
+      ]
+    },
+    {
+      "id": "S3",
+      "name": "首次安装·后端在其他端口·通过诊断页修改 API 地址",
+      "required": true,
+      "backend": "custom",
+      "startUrl": "http://docs.smoke.test/guide",
+      "steps": [
+        { "name": "点击工具栏图标打开真实 popup", "type": "openPopup" },
+        { "name": "popup 尺寸不塌缩", "type": "assertPopupSize" },
+        { "name": "默认地址连不上", "type": "waitAttr", "testId": "connection-status", "attr": "data-state", "equals": "offline", "timeoutMs": 12000 },
+        { "name": "进入诊断页签", "type": "click", "testId": "tab-diag" },
+        { "name": "填写新的 API 地址", "type": "fill", "testId": "diag-api-base-url-input", "value": "${BACKEND_URL}" },
+        { "name": "保存", "type": "click", "testId": "diag-api-base-url-save" },
+        { "name": "保存成功提示", "type": "waitVisible", "testId": "diag-api-base-url-saved", "timeoutMs": 12000 },
+        { "name": "当前地址已更新", "type": "waitText", "testId": "diag-api-base-url-current", "includes": "${BACKEND_URL}", "timeoutMs": 12000 },
+        { "name": "顶栏显示后端已连接", "type": "waitAttr", "testId": "connection-status", "attr": "data-state", "equals": "online", "timeoutMs": 15000 },
+        { "name": "点击「重新检测」（保存地址不会自动重跑诊断，PRD 未要求）", "type": "click", "testId": "diag-rerun-button" },
+        { "name": "诊断：后端连接通过", "type": "waitAttr", "testId": "diag-check-backend", "attr": "data-status", "equals": "ok", "timeoutMs": 15000 },
+        { "name": "截图：修改地址后已连接", "type": "screenshot" }
+      ]
+    }
+  ]
+}

@@ -10,7 +10,8 @@
 import { checkBoard } from './board.mjs';
 
 const METHODS = 'GET|POST|PUT|PATCH|DELETE|OPTIONS|HEAD';
-const EP_MENTION = new RegExp(`\\b(${METHODS})\\s+(\\/api\\/[A-Za-z0-9_\\-\\/:{}<>$.]*)`, 'g');
+// 路径不含点号：用例里常写「GET /api/health.pageCount」表示响应字段，点号之后不属于路径
+const EP_MENTION = new RegExp(`\\b(${METHODS})\\s+(\\/api\\/[A-Za-z0-9_\\-\\/:{}<>$]*)`, 'g');
 const BARE_API = /(^|[^A-Za-z0-9_./])(\/api\/[A-Za-z0-9_\-\/:{}]*[A-Za-z0-9_}])/g;
 const UPPER = /\b([A-Z][A-Z0-9]*(?:_[A-Z0-9]+)+)\b/g;
 const MSG_LIKE = /^(GET|SET|SAVE|DELETE|SYNC|PARSE|RUN|CHECK|OPEN|MARK|CLEAR|UPDATE|RECOVER|LIST|TOGGLE|ARCHIVE|MERGE|ADD|REMOVE|CLEANUP|FETCH|REFRESH|IMPORT|EXPORT|RESET)_[A-Z0-9_]+$/;
@@ -140,6 +141,11 @@ export function checkAlign(ctx) {
   // ---------------------------------------------------------------- cases-ui：UI 用例 ↔ ui-contract
   if (ui) {
     const tids = new Set((ui.pages || []).flatMap((p) => (p.elements || []).map((e) => e.testId)));
+    // 与契约路径段同名的词（例如 cleanup-suggestions）是在说接口，不是 testId
+    const pathSegs = new Set(K.eps.flatMap((e) => e.path.split('/')).filter((x) => x.includes('-')));
+    // docs/04 中登记的前端错误码（例如 SYNC_INTERRUPTED、NO_CACHE）不是消息 type
+    const feCodes = new Set();
+    for (const line of (ctx.readText(ctx.PATHS.feDoc, false) || '').split('\n')) if (/错误码/.test(line)) for (const m of line.matchAll(/`([A-Z][A-Z0-9]*(?:_[A-Z0-9]+)+)`/g)) feCodes.add(m[1]);
     const tidList = [...tids];
     const prefixes = new Set(tidList.map((x) => x.split('-')[0]));
     const msgs = new Set((ui.messages || []).map((m) => m.type));
@@ -152,19 +158,19 @@ export function checkAlign(ctx) {
         // testId：kebab-case 标识，第一段是已登记 testId 的前缀；不在 URL / 路径里；不是某个已登记 testId 的家族前缀
         for (const m of s.matchAll(/(^|[^A-Za-z0-9_\/.:#@-])([a-z][a-z0-9]*(?:-[a-z0-9]+)+)(?![A-Za-z0-9_\/.-])/g)) {
           const tok = m[2];
-          if (!prefixes.has(tok.split('-')[0])) continue;
+          if (!prefixes.has(tok.split('-')[0]) || pathSegs.has(tok)) continue;
           stat('cases-ui').checked++;
           if (tids.has(tok) || isFamily(tok)) continue;
           E('cases-ui', t.id, `引用的 testId「${tok}」没有在 ui-contract 中登记`);
         }
         for (const m of s.matchAll(UPPER)) {
           const tok = m[1];
-          if (!MSG_LIKE.test(tok) || K.universe.has(tok)) continue;
+          if (!MSG_LIKE.test(tok) || K.universe.has(tok) || feCodes.has(tok)) continue;
           stat('cases-ui').checked++;
           if (!msgs.has(tok)) E('cases-ui', t.id, `引用的消息 type「${tok}」没有在 ui-contract.messages 中登记`);
         }
-        for (const m of s.matchAll(/storage(?:\.local)?\.(?:get|set|remove)\(\s*(?:\{\s*|\[\s*)?['"`]([A-Za-z_][A-Za-z0-9_]*)['"`]|(?:storage\s*key|storageKey|存储键)\s*[「"'`]?\s*([A-Za-z_][A-Za-z0-9_]*)/gi)) {
-          const tok = m[1] || m[2];
+        for (const m of s.matchAll(/storage(?:\.local)?\.(?:get|set|remove)\(\s*(?:\{\s*|\[\s*)?['"`]([A-Za-z_][A-Za-z0-9_]*)['"`]|storageKeys\.([A-Za-z_][A-Za-z0-9_]*)|(?:storage\s*key|storageKey(?![A-Za-z])|存储键)\s*[「"'`]?\s*([A-Za-z_][A-Za-z0-9_]*)/gi)) {
+          const tok = m[1] || m[2] || m[3];
           stat('cases-ui').checked++;
           if (!keys.has(tok)) E('cases-ui', t.id, `引用的 storage key「${tok}」没有在 ui-contract.storageKeys 中登记`);
         }

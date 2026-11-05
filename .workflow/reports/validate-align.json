@@ -1,0 +1,83 @@
+{
+  "stage": "align",
+  "pass": true,
+  "module": null,
+  "errors": [],
+  "warnings": [],
+  "stats": {
+    "board": {
+      "total": 0,
+      "open": 0,
+      "blockingOpen": 0,
+      "byStatus": {},
+      "byTo": {},
+      "schemaErrors": 0,
+      "frozenBlockers": 0
+    },
+    "align": {
+      "contract": {
+        "checked": 19,
+        "errors": 0,
+        "warnings": 0
+      },
+      "cases-api": {
+        "checked": 1156,
+        "errors": 0,
+        "warnings": 0
+      },
+      "cases-ui": {
+        "checked": 1777,
+        "errors": 0,
+        "warnings": 0
+      },
+      "fe-be": {
+        "checked": 105,
+        "errors": 0,
+        "warnings": 0
+      },
+      "ac-coverage": {
+        "checked": 190,
+        "errors": 0,
+        "warnings": 0
+      },
+      "prd-samples": {
+        "checked": 5,
+        "errors": 0,
+        "warnings": 0
+      }
+    }
+  },
+  "board": {
+    "dir": "docs/trace/board",
+    "freeze": "align",
+    "open": [],
+    "counts": {
+      "total": 0,
+      "open": 0,
+      "blockingOpen": 0,
+      "byStatus": {},
+      "byTo": {},
+      "schemaErrors": 0,
+      "frozenBlockers": 0
+    }
+  },
+  "modules": [
+    "CACHE",
+    "CLEAN",
+    "CTX",
+    "DEMO",
+    "DIAG",
+    "INCR",
+    "MENU",
+    "PERF",
+    "PERSIST",
+    "PRIV",
+    "RANK",
+    "REC",
+    "RULE",
+    "SYNC"
+  ],
+  "sharedModules": [
+    "CORE"
+  ]
+}

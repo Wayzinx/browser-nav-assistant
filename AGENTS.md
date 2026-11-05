@@ -1,6 +1,6 @@
 # AGENTS.md
 
-> 开发 agent 优先使用 Codex / Trae（高推理强度）；测试 agent 优先使用 Claude Code 无头模式（`claude -p`）作为 worker。
+> 开发agent优先使用trae或者codex里面的gpt 6.1 sol max进行开发，测试agent优先使用worker skill里面的ds v4.1 flash max
 
 ## 项目开发约定
 
@@ -15,11 +15,12 @@
 |---|---|---|
 | 1. 前后端代码各有目录 | 后端 `server/`（加上 `scripts/`、`resources/`），插件前端 `extension/` | `node .workflow/validators/validate.mjs code`、`node specs/tools/check-spec.mjs` |
 | 2. 一个 Case ID 对应一个测试脚本 | `tests/api/<CaseID>.spec.mjs`、`tests/e2e/<CaseID>.spec.mjs`、`tests/ui/<CaseID>.spec.mjs`；公共夹具放在 `tests/fixtures/` | `node .workflow/validators/validate.mjs scripts` |
-| 3. 测试记录和留痕单独一个目录 | `evidence/<CaseID>/`：result.json、api/（请求与返回值）、server.log（后端日志）、extension.log（前端日志）、screenshots/、flow.gif、explore.json（UI 探索结论） | `node .agents/skills/nav-case-to-script/scripts/run-cases.mjs`（证据完整性检查） |
+| 3. 测试记录和留痕单独一个目录 | `evidence/<CaseID>/`：result.json、api/（请求与返回值）、server.log（后端日志）、state-before / after / diff.json（后端数据修改前后对比）、extension.log（前端日志）、screenshots/、flow.gif、explore.json（UI 探索结论）；真实安装冒烟在 `evidence/_smoke/`，人工验收在 `evidence/_manual/` | `node .agents/skills/nav-case-to-script/scripts/run-cases.mjs`（证据完整性检查） |
 
 ## 工作流、技能与规范入口
 
-- 工作流约定（ID 规则、产物路径、追溯规则、测试配方、TDD 纪律）：`.workflow/CONVENTIONS.md`；全流程编排：`.workflow/browser-nav-sdlc.workflow.js`
+- 工作流约定（ID 规则、产物路径、追溯规则、测试配方、TDD 纪律、跨角色看板、对齐冻结、真实安装冒烟、人工验收、提交）：`.workflow/CONVENTIONS.md`；全流程编排：`.workflow/browser-nav-sdlc.workflow.js`（v3：PRD → 技术方案 → 用例设计 → 对齐与冻结 → 脚本与开发 → TDD 闭环 → 交付验收）
+- 跨角色沟通：一律走看板 `docs/trace/board/`（需要别的角色澄清或修改时新建记录，处理完回填），不要只写在自己的日志里
 - 各角色技能（按阶段索引）：`.agents/skills/README.md`
   - 产品：`nav-req-analysis`
   - 测试：`nav-test-case-design`、`nav-case-to-script`、`nav-quality-report`

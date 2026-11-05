@@ -1,0 +1,51 @@
+{
+  "stage": "board",
+  "pass": true,
+  "module": null,
+  "errors": [],
+  "warnings": [],
+  "stats": {
+    "board": {
+      "total": 0,
+      "open": 0,
+      "blockingOpen": 0,
+      "byStatus": {},
+      "byTo": {},
+      "schemaErrors": 0,
+      "frozenBlockers": 0
+    }
+  },
+  "board": {
+    "dir": "docs/trace/board",
+    "freeze": null,
+    "open": [],
+    "counts": {
+      "total": 0,
+      "open": 0,
+      "blockingOpen": 0,
+      "byStatus": {},
+      "byTo": {},
+      "schemaErrors": 0,
+      "frozenBlockers": 0
+    }
+  },
+  "modules": [
+    "CACHE",
+    "CLEAN",
+    "CTX",
+    "DEMO",
+    "DIAG",
+    "INCR",
+    "MENU",
+    "PERF",
+    "PERSIST",
+    "PRIV",
+    "RANK",
+    "REC",
+    "RULE",
+    "SYNC"
+  ],
+  "sharedModules": [
+    "CORE"
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "stage": "smoke",
+  "pass": true,
+  "module": null,
+  "errors": [],
+  "warnings": [
+    "[smoke] 插件向默认地址 127.0.0.1:3000 发出了 51 个请求，全部由冒烟代理处理（未连接本机 3000 端口上的真实服务）"
+  ],
+  "stats": {},
+  "smoke": {
+    "pass": true,
+    "generatedAt": "2026-11-04T04:30:23.671Z",
+    "browsers": {
+      "chromium": {
+        "pass": true,
+        "required": true,
+        "version": "Chrome/156.0.8078.4"
+      }
+    },
+    "results": [
+      {
+        "browser": "chromium",
+        "scenario": "S1 首次安装·后端未启动",
+        "pass": true,
+        "required": true,
+        "popupSize": [
+          400,
+          498
+        ],
+        "errors": 0
+      },
+      {
+        "browser": "chromium",
+        "scenario": "S2 首次安装·后端已启动（默认地址）·主流程",
+        "pass": true,
+        "required": true,
+        "popupSize": [
+          400,
+          498
+        ],
+        "errors": 0
+      },
+      {
+        "browser": "chromium",
+        "scenario": "S3 首次安装·后端在其他端口·通过诊断页修改 API 地址",
+        "pass": true,
+        "required": true,
+        "popupSize": [
+          400,
+          498
+        ],
+        "errors": 0
+      }
+    ],
+    "summary": "evidence/_smoke/summary.json"
+  },
+  "modules": [
+    "CACHE",
+    "CLEAN",
+    "CTX",
+    "DEMO",
+    "DIAG",
+    "INCR",
+    "MENU",
+    "PERF",
+    "PERSIST",
+    "PRIV",
+    "RANK",
+    "REC",
+    "RULE",
+    "SYNC"
+  ],
+  "sharedModules": [
+    "CORE"
+  ]
+}

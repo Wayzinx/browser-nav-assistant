@@ -27,6 +27,8 @@ description: 浏览器导航助手项目的「需求理解 + PRD」技能（产�
    - REQ `REQ-NNN` 按 PROBLEM.md 出现顺序从 001 起连续；决策 `D-NN`；验收标准 `AC1`、`AC2`… 在 Feature 内连续，**发布后只能追加**（用例通过 `F-SYNC-01#AC2` 引用）。
 4. **PRD 中必须出现全部 Feature ID**，不能出现未登记的 F / C / TC ID；不要预先编造 Code ID、Case ID 或 testId。
 5. 文档用中文，字段名、接口路径和代码标识符保持英文原文（沿用 PROBLEM.md 的 camelCase）。
+6. **真实使用形态要有 AC**：首次安装（storage 为空）时界面怎么表现、后端没启动时的提示与引导、点击工具栏图标后 popup 正常显示（固定尺寸、内容不空白）、按 README 从零安装能走通验收流程。这些路径曾经漏测，导致「装上就点不开」。
+7. **跨角色沟通走看板**：评审意见或下游提出的问题（docs/trace/board/ 中 to=PM 的记录），处理后回填 status、resolution、resolvedBy、changedFiles。基线冻结之后修改 PRD、features 或 requirements，必须有 `type=change`、`status=accepted` 的看板记录，并为受影响的角色（TEST 等）新建 change 记录（CONVENTIONS §10、§11）。
 
 ## 输入与开工检查
 

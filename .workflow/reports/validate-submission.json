@@ -1,0 +1,84 @@
+{
+  "stage": "submission",
+  "pass": false,
+  "module": null,
+  "errors": [
+    "[submission] 提交包证据不完整：369/370，例如 TC-API-DEMO-002（api/ 中没有被测调用（setup 以外的请求））",
+    "[submission] 文档中有 3 个链接 / 证据引用在提交包中无法解析，例如 docs/08-测试报告.md → evidence/ACCEPTANCE-FLOW/explore/12.png，docs/08-测试报告.md → evidence/ACCEPTANCE-FLOW/explore/1.png，docs/08-测试报告.md → evidence/ACCEPTANCE-FLOW/explore/*.jpg"
+  ],
+  "warnings": [
+    "[submission] 文档中提到的 2 个路径在提交包中不存在（只是提及，不是链接），例如 docs/quality/exit-criteria.json、docs/01",
+    "[submission] 没有代码冻结记录（.workflow/reports/freeze.json），无法确认提交的代码就是终检通过的版本"
+  ],
+  "stats": {},
+  "submission": {
+    "pass": false,
+    "usage": {
+      "files": 190,
+      "totalBytes": 9794380,
+      "maxFileBytes": 972800,
+      "largest": [
+        {
+          "path": "bundles/evidence.tar.gz.part-aa",
+          "bytes": 972800
+        },
+        {
+          "path": "bundles/evidence.tar.gz.part-ab",
+          "bytes": 972800
+        },
+        {
+          "path": "bundles/evidence.tar.gz.part-ac",
+          "bytes": 972800
+        },
+        {
+          "path": "bundles/evidence.tar.gz.part-ad",
+          "bytes": 972800
+        },
+        {
+          "path": "bundles/evidence.tar.gz.part-ae",
+          "bytes": 942080
+        },
+        {
+          "path": "bundles/workflow-skills-specs.tar.gz",
+          "bytes": 911360
+        }
+      ],
+      "raw": {
+        "files": 178,
+        "bytes": 2908062
+      },
+      "bundles": {
+        "files": 11,
+        "bytes": 6886220
+      },
+      "extra": {
+        "files": 1,
+        "bytes": 98,
+        "paths": [
+          ".vibecoding/problem.json"
+        ]
+      }
+    },
+    "manifestPath": "/var/folders/v1/n6z6msv922g3jqc1ylnmb2qm0000gn/T/nav-submission-RG16mG/bundles/MANIFEST.json",
+    "stagingDir": "/var/folders/v1/n6z6msv922g3jqc1ylnmb2qm0000gn/T/nav-submission-RG16mG"
+  },
+  "modules": [
+    "CACHE",
+    "CLEAN",
+    "CTX",
+    "DEMO",
+    "DIAG",
+    "INCR",
+    "MENU",
+    "PERF",
+    "PERSIST",
+    "PRIV",
+    "RANK",
+    "REC",
+    "RULE",
+    "SYNC"
+  ],
+  "sharedModules": [
+    "CORE"
+  ]
+}

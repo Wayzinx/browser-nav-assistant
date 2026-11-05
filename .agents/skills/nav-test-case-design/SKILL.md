@@ -40,7 +40,13 @@ description: 浏览器导航助手项目的测试用例设计技能。基于 PRD
    - API / E2E 走真实 HTTP，禁止 mock 后端；
    - UI 的旧页面只能通过后端导入构造（`chrome.history.addUrl` 无法设置访问时间和次数）；popup 以 tab 方式打开；外部站点用 route 离线化；后端不可达用不存在服务的端口模拟（例如 `http://127.0.0.1:9`），不能 route 后端；元素只引用 ui-contract 中登记的 testId。
 5. **时间边界**：「恰好 N 天」必须通过契约中的时间基准覆盖参数（例如 `?now=`）固定时间；契约中没有该参数时，拆成「N 天 - 1 分钟 / N 天 + 1 分钟」两条用例，并在 testData 中写明原因（服务端处理请求的毫秒级偏移会让「恰好 N 天」不稳定）。样例数据统一按 PRD 决策 D-01 平移：最新一条 lastVisitTime = 导入时刻 − 5 分钟（夹具 `samplePayload` 已经实现）。读接口支持 `?now=` 覆盖当前时间。
-6. **证据**：执行证据会落在 `evidence/<CaseID>/`（result.json、api/、server.log、screenshots/、flow.gif、extension.log、explore.json）。用例的 `evidence` 字段可以写明需要重点留存的内容。
+6. **证据**：执行证据会落在 `evidence/<CaseID>/`（result.json、api/、server.log、state-before/after/diff.json（后端状态修改前后对比）、screenshots/、flow.gif、extension.log、explore.json）。用例的 `evidence` 字段可以写明需要重点留存的内容。
+7. **不猜，提看板**：契约或方案没写清楚的地方（字段、错误码与状态码、testId、时间基准），先按最可能的理解写出用例，同时在 `docs/trace/board/` 新建一条 blocking 看板记录（to = BE / FE / PM，refs 写清 Case ID 与相关 ID），在第 4 阶段「对齐与冻结」由负责人确认。**不要**因为不确定就删掉用例或降低断言，也不要只写在 journal 里。基线冻结后修改用例，必须有 `type=change`、`status=accepted` 的看板记录（CONVENTIONS §10、§11）。
+8. **真实使用形态**：
+   - 首次安装（storage 为空）的 UI 用例用 `test.use({ presetApiBase: false })`；
+   - 「真实 action popup 能正常打开并且尺寸正确」这一类验证，Playwright 的 UI 用例做不到（它只能以 tab 打开）。这类验证由冒烟计划 `tests/smoke/smoke-plan.json` 覆盖（S1 首次安装 · 后端未启动、S2 首次安装 · 主流程、S3 修改地址）。
+   
+   在 docs/07 中单独列一节「真实安装冒烟场景」，写明哪些验收步骤必须进入冒烟计划。
 
 ## 3. 工作流程
 

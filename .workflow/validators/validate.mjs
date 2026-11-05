@@ -3,7 +3,19 @@
 // prd / cases / scripts / code / skeleton 阶段还会调用技能和规范自带的检查脚本，结果并入本次校验（见 CONVENTIONS §5）。
 // 用法：node .workflow/validators/validate.mjs <stage> [选项]
 //   校验：prd | design | cases | scripts | infra | skeleton | code | run | gate | mutation | explore | final
+//         board | align | modules | baseline | toolchain | freeze | smoke | submission | manual | release
 //   工具：merge-cases | pack | q <ID|MOD> | trace | lock | digest | restore
+// 新阶段（逻辑在 stages/*.mjs）：
+//   board [--freeze=<stage>]          跨角色看板 docs/trace/board/*.json；报告 board.open[] 供 workflow 路由
+//   align                             跨产物对齐（用例 ↔ 契约 ↔ ui-contract ↔ PRD 样例），errors 以 [align:<检查名>] 开头
+//   modules                           docs/trace/modules.json 依赖校验，stats.layers 为拓扑分层
+//   baseline --record=<name> | --check [--name=]   基线冻结与变更影响分析
+//   toolchain --record | --check | --restore [--file=]   技能 / 规范 / 约定 / validator / workflow 防篡改
+//   freeze --record | --check          终检后的代码冻结
+//   smoke [--browser=chromium|chrome|all]   真实安装冒烟（smoke-install.mjs）
+//   submission [--check-upload] [--out=]    提交打包门禁（pack-submission.mjs）
+//   manual --init [--force] | --check  人工验收清单
+//   release                           交付前最后一关：freeze --check + manual --check + submission
 // 选项：--module=MOD（只报告该模块的问题；E2E 用 --module=E2E）  --side=BE|FE  --expect-digest=xxx
 //       --project=api,e2e  --port=4100  --file=a,b（restore）  --failures=<gate 报告>（pack）  --brief（只打印摘要）
 import fs from 'node:fs';
@@ -11,6 +23,14 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { spawn, spawnSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { checkBoard } from './stages/board.mjs';
+import { checkAlign } from './stages/align.mjs';
+import { checkModules } from './stages/modules.mjs';
+import { recordBaseline, checkBaseline } from './stages/baseline.mjs';
+import { recordToolchain, checkToolchain, restoreToolchain } from './stages/toolchain.mjs';
+import { recordFreeze, checkFreeze } from './stages/freeze.mjs';
+import { runSmoke, runSubmission } from './stages/external.mjs';
+import { initManual, checkManual } from './stages/manual.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const abs = (rel) => path.join(ROOT, rel);
@@ -56,7 +76,7 @@ const KINDS = ['action', 'display', 'system', 'api', 'rule', 'nfr'];
 const PRIORITIES = ['P0', 'P1', 'P2', 'P3'];
 const TYPE_TO_PROJECT = { API: 'api', E2E: 'e2e', UI: 'ui' };
 const TYPE_DIR = { API: 'tests/api', E2E: 'tests/e2e', UI: 'tests/ui' };
-const LOCK_SCOPE = ['tests/api', 'tests/e2e', 'tests/ui', 'tests/fixtures', 'playwright.config.mjs'];
+const LOCK_SCOPE = ['tests/api', 'tests/e2e', 'tests/ui', 'tests/fixtures', 'tests/smoke', 'playwright.config.mjs'];
 const LOCK_DIR = '.workflow/locks';
 const IGNORE_DIRS = new Set(['node_modules', '.git', 'test-results', 'playwright-report', '.DS_Store', 'coverage']);
 const FIXTURES = ['api', 'extension', 'evidence', 'mutation', 'sample'];
@@ -153,8 +173,8 @@ function skillCheck(key, args = []) {
 
 // ------------------------------------------------------------------ 加载
 
-function loadFeatures() {
-  const j = readJson(PATHS.features);
+function loadFeatures(required = true) {
+  const j = readJson(PATHS.features, required);
   const list = Array.isArray(j?.features) ? j.features : [];
   if (j && !Array.isArray(j.features)) err(`${PATHS.features} 缺少 features 数组`);
   return { json: j, list, map: new Map(list.filter((f) => f && f.id).map((f) => [f.id, f])) };
@@ -369,6 +389,8 @@ function checkDesign() {
   const conflicts = Object.entries(owners).filter(([, o]) => o.owner === 'CONFLICT');
   for (const [file, o] of conflicts) err(`文件 ${file} 被多个业务模块的代码点共用（${o.modules.join(', ')}）：拆分文件，或增加一个 CORE 代码点负责该文件`);
   R.stats.design = { codePoints: C.list.length, be: beIds.length, fe: feIds.length, coreFiles: Object.values(owners).filter((o) => o.owner === 'CORE').length };
+  // 模块依赖（docs/trace/modules.json）：workflow 按拓扑分层顺序开发
+  checkModules(ctx, { required: true });
   section = '';
   return { F, C };
 }
@@ -1022,6 +1044,18 @@ function writeMatrix() {
   R.stats.matrix = { ...(R.stats.matrix || {}), file: PATHS.matrix, inScope: scope, covered: ok };
 }
 
+// ------------------------------------------------------------------ 新阶段的上下文（stages/*.mjs 通过它使用 validator 的工具函数）
+
+const ctx = {
+  ROOT, abs, exists, readText, readJson, writeAtomic, walk, sha, short, stripAnsi, normEndpoint, uniq, isStr, isStrArr,
+  RE, SCAN, PATHS, opts, R,
+  err: (m) => err(m), warn: (m) => warn(m),
+  loadFeatures: (required = true) => loadFeatures(required),
+  loadCodePoints: (required = true) => loadCodePoints(required),
+  loadCases: (required = true) => loadCases(required),
+};
+const withSection = (name, fn) => { const prev = section; section = name; try { return fn(); } finally { section = prev; } };
+
 // ------------------------------------------------------------------ 主流程
 
 const handlers = {
@@ -1037,7 +1071,27 @@ const handlers = {
   gate: async () => { checkCode(); await runTests(); writeMatrix(); },
   mutation: () => checkMutation(),
   explore: () => checkExplore(),
-  final: async () => { checkScripts(); checkCode(); await runTests(); checkExplore(); checkDeliverables(); writeMatrix(); },
+  final: async () => {
+    checkScripts(); checkCode(); await runTests(); checkExplore(); checkDeliverables(); writeMatrix();
+    withSection('smoke', () => runSmoke(ctx));
+    checkAlign(ctx);
+    withSection('board', () => checkBoard(ctx, { freeze: 'final' }));
+    withSection('toolchain', () => checkToolchain(ctx, { missingIsWarning: true }));
+  },
+  board: () => withSection('board', () => checkBoard(ctx, { freeze: opts.freeze ? String(opts.freeze) : null })),
+  align: () => checkAlign(ctx),
+  modules: () => withSection('modules', () => checkModules(ctx, { required: true })),
+  baseline: () => withSection('baseline', () => (opts.record ? recordBaseline(ctx, opts.record === true ? '' : String(opts.record)) : checkBaseline(ctx, opts.name ? String(opts.name) : null))),
+  toolchain: () => withSection('toolchain', () => (opts.record ? recordToolchain(ctx) : opts.restore ? restoreToolchain(ctx) : checkToolchain(ctx))),
+  freeze: () => withSection('freeze', () => (opts.record ? recordFreeze(ctx) : checkFreeze(ctx))),
+  smoke: () => withSection('smoke', () => runSmoke(ctx)),
+  submission: () => withSection('submission', () => runSubmission(ctx)),
+  manual: () => withSection('manual', () => (opts.init ? initManual(ctx) : checkManual(ctx))),
+  release: () => {
+    withSection('freeze', () => checkFreeze(ctx));
+    withSection('manual', () => checkManual(ctx));
+    withSection('submission', () => runSubmission(ctx));
+  },
   pack: () => writePacks(),
   trace: () => writeMatrix(),
   lock: () => doLock(),
@@ -1047,7 +1101,7 @@ const handlers = {
 
 if (stage === 'q') { console.log(query(String(positional[0] || ''))); process.exit(0); }
 if (!handlers[stage]) {
-  console.log(`用法：node .workflow/validators/validate.mjs <${[...Object.keys(handlers), 'q'].join('|')}> [--module=] [--side=] [--expect-digest=] [--project=] [--port=] [--file=] [--failures=] [--brief]`);
+  console.log(`用法：node .workflow/validators/validate.mjs <${[...Object.keys(handlers), 'q'].join('|')}> [--module=] [--side=] [--expect-digest=] [--project=] [--port=] [--file=] [--failures=] [--freeze=] [--record[=name]] [--check] [--restore] [--init] [--browser=] [--check-upload] [--brief] [--json]`);
   process.exit(2);
 }
 try { await handlers[stage](); } catch (e) { R.errors.push(`validator 自身异常：${e.stack || e.message}`); }
@@ -1060,6 +1114,16 @@ fs.writeFileSync(abs(`.workflow/reports/validate-${reportName}.json`), JSON.stri
 if (opts.brief) {
   const b = { stage, module: MOD, pass: R.pass, errors: R.errors.length, warnings: R.warnings.length, report: `.workflow/reports/validate-${reportName}.json`, topErrors: R.errors.slice(0, 15).map((e) => short(e, 240)) };
   if (R.run) Object.assign(b, { tests: `${R.run.passed}/${R.run.total}`, failing: R.run.failures.map((f) => `${f.caseId || '-'} ${short(f.error, 160)}`).slice(0, 25), evidenceIncomplete: R.run.evidenceIncomplete.length });
+  if (R.board) b.board = { counts: R.board.counts, open: R.board.open.slice(0, 20).map((x) => `${x.id} ${x.from}→${x.to}${x.blocking ? ' [阻塞]' : ''} ${short(x.question, 80)}`) };
+  if (R.stats.layers) b.layers = R.stats.layers;
+  if (R.stats.align) b.align = R.stats.align;
+  if (R.baseline) b.baseline = { name: R.baseline.name, changes: (R.baseline.changes || []).length, uncovered: (R.baseline.uncovered || []).length, impactedCases: (R.baseline.impacted?.cases || []).length };
+  if (R.toolchain) b.toolchain = R.toolchain.changed ? { changed: R.toolchain.changed, added: R.toolchain.added, removed: R.toolchain.removed } : R.toolchain;
+  if (R.tampered != null) b.tampered = R.tampered;
+  if (R.freeze) b.freeze = { recorded: R.freeze.recorded ?? true, match: R.freeze.match ?? null, digest: R.freeze.digest };
+  if (R.smoke) b.smoke = R.smoke;
+  if (R.submission) b.submission = R.submission;
+  if (R.manual) b.manual = R.manual;
   console.log(JSON.stringify(b, null, 2));
 } else console.log(JSON.stringify(R, null, 2));
 process.exit(R.pass ? 0 : 1);

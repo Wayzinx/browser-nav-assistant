@@ -96,6 +96,7 @@ try {
 
 注意：
 - 在真实 popup 里点击会在新 tab 打开页面的元素（例如推荐项）时，popup 会因为失焦而关闭；这是真实行为，之后需要重新调用 `openRealPopup()`。
+- popup 里的「当前页面」是打开 popup 前处于活动状态的标签页。默认取第一个普通网页（可能是浏览器启动时的 `about:blank`）；要指定时传 `openRealPopup({ focusUrl: 'https://…' })`，会先把该 URL 的标签页置前。
 - 如果插件需要连接测试后端，可以像冒烟脚本那样起一个代理，或者在诊断页通过 UI 修改 API 地址（这本身就是真实的用户路径）。不要在真实 popup 场景里预写 storage。
 - 真实 popup 场景中**不能**使用 Playwright 的 `page.route` 拦截。
 

@@ -1,6 +1,6 @@
 ---
 name: nav-case-to-script
-description: 浏览器导航助手项目的「用例转可执行脚本」技能：把 docs/trace/cases-api.json / cases-ui.json 中的测试用例转成 Playwright 脚本（一个 Case ID 对应一个脚本文件），然后用确定性流水线（静态检查 → 加载 → 执行 → 失败分类 → 证据完整性 → 断言变异检查）验证脚本是否真的有效，测试证据写入 evidence/<CaseID>/。适用于：用例转脚本、写自动化测试、生成或修复测试脚本、搭测试基建（playwright.config / fixtures）、E2E 接口编排、断言怎么写、脚本有效性检查、批量转脚本（附带小 workflow）。
+description: 浏览器导航助手项目的「用例转可执行脚本」技能（含真实安装冒烟）：把 docs/trace/cases-api.json / cases-ui.json 中的测试用例转成 Playwright 脚本（一个 Case ID 对应一个脚本文件），然后用确定性流水线（静态检查 → 加载 → 执行 → 失败分类 → 证据完整性 → 断言变异检查）验证脚本是否真的有效，测试证据写入 evidence/<CaseID>/。适用于：用例转脚本、写自动化测试、生成或修复测试脚本、搭测试基建（playwright.config / fixtures）、E2E 接口编排、断言怎么写、脚本有效性检查、批量转脚本（附带小 workflow）、真实 action popup / 首次安装冒烟、可执行性预检。
 ---
 
 # 用例转可执行脚本（nav-case-to-script）
@@ -125,8 +125,38 @@ run-cases 会给每个失败打上分类，按 `references/failure-triage.md` �
 - [ ] 产品已实现时：执行通过，证据完整，API / E2E 变异杀死率 ≥ 80%（被豁免的算子都写了理由），UI 重复执行 3 次稳定
 - [ ] 没有修改 `.workflow/`、`server/`、`extension/`；没有删除或放宽任何 `[En]` 断言
 
-## 9. 与大 workflow（`.workflow/browser-nav-sdlc.workflow.js`）的关系
+## 9. 真实安装冒烟（tab 方式的 UI 用例覆盖不到的部分）
 
-- **阶段 4**：测试基建 agent 复制本技能的资产，第 1 轮调用本技能的小 workflow（`mode: 'draft'`）按用例并行编写脚本；之后按 validator 和评审反馈修订，通过后锁定。
-- **阶段 5**：TDD 门禁全绿、UI 探索完成后，调用小 workflow（`mode: 'verify'`）做断言变异检查和补强。改动的测试会经过完整性审查并重新锁定，新的 digest 会回传给大 workflow。补强后暴露出的产品缺陷，会带回 TDD 循环修复（传入 `args.assertionCheck: false` 可以关闭这一步）。
-- **门禁**：validator 的 `scripts` 阶段会调用 `lint-scripts.mjs`，并检查「一个 Case ID 一个文件」；`explore` 阶段读取 `evidence/<CaseID>/explore.json`。
+UI 用例把 popup 当普通 tab 打开，视口很宽。真实的 action popup 视口由内容撑开，焦点和生命周期也不同。2026-11-03 的「插件点不开」（popup 塌成 25×25 的空白小框）就是这样漏掉的：389 个用例全部通过，用户一装上就点不开。
+
+- **冒烟计划**：`tests/smoke/smoke-plan.json`，由本技能在第 5 阶段编写，随测试一起锁定。至少包含：
+  - S1 首次安装 · 后端未启动；
+  - S2 首次安装 · 后端已启动 · 主流程；
+  - S3 在界面上修改 API 地址。
+  
+  所有 testId 取自 ui-contract。
+- **运行**：`node .agents/skills/nav-case-to-script/scripts/smoke-install.mjs [--browser=chromium|chrome|all] [--json]`，或者 `node .workflow/validators/validate.mjs smoke`。
+  - 全新 profile、storage 为空；
+  - 冒烟脚本自带生产模式后端和转发代理，不会碰你本机正在运行的后端；
+  - 证据写入 `evidence/_smoke/`。
+- **自己写探索脚本时**：import `scripts/lib/real-popup.mjs`，用 `launchBrowser` → `openRealPopup` → `popupClick` / `popupFill` / `waitForText` / `screenshot` 操作真实 popup。原理、API 和排障见 `references/real-popup-smoke.md`。
+- **判定**：在真实浏览器或真实 popup 中加载、打开失败，一律算产品缺陷，不能写成「不算证据」放过。
+
+## 10. 证据里新增的内容
+
+- **后端状态快照**：`evidence/<CaseID>/state-before.json`、`state-after.json`、`state-diff.json`，由夹具通过 `GET /api/__test__/state` 自动生成，是「数据修改前后」的证据。`result.json` 中有 `stateDiffSummary`。
+- **截图去重**：`ext.snap` 遇到与上一张相同的截图会跳过，计入 `dedupedShots`。
+- **首次安装**：UI 用例写 `test.use({ presetApiBase: false })` 时，夹具不预写 storage，用来验证首次安装的引导和默认值。
+- **并行隔离**：并行任务设置 `EVIDENCE_DIR=.workflow/context/evidence/<任务键>` 和 `PW_OUTPUT_DIR=.workflow/context/test-results/<任务键>`，只有门禁写正式的 `evidence/`。
+- **提交时**：`pack-submission.mjs` 会把截图去重、转成半尺寸 JPEG，并同步改写 `result.json` 和 `explore.json` 里的路径。所以证据完整性检查对 `.png` 和 `.jpg` 一视同仁。
+
+## 11. 与大 workflow（`.workflow/browser-nav-sdlc.workflow.js`，v3）的关系
+
+- **第 4 阶段「对齐与冻结」**：本技能的角色先做**可执行性预检**，按模块组逐条确认用例能写成具体断言，结论写到 `.workflow/context/feasibility/`。缺口一律提 blocking 看板，交给 BE / FE / PM / TEST，不要自己猜着写。
+- **第 5 阶段**：测试基建复制本技能的资产，各模块组编写脚本，编写冒烟计划，然后全局评审、锁定。写脚本时发现用例或契约有问题，提看板，不要改用例，也不要放宽断言。
+- **第 6 阶段**：TDD 门禁全绿后依次做三件事：UI 探索（每个模块至少有一张真实 popup 截图；验收流程在首次安装状态下用真实 popup 走）、变异检查与补强、真实安装冒烟。冒烟没通过就退回开发。
+- **小 workflow**（`workflow/case-to-script.workflow.js`）：v3 没有直接调用它。需要单独批量转换或补强时手动使用，例如变更请求被接受后，重写受影响用例的脚本。
+- **门禁**：
+  - `scripts` 阶段调用 `lint-scripts.mjs`，并检查「一个 Case ID 一个文件」；
+  - `explore` 阶段读取 `evidence/<CaseID>/explore.json`；
+  - `smoke` 阶段调用 `smoke-install.mjs`。

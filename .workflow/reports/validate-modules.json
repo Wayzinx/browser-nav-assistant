@@ -1,0 +1,77 @@
+{
+  "stage": "modules",
+  "pass": true,
+  "module": null,
+  "errors": [],
+  "warnings": [],
+  "stats": {
+    "layers": [
+      [
+        "CORE"
+      ],
+      [
+        "CTX",
+        "PRIV",
+        "RULE",
+        "SYNC"
+      ],
+      [
+        "DIAG",
+        "INCR",
+        "PERSIST",
+        "RANK"
+      ],
+      [
+        "CLEAN",
+        "MENU"
+      ],
+      [
+        "DEMO",
+        "REC"
+      ],
+      [
+        "CACHE",
+        "PERF"
+      ]
+    ],
+    "modules": {
+      "total": 15,
+      "inScope": [
+        "CACHE",
+        "CLEAN",
+        "CTX",
+        "DEMO",
+        "DIAG",
+        "INCR",
+        "MENU",
+        "PERF",
+        "PERSIST",
+        "PRIV",
+        "RANK",
+        "REC",
+        "RULE",
+        "SYNC"
+      ],
+      "layerCount": 6
+    }
+  },
+  "modules": [
+    "CACHE",
+    "CLEAN",
+    "CTX",
+    "DEMO",
+    "DIAG",
+    "INCR",
+    "MENU",
+    "PERF",
+    "PERSIST",
+    "PRIV",
+    "RANK",
+    "REC",
+    "RULE",
+    "SYNC"
+  ],
+  "sharedModules": [
+    "CORE"
+  ]
+}

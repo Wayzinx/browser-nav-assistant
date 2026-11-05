@@ -1,0 +1,149 @@
+{
+  "_note": "模块依赖（后端架构师维护，validate.mjs modules / design 阶段校验）。dependsOn 的含义：本模块的用例要能转绿，必须先完成的模块（以测试数据依赖为主，依据 docs/03 §12「测试数据依赖与关键路径」与 docs/05 §12）。源码 import 依赖由 lead 骨架为每个模块预先建立的占位文件满足，不作为排期依据。workflow 按 validate-modules.json 的 stats.layers 分层开发：同层并行，上层完成后再开工下层。首次由校验器维护者根据 docs/03、docs/04、代码 import 关系和 cases 中的造数接口推导生成，后续变更请走看板 change 请求。",
+  "modules": [
+    {
+      "id": "CORE",
+      "sides": ["BE", "FE"],
+      "dependsOn": [],
+      "reasons": {}
+    },
+    {
+      "id": "SYNC",
+      "sides": ["BE", "FE"],
+      "dependsOn": ["CORE"],
+      "reasons": {
+        "CORE": "lead 骨架提供入口、路由注册表、store、POST /api/__test__/reset（C-BE-CORE-14）与 GET /api/health（C-BE-CORE-15），全部模块的用例都依赖它（docs/03 §12 表第 3 行）"
+      }
+    },
+    {
+      "id": "RULE",
+      "sides": ["BE", "FE"],
+      "dependsOn": ["CORE"],
+      "reasons": {
+        "CORE": "lead 骨架（同上）；RULE 保存链路 C-BE-RULE-05/06/08 是关键路径，由 G5 第一批交付（docs/03 §12、docs/05 §12 第 1 条）"
+      }
+    },
+    {
+      "id": "PRIV",
+      "sides": ["BE", "FE"],
+      "dependsOn": ["CORE"],
+      "reasons": {
+        "CORE": "lead 骨架（同上）；PRIV 兜底过滤 C-BE-PRIV-01/02 在 POST /api/sync 链路内，与 SYNC 同属关键路径、由 G1 一起第一批交付（docs/03 §12 表第 1 行），所以与 SYNC 同层而不是依赖 SYNC；PRIV 中经 /api/sync 验证的用例在 SYNC 完成前记为「等待」"
+      }
+    },
+    {
+      "id": "CTX",
+      "sides": ["FE"],
+      "dependsOn": ["CORE"],
+      "reasons": {
+        "CORE": "插件外壳、消息总线与 handler 注册表由 lead 骨架提供；CTX 只读取 chrome.tabs / chrome.history，不依赖后端造数"
+      }
+    },
+    {
+      "id": "RANK",
+      "sides": ["BE", "FE"],
+      "dependsOn": ["CORE", "SYNC", "RULE"],
+      "reasons": {
+        "CORE": "lead 骨架",
+        "SYNC": "排序用例经 POST /api/sync（api.loadSample）造数（docs/03 §12 表第 1 行；cases 中 RANK→/api/sync 27 处）",
+        "RULE": "规则影响排序的用例（F-RANK-04）经 POST /api/rules 造数（docs/03 §12 表第 2 行）"
+      }
+    },
+    {
+      "id": "DIAG",
+      "sides": ["BE", "FE"],
+      "dependsOn": ["CORE", "SYNC", "RULE", "PRIV"],
+      "reasons": {
+        "CORE": "lead 骨架（/api/health 基础实现在 CORE-15）",
+        "SYNC": "health.pageCount / 最近同步等诊断用例需要先同步数据（cases 中 DIAG→/api/sync 12 处）",
+        "RULE": "health.ruleCount / 规则数诊断用例需要先保存规则（cases 中 DIAG→/api/rules 11 处）",
+        "PRIV": "GET /api/config 的隐私关键词字段由 PRIV 代码点实现（api-contract 中 GET /api/config 关联 DIAG 与 PRIV 代码点）"
+      }
+    },
+    {
+      "id": "INCR",
+      "sides": ["FE"],
+      "dependsOn": ["CORE", "SYNC"],
+      "reasons": {
+        "CORE": "插件骨架",
+        "SYNC": "增量同步游标建立在同步链路之上（extension/background/services/sync.js 调用 cursor.js；cases 中 INCR→/api/sync 14 处）"
+      }
+    },
+    {
+      "id": "PERSIST",
+      "sides": ["BE"],
+      "dependsOn": ["CORE", "SYNC", "RULE"],
+      "reasons": {
+        "CORE": "lead 骨架（入口 server/src/index.js 加载 snapshot-loader，PERSIST no-op 桩由 lead 提供）",
+        "SYNC": "持久化的是同步进来的页面（cases 中 PERSIST→/api/sync 9 处）",
+        "RULE": "持久化覆盖已保存的规则（cases 中 PERSIST→/api/rules 2 处）"
+      }
+    },
+    {
+      "id": "CLEAN",
+      "sides": ["BE", "FE"],
+      "dependsOn": ["CORE", "SYNC", "RULE", "RANK"],
+      "reasons": {
+        "CORE": "lead 骨架",
+        "SYNC": "整理建议用例经 POST /api/sync 造数（docs/03 §12 表第 1 行）",
+        "RULE": "规则类用例（F-CLEAN-04 等）经 POST /api/rules 造数（docs/03 §12 表第 2 行）",
+        "RANK": "CLEAN 用例用 GET /api/pages/ranked 核对页面状态（cases 中 17 处），RANK 未完成时这些断言无法转绿"
+      }
+    },
+    {
+      "id": "MENU",
+      "sides": ["BE", "FE"],
+      "dependsOn": ["CORE", "SYNC", "RANK"],
+      "reasons": {
+        "CORE": "lead 骨架",
+        "SYNC": "G1 中 MENU 排在 SYNC 写入链路之后交付（docs/03 §12 交付安排）；important-service 复用 SYNC 的 domain/page-merge.js",
+        "RANK": "标记重要 / 手动添加后用 GET /api/pages/ranked 核对结果（cases 中 19 处）"
+      }
+    },
+    {
+      "id": "REC",
+      "sides": ["BE", "FE"],
+      "dependsOn": ["CORE", "SYNC", "RULE", "RANK", "CLEAN"],
+      "reasons": {
+        "CORE": "lead 骨架",
+        "SYNC": "推荐用例经 POST /api/sync 造数（docs/03 §12 表第 1 行）",
+        "RULE": "规则类推荐用例（F-REC-05）经 POST /api/rules 造数（docs/03 §12 表第 2 行）",
+        "RANK": "推荐打分复用 RANK 的 domain/scoring.js（server/src/domain/rec-rank.js 的 import）",
+        "CLEAN": "推荐过滤复用 CLEAN 的 domain/archive-verdict.js（server/src/domain/rec-rank.js 的 import；PRD D-22 排除正在被建议归档的页面）"
+      }
+    },
+    {
+      "id": "DEMO",
+      "sides": ["BE"],
+      "dependsOn": ["CORE", "SYNC", "CLEAN", "DIAG"],
+      "reasons": {
+        "CORE": "lead 骨架",
+        "SYNC": "样例导入脚本经 POST /api/sync 导入（docs/03 §12 表第 1 行，G6 样例导入）",
+        "CLEAN": "演示用例核对导入后的整理建议（cases 中 DEMO→cleanup 2 处）",
+        "DIAG": "演示用例用 GET /api/health 核对导入结果（cases 中 5 处）"
+      }
+    },
+    {
+      "id": "PERF",
+      "sides": ["BE"],
+      "dependsOn": ["CORE", "RANK", "REC"],
+      "reasons": {
+        "CORE": "lead 骨架",
+        "RANK": "性能用例测的是 GET /api/pages/ranked（预计算评分 / top-k 被 rank-service 使用）",
+        "REC": "性能用例测的是 POST /api/recommendations/next 的 p95 与推荐缓存（cases 中 PERF→REC 7 处）"
+      }
+    },
+    {
+      "id": "CACHE",
+      "sides": ["FE"],
+      "dependsOn": ["CORE", "SYNC", "RANK", "REC", "CLEAN"],
+      "reasons": {
+        "CORE": "插件骨架",
+        "SYNC": "离线缓存的数据来自同步后的在线结果（cases 中 CACHE→/api/sync 6 处）",
+        "RANK": "缓存并在离线时展示排序结果",
+        "REC": "缓存并在离线时展示推荐结果",
+        "CLEAN": "缓存并在离线时展示整理建议"
+      }
+    }
+  ]
+}

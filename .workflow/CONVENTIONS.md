@@ -278,16 +278,16 @@ Case    ──< tests/<type>/<CaseID>.spec.mjs，标题以 Case ID 开头 >─�
    - 行为符合用例预期但脚本失败（选择器、等待、流程过时）→ 判定为 `script_stale`，修正 `tests/ui/<CaseID>.spec.mjs`（固化）。只允许修改选择器（必须是 ui-contract 中的 testId）、等待策略、前置步骤和流程顺序；**不得删除或放宽**对应用例 `expected` 的 `[En]` 断言，可以新增断言。修改后脚本必须能通过。
    - 行为不符合预期 → 判定为 `product_bug`，附截图和复现步骤，退回前端开发。
    - 脚本通过但探索发现缺陷（说明脚本过弱）→ 判定为 `product_bug`，同时补强脚本断言，使它能捕获该缺陷。
-6. **工具链只读**：运行开始时 validator 会锁定 `.agents/skills/**`、`specs/**`、CONVENTIONS、validators、workflow 脚本、`tests/smoke/**`（`toolchain --record`）。每轮门禁前都会检查（`toolchain --check`），发现改动就还原并记为违规。对技能或规范有意见时，提看板记录给 `HUMAN`。
-7. **基线之后只走变更请求**：对齐阶段冻结基线以后，PRD、features、requirements、契约、代码点、modules、用例的每一处修改，都必须有一条 `type=change` 且 `status=accepted` 的看板记录覆盖（`baseline --check`），并且要为受影响的角色新建 change 记录。
-8. **不猜、不绕**：上游信息不清楚、上游模块没实现时，提看板记录给负责人，不要自己推断，也不要用桩绕开。分诊时，根因在上游的失败分派给上游模块。
 5. **断言有效性**：API / E2E 用例通过之后，用 `run-cases.mjs --mutation` 做响应变异检查，默认要求杀死率 ≥ 80%。处理存活变异时：
    - 优先补强对应 `[En]` 的断言；
    - 只有当该属性不在本用例任何一条 expected 的范围内时，才允许写 `// mutation-ignore: <算子> —— 理由`。
    
    补强属于「新增断言」，同样要经过测试完整性审查。
+6. **工具链只读**：运行开始时 validator 会锁定 `.agents/skills/**`、`specs/**`、CONVENTIONS、validators、workflow 脚本（`toolchain --record`；冒烟计划 `tests/smoke/**` 不在其中，它随测试脚本一起锁定）。每轮门禁前都会检查（`toolchain --check`），发现改动就还原并记为违规。对技能或规范有意见时，提看板记录给 `HUMAN`。
+7. **基线之后只走变更请求**：对齐阶段冻结基线以后，PRD、features、requirements、契约、代码点、modules、用例的每一处修改，都必须有一条 `type=change` 且 `status=accepted` 的看板记录覆盖（`baseline --check`），并且要为受影响的角色新建 change 记录。
+8. **不猜、不绕**：上游信息不清楚、上游模块没实现时，提看板记录给负责人，不要自己推断，也不要用桩绕开。分诊时，根因在上游的失败分派给上游模块。
 
-## 7. 会话与上下文管理（v2 编排）
+## 7. 会话与上下文管理
 
 | 层级 | 内容 | 怎么用 |
 |---|---|---|
@@ -306,12 +306,12 @@ Case    ──< tests/<type>/<CaseID>.spec.mjs，标题以 Case ID 开头 >─�
 | 任务类型 | 首选引擎 | 备选 |
 |---|---|---|
 | 开发（lead、模块开发、缺陷修复） | `codex exec -m gpt-6.1-sol -c model_reasoning_effort='"max"'`（续聊：`codex exec resume <session>`） | `traecli exec`（GPT-6.1-Sol）→ Claude 自己完成 |
-| 测试（用例设计、脚本编写 / 修复 / 补强、质量报告） | worker：`claude -p --output-format json`（续聊：`--resume <session_id>`） | Claude 自己完成 |
+| 测试（用例设计、脚本编写 / 修复 / 补强、质量报告） | worker 技能：`claude-relay -p --output-format json`（续聊：`--resume <session_id>`） | Claude 自己完成 |
 | 评审、分诊、仲裁、完整性审查、UI 探索（需要看截图）、校验执行 | Claude | — |
 
 外部引擎由 Claude「调度与验收者」调用：写简报（`.workflow/context/briefs/<任务键>.md`）→ 派发 → 按完成定义亲自验收 → 不达标就续聊同一会话 → 会话信息写入 `.workflow/context/sessions/<任务键>.json`。
 
-## 9. 端口分配（v2）
+## 9. 端口分配
 
 | 用途 | 端口 |
 |---|---|
@@ -326,6 +326,8 @@ Case    ──< tests/<type>/<CaseID>.spec.mjs，标题以 Case ID 开头 >─�
 | 全量回归（人工 / 调试） | 4300 |
 | 打包自检中的样例执行 | 4320 段 |
 | 真实安装冒烟 | 自动选择空闲端口（后端、代理、静态页），永远不用 3000 |
+
+**3000 端口**是插件默认的后端端口。门禁和终检要求它空闲，因为 `TC-API-DEMO-002` 要验证 `scripts/start.sh` 默认监听 3000。运行前先停掉本地手动启动的后端（`lsof -nP -iTCP:3000 -sTCP:LISTEN`）。其他任何测试、探索、冒烟都不得连接 3000 端口上的服务。
 
 ## 10. 跨角色看板（agent 之间的沟通通道）
 

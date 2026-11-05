@@ -5,7 +5,7 @@ import { loadBoard } from './board.mjs';
 import { MODULES_FILE } from './modules.mjs';
 
 export const BASELINE_DIR = '.workflow/baseline';
-const ENDPOINT_RE = /\b(GET|POST|PUT|PATCH|DELETE)\s+(\/api\/[A-Za-z0-9_\-\/:{}<>$.]*)/g;
+const ENDPOINT_RE = /\b(GET|POST|PUT|PATCH|DELETE)\s+(\/api\/[A-Za-z0-9_\-\/:{}<>$]*)/g;
 
 function upstreamFiles(ctx) {
   const P = ctx.PATHS;

@@ -1,8 +1,8 @@
 {
   "config": {
     "argv": [
-      "<project>/...",
-      "./node_modules/.bin/playwright",
+      "/Users/bytedance/.local/share/nodejs/versions/v24.20.0/bin/node",
+      "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/node_modules/.bin/playwright",
       "test",
       "--reporter=json",
       "tests/api/TC-API-CLEAN-001.spec.mjs",
@@ -16,8 +16,8 @@
       "tests/ui/TC-UI-RULE-003.spec.mjs",
       "tests/ui/TC-UI-SYNC-001.spec.mjs"
     ],
-    "configFile": "./playwright.config.mjs",
-    "rootDir": "./tests",
+    "configFile": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/playwright.config.mjs",
+    "rootDir": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/tests",
     "failOnFlakyTests": false,
     "forbidOnly": true,
     "fullyParallel": false,
@@ -33,7 +33,7 @@
     "preserveOutput": "always",
     "projects": [
       {
-        "outputDir": "./test-results",
+        "outputDir": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -41,7 +41,7 @@
         },
         "id": "api",
         "name": "api",
-        "testDir": "./tests/api",
+        "testDir": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/tests/api",
         "testIgnore": [],
         "testMatch": [
           "**/*.spec.mjs"
@@ -49,7 +49,7 @@
         "timeout": 30000
       },
       {
-        "outputDir": "./test-results",
+        "outputDir": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -57,7 +57,7 @@
         },
         "id": "e2e",
         "name": "e2e",
-        "testDir": "./tests/e2e",
+        "testDir": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/tests/e2e",
         "testIgnore": [],
         "testMatch": [
           "**/*.spec.mjs"
@@ -65,7 +65,7 @@
         "timeout": 30000
       },
       {
-        "outputDir": "./test-results",
+        "outputDir": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -73,7 +73,7 @@
         },
         "id": "ui",
         "name": "ui",
-        "testDir": "./tests/ui",
+        "testDir": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/tests/ui",
         "testIgnore": [],
         "testMatch": [
           "**/*.spec.mjs"
@@ -85,15 +85,15 @@
       {
         "grep": {},
         "grepInvert": null,
-        "outputDir": "./test-results",
+        "outputDir": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
           "actualWorkers": 1
         },
         "name": "api",
-        "testDir": "./tests/api",
-        "snapshotDir": "./tests/api",
+        "testDir": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/tests/api",
+        "snapshotDir": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/tests/api",
         "testIgnore": [],
         "testMatch": "**/*.spec.mjs",
         "timeout": 30000,
@@ -108,15 +108,15 @@
       {
         "grep": {},
         "grepInvert": null,
-        "outputDir": "./test-results",
+        "outputDir": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
           "actualWorkers": 1
         },
         "name": "e2e",
-        "testDir": "./tests/e2e",
-        "snapshotDir": "./tests/e2e",
+        "testDir": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/tests/e2e",
+        "snapshotDir": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/tests/e2e",
         "testIgnore": [],
         "testMatch": "**/*.spec.mjs",
         "timeout": 30000,
@@ -131,15 +131,15 @@
       {
         "grep": {},
         "grepInvert": null,
-        "outputDir": "./test-results",
+        "outputDir": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
           "actualWorkers": 1
         },
         "name": "ui",
-        "testDir": "./tests/ui",
-        "snapshotDir": "./tests/ui",
+        "testDir": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/tests/ui",
+        "snapshotDir": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/tests/ui",
         "testIgnore": [],
         "testMatch": "**/*.spec.mjs",
         "timeout": 60000,
@@ -177,7 +177,7 @@
         "PORT": "4300",
         "HOST": "127.0.0.1",
         "ENABLE_TEST_API": "1",
-        "LOG_FILE": "./evidence/_runtime/server-4300.log",
+        "LOG_FILE": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/evidence/_runtime/server-4300.log",
         "LOG_LEVEL": "debug"
       },
       "gracefulShutdown": {
@@ -588,22 +588,22 @@
                     {
                       "name": "screenshot online-cache-A",
                       "contentType": "image/png",
-                      "path": "./evidence/TC-UI-CACHE-003/screenshots/01-online-cache-A.png"
+                      "path": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/evidence/TC-UI-CACHE-003/screenshots/01-online-cache-A.png"
                     },
                     {
                       "name": "screenshot offline-home-ready",
                       "contentType": "image/png",
-                      "path": "./evidence/TC-UI-CACHE-003/screenshots/02-offline-home-ready.png"
+                      "path": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/evidence/TC-UI-CACHE-003/screenshots/02-offline-home-ready.png"
                     },
                     {
                       "name": "screenshot offline-ranked-projection",
                       "contentType": "image/png",
-                      "path": "./evidence/TC-UI-CACHE-003/screenshots/03-offline-ranked-projection.png"
+                      "path": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/evidence/TC-UI-CACHE-003/screenshots/03-offline-ranked-projection.png"
                     },
                     {
                       "name": "screenshot offline-cleanup-projection",
                       "contentType": "image/png",
-                      "path": "./evidence/TC-UI-CACHE-003/screenshots/04-offline-cleanup-projection.png"
+                      "path": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/evidence/TC-UI-CACHE-003/screenshots/04-offline-cleanup-projection.png"
                     }
                   ]
                 }
@@ -661,7 +661,7 @@
                     {
                       "name": "screenshot S1-默认地址诊断",
                       "contentType": "image/png",
-                      "path": "./evidence/TC-UI-DIAG-004/screenshots/01-S1-默认地址诊断.png"
+                      "path": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/evidence/TC-UI-DIAG-004/screenshots/01-S1-默认地址诊断.png"
                     }
                   ]
                 }
@@ -723,7 +723,7 @@
                     {
                       "name": "screenshot 无法识别提示",
                       "contentType": "image/png",
-                      "path": "./evidence/TC-UI-RULE-003/screenshots/01-无法识别提示.png"
+                      "path": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/evidence/TC-UI-RULE-003/screenshots/01-无法识别提示.png"
                     }
                   ]
                 }
@@ -785,12 +785,12 @@
                     {
                       "name": "screenshot 首次打开-同步前",
                       "contentType": "image/png",
-                      "path": "./evidence/TC-UI-SYNC-001/screenshots/01-首次打开-同步前.png"
+                      "path": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/evidence/TC-UI-SYNC-001/screenshots/01-首次打开-同步前.png"
                     },
                     {
                       "name": "screenshot 首次同步成功",
                       "contentType": "image/png",
-                      "path": "./evidence/TC-UI-SYNC-001/screenshots/02-首次同步成功.png"
+                      "path": "/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手/evidence/TC-UI-SYNC-001/screenshots/02-首次同步成功.png"
                     }
                   ]
                 }

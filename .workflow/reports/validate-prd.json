@@ -1,0 +1,62 @@
+{
+  "stage": "prd",
+  "pass": true,
+  "module": null,
+  "errors": [],
+  "warnings": [
+    "[需求点检查] REQ-115 的 kind 为 hint，但标记为 mandatory=true，请确认",
+    "[需求点检查] REQ-117 的 kind 为 hint，但标记为 mandatory=true，请确认",
+    "[需求点检查] [建议覆盖] PROBLEM.md 第 41 行（系统架构说明）没有被任何 REQ 覆盖：「系统包含两个主要部分：」",
+    "[需求点检查] [建议覆盖] PROBLEM.md 第 383 行（进阶要求）没有被任何 REQ 覆盖：「以下功能可做可不做，作为加分项：」",
+    "[需求点检查] [建议覆盖] PROBLEM.md 第 419 行（验收要求）没有被任何 REQ 覆盖：「候选人需要能完成以下演示流程：」"
+  ],
+  "stats": {
+    "prd": {
+      "features": 75,
+      "inScope": 70,
+      "modules": [
+        "CACHE",
+        "CLEAN",
+        "CTX",
+        "DEMO",
+        "DIAG",
+        "INCR",
+        "MENU",
+        "PERF",
+        "PERSIST",
+        "PRIV",
+        "RANK",
+        "REC",
+        "RULE",
+        "SYNC"
+      ]
+    },
+    "skillChecks": {
+      "req": {
+        "script": ".agents/skills/nav-req-analysis/scripts/check-requirements.mjs",
+        "pass": true,
+        "errors": 0,
+        "warnings": 5
+      }
+    }
+  },
+  "modules": [
+    "CACHE",
+    "CLEAN",
+    "CTX",
+    "DEMO",
+    "DIAG",
+    "INCR",
+    "MENU",
+    "PERF",
+    "PERSIST",
+    "PRIV",
+    "RANK",
+    "REC",
+    "RULE",
+    "SYNC"
+  ],
+  "sharedModules": [
+    "CORE"
+  ]
+}

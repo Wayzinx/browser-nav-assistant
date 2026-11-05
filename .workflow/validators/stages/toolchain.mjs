@@ -1,4 +1,5 @@
-// 工具链锁：workflow 开始时记录技能、规范、约定、validator、workflow 脚本和冒烟计划的摘要与快照；
+// 工具链锁：workflow 开始时记录技能、规范、约定、validator、workflow 脚本的摘要与快照；
+// （冒烟计划 tests/smoke/** 由每个需求的自动化 agent 编写，随测试脚本一起进测试锁 LOCK_SCOPE，不在这里）
 // 之后每次 --check 发现改动即报错（运行中任何 agent 都不得修改这些文件），--restore 用快照还原。
 // 规则与测试锁（tests.lock.json + snapshot/）一致。
 import fs from 'node:fs';
@@ -10,9 +11,9 @@ const QUARANTINE = '.workflow/locks/toolchain-quarantine';
 
 function scopeFiles(ctx) {
   const out = [
-    ...ctx.walk('.agents/skills'), ...ctx.walk('specs'), ...ctx.walk('.workflow/validators'), ...ctx.walk('tests/smoke'),
+    ...ctx.walk('.agents/skills'), ...ctx.walk('specs'), ...ctx.walk('.workflow/validators'),
     ...(ctx.exists('.workflow/CONVENTIONS.md') ? ['.workflow/CONVENTIONS.md'] : []),
-    ...ctx.walk('.workflow', (f) => /^\.workflow\/[^/]+\.workflow\.js$/.test(f)),
+    ...(ctx.exists('.workflow') ? fs.readdirSync(ctx.abs('.workflow')).filter((n) => n.endsWith('.workflow.js')).map((n) => `.workflow/${n}`) : []),
   ];
   return [...new Set(out)].filter((f) => !f.endsWith('.DS_Store')).sort();
 }

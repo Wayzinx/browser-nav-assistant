@@ -283,14 +283,16 @@ export class RealPopupSession {
 
   /**
    * 打开真实 action popup（等同用户点击工具栏图标）。会先把一个普通网页窗口置前并聚焦，失败时重试。
+   * @param {{ retries?: number, focusUrl?: string }} [o] focusUrl：先把这个 URL 的标签页置为活动标签（popup 里的「当前页面」）；不传时取第一个普通网页
    * @returns {Promise<string>} popup 的 targetId
    */
-  async openRealPopup({ retries = 8 } = {}) {
+  async openRealPopup({ retries = 8, focusUrl } = {}) {
     await this.closePopup();
     const popupUrl = `chrome-extension://${this.extensionId}/`;
     let lastErr = '';
     for (let i = 0; i < retries; i++) {
-      const page = (await this.targets()).find((t) => t.type === 'page' && !t.url.startsWith('chrome-extension://') && !t.url.startsWith('devtools://'));
+      const pages = (await this.targets()).filter((t) => t.type === 'page' && !t.url.startsWith('chrome-extension://') && !t.url.startsWith('devtools://'));
+      const page = (focusUrl && pages.find((t) => t.url === focusUrl)) || pages[0];
       if (page) {
         const sid = (await this.conn.send('Target.attachToTarget', { targetId: page.targetId, flatten: true })).sessionId;
         await this.conn.send('Page.bringToFront', {}, sid).catch(() => {});

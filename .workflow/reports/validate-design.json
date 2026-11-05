@@ -1,0 +1,105 @@
+{
+  "stage": "design",
+  "pass": true,
+  "module": null,
+  "errors": [],
+  "warnings": [],
+  "stats": {
+    "prd": {
+      "features": 75,
+      "inScope": 70,
+      "modules": [
+        "CACHE",
+        "CLEAN",
+        "CTX",
+        "DEMO",
+        "DIAG",
+        "INCR",
+        "MENU",
+        "PERF",
+        "PERSIST",
+        "PRIV",
+        "RANK",
+        "REC",
+        "RULE",
+        "SYNC"
+      ]
+    },
+    "apiEndpoints": 19,
+    "uiTestIds": 172,
+    "design": {
+      "codePoints": 118,
+      "be": 60,
+      "fe": 58,
+      "coreFiles": 36
+    },
+    "layers": [
+      [
+        "CORE"
+      ],
+      [
+        "CTX",
+        "PRIV",
+        "RULE",
+        "SYNC"
+      ],
+      [
+        "DIAG",
+        "INCR",
+        "PERSIST",
+        "RANK"
+      ],
+      [
+        "CLEAN",
+        "MENU"
+      ],
+      [
+        "DEMO",
+        "REC"
+      ],
+      [
+        "CACHE",
+        "PERF"
+      ]
+    ],
+    "modules": {
+      "total": 15,
+      "inScope": [
+        "CACHE",
+        "CLEAN",
+        "CTX",
+        "DEMO",
+        "DIAG",
+        "INCR",
+        "MENU",
+        "PERF",
+        "PERSIST",
+        "PRIV",
+        "RANK",
+        "REC",
+        "RULE",
+        "SYNC"
+      ],
+      "layerCount": 6
+    }
+  },
+  "modules": [
+    "CACHE",
+    "CLEAN",
+    "CTX",
+    "DEMO",
+    "DIAG",
+    "INCR",
+    "MENU",
+    "PERF",
+    "PERSIST",
+    "PRIV",
+    "RANK",
+    "REC",
+    "RULE",
+    "SYNC"
+  ],
+  "sharedModules": [
+    "CORE"
+  ]
+}

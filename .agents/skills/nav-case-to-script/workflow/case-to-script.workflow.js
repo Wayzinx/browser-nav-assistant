@@ -16,7 +16,7 @@ export const meta = {
 //       batchSize（默认 6）| maxFixRounds（默认 3）| port（默认 4160）| minKill（默认 0.8）
 
 // ============================================================ 配置
-const ROOT = '.' // 项目根目录：请在仓库根目录启动 Workflow（也可改成本机绝对路径）
+const ROOT = '/Users/bytedance/browser-use-plugin/EXAM/zrm-uwev/题目_1_浏览器导航助手/浏览器导航助手'
 const SK = '.agents/skills/nav-case-to-script'
 const RUN = `node ${SK}/scripts/run-cases.mjs`
 const LINT = `node ${SK}/scripts/lint-scripts.mjs`
